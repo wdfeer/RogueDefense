@@ -5,6 +5,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using static Upgrade;
 
 namespace RogueDefense
 {
@@ -13,22 +14,23 @@ namespace RogueDefense
         [Export]
         public PackedScene bulletScene;
 
-        PlayerHpManager hpManager;
-        PlayerShootManager shootManager;
+        public PlayerHpManager hpManager;
+        public PlayerShootManager shootManager;
+        public PlayerUpgradeManager upgradeManager;
         public override void _Ready()
         {
             hpManager = new PlayerHpManager(this);
             shootManager = new PlayerShootManager(this);
+            upgradeManager = new PlayerUpgradeManager(this);
         }
-        public void Damage(int damage) { hpManager.Damage(damage); }
-        
-
         public override void _Process(float delta)
         {
             shootManager.Process(delta);    
         }
+
+        public void Damage(float damage) { hpManager.Damage(damage); }
     }
-    class PlayerHpManager
+    public class PlayerHpManager
     {
         readonly Player player;
         public PlayerHpManager(Player player)
@@ -37,8 +39,8 @@ namespace RogueDefense
             hpBar = player.GetNode("./HpBar") as ProgressBar;
             Hp = maxHp;
         }
-        private int hp;
-        public int Hp
+        private float hp;
+        public float Hp
         {
             get => hp;
             set
@@ -47,10 +49,11 @@ namespace RogueDefense
                 hpBar.Value = (float)hp / maxHp;
             }
         }
-        public int maxHp = 1000;
+        public const float BASE_MAX_HP = 100;
+        public float maxHp = BASE_MAX_HP;
         private readonly ProgressBar hpBar;
 
-        public void Damage(int value)
+        public void Damage(float value)
         {
             Hp -= value;
             if (Hp <= 0)
@@ -63,14 +66,17 @@ namespace RogueDefense
             GD.Print($"I am dead!!!");
         }
     }
-    class PlayerShootManager
+    public class PlayerShootManager
     {
         readonly Player player;
         public PlayerShootManager(Player player)
         {
             this.player = player;
         }
-        float shootInterval = 1;
+        public const float BASE_DAMAGE = 1;
+        public float damage = BASE_DAMAGE;
+        public const float BASE_SHOOT_INTERVAL = 1;
+        public float shootInterval = BASE_SHOOT_INTERVAL;
         float timeSinceLastShot = 0;
         public void Process(float delta)
         {
@@ -86,7 +92,38 @@ namespace RogueDefense
             Bullet bullet = player.bulletScene.Instance() as Bullet;
             bullet.velocity = new Godot.Vector2(2.5f, 0);
             bullet.Position = player.Position;
+            bullet.damage = damage;
             Game.instance.AddChild(bullet);
+        }
+
+    }
+    public class PlayerUpgradeManager
+    {
+        readonly Player player;
+        public PlayerUpgradeManager(Player player)
+        {
+            this.player = player;
+        }
+
+        List<Upgrade> upgrades = new List<Upgrade>();
+        public void AddUpgrade(Upgrade upgrade)
+        {
+            upgrades.Add(upgrade);
+            UpdateUpgrades();
+        }
+        void UpdateUpgrades()
+        {
+            player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP
+                * GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
+            player.hpManager.Hp = player.hpManager.maxHp;
+            player.shootManager.shootInterval = PlayerShootManager.BASE_SHOOT_INTERVAL
+                / GetTotalUpgradeMultiplier(UpgradeType.FireRate);
+            player.shootManager.damage = PlayerShootManager.BASE_DAMAGE
+                * GetTotalUpgradeMultiplier(UpgradeType.Damage);
+        }
+        float GetTotalUpgradeMultiplier(UpgradeType type)
+        {
+            return 1f + upgrades.Where(x => x.type == type).Select(x => x.value).Aggregate(0f, (a, b) => a + b);
         }
     }
 }

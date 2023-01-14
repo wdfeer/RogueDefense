@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/icon.png" type="Texture" id=2]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Logic/Player.cs" type="Script" id=4]
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Logic/UpgradeScreen.cs" type="Script" id=6]
+[ext_resource path="res://UpgradeButton.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -32,3 +34,11 @@ margin_bottom = -33.0
 max_value = 1.0
 step = 0.001
 value = 1.0
+
+[node name="UpgradeScreen" type="PopupPanel" parent="."]
+pause_mode = 2
+margin_top = 100.0
+margin_right = 1024.0
+margin_bottom = 500.0
+script = ExtResource( 6 )
+upgradeButtonScene = ExtResource( 7 )

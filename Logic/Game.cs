@@ -34,5 +34,8 @@ public class Game : Node2D
 		enemy.QueueFree();
 		generation++;
 		enemy = null;
+
+		GetTree().Paused = true;
+		(GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
 	}
 }

@@ -7,13 +7,13 @@ public class Enemy : MovingKinematicBody2D
 	public override void _Ready()
 	{
 		velocity = new Vector2(-1, 0);
-		maxHp = 10 * (1 + Game.instance.generation / 3);
+		maxHp = 4 * Mathf.Pow(1 + Game.instance.generation / 4, 2);
 		hp = maxHp;
 	}
 
-	public int maxHp = 10;
-	public int hp;
-	public void Damage(int damage)
+	public float maxHp;
+	public float hp;
+	public void Damage(float damage)
 	{
 		hp -= damage;
 		if (hp <= 0)
@@ -21,7 +21,7 @@ public class Enemy : MovingKinematicBody2D
 			Game.instance.DeleteEnemy();	
 		}
 	}
-	public int damage = 1;
+	public float damage = 1;
 	protected override void OnCollision(KinematicCollision2D collision)
 	{
 		if (collision.Collider == Game.instance.player)

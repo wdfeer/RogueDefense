@@ -14,6 +14,10 @@ config/name="RogueDefense"
 run/main_scene="res://Game.tscn"
 config/icon="res://Assets/icon.png"
 
+[display]
+
+window/size/resizable=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
