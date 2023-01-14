@@ -3,8 +3,8 @@ using System;
 
 public struct Upgrade
 {
-	public UpgradeType type;
-	public float value;
+    public UpgradeType type;
+    public float value;
     public Upgrade(UpgradeType type, float value)
     {
         this.type = type;
@@ -32,6 +32,8 @@ public struct Upgrade
         DamageDivision,
         Damage,
         FireRate,
-        Multishot
+        Multishot,
+        CritChance,
+        CritDamage
     }
 }
