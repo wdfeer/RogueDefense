@@ -1,13 +1,13 @@
 using Godot;
 using RogueDefense;
 
-public class UpgradeScreen : PopupPanel
+public class UpgradeScreen : Panel
 {
 	[Export]
 	public PackedScene upgradeButtonScene;
 	public void Activate()
 	{
-		Popup_();
+		Show();
         buttons = new UpgradeButton[]
         {
             upgradeButtonScene.Instance() as UpgradeButton,

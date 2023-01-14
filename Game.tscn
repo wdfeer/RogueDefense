@@ -36,8 +36,9 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
-[node name="UpgradeScreen" type="PopupPanel" parent="."]
+[node name="UpgradeScreen" type="Panel" parent="."]
 pause_mode = 2
+visible = false
 margin_top = 100.0
 margin_right = 1024.0
 margin_bottom = 500.0
