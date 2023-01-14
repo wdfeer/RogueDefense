@@ -37,5 +37,7 @@ public class Game : Node2D
 
 		GetTree().Paused = true;
 		(GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
+
+		player.shootManager.ClearBullets();
 	}
 }

@@ -87,15 +87,27 @@ namespace RogueDefense
                 CreateBullet();
             }
         }
+        private List<Bullet> bullets = new List<Bullet>();
         private void CreateBullet()
         {
             Bullet bullet = player.bulletScene.Instance() as Bullet;
             bullet.velocity = new Godot.Vector2(2.5f, 0);
-            bullet.Position = player.Position;
+            bullet.Position = player.Position + new Godot.Vector2(20, 0);
             bullet.damage = damage;
             Game.instance.AddChild(bullet);
+            bullets.Add(bullet);
         }
-
+        public void ClearBullets()
+        {
+            foreach (Bullet bull in bullets)
+            {
+                if (Godot.Object.IsInstanceValid(bull))
+                {
+                    bull.QueueFree();
+                }
+            }
+            bullets = new List<Bullet>();
+        }
     }
     public class PlayerUpgradeManager
     {

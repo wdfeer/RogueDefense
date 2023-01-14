@@ -22,6 +22,12 @@ window/size/resizable=false
 
 common/drop_mouse_on_gui_input_disabled=true
 
+[layer_names]
+
+2d_physics/layer_1="General"
+2d_physics/layer_2="Enemy"
+2d_physics/layer_3="PlayerProjectile"
+
 [mono]
 
 project/assembly_name="RogueDefense"

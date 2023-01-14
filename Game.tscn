@@ -17,6 +17,7 @@ enemyScene = ExtResource( 3 )
 
 [node name="PlayerBase" type="StaticBody2D" parent="."]
 position = Vector2( 100, 300 )
+collision_mask = 3
 script = ExtResource( 4 )
 bulletScene = ExtResource( 5 )
 
@@ -46,7 +47,7 @@ upgradeButtonScene = ExtResource( 7 )
 [node name="UpgradeText" type="RichTextLabel" parent="UpgradeScreen"]
 margin_right = 200.0
 margin_bottom = 400.0
-text = "Max HP: 100.00
+text = "Max HP: 100.0
 
 Damage: 1.00
 Fire Rate: 1.00"
