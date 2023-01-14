@@ -21,12 +21,19 @@ public class Enemy : MovingKinematicBody2D
 			Game.instance.DeleteEnemy();	
 		}
 	}
-	public float damage = 1;
+	public float dps = 20;
+	public override void _Process(float delta)
+	{
+		base._Process(delta);
+		if (attacking)
+			Game.instance.player.Damage(dps * delta);
+	}
+	bool attacking = false;
 	protected override void OnCollision(KinematicCollision2D collision)
 	{
 		if (collision.Collider == Game.instance.player)
 		{
-			Game.instance.player.Damage(damage);
+			attacking = true;
 		}
 	}
 }
