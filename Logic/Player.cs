@@ -147,7 +147,7 @@ namespace RogueDefense
             float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
             player.shootManager.multishot = PlayerShootManager.BASE_MULTISHOT * multishotMult;
 
-            var upgradeText = player.GetNode("/root/Game/UpgradeScreen/UpgradeText") as RichTextLabel;
+            var upgradeText = player.GetNode("/root/Game/UpgradeScreen/UpgradeText") as Label;
             upgradeText.Text = $@"Max HP: {player.hpManager.maxHp.ToString("0.0")}
 
 Damage: {player.shootManager.damage.ToString("0.00")}

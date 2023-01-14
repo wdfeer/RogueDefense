@@ -37,6 +37,7 @@ public class Game : Node2D
 
 		GetTree().Paused = true;
 		(GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
+		(GetNode("./UpgradeScreen/LevelText") as Label).Text = $"Level {generation}";
 
 		player.shootManager.ClearBullets();
 	}

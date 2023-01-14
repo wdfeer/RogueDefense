@@ -45,7 +45,7 @@ margin_bottom = 500.0
 script = ExtResource( 6 )
 upgradeButtonScene = ExtResource( 7 )
 
-[node name="UpgradeText" type="RichTextLabel" parent="UpgradeScreen"]
+[node name="UpgradeText" type="Label" parent="UpgradeScreen"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 1020.0
@@ -53,6 +53,15 @@ margin_bottom = 396.0
 text = "This text
 should be
 updated on start"
+
+[node name="LevelText" type="Label" parent="UpgradeScreen"]
+margin_left = 432.0
+margin_top = 360.0
+margin_right = 592.0
+margin_bottom = 396.0
+text = "Level 0"
+align = 1
+valign = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 pause_mode = 2
