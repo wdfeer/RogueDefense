@@ -7,7 +7,7 @@ public class Enemy : MovingKinematicBody2D
 	public override void _Ready()
 	{
 		velocity = new Vector2(-1.1f, 0);
-		maxHp = 6f * (1f + Game.instance.generation * 0.85f);
+		maxHp = 6f * Mathf.Pow(1f + Game.instance.generation * 0.5f, 1.5f);
 		Hp = maxHp;
 	}
 
