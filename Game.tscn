@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/icon.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Logic/UpgradeScreen.cs" type="Script" id=6]
 [ext_resource path="res://UpgradeButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Logic/CustomButton.cs" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -67,3 +68,34 @@ valign = 1
 pause_mode = 2
 anchor_mode = 0
 current = true
+
+[node name="AbilityContainer" type="Control" parent="."]
+margin_left = 256.0
+margin_top = 500.0
+margin_right = 768.0
+margin_bottom = 580.0
+
+[node name="AbilityButton1" type="Button" parent="AbilityContainer"]
+margin_right = 90.0
+margin_bottom = 80.0
+script = ExtResource( 8 )
+
+[node name="Cooldown" type="ProgressBar" parent="AbilityContainer/AbilityButton1"]
+margin_left = 90.0
+margin_top = 80.0
+margin_right = 170.0
+margin_bottom = 100.0
+rect_rotation = -90.0
+max_value = 1.0
+step = 0.001
+percent_visible = false
+
+[node name="Label" type="Label" parent="AbilityContainer/AbilityButton1"]
+margin_left = 115.0
+margin_right = 515.0
+margin_bottom = 82.0
+text = "+100% Base Fire Rate
+
+Duration: 5 s
+
+Cooldown: 60 s"

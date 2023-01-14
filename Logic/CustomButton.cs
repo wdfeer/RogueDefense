@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class UpgradeButton : Button
+public class CustomButton : Button
 {
 	public Action onClick = () => { };
 	public override void _Pressed()

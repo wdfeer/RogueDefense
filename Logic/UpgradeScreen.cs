@@ -8,11 +8,11 @@ public class UpgradeScreen : Panel
 	public void Activate()
 	{
 		Show();
-        buttons = new UpgradeButton[]
+        buttons = new CustomButton[]
         {
-            upgradeButtonScene.Instance() as UpgradeButton,
-            upgradeButtonScene.Instance() as UpgradeButton,
-            upgradeButtonScene.Instance() as UpgradeButton
+            upgradeButtonScene.Instance() as CustomButton,
+            upgradeButtonScene.Instance() as CustomButton,
+            upgradeButtonScene.Instance() as CustomButton
         };
         upgrades = new Upgrade[]
         {
@@ -22,7 +22,7 @@ public class UpgradeScreen : Panel
         };
         for (int i = 0; i < buttons.Length; i++)
         {
-            UpgradeButton butt = buttons[i];
+            CustomButton butt = buttons[i];
 
             AddChild(butt);
             int index = i;
@@ -33,7 +33,7 @@ public class UpgradeScreen : Panel
         buttons[1].RectPosition += new Vector2(-240, -40);
         buttons[2].RectPosition += new Vector2(240, -40);
     }
-    UpgradeButton[] buttons;
+    CustomButton[] buttons;
     Upgrade[] upgrades;
     void OnButtonClicked(int index)
     {

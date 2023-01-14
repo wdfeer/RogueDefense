@@ -18,15 +18,19 @@ namespace RogueDefense
 		public PlayerHpManager hpManager;
 		public PlayerShootManager shootManager;
 		public PlayerUpgradeManager upgradeManager;
+		public AbilityManager abilityManager;
 		public override void _Ready()
 		{
 			hpManager = new PlayerHpManager(this);
 			shootManager = new PlayerShootManager(this);
 			upgradeManager = new PlayerUpgradeManager(this);
+			abilityManager = new AbilityManager(this);
 		}
 		public override void _Process(float delta)
 		{
-			shootManager.Process(delta);    
+			shootManager.Process(delta);
+			upgradeManager.Process(delta);
+			abilityManager.Process(delta);
 		}
 	}
 	public class PlayerHpManager
@@ -128,6 +132,12 @@ namespace RogueDefense
 		{
 			this.player = player;
 			UpdateUpgrades();
+			UpdateUpgradeText();
+		}
+
+		public void Process(float delta)
+		{
+			UpdateUpgrades();
 		}
 
 		List<Upgrade> upgrades = new List<Upgrade>();
@@ -135,7 +145,9 @@ namespace RogueDefense
 		{
 			upgrades.Add(upgrade);
 			UpdateUpgrades();
+			UpdateUpgradeText();
 		}
+
 		void UpdateUpgrades()
 		{
 			float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
@@ -153,9 +165,12 @@ namespace RogueDefense
 
 			float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
 			player.shootManager.multishot = PlayerShootManager.BASE_MULTISHOT * multishotMult;
-
-			UpdateUpgradeText();
 		}
+		IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
+	=> upgrades.Where(x => x.type == type).Select(x => x.value);
+		float GetTotalUpgradeMultiplier(UpgradeType type)
+			=> 1f + GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
+
 		void UpdateUpgradeText()
 		{
 			var upgradeText = player.GetNode("/root/Game/UpgradeScreen/UpgradeText") as Label;
@@ -167,9 +182,5 @@ Damage: {player.shootManager.damage.ToString("0.00")}
 Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}
 Multishot: {player.shootManager.multishot.ToString("0.00")}";
 		}
-		IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
-			=> upgrades.Where(x => x.type == type).Select(x => x.value);
-		float GetTotalUpgradeMultiplier(UpgradeType type)
-			=> 1f + GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
 	}
 }

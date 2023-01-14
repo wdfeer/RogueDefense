@@ -1,3 +1,4 @@
+
 using Godot;
 using RogueDefense.Logic;
 using System;
@@ -7,7 +8,7 @@ public class Enemy : MovingKinematicBody2D
 	public override void _Ready()
 	{
 		velocity = new Vector2(-1.1f, 0);
-		maxHp = 6f * Mathf.Pow(1f + Game.instance.generation * 0.5f, 1.5f);
+		maxHp = 6f * Mathf.Pow(1f + Game.instance.generation * 0.35f, 1.5f);
 		Hp = maxHp;
 	}
 
