@@ -34,7 +34,7 @@ public class Enemy : MovingKinematicBody2D
 	{
 		base._Process(delta);
 		if (attacking)
-			Game.instance.player.Damage(dps * delta);
+			Game.instance.player.hpManager.Damage(dps * delta);
 	}
 	bool attacking = false;
 

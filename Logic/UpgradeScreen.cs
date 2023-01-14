@@ -29,8 +29,9 @@ public class UpgradeScreen : Panel
             butt.onClick = () => OnButtonClicked(index);
             butt.Text = upgrades[i].ToString();
         }
-        buttons[1].RectPosition += new Vector2(-200, 0);
-        buttons[2].RectPosition += new Vector2(200, 0);
+        buttons[0].RectPosition += new Vector2(0, -40);
+        buttons[1].RectPosition += new Vector2(-240, -40);
+        buttons[2].RectPosition += new Vector2(240, -40);
     }
     UpgradeButton[] buttons;
     Upgrade[] upgrades;
