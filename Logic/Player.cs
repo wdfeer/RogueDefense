@@ -152,7 +152,6 @@ namespace RogueDefense
 		{
 			float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
 			player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
-			player.hpManager.Hp = player.hpManager.maxHp;
 
 			float damageDividor = GetTotalUpgradeMultiplier(UpgradeType.DamageDivision);
 			player.hpManager.damageMult = 1f / damageDividor;

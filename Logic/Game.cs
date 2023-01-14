@@ -40,5 +40,6 @@ public class Game : Node2D
 		(GetNode("./UpgradeScreen/LevelText") as Label).Text = $"Level {generation}";
 
 		player.shootManager.ClearBullets();
+		player.hpManager.Hp = player.hpManager.maxHp;
 	}
 }
