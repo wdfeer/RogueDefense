@@ -1,4 +1,5 @@
 ﻿using Godot;
+using RogueDefense.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,8 @@ namespace RogueDefense
         public const float BASE_SHOOT_INTERVAL = 1;
         public float shootInterval = BASE_SHOOT_INTERVAL;
         float timeSinceLastShot = 0;
+        public const float BASE_MULTISHOT = 1f;
+        public float multishot = BASE_MULTISHOT;
         public void Process(float delta)
         {
             timeSinceLastShot += delta;
@@ -88,14 +91,19 @@ namespace RogueDefense
             }
         }
         private List<Bullet> bullets = new List<Bullet>();
+        private const float SPREAD_DEGREES = 16f;
         private void CreateBullet()
         {
-            Bullet bullet = player.bulletScene.Instance() as Bullet;
-            bullet.velocity = new Godot.Vector2(2.5f, 0);
-            bullet.Position = player.Position + new Godot.Vector2(20, 0);
-            bullet.damage = damage;
-            Game.instance.AddChild(bullet);
-            bullets.Add(bullet);
+            int bulletCount = MathHelper.RandomRound(multishot);
+            for (int i = 0; i < bulletCount; i++)
+            {
+                Bullet bullet = player.bulletScene.Instance() as Bullet;
+                bullet.velocity = new Godot.Vector2(2.5f, 0).Rotated(Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f));
+                bullet.Position = player.Position + new Godot.Vector2(20, 0);
+                bullet.damage = damage;
+                Game.instance.AddChild(bullet);
+                bullets.Add(bullet);
+            }
         }
         public void ClearBullets()
         {
@@ -115,6 +123,7 @@ namespace RogueDefense
         public PlayerUpgradeManager(Player player)
         {
             this.player = player;
+            UpdateUpgrades();
         }
 
         List<Upgrade> upgrades = new List<Upgrade>();
@@ -135,11 +144,15 @@ namespace RogueDefense
             float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage);
             player.shootManager.damage = PlayerShootManager.BASE_DAMAGE * damageMult;
 
-            var upgradeText = Game.instance.GetNode("./UpgradeScreen/UpgradeText") as RichTextLabel;
+            float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
+            player.shootManager.multishot = PlayerShootManager.BASE_MULTISHOT * multishotMult;
+
+            var upgradeText = player.GetNode("/root/Game/UpgradeScreen/UpgradeText") as RichTextLabel;
             upgradeText.Text = $@"Max HP: {player.hpManager.maxHp.ToString("0.0")}
 
 Damage: {player.shootManager.damage.ToString("0.00")}
-Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}";
+Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}
+Multishot: {player.shootManager.multishot.ToString("0.00")}";
         }
         float GetTotalUpgradeMultiplier(UpgradeType type)
         {

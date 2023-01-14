@@ -31,5 +31,6 @@ public struct Upgrade
         MaxHp,
         Damage,
         FireRate,
+        Multishot
     }
 }
