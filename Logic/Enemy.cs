@@ -1,7 +1,6 @@
 
 using Godot;
 using RogueDefense.Logic;
-using System;
 
 public class Enemy : MovingKinematicBody2D
 {
