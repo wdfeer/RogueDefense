@@ -113,13 +113,21 @@ namespace RogueDefense
         }
         void UpdateUpgrades()
         {
-            player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP
-                * GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
+            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
+            player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
             player.hpManager.Hp = player.hpManager.maxHp;
-            player.shootManager.shootInterval = PlayerShootManager.BASE_SHOOT_INTERVAL
-                / GetTotalUpgradeMultiplier(UpgradeType.FireRate);
-            player.shootManager.damage = PlayerShootManager.BASE_DAMAGE
-                * GetTotalUpgradeMultiplier(UpgradeType.Damage);
+
+            float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate);
+            player.shootManager.shootInterval = PlayerShootManager.BASE_SHOOT_INTERVAL / fireRateMult;
+
+            float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage);
+            player.shootManager.damage = PlayerShootManager.BASE_DAMAGE * damageMult;
+
+            var upgradeText = Game.instance.GetNode("./UpgradeScreen/UpgradeText") as RichTextLabel;
+            upgradeText.Text = $@"Max HP: {player.hpManager.maxHp.ToString("0.0")}
+
+Damage: {player.shootManager.damage.ToString("0.00")}
+Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}";
         }
         float GetTotalUpgradeMultiplier(UpgradeType type)
         {

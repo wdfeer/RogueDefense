@@ -42,3 +42,11 @@ margin_right = 1024.0
 margin_bottom = 500.0
 script = ExtResource( 6 )
 upgradeButtonScene = ExtResource( 7 )
+
+[node name="UpgradeText" type="RichTextLabel" parent="UpgradeScreen"]
+margin_right = 200.0
+margin_bottom = 400.0
+text = "Max HP: 100.00
+
+Damage: 1.00
+Fire Rate: 1.00"
