@@ -7,7 +7,8 @@ public class Enemy : MovingKinematicBody2D
     public override void _Ready()
     {
         velocity = new Vector2(-1.1f, 0);
-        maxHp = 6f * Mathf.Pow(1f + Game.instance.generation * 0.35f, 1.5f);
+        var gen = Game.instance.generation;
+        maxHp = 6f * Mathf.Pow(1f + gen * 0.5f, gen / 8f);
         Hp = maxHp;
     }
 
@@ -29,7 +30,7 @@ public class Enemy : MovingKinematicBody2D
             Game.instance.DeleteEnemy();
         }
     }
-    public float dps = 20;
+    public float dps = 10;
     public override void _Process(float delta)
     {
         base._Process(delta);
