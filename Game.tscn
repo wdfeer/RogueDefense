@@ -102,6 +102,6 @@ margin_right = 267.0
 margin_bottom = 75.0
 theme = ExtResource( 10 )
 custom_fonts/font = ExtResource( 9 )
-text = "+100% Base Fire Rate
+text = "+100% Total Fire Rate
 Duration: 5 s
 Cooldown: 60 s"

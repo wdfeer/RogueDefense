@@ -82,13 +82,13 @@ namespace RogueDefense
         {
             this.player = player;
         }
-        public const float BASE_DAMAGE = 1;
-        public float damage = BASE_DAMAGE;
-        public const float BASE_SHOOT_INTERVAL = 1;
-        public float shootInterval = BASE_SHOOT_INTERVAL;
+        public float baseDamage = 1;
+        public float damage = 1;
+        public float baseShootInterval = 1;
+        public float shootInterval = 1;
         float timeSinceLastShot = 0;
-        public const float BASE_MULTISHOT = 1f;
-        public float multishot = BASE_MULTISHOT;
+        public float baseMultishot = 1f;
+        public float multishot = 1f;
         public void Process(float delta)
         {
             timeSinceLastShot += delta;
@@ -153,6 +153,16 @@ namespace RogueDefense
         public float critDamage = BASE_CRIT_DAMAGE;
         void UpdateUpgrades()
         {
+            float baseDamageMult = GetTotalUpgradeMultiplier(UpgradeType.BaseDamage);
+            player.shootManager.baseDamage = 1f * baseDamageMult;
+
+            float baseFireRateMult = GetTotalUpgradeMultiplier(UpgradeType.BaseFireRate);
+            player.shootManager.baseShootInterval = 1f / baseFireRateMult;
+
+            float baseMultishotMult = GetTotalUpgradeMultiplier(UpgradeType.BaseMultishot);
+            player.shootManager.baseMultishot = 1f * baseMultishotMult;
+
+
             float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
             player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
 
@@ -160,13 +170,13 @@ namespace RogueDefense
             player.hpManager.damageMult = 1f / damageDividor;
 
             float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate);
-            player.shootManager.shootInterval = PlayerShootManager.BASE_SHOOT_INTERVAL / fireRateMult;
+            player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
             float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage);
-            player.shootManager.damage = PlayerShootManager.BASE_DAMAGE * damageMult;
+            player.shootManager.damage = player.shootManager.baseDamage * damageMult;
 
             float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
-            player.shootManager.multishot = PlayerShootManager.BASE_MULTISHOT * multishotMult;
+            player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
             critChance = GetAllUpgradeValues(UpgradeType.CritChance).Aggregate(0f, (a, b) => a + b);
             critDamage = BASE_CRIT_DAMAGE * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);

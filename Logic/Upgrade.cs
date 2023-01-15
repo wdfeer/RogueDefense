@@ -1,5 +1,7 @@
 ﻿using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public struct Upgrade
 {
@@ -10,14 +12,16 @@ public struct Upgrade
         this.type = type;
         this.value = value;
     }
-    public static Upgrade RandomUpgrade()
+    public static Upgrade RandomUpgrade(bool based = false)
     {
-        UpgradeType GetRandomUpgradeType()
+        UpgradeType GetRandomUpgradeType(bool b)
         {
-            Array values = Enum.GetValues(typeof(UpgradeType));
-            return (UpgradeType)values.GetValue((int)(GD.Randf() * values.Length));
+            int[] values = Enum.GetValues(typeof(UpgradeType)) as int[];
+            values = (b ? values.Where(x => x > 500) : values.Where(x => x < 500)).ToArray();
+            return (UpgradeType)values[(int)(GD.Randf() * values.Length)];
         }
-        return new Upgrade(GetRandomUpgradeType(), GD.Randf() * 0.05f + 0.2f);
+        float value = based ? 1f : (GD.Randf() * 0.05f + 0.2f);
+        return new Upgrade(GetRandomUpgradeType(based), value);
     }
 
 
@@ -25,7 +29,6 @@ public struct Upgrade
     {
         return $"+{Mathf.RoundToInt(value * 100f)}% {type}";
     }
-
     public enum UpgradeType
     {
         MaxHp,
@@ -34,6 +37,10 @@ public struct Upgrade
         FireRate,
         Multishot,
         CritChance,
-        CritDamage
+        CritDamage,
+
+        BaseDamage = 501,
+        BaseFireRate = 502,
+        BaseMultishot = 503
     }
 }
