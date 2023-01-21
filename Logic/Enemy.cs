@@ -21,12 +21,18 @@ public class Enemy : MovingKinematicBody2D
         {
             hp = value;
             (GetNode("./HpBar") as ProgressBar).Value = hp / maxHp;
-            (GetNode("./HpBar/HpText") as Label).Text = $"{Mathf.CeilToInt(hp)} / {Mathf.CeilToInt(maxHp)}";
+            (GetNode("./HpBar/HpText") as Label).Text = $"{hp.ToString("0.0")} / {maxHp.ToString("0.0")}";
         }
     }
+    [Export]
+    public PackedScene combatText;
     public void Damage(float damage)
     {
         Hp -= damage;
+        Label dmgText = combatText.Instance() as CombatText;
+        GetNode("/root/Game").AddChild(dmgText);
+        dmgText.Text = damage.ToString("0.0");
+        dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-45, -120));
         if (Hp <= 0)
         {
             Game.instance.DeleteEnemy();

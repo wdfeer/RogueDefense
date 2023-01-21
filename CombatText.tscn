@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Logic/UI/CombatText.cs" type="Script" id=1]
+
+[node name="CombatText" type="Label"]
+pause_mode = 2
+margin_right = 83.0
+margin_bottom = 14.0
+text = "SAMPLE TEXT"
+align = 1
+valign = 1
+uppercase = true
+script = ExtResource( 1 )
