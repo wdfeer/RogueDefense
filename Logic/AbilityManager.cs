@@ -16,7 +16,12 @@ namespace RogueDefense
         {
             this.player = player;
             var ability1Button = player.GetNode("/root/Game/AbilityContainer/AbilityButton1") as CustomButton;
-            player.hooks.Add(new FireRateAbility(ability1Button));
+            ActiveAbility ability1;
+            if (GD.Randf() > 0.5f)
+                ability1 = new FireRateAbility(ability1Button);
+            else
+                ability1 = new DamageAbility(ability1Button);
+            player.hooks.Add(ability1);
 
             TimerManager.AddTimer(ResetAbilityText, 0.01f);
         }

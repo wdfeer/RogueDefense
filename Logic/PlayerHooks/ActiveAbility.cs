@@ -17,7 +17,7 @@ namespace RogueDefense
         }
         public abstract void Activate();
 
-        public virtual float BaseCooldown => 60f;
+        public virtual float BaseCooldown => 30f;
         public float Cooldown => BaseCooldown * Player.abilityManager.cooldownMult;
         protected float cooldownTimer = float.PositiveInfinity;
         public bool Cooling => cooldownTimer < Cooldown;
