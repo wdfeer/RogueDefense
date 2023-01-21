@@ -12,8 +12,12 @@ namespace RogueDefense
 {
     public class Player : Node2D
     {
+        public static Player instance;
+
         [Export]
         public PackedScene bulletScene;
+
+        public List<PlayerHooks> hooks = new List<PlayerHooks>();
 
         public PlayerHpManager hpManager;
         public PlayerShootManager shootManager;
@@ -21,6 +25,8 @@ namespace RogueDefense
         public AbilityManager abilityManager;
         public override void _Ready()
         {
+            instance = this;
+
             hpManager = new PlayerHpManager(this);
             shootManager = new PlayerShootManager(this);
             upgradeManager = new PlayerUpgradeManager(this);
@@ -28,9 +34,11 @@ namespace RogueDefense
         }
         public override void _Process(float delta)
         {
+            hooks.ForEach(x => x.PreUpdate(delta));
             shootManager.Process(delta);
             upgradeManager.Process(delta);
-            abilityManager.Process(delta);
+            hooks.ForEach(x => x.Update(delta));
+            hooks.ForEach(x => x.PostUpdate(delta));
         }
     }
     public class PlayerHpManager
