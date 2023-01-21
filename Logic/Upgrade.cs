@@ -41,6 +41,7 @@ public struct Upgrade
 
         BaseDamage = 501,
         BaseFireRate = 502,
-        BaseMultishot = 503
+        BaseMultishot = 503,
+        BaseCritMultiplier = 504
     }
 }
