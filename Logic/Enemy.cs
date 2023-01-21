@@ -32,7 +32,7 @@ public class Enemy : MovingKinematicBody2D
         Label dmgText = combatText.Instance() as CombatText;
         GetNode("/root/Game").AddChild(dmgText);
         dmgText.Text = damage.ToString("0.0");
-        dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-45, -120));
+        dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120));
         if (Hp <= 0)
         {
             Game.instance.DeleteEnemy();
