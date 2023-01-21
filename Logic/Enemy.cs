@@ -21,6 +21,7 @@ public class Enemy : MovingKinematicBody2D
         {
             hp = value;
             (GetNode("./HpBar") as ProgressBar).Value = hp / maxHp;
+            (GetNode("./HpBar/HpText") as Label).Text = $"{Mathf.CeilToInt(hp)} / {Mathf.CeilToInt(maxHp)}";
         }
     }
     public void Damage(float damage)

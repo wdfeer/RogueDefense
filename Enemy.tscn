@@ -28,3 +28,11 @@ theme = ExtResource( 3 )
 max_value = 1.0
 step = 0.001
 value = 1.0
+percent_visible = false
+
+[node name="HpText" type="Label" parent="HpBar"]
+margin_right = 120.0
+margin_bottom = 24.0
+text = "10 / 10"
+align = 1
+uppercase = true
