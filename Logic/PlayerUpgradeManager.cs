@@ -48,8 +48,8 @@ namespace RogueDefense
             float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
             player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
 
-            float damageDividor = GetTotalUpgradeMultiplier(UpgradeType.DamageDivision);
-            player.hpManager.damageMult = 1f / damageDividor;
+            float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
+            player.hpManager.damageMult = damageTakenMult;
 
             float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate);
             player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;

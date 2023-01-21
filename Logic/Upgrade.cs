@@ -32,7 +32,7 @@ public struct Upgrade
     public enum UpgradeType
     {
         MaxHp,
-        DamageDivision,
+        DamageReduction,
         Damage,
         FireRate,
         Multishot,
