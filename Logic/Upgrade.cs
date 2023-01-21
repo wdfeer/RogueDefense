@@ -20,10 +20,23 @@ public struct Upgrade
             values = (b ? values.Where(x => x > 500) : values.Where(x => x < 500)).ToArray();
             return (UpgradeType)values[(int)(GD.Randf() * values.Length)];
         }
+        UpgradeType type = GetRandomUpgradeType(based);
         float value = based ? 1f : (GD.Randf() * 0.05f + 0.2f);
-        return new Upgrade(GetRandomUpgradeType(based), value);
-    }
+        value *= GetUpgradeValueMultiplier(type);
 
+        return new Upgrade(type, value);
+    }
+    static float GetUpgradeValueMultiplier(UpgradeType type)
+    {
+        switch (type)
+        {
+            case UpgradeType.DamageReduction:
+                return 0.5f;
+            case UpgradeType.AbilityStrength:
+                return 2f;
+        }
+        return 1f;
+    }
 
     public override string ToString()
     {
@@ -38,6 +51,8 @@ public struct Upgrade
         Multishot,
         CritChance,
         CritDamage,
+
+        AbilityStrength,
 
         BaseDamage = 501,
         BaseFireRate = 502,

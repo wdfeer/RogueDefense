@@ -8,7 +8,7 @@ namespace RogueDefense
             buffLeft = Duration * 5f;
         }
         public float buffLeft = 0;
-        public override void PostUpdate(float delta)
+        public override void PostUpgradeUpdate(float delta)
         {
             if (buffLeft > 0)
             {

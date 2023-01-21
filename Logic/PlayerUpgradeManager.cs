@@ -11,8 +11,11 @@ namespace RogueDefense
         public PlayerUpgradeManager(Player player)
         {
             this.player = player;
-            UpdateUpgrades();
-            UpdateUpgradeText();
+            TimerManager.AddTimer(() =>
+            {
+                UpdateUpgrades();
+                UpdateUpgradeText();
+            }, 0.01f);
         }
 
         public void Process(float delta)
@@ -62,6 +65,8 @@ namespace RogueDefense
 
             critChance = GetAllUpgradeValues(UpgradeType.CritChance).Aggregate(0f, (a, b) => a + b);
             critDamage = this.baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
+
+            player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
         }
         IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
     => upgrades.Where(x => x.type == type).Select(x => x.value);

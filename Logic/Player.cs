@@ -33,9 +33,10 @@ namespace RogueDefense
         public override void _Process(float delta)
         {
             hooks.ForEach(x => x.PreUpdate(delta));
-            shootManager.Process(delta);
-            upgradeManager.Process(delta);
             hooks.ForEach(x => x.Update(delta));
+            upgradeManager.Process(delta);
+            hooks.ForEach(x => x.PostUpgradeUpdate(delta));
+            shootManager.Process(delta);
             hooks.ForEach(x => x.PostUpdate(delta));
         }
     }
