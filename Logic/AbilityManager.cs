@@ -17,7 +17,7 @@ namespace RogueDefense
             this.player = player;
             var ability1Button = player.GetNode("/root/Game/AbilityContainer/AbilityButton1") as CustomButton;
             ActiveAbility ability1;
-            if (GD.Randf() > 0.5f)
+            if (new Random().Next(0, 2) == 0)
                 ability1 = new FireRateAbility(ability1Button);
             else
                 ability1 = new DamageAbility(ability1Button);
