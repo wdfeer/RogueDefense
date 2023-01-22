@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Logic/UI/MainMenu/SingleplayerButton.cs" type="Script" id=2]
+[ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Game.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Theme" id=1]
@@ -23,4 +23,30 @@ theme = SubResource( 1 )
 text = "SINGLEPLAYER"
 icon_align = 1
 script = ExtResource( 2 )
-singleplayerScene = ExtResource( 3 )
+goToScene = ExtResource( 3 )
+
+[node name="HostButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -320.0
+margin_top = 400.0
+margin_right = 280.0
+margin_bottom = 700.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = SubResource( 1 )
+text = "MULTIPLAYER HOST"
+icon_align = 1
+script = ExtResource( 2 )
+
+[node name="JoinButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 20.0
+margin_top = 400.0
+margin_right = 620.0
+margin_bottom = 700.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = SubResource( 1 )
+text = "MULTIPLAYER JOIN"
+icon_align = 1
+script = ExtResource( 2 )
