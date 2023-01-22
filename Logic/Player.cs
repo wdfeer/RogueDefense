@@ -11,6 +11,7 @@ namespace RogueDefense
     public class Player : Node2D
     {
         public static Player localInstance;
+        public static string myName = "Player123";
 
         [Export]
         public PackedScene bulletScene;

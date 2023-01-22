@@ -12,10 +12,8 @@ public class NetworkManager : Node
         GetTree().Connect("network_peer_connected", this, "PeerConnected");
     }
     private NetworkedMultiplayerENet net;
-    public void InitializeNetMode(NetMode mode)
+    public void Initialize()
     {
-        if (net != null) return;
-        NetworkManager.mode = mode;
         switch (mode)
         {
             case NetMode.Server:
