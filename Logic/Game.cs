@@ -10,12 +10,12 @@ public class Game : Node2D
     [Export]
     public PackedScene enemyScene;
 
-    public Player player;
+    public Player myPlayer;
     public Enemy enemy;
     public override void _Ready()
     {
         instance = this;
-        player = GetNode("./PlayerBase") as Player;
+        myPlayer = GetNode("./PlayerBase") as Player;
     }
 
     public override void _Process(float delta)
@@ -40,7 +40,7 @@ public class Game : Node2D
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
         (GetNode("./UpgradeScreen/LevelText") as Label).Text = $"Level {generation}";
 
-        player.shootManager.ClearBullets();
-        player.hpManager.Hp = player.hpManager.maxHp;
+        myPlayer.shootManager.ClearBullets();
+        myPlayer.hpManager.Hp = myPlayer.hpManager.maxHp;
     }
 }

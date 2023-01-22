@@ -1,9 +1,16 @@
 using Godot;
+using RogueDefense;
 using RogueDefense.Logic;
 using System;
 
 public class Bullet : MovingKinematicBody2D
 {
+    public Player owner;
+    public override void _Ready()
+    {
+        base._Ready();
+        owner = Player.localInstance;
+    }
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -14,9 +21,11 @@ public class Bullet : MovingKinematicBody2D
     {
         if (collision.Collider == Game.instance.enemy)
         {
-            int critLevel = MathHelper.RandomRound(Game.instance.player.upgradeManager.critChance);
+            int critLevel = MathHelper.RandomRound(owner.upgradeManager.critChance);
+            float critMult = owner.upgradeManager.critDamage;
+            owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref damage, ref critLevel, ref critMult));
             if (critLevel > 0)
-                damage *= Game.instance.player.upgradeManager.critDamage * critLevel;
+                damage *= critMult * critLevel;
             Game.instance.enemy.Damage(damage, GetCritColor(critLevel));
             QueueFree();
         }

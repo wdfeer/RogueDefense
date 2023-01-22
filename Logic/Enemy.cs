@@ -51,7 +51,7 @@ public class Enemy : MovingKinematicBody2D
             if (attackTimer > attackInterval)
             {
                 attackTimer = 0f;
-                Game.instance.player.hpManager.Damage(damage);
+                Game.instance.myPlayer.hpManager.Damage(damage);
             }
         }
     }
@@ -59,7 +59,7 @@ public class Enemy : MovingKinematicBody2D
 
     protected override void OnCollision(KinematicCollision2D collision)
     {
-        if (collision.Collider == Game.instance.player)
+        if (collision.Collider == Game.instance.myPlayer)
         {
             attacking = true;
         }

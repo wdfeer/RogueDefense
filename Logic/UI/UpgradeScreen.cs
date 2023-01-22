@@ -39,7 +39,7 @@ public class UpgradeScreen : Panel
     void OnButtonClicked(int index)
     {
         GD.Print($"Button {index} clicked");
-        Game.instance.player.upgradeManager.AddUpgrade(upgrades[index]);
+        Game.instance.myPlayer.upgradeManager.AddUpgrade(upgrades[index]);
         foreach (var butt in buttons)
         {
             butt.QueueFree();

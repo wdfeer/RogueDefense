@@ -10,7 +10,7 @@ namespace RogueDefense
 {
     public class Player : Node2D
     {
-        public static Player instance;
+        public static Player localInstance;
 
         [Export]
         public PackedScene bulletScene;
@@ -23,7 +23,7 @@ namespace RogueDefense
         public AbilityManager abilityManager;
         public override void _Ready()
         {
-            instance = this;
+            localInstance = this;
 
             hpManager = new PlayerHpManager(this);
             shootManager = new PlayerShootManager(this);
