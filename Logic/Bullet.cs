@@ -17,8 +17,23 @@ public class Bullet : MovingKinematicBody2D
             int critLevel = MathHelper.RandomRound(Game.instance.player.upgradeManager.critChance);
             if (critLevel > 0)
                 damage *= Game.instance.player.upgradeManager.critDamage * critLevel;
-            Game.instance.enemy.Damage(damage);
+            Game.instance.enemy.Damage(damage, GetCritColor(critLevel));
             QueueFree();
+        }
+    }
+
+    private Color GetCritColor(int critLevel)
+    {
+        switch (critLevel)
+        {
+            case 0:
+                return Color.Color8(255, 255, 255);
+            case 1:
+                return Color.Color8(153, 153, 0);
+            case 2:
+                return Color.Color8(204, 133, 0);
+            default:
+                return Color.Color8(204, 0, 0);
         }
     }
 }

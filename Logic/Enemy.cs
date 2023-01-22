@@ -26,11 +26,12 @@ public class Enemy : MovingKinematicBody2D
     }
     [Export]
     public PackedScene combatText;
-    public void Damage(float damage)
+    public void Damage(float damage, Color textColor)
     {
         Hp -= damage;
         Label dmgText = combatText.Instance() as CombatText;
         GetNode("/root/Game").AddChild(dmgText);
+        dmgText.Modulate = textColor;
         dmgText.Text = damage.ToString("0.0");
         dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120));
         if (Hp <= 0)
