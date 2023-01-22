@@ -15,7 +15,7 @@ public class Game : Node2D
     public override void _Ready()
     {
         instance = this;
-        myPlayer = GetNode("./PlayerBase") as Player;
+        myPlayer = GetNode("./MyPlayer") as Player;
     }
 
     public override void _Process(float delta)

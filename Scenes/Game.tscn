@@ -16,21 +16,24 @@ extents = Vector2( 31, 31 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 enemyScene = ExtResource( 4 )
 
-[node name="PlayerBase" type="StaticBody2D" parent="."]
+[node name="MyPlayer" type="StaticBody2D" parent="."]
 position = Vector2( 100, 300 )
 collision_mask = 3
 script = ExtResource( 10 )
 bulletScene = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="PlayerBase"]
+[node name="Sprite" type="Sprite" parent="MyPlayer"]
 texture = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBase"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MyPlayer"]
 shape = SubResource( 1 )
 
-[node name="HpBar" type="ProgressBar" parent="PlayerBase"]
+[node name="HpBar" type="ProgressBar" parent="MyPlayer"]
 margin_left = -31.0
 margin_top = -47.0
 margin_right = 31.0

@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Game.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Logic/UI/MainMenu/MPButton.cs" type="Script" id=4]
+[ext_resource path="res://Scenes/NetworkManager.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
@@ -36,7 +38,10 @@ rect_scale = Vector2( 0.5, 0.5 )
 theme = SubResource( 1 )
 text = "MULTIPLAYER HOST"
 icon_align = 1
-script = ExtResource( 2 )
+script = ExtResource( 4 )
+goToScene = ExtResource( 3 )
+networkManager = ExtResource( 5 )
+host = true
 
 [node name="JoinButton" type="Button" parent="."]
 anchor_left = 0.5
@@ -49,4 +54,6 @@ rect_scale = Vector2( 0.5, 0.5 )
 theme = SubResource( 1 )
 text = "MULTIPLAYER JOIN"
 icon_align = 1
-script = ExtResource( 2 )
+script = ExtResource( 4 )
+goToScene = ExtResource( 3 )
+networkManager = ExtResource( 5 )
