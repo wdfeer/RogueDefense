@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=2]
 [ext_resource path="res://Scenes/Game.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Logic/UI/MainMenu/MPButton.cs" type="Script" id=4]
 [ext_resource path="res://Scenes/NetworkManager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/default_theme.tres" type="Theme" id=6]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 1 )
@@ -57,3 +58,29 @@ icon_align = 1
 script = ExtResource( 4 )
 goToScene = ExtResource( 3 )
 networkManager = ExtResource( 5 )
+
+[node name="UsernameContainer" type="VBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 8.0
+margin_right = 685.0
+margin_bottom = 208.0
+rect_scale = Vector2( 0.4, 0.4 )
+rect_clip_content = true
+theme = ExtResource( 6 )
+
+[node name="Label" type="Label" parent="UsernameContainer"]
+margin_right = 675.0
+margin_bottom = 87.0
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 1 )
+text = "Username:"
+valign = 1
+
+[node name="UsernameInput" type="LineEdit" parent="UsernameContainer"]
+margin_top = 91.0
+margin_right = 675.0
+margin_bottom = 188.0
+theme = ExtResource( 6 )
+custom_fonts/font = ExtResource( 1 )
+text = "Player123"
+selecting_enabled = false
