@@ -11,50 +11,24 @@ public class NetworkManager : Node
     public override void _Ready()
     {
         instance = this;
-        GetTree().Connect("network_peer_connected", this, "PlayerConnected");
-        GetTree().Connect("network_peer_disconnected", this, "PlayerDisconnected");
-    }
-    private static NetworkedMultiplayerENet net;
-    public void InitializeServer()
-    {
-        users = new List<UserData>() { new UserData() { id = 1, name = Player.myName } };
-
-        net = new NetworkedMultiplayerENet();
-        net.CreateServer(7777, 7);
-        GetTree().NetworkPeer = net;
-    }
-    public List<UserData> users;
-    public void PlayerConnected(int id)
-    {
-        GD.Print($"Connection received, id: {id}");
-        users.Add(new UserData() { id = id });
-    }
-    public void PlayerDisconnected(int id)
-    {
-        GD.Print($"Connection revoked, id: {id}");
-        users.Remove(users.Find(x => x.id == id));
     }
     public static string connectingAddress;
     public static int connectingPort;
-    public void ClientConnect()
+    public static string URL => $"wss://{connectingAddress}:{connectingPort}";
+    public static void ConnectClient()
     {
-        net = new NetworkedMultiplayerENet();
-        net.CreateClient(connectingAddress, connectingPort);
-        GetTree().NetworkPeer = net;
-        RpcId(1, "SetUsername", Player.myName);
-    }
-    [Remote]
-    public void SetUsername(string name)
-    {
-        int sender = GetTree().GetRpcSenderId();
-        users.Find(x => x.id == sender).name = name;
-        GD.Print($"Set name {name} for user {sender}");
+        Client.client.ConnectToUrl(URL);
     }
 }
 public class UserData
 {
     public int id;
     public string name;
+    public UserData(int id, string name)
+    {
+        this.id = id;
+        this.name = name;
+    }
 }
 public enum NetMode
 {

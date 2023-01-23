@@ -18,12 +18,12 @@ public class Lobby : Control
         AddChild(networkManager);
         if (NetworkManager.mode == NetMode.Server)
         {
-            networkManager.InitializeServer();
+            Server.instance.Start();
         }
         else if (NetworkManager.mode == NetMode.Client)
         {
             (GetNode("StartButton") as Button).Disabled = true;
-            networkManager.ClientConnect();
+            NetworkManager.ConnectClient();
         }
     }
 }
