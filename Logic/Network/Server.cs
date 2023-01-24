@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using static Client;
 
 public class Server : Node
 {
@@ -24,37 +25,45 @@ public class Server : Node
             SetProcess(false);
         }
     }
-    public List<int> ids = new List<int>();
+    public Dictionary<int, string> names = new Dictionary<int, string>();
     public void SendPacket(int id, byte[] data) => server.GetPeer(id).PutPacket(data);
-    public void Broadcast(byte[] data, int ignore = -1) => ids.ForEach(x =>
+    public void Broadcast(byte[] data, int ignore = -1) => names.ToList().ForEach(x =>
     {
-        if (x != ignore)
-            SendPacket(x, data);
+        if (x.Key != ignore)
+            SendPacket(x.Key, data);
     });
     public void Connected(int id, string protocol)
     {
-        ids.Add(id);
-        GD.Print($"Client {id} connected with protocol: {protocol}");
-        string data = $"{Client.MessageType.FetchLobby}{id.ToString()}";
-        if (ids.Any())
-            data += " " + String.Join(" ", ids.Select(x => $"{x.ToString()};{Client.instance.users.Find(y => y.id == x)}"));
+        string data = $"{(char)Client.MessageType.FetchLobby}{id.ToString()}";
+        if (names.Count > 0)
+            data += " " + String.Join(" ", names.Select(x => $"{x.Key.ToString()};{x.Value}"));
         SendPacket(id, data.ToUTF8());
+        names.Add(id, "");
+        GD.Print($"Client {id} connected with protocol: {protocol}");
     }
     public void Disconnected(int id, bool wasCleanClose = false)
     {
-        ids.Remove(id);
+        names.Remove(id);
         GD.Print($"Client {id} disconnected, clean: {wasCleanClose}");
     }
     public void CloseRequest(int id, int code, string reason)
     {
-        ids.Remove(id);
+        names.Remove(id);
         GD.Print($"Client {id} disconnecting with code {code}, reason: {reason}");
     }
     public void OnData(int id)
     {
-        var data = server.GetPeer(id).GetPacket();
-        GD.Print($"Got packet from {id}: {data.GetStringFromUTF8()} ... broadcasting");
+        byte[] data = server.GetPeer(id).GetPacket();
+        GD.Print($"Server: got packet from {id}: {data.GetStringFromUTF8()} ... broadcasting");
         Broadcast(data, id);
+
+        string str = data.GetStringFromUTF8();
+        if (str[0] == (char)MessageType.Register)
+        {
+            string name = str.Substring(1).Split(" ")[1];
+            names[id] = name;
+            GD.Print($"Registered name {name} for {id}");
+        }
     }
 
     public void Poll()

@@ -29,7 +29,7 @@ public class Client : Node
     public List<UserData> users = new List<UserData>();
     public void Connected(string protocol = "")
     {
-        GD.Print("Client connected!");
+        GD.Print("This client connected!");
     }
     public void Closed(bool wasCleanClose = false) { }
     public void OnData()
@@ -48,21 +48,11 @@ public class Client : Node
                 for (int i = 1; i < args.Length; i++)
                 {
                     var strs = args[i].Split(";");
-                    UserData data = new UserData(strs[0].ToInt(), strs[1]);
-                    users.Add(data);
-                    if (Lobby.Instance != null)
-                    {
-                        Lobby.Instance.AddUser(data);
-                    }
+                    RegisterUser(strs[0].ToInt(), strs[1]);
                 }
                 break;
             case MessageType.Register:
-                UserData d = new UserData(args[0].ToInt(), args[1]);
-                users.Add(d);
-                if (Lobby.Instance != null)
-                {
-                    Lobby.Instance.AddUser(d);
-                }
+                RegisterUser(args[0].ToInt(), args[1]);
                 break;
             case MessageType.Unregister:
                 int id = args[0].ToInt();
@@ -76,16 +66,25 @@ public class Client : Node
                 break;
         }
     }
+    void RegisterUser(int id, string name)
+    {
+        UserData d = new UserData(id, name);
+        users.Add(d);
+        if (Lobby.Instance != null)
+        {
+            Lobby.Instance.AddUser(d);
+        }
+    }
     public enum MessageType
     {
         FetchLobby = 'i',
         Register = 'r',
         Unregister = 'R'
     }
-    void Broadcast(string data) => client.PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
+    void Broadcast(string data) => client.GetPeer(1).PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
     void SendMessage(MessageType type, string[] args)
     {
-        Broadcast($"{type}" + String.Join(" ", args));
+        Broadcast($"{(char)type}" + String.Join(" ", args));
     }
 
     public void Poll()

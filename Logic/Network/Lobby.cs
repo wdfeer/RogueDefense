@@ -25,7 +25,7 @@ public class Lobby : Control
         var node = userDataScene.Instance() as LobbyPlayerData;
         node.SetName(data.name);
         userDisplayNodes.Add(data.id, node);
-        this.AddChild(node);
+        GetNode("PlayerList").AddChild(node);
     }
     public void RemoveUser(int id)
     {

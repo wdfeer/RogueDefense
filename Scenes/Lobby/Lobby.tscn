@@ -9,6 +9,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+userDataScene = ExtResource( 3 )
 
 [node name="PlayerList" type="VFlowContainer" parent="."]
 margin_top = 100.0
