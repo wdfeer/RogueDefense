@@ -9,7 +9,7 @@ public class MPButton : GoToSceneButton
 
     public override void _Pressed()
     {
-        base._Pressed();
         NetworkManager.mode = host ? NetMode.Server : NetMode.Client;
+        base._Pressed();
     }
 }

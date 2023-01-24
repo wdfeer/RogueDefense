@@ -8,8 +8,8 @@ public class JoinButton : GoToSceneButton
     public override void _Pressed()
     {
         NetworkManager.mode = NetMode.Client;
-        NetworkManager.connectingAddress = (GetNode("../IP Input/LineEdit") as LineEdit).Text;
-        NetworkManager.connectingPort = int.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
+        Client.address = (GetNode("../IP Input/LineEdit") as LineEdit).Text;
+        Client.port = int.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
         base._Pressed();
     }
 }

@@ -17,9 +17,10 @@ public class Server : Node
         server.Connect("data_received", this, "OnData");
 
         var err = server.Listen(PORT);
-        if (err != Error.Ok)
+        GD.Print($"Server is listening on port {PORT}");
+        if (err != Error.Ok || !server.IsListening())
         {
-            GD.Print("Unable to start server");
+            GD.PrintErr("Unable to start server");
             SetProcess(false);
         }
     }
@@ -34,8 +35,10 @@ public class Server : Node
     {
         ids.Add(id);
         GD.Print($"Client {id} connected with protocol: {protocol}");
-        SendPacket(id, ($"{Client.MessageType.FetchLobby}{id.ToString()} "
-                + String.Join(" ", ids.Select(x => $"{x.ToString()};{Client.instance.users.Find(y => y.id == x)}"))).ToUTF8());
+        string data = $"{Client.MessageType.FetchLobby}{id.ToString()}";
+        if (ids.Any())
+            data += " " + String.Join(" ", ids.Select(x => $"{x.ToString()};{Client.instance.users.Find(y => y.id == x)}"));
+        SendPacket(id, data.ToUTF8());
     }
     public void Disconnected(int id, bool wasCleanClose = false)
     {
@@ -54,7 +57,7 @@ public class Server : Node
         Broadcast(data, id);
     }
 
-    public override void _Process(float delta)
+    public void Poll()
     {
         server.Poll();
     }

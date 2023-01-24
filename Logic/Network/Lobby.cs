@@ -1,29 +1,45 @@
 using Godot;
 using RogueDefense;
 using System;
+using System.Collections.Generic;
 
 public class Lobby : Control
 {
+    [Export]
+    public PackedScene userDataScene;
     public static Lobby Instance => GDScript.IsInstanceValid(instance) ? instance : null;
     private static Lobby instance;
-    [Export]
-    public PackedScene netManagerScene;
     public override void _Ready()
     {
         instance = this;
 
         (GetNode("PlayerList/MyData/Container/Name") as Label).Text = Player.myName;
-
-        NetworkManager networkManager = netManagerScene.Instance() as NetworkManager;
-        AddChild(networkManager);
-        if (NetworkManager.mode == NetMode.Server)
-        {
-            Server.instance.Start();
-        }
-        else if (NetworkManager.mode == NetMode.Client)
-        {
+        if (NetworkManager.mode == NetMode.Client)
             (GetNode("StartButton") as Button).Disabled = true;
-            NetworkManager.ConnectClient();
+
+        NetworkManager.NetStart();
+    }
+    Dictionary<int, LobbyPlayerData> userDisplayNodes = new Dictionary<int, LobbyPlayerData>();
+    public void AddUser(UserData data)
+    {
+        var node = userDataScene.Instance() as LobbyPlayerData;
+        node.SetName(data.name);
+        userDisplayNodes.Add(data.id, node);
+        this.AddChild(node);
+    }
+    public void RemoveUser(int id)
+    {
+        if (userDisplayNodes.ContainsKey(id))
+        {
+            userDisplayNodes[id].QueueFree();
+            userDisplayNodes.Remove(id);
         }
+    }
+
+
+    public override void _Process(float delta)
+    {
+        if (NetworkManager.mode == NetMode.Server) Server.instance.Poll();
+        Client.instance.Poll();
     }
 }

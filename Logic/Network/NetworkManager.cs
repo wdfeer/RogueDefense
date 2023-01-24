@@ -6,18 +6,19 @@ using System.Collections.Generic;
 public class NetworkManager : Node
 {
     public static NetMode mode = NetMode.Singleplayer;
-    public static NetworkManager instance;
-
-    public override void _Ready()
+    public static void NetStart()
     {
-        instance = this;
-    }
-    public static string connectingAddress;
-    public static int connectingPort;
-    public static string URL => $"wss://{connectingAddress}:{connectingPort}";
-    public static void ConnectClient()
-    {
-        Client.client.ConnectToUrl(URL);
+        if (NetworkManager.mode == NetMode.Server)
+        {
+            Server.instance.Start();
+            Client.address = "localhost";
+            Client.port = Server.PORT;
+            Client.instance.Start();
+        }
+        else if (NetworkManager.mode == NetMode.Client)
+        {
+            Client.instance.Start();
+        }
     }
 }
 public class UserData
