@@ -19,10 +19,10 @@ public class Lobby : Control
 
         NetworkManager.NetStart();
     }
-    Dictionary<int, LobbyPlayerData> userDisplayNodes = new Dictionary<int, LobbyPlayerData>();
+    Dictionary<int, PlayerData> userDisplayNodes = new Dictionary<int, PlayerData>();
     public void AddUser(UserData data)
     {
-        var node = userDataScene.Instance() as LobbyPlayerData;
+        var node = userDataScene.Instance() as PlayerData;
         node.SetName(data.name);
         userDisplayNodes.Add(data.id, node);
         GetNode("PlayerList").AddChild(node);

@@ -38,7 +38,7 @@ public class Client : Node
         MessageType type = (MessageType)data[0];
         ProcessMessage(type, data.Substring(1).Split(' '));
     }
-    void ProcessMessage(MessageType type, string[] args)
+    public void ProcessMessage(MessageType type, string[] args)
     {
         switch (type)
         {
@@ -62,6 +62,9 @@ public class Client : Node
                     Lobby.Instance.RemoveUser(id);
                 }
                 break;
+            case MessageType.StartGame:
+                Lobby.Instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
+                break;
             default:
                 break;
         }
@@ -79,10 +82,11 @@ public class Client : Node
     {
         FetchLobby = 'i',
         Register = 'r',
-        Unregister = 'R'
+        Unregister = 'R',
+        StartGame = 's',
     }
     void Broadcast(string data) => client.GetPeer(1).PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
-    void SendMessage(MessageType type, string[] args)
+    public void SendMessage(MessageType type, string[] args)
     {
         Broadcast($"{(char)type}" + String.Join(" ", args));
     }

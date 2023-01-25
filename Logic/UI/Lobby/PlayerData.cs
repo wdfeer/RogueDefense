@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class LobbyPlayerData : PanelContainer
+public class PlayerData : PanelContainer
 {
     public new void SetName(string name)
     {
