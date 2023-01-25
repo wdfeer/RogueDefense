@@ -39,7 +39,6 @@ public class Lobby : Control
 
     public override void _Process(float delta)
     {
-        if (NetworkManager.mode == NetMode.Server) Server.instance.Poll();
-        Client.instance.Poll();
+        NetworkManager.Poll();
     }
 }

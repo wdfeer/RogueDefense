@@ -34,7 +34,7 @@ public class Server : Node
     });
     public void Connected(int id, string protocol)
     {
-        string data = $"{(char)Client.MessageType.FetchLobby}{id.ToString()}";
+        string data = $"{(char)MessageType.FetchLobby}{id.ToString()}";
         if (names.Count > 0)
             data += " " + String.Join(" ", names.Select(x => $"{x.Key.ToString()};{x.Value}"));
         SendPacket(id, data.ToUTF8());
@@ -65,8 +65,13 @@ public class Server : Node
             GD.Print($"Registered name {name} for {id}");
         }
     }
+    public void SendMessage(MessageType type, string[] args)
+    {
+        Broadcast(($"{(char)type}" + String.Join(" ", args)).ToUTF8());
+    }
 
-    public void Poll()
+
+    public void Poll() // important to always keep polling
     {
         server.Poll();
     }

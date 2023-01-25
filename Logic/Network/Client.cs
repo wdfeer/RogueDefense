@@ -26,7 +26,7 @@ public class Client : Node
             SetProcess(false);
         }
     }
-    public List<UserData> users = new List<UserData>();
+    public List<UserData> others = new List<UserData>();
     public void Connected(string protocol = "")
     {
         GD.Print("This client connected!");
@@ -56,7 +56,7 @@ public class Client : Node
                 break;
             case MessageType.Unregister:
                 int id = args[0].ToInt();
-                users.Remove(users.Find(x => x.id == id));
+                others.Remove(others.Find(x => x.id == id));
                 if (Lobby.Instance != null)
                 {
                     Lobby.Instance.RemoveUser(id);
@@ -65,6 +65,21 @@ public class Client : Node
             case MessageType.StartGame:
                 Lobby.Instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
                 break;
+            case MessageType.EnemyKill:
+                if (IsInstanceValid(Game.instance))
+                    Game.instance.DeleteEnemy();
+                else
+                    GD.PrintErr("Received an EnemyKill message when the Game is not active");
+                break;
+            case MessageType.Upgrade:
+                Upgrade up = new Upgrade((Upgrade.UpgradeType)args[0].ToInt(), args[1].ToFloat());
+                Player.localInstance.upgradeManager.AddUpgrade(up);
+                UpgradeScreen.instance.upgradesMade++;
+                if (UpgradeScreen.instance.AllUpgradesMadeInMP())
+                {
+                    UpgradeScreen.instance.HideAndUnpause();
+                }
+                break;
             default:
                 break;
         }
@@ -72,18 +87,11 @@ public class Client : Node
     void RegisterUser(int id, string name)
     {
         UserData d = new UserData(id, name);
-        users.Add(d);
+        others.Add(d);
         if (Lobby.Instance != null)
         {
             Lobby.Instance.AddUser(d);
         }
-    }
-    public enum MessageType
-    {
-        FetchLobby = 'i',
-        Register = 'r',
-        Unregister = 'R',
-        StartGame = 's',
     }
     void Broadcast(string data) => client.GetPeer(1).PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
     public void SendMessage(MessageType type, string[] args)
@@ -91,8 +99,18 @@ public class Client : Node
         Broadcast($"{(char)type}" + String.Join(" ", args));
     }
 
-    public void Poll()
+
+    public void Poll() // important to always keep polling
     {
         client.Poll();
     }
+}
+public enum MessageType
+{
+    FetchLobby = 'i',
+    Register = 'r',
+    Unregister = 'R',
+    StartGame = 's',
+    EnemyKill = 'k',
+    Upgrade = 'u'
 }

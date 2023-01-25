@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/defaultFont.tres" type="DynamicFont" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Logic/UI/InGame/UpgradeScreen.cs" type="Script" id=8]
 [ext_resource path="res://Logic/UI/CustomButton.cs" type="Script" id=9]
 [ext_resource path="res://Logic/Player.cs" type="Script" id=10]
+[ext_resource path="res://Logic/Network/NetPoller.cs" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -108,3 +109,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "+100% Total Fire Rate
 Duration: 5 s
 Cooldown: 60 s"
+
+[node name="NetPoller" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 11 )

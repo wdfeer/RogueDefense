@@ -3,6 +3,13 @@ using RogueDefense;
 
 public class UpgradeScreen : Panel
 {
+    public static UpgradeScreen instance;
+    public override void _Ready()
+    {
+        instance = this;
+    }
+
+
     [Export]
     public PackedScene upgradeButtonScene;
     public void Activate()
@@ -38,13 +45,34 @@ public class UpgradeScreen : Panel
     Upgrade[] upgrades;
     void OnButtonClicked(int index)
     {
-        GD.Print($"Button {index} clicked");
-        Game.instance.myPlayer.upgradeManager.AddUpgrade(upgrades[index]);
+        Upgrade up = upgrades[index];
+        Player.localInstance.upgradeManager.AddUpgrade(up);
         foreach (var butt in buttons)
         {
             butt.QueueFree();
         }
+
+        if (NetworkManager.Singleplayer)
+        {
+            HideAndUnpause();
+        }
+        else
+        {
+            upgradesMade++;
+            Client.instance.SendMessage(MessageType.Upgrade, new string[] { ((int)up.type).ToString(), up.value.ToString() });
+            if (AllUpgradesMadeInMP())
+                HideAndUnpause();
+        }
+    }
+
+    public byte upgradesMade = 0; //Only for multiplayer
+    public void HideAndUnpause()
+    {
         Hide();
         GetTree().Paused = false;
+
+        upgradesMade = 0;
     }
+    public bool AllUpgradesMadeInMP()
+        => upgradesMade >= Client.instance.others.Count + 1;
 }

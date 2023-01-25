@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class NetworkManager : Node
 {
+    public static bool Singleplayer => mode == NetMode.Singleplayer;
     public static NetMode mode = NetMode.Singleplayer;
     public static void NetStart()
     {
@@ -19,6 +20,11 @@ public class NetworkManager : Node
         {
             Client.instance.Start();
         }
+    }
+    public static void Poll()
+    {
+        if (mode == NetMode.Server) Server.instance.Poll();
+        Client.instance.Poll();
     }
 }
 public class UserData
