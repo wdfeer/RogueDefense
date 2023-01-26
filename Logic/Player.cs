@@ -70,17 +70,20 @@ namespace RogueDefense
             Hp -= dmg * damageMult;
             if (Hp <= 0)
             {
-                OnDeath();
+                Death();
             }
         }
-        bool dead = false;
-        private void OnDeath()
+        public bool dead = false;
+        public void Death(bool local = true)
         {
-            if (!dead)
+            if (local && !NetworkManager.Singleplayer)
             {
-                GD.Print($"I am dead!!!");
-                dead = true;
+                Client.instance.SendMessage(MessageType.Death);
             }
+
+            Game.instance.GetTree().Paused = true;
+            ((Panel)Game.instance.GetNode("DeathScreen")).Show();
+            ((Label)Game.instance.GetNode("DeathScreen/ScoreLabel")).Text = $"Level {Game.instance.generation + 1} reached";
         }
     }
     public class PlayerShootManager

@@ -65,9 +65,12 @@ public class Server : Node
             GD.Print($"Registered name {name} for {id}");
         }
     }
-    public void SendMessage(MessageType type, string[] args)
+    public void SendMessage(MessageType type, string[] args = null)
     {
-        Broadcast(($"{(char)type}" + String.Join(" ", args)).ToUTF8());
+        string msg = $"{(char)type}";
+        if (args != null)
+            msg += String.Join(" ", args);
+        Broadcast(msg.ToUTF8());
     }
 
 
