@@ -75,10 +75,17 @@ public class Client : Node
                 Upgrade up = new Upgrade((Upgrade.UpgradeType)args[0].ToInt(), args[1].ToFloat());
                 Player.localInstance.upgradeManager.AddUpgrade(up);
                 UpgradeScreen.instance.upgradesMade++;
-                if (UpgradeScreen.instance.AllUpgradesMadeInMP())
+                if (UpgradeScreen.instance.EveryoneUpgraded())
                 {
                     UpgradeScreen.instance.HideAndUnpause();
                 }
+                break;
+            case MessageType.Death:
+                Player.localInstance.hpManager.Death(false);
+                break;
+            case MessageType.Retry:
+                Game.instance.GetTree().Paused = false;
+                Game.instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
                 break;
             default:
                 break;
@@ -94,9 +101,12 @@ public class Client : Node
         }
     }
     void Broadcast(string data) => client.GetPeer(1).PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
-    public void SendMessage(MessageType type, string[] args)
+    public void SendMessage(MessageType type, string[] args = null)
     {
-        Broadcast($"{(char)type}" + String.Join(" ", args));
+        string msg = $"{(char)type}";
+        if (args != null)
+            msg += String.Join(" ", args);
+        Broadcast(msg);
     }
 
 
@@ -107,10 +117,12 @@ public class Client : Node
 }
 public enum MessageType
 {
-    FetchLobby = 'i',
-    Register = 'r',
-    Unregister = 'R',
+    FetchLobby = '0',
+    Register = '1',
+    Unregister = '2',
     StartGame = 's',
     EnemyKill = 'k',
-    Upgrade = 'u'
+    Upgrade = 'u',
+    Death = 'd',
+    Retry = 'r'
 }

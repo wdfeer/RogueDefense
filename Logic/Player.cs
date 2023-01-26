@@ -70,17 +70,20 @@ namespace RogueDefense
             Hp -= dmg * damageMult;
             if (Hp <= 0)
             {
-                OnDeath();
+                Death();
             }
         }
-        bool dead = false;
-        private void OnDeath()
+        public bool dead = false;
+        public void Death(bool local = true)
         {
-            if (!dead)
+            if (local && !NetworkManager.Singleplayer)
             {
-                GD.Print($"I am dead!!!");
-                dead = true;
+                Client.instance.SendMessage(MessageType.Death);
             }
+
+            Game.instance.GetTree().Paused = true;
+            ((Panel)Game.instance.GetNode("DeathScreen")).Show();
+            ((Label)Game.instance.GetNode("DeathScreen/ScoreLabel")).Text = $"Level {Game.instance.generation + 1} reached";
         }
     }
     public class PlayerShootManager
@@ -114,7 +117,7 @@ namespace RogueDefense
             for (int i = 0; i < bulletCount; i++)
             {
                 Bullet bullet = player.bulletScene.Instance() as Bullet;
-                bullet.velocity = new Godot.Vector2(2.5f, 0).Rotated(Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f));
+                bullet.velocity = new Godot.Vector2(4f, 0).Rotated(Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f));
                 bullet.Position = player.Position + new Godot.Vector2(20, 0);
                 bullet.damage = damage;
                 Game.instance.AddChild(bullet);

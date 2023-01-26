@@ -64,7 +64,7 @@ public class UpgradeScreen : Panel
         {
             upgradesMade++;
             Client.instance.SendMessage(MessageType.Upgrade, new string[] { ((int)up.type).ToString(), up.value.ToString() });
-            if (AllUpgradesMadeInMP())
+            if (EveryoneUpgraded())
                 HideAndUnpause();
         }
     }
@@ -77,6 +77,6 @@ public class UpgradeScreen : Panel
 
         upgradesMade = 0;
     }
-    public bool AllUpgradesMadeInMP()
+    public bool EveryoneUpgraded()
         => upgradesMade >= Client.instance.others.Count + 1;
 }
