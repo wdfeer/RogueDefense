@@ -23,6 +23,7 @@ public struct Upgrade
         UpgradeType type = GetRandomUpgradeType(based);
         float value = based ? 1f : (GD.Randf() * 0.05f + 0.2f);
         value *= GetUpgradeValueMultiplier(type);
+        value = Mathf.Round(value * 10000f) / 10000f;
 
         return new Upgrade(type, value);
     }

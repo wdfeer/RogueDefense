@@ -15,7 +15,7 @@ public class Game : Node2D
     public override void _Ready()
     {
         instance = this;
-        myPlayer = GetNode("./PlayerBase") as Player;
+        myPlayer = GetNode("./MyPlayer") as Player;
     }
 
     public override void _Process(float delta)
@@ -32,9 +32,18 @@ public class Game : Node2D
     public int generation = 0;
     public void DeleteEnemy()
     {
+        if (enemy == null)
+            return;
+
+        if (NetworkManager.mode == NetMode.Server)
+        {
+            Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
+        }
+
         enemy.QueueFree();
-        generation++;
         enemy = null;
+        generation++;
+
 
         GetTree().Paused = true;
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();

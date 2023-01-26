@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/defaultFont.tres" type="DynamicFont" id=2]
@@ -7,30 +7,34 @@
 [ext_resource path="res://Scenes/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/icon.png" type="Texture" id=6]
 [ext_resource path="res://Assets/default_theme.tres" type="Theme" id=7]
-[ext_resource path="res://Logic/UI/UpgradeScreen.cs" type="Script" id=8]
+[ext_resource path="res://Logic/UI/InGame/UpgradeScreen.cs" type="Script" id=8]
 [ext_resource path="res://Logic/UI/CustomButton.cs" type="Script" id=9]
 [ext_resource path="res://Logic/Player.cs" type="Script" id=10]
+[ext_resource path="res://Logic/Network/NetPoller.cs" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
 enemyScene = ExtResource( 4 )
 
-[node name="PlayerBase" type="StaticBody2D" parent="."]
+[node name="MyPlayer" type="StaticBody2D" parent="."]
 position = Vector2( 100, 300 )
 collision_mask = 3
 script = ExtResource( 10 )
 bulletScene = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="PlayerBase"]
+[node name="Sprite" type="Sprite" parent="MyPlayer"]
 texture = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerBase"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MyPlayer"]
 shape = SubResource( 1 )
 
-[node name="HpBar" type="ProgressBar" parent="PlayerBase"]
+[node name="HpBar" type="ProgressBar" parent="MyPlayer"]
 margin_left = -31.0
 margin_top = -47.0
 margin_right = 31.0
@@ -105,3 +109,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "+100% Total Fire Rate
 Duration: 5 s
 Cooldown: 60 s"
+
+[node name="NetPoller" type="Node" parent="."]
+pause_mode = 2
+script = ExtResource( 11 )

@@ -24,7 +24,7 @@ namespace RogueDefense
             timers = timers.Where(x => x.timeLeft > 0f).ToList();
         }
     }
-    public struct Timer
+    public class Timer
     {
         public Timer(Action onTimeout, float timeLeft)
         {
