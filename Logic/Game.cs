@@ -32,16 +32,16 @@ public class Game : Node2D
     public int generation = 0;
     public void DeleteEnemy()
     {
+        if (enemy == null)
+            return;
+
         if (NetworkManager.mode == NetMode.Server)
         {
             Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
         }
 
-        if (enemy != null)
-        {
-            enemy.QueueFree();
-            enemy = null;
-        }
+        enemy.QueueFree();
+        enemy = null;
         generation++;
 
 

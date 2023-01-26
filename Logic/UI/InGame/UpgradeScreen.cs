@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 using RogueDefense;
 
@@ -45,10 +46,13 @@ public class UpgradeScreen : Panel
     Upgrade[] upgrades;
     void OnButtonClicked(int index)
     {
+        if (buttons.Any(x => !IsInstanceValid(x)))
+            return;
         Upgrade up = upgrades[index];
         Player.localInstance.upgradeManager.AddUpgrade(up);
         foreach (var butt in buttons)
         {
+            butt.Hide();
             butt.QueueFree();
         }
 
