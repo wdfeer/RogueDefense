@@ -75,7 +75,7 @@ public class Client : Node
                 Upgrade up = new Upgrade((Upgrade.UpgradeType)args[0].ToInt(), args[1].ToFloat());
                 Player.localInstance.upgradeManager.AddUpgrade(up);
                 UpgradeScreen.instance.upgradesMade++;
-                if (UpgradeScreen.instance.AllUpgradesMadeInMP())
+                if (UpgradeScreen.instance.EveryoneUpgraded())
                 {
                     UpgradeScreen.instance.HideAndUnpause();
                 }

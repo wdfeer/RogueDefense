@@ -117,7 +117,7 @@ namespace RogueDefense
             for (int i = 0; i < bulletCount; i++)
             {
                 Bullet bullet = player.bulletScene.Instance() as Bullet;
-                bullet.velocity = new Godot.Vector2(2.5f, 0).Rotated(Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f));
+                bullet.velocity = new Godot.Vector2(4f, 0).Rotated(Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f));
                 bullet.Position = player.Position + new Godot.Vector2(20, 0);
                 bullet.damage = damage;
                 Game.instance.AddChild(bullet);
