@@ -34,12 +34,12 @@ public class Game : Node2D
     }
 
     public int generation = 0;
-    public void DeleteEnemy()
+    public void DeleteEnemy(bool netUpdate)
     {
         if (enemy == null)
             return;
 
-        if (NetworkManager.mode == NetMode.Server)
+        if (netUpdate)
         {
             Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
         }

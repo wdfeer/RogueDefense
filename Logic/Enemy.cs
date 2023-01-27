@@ -50,7 +50,7 @@ public class Enemy : MovingKinematicBody2D
         dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120));
         if (Hp <= 0)
         {
-            Game.instance.DeleteEnemy();
+            Game.instance.DeleteEnemy(true);
         }
     }
     bool attacking = false;

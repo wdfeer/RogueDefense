@@ -67,7 +67,7 @@ public class Client : Node
                 break;
             case MessageType.EnemyKill:
                 if (IsInstanceValid(Game.instance))
-                    Game.instance.DeleteEnemy();
+                    Game.instance.DeleteEnemy(false);
                 else
                     GD.PrintErr("Received an EnemyKill message when the Game is not active");
                 break;
