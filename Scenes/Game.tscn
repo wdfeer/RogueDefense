@@ -110,7 +110,7 @@ theme = ExtResource( 7 )
 custom_fonts/font = ExtResource( 2 )
 text = "+100% Total Fire Rate
 Duration: 5 s
-Cooldown: 60 s"
+Cooldown: 30 s"
 
 [node name="NetPoller" type="Node" parent="."]
 pause_mode = 2

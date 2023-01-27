@@ -13,11 +13,11 @@ public class Enemy : MovingKinematicBody2D
     }
     void SetMaxHp(int gen)
     {
-        float baseMHp = 6f;
+        float baseMaxHp = 5f;
         if (!NetworkManager.Singleplayer)
-            baseMHp *= Client.instance.others.Count + 1f;
-        float power = gen > 30f ? 3f : gen / 10f;
-        maxHp = baseMHp * Mathf.Pow(1f + gen * 0.5f, power);
+            baseMaxHp *= Client.instance.others.Count + 1f;
+        float power = gen <= 40f ? gen / 10f : (40f + Mathf.Sqrt(gen - 40f)) / 10f;
+        maxHp = baseMaxHp * Mathf.Pow(1f + gen, power);
         Hp = maxHp;
     }
 
