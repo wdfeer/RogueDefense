@@ -16,11 +16,11 @@ namespace RogueDefense
         [Export]
         public PackedScene bulletScene;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>();
+        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new BleedPlayer() };
 
         public PlayerHpManager hpManager;
         public PlayerShootManager shootManager;
-        public PlayerUpgradeManager upgradeManager;
+        public UpgradeManager upgradeManager;
         public AbilityManager abilityManager;
         public override void _Ready()
         {
@@ -28,7 +28,7 @@ namespace RogueDefense
 
             hpManager = new PlayerHpManager(this);
             shootManager = new PlayerShootManager(this);
-            upgradeManager = new PlayerUpgradeManager(this);
+            upgradeManager = new UpgradeManager(this);
             abilityManager = new AbilityManager(this);
         }
         public override void _Process(float delta)

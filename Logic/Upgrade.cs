@@ -53,6 +53,8 @@ public struct Upgrade
         CritChance,
         CritDamage,
 
+        BleedChance,
+
         AbilityStrength,
 
         BaseDamage = 501,

@@ -5,10 +5,10 @@ using static Upgrade;
 
 namespace RogueDefense
 {
-    public class PlayerUpgradeManager
+    public class UpgradeManager
     {
         readonly Player player;
-        public PlayerUpgradeManager(Player player)
+        public UpgradeManager(Player player)
         {
             this.player = player;
             TimerManager.AddTimer(() =>
@@ -34,6 +34,7 @@ namespace RogueDefense
         public float critChance = 0f;
         public float baseCritMult = 2f;
         public float critDamage = 2f;
+        public float bleedChance = 0f;
         void UpdateUpgrades()
         {
             float baseDamageMult = GetTotalUpgradeMultiplier(UpgradeType.BaseDamage);
@@ -67,6 +68,8 @@ namespace RogueDefense
             critDamage = this.baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
+
+            bleedChance = GetAllUpgradeValues(UpgradeType.BleedChance).Aggregate(0f, (a, b) => a + b);
         }
         IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
     => upgrades.Where(x => x.type == type).Select(x => x.value);
@@ -85,7 +88,9 @@ Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}
 Multishot: {player.shootManager.multishot.ToString("0.00")}
 
 Critical Chance: {(critChance * 100f).ToString("0.0")}%
-Critical Multiplier: {critDamage.ToString("0.00")}";
+Critical Multiplier: {critDamage.ToString("0.00")}
+
+Bleeding Chance: {(bleedChance * 100f).ToString("0.0")}%";
         }
     }
 }

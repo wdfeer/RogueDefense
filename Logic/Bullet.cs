@@ -40,6 +40,7 @@ public class Bullet : MovingKinematicBody2D
                 owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref damage, ref critLevel, ref critMult));
                 if (critLevel > 0)
                     damage *= critMult * critLevel;
+                owner.hooks.ForEach(x => x.OnHitWithBullet(this, damage));
                 Game.instance.enemy.Damage(damage, GetCritColor(critLevel));
             }
             QueueFree();

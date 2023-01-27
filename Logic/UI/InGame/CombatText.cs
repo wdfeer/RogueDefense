@@ -3,7 +3,7 @@ using System;
 
 public class CombatText : Label
 {
-    public const float SPEED = 80f;
+    public const float SPEED = 100f;
     public const float LIFESPAN = 0.75f;
     public override void _Process(float delta)
     {

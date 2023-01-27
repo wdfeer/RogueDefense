@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using System.Linq;
 using Godot;
 using RogueDefense.Logic;
 
@@ -47,6 +49,7 @@ public class Enemy : MovingKinematicBody2D
             Game.instance.DeleteEnemy();
         }
     }
+    bool attacking = false;
     public float damage = 10f;
     public float attackInterval = 1f;
     float attackTimer = 0f;
@@ -62,14 +65,44 @@ public class Enemy : MovingKinematicBody2D
                 Game.instance.myPlayer.hpManager.Damage(damage);
             }
         }
+
+        ProcessBleeds(delta);
     }
-    bool attacking = false;
 
     protected override void OnCollision(KinematicCollision2D collision)
     {
         if (collision.Collider == Game.instance.myPlayer)
         {
             attacking = true;
+        }
+    }
+
+
+    public void AddBleed(float totalDmg, float duration)
+    {
+        int ticks = MathHelper.RandomRound(duration / BLEED_INTERVAL);
+        bleeds.Add((totalDmg / ticks, ticks));
+    }
+    public List<(float dpt, int ticksLeft)> bleeds = new List<(float dpt, int ticksLeft)>();
+    const float BLEED_INTERVAL = 1f;
+    float bleedTimer = 0f;
+    public void ProcessBleeds(float delta)
+    {
+        if (!bleeds.Any())
+        {
+            bleedTimer = BLEED_INTERVAL;
+            return;
+        }
+
+        bleedTimer += delta;
+        if (bleedTimer >= BLEED_INTERVAL)
+        {
+            float damage = bleeds.Aggregate(0f, (a, b) => a + b.dpt);
+            Damage(damage, Colors.WebGray);
+
+            bleeds = bleeds.Select(x => (x.dpt, x.ticksLeft - 1)).Where(x => x.Item2 > 0).ToList();
+
+            bleedTimer %= BLEED_INTERVAL;
         }
     }
 }
