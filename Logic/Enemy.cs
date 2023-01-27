@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using RogueDefense;
 using RogueDefense.Logic;
 
 public class Enemy : MovingKinematicBody2D
@@ -39,6 +40,9 @@ public class Enemy : MovingKinematicBody2D
     public void Damage(float damage, Color textColor)
     {
         Hp -= damage;
+
+        Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));
+
         Label dmgText = combatText.Instance() as CombatText;
         GetNode("/root/Game").AddChild(dmgText);
         dmgText.Modulate = textColor;

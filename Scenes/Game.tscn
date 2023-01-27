@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/defaultFont.tres" type="DynamicFont" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Logic/Network/NetPoller.cs" type="Script" id=11]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Logic/UI/InGame/RetryButton.cs" type="Script" id=13]
+[ext_resource path="res://Logic/UI/InGame/DpsLabel.cs" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -152,3 +153,14 @@ theme = ExtResource( 7 )
 custom_fonts/font = ExtResource( 12 )
 text = "RETRY"
 script = ExtResource( 13 )
+
+[node name="DpsLabel" type="Label" parent="."]
+pause_mode = 2
+margin_top = 20.0
+margin_right = 1024.0
+margin_bottom = 50.0
+theme = ExtResource( 7 )
+text = "Avg DPS: 0.0"
+align = 1
+valign = 1
+script = ExtResource( 14 )

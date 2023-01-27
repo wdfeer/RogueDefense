@@ -16,7 +16,7 @@ namespace RogueDefense
         [Export]
         public PackedScene bulletScene;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new BleedPlayer() };
+        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounter(), new BleedPlayer() };
 
         public PlayerHpManager hpManager;
         public PlayerShootManager shootManager;
