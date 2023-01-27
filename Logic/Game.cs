@@ -39,7 +39,7 @@ public class Game : Node2D
         if (enemy == null)
             return;
 
-        if (netUpdate)
+        if (!NetworkManager.Singleplayer && netUpdate)
         {
             Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
         }
