@@ -16,17 +16,32 @@ public class Bullet : MovingKinematicBody2D
         base._Process(delta);
     }
 
+    public void SetHitMultiplier(float hitMult)
+    {
+        this.hitMult = MathHelper.RandomRound(hitMult);
+        if (this.hitMult > 1)
+        {
+            ((Label)GetNode("HitMult")).Text = this.hitMult.ToString();
+        }
+    }
+    int hitMult = 1;
     public float damage = 1;
     protected override void OnCollision(KinematicCollision2D collision)
     {
         if (collision.Collider == Game.instance.enemy)
         {
-            int critLevel = MathHelper.RandomRound(owner.upgradeManager.critChance);
-            float critMult = owner.upgradeManager.critDamage;
-            owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref damage, ref critLevel, ref critMult));
-            if (critLevel > 0)
-                damage *= critMult * critLevel;
-            Game.instance.enemy.Damage(damage, GetCritColor(critLevel));
+            for (int i = 0; i < hitMult; i++)
+            {
+                if (Game.instance.enemy == null)
+                    break;
+                float damage = this.damage;
+                int critLevel = MathHelper.RandomRound(owner.upgradeManager.critChance);
+                float critMult = owner.upgradeManager.critDamage;
+                owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref damage, ref critLevel, ref critMult));
+                if (critLevel > 0)
+                    damage *= critMult * critLevel;
+                Game.instance.enemy.Damage(damage, GetCritColor(critLevel));
+            }
             QueueFree();
         }
     }
