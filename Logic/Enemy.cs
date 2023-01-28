@@ -9,18 +9,32 @@ public class Enemy : MovingKinematicBody2D
 {
     public override void _Ready()
     {
+        ResetRngSeed();
         velocity = new Vector2(-1.15f, 0);
         var gen = Game.instance.generation;
         SetMaxHp(gen);
         damage = 10f * Mathf.Sqrt(1f + gen);
     }
+    RandomNumberGenerator statsRng = new RandomNumberGenerator();
+    void ResetRngSeed()
+    {
+        if (NetworkManager.Singleplayer)
+            statsRng.Randomize();
+        else
+        {
+            List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
+            firstChars.Add(Player.myName[0]);
+
+            int seed = firstChars.Aggregate(0, (a, b) => a + b);
+        }
+    }
     void SetMaxHp(int gen)
     {
         float baseMaxHp = 5f;
-        if (!NetworkManager.Singleplayer)
+        if (!NetworkManager.Singleplayer && gen > 2)
             baseMaxHp *= Client.instance.others.Count + 1f;
-        float power = gen <= 40f ? gen / 10f : (40f + Mathf.Sqrt(gen - 40f)) / 10f;
-        maxHp = baseMaxHp * Mathf.Pow(1f + gen, power);
+        float power = gen <= 40f ? gen / 10f : (40f + Mathf.Sqrt(gen - 40f)) / (10f * (0.8f + statsRng.Randf() * 0.4f));
+        maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power));
         Hp = maxHp;
     }
 
