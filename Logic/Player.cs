@@ -16,7 +16,7 @@ namespace RogueDefense
         [Export]
         public PackedScene bulletScene;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounter(), new BleedPlayer(), new FirstHitPlayer() };
+        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounter(), new BleedPlayer(), new FirstHitPlayer(), new NthShotMultishotPlayer() };
 
         public PlayerHpManager hpManager;
         public PlayerShootManager shootManager;
@@ -113,6 +113,7 @@ namespace RogueDefense
         private const float SPREAD_DEGREES = 16f;
         private void CreateBullet()
         {
+            player.hooks.ForEach(x => x.PreShoot(this));
             int bulletCount = MathHelper.RandomRound(multishot);
             float hitMult = 1f;
             if (bulletCount / shootInterval > 10f)
