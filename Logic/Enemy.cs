@@ -63,7 +63,7 @@ public class Enemy : MovingKinematicBody2D
     public PackedScene combatText;
     public void Damage(float damage, Color textColor, Vector2? combatTextDirection = null)
     {
-        damage *= DamageMultiplier;
+        damage *= DamageMultiplier * GetViralDmgMult();
         Hp -= damage;
 
         Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));
@@ -98,6 +98,7 @@ public class Enemy : MovingKinematicBody2D
         }
 
         ProcessBleeds(delta);
+        ProcessVirals(delta);
     }
 
     protected override void OnCollision(KinematicCollision2D collision)
@@ -139,5 +140,18 @@ public class Enemy : MovingKinematicBody2D
 
             bleedTimer %= BLEED_INTERVAL;
         }
+    }
+
+
+    public float GetViralDmgMult()
+        => 1f + virals.Count * 4f / 100f;
+    public void AddViral(float duration)
+    {
+        virals.Add(duration);
+    }
+    public List<float> virals = new List<float>();
+    public void ProcessVirals(float delta)
+    {
+        virals = virals.Select(x => x - delta).Where(x => x > 0).ToList();
     }
 }

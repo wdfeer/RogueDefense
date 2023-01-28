@@ -28,6 +28,7 @@ namespace RogueDefense
         public static readonly UpgradeType CritChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Chance");
         public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Damage");
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance") { valueMult = 0.7f };
+        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Viral Chance");
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Duration") { chanceMult = 0.4f };
         const float BASE_UPGRADE_VALUE = 0.8f;
@@ -54,6 +55,7 @@ namespace RogueDefense
             CritChance,
             CritDamage,
             BleedChance,
+            ViralChance,
             AbilityStrength,
             AbilityDuration,
             BaseDamage,

@@ -35,6 +35,7 @@ namespace RogueDefense
         public float baseCritMult = 2f;
         public float critDamage = 2f;
         public float bleedChance = 0f;
+        public float viralChance = 0f;
         void UpdateUpgrades()
         {
             float baseDamageMult = GetTotalUpgradeMultiplier(UpgradeType.BaseDamage);
@@ -72,6 +73,7 @@ namespace RogueDefense
             player.abilityManager.ResetAbilityText();
 
             bleedChance = GetAllUpgradeValues(UpgradeType.BleedChance).Aggregate(0f, (a, b) => a + b);
+            viralChance = GetAllUpgradeValues(UpgradeType.ViralChance).Aggregate(0f, (a, b) => a + b);
         }
         public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
     => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
@@ -92,7 +94,8 @@ Multishot: {player.shootManager.multishot.ToString("0.00")}
 Critical Chance: {(critChance * 100f).ToString("0.0")}%
 Critical Multiplier: {critDamage.ToString("0.00")}
 
-Bleeding Chance: {(bleedChance * 100f).ToString("0.0")}%";
+Bleeding Chance: {(bleedChance * 100f).ToString("0.0")}%
+Viral Chance: {(viralChance * 100f).ToString("0.0")}%";
         }
     }
 }

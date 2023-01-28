@@ -9,7 +9,7 @@ public class BleedContainer : HBoxContainer
         if (bleeds > 0)
         {
             Visible = true;
-            ((Label)GetNode("BleedCounter")).Text = bleeds.ToString();
+            ((Label)GetNode("Counter")).Text = bleeds.ToString();
         }
         else Visible = false;
     }
