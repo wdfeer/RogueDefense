@@ -16,7 +16,7 @@ namespace RogueDefense
         public const float BASE_DAMAGE = 7;
         public override float BaseCooldown => 12.5f;
         protected override string GetAbilityText()
-            => $@"Throw a Shuriken with {(int)(10f * Strength)} Damage
+            => $@"Throw a Shuriken with {(int)(BASE_DAMAGE * Strength)} Damage
 Bleed Duration: {(5f * Duration).ToString("0.00")} s
 Cooldown: {Cooldown.ToString("0.00")} s";
     }
