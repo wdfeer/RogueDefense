@@ -82,8 +82,8 @@ namespace RogueDefense
             }
 
             Game.instance.GetTree().Paused = true;
-            ((Panel)Game.instance.GetNode("DeathScreen")).Show();
-            ((Label)Game.instance.GetNode("DeathScreen/ScoreLabel")).Text = $"Level {Game.instance.generation + 1} reached";
+            DeathScreen.instance.Show();
+            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"Level {Game.instance.generation + 1} reached";
         }
     }
     public class PlayerShootManager

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/defaultFont.tres" type="DynamicFont" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Logic/UI/InGame/RetryButton.cs" type="Script" id=13]
 [ext_resource path="res://Logic/UI/InGame/DpsLabel.cs" type="Script" id=14]
+[ext_resource path="res://Logic/UI/InGame/DeathScreen.cs" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -117,43 +118,6 @@ Cooldown: 30 s"
 pause_mode = 2
 script = ExtResource( 11 )
 
-[node name="DeathScreen" type="Panel" parent="."]
-pause_mode = 2
-visible = false
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 1024.0
-margin_bottom = 600.0
-
-[node name="Label" type="Label" parent="DeathScreen"]
-margin_top = 69.0
-margin_right = 1024.0
-margin_bottom = 83.0
-theme = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 12 )
-text = "YOU ARE DEAD!"
-align = 1
-
-[node name="ScoreLabel" type="Label" parent="DeathScreen"]
-margin_top = 259.0
-margin_right = 1024.0
-margin_bottom = 346.0
-theme = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 12 )
-text = "Level 9999 reached"
-align = 1
-
-[node name="RetryButton" type="Button" parent="DeathScreen"]
-margin_left = 256.0
-margin_top = 440.0
-margin_right = 768.0
-margin_bottom = 540.0
-theme = ExtResource( 7 )
-custom_fonts/font = ExtResource( 12 )
-text = "RETRY"
-script = ExtResource( 13 )
-
 [node name="DpsLabel" type="Label" parent="."]
 pause_mode = 2
 margin_top = 20.0
@@ -164,3 +128,44 @@ text = "Avg DPS: 0.0"
 align = 1
 valign = 1
 script = ExtResource( 14 )
+
+[node name="z-index1" type="Node2D" parent="."]
+z_index = 1
+
+[node name="DeathScreen" type="Panel" parent="z-index1"]
+pause_mode = 2
+visible = false
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="z-index1/DeathScreen"]
+margin_top = 69.0
+margin_right = 1024.0
+margin_bottom = 83.0
+theme = ExtResource( 7 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "YOU ARE DEAD!"
+align = 1
+
+[node name="ScoreLabel" type="Label" parent="z-index1/DeathScreen"]
+margin_top = 259.0
+margin_right = 1024.0
+margin_bottom = 346.0
+theme = ExtResource( 7 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "Level 9999 reached"
+align = 1
+
+[node name="RetryButton" type="Button" parent="z-index1/DeathScreen"]
+margin_left = 256.0
+margin_top = 440.0
+margin_right = 768.0
+margin_bottom = 540.0
+theme = ExtResource( 7 )
+custom_fonts/font = ExtResource( 12 )
+text = "RETRY"
+script = ExtResource( 13 )
