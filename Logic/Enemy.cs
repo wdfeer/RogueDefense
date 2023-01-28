@@ -14,6 +14,10 @@ public class Enemy : MovingKinematicBody2D
         var gen = Game.instance.generation;
         SetMaxHp(gen);
         damage = 10f * Mathf.Sqrt(1f + gen);
+        if (gen > 10f)
+            armor = 50f * (gen - 10f);
+        else armor = 0f;
+        ResetArmorDisplay();
     }
     RandomNumberGenerator statsRng = new RandomNumberGenerator();
     void ResetRngSeed()
@@ -33,7 +37,7 @@ public class Enemy : MovingKinematicBody2D
         float baseMaxHp = 5f;
         if (!NetworkManager.Singleplayer && gen > 2)
             baseMaxHp *= Client.instance.others.Count + 1f;
-        float power = gen <= 40f ? gen / 10f : (40f + Mathf.Sqrt(gen - 40f)) / (10f * (0.8f + statsRng.Randf() * 0.4f));
+        float power = (gen <= 40f ? gen : (40f + Mathf.Sqrt(gen - 40f))) / (15f * (0.75f + statsRng.Randf() * 0.45f));
         maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * 0.75f, power));
         Hp = maxHp;
     }
@@ -49,10 +53,17 @@ public class Enemy : MovingKinematicBody2D
             (GetNode("./HpBar/HpText") as Label).Text = $"{hp.ToString("0.0")} / {maxHp.ToString("0.0")}";
         }
     }
+    public float armor;
+    public float DamageMultiplier => 300f / (300f + armor);
+    void ResetArmorDisplay()
+    {
+        ArmorBar.instance.SetDisplay(1f - DamageMultiplier);
+    }
     [Export]
     public PackedScene combatText;
     public void Damage(float damage, Color textColor, Vector2? combatTextDirection = null)
     {
+        damage *= DamageMultiplier;
         Hp -= damage;
 
         Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));
@@ -118,7 +129,11 @@ public class Enemy : MovingKinematicBody2D
         if (bleedTimer >= BLEED_INTERVAL)
         {
             float damage = bleeds.Aggregate(0f, (a, b) => a + b.dpt);
+
+            float oldArmor = armor;
+            armor = 0;
             Damage(damage, Colors.WebGray, new Vector2(0f, -0.6f));
+            armor = oldArmor;
 
             bleeds = bleeds.Select(x => (x.dpt, x.ticksLeft - 1)).Where(x => x.Item2 > 0).ToList();
 

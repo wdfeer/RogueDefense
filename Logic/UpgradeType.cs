@@ -16,7 +16,7 @@ namespace RogueDefense
         public float valueMult = 1f;
         public float GetRandomValue()
             => getBaseRandomValue() * valueMult;
-        Func<float> getBaseRandomValue = () => GD.Randf() * 0.05f + 0.2f;
+        Func<float> getBaseRandomValue = () => GD.Randf() * 0.055f + 0.2f;
         public Func<bool> canBeRolled = () => true;
 
         public int uniqueId;
@@ -27,10 +27,10 @@ namespace RogueDefense
         public static readonly UpgradeType Multishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Multishot");
         public static readonly UpgradeType CritChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Chance");
         public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Damage");
-        public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance");
+        public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance") { valueMult = 0.7f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Duration") { chanceMult = 0.4f };
-        const float BASE_UPGRADE_VALUE = 0.75f;
+        const float BASE_UPGRADE_VALUE = 0.8f;
         public static readonly UpgradeType BaseDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
         public static readonly UpgradeType BaseFireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Fire Rate") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
         public static readonly UpgradeType BaseMultishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Multishot") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
