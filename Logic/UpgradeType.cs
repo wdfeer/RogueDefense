@@ -33,6 +33,11 @@ namespace RogueDefense
         public static readonly UpgradeType BaseFireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Fire Rate") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => 0.5f };
         public static readonly UpgradeType BaseMultishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Multishot") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => 0.5f };
         public static readonly UpgradeType BaseCritMultiplier = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Crit Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => 0.5f };
+        public static readonly UpgradeType FirstHitDamage = new UpgradeType(x => $"+{(int)x}x Damage on First Hit")
+        {
+            chanceMult = 0.25f,
+            getBaseRandomValue = () => 10f
+        };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
             DamageReduction,
@@ -46,7 +51,8 @@ namespace RogueDefense
             BaseDamage,
             BaseFireRate,
             BaseMultishot,
-            BaseCritMultiplier
+            BaseCritMultiplier,
+            FirstHitDamage
         };
         public static void Initialize()
         {

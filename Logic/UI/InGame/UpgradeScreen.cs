@@ -36,7 +36,7 @@ public class UpgradeScreen : Panel
             AddChild(butt);
             int index = i;
             butt.onClick = () => OnButtonClicked(index);
-            butt.Text = upgrades[i].ToString();
+            (butt.GetNode("Label") as Label).Text = upgrades[i].ToString();
         }
         buttons[0].RectPosition += new Vector2(-240, -40);
         buttons[1].RectPosition += new Vector2(0, -40);

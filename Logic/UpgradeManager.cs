@@ -23,7 +23,7 @@ namespace RogueDefense
             UpdateUpgrades();
         }
 
-        List<Upgrade> upgrades = new List<Upgrade>();
+        public List<Upgrade> upgrades = new List<Upgrade>();
         public void AddUpgrade(Upgrade upgrade)
         {
             upgrades.Add(upgrade);
@@ -72,9 +72,9 @@ namespace RogueDefense
 
             bleedChance = GetAllUpgradeValues(UpgradeType.BleedChance).Aggregate(0f, (a, b) => a + b);
         }
-        IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
+        public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
     => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
-        float GetTotalUpgradeMultiplier(UpgradeType type)
+        public float GetTotalUpgradeMultiplier(UpgradeType type)
             => 1f + GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
 
         void UpdateUpgradeText()
