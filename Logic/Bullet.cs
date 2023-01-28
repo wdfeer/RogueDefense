@@ -34,18 +34,20 @@ public class Bullet : MovingKinematicBody2D
             {
                 if (Game.instance.enemy == null)
                     break;
-                float damage = this.damage;
+                float dmg = this.damage;
                 int critLevel = MathHelper.RandomRound(owner.upgradeManager.critChance);
                 float critMult = owner.upgradeManager.critDamage;
-                owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref damage, ref critLevel, ref critMult));
+                owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref dmg, ref critLevel, ref critMult));
                 if (critLevel > 0)
-                    damage *= critMult * critLevel;
-                owner.hooks.ForEach(x => x.OnHitWithBullet(this, damage));
-                Game.instance.enemy.Damage(damage, GetCritColor(critLevel));
+                    dmg *= critMult * critLevel;
+                owner.hooks.ForEach(x => x.OnHitWithBullet(this, dmg));
+                OnHit(dmg);
+                Game.instance.enemy.Damage(dmg, GetCritColor(critLevel));
             }
             QueueFree();
         }
     }
+    protected virtual void OnHit(float totalDmg) { }
 
     private Color GetCritColor(int critLevel)
     {

@@ -37,8 +37,8 @@ public class Enemy : MovingKinematicBody2D
         float baseMaxHp = 5f;
         if (!NetworkManager.Singleplayer && gen > 2)
             baseMaxHp *= Client.instance.others.Count + 1f;
-        float power = (gen <= 40f ? gen : (40f + Mathf.Sqrt(gen - 40f))) / (15f * (0.75f + statsRng.Randf() * 0.45f));
-        maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * 0.75f, power));
+        float power = (gen <= 40f ? gen : (40f + Mathf.Sqrt(gen - 40f))) / 15f;
+        maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * 0.75f, power) * (0.8f + statsRng.Randf() * 0.4f));
         Hp = maxHp;
     }
 
@@ -112,7 +112,7 @@ public class Enemy : MovingKinematicBody2D
     public void AddBleed(float totalDmg, float duration)
     {
         int ticks = MathHelper.RandomRound(duration / BLEED_INTERVAL);
-        bleeds.Add((totalDmg / ticks, ticks));
+        bleeds.Add((totalDmg / 5, ticks));
     }
     public List<(float dpt, int ticksLeft)> bleeds = new List<(float dpt, int ticksLeft)>();
     const float BLEED_INTERVAL = 1f;

@@ -16,14 +16,22 @@ namespace RogueDefense
         {
             this.player = player;
             var ability1Button = player.GetNode("/root/Game/AbilityContainer/AbilityButton1") as CustomButton;
-            ActiveAbility ability1;
-            if (new Random().Next(0, 2) == 0)
-                ability1 = new FireRateAbility(ability1Button);
-            else
-                ability1 = new DamageAbility(ability1Button);
+            ActiveAbility ability1 = GetRandomAbility(ability1Button);
             player.hooks.Add(ability1);
 
             TimerManager.AddTimer(ResetAbilityText, 0.01f);
+        }
+        ActiveAbility GetRandomAbility(CustomButton button)
+        {
+            switch (new Random().Next(0, 3))
+            {
+                case 0:
+                    return new FireRateAbility(button);
+                case 1:
+                    return new DamageAbility(button);
+                default:
+                    return new ShurikenAbility(button);
+            }
         }
         public void ResetAbilityText()
         {
