@@ -144,7 +144,7 @@ public class Enemy : MovingKinematicBody2D
 
 
     public float GetViralDmgMult()
-        => 1f + virals.Count * 4f / 100f;
+        => 1f + virals.Count * 5f / 100f;
     public void AddViral(float duration)
     {
         virals.Add(duration);
