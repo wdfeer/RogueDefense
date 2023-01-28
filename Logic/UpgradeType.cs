@@ -29,13 +29,14 @@ namespace RogueDefense
         public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Damage");
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance");
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f };
-        public static readonly UpgradeType BaseDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => 0.5f };
-        public static readonly UpgradeType BaseFireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Fire Rate") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => 0.5f };
-        public static readonly UpgradeType BaseMultishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Multishot") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => 0.5f };
-        public static readonly UpgradeType BaseCritMultiplier = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Crit Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => 0.5f };
-        public static readonly UpgradeType FirstHitDamage = new UpgradeType(x => $"+{(int)x}x Damage on First Hit")
+        const float BASE_UPGRADE_VALUE = 0.75f;
+        public static readonly UpgradeType BaseDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType BaseFireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Fire Rate") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType BaseMultishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Multishot") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType BaseCritMultiplier = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Crit Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType FirstHitCritDamage = new UpgradeType(x => $"+{(int)x}x Total Crit Dmg on First Hit")
         {
-            chanceMult = 0.25f,
+            chanceMult = 0.33f,
             getBaseRandomValue = () => 10f
         };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
@@ -52,7 +53,7 @@ namespace RogueDefense
             BaseFireRate,
             BaseMultishot,
             BaseCritMultiplier,
-            FirstHitDamage
+            FirstHitCritDamage
         };
         public static void Initialize()
         {

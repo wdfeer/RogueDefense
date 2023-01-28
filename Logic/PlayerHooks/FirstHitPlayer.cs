@@ -11,8 +11,8 @@ namespace RogueDefense
         {
             if (Game.instance.enemy.Hp >= Game.instance.enemy.maxHp)
             {
-                float mult = Player.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.FirstHitDamage);
-                damagePreCrit *= mult;
+                float mult = Player.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.FirstHitCritDamage);
+                critMult *= mult;
             }
         }
     }
