@@ -72,7 +72,7 @@ public class Client : Node
                     GD.PrintErr("Received an EnemyKill message when the Game is not active");
                 break;
             case MessageType.Upgrade:
-                Upgrade up = new Upgrade((Upgrade.UpgradeType)args[0].ToInt(), args[1].ToFloat());
+                Upgrade up = new Upgrade(UpgradeType.AllTypes[args[0].ToInt()], args[1].ToFloat());
                 Player.localInstance.upgradeManager.AddUpgrade(up);
                 UpgradeScreen.instance.upgradesMade++;
                 if (UpgradeScreen.instance.EveryoneUpgraded())

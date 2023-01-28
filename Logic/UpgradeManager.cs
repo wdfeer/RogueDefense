@@ -73,7 +73,7 @@ namespace RogueDefense
             bleedChance = GetAllUpgradeValues(UpgradeType.BleedChance).Aggregate(0f, (a, b) => a + b);
         }
         IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
-    => upgrades.Where(x => x.type == type).Select(x => x.value);
+    => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
         float GetTotalUpgradeMultiplier(UpgradeType type)
             => 1f + GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
 

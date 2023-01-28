@@ -1,4 +1,5 @@
 ﻿using Godot;
+using RogueDefense;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,52 +15,15 @@ public struct Upgrade
     }
     public static Upgrade RandomUpgrade(bool based = false)
     {
-        UpgradeType GetRandomUpgradeType(bool b)
-        {
-            int[] values = Enum.GetValues(typeof(UpgradeType)) as int[];
-            values = (b ? values.Where(x => x > 500) : values.Where(x => x < 500)).ToArray();
-            return (UpgradeType)values[(int)(GD.Randf() * values.Length)];
-        }
-        UpgradeType type = GetRandomUpgradeType(based);
-        float value = based ? 1f : (GD.Randf() * 0.05f + 0.2f);
-        value *= GetUpgradeValueMultiplier(type);
+        UpgradeType type = UpgradeType.GetRandomType();
+        float value = type.GetRandomValue();
         value = Mathf.Round(value * 10000f) / 10000f;
 
         return new Upgrade(type, value);
     }
-    static float GetUpgradeValueMultiplier(UpgradeType type)
-    {
-        switch (type)
-        {
-            case UpgradeType.DamageReduction:
-                return 0.5f;
-            case UpgradeType.AbilityStrength:
-                return 2f;
-        }
-        return 1f;
-    }
 
     public override string ToString()
     {
-        return $"+{Mathf.RoundToInt(value * 100f)}% {type}";
-    }
-    public enum UpgradeType
-    {
-        MaxHp,
-        DamageReduction,
-        Damage,
-        FireRate,
-        Multishot,
-        CritChance,
-        CritDamage,
-
-        BleedChance,
-
-        AbilityStrength,
-
-        BaseDamage = 501,
-        BaseFireRate = 502,
-        BaseMultishot = 503,
-        BaseCritMultiplier = 504
+        return type.getUpgradeText(value);
     }
 }
