@@ -22,9 +22,9 @@ namespace RogueDefense
         public int uniqueId;
         public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Max Hp");
         public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.6f };
-        public static readonly UpgradeType Damage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Damage");
-        public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Fire Rate");
-        public static readonly UpgradeType Multishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Multishot");
+        public static readonly UpgradeType Damage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Damage") { chanceMult = 1.25f };
+        public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Fire Rate") { chanceMult = 1.25f };
+        public static readonly UpgradeType Multishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Multishot") { chanceMult = 1.25f };
         public static readonly UpgradeType CritChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Chance");
         public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Damage");
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance") { valueMult = 0.7f };
