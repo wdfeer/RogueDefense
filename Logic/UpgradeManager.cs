@@ -68,6 +68,7 @@ namespace RogueDefense
             critDamage = this.baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
+            player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
             player.abilityManager.ResetAbilityText();
 
             bleedChance = GetAllUpgradeValues(UpgradeType.BleedChance).Aggregate(0f, (a, b) => a + b);
