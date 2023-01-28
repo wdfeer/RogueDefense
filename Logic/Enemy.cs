@@ -51,14 +51,16 @@ public class Enemy : MovingKinematicBody2D
     }
     [Export]
     public PackedScene combatText;
-    public void Damage(float damage, Color textColor)
+    public void Damage(float damage, Color textColor, Vector2? combatTextDirection = null)
     {
         Hp -= damage;
 
         Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));
 
-        Label dmgText = combatText.Instance() as CombatText;
+        CombatText dmgText = combatText.Instance() as CombatText;
         GetNode("/root/Game").AddChild(dmgText);
+        if (combatTextDirection != null)
+            dmgText.direction = (Vector2)combatTextDirection;
         dmgText.Modulate = textColor;
         dmgText.Text = damage.ToString("0.0");
         dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120));
@@ -116,7 +118,7 @@ public class Enemy : MovingKinematicBody2D
         if (bleedTimer >= BLEED_INTERVAL)
         {
             float damage = bleeds.Aggregate(0f, (a, b) => a + b.dpt);
-            Damage(damage, Colors.WebGray);
+            Damage(damage, Colors.WebGray, new Vector2(0f, -0.6f));
 
             bleeds = bleeds.Select(x => (x.dpt, x.ticksLeft - 1)).Where(x => x.Item2 > 0).ToList();
 
