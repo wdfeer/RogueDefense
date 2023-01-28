@@ -9,11 +9,17 @@ namespace RogueDefense
         {
             int bleedCount = MathHelper.RandomRound(Player.upgradeManager.bleedChance);
             if (bleedCount > 0)
-                Game.instance.enemy.AddBleed(postCritDmg * bleedCount, STATUS_DURATION);
+                for (int i = 0; i < bleedCount; i++)
+                {
+                    Game.instance.enemy.AddBleed(postCritDmg, STATUS_DURATION);
+                }
 
             int viralCount = MathHelper.RandomRound(Player.upgradeManager.viralChance);
             if (viralCount > 0)
-                Game.instance.enemy.AddViral(STATUS_DURATION);
+                for (int i = 0; i < viralCount; i++)
+                {
+                    Game.instance.enemy.AddViral(STATUS_DURATION);
+                }
         }
     }
 }
