@@ -37,8 +37,12 @@ public class Enemy : MovingKinematicBody2D
         float baseMaxHp = 5f;
         if (!NetworkManager.Singleplayer && gen > 2)
             baseMaxHp *= Client.instance.others.Count + 1f;
-        float power = (gen <= 40f ? gen : (40f + Mathf.Sqrt(gen - 40f))) / 15f;
-        maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * 0.75f, power) * (0.8f + statsRng.Randf() * 0.4f));
+        float power;
+        if (NetworkManager.Singleplayer)
+            power = (gen <= 40f ? gen : (40f + Mathf.Sqrt(gen - 40f))) / 15f;
+        else
+            power = gen / 15f;
+        maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * 0.8f, power) * (0.8f + statsRng.Randf() * 0.4f));
         Hp = maxHp;
     }
 
@@ -144,7 +148,7 @@ public class Enemy : MovingKinematicBody2D
 
 
     public float GetViralDmgMult()
-        => 1f + virals.Count * 5f / 100f;
+        => 1f + (virals.Count * 5f) / 100f;
     public void AddViral(float duration)
     {
         virals.Add(duration);
