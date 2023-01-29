@@ -27,23 +27,29 @@ namespace RogueDefense
         public static readonly UpgradeType Multishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Multishot") { chanceMult = 1.2f };
         public static readonly UpgradeType CritChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Chance");
         public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Crit Damage");
-        public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance") { valueMult = 0.6f };
-        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Viral Chance");
+        public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance")
+        {
+            getBaseRandomValue = () =>
+            (Player.localInstance.upgradeManager.bleedChance > 0.1f ?
+                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.1f)) : 0.2f) * (0.8f + GD.Randf() * 0.4f)
+        };
+        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f, chanceMult = 0.8f };
-        public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Duration") { chanceMult = 0.4f };
-        const float BASE_UPGRADE_VALUE = 0.8f;
-        public static readonly UpgradeType BaseDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
-        public static readonly UpgradeType BaseFireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Fire Rate") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
-        public static readonly UpgradeType BaseMultishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Multishot") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
-        public static readonly UpgradeType BaseCritMultiplier = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Crit Damage") { canBeRolled = () => Game.instance.generation % 5 == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.25f, chanceMult = 0.4f };
+        const float BASE_UPGRADE_VALUE = 0.75f;
+        const int BASE_UPGRADE_APPEARANCE_STEP = 6;
+        public static readonly UpgradeType BaseDamage = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Damage") { canBeRolled = () => Game.instance.generation % BASE_UPGRADE_APPEARANCE_STEP == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType BaseFireRate = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Fire Rate") { canBeRolled = () => Game.instance.generation % BASE_UPGRADE_APPEARANCE_STEP == 0, chanceMult = 8f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType BaseMultishot = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Multishot") { canBeRolled = () => Game.instance.generation % BASE_UPGRADE_APPEARANCE_STEP == 0, chanceMult = 8f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
+        public static readonly UpgradeType BaseCritMultiplier = new UpgradeType(x => $"+{ToPercentAndRound(x)}% BASE Crit Damage") { canBeRolled = () => Game.instance.generation % BASE_UPGRADE_APPEARANCE_STEP == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
         public static readonly UpgradeType FirstHitCritDamage = new UpgradeType(x => $"+{(int)x}x Total Crit Dmg on First Hit")
         {
-            chanceMult = 0.25f,
+            chanceMult = 0.2f,
             getBaseRandomValue = () => 15f
         };
         public static readonly UpgradeType NthShotMultishot = new UpgradeType(x => $"Every 4th shot has +{ToPercentAndRound(x)}% Total Multishot")
         {
-            chanceMult = 0.25f,
+            chanceMult = 0.2f,
             getBaseRandomValue = () => 1f
         };
         public static UpgradeType[] AllTypes = new UpgradeType[] {

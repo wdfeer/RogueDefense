@@ -13,7 +13,7 @@ namespace RogueDefense
         {
             base._Process(delta);
 
-            this.Rotate(delta * Mathf.Pi / 2);
+            this.Rotate(delta * Mathf.Pi * 2);
         }
     }
 }
