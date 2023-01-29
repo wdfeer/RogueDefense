@@ -27,6 +27,6 @@ public class DpsLabel : Label
     void UpdateShownDps()
     {
         float dps = hits.Aggregate(0f, (a, b) => a + b.damage) / HIT_SAVE_DURATION;
-        Text = $"Avg DPS: {dps.ToString("0.0")}";
+        Text = $"Avg DPS: {HpBar.ShortenNumber(dps)}";
     }
 }
