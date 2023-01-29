@@ -56,29 +56,34 @@ namespace RogueDefense
             float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
             player.hpManager.damageMult = damageTakenMult;
 
-            float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate);
+            float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2;
+            if (fireRateMult <= 0)
+                fireRateMult = 0.0001f;
             player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
-            float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage);
+            float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);
             player.shootManager.damage = player.shootManager.baseDamage * damageMult;
 
             float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
             player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
-            critChance = GetAllUpgradeValues(UpgradeType.CritChance).Aggregate(0f, (a, b) => a + b);
+            critChance = SumAllUpgradeValues(UpgradeType.CritChance);
             critDamage = this.baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
             player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
             player.abilityManager.ResetAbilityText();
 
-            bleedChance = GetAllUpgradeValues(UpgradeType.BleedChance).Aggregate(0f, (a, b) => a + b);
-            viralChance = GetAllUpgradeValues(UpgradeType.ViralChance).Aggregate(0f, (a, b) => a + b);
+            bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
+            viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
+
         }
         public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
-    => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
+            => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
+        public float SumAllUpgradeValues(UpgradeType type)
+            => GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
         public float GetTotalUpgradeMultiplier(UpgradeType type)
-            => 1f + GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
+            => 1f + SumAllUpgradeValues(type);
 
         void UpdateUpgradeText()
         {
