@@ -23,14 +23,17 @@ namespace RogueDefense
         }
         ActiveAbility GetRandomAbility(CustomButton button)
         {
-            switch (new Random().Next(0, 3))
+            switch (new Random().Next(0, 4))
             {
                 case 0:
                     return new FireRateAbility(button);
                 case 1:
                     return new DamageAbility(button);
-                default:
+                case 2:
                     return new ShurikenAbility(button);
+                default:
+                    return new ArmorStripAbility(button);
+
             }
         }
         public void ResetAbilityText()

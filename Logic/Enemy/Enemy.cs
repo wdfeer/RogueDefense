@@ -22,7 +22,7 @@ public class Enemy : MovingKinematicBody2D
 
         if (gen > 10f)
             armor = 50f * (gen - 10f);
-        else armor = 0f;
+        else armor = 990f;
         ResetArmorDisplay();
 
         bleedImmune = gen >= 20 && gen % 10 == 0;
@@ -67,7 +67,7 @@ public class Enemy : MovingKinematicBody2D
     }
     public float armor;
     public float ArmorDamageMultiplier => 300f / (300f + armor);
-    void ResetArmorDisplay()
+    public void ResetArmorDisplay()
     {
         ArmorBar.instance.SetDisplay(1f - ArmorDamageMultiplier);
     }
