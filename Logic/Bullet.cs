@@ -39,6 +39,7 @@ public class Bullet : MovingKinematicBody2D
                 int critLevel = GetCritLevel();
                 float critMult = owner.upgradeManager.critDamage;
                 owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref dmg, ref critLevel, ref critMult));
+                ModifyHit(ref dmg, ref critLevel, ref critMult);
                 if (critLevel > 0)
                     dmg *= critMult * critLevel;
                 owner.hooks.ForEach(x => x.OnHitWithBullet(this, dmg));
@@ -58,6 +59,7 @@ public class Bullet : MovingKinematicBody2D
             }
         }
     }
+    protected virtual void ModifyHit(ref float dmg, ref int critlevel, ref float critMult) { }
     protected virtual void OnHit(float totalDmg) { }
     private int GetCritLevel()
         => MathHelper.RandomRound(owner.upgradeManager.critChance);
