@@ -22,7 +22,7 @@ public class Enemy : MovingKinematicBody2D
 
         if (gen > 10f)
             armor = 50f * (gen - 10f);
-        else armor = 990f;
+        else armor = 0f;
         ResetArmorDisplay();
 
         bleedImmune = gen >= 20 && gen % 10 == 0;
