@@ -7,8 +7,11 @@ using RogueDefense.Logic;
 
 public class Enemy : MovingKinematicBody2D
 {
+    public static Enemy instance;
     public override void _Ready()
     {
+        instance = this;
+
         ResetRngSeed();
         velocity = new Vector2(-1.15f, 0);
         var gen = Game.instance.generation;
@@ -63,16 +66,16 @@ public class Enemy : MovingKinematicBody2D
         }
     }
     public float armor;
-    public float DamageMultiplier => 300f / (300f + armor);
+    public float ArmorDamageMultiplier => 300f / (300f + armor);
     void ResetArmorDisplay()
     {
-        ArmorBar.instance.SetDisplay(1f - DamageMultiplier);
+        ArmorBar.instance.SetDisplay(1f - ArmorDamageMultiplier);
     }
     [Export]
     public PackedScene combatText;
     public void Damage(float damage, Color textColor, Vector2? combatTextDirection = null)
     {
-        damage *= DamageMultiplier * GetViralDmgMult();
+        damage *= ArmorDamageMultiplier * GetViralDmgMult();
         Hp -= damage;
 
         Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));

@@ -36,7 +36,7 @@ public class Bullet : MovingKinematicBody2D
                 if (Game.instance.enemy == null)
                     break;
                 float dmg = this.damage;
-                int critLevel = MathHelper.RandomRound(owner.upgradeManager.critChance);
+                int critLevel = GetCritLevel();
                 float critMult = owner.upgradeManager.critDamage;
                 owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref dmg, ref critLevel, ref critMult));
                 if (critLevel > 0)
@@ -52,11 +52,15 @@ public class Bullet : MovingKinematicBody2D
             if (killShieldOrbs)
                 ((ShieldOrb)collision.Collider).QueueFree();
             else
+            {
+                ShieldOrb.damageConsumed += damage * hitMult;
                 QueueFree();
+            }
         }
     }
     protected virtual void OnHit(float totalDmg) { }
-
+    private int GetCritLevel()
+        => MathHelper.RandomRound(owner.upgradeManager.critChance);
     private Color GetCritColor(int critLevel)
     {
         switch (critLevel)

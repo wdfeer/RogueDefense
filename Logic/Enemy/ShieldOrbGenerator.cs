@@ -7,7 +7,7 @@ public class ShieldOrbGenerator : Node2D
     public PackedScene shieldOrb;
     public override void _Ready()
     {
-        if (Game.instance.generation % 3 == 0 && GD.Randf() < 0.4f)
+        if ((Game.instance.generation % 2 == 0 && GD.Randf() < 0.5f) || Game.instance.generation % 5 == 0)
             CreateOrbs(1 + Mathf.RoundToInt(GD.Randf() * 4));
     }
     public ShieldOrb[] orbs = new ShieldOrb[0];
