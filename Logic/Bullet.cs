@@ -26,6 +26,7 @@ public class Bullet : MovingKinematicBody2D
     }
     int hitMult = 1;
     public float damage = 1;
+    public bool killShieldOrbs = false;
     protected override void OnCollision(KinematicCollision2D collision)
     {
         if (collision.Collider == Game.instance.enemy)
@@ -45,6 +46,13 @@ public class Bullet : MovingKinematicBody2D
                 Game.instance.enemy.Damage(dmg, GetCritColor(critLevel));
             }
             QueueFree();
+        }
+        else if (collision.Collider is ShieldOrb)
+        {
+            if (killShieldOrbs)
+                ((ShieldOrb)collision.Collider).QueueFree();
+            else
+                QueueFree();
         }
     }
     protected virtual void OnHit(float totalDmg) { }
