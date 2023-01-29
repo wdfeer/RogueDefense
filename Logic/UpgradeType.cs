@@ -30,8 +30,8 @@ namespace RogueDefense
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Bleed Chance")
         {
             getBaseRandomValue = () =>
-            (Player.localInstance.upgradeManager.bleedChance > 0.1f ?
-                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.1f)) : 0.2f) * (0.8f + GD.Randf() * 0.4f)
+            (Player.localInstance.upgradeManager.bleedChance > 0.125f ?
+                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.125f)) : 0.2f) * (0.8f + GD.Randf() * 0.4f)
         };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f, chanceMult = 0.8f };

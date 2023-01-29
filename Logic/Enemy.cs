@@ -12,12 +12,17 @@ public class Enemy : MovingKinematicBody2D
         ResetRngSeed();
         velocity = new Vector2(-1.15f, 0);
         var gen = Game.instance.generation;
+
         SetMaxHp(gen);
+
         damage = 10f * Mathf.Sqrt(1f + gen);
+
         if (gen > 10f)
             armor = 50f * (gen - 10f);
         else armor = 0f;
         ResetArmorDisplay();
+
+        bleedImmune = gen > 10 && gen % 20 == 0;
     }
     RandomNumberGenerator statsRng = new RandomNumberGenerator();
     void ResetRngSeed()
@@ -114,8 +119,11 @@ public class Enemy : MovingKinematicBody2D
     }
 
 
+    public bool bleedImmune = false;
     public void AddBleed(float totalDmg, float duration)
     {
+        if (bleedImmune)
+            return;
         int ticks = MathHelper.RandomRound(duration / BLEED_INTERVAL);
         bleeds.Add((totalDmg / 5, ticks));
     }
