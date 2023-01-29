@@ -57,6 +57,11 @@ namespace RogueDefense
             chanceMult = 0.2f,
             getBaseRandomValue = () => 0.8f
         };
+        public static readonly UpgradeType MaxHpPerKill = new UpgradeType(x => $"On Kill: +{ToPercentAndRound(x)}% Max Hp")
+        {
+            chanceMult = 0.15f,
+            getBaseRandomValue = () => 0.02f
+        };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
             DamageReduction,
@@ -75,7 +80,8 @@ namespace RogueDefense
             BaseCritMultiplier,
             FirstHitCritDamage,
             NthShotMultishot,
-            PlusDamageMinusFireRate
+            PlusDamageMinusFireRate,
+            MaxHpPerKill
         };
         public static void Initialize()
         {

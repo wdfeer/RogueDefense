@@ -13,10 +13,11 @@ namespace RogueDefense
         public virtual void OnHitWithBullet(Bullet b, float postCritDmg) { }
         public virtual void OnAnyHit(float afterEffectsDmg) { }
         public virtual void PreShoot(PlayerShootManager shooter) { }
+        public virtual void OnKill() { }
 
-        public static PlayerHooks GetHooks<T>(Player player)
+        public static T GetHooks<T>(Player player) where T : PlayerHooks
         {
-            return player.hooks.Find(x => x is T);
+            return (T)player.hooks.Find(x => x is T);
         }
     }
 }

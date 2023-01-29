@@ -16,7 +16,7 @@ namespace RogueDefense
         [Export]
         public PackedScene bulletScene;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounter(), new StatusPlayer(), new FirstHitPlayer(), new NthShotMultishotPlayer() };
+        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounter(), new StatusPlayer(), new FirstHitPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer() };
 
         public PlayerHpManager hpManager;
         public PlayerShootManager shootManager;

@@ -55,5 +55,8 @@ public class Game : Node2D
 
         myPlayer.shootManager.ClearBullets();
         myPlayer.hpManager.Hp = myPlayer.hpManager.maxHp;
+        myPlayer.hooks.ForEach(x => x.OnKill());
+        myPlayer.upgradeManager.UpdateUpgrades();
+        myPlayer.upgradeManager.UpdateUpgradeText();
     }
 }

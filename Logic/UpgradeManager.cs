@@ -36,7 +36,7 @@ namespace RogueDefense
         public float critDamage = 2f;
         public float bleedChance = 0f;
         public float viralChance = 0f;
-        void UpdateUpgrades()
+        public void UpdateUpgrades()
         {
             float baseDamageMult = GetTotalUpgradeMultiplier(UpgradeType.BaseDamage);
             player.shootManager.baseDamage = 1f * baseDamageMult;
@@ -50,7 +50,7 @@ namespace RogueDefense
             float baseCritDmgMult = GetTotalUpgradeMultiplier(UpgradeType.BaseCritMultiplier);
             this.baseCritMult = 2f * baseCritDmgMult;
 
-            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp);
+            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + PlayerHooks.GetHooks<MaxHpPerKillPlayer>(player).increase;
             player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
 
             float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
@@ -85,7 +85,7 @@ namespace RogueDefense
         public float GetTotalUpgradeMultiplier(UpgradeType type)
             => 1f + SumAllUpgradeValues(type);
 
-        void UpdateUpgradeText()
+        public void UpdateUpgradeText()
         {
             var upgradeText = player.GetNode("/root/Game/UpgradeScreen/UpgradeText") as Label;
             upgradeText.Text = $"Max HP: {player.hpManager.maxHp.ToString("0.0")}\n";
