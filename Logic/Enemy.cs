@@ -22,7 +22,7 @@ public class Enemy : MovingKinematicBody2D
         else armor = 0f;
         ResetArmorDisplay();
 
-        bleedImmune = gen > 10 && gen % 20 == 0;
+        bleedImmune = gen >= 20 && gen % 10 == 0;
     }
     RandomNumberGenerator statsRng = new RandomNumberGenerator();
     void ResetRngSeed()
