@@ -170,7 +170,9 @@ public class Enemy : MovingKinematicBody2D
     public float GetColdSpeedMult()
         => 1f / Mathf.Pow(colds.Count + 1f, 0.33f);
     public void AddCold(float duration)
-        => colds.Add(duration);
+    {
+        if (colds.Count < 1000) colds.Add(duration);
+    }
     public List<float> colds = new List<float>();
     public void ProcessColds(float delta)
     {
