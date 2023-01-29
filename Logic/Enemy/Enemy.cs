@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -8,12 +9,12 @@ using RogueDefense.Logic;
 public class Enemy : MovingKinematicBody2D
 {
     public static Enemy instance;
+    public const float BASE_SPEED = 1.15f;
     public override void _Ready()
     {
         instance = this;
 
         ResetRngSeed();
-        velocity = new Vector2(-1.15f, 0);
         var gen = Game.instance.generation;
 
         SetMaxHp(gen);
@@ -93,6 +94,7 @@ public class Enemy : MovingKinematicBody2D
     float attackTimer = 0f;
     public override void _Process(float delta)
     {
+        velocity = new Vector2(-BASE_SPEED, 0);
         base._Process(delta);
         if (attacking)
         {
@@ -106,6 +108,7 @@ public class Enemy : MovingKinematicBody2D
 
         ProcessBleeds(delta);
         ProcessVirals(delta);
+        ProcessColds(delta);
     }
 
     protected override void OnCollision(KinematicCollision2D collision)
@@ -156,12 +159,22 @@ public class Enemy : MovingKinematicBody2D
     public float GetViralDmgMult()
         => 1f + (virals.Count > 10 ? ((Mathf.Pow(virals.Count - 10, 0.7f)) + 10) : virals.Count) / 10f;
     public void AddViral(float duration)
-    {
-        virals.Add(duration);
-    }
+        => virals.Add(duration);
     public List<float> virals = new List<float>();
     public void ProcessVirals(float delta)
     {
         virals = virals.Select(x => x - delta).Where(x => x > 0).ToList();
+    }
+
+
+    public float GetColdSpeedMult()
+        => 1f / Mathf.Pow(colds.Count + 1f, 0.33f);
+    public void AddCold(float duration)
+        => colds.Add(duration);
+    public List<float> colds = new List<float>();
+    public void ProcessColds(float delta)
+    {
+        colds = colds.Select(x => x - delta).Where(x => x > 0).ToList();
+        velocity *= GetColdSpeedMult();
     }
 }

@@ -20,6 +20,13 @@ namespace RogueDefense
                 {
                     Game.instance.enemy.AddViral(STATUS_DURATION);
                 }
+
+            int coldCount = MathHelper.RandomRound(Player.upgradeManager.coldChance);
+            if (coldCount > 0)
+                for (int i = 0; i < coldCount; i++)
+                {
+                    Game.instance.enemy.AddCold(STATUS_DURATION);
+                }
         }
     }
 }

@@ -36,6 +36,7 @@ namespace RogueDefense
         public float critDamage = 2f;
         public float bleedChance = 0f;
         public float viralChance = 0f;
+        public float coldChance = 0f;
         public void UpdateUpgrades()
         {
             float baseDamageMult = GetTotalUpgradeMultiplier(UpgradeType.BaseDamage);
@@ -76,7 +77,7 @@ namespace RogueDefense
 
             bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
             viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
-
+            coldChance = SumAllUpgradeValues(UpgradeType.ColdChance);
         }
         public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
             => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
@@ -100,7 +101,8 @@ Critical Chance: {(critChance * 100f).ToString("0.0")}%
 Critical Multiplier: {critDamage.ToString("0.00")}
 
 Bleeding Chance: {(bleedChance * 100f).ToString("0.0")}%
-Viral Chance: {(viralChance * 100f).ToString("0.0")}%";
+Viral Chance: {(viralChance * 100f).ToString("0.0")}%
+Cold Chance: {(coldChance * 100f).ToString("0.0")}%";
         }
     }
 }

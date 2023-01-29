@@ -6,10 +6,9 @@ namespace RogueDefense
 {
     public class UpgradeType
     {
-        public UpgradeType(Func<float, string> upgradeTextGetter, float chanceMult = 1f)
+        public UpgradeType(Func<float, string> upgradeTextGetter)
         {
             this.getUpgradeText = upgradeTextGetter;
-            this.chanceMult = chanceMult;
         }
         public Func<float, string> getUpgradeText;
         public float chanceMult = 1f;
@@ -34,6 +33,7 @@ namespace RogueDefense
                 (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.125f)) : 0.2f) * (0.8f + GD.Randf() * 0.4f)
         };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f };
+        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.2f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f, chanceMult = 0.8f };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.25f, chanceMult = 0.4f };
         const float BASE_UPGRADE_VALUE = 0.75f;
@@ -72,6 +72,7 @@ namespace RogueDefense
             CritDamage,
             BleedChance,
             ViralChance,
+            ColdChance,
             AbilityStrength,
             AbilityDuration,
             BaseDamage,
