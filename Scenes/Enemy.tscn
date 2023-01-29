@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/enemy.png" type="Texture" id=1]
 [ext_resource path="res://Logic/Enemy/Enemy.cs" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Assets/viralIcon.png" type="Texture" id=12]
 [ext_resource path="res://Logic/Enemy/ShieldOrbGenerator.cs" type="Script" id=13]
 [ext_resource path="res://Scenes/ShieldOrb.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Logic/Enemy/HpBar.cs" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 67.25, 175.75 )
@@ -41,6 +42,7 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 percent_visible = false
+script = ExtResource( 15 )
 
 [node name="HpText" type="Label" parent="HpBar"]
 margin_right = 480.0

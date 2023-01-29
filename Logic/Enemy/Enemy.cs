@@ -58,12 +58,7 @@ public class Enemy : MovingKinematicBody2D
     private float hp;
     public float Hp
     {
-        get => hp; set
-        {
-            hp = value;
-            (GetNode("./HpBar") as ProgressBar).Value = hp / maxHp;
-            (GetNode("./HpBar/HpText") as Label).Text = $"{hp.ToString("0.0")} / {maxHp.ToString("0.0")}";
-        }
+        get => hp; set => hp = value;
     }
     public float armor;
     public float ArmorDamageMultiplier => 300f / (300f + armor);
