@@ -19,8 +19,8 @@ namespace RogueDefense
             bullet.damage = shooter.damage;
             bullet.Scale *= 2f;
         }
-        public float PowerMultBonus => 2f * Strength;
-        public override float BaseCooldown => 15f / Duration;
+        public float PowerMultBonus => 5f * Strength;
+        public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);
         protected override string GetAbilityText()
             => $@"Fuse all bullets on screen into one
 with +{MathHelper.ToPercentAndRound(PowerMultBonus)}% Power
