@@ -18,5 +18,9 @@ namespace RogueDefense.Logic
             }
             return result;
         }
+        public static int ToPercentAndRound(float f)
+        {
+            return Mathf.RoundToInt(f * 100f);
+        }
     }
 }
