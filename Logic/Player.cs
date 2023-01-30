@@ -106,12 +106,12 @@ namespace RogueDefense
             if (timeSinceLastShot > shootInterval)
             {
                 timeSinceLastShot = 0;
-                CreateBullet();
+                CreateBullets();
             }
         }
-        private List<Bullet> bullets = new List<Bullet>();
-        private const float SPREAD_DEGREES = 16f;
-        private void CreateBullet()
+        public List<Bullet> bullets = new List<Bullet>();
+        public const float SPREAD_DEGREES = 16f;
+        private void CreateBullets()
         {
             player.hooks.ForEach(x => x.PreShoot(this));
             int bulletCount = MathHelper.RandomRound(multishot);
@@ -123,14 +123,19 @@ namespace RogueDefense
             }
             for (int i = 0; i < bulletCount; i++)
             {
-                Bullet bullet = player.bulletScene.Instance() as Bullet;
-                bullet.velocity = new Godot.Vector2(6f, 0).Rotated(Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f));
-                bullet.Position = player.Position + new Godot.Vector2(20, 0);
+                Bullet bullet = Shoot(6f);
                 bullet.damage = damage;
                 bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
-                Game.instance.AddChild(bullet);
-                bullets.Add(bullet);
             }
+        }
+        public Bullet Shoot(float speed, float spread = -1)
+        {
+            Bullet bullet = player.bulletScene.Instance() as Bullet;
+            bullet.velocity = new Godot.Vector2(1f * speed, 0).Rotated(spread == -1 ? Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread);
+            bullet.Position = player.Position + new Godot.Vector2(20, 0);
+            Game.instance.AddChild(bullet);
+            bullets.Add(bullet);
+            return bullet;
         }
         public void ClearBullets()
         {

@@ -33,6 +33,8 @@ namespace RogueDefense
                     return new ShurikenAbility(button);
                 case 3:
                     return new ViralChanceAbility(button);
+                case 4:
+                    return new FuseBulletsAbility(button);
                 default:
                     return new ArmorStripAbility(button);
             }

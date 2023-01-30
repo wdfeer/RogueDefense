@@ -24,7 +24,7 @@ public class Bullet : MovingKinematicBody2D
             ((Label)GetNode("HitMult")).Text = this.hitMult.ToString();
         }
     }
-    int hitMult = 1;
+    public int hitMult = 1;
     public float damage = 1;
     public bool killShieldOrbs = false;
     protected override void OnCollision(KinematicCollision2D collision)
