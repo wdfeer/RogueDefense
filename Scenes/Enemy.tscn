@@ -57,7 +57,6 @@ align = 1
 uppercase = true
 
 [node name="Statuses" type="VBoxContainer" parent="."]
-visible = false
 margin_left = 70.0
 margin_top = -98.0
 margin_right = 110.0
@@ -123,7 +122,6 @@ theme = ExtResource( 3 )
 text = "0"
 
 [node name="ArmorBar" type="TextureProgress" parent="."]
-visible = false
 margin_left = -88.0
 margin_top = -101.0
 margin_right = 72.0
