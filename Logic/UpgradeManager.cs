@@ -33,7 +33,7 @@ namespace RogueDefense
 
         public float critChance = 0f;
         public float baseCritMult = 2f;
-        public float critDamage = 2f;
+        public float critDamageMult = 2f;
         public float bleedChance = 0f;
         public float viralChance = 0f;
         public float coldChance = 0f;
@@ -69,7 +69,7 @@ namespace RogueDefense
             player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
             critChance = SumAllUpgradeValues(UpgradeType.CritChance);
-            critDamage = this.baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
+            critDamageMult = this.baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
             player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
@@ -98,7 +98,7 @@ Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}
 Multishot: {player.shootManager.multishot.ToString("0.00")}
 
 Critical Chance: {(critChance * 100f).ToString("0.0")}%
-Critical Multiplier: {critDamage.ToString("0.00")}
+Critical Multiplier: {critDamageMult.ToString("0.00")}
 
 Bleeding Chance: {(bleedChance * 100f).ToString("0.0")}%
 Viral Chance: {(viralChance * 100f).ToString("0.0")}%

@@ -1,4 +1,6 @@
 using Godot;
+using RogueDefense;
+using RogueDefense.Logic;
 using System;
 
 public class ShieldOrbButton : TextureButton
@@ -9,7 +11,13 @@ public class ShieldOrbButton : TextureButton
         {
             float oldArmor = Enemy.instance.armor;
             Enemy.instance.armor = 0;
-            Enemy.instance.Damage(ShieldOrb.damageConsumed, Colors.Black, new Vector2(0, -1.5f));
+
+            float damage = ShieldOrb.damageConsumed;
+            int critLevel = MathHelper.RandomRound(Player.localInstance.upgradeManager.critChance);
+            if (critLevel > 0)
+                damage *= Player.localInstance.upgradeManager.critDamageMult;
+            Enemy.instance.Damage(damage, Bullet.GetCritColor(critLevel).Darkened(0.5f), new Vector2(0, -1.5f));
+
             Enemy.instance.armor = oldArmor;
             ShieldOrb.damageConsumed = 0;
         }
