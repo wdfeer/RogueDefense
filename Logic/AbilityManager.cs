@@ -23,7 +23,7 @@ namespace RogueDefense
         }
         ActiveAbility GetRandomAbility(CustomButton button)
         {
-            switch (new Random().Next(0, 5))
+            switch (new Random().Next(0, 6))
             {
                 case 0:
                     return new FireRateAbility(button);
