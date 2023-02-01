@@ -36,7 +36,7 @@ public class Enemy : MovingKinematicBody2D
         else
         {
             List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
-            firstChars.Add(Player.myName[0]);
+            firstChars.Add(RogueDefense.UserData.name[0]);
 
             int seed = firstChars.Aggregate(0, (a, b) => a + b);
         }

@@ -43,7 +43,7 @@ public class Client : Node
         switch (type)
         {
             case MessageType.FetchLobby:
-                SendMessage(MessageType.Register, new string[] { args[0], Player.myName });
+                SendMessage(MessageType.Register, new string[] { args[0], RogueDefense.UserData.name });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
