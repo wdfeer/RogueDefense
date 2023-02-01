@@ -44,7 +44,7 @@ public class Bullet : MovingKinematicBody2D
                     dmg *= critMult * critLevel;
                 owner.hooks.ForEach(x => x.OnHitWithBullet(this, dmg));
                 OnHit(dmg);
-                Game.instance.enemy.Damage(dmg, false, GetCritColor(critLevel));
+                Game.instance.enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
             }
             QueueFree();
         }
@@ -59,6 +59,7 @@ public class Bullet : MovingKinematicBody2D
             }
         }
     }
+    protected virtual bool UnhideableDamageNumbers => false;
     protected virtual void ModifyHit(ref float dmg, ref int critlevel, ref float critMult) { }
     protected virtual void OnHit(float totalDmg) { }
     private int GetCritLevel()

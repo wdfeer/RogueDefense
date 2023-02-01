@@ -20,5 +20,7 @@ namespace RogueDefense
 
             this.Rotate(delta * Mathf.Pi * 2);
         }
+
+        protected override bool UnhideableDamageNumbers => true;
     }
 }
