@@ -14,7 +14,6 @@ public class Enemy : MovingKinematicBody2D
     {
         instance = this;
 
-        ResetRngSeed();
         var gen = Game.instance.generation;
 
         SetMaxHp(gen);
@@ -27,9 +26,13 @@ public class Enemy : MovingKinematicBody2D
         ResetArmorDisplay();
 
         bleedImmune = gen >= 20 && gen % 10 == 0;
+
+        slowingField = (SlowingField)GetNode("SlowingField");
+        if (statsRng.Randf() < 0.2f)
+            slowingField.Enable();
     }
-    RandomNumberGenerator statsRng = new RandomNumberGenerator();
-    void ResetRngSeed()
+    public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
+    public static void ResetRngSeed()
     {
         if (NetworkManager.Singleplayer)
             statsRng.Randomize();
@@ -122,6 +125,9 @@ public class Enemy : MovingKinematicBody2D
             attacking = true;
         }
     }
+
+
+    public SlowingField slowingField;
 
 
     public bool bleedImmune = false;

@@ -18,6 +18,8 @@ public class Game : Node2D
 
         instance = this;
         myPlayer = GetNode("./MyPlayer") as Player;
+
+        Enemy.ResetRngSeed();
     }
 
     public override void _Process(float delta)
