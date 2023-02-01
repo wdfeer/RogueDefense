@@ -5,6 +5,7 @@ using System.Linq;
 using Godot;
 using RogueDefense;
 using RogueDefense.Logic;
+using RogueDefense.Logic.Statuses;
 
 public class Enemy : MovingKinematicBody2D
 {
@@ -25,13 +26,13 @@ public class Enemy : MovingKinematicBody2D
         else armor = 0f;
         ResetArmorDisplay();
 
-        bleedImmune = gen >= 20 && gen % 10 == 0;
+        bleed.immune = gen >= 20 && gen % 10 == 0;
 
         slowingField = (SlowingField)GetNode("SlowingField");
         if (statsRng.Randf() < 0.2f)
             slowingField.Enable();
 
-        if (!bleedImmune)
+        if (!bleed.immune)
         {
             float rand = statsRng.Randf();
             if (rand < 0.1f)
@@ -74,19 +75,21 @@ public class Enemy : MovingKinematicBody2D
         get => hp; set => hp = value;
     }
     public float armor;
-    public float ArmorDamageMultiplier => 300f / (300f + armor);
+    public float GetArmorDamageMultiplier(float armor) => 300f / (300f + armor);
     public void ResetArmorDisplay()
     {
-        ArmorBar.instance.SetDisplay(1f - ArmorDamageMultiplier);
+        ArmorBar.instance.SetDisplay(1f - GetArmorDamageMultiplier(armor));
     }
     [Export]
     public PackedScene combatText;
-    public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null)
+    public float dynamicDamageMult = 1f;
+    public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null, bool ignoreArmor = false)
     {
-        damage *= GetViralDmgMult();
+        damage *= dynamicDamageMult;
         if (damage < minDamage)
             damage = 0;
-        damage *= ArmorDamageMultiplier;
+        if (!ignoreArmor)
+            damage *= GetArmorDamageMultiplier(armor);
         if (damageCap > 0 && damage > damageCap)
             damage = damageCap;
         Hp -= damage;
@@ -113,9 +116,9 @@ public class Enemy : MovingKinematicBody2D
     public float damage = 10f;
     public float attackInterval = 1f;
     float attackTimer = 0f;
+    public float dynamicSpeedMult = 1f;
     public override void _Process(float delta)
     {
-        velocity = new Vector2(-BASE_SPEED, 0);
         base._Process(delta);
         if (attacking)
         {
@@ -126,10 +129,14 @@ public class Enemy : MovingKinematicBody2D
                 Game.instance.myPlayer.hpManager.Damage(damage);
             }
         }
+        dynamicSpeedMult = 1f;
+        dynamicDamageMult = 1f;
 
-        ProcessBleeds(delta);
-        ProcessVirals(delta);
-        ProcessColds(delta);
+        bleed.TryProcess(delta);
+        viral.TryProcess(delta);
+        cold.TryProcess(delta);
+
+        velocity = new Vector2(-BASE_SPEED * dynamicSpeedMult, 0);
     }
 
     protected override void OnCollision(KinematicCollision2D collision)
@@ -168,63 +175,10 @@ public class Enemy : MovingKinematicBody2D
     public SlowingField slowingField;
 
 
-    public bool bleedImmune = false;
-    public void AddBleed(float totalDmg, float duration)
-    {
-        if (bleedImmune)
-            return;
-        int ticks = MathHelper.RandomRound(duration / BLEED_INTERVAL);
-        bleeds.Add((totalDmg / 5, ticks));
-    }
-    public List<(float dpt, int ticksLeft)> bleeds = new List<(float dpt, int ticksLeft)>();
-    const float BLEED_INTERVAL = 1f;
-    float bleedTimer = 0f;
-    public void ProcessBleeds(float delta)
-    {
-        if (!bleeds.Any())
-        {
-            bleedTimer = BLEED_INTERVAL;
-            return;
-        }
-
-        bleedTimer += delta;
-        if (bleedTimer >= BLEED_INTERVAL)
-        {
-            float damage = bleeds.Aggregate(0f, (a, b) => a + b.dpt);
-
-            float oldArmor = armor;
-            armor = 0;
-            Damage(damage, true, Colors.WebGray, new Vector2(0f, -0.6f));
-            armor = oldArmor;
-
-            bleeds = bleeds.Select(x => (x.dpt, x.ticksLeft - 1)).Where(x => x.Item2 > 0).ToList();
-
-            bleedTimer %= BLEED_INTERVAL;
-        }
-    }
-
-
-    public float GetViralDmgMult()
-        => 1f + (virals.Count > 10 ? ((Mathf.Pow(virals.Count - 10, 0.7f)) + 10) : virals.Count) / 10f;
-    public void AddViral(float duration)
-        => virals.Add(duration);
-    public List<float> virals = new List<float>();
-    public void ProcessVirals(float delta)
-    {
-        virals = virals.Select(x => x - delta).Where(x => x > 0).ToList();
-    }
-
-
-    public float GetColdSpeedMult()
-        => 1f / Mathf.Pow(colds.Count + 1f, 0.33f);
-    public void AddCold(float duration)
-    {
-        if (colds.Count < 1000) colds.Add(duration);
-    }
-    public List<float> colds = new List<float>();
-    public void ProcessColds(float delta)
-    {
-        colds = colds.Select(x => x - delta).Where(x => x > 0).ToList();
-        velocity *= GetColdSpeedMult();
-    }
+    public Bleed bleed = new Bleed();
+    public Viral viral = new Viral();
+    public Cold cold = new Cold();
+    public void AddBleed(float totalDmg, float duration) => bleed.Add(totalDmg / 5f, duration);
+    public void AddViral(float duration) => viral.Add(duration);
+    public void AddCold(float duration) => cold.Add(duration);
 }
