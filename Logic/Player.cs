@@ -122,7 +122,7 @@ namespace RogueDefense
             }
             for (int i = 0; i < bulletCount * 1; i++)
             {
-                Bullet bullet = Shoot(15f);
+                Bullet bullet = Shoot(6f);
                 bullet.damage = damage;
                 bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
             }
