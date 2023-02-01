@@ -32,7 +32,7 @@ public class Enemy : MovingKinematicBody2D
             slowingField.Enable();
 
         if (!bleedImmune && statsRng.Randf() < 0.1f)
-            SetDamageCap(gen > 30 ? 0.06f : 0.1f);
+            SetDamageCap(gen > 30 ? (gen > 60 ? 0.03f : 0.06f) : 0.1f);
     }
     public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
     public static void ResetRngSeed()
@@ -54,7 +54,7 @@ public class Enemy : MovingKinematicBody2D
             baseMaxHp *= Client.instance.others.Count + 1f;
         float power;
         if (NetworkManager.Singleplayer)
-            power = (gen <= 40f ? gen : (40f + Mathf.Sqrt(gen - 40f))) / 15f;
+            power = (gen <= 27f ? gen : 27f) / 15f;
         else
             power = gen / 15f;
         maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * 0.8f, power) * (0.8f + statsRng.Randf() * 0.4f));
@@ -75,14 +75,6 @@ public class Enemy : MovingKinematicBody2D
     }
     [Export]
     public PackedScene combatText;
-    public float damageCap = -1f;
-    public void SetDamageCap(float maxHpDamageCap)
-    {
-        Label label = (Label)GetNode("BottomInfo");
-        label.Visible = true;
-        label.Text = $"Damage Cap per Hit: {MathHelper.ToPercentAndRound(maxHpDamageCap)}%";
-        damageCap = maxHp * maxHpDamageCap;
-    }
     public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null)
     {
         damage *= ArmorDamageMultiplier * GetViralDmgMult();
@@ -137,6 +129,16 @@ public class Enemy : MovingKinematicBody2D
         {
             attacking = true;
         }
+    }
+
+
+    public float damageCap = -1f;
+    public void SetDamageCap(float maxHpDamageCap)
+    {
+        Label label = (Label)GetNode("BottomInfo");
+        label.Visible = true;
+        label.Text = $"Damage Cap per Hit: {MathHelper.ToPercentAndRound(maxHpDamageCap)}%";
+        damageCap = maxHp * maxHpDamageCap;
     }
 
 
