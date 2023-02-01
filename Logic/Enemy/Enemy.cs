@@ -31,8 +31,14 @@ public class Enemy : MovingKinematicBody2D
         if (statsRng.Randf() < 0.2f)
             slowingField.Enable();
 
-        if (!bleedImmune && statsRng.Randf() < 0.1f)
-            SetDamageCap(gen > 30 ? (gen > 60 ? 0.03f : 0.06f) : 0.1f);
+        if (!bleedImmune)
+        {
+            float rand = statsRng.Randf();
+            if (rand < 0.1f)
+                SetDamageCap(GetDamageCap(gen));
+            else if (gen > 9 && rand < 0.2f)
+                SetMinDamage(GetMinDamage(gen));
+        }
     }
     public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
     public static void ResetRngSeed()
@@ -77,7 +83,10 @@ public class Enemy : MovingKinematicBody2D
     public PackedScene combatText;
     public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null)
     {
-        damage *= ArmorDamageMultiplier * GetViralDmgMult();
+        damage *= GetViralDmgMult();
+        if (damage < minDamage)
+            damage = 0;
+        damage *= ArmorDamageMultiplier;
         if (damageCap > 0 && damage > damageCap)
             damage = damageCap;
         Hp -= damage;
@@ -133,12 +142,26 @@ public class Enemy : MovingKinematicBody2D
 
 
     public float damageCap = -1f;
+    float GetDamageCap(int gen)
+        => gen > 30 ? (gen > 60 ? 0.03f : 0.06f) : 0.101f;
     public void SetDamageCap(float maxHpDamageCap)
     {
         Label label = (Label)GetNode("BottomInfo");
         label.Visible = true;
         label.Text = $"Damage Cap per Hit: {MathHelper.ToPercentAndRound(maxHpDamageCap)}%";
         damageCap = maxHp * maxHpDamageCap;
+    }
+
+
+    public float minDamage = -1f;
+    float GetMinDamage(int gen)
+        => GetDamageCap(gen) * 0.89f;
+    public void SetMinDamage(float minDamage)
+    {
+        Label label = (Label)GetNode("BottomInfo");
+        label.Visible = true;
+        label.Text = $"Minimum Damage per Hit: {MathHelper.ToPercentAndRound(minDamage)}%";
+        this.minDamage = maxHp * minDamage;
     }
 
 
