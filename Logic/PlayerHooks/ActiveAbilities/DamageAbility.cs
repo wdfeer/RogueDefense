@@ -13,7 +13,14 @@ namespace RogueDefense
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
-                Player.shootManager.damage *= 1f + 1f * Strength;
+            }
+        }
+        public override void PostShoot(Bullet bullet)
+        {
+            if (buffLeft > 0)
+            {
+                bullet.damage *= 1f + 1f * Strength;
+                bullet.StartParticleEffect();
             }
         }
 

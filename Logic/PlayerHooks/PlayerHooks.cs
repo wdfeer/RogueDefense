@@ -13,6 +13,7 @@ namespace RogueDefense
         public virtual void OnHitWithBullet(Bullet b, float postCritDmg) { }
         public virtual void OnAnyHit(float afterEffectsDmg) { }
         public virtual void PreShoot(PlayerShootManager shooter) { }
+        public virtual void PostShoot(Bullet bullet) { }
         public virtual void OnKill() { }
 
         public static T GetHooks<T>(Player player) where T : PlayerHooks

@@ -125,6 +125,8 @@ namespace RogueDefense
                 Bullet bullet = Shoot(6f);
                 bullet.damage = damage;
                 bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
+
+                player.hooks.ForEach(x => x.PostShoot(bullet));
             }
         }
         public Bullet Shoot(float speed, float spread = -1)

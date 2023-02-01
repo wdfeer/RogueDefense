@@ -18,6 +18,7 @@ namespace RogueDefense
             bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
             bullet.damage = shooter.damage;
             bullet.Scale *= 2f;
+            bullet.StartParticleEffect();
         }
         public float PowerMultBonus => 2f * Strength;
         public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);

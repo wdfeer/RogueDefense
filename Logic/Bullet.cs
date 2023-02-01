@@ -77,4 +77,9 @@ public class Bullet : MovingKinematicBody2D
                 return Color.Color8(204, 0, 0);
         }
     }
+
+    public void StartParticleEffect()
+    {
+        (GetNode("Particles2D") as Particles2D).Emitting = true;
+    }
 }
