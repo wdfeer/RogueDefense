@@ -19,6 +19,7 @@ namespace RogueDefense
 
         public virtual float BaseCooldown => 25f;
         public float Cooldown => BaseCooldown * Player.abilityManager.cooldownMult;
+        public void ResetCooldown() => cooldownTimer = float.PositiveInfinity;
         protected float cooldownTimer = float.PositiveInfinity;
         public bool Cooling => cooldownTimer < Cooldown;
         public override void PreUpdate(float delta)
