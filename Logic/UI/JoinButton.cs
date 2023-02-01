@@ -11,15 +11,15 @@ public class JoinButton : GoToSceneButton
     }
     public void LoadLastIp()
     {
-        AddressEdit.Text = RogueDefense.UserData.lastIp;
+        AddressEdit.Text = RogueDefense.UserSaveData.lastIp;
     }
     public override void _Pressed()
     {
         NetworkManager.mode = NetMode.Client;
         string addr = AddressEdit.Text;
         Client.address = addr;
-        RogueDefense.UserData.lastIp = addr;
-        RogueDefense.UserData.Save();
+        RogueDefense.UserSaveData.lastIp = addr;
+        RogueDefense.UserSaveData.Save();
         Client.port = int.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
         base._Pressed();
     }

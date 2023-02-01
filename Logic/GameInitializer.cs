@@ -6,7 +6,7 @@ public class GameInitializer : Node
 {
     public override void _Ready()
     {
-        RogueDefense.UserData.Load();
+        RogueDefense.UserSaveData.Load();
 
         UpgradeType.Initialize();
     }

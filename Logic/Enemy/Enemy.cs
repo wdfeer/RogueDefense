@@ -36,7 +36,7 @@ public class Enemy : MovingKinematicBody2D
         else
         {
             List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
-            firstChars.Add(RogueDefense.UserData.name[0]);
+            firstChars.Add(RogueDefense.UserSaveData.name[0]);
 
             int seed = firstChars.Aggregate(0, (a, b) => a + b);
         }
@@ -69,20 +69,24 @@ public class Enemy : MovingKinematicBody2D
     }
     [Export]
     public PackedScene combatText;
-    public void Damage(float damage, Color textColor, Vector2? combatTextDirection = null)
+    public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null)
     {
         damage *= ArmorDamageMultiplier * GetViralDmgMult();
         Hp -= damage;
 
         Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));
 
-        CombatText dmgText = combatText.Instance() as CombatText;
-        GetNode("/root/Game").AddChild(dmgText);
-        if (combatTextDirection != null)
-            dmgText.direction = (Vector2)combatTextDirection;
-        dmgText.Modulate = textColor;
-        dmgText.Text = damage.ToString("0.0");
-        dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120));
+        if (UserSaveData.showCombatText || unhideable)
+        {
+            CombatText dmgText = combatText.Instance() as CombatText;
+            GetNode("/root/Game").AddChild(dmgText);
+            if (combatTextDirection != null)
+                dmgText.direction = (Vector2)combatTextDirection;
+            dmgText.Modulate = textColor;
+            dmgText.Text = damage.ToString("0.0");
+            dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120));
+        }
+
         if (Hp <= 0)
         {
             Game.instance.DeleteEnemy(true);
@@ -146,7 +150,7 @@ public class Enemy : MovingKinematicBody2D
 
             float oldArmor = armor;
             armor = 0;
-            Damage(damage, Colors.WebGray, new Vector2(0f, -0.6f));
+            Damage(damage, true, Colors.WebGray, new Vector2(0f, -0.6f));
             armor = oldArmor;
 
             bleeds = bleeds.Select(x => (x.dpt, x.ticksLeft - 1)).Where(x => x.Item2 > 0).ToList();

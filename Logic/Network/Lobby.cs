@@ -13,7 +13,7 @@ public class Lobby : Control
     {
         instance = this;
 
-        (GetNode("PlayerList/MyData/Container/Name") as Label).Text = RogueDefense.UserData.name;
+        (GetNode("PlayerList/MyData/Container/Name") as Label).Text = RogueDefense.UserSaveData.name;
         if (NetworkManager.mode == NetMode.Client)
             (GetNode("StartButton") as Button).Disabled = true;
 

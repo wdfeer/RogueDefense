@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=1]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Logic/UI/MainMenu/MPButton.cs" type="Script" id=7]
 [ext_resource path="res://Scenes/JoinScene.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Logic/GameInitializer.cs" type="Script" id=9]
+[ext_resource path="res://Logic/UI/MainMenu/CombatTextButton.cs" type="Script" id=10]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -90,3 +91,12 @@ custom_fonts/font = ExtResource( 2 )
 text = "Player123"
 selecting_enabled = false
 script = ExtResource( 6 )
+
+[node name="CombatTextButton" type="CheckBox" parent="."]
+margin_left = 749.0
+margin_top = 8.0
+margin_right = 1016.0
+margin_bottom = 62.0
+theme = ExtResource( 5 )
+text = "Show Common Damage Numbers"
+script = ExtResource( 10 )

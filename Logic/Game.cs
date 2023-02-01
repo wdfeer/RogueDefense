@@ -14,7 +14,7 @@ public class Game : Node2D
     public Enemy enemy;
     public override void _Ready()
     {
-        RogueDefense.UserData.Save();
+        RogueDefense.UserSaveData.Save();
 
         instance = this;
         myPlayer = GetNode("./MyPlayer") as Player;

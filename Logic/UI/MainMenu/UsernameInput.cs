@@ -9,10 +9,10 @@ public class UsernameInput : LineEdit
         Connect("text_changed", this, "OnTextChanged");
         ToSignal(GetTree().CreateTimer(0.001f), "timeout").OnCompleted(() =>
         {
-            if (RogueDefense.UserData.name == "default")
+            if (RogueDefense.UserSaveData.name == "default")
                 GenerateRandomName();
             else
-                Text = RogueDefense.UserData.name;
+                Text = RogueDefense.UserSaveData.name;
         });
     }
     void GenerateRandomName()
@@ -26,6 +26,6 @@ public class UsernameInput : LineEdit
 
     public void OnTextChanged(string newText)
     {
-        RogueDefense.UserData.name = newText;
+        RogueDefense.UserSaveData.name = newText;
     }
 }
