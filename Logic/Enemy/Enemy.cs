@@ -162,7 +162,7 @@ public class Enemy : MovingKinematicBody2D
 
     public float minDamage = -1f;
     float GetMinDamage(int gen)
-        => GetDamageCap(gen) * 0.89f;
+        => GetDamageCap(gen) * 0.69f;
     public void SetMinDamage(float minDamage)
     {
         Label label = (Label)GetNode("BottomInfo");
