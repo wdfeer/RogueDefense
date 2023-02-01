@@ -30,6 +30,9 @@ public class Enemy : MovingKinematicBody2D
         slowingField = (SlowingField)GetNode("SlowingField");
         if (statsRng.Randf() < 0.2f)
             slowingField.Enable();
+
+        if (!bleedImmune && statsRng.Randf() < 0.1f)
+            SetDamageCap(gen > 30 ? 0.06f : 0.1f);
     }
     public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
     public static void ResetRngSeed()
@@ -72,9 +75,19 @@ public class Enemy : MovingKinematicBody2D
     }
     [Export]
     public PackedScene combatText;
+    public float damageCap = -1f;
+    public void SetDamageCap(float maxHpDamageCap)
+    {
+        Label label = (Label)GetNode("BottomInfo");
+        label.Visible = true;
+        label.Text = $"Damage Cap per Hit: {MathHelper.ToPercentAndRound(maxHpDamageCap)}%";
+        damageCap = maxHp * maxHpDamageCap;
+    }
     public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null)
     {
         damage *= ArmorDamageMultiplier * GetViralDmgMult();
+        if (damageCap > 0 && damage > damageCap)
+            damage = damageCap;
         Hp -= damage;
 
         Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));

@@ -162,3 +162,13 @@ modulate = Color( 0.501961, 0.501961, 1, 0.313726 )
 scale = Vector2( 1.5, 1.5 )
 z_index = -1
 texture = ExtResource( 18 )
+
+[node name="BottomInfo" type="Label" parent="."]
+visible = false
+margin_left = -90.0
+margin_top = 70.0
+margin_right = 90.0
+margin_bottom = 110.0
+theme = ExtResource( 3 )
+align = 1
+valign = 1
