@@ -20,7 +20,7 @@
 [ext_resource path="res://Logic/Enemy/SlowingField.cs" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 67.25, 175.75 )
+extents = Vector2( 65, 65 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 100.0

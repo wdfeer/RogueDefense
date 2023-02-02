@@ -12,7 +12,7 @@ namespace RogueDefense
         public virtual void ModifyHitWithBullet(Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult) { }
         public virtual void OnHitWithBullet(Bullet b, float postCritDmg) { }
         public virtual void OnAnyHit(float afterEffectsDmg) { }
-        public virtual void PreShoot(PlayerShootManager shooter) { }
+        public virtual void PreShoot(ShootManager shooter) { }
         public virtual void PostShoot(Bullet bullet) { }
         public virtual void OnKill() { }
 

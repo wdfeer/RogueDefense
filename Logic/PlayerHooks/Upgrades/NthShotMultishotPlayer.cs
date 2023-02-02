@@ -8,7 +8,7 @@ namespace RogueDefense
     public class NthShotMultishotPlayer : PlayerHooks
     {
         int shots = 0;
-        public override void PreShoot(PlayerShootManager shooter)
+        public override void PreShoot(ShootManager shooter)
         {
             if (shots % 4 == 0)
             {
