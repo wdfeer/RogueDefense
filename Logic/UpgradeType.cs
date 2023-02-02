@@ -37,8 +37,8 @@ namespace RogueDefense
         public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 30 && Player.localInstance.upgradeManager.coldChance < 0.13f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f, chanceMult = 0.8f };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.25f, chanceMult = 0.4f };
-        const float BASE_UPGRADE_VALUE = 0.75f;
-        const int BASE_UPGRADE_APPEARANCE_STEP = 6;
+        const float BASE_UPGRADE_VALUE = 1f;
+        const int BASE_UPGRADE_APPEARANCE_STEP = 10;
         public static readonly UpgradeType BaseDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% BASE Damage") { canBeRolled = () => Game.instance.generation % BASE_UPGRADE_APPEARANCE_STEP == 0, chanceMult = 10f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
         public static readonly UpgradeType BaseFireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% BASE Fire Rate") { canBeRolled = () => Game.instance.generation % BASE_UPGRADE_APPEARANCE_STEP == 0, chanceMult = 8f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
         public static readonly UpgradeType BaseMultishot = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% BASE Multishot") { canBeRolled = () => Game.instance.generation % BASE_UPGRADE_APPEARANCE_STEP == 0, chanceMult = 8f, getBaseRandomValue = () => BASE_UPGRADE_VALUE };
