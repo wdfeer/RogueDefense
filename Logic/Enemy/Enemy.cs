@@ -28,6 +28,7 @@ public class Enemy : MovingKinematicBody2D
 
         bleed.immune = gen >= 20 && gen % 10 == 0;
         viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
+        cold.immune = !bleed.immune && gen >= 40 && statsRng.Randf() < 0.1f;
 
         slowingField = (SlowingField)GetNode("SlowingField");
         if (statsRng.Randf() < 0.2f)
