@@ -34,6 +34,7 @@ namespace RogueDefense
         {
             hooks.ForEach(x => x.PreUpdate(delta));
             hooks.ForEach(x => x.Update(delta));
+            hpManager.Process(delta);
             upgradeManager.Process(delta);
             hooks.ForEach(x => x.PostUpgradeUpdate(delta));
             shootManager.Process(delta);
@@ -71,6 +72,10 @@ namespace RogueDefense
             {
                 Death();
             }
+        }
+        public void Process(float delta)
+        {
+            Damage(delta);
         }
         public bool dead = false;
         public void Death(bool local = true)
