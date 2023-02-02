@@ -83,4 +83,7 @@ public class Bullet : MovingKinematicBody2D
     {
         (GetNode("Particles2D") as Particles2D).Emitting = true;
     }
+
+
+    public bool canBeFused = true;
 }

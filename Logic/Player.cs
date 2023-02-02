@@ -138,12 +138,14 @@ namespace RogueDefense
             bullets.Add(bullet);
             return bullet;
         }
-        public void ClearBullets()
+        public void ClearBullets(Func<Bullet, bool> filter = null)
         {
             foreach (Bullet bull in bullets)
             {
                 if (Godot.Object.IsInstanceValid(bull))
                 {
+                    if (filter != null && !filter(bull))
+                        continue;
                     bull.QueueFree();
                 }
             }

@@ -11,8 +11,9 @@ namespace RogueDefense
         {
             PlayerShootManager shooter = Player.localInstance.shootManager;
 
-            float hitMult = shooter.bullets.Aggregate(0f, (a, b) => a + (Object.IsInstanceValid(b) ? b.hitMult : 0));
-            shooter.ClearBullets();
+            float hitMult = shooter.bullets.Aggregate(0f, (a, b) =>
+                a + ((Object.IsInstanceValid(b) && b.canBeFused) ? b.hitMult : 0));
+            shooter.ClearBullets(x => x.canBeFused);
             if (hitMult <= 0)
             {
                 ResetCooldown();
@@ -23,8 +24,9 @@ namespace RogueDefense
             bullet.damage = shooter.damage;
             bullet.Scale *= 2f;
             bullet.StartParticleEffect();
+            bullet.canBeFused = false;
         }
-        public float PowerMultBonus => 2f * Strength;
+        public float PowerMultBonus => 1.5f * Strength;
         public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);
         protected override string GetAbilityText()
             => $@"Fuse all bullets on screen into one
