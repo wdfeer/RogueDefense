@@ -27,12 +27,13 @@ public class Enemy : MovingKinematicBody2D
         ResetArmorDisplay();
 
         bleed.immune = gen >= 20 && gen % 10 == 0;
+        viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
 
         slowingField = (SlowingField)GetNode("SlowingField");
         if (statsRng.Randf() < 0.2f)
             slowingField.Enable();
 
-        if (!bleed.immune)
+        if (!bleed.immune && !viral.immune)
         {
             float rand = statsRng.Randf();
             if (rand < 0.1f)
