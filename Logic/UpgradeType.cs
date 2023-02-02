@@ -30,11 +30,11 @@ namespace RogueDefense
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance")
         {
             getBaseRandomValue = () =>
-            (Player.localInstance.upgradeManager.bleedChance > 0.125f ?
-                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.125f)) : 0.2f) * (0.8f + GD.Randf() * 0.4f)
+            (Player.localInstance.upgradeManager.bleedChance > 0.2f ?
+                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.75f + GD.Randf() * 0.45f)
         };
-        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f };
-        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.125f, canBeRolled = () => Game.instance.generation > 20 && Player.localInstance.upgradeManager.coldChance < 0.115f };
+        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.4f };
+        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 30 && Player.localInstance.upgradeManager.coldChance < 0.13f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f, chanceMult = 0.8f };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.25f, chanceMult = 0.4f };
         const float BASE_UPGRADE_VALUE = 0.75f;
