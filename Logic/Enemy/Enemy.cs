@@ -164,7 +164,7 @@ public class Enemy : MovingKinematicBody2D
 
     public float minDamage = -1f;
     float GetMinDamage(int gen)
-        => gen > 10 ? (gen > 25 ? 0.03f : 0.06f) : 0.999f;
+        => gen > 10 ? (gen > 25 ? 0.03f : 0.06f) : 0.099f;
     public void SetMinDamage(float minDamage)
     {
         Label label = (Label)GetNode("BottomInfo");
