@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/defaultFont.tres" type="DynamicFont" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Logic/UI/InGame/DpsLabel.cs" type="Script" id=14]
 [ext_resource path="res://Logic/UI/InGame/DeathScreen.cs" type="Script" id=15]
 [ext_resource path="res://Logic/PlayArea.cs" type="Script" id=16]
+[ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -35,6 +36,7 @@ position = Vector2( 100, 300 )
 collision_mask = 3
 script = ExtResource( 10 )
 bulletScene = ExtResource( 5 )
+turretScene = ExtResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="MyPlayer"]
 texture = ExtResource( 6 )

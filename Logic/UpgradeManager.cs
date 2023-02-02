@@ -26,6 +26,12 @@ namespace RogueDefense
         public List<Upgrade> upgrades = new List<Upgrade>();
         public void AddUpgrade(Upgrade upgrade)
         {
+            if (upgrade.type == UpgradeType.Turret)
+            {
+                PlayerHooks.GetHooks<TurretPlayer>(player).SpawnTurret();
+                return;
+            }
+
             upgrades.Add(upgrade);
             UpdateUpgrades();
             UpdateUpgradeText();

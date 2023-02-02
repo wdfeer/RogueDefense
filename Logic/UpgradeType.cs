@@ -64,6 +64,11 @@ namespace RogueDefense
             canBeRolled = () => Game.instance.generation < 10,
             getBaseRandomValue = () => 0.02f
         };
+        public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a turret")
+        {
+            chanceMult = 0.1f,
+            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 60)
+        };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
             DamageReduction,
@@ -84,7 +89,8 @@ namespace RogueDefense
             FirstHitCritDamage,
             NthShotMultishot,
             PlusDamageMinusFireRate,
-            MaxHpPerKill
+            MaxHpPerKill,
+            Turret
         };
         public static void Initialize()
         {
