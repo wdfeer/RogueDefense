@@ -9,7 +9,7 @@ public class UsernameInput : LineEdit
         Connect("text_changed", this, "OnTextChanged");
         ToSignal(GetTree().CreateTimer(0.001f), "timeout").OnCompleted(() =>
         {
-            if (RogueDefense.UserSaveData.name == "default")
+            if (RogueDefense.UserSaveData.name == "")
                 GenerateRandomName();
             else
                 Text = RogueDefense.UserSaveData.name;

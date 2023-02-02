@@ -40,7 +40,7 @@ namespace RogueDefense
 
             file.Close();
         }
-        public static string name = "default";
+        public static string name = "";
         public static string lastIp = "";
         public static bool showCombatText = false;
         public static int highscoreSingleplayer = 0;
