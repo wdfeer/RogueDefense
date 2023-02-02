@@ -29,7 +29,7 @@ namespace RogueDefense
         }
         public const float BASE_STRIP = 0.4f;
         public const float BASE_DURATION = 5f;
-        public override float BaseCooldown => 30f;
+        public override float BaseCooldown => NetworkManager.Singleplayer ? 20f : 30f;
         public float Strip => BASE_STRIP * Strength;
         protected override string GetAbilityText()
             => $@"Remove {(int)(Strip * 100f)}% Enemy Armor
