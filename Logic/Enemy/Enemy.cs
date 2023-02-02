@@ -37,7 +37,7 @@ public class Enemy : MovingKinematicBody2D
             float rand = statsRng.Randf();
             if (rand < 0.1f)
                 SetDamageCap(GetDamageCap(gen));
-            else if (gen > 9 && rand < 0.2f)
+            else if (gen > 9 && rand < 0.16f)
                 SetMinDamage(GetMinDamage(gen));
         }
     }
@@ -162,7 +162,7 @@ public class Enemy : MovingKinematicBody2D
 
     public float minDamage = -1f;
     float GetMinDamage(int gen)
-        => GetDamageCap(gen) * 0.69f;
+        => GetDamageCap(gen) * 0.49f;
     public void SetMinDamage(float minDamage)
     {
         Label label = (Label)GetNode("BottomInfo");
