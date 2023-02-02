@@ -53,7 +53,7 @@ namespace RogueDefense
         {
             Bullet bullet = player.bulletScene.Instance() as Bullet;
             bullet.velocity = new Godot.Vector2(1f * speed, 0).Rotated(spread == -1 ? Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread);
-            bullet.Position = player.Position + new Godot.Vector2(20, 0);
+            bullet.Position = player.Position + new Godot.Vector2(16, 0);
             Game.instance.AddChild(bullet);
             bullets.Add(bullet);
             return bullet;
