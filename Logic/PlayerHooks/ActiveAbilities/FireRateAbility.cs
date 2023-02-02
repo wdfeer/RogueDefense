@@ -13,7 +13,7 @@ namespace RogueDefense
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
-                Player.shootManager.shootInterval /= 2f * Strength;
+                Player.shootManager.shootInterval /= 1 + 1f * Strength;
             }
         }
 
