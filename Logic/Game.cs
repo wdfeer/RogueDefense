@@ -37,7 +37,7 @@ public class Game : Node2D
         AddChild(enemy);
     }
 
-    public int generation = 0;
+    public int generation = 1;
     public void DeleteEnemy(bool netUpdate)
     {
         if (enemy == null)
@@ -52,6 +52,8 @@ public class Game : Node2D
         enemy = null;
         generation++;
 
+        UserSaveData.UpdateHighscore();
+        UserSaveData.Save();
 
         GetTree().Paused = true;
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();

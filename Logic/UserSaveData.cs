@@ -16,6 +16,8 @@ namespace RogueDefense
                 name = file.GetLine();
                 lastIp = file.GetLine();
                 showCombatText = file.GetLine() == "1";
+                int.TryParse(file.GetLine(), out highscoreSingleplayer);
+                int.TryParse(file.GetLine(), out highscoreMultiplayer);
 
                 file.Close();
                 return true;
@@ -33,11 +35,23 @@ namespace RogueDefense
             file.StoreLine(name);
             file.StoreLine(lastIp);
             file.StoreLine(showCombatText ? "1" : "0");
+            file.StoreLine(highscoreSingleplayer.ToString());
+            file.StoreLine(highscoreMultiplayer.ToString());
 
             file.Close();
         }
         public static string name = "default";
         public static string lastIp = "";
         public static bool showCombatText = false;
+        public static int highscoreSingleplayer = 0;
+        public static int highscoreMultiplayer = 0;
+        public static void UpdateHighscore()
+        {
+            int lvl = Game.instance.generation;
+            if (NetworkManager.Singleplayer && lvl > highscoreSingleplayer)
+                highscoreSingleplayer = lvl;
+            else if (lvl > highscoreMultiplayer)
+                highscoreMultiplayer = lvl;
+        }
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=1]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Scenes/JoinScene.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Logic/GameInitializer.cs" type="Script" id=9]
 [ext_resource path="res://Logic/UI/MainMenu/CombatTextButton.cs" type="Script" id=10]
+[ext_resource path="res://Logic/UI/MainMenu/Highscores.cs" type="Script" id=11]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -100,3 +101,32 @@ margin_bottom = 62.0
 theme = ExtResource( 5 )
 text = "Show Common Damage Numbers"
 script = ExtResource( 10 )
+
+[node name="Highscores" type="VBoxContainer" parent="."]
+margin_left = 412.0
+margin_top = 290.0
+margin_right = 612.0
+margin_bottom = 364.0
+rect_min_size = Vector2( 200, 0 )
+theme = ExtResource( 5 )
+script = ExtResource( 11 )
+
+[node name="HighscoreSP" type="Label" parent="Highscores"]
+margin_right = 200.0
+margin_bottom = 23.0
+theme = ExtResource( 5 )
+text = "Singleplayer Highscore: "
+
+[node name="Splitter" type="Control" parent="Highscores"]
+margin_top = 27.0
+margin_right = 200.0
+margin_bottom = 47.0
+rect_min_size = Vector2( 0, 20 )
+theme = ExtResource( 5 )
+
+[node name="HighscoreMP" type="Label" parent="Highscores"]
+margin_top = 51.0
+margin_right = 200.0
+margin_bottom = 74.0
+theme = ExtResource( 5 )
+text = "Multiplayer Highscore: "
