@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/enemy.png" type="Texture" id=1]
 [ext_resource path="res://Logic/Enemy/Enemy.cs" type="Script" id=2]
@@ -17,14 +17,13 @@
 [ext_resource path="res://Logic/Enemy/HpBar.cs" type="Script" id=15]
 [ext_resource path="res://Assets/coldIcon.png" type="Texture" id=16]
 [ext_resource path="res://Logic/Enemy/StatusContainers/ColdContainer.cs" type="Script" id=17]
-[ext_resource path="res://Assets/blackCircle.png" type="Texture" id=18]
 [ext_resource path="res://Logic/Enemy/SlowingField.cs" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 67.25, 175.75 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 190.0
+radius = 100.0
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 2
@@ -146,7 +145,7 @@ script = ExtResource( 13 )
 shieldOrb = ExtResource( 14 )
 
 [node name="SlowingField" type="Area2D" parent="."]
-visible = false
+z_index = -2
 collision_layer = 0
 collision_mask = 4
 gravity_vec = Vector2( -1, 0 )
@@ -154,14 +153,7 @@ gravity = 0.0
 script = ExtResource( 19 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SlowingField"]
-visible = false
 shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="SlowingField"]
-modulate = Color( 0.501961, 0.501961, 1, 0.313726 )
-scale = Vector2( 1.5, 1.5 )
-z_index = -1
-texture = ExtResource( 18 )
 
 [node name="BottomInfo" type="Label" parent="."]
 visible = false
