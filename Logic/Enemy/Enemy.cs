@@ -36,10 +36,12 @@ public class Enemy : MovingKinematicBody2D
 
         if (!bleed.immune && !viral.immune)
         {
+            ShieldOrbGenerator GetShieldOrbGenerator() => GetNode("ShieldOrbGenerator") as ShieldOrbGenerator;
+
             float rand = statsRng.Randf();
             if (rand < 0.1f)
                 SetDamageCap(GetDamageCap(gen));
-            else if (gen < 40 && rand < 0.2f)
+            else if (GetShieldOrbGenerator().count > 0 && gen < 40 && rand < 0.2f)
                 SetMinDamage(GetMinDamage(gen));
         }
     }

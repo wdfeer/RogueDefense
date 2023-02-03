@@ -140,7 +140,7 @@ texture_progress = ExtResource( 7 )
 fill_mode = 3
 script = ExtResource( 10 )
 
-[node name="ShieldOrbs" type="Node2D" parent="."]
+[node name="ShieldOrbGenerator" type="Node2D" parent="."]
 script = ExtResource( 13 )
 shieldOrb = ExtResource( 14 )
 
