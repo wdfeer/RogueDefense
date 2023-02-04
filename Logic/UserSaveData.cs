@@ -18,6 +18,8 @@ namespace RogueDefense
                 showCombatText = file.GetLine() == "1";
                 int.TryParse(file.GetLine(), out highscoreSingleplayer);
                 int.TryParse(file.GetLine(), out highscoreMultiplayer);
+                int.TryParse(file.GetLine(), out gameCount);
+                int.TryParse(file.GetLine(), out killCount);
 
                 file.Close();
                 return true;
@@ -37,6 +39,8 @@ namespace RogueDefense
             file.StoreLine(showCombatText ? "1" : "0");
             file.StoreLine(highscoreSingleplayer.ToString());
             file.StoreLine(highscoreMultiplayer.ToString());
+            file.StoreLine(gameCount.ToString());
+            file.StoreLine(killCount.ToString());
 
             file.Close();
         }
@@ -45,6 +49,8 @@ namespace RogueDefense
         public static bool showCombatText = false;
         public static int highscoreSingleplayer = 0;
         public static int highscoreMultiplayer = 0;
+        public static int gameCount = 0;
+        public static int killCount = 0;
         public static void UpdateHighscore()
         {
             int lvl = Game.instance.generation;

@@ -53,6 +53,7 @@ public class Game : Node2D
         generation++;
 
         UserSaveData.UpdateHighscore();
+        UserSaveData.killCount++;
         UserSaveData.Save();
 
         GetTree().Paused = true;

@@ -10,7 +10,7 @@
 [ext_resource path="res://Scenes/JoinScene.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Logic/GameInitializer.cs" type="Script" id=9]
 [ext_resource path="res://Logic/UI/MainMenu/CombatTextButton.cs" type="Script" id=10]
-[ext_resource path="res://Logic/UI/MainMenu/Highscores.cs" type="Script" id=11]
+[ext_resource path="res://Logic/UI/MainMenu/Statview.cs" type="Script" id=11]
 [ext_resource path="res://Assets/editIcon.png" type="Texture" id=12]
 [ext_resource path="res://Logic/UI/MainMenu/AbilityChooser.cs" type="Script" id=13]
 
@@ -43,9 +43,9 @@ goToScene = ExtResource( 4 )
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -320.0
-margin_top = 400.0
+margin_top = 300.0
 margin_right = 280.0
-margin_bottom = 700.0
+margin_bottom = 600.0
 rect_scale = Vector2( 0.5, 0.5 )
 theme = SubResource( 1 )
 text = "MULTIPLAYER HOST"
@@ -58,9 +58,9 @@ host = true
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = 20.0
-margin_top = 400.0
+margin_top = 300.0
 margin_right = 620.0
-margin_bottom = 700.0
+margin_bottom = 600.0
 rect_scale = Vector2( 0.5, 0.5 )
 theme = SubResource( 1 )
 text = "MULTIPLAYER JOIN"
@@ -91,34 +91,46 @@ theme = ExtResource( 5 )
 text = "Show Common Damage Numbers"
 script = ExtResource( 10 )
 
-[node name="Highscores" type="VBoxContainer" parent="."]
+[node name="Statview" type="VBoxContainer" parent="."]
 margin_left = 412.0
-margin_top = 290.0
+margin_top = 460.0
 margin_right = 612.0
-margin_bottom = 364.0
+margin_bottom = 534.0
 rect_min_size = Vector2( 200, 0 )
 theme = ExtResource( 5 )
 script = ExtResource( 11 )
 
-[node name="HighscoreSP" type="Label" parent="Highscores"]
+[node name="HighscoreSP" type="Label" parent="Statview"]
 margin_right = 200.0
 margin_bottom = 23.0
 theme = ExtResource( 5 )
 text = "Singleplayer Highscore: "
 
-[node name="Splitter" type="Control" parent="Highscores"]
+[node name="HighscoreMP" type="Label" parent="Statview"]
 margin_top = 27.0
 margin_right = 200.0
-margin_bottom = 47.0
+margin_bottom = 50.0
+theme = ExtResource( 5 )
+text = "Multiplayer Highscore: "
+
+[node name="Splitter" type="Control" parent="Statview"]
+margin_top = 54.0
+margin_right = 200.0
+margin_bottom = 74.0
 rect_min_size = Vector2( 0, 20 )
 theme = ExtResource( 5 )
 
-[node name="HighscoreMP" type="Label" parent="Highscores"]
-margin_top = 51.0
+[node name="GameCount" type="Label" parent="Statview"]
+margin_top = 78.0
 margin_right = 200.0
-margin_bottom = 74.0
-theme = ExtResource( 5 )
-text = "Multiplayer Highscore: "
+margin_bottom = 101.0
+text = "Games completed: "
+
+[node name="KillCount" type="Label" parent="Statview"]
+margin_top = 105.0
+margin_right = 200.0
+margin_bottom = 128.0
+text = "Enemies killed: "
 
 [node name="AbilityChooser" type="MenuButton" parent="."]
 margin_left = 412.0

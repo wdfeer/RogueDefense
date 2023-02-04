@@ -85,6 +85,9 @@ namespace RogueDefense
                 Client.instance.SendMessage(MessageType.Death);
             }
 
+            UserSaveData.gameCount++;
+            UserSaveData.Save();
+
             Game.instance.GetTree().Paused = true;
             DeathScreen.instance.Show();
             (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"Level {Game.instance.generation} reached";
