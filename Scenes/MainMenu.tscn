@@ -121,10 +121,11 @@ theme = ExtResource( 5 )
 text = "Multiplayer Highscore: "
 
 [node name="AbilityChooser" type="MenuButton" parent="."]
-margin_left = 442.0
+margin_left = 412.0
 margin_top = 15.0
-margin_right = 582.0
+margin_right = 612.0
 margin_bottom = 44.0
+rect_min_size = Vector2( 200, 0 )
 theme = ExtResource( 5 )
-text = "Chosen Ability: -1"
+text = "Chosen Ability: Random"
 script = ExtResource( 13 )
