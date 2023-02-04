@@ -45,18 +45,6 @@ namespace RogueDefense
         public float coldChance = 0f;
         public void UpdateUpgrades()
         {
-            float baseDamageMult = GetTotalUpgradeMultiplier(UpgradeType.BaseDamage);
-            player.shootManager.baseDamage = 1f * baseDamageMult;
-
-            float baseFireRateMult = GetTotalUpgradeMultiplier(UpgradeType.BaseFireRate);
-            player.shootManager.baseShootInterval = 1f / baseFireRateMult;
-
-            float baseMultishotMult = GetTotalUpgradeMultiplier(UpgradeType.BaseMultishot);
-            player.shootManager.baseMultishot = 1f * baseMultishotMult;
-
-            float baseCritDmgMult = GetTotalUpgradeMultiplier(UpgradeType.BaseCritMultiplier);
-            this.baseCritMult = 2f * baseCritDmgMult;
-
             float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + PlayerHooks.GetHooks<MaxHpPerKillPlayer>(player).increase;
             player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
 

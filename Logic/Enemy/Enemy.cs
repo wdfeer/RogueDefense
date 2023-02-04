@@ -22,7 +22,7 @@ public class Enemy : MovingKinematicBody2D
         damage = 10f * Mathf.Sqrt(1f + gen);
 
         if (gen > 10f)
-            armor = 50f * (gen - 10f);
+            armor = (NetworkManager.Singleplayer ? 30f : 40f) * (gen - 10f);
         else armor = 0f;
         ResetArmorDisplay();
 
@@ -65,9 +65,9 @@ public class Enemy : MovingKinematicBody2D
             baseMaxHp *= Client.instance.others.Count + 1f;
         float power;
         if (NetworkManager.Singleplayer)
-            power = (gen <= 27f ? gen : 27f) / 15f;
+            power = (gen <= 27f ? gen : 27f) / 22.5f;
         else
-            power = gen / 15f;
+            power = gen / 20f;
         maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * (NetworkManager.Singleplayer ? 0.6f : 0.85f), power) * (0.8f + statsRng.Randf() * 0.4f));
         Hp = maxHp;
     }
