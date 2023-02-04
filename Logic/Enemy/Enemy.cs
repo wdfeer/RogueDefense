@@ -65,9 +65,9 @@ public class Enemy : MovingKinematicBody2D
             baseMaxHp *= Client.instance.others.Count + 1f;
         float power;
         if (NetworkManager.Singleplayer)
-            power = (gen <= 27f ? gen : 27f) / 22.5f;
+            power = (gen <= 40f ? gen : 40f + Mathf.Sqrt(gen - 40)) / 17.5f;
         else
-            power = gen / 20f;
+            power = gen / 15f;
         maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen * (NetworkManager.Singleplayer ? 0.6f : 0.85f), power) * (0.8f + statsRng.Randf() * 0.4f));
         Hp = maxHp;
     }
