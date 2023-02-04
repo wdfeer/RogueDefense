@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=1]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Logic/GameInitializer.cs" type="Script" id=9]
 [ext_resource path="res://Logic/UI/MainMenu/CombatTextButton.cs" type="Script" id=10]
 [ext_resource path="res://Logic/UI/MainMenu/Highscores.cs" type="Script" id=11]
+[ext_resource path="res://Assets/editIcon.png" type="Texture" id=12]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -66,31 +67,18 @@ icon_align = 1
 script = ExtResource( 7 )
 goToScene = ExtResource( 8 )
 
-[node name="UsernameContainer" type="VBoxContainer" parent="."]
-margin_left = 10.0
-margin_top = 8.0
-margin_right = 685.0
-margin_bottom = 208.0
+[node name="UsernameInput" type="LineEdit" parent="."]
+margin_left = 13.0
+margin_top = 16.0
+margin_right = 613.0
+margin_bottom = 154.0
+rect_min_size = Vector2( 600, 0 )
 rect_scale = Vector2( 0.4, 0.4 )
-rect_clip_content = true
-theme = ExtResource( 5 )
-
-[node name="Label" type="Label" parent="UsernameContainer"]
-margin_right = 675.0
-margin_bottom = 87.0
-theme = ExtResource( 5 )
-custom_fonts/font = ExtResource( 2 )
-text = "Username:"
-valign = 1
-
-[node name="UsernameInput" type="LineEdit" parent="UsernameContainer"]
-margin_top = 91.0
-margin_right = 675.0
-margin_bottom = 188.0
 theme = ExtResource( 5 )
 custom_fonts/font = ExtResource( 2 )
 text = "Player123"
 selecting_enabled = false
+right_icon = ExtResource( 12 )
 script = ExtResource( 6 )
 
 [node name="CombatTextButton" type="CheckBox" parent="."]
