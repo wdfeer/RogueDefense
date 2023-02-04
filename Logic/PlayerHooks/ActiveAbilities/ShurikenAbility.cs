@@ -13,15 +13,16 @@ namespace RogueDefense
             {
                 Shuriken proj = ((Shuriken)shurikenScene.Instance());
                 proj.velocity = new Vector2(20f, 0f).Rotated(0.1f * GD.Randf());
-                proj.damage = BASE_DAMAGE * Strength;
+                proj.damage = Damage;
                 Player.localInstance.AddChild(proj);
                 Player.shootManager.bullets.Add(proj);
             }
         }
-        public const float BASE_DAMAGE = 10;
+        public const float BASE_DAMAGE = 4;
+        public float Damage => BASE_DAMAGE * Strength * Player.shootManager.damage;
         public override float BaseCooldown => 10f / Mathf.Pow(Duration, 0.75f);
         protected override string GetAbilityText()
-            => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)(BASE_DAMAGE * Strength)} Damage
+            => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)(Damage)} Damage
 Bleed Duration: {(5f * Duration).ToString("0.00")} s
 Cooldown: {Cooldown.ToString("0.00")} s";
     }
