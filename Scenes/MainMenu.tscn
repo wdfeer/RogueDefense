@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=1]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Logic/UI/MainMenu/CombatTextButton.cs" type="Script" id=10]
 [ext_resource path="res://Logic/UI/MainMenu/Highscores.cs" type="Script" id=11]
 [ext_resource path="res://Assets/editIcon.png" type="Texture" id=12]
+[ext_resource path="res://Logic/UI/MainMenu/AbilityChooser.cs" type="Script" id=13]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -118,3 +119,12 @@ margin_right = 200.0
 margin_bottom = 74.0
 theme = ExtResource( 5 )
 text = "Multiplayer Highscore: "
+
+[node name="AbilityChooser" type="MenuButton" parent="."]
+margin_left = 442.0
+margin_top = 15.0
+margin_right = 582.0
+margin_bottom = 44.0
+theme = ExtResource( 5 )
+text = "Chosen Ability: -1"
+script = ExtResource( 13 )

@@ -16,29 +16,33 @@ namespace RogueDefense
         {
             this.player = player;
             var ability1Button = player.GetNode("/root/Game/AbilityContainer/AbilityButton1") as CustomButton;
-            ActiveAbility ability1 = GetRandomAbility(ability1Button);
+            ActiveAbility ability1 = GetAbility(ability1Button);
             player.hooks.Add(ability1);
 
             TimerManager.AddTimer(ResetAbilityText, 0.01f);
         }
+
+        ActiveAbility GetAbility(CustomButton button)
+        {
+            if (AbilityChooser.chosen == -1)
+                return GetRandomAbility(button);
+            else return CreateAbilityInstance(AbilityChooser.chosen, button);
+        }
         ActiveAbility GetRandomAbility(CustomButton button)
         {
-            switch (new Random().Next(0, 6))
-            {
-                case 0:
-                    return new FireRateAbility(button);
-                case 1:
-                    return new DamageAbility(button);
-                case 2:
-                    return new ShurikenAbility(button);
-                case 3:
-                    return new ViralChanceAbility(button);
-                case 4:
-                    return new FuseBulletsAbility(button);
-                default:
-                    return new ArmorStripAbility(button);
-            }
+            int index = new Random().Next(0, abilityTypes.Length);
+            return CreateAbilityInstance(index, button);
         }
+        public static readonly Type[] abilityTypes = new Type[] {
+            typeof(DamageAbility),
+            typeof(FireRateAbility),
+            typeof(ShurikenAbility),
+            typeof(ViralChanceAbility),
+            typeof(FuseBulletsAbility),
+            typeof(ArmorStripAbility),
+        };
+        ActiveAbility CreateAbilityInstance(int index, CustomButton button)
+            => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { button });
         public void ResetAbilityText()
         {
             player.hooks.ForEach(x =>
