@@ -3,10 +3,11 @@ using RogueDefense;
 using System;
 using System.Collections.Generic;
 
-public class NetworkManager : Node
+public static class NetworkManager
 {
     public static bool Singleplayer => mode == NetMode.Singleplayer;
     public static NetMode mode = NetMode.Singleplayer;
+    public static bool active = false;
     public static void NetStart()
     {
         if (NetworkManager.mode == NetMode.Server)
@@ -20,6 +21,7 @@ public class NetworkManager : Node
         {
             Client.instance.Start();
         }
+        active = true;
     }
     public static void Poll()
     {

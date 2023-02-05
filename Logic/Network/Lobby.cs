@@ -15,9 +15,15 @@ public class Lobby : Control
 
         (GetNode("PlayerList/MyData/Container/Name") as Label).Text = RogueDefense.UserSaveData.name;
         if (NetworkManager.mode == NetMode.Client)
+        {
             (GetNode("StartButton") as Button).Disabled = true;
-
-        NetworkManager.NetStart();
+            foreach (var data in Client.instance.others)
+            {
+                AddUser(data);
+            }
+        }
+        else
+            NetworkManager.NetStart(); // clients' NetworkManager is already started by JoinButton
     }
     Dictionary<int, PlayerData> userDisplayNodes = new Dictionary<int, PlayerData>();
     public void AddUser(UserData data)
@@ -34,11 +40,5 @@ public class Lobby : Control
             userDisplayNodes[id].QueueFree();
             userDisplayNodes.Remove(id);
         }
-    }
-
-
-    public override void _Process(float delta)
-    {
-        NetworkManager.Poll();
     }
 }

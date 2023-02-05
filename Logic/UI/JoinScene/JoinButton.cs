@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class JoinButton : GoToSceneButton
+public class JoinButton : Button
 {
     LineEdit AddressEdit => (GetNode("../IP Input/LineEdit") as LineEdit);
     public override void _Ready()
@@ -13,6 +13,7 @@ public class JoinButton : GoToSceneButton
     {
         AddressEdit.Text = RogueDefense.UserSaveData.lastIp;
     }
+    ConnectingLabel connectingLabel => (ConnectingLabel)GetNode("../ConnectingLabel");
     public override void _Pressed()
     {
         NetworkManager.mode = NetMode.Client;
@@ -21,6 +22,9 @@ public class JoinButton : GoToSceneButton
         RogueDefense.UserSaveData.lastIp = addr;
         RogueDefense.UserSaveData.Save();
         Client.port = int.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
-        base._Pressed();
+
+        connectingLabel.Visible = true;
+
+        NetworkManager.NetStart();
     }
 }

@@ -10,7 +10,7 @@
 [ext_resource path="res://Logic/UI/InGame/UpgradeScreen.cs" type="Script" id=8]
 [ext_resource path="res://Logic/UI/CustomButton.cs" type="Script" id=9]
 [ext_resource path="res://Logic/Player.cs" type="Script" id=10]
-[ext_resource path="res://Logic/Network/NetPoller.cs" type="Script" id=11]
+[ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Logic/UI/InGame/RetryButton.cs" type="Script" id=13]
 [ext_resource path="res://Logic/UI/InGame/DpsLabel.cs" type="Script" id=14]
@@ -131,9 +131,7 @@ text = "+100% Total Fire Rate
 Duration: 5 s
 Cooldown: 30 s"
 
-[node name="NetPoller" type="Node" parent="."]
-pause_mode = 2
-script = ExtResource( 11 )
+[node name="NetPoller" parent="." instance=ExtResource( 11 )]
 
 [node name="DpsLabel" type="Label" parent="."]
 pause_mode = 2

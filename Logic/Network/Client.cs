@@ -29,7 +29,9 @@ public class Client : Node
     public List<UserData> others = new List<UserData>();
     public void Connected(string protocol = "")
     {
-        GD.Print("This client connected!");
+        GD.Print("This client connected! Loading lobby...");
+        if (NetworkManager.mode == NetMode.Client)
+            JoinScene.TryChangeToLobbyScene();
     }
     public void Closed(bool wasCleanClose = false) { }
     public void OnData()

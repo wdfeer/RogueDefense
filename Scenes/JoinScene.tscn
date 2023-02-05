@@ -1,20 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Logic/UI/JoinButton.cs" type="Script" id=3]
-[ext_resource path="res://Scenes/Lobby/Lobby.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Logic/UI/JoinScene/JoinButton.cs" type="Script" id=3]
+[ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Logic/UI/JoinScene/ConnectingLabel.cs" type="Script" id=5]
+[ext_resource path="res://Logic/UI/JoinScene/JoinScene.cs" type="Script" id=6]
+[ext_resource path="res://Scenes/Lobby/Lobby.tscn" type="PackedScene" id=7]
 
-[node name="Control" type="CenterContainer"]
+[node name="JoinScene" type="CenterContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+script = ExtResource( 6 )
+lobbyScene = ExtResource( 7 )
+
+[node name="NetPoller" parent="." instance=ExtResource( 4 )]
 
 [node name="Container" type="VBoxContainer" parent="."]
 margin_left = 296.0
-margin_top = 130.0
+margin_top = 108.0
 margin_right = 727.0
-margin_bottom = 469.0
+margin_bottom = 491.0
 
 [node name="IP Input" type="HBoxContainer" parent="Container"]
 margin_right = 431.0
@@ -62,7 +69,7 @@ custom_fonts/font = ExtResource( 2 )
 text = "7777"
 max_length = 5
 
-[node name="Spacer" type="Control" parent="Container"]
+[node name="Spacer1" type="Control" parent="Container"]
 margin_top = 202.0
 margin_right = 431.0
 margin_bottom = 242.0
@@ -76,4 +83,19 @@ theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "JOIN"
 script = ExtResource( 3 )
-goToScene = ExtResource( 4 )
+
+[node name="Spacer2" type="Control" parent="Container"]
+margin_top = 343.0
+margin_right = 431.0
+margin_bottom = 383.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="ConnectingLabel" type="Label" parent="Container"]
+visible = false
+margin_left = 40.0
+margin_top = 387.0
+margin_right = 431.0
+margin_bottom = 474.0
+custom_fonts/font = ExtResource( 2 )
+text = "Connecting..."
+script = ExtResource( 5 )
