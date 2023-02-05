@@ -22,13 +22,7 @@ public class UpgradeScreen : Panel
             upgradeButtonScene.Instance() as CustomButton,
             upgradeButtonScene.Instance() as CustomButton
         };
-        bool basedUpgrades = Game.instance.generation % 5 == 0;
-        upgrades = new Upgrade[]
-        {
-            Upgrade.RandomUpgrade(basedUpgrades),
-            Upgrade.RandomUpgrade(basedUpgrades),
-            Upgrade.RandomUpgrade(basedUpgrades),
-        };
+        upgrades = Upgrade.RandomUniqueUpgrades(3);
         for (int i = 0; i < buttons.Length; i++)
         {
             CustomButton butt = buttons[i];

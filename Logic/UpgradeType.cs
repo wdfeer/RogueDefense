@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using RogueDefense.Logic;
@@ -23,7 +24,7 @@ namespace RogueDefense
         public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Max Hp");
         public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.6f };
         public static readonly UpgradeType Damage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage") { chanceMult = 1.1f };
-        public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate") { chanceMult = 1.25f };
+        public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate") { chanceMult = 1.2f };
         public static readonly UpgradeType Multishot = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Multishot") { chanceMult = 1.2f };
         public static readonly UpgradeType CritChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Chance");
         public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Damage");
@@ -98,9 +99,11 @@ namespace RogueDefense
 
 
 
-        public static UpgradeType GetRandomType()
+        public static UpgradeType GetRandomType(IEnumerable<UpgradeType> blacklist = null)
         {
             UpgradeType[] possible = AllTypes.Where(x => x.canBeRolled()).ToArray();
+            if (blacklist != null)
+                possible = possible.Except(blacklist).ToArray();
             float chanceRange = possible.Aggregate(0f, (a, b) => a + b.chanceMult);
             float rand = GD.Randf() * chanceRange;
 

@@ -13,9 +13,20 @@ public struct Upgrade
         this.type = type;
         this.value = value;
     }
-    public static Upgrade RandomUpgrade(bool based = false)
+    public static Upgrade[] RandomUniqueUpgrades(int count)
     {
-        UpgradeType type = UpgradeType.GetRandomType();
+        List<UpgradeType> rolled = new List<UpgradeType>();
+        Upgrade[] upgrades = new Upgrade[count];
+        for (int i = 0; i < count; i++)
+        {
+            upgrades[i] = RandomUpgrade(rolled);
+            rolled.Add(upgrades[i].type);
+        }
+        return upgrades;
+    }
+    public static Upgrade RandomUpgrade(IEnumerable<UpgradeType> blacklist = null)
+    {
+        UpgradeType type = UpgradeType.GetRandomType(blacklist);
         float value = type.GetRandomValue();
         value = Mathf.Round(value * 10000f) / 10000f;
 
