@@ -18,12 +18,11 @@ namespace RogueDefense
                 Player.shootManager.bullets.Add(proj);
             }
         }
-        public const float BASE_DAMAGE = 5;
+        public const float BASE_DAMAGE = 4;
         public float Damage => BASE_DAMAGE * Strength * Player.shootManager.damage;
-        public override float BaseCooldown => 12.5f / Mathf.Pow(Duration, 0.72f);
+        public override float BaseCooldown => 12f / Mathf.Pow(1f + (Duration - 1f) * 0.75f, 0.65f);
         protected override string GetAbilityText()
             => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)(Damage)} Damage
-Bleed Duration: {(5f * Duration).ToString("0.00")} s
 Cooldown: {Cooldown.ToString("0.00")} s";
     }
 }

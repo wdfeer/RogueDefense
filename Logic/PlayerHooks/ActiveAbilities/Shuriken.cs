@@ -11,7 +11,7 @@ namespace RogueDefense
         }
         protected override void OnHit(float totalDmg)
         {
-            Game.instance.enemy.AddBleed(totalDmg * Player.localInstance.abilityManager.strengthMult, 5f * Player.localInstance.abilityManager.durationMult);
+            Game.instance.enemy.AddBleed(totalDmg * Player.localInstance.abilityManager.strengthMult, 5f);
         }
 
         public override void _Process(float delta)
