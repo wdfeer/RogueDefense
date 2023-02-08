@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,6 @@ public class DpsLabel : Label
     void UpdateShownDps()
     {
         float dps = hits.Aggregate(0f, (a, b) => a + b.damage) / HIT_SAVE_DURATION;
-        Text = $"Avg DPS: {HpBar.ShortenNumber(dps)}";
+        Text = $"Avg DPS: {MathHelper.ToShortenedString(dps)}";
     }
 }

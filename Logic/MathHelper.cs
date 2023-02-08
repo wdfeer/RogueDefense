@@ -22,5 +22,15 @@ namespace RogueDefense.Logic
         {
             return Mathf.RoundToInt(f * 100f);
         }
+
+        public static string ToShortenedString(float x)
+        {
+            if (x < 1000)
+                return x.ToString("0.0");
+            else if (x < 1000000)
+                return (x / 1000f).ToString("0.0") + "K";
+            else
+                return (x / 1000000f).ToString("0.0") + "M";
+        }
     }
 }
