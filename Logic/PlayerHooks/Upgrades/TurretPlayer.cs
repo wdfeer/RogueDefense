@@ -7,6 +7,7 @@ namespace RogueDefense
 {
     public class TurretPlayer : PlayerHooks
     {
+        public int TurretCount => turrets.Count;
         public List<Node2D> turrets = new List<Node2D>();
         public void SpawnTurret()
         {

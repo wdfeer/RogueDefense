@@ -34,10 +34,10 @@ namespace RogueDefense
             (Player.localInstance.upgradeManager.bleedChance > 0.2f ?
                 (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.75f + GD.Randf() * 0.45f)
         };
-        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.4f };
-        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 30 && Player.localInstance.upgradeManager.coldChance < 0.13f };
-        public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2.25f, chanceMult = 0.8f };
-        public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.25f, chanceMult = 0.4f };
+        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
+        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 29 && Player.localInstance.upgradeManager.coldChance < 0.13f };
+        public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f, chanceMult = 0.75f };
+        public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.15f, chanceMult = 0.5f };
         public static readonly UpgradeType FirstHitCritDamage = new UpgradeType(x => $"+{(int)x}x Total Crit Dmg on First Hit")
         {
             chanceMult = 0.2f,
@@ -51,18 +51,18 @@ namespace RogueDefense
         public static readonly UpgradeType PlusDamageMinusFireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage, -{MathHelper.ToPercentAndRound(x / 2)}% Fire Rate")
         {
             chanceMult = 0.2f,
-            getBaseRandomValue = () => 0.8f
+            getBaseRandomValue = () => 0.9f
         };
         public static readonly UpgradeType MaxHpPerKill = new UpgradeType(x => $"On Kill: +{MathHelper.ToPercentAndRound(x)}% Max Hp")
         {
-            chanceMult = 0.25f,
+            chanceMult = 0.33f,
             canBeRolled = () => Game.instance.generation < 10,
             getBaseRandomValue = () => 0.02f
         };
         public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a turret")
         {
             chanceMult = 0.1f,
-            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 60)
+            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 50) && PlayerHooks.GetHooks<TurretPlayer>(Player.localInstance).TurretCount < 2
         };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
