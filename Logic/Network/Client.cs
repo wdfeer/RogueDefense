@@ -45,16 +45,16 @@ public class Client : Node
         switch (type)
         {
             case MessageType.FetchLobby:
-                SendMessage(MessageType.Register, new string[] { args[0], RogueDefense.UserSaveData.name });
+                SendMessage(MessageType.Register, new string[] { args[0], UserSaveData.name, AbilityChooser.chosen.ToString() });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
                     var strs = args[i].Split(";");
-                    RegisterUser(strs[0].ToInt(), strs[1]);
+                    RegisterUser(strs[0].ToInt(), strs[1], strs[2].ToInt());
                 }
                 break;
             case MessageType.Register:
-                RegisterUser(args[0].ToInt(), args[1]);
+                RegisterUser(args[0].ToInt(), args[1], args[2].ToInt());
                 break;
             case MessageType.Unregister:
                 int id = args[0].ToInt();
@@ -93,9 +93,9 @@ public class Client : Node
                 break;
         }
     }
-    void RegisterUser(int id, string name)
+    void RegisterUser(int id, string name, int ability)
     {
-        UserData d = new UserData(id, name);
+        UserData d = new UserData(id, name, ability);
         others.Add(d);
         if (Lobby.Instance != null)
         {

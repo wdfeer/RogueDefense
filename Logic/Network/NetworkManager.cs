@@ -33,10 +33,12 @@ public class UserData
 {
     public int id;
     public string name;
-    public UserData(int id, string name)
+    public int ability;
+    public UserData(int id, string name, int ability)
     {
         this.id = id;
         this.name = name;
+        this.ability = ability;
     }
 }
 public enum NetMode

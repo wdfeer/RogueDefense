@@ -13,7 +13,14 @@ public class Lobby : Control
     {
         instance = this;
 
-        (GetNode("PlayerList/MyData/Container/Name") as Label).Text = RogueDefense.UserSaveData.name;
+
+        {
+            var myData = (PlayerData)GetNode("PlayerList/MyData");
+            myData.SetName(RogueDefense.UserSaveData.name);
+            myData.SetAbilityText(AbilityManager.GetAbilityName(AbilityChooser.chosen));
+        }
+
+
         if (NetworkManager.mode == NetMode.Client)
         {
             (GetNode("StartButton") as Button).Disabled = true;
@@ -30,6 +37,7 @@ public class Lobby : Control
     {
         var node = userDataScene.Instance() as PlayerData;
         node.SetName(data.name);
+        node.SetAbilityText(AbilityManager.GetAbilityName(data.ability));
         userDisplayNodes.Add(data.id, node);
         GetNode("PlayerList").AddChild(node);
     }

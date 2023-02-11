@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace RogueDefense
@@ -40,5 +41,11 @@ namespace RogueDefense
             (button.GetNode("./Label") as Label).Text = GetAbilityText();
         }
         protected abstract string GetAbilityText();
+
+
+        public int GetAbilityIndex()
+        {
+            return Array.IndexOf(AbilityManager.abilityTypes, GetType());
+        }
     }
 }

@@ -28,3 +28,14 @@ margin_right = 133.0
 margin_bottom = 43.0
 theme = ExtResource( 2 )
 text = "Loading..."
+
+[node name="AbilityLabel" type="Label" parent="Container"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 137.0
+margin_top = 20.0
+margin_right = 217.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 80, 0 )
+theme = ExtResource( 2 )
+text = "Random"
+align = 2

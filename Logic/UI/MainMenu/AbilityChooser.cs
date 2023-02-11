@@ -11,7 +11,7 @@ public class AbilityChooser : MenuButton
         popup = GetPopup();
         for (int i = 0; i < AbilityManager.abilityTypes.Length; i++)
         {
-            string name = AbilityManager.abilityTypes[i].ToString().Split(".").Last();
+            string name = AbilityManager.GetAbilityName(i);
             popup.AddItem(name, i);
         }
         popup.Connect("id_pressed", this, "IdPressed");

@@ -8,4 +8,8 @@ public class PlayerData : PanelContainer
         (GetNode("./Container/Name") as Label).Text = name;
         this.Name = name;
     }
+    public void SetAbilityText(string text)
+    {
+        (GetNode("./Container/AbilityLabel") as Label).Text = text;
+    }
 }

@@ -25,9 +25,9 @@ public class Server : Node
             SetProcess(false);
         }
     }
-    public Dictionary<int, string> names = new Dictionary<int, string>();
+    public Dictionary<int, (string name, int ability)> users = new Dictionary<int, (string name, int ability)>();
     public void SendPacket(int id, byte[] data) => server.GetPeer(id).PutPacket(data);
-    public void Broadcast(byte[] data, int ignore = -1) => names.ToList().ForEach(x =>
+    public void Broadcast(byte[] data, int ignore = -1) => users.ToList().ForEach(x =>
     {
         if (x.Key != ignore)
             SendPacket(x.Key, data);
@@ -35,20 +35,20 @@ public class Server : Node
     public void Connected(int id, string protocol)
     {
         string data = $"{(char)MessageType.FetchLobby}{id.ToString()}";
-        if (names.Count > 0)
-            data += " " + String.Join(" ", names.Select(x => $"{x.Key.ToString()};{x.Value}"));
+        if (users.Count > 0)
+            data += " " + String.Join(" ", users.Select(x => $"{x.Key.ToString()};{x.Value.name};{x.Value.ability}"));
         SendPacket(id, data.ToUTF8());
-        names.Add(id, "");
+        users.Add(id, ("", -1));
         GD.Print($"Client {id} connected with protocol: {protocol}");
     }
     public void Disconnected(int id, bool wasCleanClose = false)
     {
-        names.Remove(id);
+        users.Remove(id);
         GD.Print($"Client {id} disconnected, clean: {wasCleanClose}");
     }
     public void CloseRequest(int id, int code, string reason)
     {
-        names.Remove(id);
+        users.Remove(id);
         GD.Print($"Client {id} disconnecting with code {code}, reason: {reason}");
     }
     public void OnData(int id)
@@ -60,9 +60,9 @@ public class Server : Node
         string str = data.GetStringFromUTF8();
         if (str[0] == (char)MessageType.Register)
         {
-            string name = str.Substring(1).Split(" ")[1];
-            names[id] = name;
-            GD.Print($"Registered name {name} for {id}");
+            string[] args = str.Substring(1).Split(" ");
+            users[id] = (args[1], args[2].ToInt());
+            GD.Print($"Registered user {args[1]} with ability {args[2]} as {id}");
         }
     }
     public void SendMessage(MessageType type, string[] args = null)

@@ -19,7 +19,7 @@ margin_right = 1024.0
 margin_bottom = 500.0
 
 [node name="MyData" parent="PlayerList" instance=ExtResource( 3 )]
-margin_right = 147.0
+margin_right = 231.0
 
 [node name="StartButton" type="Button" parent="."]
 margin_top = 500.0

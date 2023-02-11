@@ -7,6 +7,7 @@ namespace RogueDefense
 {
     public class AbilityManager
     {
+        public ActiveAbility ability1;
         Player player;
 
         public float strengthMult = 1f;
@@ -16,7 +17,7 @@ namespace RogueDefense
         {
             this.player = player;
             var ability1Button = player.GetNode("/root/Game/AbilityContainer/AbilityButton1") as CustomButton;
-            ActiveAbility ability1 = GetAbility(ability1Button);
+            ability1 = GetAbility(ability1Button);
             player.hooks.Add(ability1);
 
             TimerManager.AddTimer(ResetAbilityText, 0.01f);
@@ -32,6 +33,11 @@ namespace RogueDefense
         {
             int index = new Random().Next(0, abilityTypes.Length);
             return CreateAbilityInstance(index, button);
+        }
+        public static string GetAbilityName(int index)
+        {
+            if (index == -1) return "Random";
+            return abilityTypes[index].ToString().Split(".").Last();
         }
         public static readonly Type[] abilityTypes = new Type[] {
             typeof(DamageAbility),
