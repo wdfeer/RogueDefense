@@ -5,6 +5,8 @@ namespace RogueDefense
     public class StatusPlayer : PlayerHooks
     {
         public const float STATUS_DURATION = 5f;
+
+        public float corrosiveChance = 0f;
         public override void OnHitWithBullet(Bullet b, float postCritDmg)
         {
             int bleedCount = MathHelper.RandomRound(Player.upgradeManager.bleedChance);
@@ -26,6 +28,13 @@ namespace RogueDefense
                 for (int i = 0; i < coldCount; i++)
                 {
                     Game.instance.enemy.AddCold(STATUS_DURATION);
+                }
+
+            int corrosiveCount = MathHelper.RandomRound(corrosiveChance);
+            if (corrosiveCount > 0)
+                for (int i = 0; i < corrosiveCount; i++)
+                {
+                    Game.instance.enemy.corrosive.Add(STATUS_DURATION);
                 }
         }
     }

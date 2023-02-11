@@ -30,8 +30,9 @@ public class Enemy : KinematicBody2D
         ResetArmorDisplay();
 
         bleed.immune = gen >= 20 && gen % 10 == 0;
+        corrosive.immune = gen >= 30 && (gen + 5) % 10 == 0;
         viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
-        cold.immune = !bleed.immune && gen >= 40 && statsRng.Randf() < 0.1f;
+        cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
 
         slowingField = (SlowingField)GetNode("SlowingField");
         if (statsRng.Randf() < 0.2f)
@@ -82,7 +83,8 @@ public class Enemy : KinematicBody2D
         get => hp; set => hp = value;
     }
     public float armor;
-    public float GetArmorDamageMultiplier(float armor) => 300f / (300f + armor);
+    public float dynamicArmorMult = 1f;
+    public float GetArmorDamageMultiplier(float armor) => 300f / (300f + armor * dynamicArmorMult);
     public void ResetArmorDisplay()
     {
         ArmorBar.instance.SetDisplay(1f - GetArmorDamageMultiplier(armor));
@@ -139,10 +141,14 @@ public class Enemy : KinematicBody2D
         }
         dynamicSpeedMult = 1f;
         dynamicDamageMult = 1f;
+        dynamicArmorMult = 1f;
 
         bleed.TryProcess(delta);
         viral.TryProcess(delta);
         cold.TryProcess(delta);
+        corrosive.TryProcess(delta);
+
+        ResetArmorDisplay();
 
         if (!attacking)
         {
@@ -191,6 +197,7 @@ public class Enemy : KinematicBody2D
     public Bleed bleed = new Bleed();
     public Viral viral = new Viral();
     public Cold cold = new Cold();
+    public Corrosive corrosive = new Corrosive();
     public void AddBleed(float totalDmg, float duration) => bleed.Add(totalDmg / 5f, duration);
     public void AddViral(float duration) => viral.Add(duration);
     public void AddCold(float duration) => cold.Add(duration);

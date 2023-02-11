@@ -33,9 +33,10 @@ namespace RogueDefense
         {
             getBaseRandomValue = () =>
             (Player.localInstance.upgradeManager.bleedChance > 0.2f ?
-                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.75f + GD.Randf() * 0.45f),
+                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.65f + GD.Randf() * 0.35f),
             canBeRolled = () => Player.localInstance.upgradeManager.bleedChance < 0.5f
         };
+        public static readonly UpgradeType CorrosiveChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Corrosive Chance") { chanceMult = 0.6f, valueMult = 0.37f, canBeRolled = () => Game.instance.generation > 15 };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
         public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 29 && Player.localInstance.upgradeManager.coldChance < 0.13f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f, chanceMult = 0.75f, canBeRolled = () => !Player.localInstance.abilityManager.ability1.ConstantValues };
@@ -85,7 +86,8 @@ namespace RogueDefense
             NthShotMultishot,
             PlusDamageMinusFireRate,
             MaxHpPerKill,
-            Turret
+            Turret,
+            CorrosiveChance
         };
         public static void Initialize()
         {

@@ -74,6 +74,7 @@ namespace RogueDefense
             bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
             viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
             coldChance = SumAllUpgradeValues(UpgradeType.ColdChance);
+            PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
         }
         public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
             => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
@@ -94,11 +95,12 @@ Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}
 Multishot: {player.shootManager.multishot.ToString("0.00")}
 
 Critical Chance: {(critChance * 100f).ToString("0.0")}%
-Critical Multiplier: {critDamageMult.ToString("0.00")}
-
-Bleeding Chance: {(bleedChance * 100f).ToString("0.0")}%
-Viral Chance: {(viralChance * 100f).ToString("0.0")}%
-Cold Chance: {(coldChance * 100f).ToString("0.0")}%";
+Critical Multiplier: {critDamageMult.ToString("0.00")}x
+";
+            if (bleedChance > 0f) upgradeText.Text += $"\nBleeding Chance: {(bleedChance * 100f).ToString("0.0")}%";
+            float corrosiveChance = PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance;
+            if (corrosiveChance > 0f) upgradeText.Text += $"\nCorrosive Chance: {(corrosiveChance * 100f).ToString("0.0")}%"; if (viralChance > 0f) upgradeText.Text += $"\nViral Chance: {(viralChance * 100f).ToString("0.0")}%";
+            if (coldChance > 0f) upgradeText.Text += $"\nCold Chance: {(coldChance * 100f).ToString("0.0")}% ";
         }
     }
 }

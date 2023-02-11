@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Assets/enemy.png" type="Texture" id=1]
 [ext_resource path="res://Logic/Enemy/Enemy.cs" type="Script" id=2]
@@ -17,7 +17,9 @@
 [ext_resource path="res://Logic/Enemy/HpBar.cs" type="Script" id=15]
 [ext_resource path="res://Assets/coldIcon.png" type="Texture" id=16]
 [ext_resource path="res://Logic/Enemy/StatusContainers/ColdContainer.cs" type="Script" id=17]
+[ext_resource path="res://Assets/corrosiveIcon.png" type="Texture" id=18]
 [ext_resource path="res://Logic/Enemy/SlowingField.cs" type="Script" id=19]
+[ext_resource path="res://Logic/Enemy/StatusContainers/CorrosiveContainer.cs" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 65, 65 )
@@ -85,10 +87,30 @@ margin_bottom = 23.0
 theme = ExtResource( 3 )
 text = "0"
 
-[node name="ViralContainer" type="HBoxContainer" parent="Statuses"]
+[node name="CorrosiveContainer" type="HBoxContainer" parent="Statuses"]
 margin_top = 27.0
 margin_right = 40.0
 margin_bottom = 50.0
+script = ExtResource( 20 )
+
+[node name="TextureRect" type="TextureRect" parent="Statuses/CorrosiveContainer"]
+margin_right = 20.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 18 )
+expand = true
+
+[node name="Counter" type="Label" parent="Statuses/CorrosiveContainer"]
+margin_left = 24.0
+margin_right = 33.0
+margin_bottom = 23.0
+theme = ExtResource( 3 )
+text = "0"
+
+[node name="ViralContainer" type="HBoxContainer" parent="Statuses"]
+margin_top = 54.0
+margin_right = 40.0
+margin_bottom = 77.0
 script = ExtResource( 11 )
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/ViralContainer"]
@@ -106,9 +128,9 @@ theme = ExtResource( 3 )
 text = "0"
 
 [node name="ColdContainer" type="HBoxContainer" parent="Statuses"]
-margin_top = 54.0
+margin_top = 81.0
 margin_right = 40.0
-margin_bottom = 77.0
+margin_bottom = 104.0
 script = ExtResource( 17 )
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/ColdContainer"]

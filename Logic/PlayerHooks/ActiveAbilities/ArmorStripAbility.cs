@@ -11,7 +11,6 @@ namespace RogueDefense
                 Enemy.instance.armor = 0;
             else
                 Enemy.instance.armor *= 1 - Strip;
-            Enemy.instance.ResetArmorDisplay();
         }
         public const float BASE_STRIP = 0.4f;
         public override float BaseCooldown => (NetworkManager.Singleplayer ? 25f : 40f) / Mathf.Sqrt(Duration);
