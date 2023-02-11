@@ -62,7 +62,7 @@ namespace RogueDefense
         public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a turret")
         {
             chanceMult = 0.1f,
-            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 50) &&
+            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 36) &&
                 PlayerHooks.GetHooks<TurretPlayer>(Player.localInstance).TurretCount < 2
         };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
