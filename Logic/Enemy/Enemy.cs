@@ -29,10 +29,18 @@ public class Enemy : KinematicBody2D
         else armor = 0f;
         ResetArmorDisplay();
 
-        bleed.immune = gen >= 20 && gen % 10 == 0;
-        corrosive.immune = gen >= 30 && (gen + 5) % 10 == 0;
-        viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
-        cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
+        if (gen > 50 && gen % 25 == 0)
+        {
+            bleed.immune = true;
+            corrosive.immune = true;
+        }
+        else
+        {
+            bleed.immune = gen >= 20 && gen % 10 == 0;
+            corrosive.immune = gen >= 30 && (gen + 5) % 10 == 0;
+            viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
+            cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
+        }
 
         slowingField = (SlowingField)GetNode("SlowingField");
         if (statsRng.Randf() < 0.2f)
