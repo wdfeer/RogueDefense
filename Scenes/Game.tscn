@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/defaultFont.tres" type="DynamicFont" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Logic/UI/InGame/DeathScreen.cs" type="Script" id=15]
 [ext_resource path="res://Logic/PlayArea.cs" type="Script" id=16]
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Logic/UI/InGame/ExitButton.cs" type="Script" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -184,3 +185,21 @@ theme = ExtResource( 7 )
 custom_fonts/font = ExtResource( 12 )
 text = "RETRY"
 script = ExtResource( 13 )
+
+[node name="ExitButton" type="Button" parent="z-index1"]
+pause_mode = 2
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 60.0
+margin_bottom = 60.0
+theme = ExtResource( 7 )
+text = "SURRENDER"
+script = ExtResource( 18 )
+
+[node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/ExitButton"]
+margin_left = 390.0
+margin_top = 260.0
+margin_right = 635.0
+margin_bottom = 340.0
+theme = ExtResource( 7 )
+dialog_text = "Give up (progress will NOT be saved!)"
