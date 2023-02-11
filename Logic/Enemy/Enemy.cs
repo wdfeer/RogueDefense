@@ -67,7 +67,7 @@ public class Enemy : KinematicBody2D
         if (!NetworkManager.Singleplayer && gen > 2)
             baseMaxHp *= Client.instance.others.Count + 1f;
         float power;
-        if (NetworkManager.Singleplayer)
+        if (NetworkManager.Singleplayer && gen < 100)
             power = (gen <= 40f ? gen : 40f + Mathf.Sqrt(gen - 40)) / 17.5f;
         else
             power = gen / 15f;
