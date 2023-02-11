@@ -7,13 +7,16 @@ using RogueDefense;
 using RogueDefense.Logic;
 using RogueDefense.Logic.Statuses;
 
-public class Enemy : MovingKinematicBody2D
+public class Enemy : KinematicBody2D
 {
     public static Enemy instance;
     public const float BASE_SPEED = 1.15f;
     public override void _Ready()
     {
         instance = this;
+
+        lastPos = GlobalPosition;
+
 
         var gen = Game.instance.generation;
 
@@ -121,6 +124,7 @@ public class Enemy : MovingKinematicBody2D
     public float attackInterval = 1f;
     float attackTimer = 0f;
     public float dynamicSpeedMult = 1f;
+    public Vector2 lastPos;
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -140,10 +144,15 @@ public class Enemy : MovingKinematicBody2D
         viral.TryProcess(delta);
         cold.TryProcess(delta);
 
-        velocity = new Vector2(-BASE_SPEED * dynamicSpeedMult, 0);
+        if (!attacking)
+        {
+            lastPos += new Vector2(-BASE_SPEED * dynamicSpeedMult, 0);
+            GlobalPosition = lastPos;
+            var collision = MoveAndCollide(Vector2.Zero);
+            if (collision != null) OnCollision(collision);
+        }
     }
-
-    protected override void OnCollision(KinematicCollision2D collision)
+    void OnCollision(KinematicCollision2D collision)
     {
         if (collision.Collider == Game.instance.myPlayer)
         {

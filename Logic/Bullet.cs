@@ -15,8 +15,6 @@ public class Bullet : MovingKinematicBody2D
     {
         base._Process(delta);
     }
-    public override bool InfiniteInertia => false;
-
     public void SetHitMultiplier(float hitMult)
     {
         this.hitMult = MathHelper.RandomRound(hitMult);
