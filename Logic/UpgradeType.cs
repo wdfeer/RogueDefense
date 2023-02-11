@@ -21,6 +21,7 @@ namespace RogueDefense
         public Func<bool> canBeRolled = () => true;
 
         public int uniqueId;
+
         public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Max Hp");
         public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.6f };
         public static readonly UpgradeType Damage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage") { chanceMult = 1.1f, valueMult = 1.15f };
@@ -36,8 +37,8 @@ namespace RogueDefense
         };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
         public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 29 && Player.localInstance.upgradeManager.coldChance < 0.13f };
-        public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f, chanceMult = 0.75f };
-        public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.15f, chanceMult = 0.5f };
+        public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f, chanceMult = 0.75f, canBeRolled = () => !Player.localInstance.abilityManager.ability1.ConstantValues };
+        public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.15f, chanceMult = 0.5f, canBeRolled = () => !Player.localInstance.abilityManager.ability1.ConstantValues };
         public static readonly UpgradeType FirstHitCritDamage = new UpgradeType(x => $"+{(int)x}x Total Crit Dmg on First Hit")
         {
             chanceMult = 0.2f,
@@ -65,6 +66,7 @@ namespace RogueDefense
             canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 36) &&
                 PlayerHooks.GetHooks<TurretPlayer>(Player.localInstance).TurretCount < 2
         };
+
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
             DamageReduction,
@@ -96,7 +98,6 @@ namespace RogueDefense
         public override int GetHashCode() => uniqueId;
         public override bool Equals(object obj)
             => obj is UpgradeType && ((UpgradeType)obj).uniqueId == this.uniqueId;
-
 
 
 

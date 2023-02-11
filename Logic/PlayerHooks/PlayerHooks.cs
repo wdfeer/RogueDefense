@@ -16,6 +16,10 @@ namespace RogueDefense
         public virtual void PostShoot(Bullet bullet) { }
         public virtual void OnKill() { }
 
+        public static T GetLocalHooks<T>() where T : PlayerHooks
+        {
+            return GetHooks<T>(Player.localInstance);
+        }
         public static T GetHooks<T>(Player player) where T : PlayerHooks
         {
             return (T)player.hooks.Find(x => x is T);

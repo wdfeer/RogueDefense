@@ -38,10 +38,12 @@ namespace RogueDefense
 
         public void ResetText()
         {
-            (button.GetNode("./Label") as Label).Text = GetAbilityText();
+            var label = (button.GetNode("./Label") as Label);
+            label.Text = GetAbilityText();
+            if (ConstantValues) label.Text += "\n\n(These values are constant)";
         }
         protected abstract string GetAbilityText();
-
+        public virtual bool ConstantValues => false;
 
         public int GetAbilityIndex()
         {

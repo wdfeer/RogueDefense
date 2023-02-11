@@ -46,6 +46,7 @@ namespace RogueDefense
             typeof(ViralChanceAbility),
             typeof(FuseBulletsAbility),
             typeof(ArmorStripAbility),
+            typeof(UpgradeBuffAbility),
         };
         ActiveAbility CreateAbilityInstance(int index, CustomButton button)
             => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { button });
