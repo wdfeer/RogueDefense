@@ -33,7 +33,8 @@ namespace RogueDefense
         {
             getBaseRandomValue = () =>
             (Player.localInstance.upgradeManager.bleedChance > 0.2f ?
-                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.75f + GD.Randf() * 0.45f)
+                (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.75f + GD.Randf() * 0.45f),
+            canBeRolled = () => Player.localInstance.upgradeManager.bleedChance < 0.5f
         };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
         public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 29 && Player.localInstance.upgradeManager.coldChance < 0.13f };
