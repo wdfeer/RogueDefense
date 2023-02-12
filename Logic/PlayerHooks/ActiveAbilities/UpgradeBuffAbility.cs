@@ -9,7 +9,7 @@ namespace RogueDefense
         {
             active = true;
         }
-        public bool active = false;
+        public static bool active = false;
         public const float UPGRADE_VALUE_INCREASE = 1f;
         public override float BaseCooldown => 30f;
         public override bool ConstantValues => true;

@@ -24,13 +24,13 @@ public struct Upgrade
         }
 
 
-        if (Player.localInstance.abilityManager.ability1 is UpgradeBuffAbility ability && ability.active)
+        if (UpgradeBuffAbility.active)
         {
             for (int i = 0; i < upgrades.Length; i++)
             {
                 upgrades[i].value *= 1 + UpgradeBuffAbility.UPGRADE_VALUE_INCREASE;
             }
-            ability.active = false;
+            UpgradeBuffAbility.active = false;
         }
 
         return upgrades;
