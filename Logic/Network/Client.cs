@@ -89,6 +89,11 @@ public class Client : Node
                 Game.instance.GetTree().Paused = false;
                 Game.instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
                 break;
+            case MessageType.AbilityActivated:
+                int abilityType = args[0].ToInt();
+                ActiveAbility ability = AbilityManager.CreateAbilityInstance(abilityType);
+                ability.Activate();
+                break;
             default:
                 break;
         }
@@ -126,5 +131,6 @@ public enum MessageType
     EnemyKill = 'k',
     Upgrade = 'u',
     Death = 'd',
-    Retry = 'r'
+    Retry = 'r',
+    AbilityActivated = 'a'
 }

@@ -6,8 +6,10 @@ namespace RogueDefense
     public abstract class ActiveAbility : PlayerHooks
     {
         CustomButton button;
-        public ActiveAbility(CustomButton button)
+        public ActiveAbility(CustomButton button = null)
         {
+            if (button == null)
+                return;
             this.button = button;
             this.button.onClick = OnButtonClick;
         }
@@ -15,8 +17,13 @@ namespace RogueDefense
         {
             cooldownTimer = 0;
             Activate();
+            if (!NetworkManager.Singleplayer) NetSendActivation();
         }
         public abstract void Activate();
+        public void NetSendActivation()
+        {
+            Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { GetAbilityIndex().ToString() });
+        }
 
         public virtual float BaseCooldown => 25f;
         public float Cooldown => BaseCooldown * Player.abilityManager.cooldownMult;

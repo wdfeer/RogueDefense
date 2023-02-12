@@ -48,15 +48,11 @@ namespace RogueDefense
             typeof(ArmorStripAbility),
             typeof(UpgradeBuffAbility),
         };
-        ActiveAbility CreateAbilityInstance(int index, CustomButton button)
+        public static ActiveAbility CreateAbilityInstance(int index, CustomButton button = null)
             => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { button });
         public void ResetAbilityText()
         {
-            player.hooks.ForEach(x =>
-            {
-                if (x is ActiveAbility)
-                    (x as ActiveAbility).ResetText();
-            });
+            ability1.ResetText();
         }
     }
 }
