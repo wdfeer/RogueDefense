@@ -75,7 +75,8 @@ namespace RogueDefense
         }
         public void Process(float delta)
         {
-            Damage(delta);
+            float dps = Game.instance.generation > 50 ? 10 : 1;
+            Damage(delta * dps);
         }
         public bool dead = false;
         public void Death(bool local = true)
