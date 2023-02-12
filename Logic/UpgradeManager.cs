@@ -30,13 +30,18 @@ namespace RogueDefense
         {
             if (upgrade.type == UpgradeType.Turret)
             {
-                PlayerHooks.GetHooks<TurretPlayer>(player).SpawnTurret();
-                return;
+                PlayerHooks.GetLocalHooks<TurretPlayer>().SpawnTurret();
             }
-
-            upgrades.Add(upgrade);
-            UpdateUpgrades();
-            UpdateUpgradeText();
+            else if (upgrade.type == UpgradeType.DamagePerUniqueStatus)
+            {
+                PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus += upgrade.value;
+            }
+            else
+            {
+                upgrades.Add(upgrade);
+                UpdateUpgrades();
+                UpdateUpgradeText();
+            }
         }
 
         public float critChance = 0f;

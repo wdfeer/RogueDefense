@@ -7,7 +7,7 @@ namespace RogueDefense.Logic.Statuses
     public abstract class DamagingStatus : Status
     {
         public List<DamagingStatusInstance> instances = new List<DamagingStatusInstance>();
-        public override int GetCount() => instances.Count;
+        public override int Count() => instances.Count;
         public void Add(float dpt, float duration)
         {
             if (!immune)

@@ -34,7 +34,7 @@ namespace RogueDefense
             getBaseRandomValue = () =>
             (Player.localInstance.upgradeManager.bleedChance > 0.2f ?
                 (0.2f / (Player.localInstance.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.65f + GD.Randf() * 0.35f),
-            canBeRolled = () => Player.localInstance.upgradeManager.bleedChance < 0.5f
+            canBeRolled = () => Player.localInstance.upgradeManager.bleedChance < 0.5f,
         };
         public static readonly UpgradeType CorrosiveChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Corrosive Chance") { chanceMult = 0.6f, valueMult = 0.37f, canBeRolled = () => Game.instance.generation > 15 };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
@@ -62,11 +62,17 @@ namespace RogueDefense
             canBeRolled = () => Game.instance.generation < 10,
             getBaseRandomValue = () => 0.02f
         };
-        public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a turret")
+        public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a Turret")
         {
             chanceMult = 0.1f,
             canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 36) &&
                 PlayerHooks.GetHooks<TurretPlayer>(Player.localInstance).TurretCount < 2
+        };
+        public static readonly UpgradeType DamagePerUniqueStatus = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
+        {
+            chanceMult = 0.2f,
+            canBeRolled = () => Game.instance.generation > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.3f,
+            valueMult = 0.275f
         };
 
         public static UpgradeType[] AllTypes = new UpgradeType[] {
@@ -87,7 +93,8 @@ namespace RogueDefense
             PlusDamageMinusFireRate,
             MaxHpPerKill,
             Turret,
-            CorrosiveChance
+            CorrosiveChance,
+            DamagePerUniqueStatus
         };
         public static void Initialize()
         {

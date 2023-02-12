@@ -17,10 +17,26 @@ public class Enemy : KinematicBody2D
 
         lastPos = GlobalPosition;
 
+        statuses = new Status[] { bleed, corrosive, viral, cold };
 
-        var gen = Game.instance.generation;
+        ScaleStats(Game.instance.generation);
+    }
+    public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
+    public static void ResetRngSeed()
+    {
+        if (NetworkManager.Singleplayer)
+            statsRng.Randomize();
+        else
+        {
+            List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
+            firstChars.Add(RogueDefense.UserSaveData.name[0]);
 
-        SetMaxHp(gen);
+            int seed = firstChars.Aggregate(0, (a, b) => a + b);
+        }
+    }
+    void ScaleStats(int gen)
+    {
+        ScaleMaxHp(gen);
 
         damage = 10f * Mathf.Sqrt(1f + gen);
 
@@ -57,20 +73,7 @@ public class Enemy : KinematicBody2D
                 SetMinDamage(GetMinDamage(gen));
         }
     }
-    public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
-    public static void ResetRngSeed()
-    {
-        if (NetworkManager.Singleplayer)
-            statsRng.Randomize();
-        else
-        {
-            List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
-            firstChars.Add(RogueDefense.UserSaveData.name[0]);
-
-            int seed = firstChars.Aggregate(0, (a, b) => a + b);
-        }
-    }
-    void SetMaxHp(int gen)
+    void ScaleMaxHp(int gen)
     {
         float baseMaxHp = 5f;
         if (!NetworkManager.Singleplayer && gen > 2)
@@ -206,6 +209,7 @@ public class Enemy : KinematicBody2D
     public Viral viral = new Viral();
     public Cold cold = new Cold();
     public Corrosive corrosive = new Corrosive();
+    public Status[] statuses;
     public void AddBleed(float totalDmg, float duration) => bleed.Add(totalDmg / 5f, duration);
     public void AddViral(float duration) => viral.Add(duration);
     public void AddCold(float duration) => cold.Add(duration);

@@ -6,7 +6,7 @@ namespace RogueDefense.Logic.Statuses
     {
         public override void SpecialProcess(float delta)
         {
-            Enemy.dynamicArmorMult /= 1f + (instances.Count > 10 ? (1f + (instances.Count - 10) / 25f) : instances.Count / 10f);
+            Enemy.dynamicArmorMult /= 1f + (Count() > 10 ? (1f + (Count() - 10) / 25f) : Count() / 10f);
         }
     }
 }
