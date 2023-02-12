@@ -90,9 +90,12 @@ public class Client : Node
                 Game.instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
                 break;
             case MessageType.AbilityActivated:
-                int abilityType = args[0].ToInt();
+                string username = others.Find(x => x.id == args[0].ToInt()).name;
+                int abilityType = args[1].ToInt();
                 ActiveAbility ability = AbilityManager.CreateAbilityInstance(abilityType);
                 ability.Activate();
+
+                NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
             default:
                 break;

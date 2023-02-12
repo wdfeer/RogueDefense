@@ -15,14 +15,16 @@ namespace RogueDefense
         }
         void OnButtonClick()
         {
+            if (!CanBeActivated()) return;
             cooldownTimer = 0;
             Activate();
             if (!NetworkManager.Singleplayer) NetSendActivation();
         }
+        public virtual bool CanBeActivated() => true;
         public abstract void Activate();
         public void NetSendActivation()
         {
-            Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { GetAbilityIndex().ToString() });
+            Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { Client.myId.ToString(), GetAbilityIndex().ToString() });
         }
 
         public virtual float BaseCooldown => 25f;
@@ -52,6 +54,8 @@ namespace RogueDefense
         protected abstract string GetAbilityText();
         public virtual bool ConstantValues => false;
 
+        public string GetName()
+            => AbilityManager.GetAbilityName(GetAbilityIndex());
         public int GetAbilityIndex()
         {
             return Array.IndexOf(AbilityManager.abilityTypes, GetType());

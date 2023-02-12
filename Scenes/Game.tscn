@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/defaultFont.tres" type="DynamicFont" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Logic/PlayArea.cs" type="Script" id=16]
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Logic/UI/InGame/ExitButton.cs" type="Script" id=18]
+[ext_resource path="res://Logic/UI/InGame/NotificationPopup.cs" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -203,3 +204,24 @@ margin_right = 635.0
 margin_bottom = 340.0
 theme = ExtResource( 7 )
 dialog_text = "Give up (progress will NOT be saved!)"
+
+[node name="NotificationPopup" type="PopupPanel" parent="."]
+pause_mode = 2
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 256.0
+margin_top = 80.0
+margin_right = 1280.0
+margin_bottom = 180.0
+rect_scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 19 )
+
+[node name="Label" type="Label" parent="NotificationPopup"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1020.0
+margin_bottom = 96.0
+theme = ExtResource( 7 )
+custom_fonts/font = ExtResource( 12 )
+text = "[Username] used [AbilityName]"
+align = 1
+valign = 1
