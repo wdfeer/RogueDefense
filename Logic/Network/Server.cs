@@ -21,7 +21,7 @@ public class Server : Node
         GD.Print($"Server is listening on port {PORT}");
         if (err != Error.Ok || !server.IsListening())
         {
-            GD.PrintErr("Unable to start server");
+            GD.PrintErr($"Unable to start server ({err})");
             SetProcess(false);
         }
     }

@@ -12,7 +12,7 @@
 [ext_resource path="res://Logic/Player.cs" type="Script" id=10]
 [ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=12]
-[ext_resource path="res://Logic/UI/InGame/RetryButton.cs" type="Script" id=13]
+[ext_resource path="res://Logic/UI/InGame/MainMenuButton.cs" type="Script" id=13]
 [ext_resource path="res://Logic/UI/InGame/DpsLabel.cs" type="Script" id=14]
 [ext_resource path="res://Logic/UI/InGame/DeathScreen.cs" type="Script" id=15]
 [ext_resource path="res://Logic/PlayArea.cs" type="Script" id=16]
@@ -177,14 +177,14 @@ custom_fonts/font = ExtResource( 12 )
 text = "Level 9999 reached"
 align = 1
 
-[node name="RetryButton" type="Button" parent="z-index1/DeathScreen"]
+[node name="MainMenuButton" type="Button" parent="z-index1/DeathScreen"]
 margin_left = 256.0
 margin_top = 440.0
 margin_right = 768.0
 margin_bottom = 540.0
 theme = ExtResource( 7 )
 custom_fonts/font = ExtResource( 12 )
-text = "RETRY"
+text = "MAIN MENU"
 script = ExtResource( 13 )
 
 [node name="ExitButton" type="Button" parent="z-index1"]

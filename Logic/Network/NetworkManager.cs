@@ -23,6 +23,18 @@ public static class NetworkManager
         }
         active = true;
     }
+    public static void NetStop()
+    {
+        active = false;
+        if (NetworkManager.mode == NetMode.Server)
+        {
+            Server.server.Stop();
+            Server.server = null;
+            Server.instance = new Server();
+        }
+        Client.client = null;
+        Client.instance = new Client();
+    }
     public static void Poll()
     {
         if (mode == NetMode.Server) Server.instance.Poll();
