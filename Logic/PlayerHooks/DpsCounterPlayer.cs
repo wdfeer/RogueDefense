@@ -5,7 +5,7 @@ using RogueDefense.Logic;
 
 namespace RogueDefense
 {
-    public class DpsCounter : PlayerHooks
+    public class DpsCounterPlayer : PlayerHooks
     {
         public override void OnAnyHit(float afterEffectsDmg)
         {

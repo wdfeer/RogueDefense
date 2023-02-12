@@ -15,7 +15,7 @@ namespace RogueDefense
         [Export]
         public PackedScene turretScene;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounter(), new StatusPlayer(), new FirstHitPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new TurretPlayer() };
+        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounterPlayer(), new StatusPlayer(), new FirstHitPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new TurretPlayer() };
 
         public PlayerHpManager hpManager;
         public ShootManager shootManager;

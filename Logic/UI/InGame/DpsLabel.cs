@@ -14,7 +14,7 @@ public class DpsLabel : Label
 
     public List<(float damage, float timeAgo)> hits = new List<(float damage, float timeAgo)>();
     float secondTimer = 0f;
-    const int HIT_SAVE_DURATION = 3;
+    const float HIT_SAVE_DURATION = 1f;
     public override void _Process(float delta)
     {
         secondTimer += delta;
