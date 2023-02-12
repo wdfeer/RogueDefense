@@ -34,6 +34,9 @@ namespace RogueDefense
         public bool Cooling => cooldownTimer < Cooldown;
         public override void PreUpdate(float delta)
         {
+            if (button == null)
+                return;
+
             button.Disabled = Cooling;
             (button.GetNode("./Cooldown") as ProgressBar).Value = (Cooldown - cooldownTimer) / Cooldown;
             if (Cooling)

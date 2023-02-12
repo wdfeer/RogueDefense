@@ -91,10 +91,9 @@ public class Client : Node
                 break;
             case MessageType.AbilityActivated:
                 string username = others.Find(x => x.id == args[0].ToInt()).name;
-                int abilityType = args[1].ToInt();
-                ActiveAbility ability = AbilityManager.CreateAbilityInstance(abilityType);
+                int abilityTypeIndex = args[1].ToInt();
+                ActiveAbility ability = (ActiveAbility)Player.localInstance.hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
                 ability.Activate();
-
                 NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
             default:

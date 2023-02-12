@@ -16,9 +16,19 @@ namespace RogueDefense
         public AbilityManager(Player player)
         {
             this.player = player;
+
             var ability1Button = player.GetNode("/root/Game/AbilityContainer/AbilityButton1") as CustomButton;
             ability1 = GetAbility(ability1Button);
+            int ability1Index = ability1.GetAbilityIndex();
             player.hooks.Add(ability1);
+
+            for (int i = 0; i < abilityTypes.Length; i++)
+            {
+                if (i == ability1Index)
+                    continue;
+
+                player.hooks.Add(CreateAbilityInstance(i));
+            }
 
             TimerManager.AddTimer(ResetAbilityText, 0.01f);
         }
