@@ -41,11 +41,11 @@ public class Enemy : KinematicBody2D
         damage = 10f * Mathf.Sqrt(1f + gen);
 
         if (gen > 10f)
-            armor = (NetworkManager.Singleplayer ? 30f : 40f) * (gen - 10f);
+            armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 10f);
         else armor = 0f;
         ResetArmorDisplay();
 
-        if (gen > 50 && gen % 25 == 0)
+        if (gen >= (NetworkManager.Singleplayer ? 75 : 30) && gen % (NetworkManager.Singleplayer ? 25 : 15) == 0)
         {
             bleed.immune = true;
             corrosive.immune = true;
