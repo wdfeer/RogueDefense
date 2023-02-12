@@ -1,6 +1,7 @@
 using Godot;
 using RogueDefense;
 using System;
+using System.Linq;
 
 public class UsernameInput : LineEdit
 {
@@ -23,9 +24,11 @@ public class UsernameInput : LineEdit
         OnTextChanged(randomName);
         Text = randomName;
     }
-
+    public static readonly char[] ALLOWED_CHARACTERS = Enumerable.Range('\x1', 127).Select(x => (char)x).ToArray();
     public void OnTextChanged(string newText)
     {
-        RogueDefense.UserSaveData.name = newText;
+        newText = String.Concat(newText.Where(x => ALLOWED_CHARACTERS.Contains(x))).Replace(' ', '_');
+        if (newText.Length > 0)
+            RogueDefense.UserSaveData.name = newText;
     }
 }
