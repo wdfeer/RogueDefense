@@ -75,13 +75,14 @@ public class Enemy : KinematicBody2D
     void ScaleMaxHp(int gen)
     {
         float baseMaxHp = 5f;
-        if (!NetworkManager.Singleplayer && gen > 2)
-            baseMaxHp *= Client.instance.others.Count + 1f;
         float power;
         if (NetworkManager.Singleplayer)
             power = (gen <= 40f ? gen : 40f + Mathf.Pow(gen - 40, 0.75f)) / 20f;
         else
+        {
             power = gen / 17.5f;
+            baseMaxHp *= Client.instance.others.Count + 1f;
+        }
         maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power) * (0.8f + statsRng.Randf() * 0.4f));
         Hp = maxHp;
     }
