@@ -45,7 +45,7 @@ public class Enemy : KinematicBody2D
         else armor = 0f;
         ResetArmorDisplay();
 
-        if (gen >= (NetworkManager.Singleplayer ? 75 : 30) && gen % (NetworkManager.Singleplayer ? 25 : 15) == 0)
+        if (gen >= (NetworkManager.Singleplayer ? 75 : 24) && gen % (NetworkManager.Singleplayer ? 25 : 12) == 0)
         {
             bleed.immune = true;
             corrosive.immune = true;
@@ -58,11 +58,10 @@ public class Enemy : KinematicBody2D
             cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
         }
 
-        slowingField = (SlowingField)GetNode("SlowingField");
-        if (statsRng.Randf() < 0.2f)
-            slowingField.Enable();
+        if (statsRng.Randf() < 0.15f)
+            ((SlowingField)GetNode("SlowingField")).Enable();
 
-        if (!bleed.immune && !viral.immune)
+        if (!bleed.immune && !corrosive.immune)
         {
             ShieldOrbGenerator GetShieldOrbGenerator() => GetNode("ShieldOrbGenerator") as ShieldOrbGenerator;
 
@@ -82,7 +81,7 @@ public class Enemy : KinematicBody2D
         if (NetworkManager.Singleplayer)
             power = (gen <= 40f ? gen : 40f + Mathf.Pow(gen - 40, 0.75f)) / 20f;
         else
-            power = gen / 20f;
+            power = gen / 17.5f;
         maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power) * (0.8f + statsRng.Randf() * 0.4f));
         Hp = maxHp;
     }
