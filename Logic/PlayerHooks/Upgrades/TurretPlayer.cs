@@ -21,7 +21,7 @@ namespace RogueDefense
             foreach (var sentry in turrets)
             {
                 Vector2 direction = sentry.GlobalPosition.DirectionTo(Enemy.instance.GlobalPosition).Rotated((GD.Randf() - 0.5f) * 0.05f);
-                Bullet b = Player.shootManager.NewBullet(sentry.GlobalPosition, direction * ShootManager.SHOOT_SPEED);
+                Bullet b = Player.shootManager.NewBullet(sentry.GlobalPosition, direction * Player.shootManager.shootSpeed);
 
                 b.damage = bullet.damage;
                 b.SetHitMultiplier(bullet.hitMult);

@@ -13,12 +13,14 @@ namespace RogueDefense
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
-                Player.shootManager.shootInterval /= 1 + 1f * Strength;
+                Player.shootManager.shootInterval /= 1 + 0.75f * Strength;
+                Player.shootManager.shootSpeed *= 2;
             }
         }
-
+        public override float BaseCooldown => 22f;
         protected override string GetAbilityText()
-            => $@"+{(int)(100f * Strength)}% Total Fire Rate
+            => $@"+{(int)(75f * Strength)}% Total Fire Rate and
++100% Projectile velocity
 Duration: {(5f * Duration).ToString("0.00")} s
 Cooldown: {Cooldown.ToString("0.00")} s";
     }

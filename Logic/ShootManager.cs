@@ -29,7 +29,8 @@ namespace RogueDefense
             }
         }
         public List<Bullet> bullets = new List<Bullet>();
-        public const float SHOOT_SPEED = 6f;
+        public const float BASE_SHOOT_SPEED = 6f;
+        public float shootSpeed = BASE_SHOOT_SPEED;
         public const float SPREAD_DEGREES = 16f;
         private void CreateBullets()
         {
@@ -43,7 +44,7 @@ namespace RogueDefense
             }
             for (int i = 0; i < bulletCount * 1; i++)
             {
-                Bullet bullet = Shoot(SHOOT_SPEED);
+                Bullet bullet = Shoot(shootSpeed);
                 bullet.damage = damage;
                 bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 

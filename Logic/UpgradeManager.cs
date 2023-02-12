@@ -75,6 +75,8 @@ namespace RogueDefense
             viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
             coldChance = SumAllUpgradeValues(UpgradeType.ColdChance);
             PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
+
+            player.shootManager.shootSpeed = ShootManager.BASE_SHOOT_SPEED;
         }
         public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
             => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
