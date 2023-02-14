@@ -75,7 +75,7 @@ namespace RogueDefense
         }
         public void Process(float delta)
         {
-            float dps = Game.instance.generation > 50 ? 10 : 1;
+            float dps = Game.instance.generation > 50 ? (NetworkManager.Singleplayer ? 8 : (Client.instance.others.Count + 1) * 10) : 3;
             Damage(delta * dps);
         }
         public bool dead = false;
