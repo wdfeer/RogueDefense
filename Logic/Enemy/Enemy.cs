@@ -38,7 +38,7 @@ public class Enemy : KinematicBody2D
     {
         ScaleMaxHp(gen);
 
-        damage = 10f * Mathf.Sqrt(1f + gen);
+        damage = 12.5f * Mathf.Sqrt(1f + gen);
 
         if (gen > 10f)
             armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 10f);
