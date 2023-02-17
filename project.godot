@@ -38,6 +38,7 @@ project/assembly_name="RogueDefense"
 [physics]
 
 common/enable_pause_aware_picking=true
+2d/thread_model=2
 2d/default_gravity=0
 
 [rendering]
