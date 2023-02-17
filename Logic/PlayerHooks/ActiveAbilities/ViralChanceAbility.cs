@@ -17,6 +17,7 @@ namespace RogueDefense
                 buffLeft -= delta;
                 Player.upgradeManager.viralChance += FlatBonus;
                 Player.upgradeManager.viralChance *= 1 + MultBonus;
+                Enemy.instance.viral.immune = false;
             }
         }
         public const float BASE_DURATION = 4f;
