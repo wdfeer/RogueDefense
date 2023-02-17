@@ -71,8 +71,8 @@ namespace RogueDefense
         public static readonly UpgradeType DamagePerUniqueStatus = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
         {
             chanceMult = 0.2f,
-            canBeRolled = () => Game.instance.generation > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.3f,
-            valueMult = 0.275f
+            canBeRolled = () => Game.instance.generation > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.35f,
+            valueMult = 0.3f
         };
 
         public static UpgradeType[] AllTypes = new UpgradeType[] {
