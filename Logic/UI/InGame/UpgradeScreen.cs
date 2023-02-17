@@ -32,9 +32,9 @@ public class UpgradeScreen : Panel
             butt.onClick = () => OnButtonClicked(index);
             (butt.GetNode("Label") as Label).Text = upgrades[i].ToString();
         }
-        buttons[0].RectPosition += new Vector2(-240, -40);
-        buttons[1].RectPosition += new Vector2(0, -40);
-        buttons[2].RectPosition += new Vector2(240, -40);
+        buttons[0].RectPosition += new Vector2(-250, -60);
+        buttons[1].RectPosition += new Vector2(-25, -60);
+        buttons[2].RectPosition += new Vector2(200, -60);
     }
     CustomButton[] buttons;
     Upgrade[] upgrades;
