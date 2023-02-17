@@ -50,11 +50,13 @@ namespace RogueDefense
         public float bleedChance = 0f;
         public float viralChance = 0f;
         public float coldChance = 0f;
-        public void UpdateUpgrades()
+        public void UpdateMaxHp()
         {
             float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + PlayerHooks.GetHooks<MaxHpPerKillPlayer>(player).increase;
             player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
-
+        }
+        public void UpdateUpgrades()
+        {
             float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
             player.hpManager.damageMult = damageTakenMult;
 

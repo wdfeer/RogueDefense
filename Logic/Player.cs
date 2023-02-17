@@ -15,7 +15,7 @@ namespace RogueDefense
         [Export]
         public PackedScene turretScene;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new DpsCounterPlayer(), new StatusPlayer(), new FirstHitPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new TurretPlayer(), new DamagePerUniqueStatusPlayer() };
+        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new HpResetter(), new DpsCounterPlayer(), new StatusPlayer(), new FirstHitPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new TurretPlayer(), new DamagePerUniqueStatusPlayer() };
 
         public PlayerHpManager hpManager;
         public ShootManager shootManager;
@@ -34,8 +34,8 @@ namespace RogueDefense
         {
             hooks.ForEach(x => x.PreUpdate(delta));
             hooks.ForEach(x => x.Update(delta));
-            hpManager.Process(delta);
             upgradeManager.Process(delta);
+            hpManager.Process(delta);
             hooks.ForEach(x => x.PostUpgradeUpdate(delta));
             shootManager.Process(delta);
             hooks.ForEach(x => x.PostUpdate(delta));
@@ -54,11 +54,7 @@ namespace RogueDefense
         public float Hp
         {
             get => hp;
-            set
-            {
-                hp = value;
-                hpBar.Value = hp / maxHp;
-            }
+            set => hp = value;
         }
         public const float BASE_MAX_HP = 100;
         public float maxHp = BASE_MAX_HP;
@@ -75,8 +71,13 @@ namespace RogueDefense
         }
         public void Process(float delta)
         {
-            float dps = Game.instance.generation > 50 ? (NetworkManager.Singleplayer ? 8 : (Client.instance.others.Count + 1) * 10) : 3;
+            float dps = 30;
             Damage(delta * dps);
+
+            float hpOfMaxHp = hp / maxHp;
+            hpBar.Value = hpOfMaxHp;
+            if (hpOfMaxHp < 0.5f) hpBar.Modulate = Colors.Red;
+            else hpBar.Modulate = Colors.White;
         }
         public bool dead = false;
         public void Death(bool local = true)
