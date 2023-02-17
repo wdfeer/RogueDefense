@@ -13,6 +13,7 @@ namespace RogueDefense
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
+                Player.shootManager.shootSpeed *= 2;
             }
         }
         public override void PostShoot(Bullet bullet)
@@ -25,7 +26,8 @@ namespace RogueDefense
         }
 
         protected override string GetAbilityText()
-            => $@"+{(int)(100f * Strength)}% Total Damage
+            => $@"+{(int)(100f * Strength)}% Total Damage and
++100% Projectile velocity
 Duration: {(5f * Duration).ToString("0.00")} s
 Cooldown: {Cooldown.ToString("0.00")} s";
     }
