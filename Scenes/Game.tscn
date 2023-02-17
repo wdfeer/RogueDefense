@@ -33,6 +33,11 @@ __meta__ = {
 }
 enemyScene = ExtResource( 4 )
 
+[node name="Camera2D" type="Camera2D" parent="."]
+pause_mode = 2
+anchor_mode = 0
+current = true
+
 [node name="MyPlayer" type="StaticBody2D" parent="."]
 position = Vector2( 100, 300 )
 collision_mask = 3
@@ -95,11 +100,6 @@ theme = ExtResource( 7 )
 text = "Level 0"
 align = 1
 valign = 1
-
-[node name="Camera2D" type="Camera2D" parent="."]
-pause_mode = 2
-anchor_mode = 0
-current = true
 
 [node name="AbilityContainer" type="Control" parent="."]
 margin_left = 256.0
