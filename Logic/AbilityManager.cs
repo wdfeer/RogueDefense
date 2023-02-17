@@ -57,6 +57,7 @@ namespace RogueDefense
             typeof(FuseBulletsAbility),
             typeof(ArmorStripAbility),
             typeof(UpgradeBuffAbility),
+            typeof(CritChanceAbility)
         };
         public static ActiveAbility CreateAbilityInstance(int index, CustomButton button = null)
             => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { button });
