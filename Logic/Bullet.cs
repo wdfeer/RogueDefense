@@ -10,6 +10,7 @@ public class Bullet : MovingKinematicBody2D
     {
         base._Ready();
         owner = Player.localInstance;
+        ParticleEmitter.Modulate = Colors.Purple;
     }
     public override void _Process(float delta)
     {
@@ -78,9 +79,10 @@ public class Bullet : MovingKinematicBody2D
         }
     }
 
+    public Particles2D ParticleEmitter => (GetNode("Particles2D") as Particles2D);
     public void StartParticleEffect()
     {
-        (GetNode("Particles2D") as Particles2D).Emitting = true;
+        ParticleEmitter.Emitting = true;
     }
 
 
