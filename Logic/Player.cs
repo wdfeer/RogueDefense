@@ -71,8 +71,13 @@ namespace RogueDefense
         }
         public void Process(float delta)
         {
-            float dps = 30;
-            Damage(delta * dps);
+            if (UserSaveData.killCount > 25)
+            {
+                float dps = 12;
+                if (!NetworkManager.Singleplayer) dps *= 2f;
+                if (Game.instance.generation > 40) dps *= 2f;
+                Damage(delta * dps);
+            }
 
             float hpOfMaxHp = hp / maxHp;
             hpBar.Value = hpOfMaxHp;
