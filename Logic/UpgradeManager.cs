@@ -52,7 +52,7 @@ namespace RogueDefense
         public float coldChance = 0f;
         public void UpdateMaxHp()
         {
-            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + PlayerHooks.GetHooks<MaxHpPerKillPlayer>(player).increase;
+            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + PlayerHooks.GetHooks<MaxHpPerKillPlayer>(player).increase - SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) / 2f;
             player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
         }
         public void UpdateUpgrades()
@@ -60,7 +60,7 @@ namespace RogueDefense
             float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
             player.hpManager.damageMult = damageTakenMult;
 
-            float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2;
+            float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2;
             if (fireRateMult <= 0)
                 fireRateMult = 0.0001f;
             player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;

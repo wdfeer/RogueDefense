@@ -25,7 +25,7 @@ namespace RogueDefense
         public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Max Hp");
         public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.6f };
         public static readonly UpgradeType Damage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage") { chanceMult = 1.1f, valueMult = 1.2f };
-        public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate") { chanceMult = 1.2f };
+        public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate");
         public static readonly UpgradeType Multishot = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Multishot") { chanceMult = 1.2f };
         public static readonly UpgradeType CritChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Chance");
         public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Damage");
@@ -54,6 +54,7 @@ namespace RogueDefense
         public static readonly UpgradeType PlusDamageMinusFireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage, -{MathHelper.ToPercentAndRound(x / 2)}% Fire Rate")
         {
             chanceMult = 0.2f,
+            canBeRolled = () => Player.localInstance.shootManager.shootInterval < 1.4f,
             getBaseRandomValue = () => 0.9f
         };
         public static readonly UpgradeType MaxHpPerKill = new UpgradeType(x => $"On Kill: +{MathHelper.ToPercentAndRound(x)}% Max Hp")
@@ -73,6 +74,12 @@ namespace RogueDefense
             chanceMult = 0.2f,
             canBeRolled = () => Game.instance.generation > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.35f,
             valueMult = 0.3f
+        };
+        public static readonly UpgradeType FireRateMinusMaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate, -{MathHelper.ToPercentAndRound(x / 2)}% Max Hp")
+        {
+            chanceMult = 0.2f,
+            canBeRolled = () => Game.instance.generation > 10 && Player.localInstance.hpManager.maxHp > 75f,
+            valueMult = 1.75f
         };
 
         public static UpgradeType[] AllTypes = new UpgradeType[] {
@@ -94,7 +101,8 @@ namespace RogueDefense
             MaxHpPerKill,
             Turret,
             CorrosiveChance,
-            DamagePerUniqueStatus
+            DamagePerUniqueStatus,
+            FireRateMinusMaxHp
         };
         public static void Initialize()
         {
