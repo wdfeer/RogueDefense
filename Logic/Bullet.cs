@@ -86,5 +86,5 @@ public class Bullet : MovingKinematicBody2D
     }
 
 
-    public bool canBeFused = true;
+    public bool fused = false;
 }
