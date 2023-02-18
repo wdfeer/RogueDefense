@@ -59,8 +59,8 @@ public class Enemy : KinematicBody2D
             cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
         }
 
-        // if (statsRng.Randf() < 0.15f)
-        ActivateEffectField();
+        if (statsRng.Randf() < 0.15f)
+            ActivateEffectField();
 
         if (!bleed.immune && !corrosive.immune)
         {
