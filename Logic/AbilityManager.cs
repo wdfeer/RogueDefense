@@ -58,7 +58,8 @@ namespace RogueDefense
             typeof(ArmorStripAbility),
             typeof(UpgradeBuffAbility),
             typeof(CritChanceAbility),
-            typeof(DmgDealtDmgTakenAbility)
+            typeof(DmgDealtDmgTakenAbility),
+            typeof(DamageReductionAbility)
         };
         public static ActiveAbility CreateAbilityInstance(int index, CustomButton button = null)
             => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { button });
