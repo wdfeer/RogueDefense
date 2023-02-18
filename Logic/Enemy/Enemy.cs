@@ -185,7 +185,7 @@ public class Enemy : KinematicBody2D
 
     public float damageCap = -1f;
     float GetDamageCap(int gen)
-        => gen > 30 ? (gen > 60 ? 0.03f : 0.06f) : 0.101f;
+        => gen > 20 ? (gen > 60 ? 0.03f : 0.08f) : 0.151f;
     public void SetDamageCap(float maxHpDamageCap)
     {
         Label label = (Label)GetNode("BottomInfo");
