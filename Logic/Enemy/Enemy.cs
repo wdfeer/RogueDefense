@@ -32,6 +32,7 @@ public class Enemy : KinematicBody2D
             firstChars.Add(RogueDefense.UserSaveData.name[0]);
 
             int seed = firstChars.Aggregate(0, (a, b) => a + b);
+            statsRng.Seed = (ulong)seed;
         }
     }
     void ScaleStats(int gen)
