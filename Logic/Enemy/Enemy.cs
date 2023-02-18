@@ -59,8 +59,8 @@ public class Enemy : KinematicBody2D
             cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
         }
 
-        if (statsRng.Randf() < 0.15f)
-            ((SlowingField)GetNode("SlowingField")).Enable();
+        // if (statsRng.Randf() < 0.15f)
+        ActivateEffectField();
 
         if (!bleed.immune && !corrosive.immune)
         {
@@ -72,6 +72,10 @@ public class Enemy : KinematicBody2D
             else if (GetShieldOrbGenerator().count > 0 && gen < 40 && rand < 0.2f)
                 SetMinDamage(GetMinDamage(gen));
         }
+    }
+    void ActivateEffectField()
+    {
+        ((EffectField)GetNode("EffectField")).Enable(GD.Randf() < 0.5f ? EffectField.EffectFieldMode.Slow : EffectField.EffectFieldMode.Diffuse);
     }
     void ScaleMaxHp(int gen)
     {
@@ -203,7 +207,7 @@ public class Enemy : KinematicBody2D
     }
 
 
-    public SlowingField slowingField;
+    public EffectField slowingField;
 
 
     public Bleed bleed = new Bleed();
