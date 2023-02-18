@@ -18,7 +18,7 @@ namespace RogueDefense
                 Player.upgradeManager.critChance += CritChance;
             }
         }
-        public float CritChance => 2f * Strength;
+        public float CritChance => Strength * (1f + Player.upgradeManager.critChance);
         public override float BaseCooldown => 20f;
         protected override string GetAbilityText()
             => $@"+{MathHelper.ToPercentAndRound(CritChance)}% Crit Chance
