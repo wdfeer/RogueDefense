@@ -72,9 +72,10 @@ namespace RogueDefense
         {
             if (UserSaveData.killCount > 25)
             {
-                float dps = 12;
+                float dps = 6;
                 if (!NetworkManager.Singleplayer) dps *= 2f;
                 if (Game.instance.generation > 40) dps *= 2f;
+                if (Game.instance.generation > 25) dps *= 2f;
                 Damage(delta * dps);
             }
 
