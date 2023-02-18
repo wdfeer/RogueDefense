@@ -22,7 +22,7 @@
 [ext_resource path="res://Logic/Enemy/StatusContainers/CorrosiveContainer.cs" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 65, 65 )
+extents = Vector2( 68, 68 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 100.0

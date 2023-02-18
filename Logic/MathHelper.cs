@@ -25,12 +25,14 @@ namespace RogueDefense.Logic
 
         public static string ToShortenedString(float x)
         {
-            if (x < 1000)
+            if (x < 1e3f)
                 return x.ToString("0.0");
-            else if (x < 1000000)
-                return (x / 1000f).ToString("0.0") + "K";
+            else if (x < 1e6f)
+                return (x / 1e3f).ToString("0.0") + "K";
+            else if (x < 1e9f)
+                return (x / 1e6f).ToString("0.0") + "M";
             else
-                return (x / 1000000f).ToString("0.0") + "M";
+                return (x / 1e9f).ToString("0.0") + "B";
         }
     }
 }
