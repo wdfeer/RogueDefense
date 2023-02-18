@@ -19,6 +19,8 @@ public class EffectField : Area2D
         if (!(body is Bullet))
             return;
         Bullet bullet = (Bullet)body;
+        if (bullet.fused)
+            return;
         switch (mode)
         {
             case EffectFieldMode.Slow:
