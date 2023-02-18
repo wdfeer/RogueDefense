@@ -27,36 +27,33 @@ public class Bullet : MovingKinematicBody2D
     public int hitMult = 1;
     public float damage = 1;
     public bool killShieldOrbs = false;
-    protected override void OnCollision(KinematicCollision2D collision)
+    public void EnemyCollision()
     {
-        if (collision.Collider == Game.instance.enemy)
+        for (int i = 0; i < hitMult; i++)
         {
-            for (int i = 0; i < hitMult; i++)
-            {
-                if (Game.instance.enemy == null)
-                    break;
-                float dmg = this.damage;
-                int critLevel = GetCritLevel();
-                float critMult = owner.upgradeManager.critDamageMult;
-                owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref dmg, ref critLevel, ref critMult));
-                ModifyHit(ref dmg, ref critLevel, ref critMult);
-                if (critLevel > 0)
-                    dmg *= critMult * critLevel;
-                owner.hooks.ForEach(x => x.OnHitWithBullet(this, dmg));
-                OnHit(dmg);
-                Game.instance.enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
-            }
-            QueueFree();
+            if (Game.instance.enemy == null)
+                break;
+            float dmg = this.damage;
+            int critLevel = GetCritLevel();
+            float critMult = owner.upgradeManager.critDamageMult;
+            owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref dmg, ref critLevel, ref critMult));
+            ModifyHit(ref dmg, ref critLevel, ref critMult);
+            if (critLevel > 0)
+                dmg *= critMult * critLevel;
+            owner.hooks.ForEach(x => x.OnHitWithBullet(this, dmg));
+            OnHit(dmg);
+            Game.instance.enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
         }
-        else if (collision.Collider is ShieldOrb)
+        QueueFree();
+    }
+    public void ShieldOrbCollision(ShieldOrb orb)
+    {
+        if (killShieldOrbs)
+            orb.QueueFree();
+        else
         {
-            if (killShieldOrbs)
-                ((ShieldOrb)collision.Collider).QueueFree();
-            else
-            {
-                ShieldOrb.damageConsumed += damage * hitMult;
-                QueueFree();
-            }
+            ShieldOrb.damageConsumed += damage * hitMult;
+            QueueFree();
         }
     }
     protected virtual bool UnhideableDamageNumbers => false;

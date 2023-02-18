@@ -7,7 +7,7 @@ using RogueDefense;
 using RogueDefense.Logic;
 using RogueDefense.Logic.Statuses;
 
-public class Enemy : KinematicBody2D
+public class Enemy : Area2D
 {
     public static Enemy instance;
     public const float BASE_SPEED = 1.15f;
@@ -15,7 +15,7 @@ public class Enemy : KinematicBody2D
     {
         instance = this;
 
-        lastPos = GlobalPosition;
+        Connect("body_entered", this, "BodyEntered");
 
         statuses = new Status[] { bleed, corrosive, viral, cold };
 
@@ -142,7 +142,6 @@ public class Enemy : KinematicBody2D
     public float attackInterval = 1f;
     float attackTimer = 0f;
     public float dynamicSpeedMult = 1f;
-    public Vector2 lastPos;
     public override void _Process(float delta)
     {
         base._Process(delta);
@@ -168,18 +167,17 @@ public class Enemy : KinematicBody2D
 
         if (!attacking)
         {
-            lastPos += new Vector2(-BASE_SPEED * dynamicSpeedMult, 0);
-            GlobalPosition = lastPos;
-            var collision = MoveAndCollide(Vector2.Zero);
-            if (collision != null) OnCollision(collision);
+            GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult, 0);
         }
     }
-    void OnCollision(KinematicCollision2D collision)
+    public void BodyEntered(Node body)
     {
-        if (collision.Collider == Game.instance.myPlayer)
+        if (body is Bullet bullet)
         {
-            attacking = true;
+            bullet.EnemyCollision();
         }
+        else if (body == Game.instance.myPlayer)
+            attacking = true;
     }
 
 
