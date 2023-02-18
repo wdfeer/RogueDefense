@@ -16,7 +16,7 @@ namespace RogueDefense
         public override void PreShoot(ShootManager shooter)
         {
             float increase = Player.upgradeManager.SumAllUpgradeValues(UpgradeType.MultishotPerShot);
-            shooter.multishot += increase * shots;
+            shooter.multishot *= 1f + increase * shots;
 
             if (shots < MAX_STACK)
                 shots++;

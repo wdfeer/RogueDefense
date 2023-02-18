@@ -87,7 +87,7 @@ namespace RogueDefense
             canBeRolled = () => Game.instance.generation > 35,
             valueMult = 1.6f
         };
-        public static readonly UpgradeType MultishotPerShot = new UpgradeType(x => $"On Shot: +{MathHelper.ToPercentAndRound(x)}% Multishot, stacks up to {MultishotPerShotPlayer.MAX_STACK} times")
+        public static readonly UpgradeType MultishotPerShot = new UpgradeType(x => $"On Shot: +{MathHelper.ToPercentAndRound(x)}% Total Multishot, stacks up to {MultishotPerShotPlayer.MAX_STACK} times")
         {
             chanceMult = 0.2f,
             getBaseRandomValue = () => 0.01f
