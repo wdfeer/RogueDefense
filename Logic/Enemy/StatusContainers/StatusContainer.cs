@@ -15,7 +15,7 @@ public abstract class StatusContainer : HBoxContainer
             return;
         }
 
-        int count = GetStatus().Count();
+        int count = GetStatus().Count;
         if (count > 0)
         {
             Visible = true;

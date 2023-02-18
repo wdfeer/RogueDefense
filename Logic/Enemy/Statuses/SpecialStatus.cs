@@ -6,7 +6,7 @@ namespace RogueDefense.Logic.Statuses
     public abstract class SpecialStatus : Status
     {
         public List<float> instances = new List<float>();
-        public override int Count() => instances.Count;
+        public override int Count => instances.Count;
         public void Add(float duration)
         {
             if (!immune)
