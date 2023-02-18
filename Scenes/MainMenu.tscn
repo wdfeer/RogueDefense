@@ -1,9 +1,7 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Logic/UI/GoToSceneButton.cs" type="Script" id=1]
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Lobby/Lobby.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Game.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/default_theme.tres" type="Theme" id=5]
 [ext_resource path="res://Logic/UI/MainMenu/UsernameInput.cs" type="Script" id=6]
 [ext_resource path="res://Logic/UI/MainMenu/MPButton.cs" type="Script" id=7]
@@ -25,30 +23,15 @@ anchor_bottom = 1.0
 [node name="GameInitializer" type="Node" parent="."]
 script = ExtResource( 9 )
 
-[node name="SingleplayerButton" type="Button" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -200.0
-margin_top = 120.0
-margin_right = 600.0
-margin_bottom = 420.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = SubResource( 1 )
-text = "SINGLEPLAYER"
-icon_align = 1
-script = ExtResource( 1 )
-goToScene = ExtResource( 4 )
-
 [node name="HostButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -320.0
-margin_top = 300.0
-margin_right = 280.0
-margin_bottom = 600.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = -362.0
+margin_top = 220.0
+margin_right = -62.0
+margin_bottom = 370.0
 theme = SubResource( 1 )
-text = "MULTIPLAYER HOST"
+text = "HOST"
 icon_align = 1
 script = ExtResource( 7 )
 goToScene = ExtResource( 3 )
@@ -57,13 +40,12 @@ host = true
 [node name="JoinButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 20.0
-margin_top = 300.0
-margin_right = 620.0
-margin_bottom = 600.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = 62.0
+margin_top = 220.0
+margin_right = 362.0
+margin_bottom = 370.0
 theme = SubResource( 1 )
-text = "MULTIPLAYER JOIN"
+text = "JOIN"
 icon_align = 1
 script = ExtResource( 7 )
 goToScene = ExtResource( 8 )
