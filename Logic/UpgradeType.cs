@@ -81,6 +81,12 @@ namespace RogueDefense
             canBeRolled = () => Game.instance.generation > 10 && Player.localInstance.hpManager.maxHp > 75f,
             valueMult = 1.75f
         };
+        public static readonly UpgradeType LowEnemyHpDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage if Enemy HP is lower than 50%")
+        {
+            chanceMult = 0.2f,
+            canBeRolled = () => Game.instance.generation > 35,
+            valueMult = 1.6f
+        };
 
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
@@ -102,7 +108,8 @@ namespace RogueDefense
             Turret,
             CorrosiveChance,
             DamagePerUniqueStatus,
-            FireRateMinusMaxHp
+            FireRateMinusMaxHp,
+            LowEnemyHpDamage
         };
         public static void Initialize()
         {

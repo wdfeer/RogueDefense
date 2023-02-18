@@ -12,7 +12,7 @@ namespace RogueDefense
         {
             this.player = player;
         }
-        public float baseDamage = 1;
+        public float baseDamage = 1f;
         public float damage = 1;
         public float baseShootInterval = 1;
         public float shootInterval = 1;

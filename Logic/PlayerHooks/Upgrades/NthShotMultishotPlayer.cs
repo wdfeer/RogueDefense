@@ -10,7 +10,7 @@ namespace RogueDefense
         int shots = 0;
         public override void PreShoot(ShootManager shooter)
         {
-            if (shots % 4 == 0)
+            if (shots >= 4)
             {
                 float mult = Player.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.NthShotMultishot);
                 shooter.multishot *= mult;
