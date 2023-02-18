@@ -22,7 +22,7 @@ namespace RogueDefense
         }
         public const float BASE_DURATION = 4f;
         public float FlatBonus => 0.2f * Strength;
-        public float MultBonus => 0.75f * Strength;
+        public float MultBonus => 1f * Strength;
         public override float BaseCooldown => 18f;
         protected override string GetAbilityText()
             => $@"+{MathHelper.ToPercentAndRound(FlatBonus)}% Viral Chance and then

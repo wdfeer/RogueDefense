@@ -6,8 +6,11 @@ namespace RogueDefense.Logic.Statuses
     {
         public override void SpecialProcess(float delta)
         {
-            Enemy.dynamicDamageMult = 1f +
-                (instances.Count > 10 ? ((Mathf.Pow(instances.Count - 10, 0.7f)) + 10) : instances.Count) / 10f;
+            if (instances.Count == 0)
+                return;
+            Enemy.dynamicDamageMult *= 1.5f;
+            Enemy.dynamicDamageMult *= 1f +
+                (instances.Count > 10 ? ((Mathf.Pow(instances.Count - 10, 0.75f)) + 10) : instances.Count) / 10f;
         }
     }
 }
