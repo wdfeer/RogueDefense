@@ -6,6 +6,8 @@ public class SlowingField : Area2D
     public void Enable()
     {
         Visible = true;
+        Monitoring = true;
+        Monitorable = true;
         Connect("body_entered", this, "BodyEntered");
         ((CircleShape2D)(GetNode("CollisionShape2D") as CollisionShape2D).Shape).Radius = radius;
     }
