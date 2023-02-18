@@ -16,8 +16,8 @@ namespace RogueDefense
                 UpdateUpgrades();
                 UpdateUpgradeText();
             }, 0.01f);
-            player.shootManager.baseDamage *= 1f + 0.01f * UserSaveData.killCount;
-            baseCritMult += 0.05f * UserSaveData.gameCount;
+            player.shootManager.baseDamage *= 1f + 0.01f * (UserSaveData.killCount > 100 ? 100 : UserSaveData.killCount);
+            baseCritMult += 0.05f * (UserSaveData.gameCount > 10 ? 10 : UserSaveData.gameCount);
         }
 
         public void Process(float delta)
