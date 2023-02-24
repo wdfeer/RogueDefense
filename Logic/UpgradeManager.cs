@@ -36,6 +36,10 @@ namespace RogueDefense
             {
                 PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus += upgrade.value;
             }
+            else if (upgrade.type == UpgradeType.MultishotPerShot)
+            {
+                PlayerHooks.GetLocalHooks<MultishotPerShotPlayer>().multishotPerShot += upgrade.value;
+            }
             else
             {
                 upgrades.Add(upgrade);

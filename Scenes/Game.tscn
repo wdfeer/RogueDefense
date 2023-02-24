@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/segoeui.ttf" type="DynamicFontData" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Logic/UI/InGame/ExitButton.cs" type="Script" id=18]
 [ext_resource path="res://Logic/UI/InGame/NotificationPopup.cs" type="Script" id=19]
+[ext_resource path="res://Logic/UI/InGame/BuffText.cs" type="Script" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -106,6 +107,18 @@ theme = ExtResource( 7 )
 text = "Level 0"
 align = 1
 valign = 1
+
+[node name="BuffText" type="Label" parent="."]
+modulate = Color( 0.662745, 1, 1, 1 )
+margin_left = 10.0
+margin_top = 496.0
+margin_right = 650.0
+margin_bottom = 721.0
+rect_scale = Vector2( 0.36, 0.36 )
+custom_fonts/font = ExtResource( 12 )
+text = "+999% Multishot
++5000% Crit Chance"
+script = ExtResource( 20 )
 
 [node name="AbilityContainer" type="Control" parent="."]
 margin_left = 256.0
