@@ -4,7 +4,10 @@ namespace RogueDefense
 {
     public class UpgradeBuffAbility : ActiveAbility
     {
-        public UpgradeBuffAbility(CustomButton button) : base(button) { }
+        public UpgradeBuffAbility(CustomButton button) : base(button)
+        {
+            active = false;
+        }
         public override void Activate()
         {
             active = true;
