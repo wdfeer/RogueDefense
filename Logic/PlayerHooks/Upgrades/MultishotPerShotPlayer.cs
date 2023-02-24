@@ -7,20 +7,13 @@ namespace RogueDefense
 {
     public class MultishotPerShotPlayer : PlayerHooks
     {
-        public override void OnKill()
-        {
-            shots = 0;
-        }
         public float multishotPerShot = 0;
-        public int shots = 0;
-        public float CurrentBuff => multishotPerShot * shots;
+        public float CurrentBuff => multishotPerShot * (Player.shootManager.shootCount > MAX_STACK ? MAX_STACK : Player.shootManager.shootCount);
         public static int MAX_STACK = 60;
         public override void PreShoot(ShootManager shooter)
         {
+            if (multishotPerShot <= 0) return;
             shooter.multishot *= 1f + CurrentBuff;
-
-            if (shots < MAX_STACK)
-                shots++;
         }
     }
 }

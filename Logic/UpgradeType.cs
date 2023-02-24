@@ -38,14 +38,9 @@ namespace RogueDefense
         };
         public static readonly UpgradeType CorrosiveChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Corrosive Chance") { chanceMult = 0.6f, valueMult = 0.37f, canBeRolled = () => Game.instance.generation > 15 };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
-        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 29 && Player.localInstance.upgradeManager.coldChance < 0.13f };
+        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 24 && Player.localInstance.upgradeManager.coldChance < 0.13f };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f, chanceMult = 0.75f, canBeRolled = () => !Player.localInstance.abilityManager.ability1.ConstantValues };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.15f, chanceMult = 0.5f, canBeRolled = () => !Player.localInstance.abilityManager.ability1.ConstantValues };
-        public static readonly UpgradeType FirstHitCritDamage = new UpgradeType(x => $"+{(int)x}x Total Crit Dmg on First Hit")
-        {
-            chanceMult = 0.2f,
-            getBaseRandomValue = () => 15f
-        };
         public static readonly UpgradeType NthShotMultishot = new UpgradeType(x => $"Every 4th shot has +{MathHelper.ToPercentAndRound(x)}% Total Multishot")
         {
             chanceMult = 0.2f,
@@ -92,7 +87,17 @@ namespace RogueDefense
             chanceMult = 0.2f,
             getBaseRandomValue = () => 0.01f
         };
-
+        public static readonly UpgradeType FirstShotTotalDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage on First Shot")
+        {
+            chanceMult = 0.2f,
+            getBaseRandomValue = () => 2f
+        };
+        public static readonly UpgradeType FirstHitCritDamage = new UpgradeType(x => $"+{(int)x}x Total Crit Dmg on First Hit")
+        {
+            chanceMult = 0.25f,
+            getBaseRandomValue = () => 15f,
+            canBeRolled = () => PlayerHooks.GetLocalHooks<FirstShotPlayer>().damageMult > 1f
+        };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
             DamageReduction,
@@ -115,7 +120,8 @@ namespace RogueDefense
             DamagePerUniqueStatus,
             FireRateMinusMaxHp,
             LowEnemyHpDamage,
-            MultishotPerShot
+            MultishotPerShot,
+            FirstShotTotalDamage
         };
         public static void Initialize()
         {

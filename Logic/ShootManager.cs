@@ -26,12 +26,14 @@ namespace RogueDefense
             {
                 timeSinceLastShot = 0;
                 CreateBullets();
+                shootCount++;
             }
         }
         public List<Bullet> bullets = new List<Bullet>();
         public const float BASE_SHOOT_SPEED = 6f;
         public float shootSpeed = BASE_SHOOT_SPEED;
         public const float SPREAD_DEGREES = 16f;
+        public int shootCount = 0;
         private void CreateBullets()
         {
             player.hooks.ForEach(x => x.PreShoot(this));

@@ -64,5 +64,6 @@ public class Game : Node2D
         myPlayer.hooks.ForEach(x => x.OnKill());
         myPlayer.upgradeManager.UpdateUpgrades();
         myPlayer.upgradeManager.UpdateUpgradeText();
+        myPlayer.shootManager.shootCount = 0;
     }
 }

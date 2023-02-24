@@ -109,7 +109,7 @@ align = 1
 valign = 1
 
 [node name="BuffText" type="Label" parent="."]
-modulate = Color( 0.662745, 1, 1, 1 )
+modulate = Color( 0.662745, 0.784314, 1, 1 )
 margin_left = 10.0
 margin_top = 496.0
 margin_right = 650.0

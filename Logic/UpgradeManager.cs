@@ -40,6 +40,10 @@ namespace RogueDefense
             {
                 PlayerHooks.GetLocalHooks<MultishotPerShotPlayer>().multishotPerShot += upgrade.value;
             }
+            else if (upgrade.type == UpgradeType.FirstShotTotalDamage)
+            {
+                PlayerHooks.GetLocalHooks<FirstShotPlayer>().damageMult += upgrade.value;
+            }
             else
             {
                 upgrades.Add(upgrade);
