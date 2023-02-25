@@ -12,12 +12,12 @@ public class BuffText : Label
         {
             var hook = PlayerHooks.GetLocalHooks<MultishotPerShotPlayer>();
             if (hook.CurrentBuff > 0)
-                Text += $"+{MathHelper.ToPercentAndRound(hook.CurrentBuff)}% Multishot";
+                Text += $"+{MathHelper.ToPercentAndRound(hook.CurrentBuff)}% Multishot\n";
         }
         {
             var hook = PlayerHooks.GetLocalHooks<LowEnemyHpDamagePlayer>();
             if (hook.Affecting)
-                Text += $"+{MathHelper.ToPercentAndRound(hook.buff)}% Total Damage";
+                Text += $"+{MathHelper.ToPercentAndRound(hook.buff)}% Total Damage\n";
         }
     }
 }
