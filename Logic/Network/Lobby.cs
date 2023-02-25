@@ -14,13 +14,6 @@ public class Lobby : Control
         instance = this;
 
 
-        {
-            var myData = (PlayerData)GetNode("PlayerList/MyData");
-            myData.SetName(RogueDefense.UserSaveData.name);
-            myData.SetAbilityText(AbilityManager.GetAbilityName(AbilityChooser.chosen));
-        }
-
-
         if (NetworkManager.mode == NetMode.Client)
         {
             (GetNode("StartButton") as Button).Disabled = true;

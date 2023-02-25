@@ -22,11 +22,12 @@ public class AbilityChooser : MenuButton
     public void IdPressed(int id)
     {
         chosen = id;
+        Client.instance.SendMessage(MessageType.SetAbility, new string[] { Client.myId.ToString(), id.ToString() });
         ResetButtonText();
     }
 
     public void ResetButtonText()
     {
-        Text = $"Chosen Ability: {(chosen == -1 ? "Random" : chosen.ToString())}";
+        Text = AbilityManager.GetAbilityName(chosen);
     }
 }

@@ -61,11 +61,23 @@ public class Server : Node
         Broadcast(data, id);
 
         string str = data.GetStringFromUTF8();
-        if (str[0] == (char)MessageType.Register)
+        string[] args = str.Substring(1).Split(" ");
+        PostBroadcastMessage(id, (MessageType)str[0], args);
+    }
+    public void PostBroadcastMessage(int from, MessageType type, string[] args)
+    {
+        switch (type)
         {
-            string[] args = str.Substring(1).Split(" ");
-            users[id] = (args[1], args[2].ToInt());
-            GD.Print($"Registered user {args[1]} with ability {args[2]} as {id}");
+            case MessageType.Register:
+                users[from] = (args[1], args[2].ToInt());
+                GD.Print($"Registered user {args[1]} with ability {args[2]} as {from}");
+                return;
+            case MessageType.SetAbility:
+                users[from] = (users[from].name, args[1].ToInt());
+                GD.Print($"Set ability {users[from].ability} for {users[from].name}");
+                return;
+            default:
+                return;
         }
     }
     public void SendMessage(MessageType type, string[] args = null)

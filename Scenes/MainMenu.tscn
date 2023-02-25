@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Scenes/Lobby/Lobby.tscn" type="PackedScene" id=3]
@@ -10,7 +10,6 @@
 [ext_resource path="res://Logic/UI/MainMenu/CombatTextButton.cs" type="Script" id=10]
 [ext_resource path="res://Logic/UI/MainMenu/Statview.cs" type="Script" id=11]
 [ext_resource path="res://Assets/editIcon.png" type="Texture" id=12]
-[ext_resource path="res://Logic/UI/MainMenu/AbilityChooser.cs" type="Script" id=13]
 
 [sub_resource type="Theme" id=1]
 default_font = ExtResource( 2 )
@@ -113,13 +112,3 @@ margin_top = 105.0
 margin_right = 200.0
 margin_bottom = 128.0
 text = "Enemies killed: "
-
-[node name="AbilityChooser" type="MenuButton" parent="."]
-margin_left = 412.0
-margin_top = 15.0
-margin_right = 612.0
-margin_bottom = 44.0
-rect_min_size = Vector2( 200, 0 )
-theme = ExtResource( 5 )
-text = "Chosen Ability: Random"
-script = ExtResource( 13 )

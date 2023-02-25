@@ -27,6 +27,8 @@ public class Client : Node
         }
     }
     public List<UserData> others = new List<UserData>();
+    public UserData GetUserData(int id) => others.Find(x => x.id == id);
+    public void RemoveUserData(int id) => others.Remove(GetUserData(id));
     public void Connected(string protocol = "")
     {
         GD.Print("This client connected! Loading lobby...");
@@ -56,13 +58,17 @@ public class Client : Node
             case MessageType.Register:
                 RegisterUser(args[0].ToInt(), args[1], args[2].ToInt());
                 break;
-            case MessageType.Unregister:
+            case MessageType.SetAbility:
+                if (Lobby.Instance == null) break;
                 int id = args[0].ToInt();
-                others.Remove(others.Find(x => x.id == id));
-                if (Lobby.Instance != null)
-                {
-                    Lobby.Instance.RemoveUser(id);
-                }
+                UserData data = GetUserData(id);
+                data.ability = args[1].ToInt();
+                UnregisterUser(id);
+                RegisterUser(id, data.name, data.ability);
+                break;
+            case MessageType.Unregister:
+                id = args[0].ToInt();
+                UnregisterUser(id);
                 break;
             case MessageType.StartGame:
                 Lobby.Instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
@@ -109,6 +115,14 @@ public class Client : Node
             Lobby.Instance.AddUser(d);
         }
     }
+    void UnregisterUser(int id)
+    {
+        RemoveUserData(id);
+        if (Lobby.Instance != null)
+        {
+            Lobby.Instance.RemoveUser(id);
+        }
+    }
     void Broadcast(string data) => client.GetPeer(1).PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
     public void SendMessage(MessageType type, string[] args = null)
     {
@@ -129,10 +143,11 @@ public enum MessageType
     FetchLobby = '0',
     Register = '1',
     Unregister = '2',
+    SetAbility = 'a',
     StartGame = 's',
     EnemyKill = 'k',
     Upgrade = 'u',
     Death = 'd',
     Retry = 'r',
-    AbilityActivated = 'a'
+    AbilityActivated = 'A'
 }

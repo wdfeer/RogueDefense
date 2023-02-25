@@ -3,13 +3,16 @@ using System;
 
 public class PlayerData : PanelContainer
 {
+    public HBoxContainer Container => (HBoxContainer)GetNode("./Container");
+    public Label NameLabel => (GetNode("./Container/Name") as Label);
     public new void SetName(string name)
     {
-        (GetNode("./Container/Name") as Label).Text = name;
+        NameLabel.Text = name;
         this.Name = name;
     }
+    public Label AbilityLabel => (GetNode("./Container/AbilityLabel") as Label);
     public void SetAbilityText(string text)
     {
-        (GetNode("./Container/AbilityLabel") as Label).Text = text;
+        AbilityLabel.Text = text;
     }
 }
