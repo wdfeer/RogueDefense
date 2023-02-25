@@ -44,6 +44,10 @@ namespace RogueDefense
             {
                 PlayerHooks.GetLocalHooks<FirstShotPlayer>().damageMult += upgrade.value;
             }
+            else if (upgrade.type == UpgradeType.LowEnemyHpDamage)
+            {
+                PlayerHooks.GetLocalHooks<LowEnemyHpDamagePlayer>().buff += upgrade.value;
+            }
             else
             {
                 upgrades.Add(upgrade);
