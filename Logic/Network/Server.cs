@@ -32,6 +32,7 @@ public class Server : Node
         if (x.Key != ignore)
             SendPacket(x.Key, data);
     });
+    public void Broadcast(string data, int ignore = -1) => Broadcast(data.ToUTF8(), ignore);
     public void Connected(int id, string protocol)
     {
         string data = $"{(char)MessageType.FetchLobby}{id.ToString()}";
@@ -45,6 +46,8 @@ public class Server : Node
     {
         users.Remove(id);
         GD.Print($"Client {id} disconnected, clean: {wasCleanClose}");
+
+        SendMessage(MessageType.Unregister, new string[] { id.ToString() });
     }
     public void CloseRequest(int id, int code, string reason)
     {
@@ -70,7 +73,7 @@ public class Server : Node
         string msg = $"{(char)type}";
         if (args != null)
             msg += String.Join(" ", args);
-        Broadcast(msg.ToUTF8());
+        Broadcast(msg);
     }
 
 
