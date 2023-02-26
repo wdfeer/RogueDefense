@@ -7,7 +7,7 @@
 [ext_resource path="res://Assets/slashIcon.png" type="Texture" id=5]
 [ext_resource path="res://Logic/Enemy/StatusContainers/BleedContainer.cs" type="Script" id=6]
 [ext_resource path="res://Assets/shieldIconFilled.png" type="Texture" id=7]
-[ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=8]
 [ext_resource path="res://Assets/shieldIconBorder.png" type="Texture" id=9]
 [ext_resource path="res://Logic/Enemy/ArmorBar.cs" type="Script" id=10]
 [ext_resource path="res://Logic/Enemy/StatusContainers/ViralContainer.cs" type="Script" id=11]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Assets/corrosiveIcon.png" type="Texture" id=18]
 [ext_resource path="res://Logic/Enemy/EffectField.cs" type="Script" id=19]
 [ext_resource path="res://Logic/Enemy/StatusContainers/CorrosiveContainer.cs" type="Script" id=20]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 68, 68 )

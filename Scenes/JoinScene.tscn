@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Logic/UI/JoinScene/JoinButton.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Logic/UI/JoinScene/ConnectingLabel.cs" type="Script" id=5]

@@ -78,7 +78,7 @@ namespace RogueDefense
             player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
             float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);
-            player.shootManager.damage = player.shootManager.baseDamage * damageMult;
+            player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult;
 
             float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
             player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;

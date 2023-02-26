@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/blackCircle.png" type="Texture" id=1]
-[ext_resource path="res://Assets/bigFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Logic/Enemy/ShieldOrbButton.cs" type="Script" id=3]
 [ext_resource path="res://Logic/Enemy/ShieldOrb.cs" type="Script" id=4]
 

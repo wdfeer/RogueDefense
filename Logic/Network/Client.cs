@@ -70,6 +70,10 @@ public class Client : Node
                 id = args[0].ToInt();
                 UnregisterUser(id);
                 break;
+            case MessageType.UpdateSettings:
+                GameSettings.totalDmgMult = args[0].ToFloat();
+                GameSettings.UpdateSliders();
+                break;
             case MessageType.StartGame:
                 Lobby.Instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
                 break;
@@ -144,6 +148,7 @@ public enum MessageType
     Register = '1',
     Unregister = '2',
     SetAbility = 'a',
+    UpdateSettings = 'c',
     StartGame = 's',
     EnemyKill = 'k',
     Upgrade = 'u',
