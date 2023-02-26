@@ -14,6 +14,6 @@ public class ResetButton : Button
         }
 
         GameSettings.UpdateFromSliders();
-        GameSettings.SyncSettings();
+        GameSettings.SendSettings();
     }
 }

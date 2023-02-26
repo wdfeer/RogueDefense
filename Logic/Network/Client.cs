@@ -71,8 +71,7 @@ public class Client : Node
                 UnregisterUser(id);
                 break;
             case MessageType.UpdateSettings:
-                GameSettings.totalDmgMult = args[0].ToFloat();
-                GameSettings.UpdateSliders();
+                GameSettings.ReceiveSettings(args);
                 break;
             case MessageType.StartGame:
                 Lobby.Instance.GetTree().ChangeScene("res://Scenes/Game.tscn");

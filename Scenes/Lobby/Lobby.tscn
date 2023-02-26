@@ -96,6 +96,16 @@ text = "Damage Multiplier: "
 [node name="Slider" parent="SettingsPanel/Container/Sliders/DmgMult" index="1"]
 max_value = 2.0
 
+[node name="FireRateMult" parent="SettingsPanel/Container/Sliders" instance=ExtResource( 10 )]
+margin_top = 47.0
+margin_bottom = 90.0
+
+[node name="Label" parent="SettingsPanel/Container/Sliders/FireRateMult" index="0"]
+text = "Fire Rate Multiplier: "
+
+[node name="Slider" parent="SettingsPanel/Container/Sliders/FireRateMult" index="1"]
+max_value = 2.0
+
 [node name="ResetButton" type="Button" parent="SettingsPanel/Container"]
 margin_top = 487.0
 margin_right = 312.0
@@ -119,3 +129,4 @@ margin_right = 320.0
 margin_bottom = 600.0
 
 [editable path="SettingsPanel/Container/Sliders/DmgMult"]
+[editable path="SettingsPanel/Container/Sliders/FireRateMult"]

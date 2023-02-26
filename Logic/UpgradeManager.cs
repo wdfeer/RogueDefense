@@ -72,9 +72,9 @@ namespace RogueDefense
             float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
             player.hpManager.damageMult = damageTakenMult;
 
-            float fireRateMult = GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2;
+            float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
             if (fireRateMult <= 0)
-                fireRateMult = 0.0001f;
+                fireRateMult = 0.001f;
             player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
             float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);

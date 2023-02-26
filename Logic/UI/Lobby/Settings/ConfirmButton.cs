@@ -8,6 +8,6 @@ public class ConfirmButton : Button
         SettingsButton.panel.Visible = false;
 
         GameSettings.UpdateFromSliders();
-        GameSettings.SyncSettings();
+        GameSettings.SendSettings();
     }
 }
