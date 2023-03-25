@@ -57,7 +57,7 @@ public class UpgradeScreen : Panel
         else
         {
             upgradesMade++;
-            Client.instance.SendMessage(MessageType.Upgrade, new string[] { up.type.uniqueId.ToString(), up.value.ToString() });
+            Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.value.ToString() });
             if (EveryoneUpgraded())
                 HideAndUnpause();
         }

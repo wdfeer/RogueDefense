@@ -26,11 +26,11 @@ namespace RogueDefense
         }
 
         public List<Upgrade> upgrades = new List<Upgrade>();
-        public void AddUpgrade(Upgrade upgrade)
+        public void AddUpgrade(Upgrade upgrade, int from = -1)
         {
             if (upgrade.type == UpgradeType.Turret)
             {
-                PlayerHooks.GetLocalHooks<TurretPlayer>().SpawnTurret();
+                PlayerHooks.GetLocalHooks<TurretPlayer>().SpawnTurret(from == -1 ? null : Client.instance.others.Find(x => x.id == from).name);
             }
             else if (upgrade.type == UpgradeType.DamagePerUniqueStatus)
             {

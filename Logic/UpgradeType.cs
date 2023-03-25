@@ -65,7 +65,7 @@ namespace RogueDefense
         {
             chanceMult = 0.1f,
             canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 36) &&
-                PlayerHooks.GetHooks<TurretPlayer>(Player.localInstance).TurretCount < 2
+                ((float)PlayerHooks.GetLocalHooks<TurretPlayer>().TurretCount / NetworkManager.PlayerCount) < 1.9f
         };
         public static readonly UpgradeType DamagePerUniqueStatus = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
         {

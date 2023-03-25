@@ -7,7 +7,12 @@ public class Turret : Node2D
     {
         if (IsInstanceValid(Enemy.instance))
         {
-            LookAt(Enemy.instance.GlobalPosition);
+            (GetNode("Sprite") as Sprite).LookAt(Enemy.instance.GlobalPosition);
         }
+    }
+
+    public void SetLabel(string text)
+    {
+        ((Label)GetNode("Label")).Text = text;
     }
 }
