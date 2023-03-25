@@ -8,7 +8,7 @@ namespace RogueDefense
     {
         public static Player my;
         public bool local => id == Client.myId;
-        public static Dictionary<int, Player> players = new Dictionary<int, Player>();
+        public static Dictionary<int, Player> players;
         public int id;
         public string Name => local ? UserSaveData.name : Client.instance.GetUserData(id).name;
 
