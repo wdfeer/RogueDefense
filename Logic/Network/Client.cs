@@ -103,7 +103,7 @@ public class Client : Node
                 string username = GetUserData(id).name;
                 int abilityTypeIndex = args[1].ToInt();
                 ActiveAbility ability = (ActiveAbility)Player.players[id].hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
-                ability.Activate();
+                ability.ActivateTryShare();
                 NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
             default:

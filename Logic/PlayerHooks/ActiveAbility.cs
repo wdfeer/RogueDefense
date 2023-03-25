@@ -17,11 +17,32 @@ namespace RogueDefense
         {
             if (!CanBeActivated()) return;
             cooldownTimer = 0;
-            Activate();
+            ActivateTryShare();
             if (!NetworkManager.Singleplayer) NetSendActivation();
         }
         public virtual bool CanBeActivated() => true;
+        public void ActivateTryShare()
+        {
+            if (Shared)
+                ActivateForceShare();
+            else
+                Activate();
+        }
         public abstract void Activate();
+        public virtual bool Shared => true;
+        public void ActivateForceShare()
+        {
+            foreach (var item in Player.players)
+            {
+                item.Value.hooks.ForEach(x =>
+                {
+                    if (x is ActiveAbility ability && ability.GetType() == this.GetType())
+                    {
+                        ability.Activate();
+                    }
+                });
+            }
+        }
         public void NetSendActivation()
         {
             Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { Client.myId.ToString(), GetAbilityIndex().ToString() });

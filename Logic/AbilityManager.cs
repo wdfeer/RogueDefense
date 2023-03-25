@@ -21,14 +21,7 @@ namespace RogueDefense
                 var ability1Button = Game.instance.GetNode("AbilityContainer/AbilityButton1") as CustomButton;
                 ability1 = GetAbility(ability1Button);
 
-                // int ability1Index = ability1.GetAbilityIndex();
-                // for (int i = 0; i < abilityTypes.Length; i++)
-                // {
-                //     if (i == ability1Index)
-                //         continue;
 
-                //     player.hooks.Add(CreateAbilityInstance(i, player));
-                // }
                 TimerManager.AddTimer(ResetAbilityText, 0.01f);
             }
             else
@@ -36,6 +29,14 @@ namespace RogueDefense
                 ability1 = CreateAbilityInstance(Client.instance.GetUserData(player.id).ability, player);
             }
             player.hooks.Add(ability1);
+            int ability1Index = ability1.GetAbilityIndex();
+            for (int i = 0; i < abilityTypes.Length; i++)
+            {
+                if (i == ability1Index)
+                    continue;
+
+                player.hooks.Add(CreateAbilityInstance(i, player));
+            }
         }
 
         ActiveAbility GetAbility(CustomButton button)

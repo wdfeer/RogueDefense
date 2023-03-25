@@ -4,7 +4,7 @@ namespace RogueDefense
 {
     public class UpgradeBuffAbility : ActiveAbility
     {
-        public UpgradeBuffAbility(Player player, CustomButton button) : base(Player.my, button)
+        public UpgradeBuffAbility(Player player, CustomButton button) : base(player, button)
         {
             active = false;
         }
