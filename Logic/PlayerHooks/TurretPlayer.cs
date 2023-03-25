@@ -7,6 +7,17 @@ namespace RogueDefense
 {
     public class TurretPlayer : PlayerHooks
     {
+        public TurretPlayer()
+        {
+            SpawnTurret();
+            if (!NetworkManager.Singleplayer)
+            {
+                for (int i = 0; i < Client.instance.others.Count; i++)
+                {
+                    SpawnTurret();
+                }
+            }
+        }
         public int TurretCount => turrets.Count;
         public List<Node2D> turrets = new List<Node2D>();
         public void SpawnTurret()
@@ -15,17 +26,8 @@ namespace RogueDefense
             Player.AddChild(turret);
             turret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
             turrets.Add(turret);
-        }
-        public override void PostShoot(Bullet bullet)
-        {
-            foreach (var sentry in turrets)
-            {
-                Vector2 direction = sentry.GlobalPosition.DirectionTo(Enemy.instance.GlobalPosition).Rotated((GD.Randf() - 0.5f) * 0.05f);
-                Bullet b = Player.shootManager.NewBullet(sentry.GlobalPosition, direction * Player.shootManager.shootSpeed);
 
-                b.damage = bullet.damage;
-                b.SetHitMultiplier(bullet.hitMult);
-            }
+            Player.shootManager.bulletSpawns.Add(turret.GlobalPosition);
         }
     }
 }

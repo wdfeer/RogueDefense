@@ -32,8 +32,9 @@ namespace RogueDefense
         public List<Bullet> bullets = new List<Bullet>();
         public const float BASE_SHOOT_SPEED = 6f;
         public float shootSpeed = BASE_SHOOT_SPEED;
-        public const float SPREAD_DEGREES = 16f;
+        public const float SPREAD_DEGREES = 10f;
         public int shootCount = 0;
+        public List<Vector2> bulletSpawns = new List<Vector2>();
         private void CreateBullets()
         {
             player.hooks.ForEach(x => x.PreShoot(this));
@@ -44,18 +45,23 @@ namespace RogueDefense
                 hitMult = bulletCount / 3f;
                 bulletCount = 3;
             }
-            for (int i = 0; i < bulletCount * 1; i++)
+            for (int i = 0; i < bulletSpawns.Count; i++)
             {
-                Bullet bullet = Shoot(shootSpeed);
-                bullet.damage = damage;
-                bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
+                for (int k = 0; k < bulletCount * 1; k++)
+                {
+                    Bullet bullet = Shoot(bulletSpawns[i], shootSpeed);
+                    bullet.damage = damage;
+                    bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 
-                player.hooks.ForEach(x => x.PostShoot(bullet));
+                    player.hooks.ForEach(x => x.PostShoot(bullet));
+                }
             }
+
         }
-        public Bullet Shoot(float speed, float spread = -1)
+        public Bullet Shoot(Vector2 pos, float speed, float spread = -1)
         {
-            Bullet bullet = NewBullet(player.GlobalPosition + new Godot.Vector2(16, 0), new Godot.Vector2(1f * speed, 0).Rotated(spread == -1 ? Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread));
+            Vector2 velocity = speed * pos.DirectionTo(Game.instance.enemy.GlobalPosition);
+            Bullet bullet = NewBullet(pos, velocity.Rotated(spread == -1 ? Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread));
             return bullet;
         }
         public Bullet NewBullet(Vector2 gposition, Vector2 velocity)

@@ -15,7 +15,7 @@ namespace RogueDefense
         [Export]
         public PackedScene turretScene;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new HpResetter(), new DpsCounterPlayer(), new StatusPlayer(), new FirstShotPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new TurretPlayer(), new DamagePerUniqueStatusPlayer(), new LowEnemyHpDamagePlayer(), new MultishotPerShotPlayer() };
+        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new HpResetter(), new DpsCounterPlayer(), new StatusPlayer(), new FirstShotPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new DamagePerUniqueStatusPlayer(), new LowEnemyHpDamagePlayer(), new MultishotPerShotPlayer() };
 
         public PlayerHpManager hpManager;
         public ShootManager shootManager;
@@ -29,6 +29,8 @@ namespace RogueDefense
             shootManager = new ShootManager(this);
             upgradeManager = new UpgradeManager(this);
             abilityManager = new AbilityManager(this);
+
+            hooks.Add(new TurretPlayer());
         }
         public override void _Process(float delta)
         {

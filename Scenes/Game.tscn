@@ -110,10 +110,10 @@ valign = 1
 
 [node name="BuffText" type="Label" parent="."]
 modulate = Color( 0.662745, 0.784314, 1, 1 )
-margin_left = 10.0
-margin_top = 496.0
-margin_right = 650.0
-margin_bottom = 721.0
+margin_left = 12.0
+margin_top = 500.0
+margin_right = 652.0
+margin_bottom = 725.0
 rect_scale = Vector2( 0.36, 0.36 )
 custom_fonts/font = ExtResource( 12 )
 text = "+999% Multishot
@@ -164,6 +164,9 @@ text = "Avg DPS: 0.0"
 align = 1
 valign = 1
 script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="z-index1" type="Node2D" parent="."]
 z_index = 1

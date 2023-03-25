@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public static class NetworkManager
 {
+    public static int PlayerCount => 1 + (Singleplayer ? 0 : Client.instance.others.Count);
     public static bool Singleplayer => mode == NetMode.Singleplayer;
     public static NetMode mode = NetMode.Singleplayer;
     public static bool active = false;

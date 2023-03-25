@@ -16,7 +16,7 @@ namespace RogueDefense
             float hitMult = shooter.bullets.Aggregate(0f, (a, b) =>
                 a + ((Object.IsInstanceValid(b) && !b.fused) ? b.hitMult : 0));
             shooter.ClearBullets(x => !x.fused);
-            Bullet bullet = shooter.Shoot(3f);
+            Bullet bullet = shooter.Shoot(Player.shootManager.bulletSpawns[0], 3f);
             bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
             bullet.damage = shooter.damage;
             bullet.Scale *= 2f;
