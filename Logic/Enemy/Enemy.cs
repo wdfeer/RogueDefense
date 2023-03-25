@@ -86,7 +86,7 @@ public class Enemy : Area2D
         else
         {
             power = gen / 17.5f;
-            baseMaxHp *= Client.instance.others.Count + 1f;
+            baseMaxHp *= NetworkManager.PlayerCount;
         }
         maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power) * (0.8f + statsRng.Randf() * 0.4f));
         Hp = maxHp;
@@ -119,7 +119,7 @@ public class Enemy : Area2D
             damage = damageCap;
         Hp -= damage;
 
-        Player.local.hooks.ForEach(x => x.OnAnyHit(damage));
+        Player.my.hooks.ForEach(x => x.OnAnyHit(damage));
 
         if (UserSaveData.showCombatText || unhideable)
         {

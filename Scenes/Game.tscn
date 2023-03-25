@@ -1,20 +1,22 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/segoeui.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scenes/UpgradeButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Logic/DefenseObjective.cs" type="Script" id=5]
+[ext_resource path="res://Scenes/Bullet.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/player.png" type="Texture" id=6]
 [ext_resource path="res://Assets/default_theme.tres" type="Theme" id=7]
 [ext_resource path="res://Logic/UI/InGame/UpgradeScreen.cs" type="Script" id=8]
 [ext_resource path="res://Logic/UI/CustomButton.cs" type="Script" id=9]
+[ext_resource path="res://Logic/DefenseObjective.cs" type="Script" id=10]
 [ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=12]
 [ext_resource path="res://Logic/UI/InGame/MainMenuButton.cs" type="Script" id=13]
 [ext_resource path="res://Logic/UI/InGame/DpsLabel.cs" type="Script" id=14]
 [ext_resource path="res://Logic/UI/InGame/DeathScreen.cs" type="Script" id=15]
 [ext_resource path="res://Logic/PlayArea.cs" type="Script" id=16]
+[ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Logic/UI/InGame/ExitButton.cs" type="Script" id=18]
 [ext_resource path="res://Logic/UI/InGame/NotificationPopup.cs" type="Script" id=19]
 [ext_resource path="res://Logic/UI/InGame/BuffText.cs" type="Script" id=20]
@@ -46,7 +48,9 @@ current = true
 [node name="DefenseObjective" type="StaticBody2D" parent="."]
 position = Vector2( 100, 300 )
 collision_mask = 3
-script = ExtResource( 5 )
+script = ExtResource( 10 )
+bulletScene = ExtResource( 5 )
+turretScene = ExtResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="DefenseObjective"]
 texture = ExtResource( 6 )

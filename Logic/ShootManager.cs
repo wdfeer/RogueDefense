@@ -66,7 +66,7 @@ namespace RogueDefense
         }
         public Bullet NewBullet(Vector2 gposition, Vector2 velocity)
         {
-            Bullet bullet = new Bullet();
+            Bullet bullet = DefenseObjective.instance.bulletScene.Instance<Bullet>();
             bullet.velocity = velocity;
             bullet.GlobalPosition = gposition;
             Game.instance.AddChild(bullet);

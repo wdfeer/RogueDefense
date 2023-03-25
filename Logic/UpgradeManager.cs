@@ -28,34 +28,34 @@ namespace RogueDefense
         }
 
         public List<Upgrade> upgrades = new List<Upgrade>();
-        public void AddUpgrade(Upgrade upgrade, int from = -1)
+        public static void AddUpgrade(Upgrade upgrade, int from)
         {
             if (upgrade.type == UpgradeType.Turret)
             {
-                if (from == -1) Player.local.SpawnTurret();
-                else Player.players[from].SpawnTurret();
+                Player.players[from].SpawnTurret();
             }
             else if (upgrade.type == UpgradeType.DamagePerUniqueStatus)
             {
-                PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus += upgrade.value;
+                PlayerHooks.GetHooks<DamagePerUniqueStatusPlayer>(Player.players[from]).damageIncreasePerUniqueStatus += upgrade.value;
             }
             else if (upgrade.type == UpgradeType.MultishotPerShot)
             {
-                PlayerHooks.GetLocalHooks<MultishotPerShotPlayer>().multishotPerShot += upgrade.value;
+                PlayerHooks.GetHooks<MultishotPerShotPlayer>(Player.players[from]).multishotPerShot += upgrade.value;
             }
             else if (upgrade.type == UpgradeType.FirstShotTotalDamage)
             {
-                PlayerHooks.GetLocalHooks<FirstShotPlayer>().damageMult += upgrade.value;
+                PlayerHooks.GetHooks<FirstShotPlayer>(Player.players[from]).damageMult += upgrade.value;
             }
             else if (upgrade.type == UpgradeType.LowEnemyHpDamage)
             {
-                PlayerHooks.GetLocalHooks<LowEnemyHpDamagePlayer>().buff += upgrade.value;
+                PlayerHooks.GetHooks<LowEnemyHpDamagePlayer>(Player.players[from]).buff += upgrade.value;
             }
             else
             {
-                upgrades.Add(upgrade);
-                UpdateUpgrades();
-                UpdateUpgradeText();
+                var upgradeManager = Player.players[from].upgradeManager;
+                upgradeManager.upgrades.Add(upgrade);
+                upgradeManager.UpdateUpgrades();
+                upgradeManager.UpdateUpgradeText();
             }
         }
 
@@ -81,7 +81,7 @@ namespace RogueDefense
             player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
             float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);
-            player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult / NetworkManager.PlayerCount;
+            player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult;
 
             float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
             player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
@@ -109,6 +109,8 @@ namespace RogueDefense
 
         public void UpdateUpgradeText()
         {
+            if (player != Player.my) return;
+
             var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
             upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
             if (DefenseObjective.instance.damageMult != 1f)

@@ -10,9 +10,9 @@ public class Turret : Node2D
             (GetNode("Sprite") as Sprite).LookAt(Enemy.instance.GlobalPosition);
         }
     }
-
     public void SetLabel(string text)
     {
-        ((Label)GetNode("Label")).Text = text;
+        Label label = (Label)GetNode("Label");
+        label.Text = text;
     }
 }

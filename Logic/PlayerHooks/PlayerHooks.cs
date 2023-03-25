@@ -4,7 +4,7 @@ namespace RogueDefense
 {
     public abstract class PlayerHooks
     {
-        public Player Player => Player.local;
+        public Player Player => Player.my;
         public virtual void PreUpdate(float delta) { }
         public virtual void PostUpgradeUpdate(float delta) { }
         public virtual void PostUpdate(float delta) { }
@@ -17,7 +17,7 @@ namespace RogueDefense
 
         public static T GetLocalHooks<T>() where T : PlayerHooks
         {
-            return GetHooks<T>(Player.local);
+            return GetHooks<T>(Player.my);
         }
         public static T GetHooks<T>(Player player) where T : PlayerHooks
         {

@@ -6,11 +6,11 @@ namespace RogueDefense
 {
     public class Player
     {
-        public static Player local;
-        public bool Local => this == local;
+        public static Player my;
+        public bool local => id == Client.myId;
         public static Dictionary<int, Player> players = new Dictionary<int, Player>();
         public int id;
-        public string Name => Local ? UserSaveData.name : Client.instance.GetUserData(id).name;
+        public string Name => local ? UserSaveData.name : Client.instance.GetUserData(id).name;
 
         public List<PlayerHooks> hooks = new List<PlayerHooks>() { new HpResetter(), new DpsCounterPlayer(), new StatusPlayer(), new FirstShotPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new DamagePerUniqueStatusPlayer(), new LowEnemyHpDamagePlayer(), new MultishotPerShotPlayer() };
         public ShootManager shootManager;
@@ -37,7 +37,7 @@ namespace RogueDefense
         public List<Turret> turrets = new List<Turret>();
         public void SpawnTurret()
         {
-            Turret turret = new Turret();
+            Turret turret = DefenseObjective.instance.turretScene.Instance<Turret>();
             DefenseObjective.instance.AddChild(turret);
             turret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
             turrets.Add(turret);

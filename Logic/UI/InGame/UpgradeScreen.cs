@@ -43,7 +43,7 @@ public class UpgradeScreen : Panel
         if (buttons.Any(x => !IsInstanceValid(x)))
             return;
         Upgrade up = upgrades[index];
-        Player.local.upgradeManager.AddUpgrade(up);
+        UpgradeManager.AddUpgrade(up, Player.my.id);
         foreach (var butt in buttons)
         {
             butt.Hide();

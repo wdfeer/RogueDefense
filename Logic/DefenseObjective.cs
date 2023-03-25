@@ -9,14 +9,18 @@ namespace RogueDefense
     public class DefenseObjective : Node2D
     {
         public static DefenseObjective instance;
+
+        [Export]
+        public PackedScene bulletScene;
+        [Export]
+        public PackedScene turretScene;
+
         public override void _Ready()
         {
             instance = this;
 
             hpBar = GetNode("./HpBar") as ProgressBar;
             Hp = maxHp;
-
-            Player.local = new Player(Client.myId);
         }
 
 
@@ -55,7 +59,10 @@ namespace RogueDefense
             if (hpOfMaxHp < 0.5f) hpBar.Modulate = Colors.Red;
             else hpBar.Modulate = Colors.White;
 
-            Player.local._Process(delta);
+            foreach (var pair in Player.players)
+            {
+                pair.Value._Process(delta);
+            }
         }
         public bool dead = false;
         public void Death(bool local = true)

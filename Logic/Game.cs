@@ -18,6 +18,9 @@ public class Game : Node2D
         instance = this;
 
         Enemy.ResetRngSeed();
+
+        Player.my = new Player(Client.myId);
+        Client.instance.others.ForEach(x => new Player(x.id));
     }
 
     public override void _Process(float delta)
@@ -58,10 +61,10 @@ public class Game : Node2D
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
         (GetNode("./UpgradeScreen/LevelText") as Label).Text = $"Level {generation}";
 
-        Player.local.shootManager.ClearBullets();
-        Player.local.hooks.ForEach(x => x.OnKill());
-        Player.local.upgradeManager.UpdateUpgrades();
-        Player.local.upgradeManager.UpdateUpgradeText();
-        Player.local.shootManager.shootCount = 0;
+        Player.my.shootManager.ClearBullets();
+        Player.my.hooks.ForEach(x => x.OnKill());
+        Player.my.upgradeManager.UpdateUpgrades();
+        Player.my.upgradeManager.UpdateUpgradeText();
+        Player.my.shootManager.shootCount = 0;
     }
 }

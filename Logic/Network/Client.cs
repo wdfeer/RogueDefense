@@ -84,7 +84,7 @@ public class Client : Node
                 break;
             case MessageType.Upgrade:
                 Upgrade up = new Upgrade(UpgradeType.AllTypes[args[1].ToInt()], args[2].ToFloat());
-                Player.local.upgradeManager.AddUpgrade(up, args[0].ToInt());
+                UpgradeManager.AddUpgrade(up, args[0].ToInt());
                 UpgradeScreen.instance.upgradesMade++;
                 if (UpgradeScreen.instance.EveryoneUpgraded())
                 {
@@ -99,9 +99,10 @@ public class Client : Node
                 Game.instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
                 break;
             case MessageType.AbilityActivated:
-                string username = others.Find(x => x.id == args[0].ToInt()).name;
+                id = args[0].ToInt();
+                string username = GetUserData(id).name;
                 int abilityTypeIndex = args[1].ToInt();
-                ActiveAbility ability = (ActiveAbility)Player.local.hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
+                ActiveAbility ability = (ActiveAbility)Player.players[id].hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
                 ability.Activate();
                 NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
