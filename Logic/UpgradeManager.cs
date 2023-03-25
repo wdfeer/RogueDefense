@@ -54,8 +54,11 @@ namespace RogueDefense
             {
                 var upgradeManager = Player.players[from].upgradeManager;
                 upgradeManager.upgrades.Add(upgrade);
-                upgradeManager.UpdateUpgrades();
-                upgradeManager.UpdateUpgradeText();
+                foreach (var item in Player.players)
+                {
+                    item.Value.upgradeManager.UpdateUpgrades();
+                    Player.my.upgradeManager.UpdateUpgradeText();
+                }
             }
         }
 
@@ -67,13 +70,18 @@ namespace RogueDefense
         public float coldChance = 0f;
         public void UpdateMaxHp()
         {
-            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + MaxHpPerKillPlayer.GetTotalIncrease();
+            float hpMult = 1f + SumEveryonesUpgradeValues(UpgradeType.MaxHp) + MaxHpPerKillPlayer.GetTotalIncrease();
             DefenseObjective.instance.maxHp = DefenseObjective.BASE_MAX_HP * hpMult;
+        }
+        public void UpdateDamageReduction()
+        {
+            float damageTakenMult = Player.players.Select(x => x.Value.upgradeManager.GetDamageTakenMult()).Aggregate(1f, (a, b) => a * b);
+            DefenseObjective.instance.damageMult = damageTakenMult;
         }
         public void UpdateUpgrades()
         {
-            float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
-            DefenseObjective.instance.damageMult = damageTakenMult;
+            if (player.local)
+                UpdateDamageReduction();
 
             float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
             if (fireRateMult <= 0)
@@ -107,6 +115,11 @@ namespace RogueDefense
             => GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
         public float GetTotalUpgradeMultiplier(UpgradeType type)
             => 1f + SumAllUpgradeValues(type);
+        public float SumEveryonesUpgradeValues(UpgradeType type)
+            => Player.players.Select(x => x.Value.upgradeManager.SumAllUpgradeValues(type)).Aggregate(0f, (a, b) => a + b);
+
+        public float GetDamageTakenMult()
+            => GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
 
         public void UpdateUpgradeText()
         {

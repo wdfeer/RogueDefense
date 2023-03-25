@@ -61,10 +61,13 @@ public class Game : Node2D
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
         (GetNode("./UpgradeScreen/LevelText") as Label).Text = $"Level {generation}";
 
-        Player.my.shootManager.ClearBullets();
-        Player.my.hooks.ForEach(x => x.OnKill());
-        Player.my.upgradeManager.UpdateUpgrades();
-        Player.my.upgradeManager.UpdateUpgradeText();
-        Player.my.shootManager.shootCount = 0;
+        foreach (var item in Player.players)
+        {
+            item.Value.shootManager.ClearBullets();
+            item.Value.hooks.ForEach(x => x.OnKill());
+            item.Value.upgradeManager.UpdateUpgrades();
+            item.Value.upgradeManager.UpdateUpgradeText();
+            item.Value.shootManager.shootCount = 0;
+        }
     }
 }

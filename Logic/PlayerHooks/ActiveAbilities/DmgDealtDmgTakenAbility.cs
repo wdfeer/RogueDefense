@@ -5,19 +5,18 @@ namespace RogueDefense
 {
     public class DmgDealtDmgTakenAbility : ActiveAbility
     {
+        public DmgDealtDmgTakenAbility(Player player, CustomButton button) : base(player, button)
+        {
+        }
+
         public override void Activate()
         {
             buffLeft = Duration * 5f;
         }
         public float buffLeft = 0;
-
-        public DmgDealtDmgTakenAbility(Player player, CustomButton button) : base(player, button)
-        {
-        }
-
         public override void PostUpgradeUpdate(float delta)
         {
-            if (buffLeft > 0)
+            if (buffLeft > 0 && player.local)
             {
                 buffLeft -= delta;
                 DefenseObjective.instance.damageMult *= 1f + DamageTaken;
