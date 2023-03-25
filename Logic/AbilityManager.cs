@@ -17,7 +17,7 @@ namespace RogueDefense
         {
             this.player = player;
 
-            var ability1Button = player.GetNode("/root/Game/AbilityContainer/AbilityButton1") as CustomButton;
+            var ability1Button = DefenseObjective.instance.GetNode("AbilityContainer/AbilityButton1") as CustomButton;
             ability1 = GetAbility(ability1Button);
             int ability1Index = ability1.GetAbilityIndex();
             player.hooks.Add(ability1);

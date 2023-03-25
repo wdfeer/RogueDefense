@@ -13,9 +13,9 @@ public class ShieldOrbButton : TextureButton
             Enemy.instance.armor = 0;
 
             float damage = ShieldOrb.damageConsumed;
-            int critLevel = MathHelper.RandomRound(Player.localInstance.upgradeManager.critChance);
+            int critLevel = MathHelper.RandomRound(Player.local.upgradeManager.critChance);
             if (critLevel > 0)
-                damage *= Player.localInstance.upgradeManager.critDamageMult;
+                damage *= Player.local.upgradeManager.critDamageMult;
             Enemy.instance.Damage(damage, true, Bullet.GetCritColor(critLevel), new Vector2(0, -1.5f));
 
             Enemy.instance.armor = oldArmor;

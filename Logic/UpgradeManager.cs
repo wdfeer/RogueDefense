@@ -7,6 +7,8 @@ namespace RogueDefense
 {
     public class UpgradeManager
     {
+        public static UpgradeManager local;
+        public static Dictionary<int, UpgradeManager> others = new Dictionary<int, UpgradeManager>();
         readonly Player player;
         public UpgradeManager(Player player)
         {
@@ -30,7 +32,8 @@ namespace RogueDefense
         {
             if (upgrade.type == UpgradeType.Turret)
             {
-                PlayerHooks.GetLocalHooks<TurretPlayer>().SpawnTurret(from == -1 ? null : Client.instance.others.Find(x => x.id == from).name);
+                if (from == -1) Player.local.SpawnTurret();
+                else Player.players[from].SpawnTurret();
             }
             else if (upgrade.type == UpgradeType.DamagePerUniqueStatus)
             {
@@ -65,12 +68,12 @@ namespace RogueDefense
         public void UpdateMaxHp()
         {
             float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + PlayerHooks.GetHooks<MaxHpPerKillPlayer>(player).increase - SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) / 2f;
-            player.hpManager.maxHp = PlayerHpManager.BASE_MAX_HP * hpMult;
+            DefenseObjective.instance.maxHp = DefenseObjective.BASE_MAX_HP * hpMult;
         }
         public void UpdateUpgrades()
         {
             float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
-            player.hpManager.damageMult = damageTakenMult;
+            DefenseObjective.instance.damageMult = damageTakenMult;
 
             float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
             if (fireRateMult <= 0)
@@ -106,10 +109,10 @@ namespace RogueDefense
 
         public void UpdateUpgradeText()
         {
-            var upgradeText = player.GetNode("/root/Game/UpgradeScreen/UpgradeText") as Label;
-            upgradeText.Text = $"Max HP: {player.hpManager.maxHp.ToString("0.0")}\n";
-            if (player.hpManager.damageMult != 1f)
-                upgradeText.Text += $"Damage Reduction: {(1 - player.hpManager.damageMult) * 100f}%\n";
+            var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
+            upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
+            if (DefenseObjective.instance.damageMult != 1f)
+                upgradeText.Text += $"Damage Reduction: {(1 - DefenseObjective.instance.damageMult) * 100f}%\n";
             upgradeText.Text += $@"
 Damage: {player.shootManager.damage.ToString("0.00")}
 Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}

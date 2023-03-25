@@ -119,7 +119,7 @@ public class Enemy : Area2D
             damage = damageCap;
         Hp -= damage;
 
-        Player.localInstance.hooks.ForEach(x => x.OnAnyHit(damage));
+        Player.local.hooks.ForEach(x => x.OnAnyHit(damage));
 
         if (UserSaveData.showCombatText || unhideable)
         {
@@ -151,7 +151,7 @@ public class Enemy : Area2D
             if (attackTimer > attackInterval)
             {
                 attackTimer = 0f;
-                Game.instance.myPlayer.hpManager.Damage(damage);
+                DefenseObjective.instance.Damage(damage);
             }
         }
         dynamicSpeedMult = 1f;
@@ -176,7 +176,7 @@ public class Enemy : Area2D
         {
             bullet.EnemyCollision();
         }
-        else if (body == Game.instance.myPlayer)
+        else if (body == DefenseObjective.instance)
             attacking = true;
     }
 

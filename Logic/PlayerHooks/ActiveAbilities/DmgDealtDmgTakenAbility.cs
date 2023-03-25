@@ -16,7 +16,7 @@ namespace RogueDefense
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
-                Player.hpManager.damageMult *= 1f + DamageTaken;
+                DefenseObjective.instance.damageMult *= 1f + DamageTaken;
             }
         }
         public override void PostShoot(Bullet bullet)

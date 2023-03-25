@@ -8,10 +8,10 @@ namespace RogueDefense
     {
         public FuseBulletsAbility(CustomButton button) : base(button) { }
         public override bool CanBeActivated()
-            => Player.localInstance.shootManager.bullets.Any(x => Object.IsInstanceValid(x) && !x.fused);
+            => Player.local.shootManager.bullets.Any(x => Object.IsInstanceValid(x) && !x.fused);
         public override void Activate()
         {
-            ShootManager shooter = Player.localInstance.shootManager;
+            ShootManager shooter = Player.local.shootManager;
 
             float hitMult = shooter.bullets.Aggregate(0f, (a, b) =>
                 a + ((Object.IsInstanceValid(b) && !b.fused) ? b.hitMult : 0));

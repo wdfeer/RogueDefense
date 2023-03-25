@@ -10,14 +10,12 @@ public class Game : Node2D
     [Export]
     public PackedScene enemyScene;
 
-    public Player myPlayer;
     public Enemy enemy;
     public override void _Ready()
     {
         RogueDefense.UserSaveData.Save();
 
         instance = this;
-        myPlayer = GetNode("./MyPlayer") as Player;
 
         Enemy.ResetRngSeed();
     }
@@ -60,10 +58,10 @@ public class Game : Node2D
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
         (GetNode("./UpgradeScreen/LevelText") as Label).Text = $"Level {generation}";
 
-        myPlayer.shootManager.ClearBullets();
-        myPlayer.hooks.ForEach(x => x.OnKill());
-        myPlayer.upgradeManager.UpdateUpgrades();
-        myPlayer.upgradeManager.UpdateUpgradeText();
-        myPlayer.shootManager.shootCount = 0;
+        Player.local.shootManager.ClearBullets();
+        Player.local.hooks.ForEach(x => x.OnKill());
+        Player.local.upgradeManager.UpdateUpgrades();
+        Player.local.upgradeManager.UpdateUpgradeText();
+        Player.local.shootManager.shootCount = 0;
     }
 }

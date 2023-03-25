@@ -10,7 +10,7 @@ namespace RogueDefense
         public override void OnKill()
         {
             Player.upgradeManager.UpdateMaxHp();
-            Player.hpManager.Hp = Player.hpManager.maxHp;
+            DefenseObjective.instance.Hp = DefenseObjective.instance.maxHp;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RogueDefense
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
-                Player.hpManager.damageMult *= DamageTakenMult;
+                DefenseObjective.instance.damageMult *= DamageTakenMult;
             }
         }
         public float DamageTakenMult => 0.5f / Strength;

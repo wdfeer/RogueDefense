@@ -1,105 +1,50 @@
 using Godot;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace RogueDefense
 {
-    public class Player : Node2D
+    public class Player
     {
-        public static Player localInstance;
-
-        [Export]
-        public PackedScene bulletScene;
-        [Export]
-        public PackedScene turretScene;
+        public static Player local;
+        public bool Local => this == local;
+        public static Dictionary<int, Player> players = new Dictionary<int, Player>();
+        public int id;
+        public string Name => Local ? UserSaveData.name : Client.instance.GetUserData(id).name;
 
         public List<PlayerHooks> hooks = new List<PlayerHooks>() { new HpResetter(), new DpsCounterPlayer(), new StatusPlayer(), new FirstShotPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new DamagePerUniqueStatusPlayer(), new LowEnemyHpDamagePlayer(), new MultishotPerShotPlayer() };
-
-        public PlayerHpManager hpManager;
         public ShootManager shootManager;
         public UpgradeManager upgradeManager;
         public AbilityManager abilityManager;
-        public override void _Ready()
+        public Player(int id)
         {
-            localInstance = this;
-
-            hpManager = new PlayerHpManager(this);
+            this.id = id;
+            Player.players.Add(id, this);
             shootManager = new ShootManager(this);
             upgradeManager = new UpgradeManager(this);
             abilityManager = new AbilityManager(this);
-
-            hooks.Add(new TurretPlayer());
+            SpawnTurret();
         }
-        public override void _Process(float delta)
+        public void _Process(float delta)
         {
             hooks.ForEach(x => x.PreUpdate(delta));
             upgradeManager.Process(delta);
             hooks.ForEach(x => x.PostUpgradeUpdate(delta));
-            hpManager.Process(delta);
             shootManager.Process(delta);
             hooks.ForEach(x => x.PostUpdate(delta));
         }
-    }
-    public class PlayerHpManager
-    {
-        readonly Player player;
-        public PlayerHpManager(Player player)
-        {
-            this.player = player;
-            hpBar = player.GetNode("./HpBar") as ProgressBar;
-            Hp = maxHp;
-        }
-        private float hp;
-        public float Hp
-        {
-            get => hp;
-            set => hp = value;
-        }
-        public const float BASE_MAX_HP = 100;
-        public float maxHp = BASE_MAX_HP;
-        private readonly ProgressBar hpBar;
 
-        public float damageMult = 1f;
-        public void Damage(float dmg)
+        public List<Turret> turrets = new List<Turret>();
+        public void SpawnTurret()
         {
-            Hp -= dmg * damageMult;
-            if (Hp <= 0)
-            {
-                Death();
-            }
-        }
-        public void Process(float delta)
-        {
-            if (UserSaveData.killCount > 25)
-            {
-                float dps = 6;
-                if (!NetworkManager.Singleplayer) dps *= 2f;
-                if (Game.instance.generation > 40) dps *= 2f;
-                if (Game.instance.generation > 25) dps *= 2f;
-                Damage(delta * dps);
-            }
+            Turret turret = new Turret();
+            DefenseObjective.instance.AddChild(turret);
+            turret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
+            turrets.Add(turret);
 
-            float hpOfMaxHp = hp / maxHp;
-            hpBar.Value = hpOfMaxHp;
-            if (hpOfMaxHp < 0.5f) hpBar.Modulate = Colors.Red;
-            else hpBar.Modulate = Colors.White;
-        }
-        public bool dead = false;
-        public void Death(bool local = true)
-        {
-            if (local && !NetworkManager.Singleplayer)
-            {
-                Client.instance.SendMessage(MessageType.Death);
-            }
+            shootManager.bulletSpawns.Add(turret.GlobalPosition);
 
-            UserSaveData.gameCount++;
-            UserSaveData.Save();
-
-            Game.instance.GetTree().Paused = true;
-            DeathScreen.instance.Show();
-            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"Level {Game.instance.generation} reached";
+            turret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
         }
     }
 }

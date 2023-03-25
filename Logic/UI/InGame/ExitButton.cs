@@ -12,7 +12,7 @@ public class ExitButton : Button
     }
     public void ExitConfirmed()
     {
-        Player.localInstance.hpManager.Death();
+        DefenseObjective.instance.Death();
     }
     Rect2 popupBounds;
     public override void _Pressed()

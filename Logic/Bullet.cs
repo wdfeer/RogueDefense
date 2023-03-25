@@ -9,7 +9,7 @@ public class Bullet : MovingKinematicBody2D
     public override void _Ready()
     {
         base._Ready();
-        owner = Player.localInstance;
+        owner = Player.local;
         ParticleEmitter.Modulate = Colors.Purple;
     }
     public override void _Process(float delta)

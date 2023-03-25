@@ -10,7 +10,7 @@ public class Client : Node
     public static string URL => $"ws://{address}:{port}";
     public static Client instance = new Client();
     public static WebSocketClient client;
-    public static int myId;
+    public static int myId = -1;
     public void Start()
     {
         client = new WebSocketClient();
@@ -84,7 +84,7 @@ public class Client : Node
                 break;
             case MessageType.Upgrade:
                 Upgrade up = new Upgrade(UpgradeType.AllTypes[args[1].ToInt()], args[2].ToFloat());
-                Player.localInstance.upgradeManager.AddUpgrade(up, args[0].ToInt());
+                Player.local.upgradeManager.AddUpgrade(up, args[0].ToInt());
                 UpgradeScreen.instance.upgradesMade++;
                 if (UpgradeScreen.instance.EveryoneUpgraded())
                 {
@@ -92,7 +92,7 @@ public class Client : Node
                 }
                 break;
             case MessageType.Death:
-                Player.localInstance.hpManager.Death(false);
+                DefenseObjective.instance.Death(false);
                 break;
             case MessageType.Retry:
                 Game.instance.GetTree().Paused = false;
@@ -101,7 +101,7 @@ public class Client : Node
             case MessageType.AbilityActivated:
                 string username = others.Find(x => x.id == args[0].ToInt()).name;
                 int abilityTypeIndex = args[1].ToInt();
-                ActiveAbility ability = (ActiveAbility)Player.localInstance.hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
+                ActiveAbility ability = (ActiveAbility)Player.local.hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
                 ability.Activate();
                 NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
