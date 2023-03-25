@@ -67,7 +67,7 @@ namespace RogueDefense
         public float coldChance = 0f;
         public void UpdateMaxHp()
         {
-            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + PlayerHooks.GetHooks<MaxHpPerKillPlayer>(player).increase - SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) / 2f;
+            float hpMult = GetTotalUpgradeMultiplier(UpgradeType.MaxHp) + MaxHpPerKillPlayer.GetTotalIncrease();
             DefenseObjective.instance.maxHp = DefenseObjective.BASE_MAX_HP * hpMult;
         }
         public void UpdateUpgrades()
@@ -75,7 +75,7 @@ namespace RogueDefense
             float damageTakenMult = GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
             DefenseObjective.instance.damageMult = damageTakenMult;
 
-            float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMaxHp) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
+            float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
             if (fireRateMult <= 0)
                 fireRateMult = 0.001f;
             player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
@@ -83,7 +83,7 @@ namespace RogueDefense
             float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);
             player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult;
 
-            float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot);
+            float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot) - SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) / 2f;
             player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
             critChance = SumAllUpgradeValues(UpgradeType.CritChance);
@@ -91,7 +91,8 @@ namespace RogueDefense
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
             player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
-            player.abilityManager.ResetAbilityText();
+            if (player.local)
+                player.abilityManager.ResetAbilityText();
 
             bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
             viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);

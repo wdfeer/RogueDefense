@@ -4,12 +4,16 @@ namespace RogueDefense
 {
     public class DamageReductionAbility : ActiveAbility
     {
-        public DamageReductionAbility(CustomButton button) : base(button) { }
         public override void Activate()
         {
             buffLeft = Duration * 7.5f;
         }
         public float buffLeft = 0;
+
+        public DamageReductionAbility(Player player, CustomButton button) : base(player, button)
+        {
+        }
+
         public override void PostUpgradeUpdate(float delta)
         {
             if (buffLeft > 0)

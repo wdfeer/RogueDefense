@@ -2,18 +2,22 @@ namespace RogueDefense
 {
     public class DamageAbility : ActiveAbility
     {
-        public DamageAbility(CustomButton button) : base(button) { }
         public override void Activate()
         {
             buffLeft = Duration * 5f;
         }
         public float buffLeft = 0;
+
+        public DamageAbility(Player player, CustomButton button) : base(player, button)
+        {
+        }
+
         public override void PostUpgradeUpdate(float delta)
         {
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
-                Player.shootManager.shootSpeed *= 2;
+                player.shootManager.shootSpeed *= 2;
             }
         }
         public override void PostShoot(Bullet bullet)

@@ -9,6 +9,11 @@ namespace RogueDefense
     {
         public float damageMult = 1f;
         bool affectingThisShot = false;
+
+        public FirstShotPlayer(Player player) : base(player)
+        {
+        }
+
         public override void PreShoot(ShootManager shooter)
         {
             if (damageMult <= 1f || shooter.shootCount > 0)

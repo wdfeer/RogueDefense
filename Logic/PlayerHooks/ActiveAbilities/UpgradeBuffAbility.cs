@@ -4,7 +4,7 @@ namespace RogueDefense
 {
     public class UpgradeBuffAbility : ActiveAbility
     {
-        public UpgradeBuffAbility(CustomButton button) : base(button)
+        public UpgradeBuffAbility(Player player, CustomButton button) : base(Player.my, button)
         {
             active = false;
         }
@@ -14,6 +14,9 @@ namespace RogueDefense
         }
         public static bool active = false;
         public const float UPGRADE_VALUE_INCREASE = 1f;
+
+
+
         public override float BaseCooldown => 30f;
         public override bool ConstantValues => true;
         protected override string GetAbilityText()

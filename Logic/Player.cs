@@ -12,18 +12,22 @@ namespace RogueDefense
         public int id;
         public string Name => local ? UserSaveData.name : Client.instance.GetUserData(id).name;
 
-        public List<PlayerHooks> hooks = new List<PlayerHooks>() { new HpResetter(), new DpsCounterPlayer(), new StatusPlayer(), new FirstShotPlayer(), new NthShotMultishotPlayer(), new MaxHpPerKillPlayer(), new DamagePerUniqueStatusPlayer(), new LowEnemyHpDamagePlayer(), new MultishotPerShotPlayer() };
+        public List<PlayerHooks> hooks;
         public ShootManager shootManager;
         public UpgradeManager upgradeManager;
         public AbilityManager abilityManager;
         public Player(int id)
         {
+            hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this) };
+
             this.id = id;
             Player.players.Add(id, this);
             shootManager = new ShootManager(this);
             upgradeManager = new UpgradeManager(this);
             abilityManager = new AbilityManager(this);
             SpawnTurret();
+
+            if (local) hooks.Add(new HpResetter(this));
         }
         public void _Process(float delta)
         {

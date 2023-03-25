@@ -16,33 +16,38 @@ namespace RogueDefense
         public AbilityManager(Player player)
         {
             this.player = player;
-
-            var ability1Button = Game.instance.GetNode("AbilityContainer/AbilityButton1") as CustomButton;
-            ability1 = GetAbility(ability1Button);
-            int ability1Index = ability1.GetAbilityIndex();
-            player.hooks.Add(ability1);
-
-            for (int i = 0; i < abilityTypes.Length; i++)
+            if (player.local)
             {
-                if (i == ability1Index)
-                    continue;
+                var ability1Button = Game.instance.GetNode("AbilityContainer/AbilityButton1") as CustomButton;
+                ability1 = GetAbility(ability1Button);
 
-                player.hooks.Add(CreateAbilityInstance(i));
+                // int ability1Index = ability1.GetAbilityIndex();
+                // for (int i = 0; i < abilityTypes.Length; i++)
+                // {
+                //     if (i == ability1Index)
+                //         continue;
+
+                //     player.hooks.Add(CreateAbilityInstance(i, player));
+                // }
+                TimerManager.AddTimer(ResetAbilityText, 0.01f);
             }
-
-            TimerManager.AddTimer(ResetAbilityText, 0.01f);
+            else
+            {
+                ability1 = CreateAbilityInstance(Client.instance.GetUserData(player.id).ability, player);
+            }
+            player.hooks.Add(ability1);
         }
 
         ActiveAbility GetAbility(CustomButton button)
         {
             if (AbilityChooser.chosen == -1)
                 return GetRandomAbility(button);
-            else return CreateAbilityInstance(AbilityChooser.chosen, button);
+            else return CreateAbilityInstance(AbilityChooser.chosen, player, button);
         }
         ActiveAbility GetRandomAbility(CustomButton button)
         {
             int index = new Random().Next(0, abilityTypes.Length);
-            return CreateAbilityInstance(index, button);
+            return CreateAbilityInstance(index, player, button);
         }
         public static string GetAbilityName(int index)
         {
@@ -61,8 +66,8 @@ namespace RogueDefense
             typeof(DmgDealtDmgTakenAbility),
             typeof(DamageReductionAbility)
         };
-        public static ActiveAbility CreateAbilityInstance(int index, CustomButton button = null)
-            => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { button });
+        public static ActiveAbility CreateAbilityInstance(int index, Player player, CustomButton button = null)
+            => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { player, button });
         public void ResetAbilityText()
         {
             ability1.ResetText();

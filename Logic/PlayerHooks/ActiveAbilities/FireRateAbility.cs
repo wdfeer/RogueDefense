@@ -2,19 +2,23 @@ namespace RogueDefense
 {
     public class FireRateAbility : ActiveAbility
     {
-        public FireRateAbility(CustomButton button) : base(button) { }
         public override void Activate()
         {
             buffLeft = Duration * 5f;
         }
         public float buffLeft = 0;
+
+        public FireRateAbility(Player player, CustomButton button) : base(player, button)
+        {
+        }
+
         public override void PostUpgradeUpdate(float delta)
         {
             if (buffLeft > 0)
             {
                 buffLeft -= delta;
-                Player.shootManager.shootInterval /= 1 + 0.75f * Strength;
-                Player.shootManager.shootSpeed *= 2;
+                player.shootManager.shootInterval /= 1 + 0.75f * Strength;
+                player.shootManager.shootSpeed *= 2;
             }
         }
         public override float BaseCooldown => 22f;

@@ -4,7 +4,11 @@ namespace RogueDefense
 {
     public abstract class PlayerHooks
     {
-        public Player Player => Player.my;
+        public PlayerHooks(Player player)
+        {
+            this.player = player;
+        }
+        public Player player;
         public virtual void PreUpdate(float delta) { }
         public virtual void PostUpgradeUpdate(float delta) { }
         public virtual void PostUpdate(float delta) { }

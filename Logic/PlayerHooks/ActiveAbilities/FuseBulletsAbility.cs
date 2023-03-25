@@ -6,7 +6,10 @@ namespace RogueDefense
 {
     public class FuseBulletsAbility : ActiveAbility
     {
-        public FuseBulletsAbility(CustomButton button) : base(button) { }
+        public FuseBulletsAbility(Player player, CustomButton button) : base(player, button)
+        {
+        }
+
         public override bool CanBeActivated()
             => Player.my.shootManager.bullets.Any(x => Object.IsInstanceValid(x) && !x.fused);
         public override void Activate()
@@ -16,7 +19,7 @@ namespace RogueDefense
             float hitMult = shooter.bullets.Aggregate(0f, (a, b) =>
                 a + ((Object.IsInstanceValid(b) && !b.fused) ? b.hitMult : 0));
             shooter.ClearBullets(x => !x.fused);
-            Bullet bullet = shooter.Shoot(Player.shootManager.bulletSpawns[0], 3f);
+            Bullet bullet = shooter.Shoot(player.shootManager.bulletSpawns[0], 3f);
             bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
             bullet.damage = shooter.damage;
             bullet.Scale *= 2f;

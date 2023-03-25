@@ -5,7 +5,9 @@ namespace RogueDefense
 {
     public class ArmorStripAbility : ActiveAbility
     {
-        public ArmorStripAbility(CustomButton button) : base(button) { }
+        public ArmorStripAbility(Player player, CustomButton button) : base(player, button)
+        {
+        }
         public override void Activate()
         {
             if (Strip > 1f)
@@ -20,6 +22,9 @@ namespace RogueDefense
                 Enemy.instance.armor *= 1 - Strip;
         }
         public const float BASE_STRIP = 0.3f;
+
+
+
         public override float BaseCooldown => (NetworkManager.Singleplayer ? 30f : 45f) / Mathf.Sqrt(Duration);
         public float Strip => BASE_STRIP * Strength;
         protected override string GetAbilityText()

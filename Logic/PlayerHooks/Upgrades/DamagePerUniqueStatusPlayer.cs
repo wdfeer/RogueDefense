@@ -8,6 +8,11 @@ namespace RogueDefense
     public class DamagePerUniqueStatusPlayer : PlayerHooks
     {
         public float damageIncreasePerUniqueStatus = 0f;
+
+        public DamagePerUniqueStatusPlayer(Player player) : base(player)
+        {
+        }
+
         public override void ModifyHitWithBullet(Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult)
         {
             int statuses = Enemy.instance.statuses.Count(x => x.Active);

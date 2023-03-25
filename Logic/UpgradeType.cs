@@ -73,11 +73,11 @@ namespace RogueDefense
             canBeRolled = () => Game.instance.generation > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.35f,
             valueMult = 0.3f
         };
-        public static readonly UpgradeType FireRateMinusMaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate, -{MathHelper.ToPercentAndRound(x / 2)}% Max Hp")
+        public static readonly UpgradeType FireRateMinusMultishot = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate, -{MathHelper.ToPercentAndRound(x / 2)}% Multishot")
         {
             chanceMult = 0.2f,
-            canBeRolled = () => Game.instance.generation > 10 && DefenseObjective.instance.maxHp > 75f,
-            valueMult = 1.75f
+            canBeRolled = () => Game.instance.generation > 10 && Player.my.shootManager.multishot > 1f,
+            valueMult = 2.2f
         };
         public static readonly UpgradeType LowEnemyHpDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage if Enemy HP is lower than 50%")
         {
@@ -121,7 +121,7 @@ namespace RogueDefense
             Turret,
             CorrosiveChance,
             DamagePerUniqueStatus,
-            FireRateMinusMaxHp,
+            FireRateMinusMultishot,
             LowEnemyHpDamage,
             MultishotPerShot,
             FirstShotTotalDamage

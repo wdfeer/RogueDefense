@@ -7,9 +7,13 @@ namespace RogueDefense
 {
     public class HpResetter : PlayerHooks
     {
+        public HpResetter(Player player) : base(player)
+        {
+        }
+
         public override void OnKill()
         {
-            Player.upgradeManager.UpdateMaxHp();
+            player.upgradeManager.UpdateMaxHp();
             DefenseObjective.instance.Hp = DefenseObjective.instance.maxHp;
         }
     }

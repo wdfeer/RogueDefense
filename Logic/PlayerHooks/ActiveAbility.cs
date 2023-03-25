@@ -6,7 +6,7 @@ namespace RogueDefense
     public abstract class ActiveAbility : PlayerHooks
     {
         CustomButton button;
-        public ActiveAbility(CustomButton button = null)
+        public ActiveAbility(Player player, CustomButton button) : base(player)
         {
             if (button == null)
                 return;
@@ -28,13 +28,13 @@ namespace RogueDefense
         }
 
         public virtual float BaseCooldown => 25f;
-        public float Cooldown => BaseCooldown * Player.abilityManager.cooldownMult;
+        public float Cooldown => BaseCooldown * player.abilityManager.cooldownMult;
         public void ResetCooldown() => cooldownTimer = float.PositiveInfinity;
         protected float cooldownTimer = float.PositiveInfinity;
         public bool Cooling => cooldownTimer < Cooldown;
         public override void PreUpdate(float delta)
         {
-            if (button == null)
+            if (button == null || !player.local)
                 return;
 
             button.Disabled = Cooling;
@@ -45,8 +45,8 @@ namespace RogueDefense
             }
         }
 
-        public float Strength => Player.abilityManager.strengthMult;
-        public float Duration => Player.abilityManager.durationMult;
+        public float Strength => player.abilityManager.strengthMult;
+        public float Duration => player.abilityManager.durationMult;
 
         public void ResetText()
         {
