@@ -16,7 +16,7 @@ namespace RogueDefense
         public float buffLeft = 0;
         public override void PostUpgradeUpdate(float delta)
         {
-            if (buffLeft > 0 && player.local)
+            if (buffLeft > 0 && player.Local)
             {
                 buffLeft -= delta;
                 DefenseObjective.instance.damageMult *= DamageTakenMult;

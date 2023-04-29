@@ -13,11 +13,11 @@ namespace RogueDefense
         public UpgradeManager(Player player)
         {
             this.player = player;
-            TimerManager.AddTimer(() =>
+            Game.instance.ToSignal(Game.instance.GetTree().CreateTimer(0.01f), "timeout").OnCompleted(() =>
             {
                 UpdateUpgrades();
                 UpdateUpgradeText();
-            }, 0.01f);
+            });
             player.shootManager.baseDamage *= 1f + 0.01f * (UserSaveData.killCount > 100 ? 100 : UserSaveData.killCount);
             baseCritMult += 0.05f * (UserSaveData.gameCount > 10 ? 10 : UserSaveData.gameCount);
         }
@@ -80,7 +80,7 @@ namespace RogueDefense
         }
         public void UpdateUpgrades()
         {
-            if (player.local)
+            if (player.Local)
                 UpdateDamageReduction();
 
             float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
@@ -99,7 +99,7 @@ namespace RogueDefense
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
             player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
-            if (player.local)
+            if (player.Local)
                 player.abilityManager.ResetAbilityText();
 
             bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);

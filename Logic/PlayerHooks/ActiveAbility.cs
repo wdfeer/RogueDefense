@@ -55,7 +55,7 @@ namespace RogueDefense
         public bool Cooling => cooldownTimer < Cooldown;
         public override void PreUpdate(float delta)
         {
-            if (button == null || !player.local)
+            if (button == null || !player.Local)
                 return;
 
             button.Disabled = Cooling;

@@ -16,13 +16,13 @@ namespace RogueDefense
         public AbilityManager(Player player)
         {
             this.player = player;
-            if (player.local)
+            if (player.Local)
             {
                 var ability1Button = Game.instance.GetNode("AbilityContainer/AbilityButton1") as CustomButton;
                 ability1 = GetAbility(ability1Button);
 
 
-                TimerManager.AddTimer(ResetAbilityText, 0.01f);
+                Game.instance.ToSignal(Game.instance.GetTree().CreateTimer(0.01f), "timeout").OnCompleted(ResetAbilityText);
             }
             else
             {

@@ -25,7 +25,6 @@ public class Game : Node2D
 
     public override void _Process(float delta)
     {
-        TimerManager.Process(delta);
         if (enemy == null)
         {
             SpawnEnemy();
