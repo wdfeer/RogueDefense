@@ -16,11 +16,14 @@ public class NotificationPopup : PopupPanel
         instance.Label.Text = text;
         instance.Popup(duration);
     }
+    SceneTreeTimer timer;
     void Popup(float duration)
     {
         Popup_(bounds);
 
-        ToSignal(GetTree().CreateTimer(duration), "timeout").OnCompleted(() =>
+        if (timer != null) timer.Dispose();
+        timer = GetTree().CreateTimer(duration);
+        ToSignal(timer, "timeout").OnCompleted(() =>
         {
             Hide();
         });
