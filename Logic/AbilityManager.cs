@@ -41,14 +41,7 @@ namespace RogueDefense
 
         ActiveAbility GetAbility(CustomButton button)
         {
-            if (AbilityChooser.chosen == -1)
-                return GetRandomAbility(button);
-            else return CreateAbilityInstance(AbilityChooser.chosen, player, button);
-        }
-        ActiveAbility GetRandomAbility(CustomButton button)
-        {
-            int index = new Random().Next(0, abilityTypes.Length);
-            return CreateAbilityInstance(index, player, button);
+            return CreateAbilityInstance(AbilityChooser.chosen, player, button);
         }
         public static string GetAbilityName(int index)
         {
@@ -68,7 +61,10 @@ namespace RogueDefense
             typeof(DamageReductionAbility)
         };
         public static ActiveAbility CreateAbilityInstance(int index, Player player, CustomButton button = null)
-            => (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { player, button });
+        {
+            if (index < 0) index = new Random().Next(0, abilityTypes.Length);
+            return (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { player, button });
+        }
         public void ResetAbilityText()
         {
             ability1.ResetText();
