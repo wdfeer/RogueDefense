@@ -63,8 +63,8 @@ namespace RogueDefense
         };
         public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a Turret")
         {
-            chanceMult = 0.1f,
-            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 30 : 36) &&
+            chanceMult = 0.25f,
+            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 22 : 36) &&
                 ((float)Player.my.turrets.Count / NetworkManager.PlayerCount) < 1.9f
         };
         public static readonly UpgradeType DamagePerUniqueStatus = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
