@@ -13,7 +13,7 @@ namespace RogueDefense
                 Shuriken proj = ((Shuriken)shurikenScene.Instance());
                 proj.velocity = new Vector2(20f, 0f).Rotated(0.1f * GD.Randf());
                 proj.damage = Damage;
-                Player.my.turrets[0].AddChild(proj);
+                DefenseObjective.instance.AddChild(proj);
                 player.shootManager.bullets.Add(proj);
             }
         }
