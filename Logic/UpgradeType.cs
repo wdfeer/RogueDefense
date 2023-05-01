@@ -26,9 +26,9 @@ namespace RogueDefense
         public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.455f };
         public static readonly UpgradeType Evasion = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Evasion")
         {
-            chanceMult = 10.5f, // DEBUG
+            chanceMult = 0.5f,
             valueMult = 0.52f,
-            // canBeRolled = () => Game.instance.generation > 15
+            canBeRolled = () => Game.instance.generation > 15
         };
         public static readonly UpgradeType Damage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage") { chanceMult = 1.1f, valueMult = 1.2f };
         public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate");
