@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic;
 using System.Collections.Generic;
 using System.Linq;
 using static Upgrade;
@@ -75,13 +76,22 @@ namespace RogueDefense
         }
         public void UpdateDamageReduction()
         {
-            float damageTakenMult = Player.players.Select(x => x.Value.upgradeManager.GetDamageTakenMult()).Aggregate(1f, (a, b) => a * b);
+            float damageTakenMult = Player.players.Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.DamageReduction)).Aggregate(1f, (a, b) => a * b);
             DefenseObjective.instance.damageMult = damageTakenMult;
+        }
+        public void UpdateEvasion()
+        {
+            float chanceToTakeDamage = Player.players.Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.Evasion)).Aggregate(1f, (a, b) => a * b);
+            float evasionChance = 1 - chanceToTakeDamage;
+            DefenseObjective.instance.evasionChance = evasionChance;
         }
         public void UpdateUpgrades()
         {
             if (player.Local)
+            {
                 UpdateDamageReduction();
+                UpdateEvasion();
+            }
 
             float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
             if (fireRateMult <= 0)
@@ -117,9 +127,8 @@ namespace RogueDefense
             => 1f + SumAllUpgradeValues(type);
         public float SumEveryonesUpgradeValues(UpgradeType type)
             => Player.players.Select(x => x.Value.upgradeManager.SumAllUpgradeValues(type)).Aggregate(0f, (a, b) => a + b);
-
-        public float GetDamageTakenMult()
-            => GetAllUpgradeValues(UpgradeType.DamageReduction).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
+        public float GetReversedMultiplier(UpgradeType type) // Returns the product of all (1 - upgradeValue) on the player
+            => GetAllUpgradeValues(type).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
 
         public void UpdateUpgradeText()
         {
@@ -128,7 +137,9 @@ namespace RogueDefense
             var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
             upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
             if (DefenseObjective.instance.damageMult != 1f)
-                upgradeText.Text += $"Damage Reduction: {(1 - DefenseObjective.instance.damageMult) * 100f}%\n";
+                upgradeText.Text += $"Damage Reduction: {MathHelper.ToPercentAndRound((1 - DefenseObjective.instance.damageMult))}%\n";
+            if (DefenseObjective.instance.evasionChance > 0f)
+                upgradeText.Text += $"Evasion: {MathHelper.ToPercentAndRound(DefenseObjective.instance.evasionChance)}%\n";
             upgradeText.Text += $@"
 Damage: {player.shootManager.damage.ToString("0.00")}
 Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}

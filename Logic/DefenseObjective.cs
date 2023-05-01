@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
@@ -35,8 +36,12 @@ namespace RogueDefense
         private ProgressBar hpBar;
 
         public float damageMult = 1f;
+        public float evasionChance = 0f;
         public void Damage(float dmg)
         {
+            if (GD.Randf() < evasionChance)
+                return;
+
             Hp -= dmg * damageMult;
             if (Hp <= 0)
             {

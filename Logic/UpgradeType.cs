@@ -23,7 +23,13 @@ namespace RogueDefense
         public int uniqueId;
 
         public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Max Hp") { valueMult = 0.55f };
-        public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.45f };
+        public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.455f };
+        public static readonly UpgradeType Evasion = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Evasion")
+        {
+            chanceMult = 10.5f, // DEBUG
+            valueMult = 0.52f,
+            // canBeRolled = () => Game.instance.generation > 15
+        };
         public static readonly UpgradeType Damage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage") { chanceMult = 1.1f, valueMult = 1.2f };
         public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate");
         public static readonly UpgradeType Multishot = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Multishot");
@@ -104,6 +110,7 @@ namespace RogueDefense
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
             DamageReduction,
+            Evasion,
             Damage,
             FireRate,
             Multishot,
