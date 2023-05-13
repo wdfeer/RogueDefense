@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="RogueDefense"
-run/main_scene="res://Scenes/MainMenu.tscn"
+run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://Assets/icon.png"
 

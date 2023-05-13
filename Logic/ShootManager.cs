@@ -11,8 +11,11 @@ namespace RogueDefense
         public ShootManager(Player player)
         {
             this.player = player;
+            baseDamage = 1f + UserSaveData.contributedUpgradePoints[0] * UpgradeContainer.STAT_PER_POINT[0];
+            baseShootInterval = 1f / (1f + UserSaveData.contributedUpgradePoints[1] * UpgradeContainer.STAT_PER_POINT[1]);
+            baseMultishot = 1f + UserSaveData.contributedUpgradePoints[0] * UpgradeContainer.STAT_PER_POINT[2];
         }
-        public float baseDamage = 1f;
+        public float baseDamage;
         public float damage = 1;
         public float baseShootInterval = 1;
         public float shootInterval = 1;

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Godot;
 
 namespace RogueDefense
@@ -20,11 +21,16 @@ namespace RogueDefense
                 int.TryParse(file.GetLine(), out highscoreMultiplayer);
                 int.TryParse(file.GetLine(), out gameCount);
                 int.TryParse(file.GetLine(), out killCount);
+                for (int i = 0; i < contributedUpgradePoints.Length; i++)
+                {
+                    contributedUpgradePoints[i] = (int)file.Get64();
+                    SpareUpgradePoints -= contributedUpgradePoints[i];
+                }
 
                 file.Close();
                 return true;
             }
-            catch (System.Exception)
+            catch (Exception exception)
             {
                 return false;
             }
@@ -41,6 +47,10 @@ namespace RogueDefense
             file.StoreLine(highscoreMultiplayer.ToString());
             file.StoreLine(gameCount.ToString());
             file.StoreLine(killCount.ToString());
+            for (int i = 0; i < contributedUpgradePoints.Length; i++)
+            {
+                file.Store64((ulong)contributedUpgradePoints[i]);
+            }
 
             file.Close();
         }
@@ -51,6 +61,18 @@ namespace RogueDefense
         public static int highscoreMultiplayer = 0;
         public static int gameCount = 0;
         public static int killCount = 0;
+        public static int[] contributedUpgradePoints = new int[] { 0, 0, 0 };
+        private static int spareUpgradePoints = 10;
+        public static int SpareUpgradePoints
+        {
+            get => spareUpgradePoints; set
+            {
+                onUpgradePointCountChanged(value);
+                spareUpgradePoints = value;
+            }
+        }
+        public static Action<int> onUpgradePointCountChanged = (value) => { };
+
         public static void UpdateHighscore()
         {
             int lvl = Game.instance.generation;

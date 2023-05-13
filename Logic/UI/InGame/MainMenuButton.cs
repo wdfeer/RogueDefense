@@ -9,7 +9,7 @@ public class MainMenuButton : Button
         {
             NetworkManager.NetStop();
         }
-        GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+        GetTree().ChangeScene("res://Scenes/MainMenu/MainMenu.tscn");
         GetTree().Paused = false;
     }
 }
