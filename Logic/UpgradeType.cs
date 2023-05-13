@@ -37,7 +37,10 @@ namespace RogueDefense
         {
             canBeRolled = () => Player.my.upgradeManager.critChance < 1.25f
         };
-        public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Damage");
+        public static readonly UpgradeType CritDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Damage")
+        {
+            canBeRolled = () => Player.my.upgradeManager.critChance > 0
+        };
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance")
         {
             getBaseRandomValue = () =>
