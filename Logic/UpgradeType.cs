@@ -56,7 +56,8 @@ namespace RogueDefense
         public static readonly UpgradeType NthShotMultishot = new UpgradeType(x => $"Every 4th shot has +{MathHelper.ToPercentAndRound(x)}% Total Multishot")
         {
             chanceMult = 0.2f,
-            getBaseRandomValue = () => 1f
+            getBaseRandomValue = () => 1f,
+            canBeRolled = () => Player.my.upgradeManager.SumAllUpgradeValues(NthShotMultishot) < 1.5f
         };
         public static readonly UpgradeType PlusDamageMinusFireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage, -{MathHelper.ToPercentAndRound(x / 2)}% Fire Rate")
         {
