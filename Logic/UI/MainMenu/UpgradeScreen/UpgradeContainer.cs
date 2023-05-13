@@ -37,7 +37,7 @@ public class UpgradeContainer : HBoxContainer
 
     public void Load()
     {
-        points = UserSaveData.contributedUpgradePoints[GetUpgradeIndex()];
+        points = UserSaveData.upgradePointDistribution[GetUpgradeIndex()];
         UpdateStatBasedOnPoints();
         UpdateLabelText();
     }
@@ -46,6 +46,6 @@ public class UpgradeContainer : HBoxContainer
         int.Parse(Name);
     public void Save()
     {
-        UserSaveData.contributedUpgradePoints[GetUpgradeIndex()] = points;
+        UserSaveData.upgradePointDistribution[GetUpgradeIndex()] = points;
     }
 }

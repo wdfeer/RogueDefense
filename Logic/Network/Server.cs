@@ -25,7 +25,7 @@ public class Server : Node
             SetProcess(false);
         }
     }
-    public Dictionary<int, (string name, int ability)> users = new Dictionary<int, (string name, int ability)>();
+    public Dictionary<int, UserData> users = new Dictionary<int, UserData>();
     public void SendPacket(int id, byte[] data) => server.GetPeer(id).PutPacket(data);
     public void Broadcast(byte[] data, int ignore = -1) => users.ToList().ForEach(x =>
     {
@@ -37,9 +37,9 @@ public class Server : Node
     {
         string data = $"{(char)MessageType.FetchLobby}{id.ToString()}";
         if (users.Count > 0)
-            data += " " + String.Join(" ", users.Select(x => $"{x.Key.ToString()};{x.Value.name};{x.Value.ability}"));
+            data += " " + String.Join(" ", users.Select(x => $"{x.Key.ToString()};{x.Value.name};{x.Value.ability};{UserData.UpgradePointsAsString(x.Value.upgradePoints)}"));
         SendPacket(id, data.ToUTF8());
-        users.Add(id, ("", -1));
+        users.Add(id, new UserData(id, "", -1, null));
         GD.Print($"Client {id} connected with protocol: {protocol}");
     }
     public void Disconnected(int id, bool wasCleanClose = false)
@@ -62,18 +62,18 @@ public class Server : Node
 
         string str = data.GetStringFromUTF8();
         string[] args = str.Substring(1).Split(" ");
-        PostBroadcastMessage(id, (MessageType)str[0], args);
+        AfterBroadcastMessage(id, (MessageType)str[0], args);
     }
-    public void PostBroadcastMessage(int from, MessageType type, string[] args)
+    public void AfterBroadcastMessage(int from, MessageType type, string[] args)
     {
         switch (type)
         {
             case MessageType.Register:
-                users[from] = (args[1], args[2].ToInt());
+                users[from] = new UserData(from, args[1], args[2].ToInt(), UserData.UpgradePointsFromString(args[3]));
                 GD.Print($"Registered user {args[1]} with ability {args[2]} as {from}");
                 return;
             case MessageType.SetAbility:
-                users[from] = (users[from].name, args[1].ToInt());
+                users[from] = new UserData(from, users[from].name, args[1].ToInt(), users[from].upgradePoints);
                 GD.Print($"Set ability {users[from].ability} for {users[from].name}");
                 return;
             default:

@@ -2,6 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Client : Node
 {
@@ -47,16 +48,16 @@ public class Client : Node
         switch (type)
         {
             case MessageType.FetchLobby:
-                SendMessage(MessageType.Register, new string[] { args[0], UserSaveData.name, AbilityChooser.chosen.ToString() });
+                SendMessage(MessageType.Register, new string[] { args[0], UserSaveData.name, AbilityChooser.chosen.ToString(), UserData.UpgradePointsAsString(UserSaveData.upgradePointDistribution) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
                     var strs = args[i].Split(";");
-                    RegisterUser(strs[0].ToInt(), strs[1], strs[2].ToInt());
+                    RegisterUser(strs[0].ToInt(), strs[1], strs[2].ToInt(), strs[3].Split("/").Select(x => int.Parse(x)).ToArray());
                 }
                 break;
             case MessageType.Register:
-                RegisterUser(args[0].ToInt(), args[1], args[2].ToInt());
+                RegisterUser(args[0].ToInt(), args[1], args[2].ToInt(), UserData.UpgradePointsFromString(args[3]));
                 break;
             case MessageType.SetAbility:
                 if (Lobby.Instance == null) break;
@@ -64,7 +65,7 @@ public class Client : Node
                 UserData data = GetUserData(id);
                 data.ability = args[1].ToInt();
                 UnregisterUser(id);
-                RegisterUser(id, data.name, data.ability);
+                RegisterUser(id, data.name, data.ability, data.upgradePoints);
                 break;
             case MessageType.Unregister:
                 id = args[0].ToInt();
@@ -110,9 +111,9 @@ public class Client : Node
                 break;
         }
     }
-    void RegisterUser(int id, string name, int ability)
+    void RegisterUser(int id, string name, int ability, int[] upgradePoints)
     {
-        UserData d = new UserData(id, name, ability);
+        UserData d = new UserData(id, name, ability, upgradePoints);
         others.Add(d);
         if (Lobby.Instance != null)
         {

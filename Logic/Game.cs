@@ -19,8 +19,8 @@ public class Game : Node2D
 
         Enemy.ResetRngSeed();
 
-        Player.my = new Player(Client.myId);
-        Client.instance.others.ForEach(x => new Player(x.id));
+        Player.my = new Player(Client.myId, UserSaveData.upgradePointDistribution);
+        Client.instance.others.ForEach(x => new Player(x.id, x.upgradePoints));
     }
 
     public override void _Process(float delta)
