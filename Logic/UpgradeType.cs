@@ -43,10 +43,8 @@ namespace RogueDefense
         };
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance")
         {
-            getBaseRandomValue = () =>
-            (Player.my.upgradeManager.bleedChance > 0.2f ?
-                (0.2f / (Player.my.upgradeManager.bleedChance / 0.2f)) : 0.25f) * (0.65f + GD.Randf() * 0.35f),
-            canBeRolled = () => Player.my.upgradeManager.bleedChance < 0.5f,
+            getBaseRandomValue = () => 0.16f,
+            canBeRolled = () => Player.my.upgradeManager.bleedChance < 0.25f,
         };
         public static readonly UpgradeType CorrosiveChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Corrosive Chance") { chanceMult = 0.6f, valueMult = 0.37f, canBeRolled = () => Game.instance.generation > 15 };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
