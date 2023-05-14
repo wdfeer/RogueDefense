@@ -16,10 +16,10 @@ namespace RogueDefense
         public ShootManager shootManager;
         public UpgradeManager upgradeManager;
         public AbilityManager abilityManager;
-        public int[] upgradePoints;
+        public int[] augmentPoints;
         public Player(int id, int[] upgradePointDistribution)
         {
-            this.upgradePoints = upgradePointDistribution;
+            this.augmentPoints = upgradePointDistribution;
 
             hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this) };
 

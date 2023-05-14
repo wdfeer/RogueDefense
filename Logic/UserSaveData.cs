@@ -21,6 +21,7 @@ namespace RogueDefense
                 int.TryParse(file.GetLine(), out highscoreMultiplayer);
                 int.TryParse(file.GetLine(), out gameCount);
                 int.TryParse(file.GetLine(), out killCount);
+                SpareAugmentPoints = 10;
                 for (int i = 0; i < augmentAllotment.Length; i++)
                 {
                     augmentAllotment[i] = (int)file.Get64();
@@ -61,13 +62,17 @@ namespace RogueDefense
         public static int highscoreMultiplayer = 0;
         public static int gameCount = 0;
         public static int killCount = 0;
-        public static int[] augmentAllotment = new int[] { 0, 0, 0 };
+        public static int[] augmentAllotment = new int[] { 0, 0, 0, 0 };
         private static int spareAugmentPoints = 10;
         public static int SpareAugmentPoints
         {
             get => spareAugmentPoints; set
             {
-                updateAugmentPointCounter(value);
+                try
+                {
+                    updateAugmentPointCounter(value);
+                }
+                catch (Exception) { }
                 spareAugmentPoints = value;
             }
         }

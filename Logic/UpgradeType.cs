@@ -13,6 +13,7 @@ namespace RogueDefense
             this.getUpgradeText = upgradeTextGetter;
         }
         public Func<float, string> getUpgradeText;
+        public bool status = false;
         public float chanceMult = 1f;
         public float valueMult = 1f;
         public float GetRandomValue()
@@ -43,12 +44,29 @@ namespace RogueDefense
         };
         public static readonly UpgradeType BleedChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance")
         {
+            status = true,
             getBaseRandomValue = () => 0.16f,
             canBeRolled = () => Player.my.upgradeManager.bleedChance < 0.25f,
         };
-        public static readonly UpgradeType CorrosiveChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Corrosive Chance") { chanceMult = 0.6f, valueMult = 0.37f, canBeRolled = () => Game.instance.generation > 15 };
-        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance") { chanceMult = 0.5f, valueMult = 0.8f };
-        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance") { valueMult = 0.13f, canBeRolled = () => Game.instance.generation > 24 && Player.my.upgradeManager.coldChance < 0.13f };
+        public static readonly UpgradeType CorrosiveChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Corrosive Chance")
+        {
+            status = true,
+            chanceMult = 0.6f,
+            valueMult = 0.37f,
+            canBeRolled = () => Game.instance.generation > 15
+        };
+        public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance")
+        {
+            status = true,
+            chanceMult = 0.5f,
+            valueMult = 0.8f
+        };
+        public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance")
+        {
+            status = true,
+            valueMult = 0.13f,
+            canBeRolled = () => Game.instance.generation > 24 && Player.my.upgradeManager.coldChance < 0.13f
+        };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f, chanceMult = 0.75f, canBeRolled = () => !Player.my.abilityManager.ability1.ConstantValues };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.15f, chanceMult = 0.5f, canBeRolled = () => !Player.my.abilityManager.ability1.ConstantValues };
         public static readonly UpgradeType NthShotMultishot = new UpgradeType(x => $"Every 4th shot has +{MathHelper.ToPercentAndRound(x)}% Total Multishot")

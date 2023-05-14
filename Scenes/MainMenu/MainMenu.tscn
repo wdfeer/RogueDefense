@@ -173,3 +173,8 @@ augmentText = "Base Fire Rate: "
 margin_top = 208.0
 margin_bottom = 308.0
 augmentText = "Base Multishot: "
+
+[node name="3" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 208.0
+margin_bottom = 308.0
+augmentText = "Status Chance Mult: "
