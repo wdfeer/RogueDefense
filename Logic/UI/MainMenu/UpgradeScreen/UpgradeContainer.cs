@@ -11,7 +11,7 @@ public class UpgradeContainer : HBoxContainer
     public static readonly float[] STAT_PER_POINT = new float[] {
         0.1f, 0.06f, 0.07f
     };
-    public const int MIN_POINTS = 0;
+    public const int MIN_POINTS = -2;
     public float stat = 1f;
     public int points = 0;
     public override void _Ready()
