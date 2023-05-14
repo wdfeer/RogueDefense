@@ -19,7 +19,7 @@ public class Game : Node2D
 
         Enemy.ResetRngSeed();
 
-        Player.my = new Player(Client.myId, UserSaveData.upgradePointDistribution);
+        Player.my = new Player(Client.myId, UserSaveData.augmentAllotment);
         Client.instance.others.ForEach(x => new Player(x.id, x.upgradePoints));
     }
 

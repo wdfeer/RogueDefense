@@ -2,14 +2,13 @@
 
 [ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/font32.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Logic/UI/MainMenu/UpgradeScreen/UpgradeContainer.cs" type="Script" id=3]
-[ext_resource path="res://Logic/UI/MainMenu/UpgradeScreen/PlusMinusButton.cs" type="Script" id=4]
+[ext_resource path="res://Logic/UI/MainMenu/AugmentScreen/AugmentContainer.cs" type="Script" id=3]
+[ext_resource path="res://Logic/UI/MainMenu/AugmentScreen/PlusMinusButton.cs" type="Script" id=4]
 
-[node name="UpgradeContainer" type="HBoxContainer"]
+[node name="AugmentContainer" type="HBoxContainer"]
 margin_right = 872.0
 margin_bottom = 178.0
 script = ExtResource( 3 )
-upgradeText = "Base Damage: "
 
 [node name="Label" type="Label" parent="."]
 margin_top = 67.0

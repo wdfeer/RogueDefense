@@ -2,14 +2,14 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class UpgradeScreenButton : TextureButton
+public class AugmentsButton : TextureButton
 {
     public override void _Pressed()
     {
-        var upgradePanel = GetNode<Panel>("/root/Control/UpgradePanel");
+        var upgradePanel = GetNode<Panel>("/root/Control/AugmentPanel");
         upgradePanel.Visible = !upgradePanel.Visible;
 
-        foreach (UpgradeContainer upgrader in upgradePanel.GetNode("VBoxContainer").GetChildren())
+        foreach (AugmentContainer upgrader in upgradePanel.GetNode("VBoxContainer").GetChildren())
         {
             upgrader.Save();
         }

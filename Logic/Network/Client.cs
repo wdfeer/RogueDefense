@@ -48,7 +48,7 @@ public class Client : Node
         switch (type)
         {
             case MessageType.FetchLobby:
-                SendMessage(MessageType.Register, new string[] { args[0], UserSaveData.name, AbilityChooser.chosen.ToString(), UserData.UpgradePointsAsString(UserSaveData.upgradePointDistribution) });
+                SendMessage(MessageType.Register, new string[] { args[0], UserSaveData.name, AbilityChooser.chosen.ToString(), UserData.UpgradePointsAsString(UserSaveData.augmentAllotment) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {

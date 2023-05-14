@@ -6,8 +6,8 @@ public class PointLabel : Label
 {
     public override void _Ready()
     {
-        UserSaveData.onUpgradePointCountChanged = UpdateText;
-        UpdateText(UserSaveData.SpareUpgradePoints);
+        UserSaveData.updateAugmentPointCounter = UpdateText;
+        UpdateText(UserSaveData.SpareAugmentPoints);
     }
     void UpdateText(int points)
     {

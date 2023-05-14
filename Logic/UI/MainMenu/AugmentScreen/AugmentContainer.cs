@@ -2,10 +2,10 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class UpgradeContainer : HBoxContainer
+public class AugmentContainer : HBoxContainer
 {
     [Export]
-    public string upgradeText;
+    public string augmentText;
     public Label Label => GetNode<Label>("Label");
 
     public static readonly float[] STAT_PER_POINT = new float[] {
@@ -20,32 +20,32 @@ public class UpgradeContainer : HBoxContainer
     }
     void UpdateLabelText()
     {
-        Label.Text = upgradeText + stat.ToString("0.00");
+        Label.Text = augmentText + stat.ToString("0.00");
     }
 
     public void ChangeStat(int effect)
     {
-        UserSaveData.SpareUpgradePoints -= effect;
+        UserSaveData.SpareAugmentPoints -= effect;
         points += effect;
         UpdateStatBasedOnPoints();
         UpdateLabelText();
     }
     void UpdateStatBasedOnPoints()
     {
-        stat = 1f + points * STAT_PER_POINT[GetUpgradeIndex()];
+        stat = 1f + points * STAT_PER_POINT[GetAugmentIndex()];
     }
 
     public void Load()
     {
-        points = UserSaveData.upgradePointDistribution[GetUpgradeIndex()];
+        points = UserSaveData.augmentAllotment[GetAugmentIndex()];
         UpdateStatBasedOnPoints();
         UpdateLabelText();
     }
 
-    int GetUpgradeIndex() =>
+    int GetAugmentIndex() =>
         int.Parse(Name);
     public void Save()
     {
-        UserSaveData.upgradePointDistribution[GetUpgradeIndex()] = points;
+        UserSaveData.augmentAllotment[GetAugmentIndex()] = points;
     }
 }
