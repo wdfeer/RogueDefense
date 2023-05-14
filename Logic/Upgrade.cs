@@ -7,11 +7,16 @@ using System.Linq;
 public struct Upgrade
 {
     public UpgradeType type;
-    public float value;
-    public Upgrade(UpgradeType type, float value)
+    public float baseValue;
+    public float Value => baseValue * valueMult;
+    public float valueMult;
+    public bool risky;
+    public Upgrade(UpgradeType type, float baseValue)
     {
         this.type = type;
-        this.value = value;
+        this.baseValue = baseValue;
+        valueMult = 1f;
+        risky = false;
     }
     public static Upgrade[] RandomUniqueUpgrades(int count)
     {
@@ -28,7 +33,7 @@ public struct Upgrade
         {
             for (int i = 0; i < upgrades.Length; i++)
             {
-                upgrades[i].value *= 1 + UpgradeBuffAbility.UPGRADE_VALUE_INCREASE;
+                upgrades[i].valueMult += UpgradeBuffAbility.UPGRADE_VALUE_INCREASE;
             }
             UpgradeBuffAbility.active = false;
         }
@@ -45,6 +50,6 @@ public struct Upgrade
 
     public override string ToString()
     {
-        return type.getUpgradeText(value);
+        return type.getUpgradeText(Value);
     }
 }

@@ -35,16 +35,14 @@ public class Enemy : Area2D
             statsRng.Seed = (ulong)seed;
         }
     }
+    public static float oneTimeHpMult = 1f;
+    public static float oneTimeArmorMult = 1f;
+    public static float oneTimeDamageMult = 1f;
     void ScaleStats(int gen)
     {
         ScaleMaxHp(gen);
-
-        damage = 12.5f * Mathf.Sqrt(1f + gen);
-
-        if (gen > 10f)
-            armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 10f);
-        else armor = 0f;
-        ResetArmorDisplay();
+        ScaleDamage(gen);
+        ScaleArmor(gen);
 
         if (gen >= (NetworkManager.Singleplayer ? 75 : 24) && gen % (NetworkManager.Singleplayer ? 25 : 12) == 0)
         {
@@ -73,10 +71,6 @@ public class Enemy : Area2D
                 SetMinDamage(GetMinDamage(gen));
         }
     }
-    void ActivateEffectField()
-    {
-        ((EffectField)GetNode("EffectField")).Enable(GD.Randf() < 0.5f ? EffectField.EffectFieldMode.Slow : EffectField.EffectFieldMode.Diffuse);
-    }
     void ScaleMaxHp(int gen)
     {
         float baseMaxHp = 5f;
@@ -88,9 +82,32 @@ public class Enemy : Area2D
             power = gen / 17.5f;
             baseMaxHp *= NetworkManager.PlayerCount;
         }
-        maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power) * (0.8f + statsRng.Randf() * 0.4f));
+        maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power) * (0.8f + statsRng.Randf() * 0.4f)) * oneTimeHpMult;
         Hp = maxHp;
+
+        oneTimeHpMult = 1f;
     }
+    void ScaleDamage(int gen)
+    {
+        damage = 12.5f * Mathf.Sqrt(1f + gen) * oneTimeDamageMult;
+        oneTimeDamageMult = 1f;
+    }
+    void ScaleArmor(int gen)
+    {
+        if (gen > 10f)
+            armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 10f) * oneTimeArmorMult;
+        else
+            armor = 0f;
+
+        oneTimeArmorMult = 1f;
+
+        ResetArmorDisplay();
+    }
+    void ActivateEffectField()
+    {
+        ((EffectField)GetNode("EffectField")).Enable(GD.Randf() < 0.5f ? EffectField.EffectFieldMode.Slow : EffectField.EffectFieldMode.Diffuse);
+    }
+
 
     public float maxHp;
     private float hp;

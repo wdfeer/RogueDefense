@@ -22,7 +22,15 @@ public class UpgradeScreen : Panel
             upgradeButtonScene.Instance() as CustomButton,
             upgradeButtonScene.Instance() as CustomButton
         };
+
         upgrades = Upgrade.RandomUniqueUpgrades(3);
+        if (Game.Gen % 6 == 0)
+        {
+            upgrades[2].valueMult += 1.25f;
+            buttons[2].Modulate = Colors.Red;
+            upgrades[2].risky = true;
+        }
+
         for (int i = 0; i < buttons.Length; i++)
         {
             CustomButton butt = buttons[i];
@@ -57,7 +65,7 @@ public class UpgradeScreen : Panel
         else
         {
             upgradesMade++;
-            Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.value.ToString() });
+            Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
             if (EveryoneUpgraded())
                 HideAndUnpause();
         }

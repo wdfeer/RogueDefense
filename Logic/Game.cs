@@ -37,6 +37,7 @@ public class Game : Node2D
         AddChild(enemy);
     }
 
+    public static int Gen => instance.generation;
     public int generation = 1;
     public void DeleteEnemy(bool netUpdate)
     {

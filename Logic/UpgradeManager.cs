@@ -29,25 +29,32 @@ namespace RogueDefense
         public List<Upgrade> upgrades = new List<Upgrade>();
         public static void AddUpgrade(Upgrade upgrade, int from)
         {
+            if (upgrade.risky)
+            {
+                Enemy.oneTimeHpMult += 2f;
+                Enemy.oneTimeArmorMult += 1f;
+                Enemy.oneTimeDamageMult += 2f;
+            }
+
             if (upgrade.type == UpgradeType.Turret)
             {
                 Player.players[from].SpawnTurret();
             }
             else if (upgrade.type == UpgradeType.DamagePerUniqueStatus)
             {
-                PlayerHooks.GetHooks<DamagePerUniqueStatusPlayer>(Player.players[from]).damageIncreasePerUniqueStatus += upgrade.value;
+                PlayerHooks.GetHooks<DamagePerUniqueStatusPlayer>(Player.players[from]).damageIncreasePerUniqueStatus += upgrade.Value;
             }
             else if (upgrade.type == UpgradeType.MultishotPerShot)
             {
-                PlayerHooks.GetHooks<MultishotPerShotPlayer>(Player.players[from]).multishotPerShot += upgrade.value;
+                PlayerHooks.GetHooks<MultishotPerShotPlayer>(Player.players[from]).multishotPerShot += upgrade.Value;
             }
             else if (upgrade.type == UpgradeType.FirstShotTotalDamage)
             {
-                PlayerHooks.GetHooks<FirstShotPlayer>(Player.players[from]).damageMult += upgrade.value;
+                PlayerHooks.GetHooks<FirstShotPlayer>(Player.players[from]).damageMult += upgrade.Value;
             }
             else if (upgrade.type == UpgradeType.LowEnemyHpDamage)
             {
-                PlayerHooks.GetHooks<LowEnemyHpDamagePlayer>(Player.players[from]).buff += upgrade.value;
+                PlayerHooks.GetHooks<LowEnemyHpDamagePlayer>(Player.players[from]).buff += upgrade.Value;
             }
             else
             {
@@ -118,7 +125,7 @@ namespace RogueDefense
             player.shootManager.shootSpeed = ShootManager.BASE_SHOOT_SPEED;
         }
         public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
-            => upgrades.Where(x => x.type.Equals(type)).Select(x => x.value);
+            => upgrades.Where(x => x.type.Equals(type)).Select(x => x.Value);
         public float SumAllUpgradeValues(UpgradeType type)
             => GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
         public float GetTotalUpgradeMultiplier(UpgradeType type)
