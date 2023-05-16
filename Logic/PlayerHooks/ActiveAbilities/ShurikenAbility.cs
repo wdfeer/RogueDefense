@@ -23,8 +23,9 @@ namespace RogueDefense
         {
         }
 
+        public override bool Shared => false;
         public float Damage => BASE_DAMAGE * Strength * player.shootManager.damage;
-        public override float BaseCooldown => 10f / Mathf.Sqrt(1f + (Duration - 1f) * 0.75f);
+        public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);
         protected override string GetAbilityText()
             => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)(Damage)} Damage
 Cooldown: {Cooldown.ToString("0.00")} s";
