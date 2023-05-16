@@ -7,7 +7,7 @@ namespace RogueDefense
 {
     public class HpResetter : PlayerHooks
     {
-        public HpResetter(Player player) : base(player)
+        public HpResetter(Player player) : base(player) // Only created on the local player
         {
         }
 

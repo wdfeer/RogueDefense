@@ -184,7 +184,7 @@ public class Enemy : Area2D
 
         if (!attacking)
         {
-            GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult, 0);
+            GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult * delta * 60, 0);
         }
     }
     public void BodyEntered(Node body)
