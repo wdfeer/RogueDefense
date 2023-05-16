@@ -120,7 +120,7 @@ namespace RogueDefense
             bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
             viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
             coldChance = SumAllUpgradeValues(UpgradeType.ColdChance);
-            PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
+            PlayerHooks.GetHooks<StatusPlayer>(player).corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
 
             player.shootManager.shootSpeed = ShootManager.BASE_SHOOT_SPEED;
         }
