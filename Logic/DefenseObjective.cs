@@ -50,14 +50,7 @@ namespace RogueDefense
         }
         public override void _Process(float delta)
         {
-            if (UserSaveData.killCount > 25)
-            {
-                float dps = 6;
-                if (!NetworkManager.Singleplayer) dps *= 2f;
-                if (Game.instance.generation > 40) dps *= 2f;
-                if (Game.instance.generation > 25) dps *= 2f;
-                Damage(delta * dps);
-            }
+            DealPassiveDamage(delta);
 
             float hpOfMaxHp = hp / maxHp;
             hpBar.Value = hpOfMaxHp;
@@ -69,6 +62,15 @@ namespace RogueDefense
                 pair.Value._Process(delta);
             }
         }
+        void DealPassiveDamage(float delta)
+        {
+            float dps = 6;
+            if (!NetworkManager.Singleplayer) dps *= 2f;
+            if (Game.instance.generation > 40) dps *= 2f;
+            if (Game.instance.generation > 25) dps *= 2f;
+            Damage(delta * dps);
+        }
+
         public bool dead = false;
         public void Death(bool local = true)
         {
