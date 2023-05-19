@@ -36,6 +36,8 @@ public class Game : Node2D
         enemy = enemyScene.Instance() as Enemy;
         enemy.Position = new Vector2(900, 300);
         AddChild(enemy);
+
+        (GetNode("./LevelText") as Label).Text = $"Level {generation}";
     }
 
     public static int Gen => instance.generation;
@@ -60,7 +62,6 @@ public class Game : Node2D
 
         GetTree().Paused = true;
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
-        (GetNode("./UpgradeScreen/LevelText") as Label).Text = $"Level {generation}";
 
         foreach (var item in Player.players)
         {

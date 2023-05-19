@@ -98,22 +98,12 @@ text = "This text
 should be
 updated on start"
 
-[node name="LevelText" type="Label" parent="UpgradeScreen"]
-margin_left = 432.0
-margin_top = 360.0
-margin_right = 592.0
-margin_bottom = 396.0
-theme = ExtResource( 7 )
-text = "Level 0"
-align = 1
-valign = 1
-
 [node name="BuffText" type="Label" parent="."]
 modulate = Color( 0.662745, 0.784314, 1, 1 )
 margin_left = 12.0
-margin_top = 500.0
+margin_top = 492.0
 margin_right = 652.0
-margin_bottom = 725.0
+margin_bottom = 717.0
 rect_scale = Vector2( 0.36, 0.36 )
 custom_fonts/font = ExtResource( 12 )
 text = "+999% Multishot
@@ -128,8 +118,9 @@ margin_bottom = 580.0
 theme = ExtResource( 7 )
 
 [node name="AbilityButton1" type="Button" parent="AbilityContainer"]
+margin_top = -8.0
 margin_right = 90.0
-margin_bottom = 80.0
+margin_bottom = 72.0
 script = ExtResource( 9 )
 
 [node name="Cooldown" type="ProgressBar" parent="AbilityContainer/AbilityButton1"]
@@ -156,17 +147,28 @@ Cooldown: 30 s"
 
 [node name="DpsLabel" type="Label" parent="."]
 pause_mode = 2
-margin_top = 20.0
-margin_right = 1024.0
-margin_bottom = 50.0
+modulate = Color( 1, 1, 1, 0.627451 )
+margin_left = 432.0
+margin_top = 42.0
+margin_right = 592.0
+margin_bottom = 65.0
 theme = ExtResource( 7 )
 text = "Avg DPS: 0.0"
 align = 1
 valign = 1
 script = ExtResource( 14 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
+
+[node name="LevelText" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 432.0
+margin_top = 69.0
+margin_right = 592.0
+margin_bottom = 101.0
+theme = ExtResource( 7 )
+text = "Level 1"
+align = 1
+valign = 1
 
 [node name="z-index1" type="Node2D" parent="."]
 z_index = 1
@@ -213,10 +215,10 @@ script = ExtResource( 13 )
 pause_mode = 2
 margin_left = 12.0
 margin_top = 12.0
-margin_right = 60.0
+margin_right = 84.0
 margin_bottom = 60.0
 theme = ExtResource( 7 )
-text = "SURRENDER"
+text = "EXIT"
 script = ExtResource( 18 )
 
 [node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/ExitButton"]

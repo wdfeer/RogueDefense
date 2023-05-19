@@ -24,7 +24,7 @@ public class UpgradeScreen : Panel
         };
 
         upgrades = Upgrade.RandomUniqueUpgrades(3);
-        if (Game.Gen % 6 == 0)
+        if ((Game.Gen - 1) % 6 == 0)
         {
             upgrades[2].valueMult += 1.25f;
             buttons[2].Modulate = Colors.Red;
