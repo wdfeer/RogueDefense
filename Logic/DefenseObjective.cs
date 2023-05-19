@@ -79,8 +79,8 @@ namespace RogueDefense
                 Client.instance.SendMessage(MessageType.Death);
             }
 
-            UserSaveData.gameCount++;
-            UserSaveData.Save();
+            SaveData.gameCount++;
+            SaveData.Save();
 
             Game.instance.GetTree().Paused = true;
             DeathScreen.instance.Show();

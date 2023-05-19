@@ -13,7 +13,7 @@ public class PlusMinusButton : Button
 
     public override void _Process(float delta)
     {
-        Disabled = effect > UserSaveData.SpareAugmentPoints ||
+        Disabled = effect > SaveData.SpareAugmentPoints ||
             (GetParent<AugmentContainer>().points == AugmentContainer.MIN_POINTS && effect < 0);
     }
 }

@@ -32,7 +32,7 @@ namespace RogueDefense
         }
         public void Process(float delta)
         {
-            if (UserSaveData.killCount > 25)
+            if (SaveData.killCount > 25)
             {
                 float dps = 6;
                 if (!NetworkManager.Singleplayer) dps *= 2f;
@@ -54,8 +54,8 @@ namespace RogueDefense
                 Client.instance.SendMessage(MessageType.Death);
             }
 
-            UserSaveData.gameCount++;
-            UserSaveData.Save();
+            SaveData.gameCount++;
+            SaveData.Save();
 
             Game.instance.GetTree().Paused = true;
             DeathScreen.instance.Show();

@@ -4,7 +4,7 @@ using Godot;
 
 namespace RogueDefense
 {
-    public static class UserSaveData
+    public static class SaveData
     {
         public const string SAVE_PATH = "user://user.txt";
         public static bool Load()
@@ -55,6 +55,16 @@ namespace RogueDefense
 
             file.Close();
         }
+        public static void UpdateHighscore()
+        {
+            int lvl = Game.instance.generation;
+            if (NetworkManager.Singleplayer && lvl > highscoreSingleplayer)
+                highscoreSingleplayer = lvl;
+            else if (lvl > highscoreMultiplayer)
+                highscoreMultiplayer = lvl;
+        }
+
+
         public static string name = "";
         public static string lastIp = "";
         public static bool showCombatText = false;
@@ -63,6 +73,8 @@ namespace RogueDefense
         public static int gameCount = 0;
         public static int killCount = 0;
         public static int[] augmentAllotment = new int[] { 0, 0, 0, 0, 0 };
+
+
         private static int spareAugmentPoints = 10;
         public static int SpareAugmentPoints
         {
@@ -77,14 +89,5 @@ namespace RogueDefense
             }
         }
         public static Action<int> updateAugmentPointCounter = (value) => { };
-
-        public static void UpdateHighscore()
-        {
-            int lvl = Game.instance.generation;
-            if (NetworkManager.Singleplayer && lvl > highscoreSingleplayer)
-                highscoreSingleplayer = lvl;
-            else if (lvl > highscoreMultiplayer)
-                highscoreMultiplayer = lvl;
-        }
     }
 }

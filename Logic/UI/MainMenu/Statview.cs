@@ -12,10 +12,10 @@ public class Statview : VBoxContainer
     {
         ToSignal(GetTree().CreateTimer(0.01f), "timeout").OnCompleted(() =>
         {
-            SingleplayerHighscore.Text += UserSaveData.highscoreSingleplayer.ToString();
-            MultiplayerHighscore.Text += UserSaveData.highscoreMultiplayer.ToString();
-            GameCounter.Text += UserSaveData.gameCount.ToString();
-            KillCounter.Text += UserSaveData.killCount.ToString();
+            SingleplayerHighscore.Text += SaveData.highscoreSingleplayer.ToString();
+            MultiplayerHighscore.Text += SaveData.highscoreMultiplayer.ToString();
+            GameCounter.Text += SaveData.gameCount.ToString();
+            KillCounter.Text += SaveData.killCount.ToString();
         });
     }
 }

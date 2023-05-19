@@ -13,6 +13,6 @@ public class AugmentsButton : TextureButton
         {
             upgrader.Save();
         }
-        UserSaveData.Save();
+        SaveData.Save();
     }
 }

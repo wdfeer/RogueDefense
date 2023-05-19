@@ -11,7 +11,7 @@ public class JoinButton : Button
     }
     public void LoadLastIp()
     {
-        AddressEdit.Text = RogueDefense.UserSaveData.lastIp;
+        AddressEdit.Text = RogueDefense.SaveData.lastIp;
     }
     ConnectingLabel connectingLabel => (ConnectingLabel)GetNode("../ConnectingLabel");
     public override void _Pressed()
@@ -19,8 +19,8 @@ public class JoinButton : Button
         NetworkManager.mode = NetMode.Client;
         string addr = AddressEdit.Text;
         Client.address = addr;
-        RogueDefense.UserSaveData.lastIp = addr;
-        RogueDefense.UserSaveData.Save();
+        RogueDefense.SaveData.lastIp = addr;
+        RogueDefense.SaveData.Save();
         Client.port = int.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
 
         connectingLabel.Visible = true;

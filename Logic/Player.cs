@@ -10,7 +10,7 @@ namespace RogueDefense
         public bool Local => id == Client.myId;
         public static Dictionary<int, Player> players;
         public int id;
-        public string Name => Local ? UserSaveData.name : Client.instance.GetUserData(id).name;
+        public string Name => Local ? SaveData.name : Client.instance.GetUserData(id).name;
 
         public List<PlayerHooks> hooks;
         public ShootManager shootManager;

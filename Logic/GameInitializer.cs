@@ -10,7 +10,7 @@ public class GameInitializer : Node
         Player.my = null;
         Player.players = new Dictionary<int, Player>();
 
-        RogueDefense.UserSaveData.Load();
+        RogueDefense.SaveData.Load();
 
         UpgradeType.Initialize();
     }

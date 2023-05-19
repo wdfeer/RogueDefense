@@ -13,13 +13,13 @@ public class Game : Node2D
     public Enemy enemy;
     public override void _Ready()
     {
-        RogueDefense.UserSaveData.Save();
+        RogueDefense.SaveData.Save();
 
         instance = this;
 
         Enemy.ResetRngSeed();
 
-        Player.my = new Player(Client.myId, UserSaveData.augmentAllotment);
+        Player.my = new Player(Client.myId, SaveData.augmentAllotment);
         Client.instance.others.ForEach(x => new Player(x.id, x.upgradePoints));
     }
 
@@ -53,9 +53,9 @@ public class Game : Node2D
         enemy = null;
         generation++;
 
-        UserSaveData.UpdateHighscore();
-        UserSaveData.killCount++;
-        UserSaveData.Save();
+        SaveData.UpdateHighscore();
+        SaveData.killCount++;
+        SaveData.Save();
 
         GetTree().Paused = true;
         (GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
