@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Logic/Game.cs" type="Script" id=1]
 [ext_resource path="res://Assets/segoeui.ttf" type="DynamicFontData" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Logic/UI/InGame/ExitButton.cs" type="Script" id=18]
 [ext_resource path="res://Logic/UI/InGame/NotificationPopup.cs" type="Script" id=19]
 [ext_resource path="res://Logic/UI/InGame/BuffText.cs" type="Script" id=20]
+[ext_resource path="res://Assets/font24.tres" type="DynamicFont" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31, 31 )
@@ -123,19 +124,16 @@ margin_right = 90.0
 margin_bottom = 72.0
 script = ExtResource( 9 )
 
-[node name="Cooldown" type="ProgressBar" parent="AbilityContainer/AbilityButton1"]
-margin_left = 90.0
-margin_top = 80.0
-margin_right = 170.0
-margin_bottom = 100.0
-rect_rotation = -90.0
-max_value = 1.0
-step = 0.001
-percent_visible = false
+[node name="CooldownLabel" type="Label" parent="AbilityContainer/AbilityButton1"]
+margin_right = 90.0
+margin_bottom = 81.0
+custom_fonts/font = ExtResource( 21 )
+align = 1
+valign = 1
 
 [node name="Label" type="Label" parent="AbilityContainer/AbilityButton1"]
-margin_left = 115.0
-margin_right = 267.0
+margin_left = 99.0
+margin_right = 252.0
 margin_bottom = 75.0
 theme = ExtResource( 7 )
 custom_fonts/font = SubResource( 3 )

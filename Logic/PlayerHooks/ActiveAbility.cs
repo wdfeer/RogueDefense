@@ -53,6 +53,7 @@ namespace RogueDefense
         public float Cooldown => BaseCooldown * player.abilityManager.cooldownMult;
         public void ResetCooldown() => cooldownTimer = float.PositiveInfinity;
         protected float cooldownTimer = float.PositiveInfinity;
+        float TimeRemaining => Cooldown - cooldownTimer;
         public bool Cooling => cooldownTimer < Cooldown;
         public override void PreUpdate(float delta)
         {
@@ -60,10 +61,16 @@ namespace RogueDefense
                 return;
 
             button.Disabled = Cooling;
-            (button.GetNode("./Cooldown") as ProgressBar).Value = (Cooldown - cooldownTimer) / Cooldown;
+            Label cooldownLabel = button.GetNode<Label>("CooldownLabel");
             if (Cooling)
             {
                 cooldownTimer += delta;
+                cooldownLabel.Text = TimeRemaining.ToString("0.0");
+                cooldownLabel.Modulate = (TimeRemaining / Cooldown) > 0.5f ? Colors.DarkRed : Colors.Yellow;
+            }
+            else
+            {
+                cooldownLabel.Text = "";
             }
         }
 
