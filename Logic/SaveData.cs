@@ -21,6 +21,12 @@ namespace RogueDefense
                 int.TryParse(file.GetLine(), out highscoreMultiplayer);
                 int.TryParse(file.GetLine(), out gameCount);
                 int.TryParse(file.GetLine(), out killCount);
+
+                for (int i = 0; i < topPP.Length; i++)
+                {
+                    topPP[i] = file.GetFloat();
+                }
+
                 SpareAugmentPoints = 10;
                 for (int i = 0; i < augmentAllotment.Length; i++)
                 {
@@ -48,6 +54,10 @@ namespace RogueDefense
             file.StoreLine(highscoreMultiplayer.ToString());
             file.StoreLine(gameCount.ToString());
             file.StoreLine(killCount.ToString());
+            for (int i = 0; i < topPP.Length; i++)
+            {
+                file.StoreFloat(topPP[i]);
+            }
             for (int i = 0; i < augmentAllotment.Length; i++)
             {
                 file.Store64((ulong)augmentAllotment[i]);
@@ -72,6 +82,7 @@ namespace RogueDefense
         public static int highscoreMultiplayer = 0;
         public static int gameCount = 0;
         public static int killCount = 0;
+        public static float[] topPP = new float[] { 0f, 0f, 0f };
         public static int[] augmentAllotment = new int[] { 0, 0, 0, 0, 0 };
 
 

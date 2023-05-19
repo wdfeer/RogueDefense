@@ -99,6 +99,43 @@ text = "This text
 should be
 updated on start"
 
+[node name="DpsLabel" type="Label" parent="."]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0.627451 )
+margin_left = 432.0
+margin_top = 82.0
+margin_right = 592.0
+margin_bottom = 105.0
+theme = ExtResource( 7 )
+text = "Avg DPS: 0.0"
+align = 1
+valign = 1
+script = ExtResource( 14 )
+
+[node name="LevelText" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 432.0
+margin_top = 45.0
+margin_right = 592.0
+margin_bottom = 69.0
+theme = ExtResource( 7 )
+text = "Level 1"
+align = 1
+valign = 1
+
+[node name="PPLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 432.0
+margin_top = 19.0
+margin_right = 592.0
+margin_bottom = 43.0
+theme = ExtResource( 7 )
+text = "0.000 pp"
+align = 1
+valign = 1
+
 [node name="BuffText" type="Label" parent="."]
 modulate = Color( 0.662745, 0.784314, 1, 1 )
 margin_left = 12.0
@@ -142,31 +179,6 @@ Duration: 5 s
 Cooldown: 30 s"
 
 [node name="NetPoller" parent="." instance=ExtResource( 11 )]
-
-[node name="DpsLabel" type="Label" parent="."]
-pause_mode = 2
-modulate = Color( 1, 1, 1, 0.627451 )
-margin_left = 432.0
-margin_top = 42.0
-margin_right = 592.0
-margin_bottom = 65.0
-theme = ExtResource( 7 )
-text = "Avg DPS: 0.0"
-align = 1
-valign = 1
-script = ExtResource( 14 )
-
-[node name="LevelText" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 432.0
-margin_top = 69.0
-margin_right = 592.0
-margin_bottom = 101.0
-theme = ExtResource( 7 )
-text = "Level 1"
-align = 1
-valign = 1
 
 [node name="z-index1" type="Node2D" parent="."]
 z_index = 1

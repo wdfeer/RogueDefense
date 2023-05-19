@@ -1,5 +1,6 @@
 using Godot;
 using RogueDefense;
+using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System;
 using System.Security.Policy;
@@ -17,6 +18,8 @@ public class Game : Node2D
         RogueDefense.SaveData.Save();
 
         instance = this;
+
+        PP.currentPP = 0f;
 
         Enemy.ResetRngSeed();
 
@@ -51,6 +54,9 @@ public class Game : Node2D
         {
             Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
         }
+
+        PP.currentPP += PP.GetKillPP(generation, DefenseObjective.instance.HpRatio);
+        ((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
         enemy.QueueFree();
         enemy = null;

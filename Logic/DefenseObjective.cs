@@ -32,6 +32,7 @@ namespace RogueDefense
             get => hp;
             set => hp = value;
         }
+        public float HpRatio => Hp / maxHp;
         public const float BASE_MAX_HP = 100;
         public float maxHp = BASE_MAX_HP;
         private ProgressBar hpBar;
@@ -81,12 +82,13 @@ namespace RogueDefense
                 Client.instance.SendMessage(MessageType.Death);
             }
 
+            PP.TryRecordPP();
             SaveData.gameCount++;
             SaveData.Save();
 
             Game.instance.GetTree().Paused = true;
             DeathScreen.instance.Show();
-            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"Level {Game.instance.generation} reached";
+            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"Level {Game.instance.generation} reached\n{PP.currentPP.ToString("0.000")} pp";
         }
     }
 }
