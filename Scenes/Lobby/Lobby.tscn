@@ -94,6 +94,7 @@ script = ExtResource( 15 )
 text = "Damage Multiplier: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/DmgMult" index="1"]
+min_value = 0.5
 max_value = 2.0
 
 [node name="FireRateMult" parent="SettingsPanel/Container/Sliders" instance=ExtResource( 10 )]
@@ -104,6 +105,7 @@ margin_bottom = 90.0
 text = "Fire Rate Multiplier: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/FireRateMult" index="1"]
+min_value = 0.5
 max_value = 2.0
 
 [node name="HpDrain" parent="SettingsPanel/Container/Sliders" instance=ExtResource( 10 )]
