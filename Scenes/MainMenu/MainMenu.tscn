@@ -175,6 +175,11 @@ margin_bottom = 308.0
 augmentText = "Base Multishot: "
 
 [node name="3" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 208.0
-margin_bottom = 308.0
+margin_top = 312.0
+margin_bottom = 412.0
 augmentText = "Status Chance Mult: "
+
+[node name="4" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 416.0
+margin_bottom = 516.0
+augmentText = "Crit Damage Mult: "

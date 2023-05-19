@@ -31,7 +31,7 @@ namespace RogueDefense
                 file.Close();
                 return true;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -62,7 +62,7 @@ namespace RogueDefense
         public static int highscoreMultiplayer = 0;
         public static int gameCount = 0;
         public static int killCount = 0;
-        public static int[] augmentAllotment = new int[] { 0, 0, 0, 0 };
+        public static int[] augmentAllotment = new int[] { 0, 0, 0, 0, 0 };
         private static int spareAugmentPoints = 10;
         public static int SpareAugmentPoints
         {

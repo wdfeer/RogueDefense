@@ -46,7 +46,7 @@ namespace RogueDefense
         {
             status = true,
             getBaseRandomValue = () => 0.16f,
-            canBeRolled = () => Player.my.upgradeManager.bleedChance < 0.25f * AugmentContainer.GetMyMult(3),
+            canBeRolled = () => Player.my.upgradeManager.bleedChance < 0.25f * AugmentContainer.GetStatMult(3),
         };
         public static readonly UpgradeType CorrosiveChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Corrosive Chance")
         {

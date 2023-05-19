@@ -110,7 +110,8 @@ namespace RogueDefense
             player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
             critChance = SumAllUpgradeValues(UpgradeType.CritChance);
-            critDamageMult = this.baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
+            baseCritMult = 2f * AugmentContainer.GetStatMult(4);
+            critDamageMult = baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
             player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);

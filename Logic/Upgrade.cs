@@ -46,7 +46,7 @@ public struct Upgrade
         float value = type.GetRandomValue();
         value = Mathf.Round(value * 10000f) / 10000f;
         if (type.status)
-            value *= AugmentContainer.GetMyMult(3);
+            value *= AugmentContainer.GetStatMult(3);
         return new Upgrade(type, value);
     }
 

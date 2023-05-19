@@ -8,10 +8,10 @@ public class AugmentContainer : HBoxContainer
     public string augmentText;
     public Label Label => GetNode<Label>("Label");
 
-    public static float GetMyMult(int augmentIndex)
+    public static float GetStatMult(int augmentIndex)
         => 1f + Player.my.augmentPoints[augmentIndex] * STAT_PER_POINT[augmentIndex];
     public static readonly float[] STAT_PER_POINT = new float[] {
-        0.1f, 0.06f, 0.07f, 0.12f
+        0.1f, 0.06f, 0.07f, 0.12f, 0.12f
     };
     public const int MIN_POINTS = -2;
     public float stat = 1f;
