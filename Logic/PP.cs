@@ -8,6 +8,10 @@ namespace RogueDefense.Logic
 {
     public class PP
     {
+        public static void UpdateLobbyPPMultDisplay()
+        {
+            ((Label)Lobby.Instance.GetNode("PPMult")).Text = "pp Multiplier: " + GetGameSettingsPPMult().ToString("0.000");
+        }
         public static float GetGameSettingsPPMult()
         {
             float result = 1f;

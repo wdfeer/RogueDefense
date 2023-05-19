@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic;
 using System;
 
 public static class GameSettings
@@ -25,17 +26,18 @@ public static class GameSettings
         UpdateSliders();
     }
 
-
     public static void UpdateFromSliders()
     {
         totalDmgMult = (float)Sliders.dmgMult.Slider.Value;
         totalFireRateMult = (float)Sliders.fireRateMult.Slider.Value;
         healthDrain = Sliders.healthDrain.Slider.Value > 0;
+        PP.UpdateLobbyPPMultDisplay();
     }
     public static void UpdateSliders()
     {
         Sliders.dmgMult.SetValue(totalDmgMult);
         Sliders.fireRateMult.SetValue(totalFireRateMult);
         Sliders.healthDrain.SetValue(healthDrain ? 1 : 0);
+        PP.UpdateLobbyPPMultDisplay();
     }
 }
