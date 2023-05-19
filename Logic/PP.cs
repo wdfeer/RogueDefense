@@ -45,5 +45,17 @@ namespace RogueDefense.Logic
             SaveData.topPP = newTopPP.Take(3).ToArray();
             return true;
         }
+
+        public static float GetTotalPP()
+        {
+            float result = 0f;
+            float mult = 1f;
+            for (int i = 0; i < SaveData.topPP.Length; i++)
+            {
+                result += SaveData.topPP[i] * mult;
+                mult /= 2f;
+            }
+            return result;
+        }
     }
 }

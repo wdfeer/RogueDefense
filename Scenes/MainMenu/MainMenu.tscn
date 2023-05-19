@@ -102,6 +102,13 @@ margin_bottom = 78.0
 margin_top = 82.0
 margin_bottom = 110.0
 
+[node name="TotalPP" type="Label" parent="TopPlays"]
+margin_top = 114.0
+margin_right = 256.0
+margin_bottom = 128.0
+text = "= 100 pp"
+align = 2
+
 [node name="Statview" type="VBoxContainer" parent="."]
 margin_left = 412.0
 margin_top = 460.0
