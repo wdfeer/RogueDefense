@@ -15,10 +15,10 @@ namespace RogueDefense.Logic
         public static float GetGameSettingsPPMult()
         {
             float result = 1f;
-            result /= GameSettings.totalDmgMult;
-            result /= Mathf.Pow(GameSettings.totalFireRateMult, 1.25f);
+            result /= GameSettings.totalDmgMult > 1f ? GameSettings.totalDmgMult : Mathf.Sqrt(GameSettings.totalDmgMult);
+            result /= GameSettings.totalFireRateMult > 1f ? Mathf.Pow(GameSettings.totalFireRateMult, 1.25f) : Mathf.Sqrt(GameSettings.totalFireRateMult);
             if (GameSettings.healthDrain)
-                result *= 2f;
+                result *= 1.6f;
             return result;
         }
         public static float currentPP = 0f;
