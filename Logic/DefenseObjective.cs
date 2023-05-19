@@ -51,7 +51,8 @@ namespace RogueDefense
         }
         public override void _Process(float delta)
         {
-            DealPassiveDamage(delta);
+            if (GameSettings.healthDrain)
+                DealPassiveDamage(delta);
 
             float hpOfMaxHp = hp / maxHp;
             hpBar.Value = hpOfMaxHp;

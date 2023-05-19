@@ -106,6 +106,20 @@ text = "Fire Rate Multiplier: "
 [node name="Slider" parent="SettingsPanel/Container/Sliders/FireRateMult" index="1"]
 max_value = 2.0
 
+[node name="HpDrain" parent="SettingsPanel/Container/Sliders" instance=ExtResource( 10 )]
+margin_top = 94.0
+margin_bottom = 137.0
+
+[node name="Label" parent="SettingsPanel/Container/Sliders/HpDrain" index="0"]
+text = "Health Drain: "
+
+[node name="Slider" parent="SettingsPanel/Container/Sliders/HpDrain" index="1"]
+min_value = 0.0
+max_value = 1.0
+step = 1.0
+value = 0.0
+rounded = true
+
 [node name="ResetButton" type="Button" parent="SettingsPanel/Container"]
 margin_top = 487.0
 margin_right = 312.0
@@ -130,3 +144,4 @@ margin_bottom = 600.0
 
 [editable path="SettingsPanel/Container/Sliders/DmgMult"]
 [editable path="SettingsPanel/Container/Sliders/FireRateMult"]
+[editable path="SettingsPanel/Container/Sliders/HpDrain"]
