@@ -11,6 +11,7 @@ namespace RogueDefense
             for (int i = 0; i < ShurikenCount; i++)
             {
                 Shuriken proj = ((Shuriken)shurikenScene.Instance());
+                proj.owner = player;
                 proj.velocity = new Vector2(20f, 0f).Rotated(0.1f * GD.Randf());
                 proj.damage = Damage;
                 DefenseObjective.instance.AddChild(proj);
