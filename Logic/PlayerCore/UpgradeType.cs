@@ -4,13 +4,13 @@ using System.Linq;
 using Godot;
 using RogueDefense.Logic;
 
-namespace RogueDefense
+namespace RogueDefense.Logic.PlayerCore
 {
     public class UpgradeType
     {
         public UpgradeType(Func<float, string> upgradeTextGetter)
         {
-            this.getUpgradeText = upgradeTextGetter;
+            getUpgradeText = upgradeTextGetter;
         }
         public Func<float, string> getUpgradeText;
         public bool status = false;
@@ -91,7 +91,7 @@ namespace RogueDefense
         {
             chanceMult = 0.25f,
             canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 22 : 36) &&
-                ((float)Player.my.turrets.Count / NetworkManager.PlayerCount) < 1.9f
+                (float)Player.my.turrets.Count / NetworkManager.PlayerCount < 1.9f
         };
         public static readonly UpgradeType DamagePerUniqueStatus = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
         {
@@ -164,7 +164,7 @@ namespace RogueDefense
 
         public override int GetHashCode() => uniqueId;
         public override bool Equals(object obj)
-            => obj is UpgradeType && ((UpgradeType)obj).uniqueId == this.uniqueId;
+            => obj is UpgradeType && ((UpgradeType)obj).uniqueId == uniqueId;
 
 
 

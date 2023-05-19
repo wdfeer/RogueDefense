@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {

@@ -5,6 +5,7 @@ using System.Linq;
 using Godot;
 using RogueDefense;
 using RogueDefense.Logic;
+using RogueDefense.Logic.PlayerCore;
 using RogueDefense.Logic.Statuses;
 
 public class Enemy : Area2D

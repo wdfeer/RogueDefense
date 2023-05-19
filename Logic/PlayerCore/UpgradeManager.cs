@@ -2,9 +2,8 @@ using Godot;
 using RogueDefense.Logic;
 using System.Collections.Generic;
 using System.Linq;
-using static Upgrade;
 
-namespace RogueDefense
+namespace RogueDefense.Logic.PlayerCore
 {
     public class UpgradeManager
     {
@@ -143,7 +142,7 @@ namespace RogueDefense
             var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
             upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
             if (DefenseObjective.instance.damageMult != 1f)
-                upgradeText.Text += $"Damage Reduction: {MathHelper.ToPercentAndRound((1 - DefenseObjective.instance.damageMult))}%\n";
+                upgradeText.Text += $"Damage Reduction: {MathHelper.ToPercentAndRound(1 - DefenseObjective.instance.damageMult)}%\n";
             if (DefenseObjective.instance.evasionChance > 0f)
                 upgradeText.Text += $"Evasion: {MathHelper.ToPercentAndRound(DefenseObjective.instance.evasionChance)}%\n";
             upgradeText.Text += $@"

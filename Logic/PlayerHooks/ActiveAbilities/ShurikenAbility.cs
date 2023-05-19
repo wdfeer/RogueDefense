@@ -1,4 +1,6 @@
 using Godot;
+using RogueDefense.Logic.PlayerCore;
+
 namespace RogueDefense
 {
     public class ShurikenAbility : ActiveAbility

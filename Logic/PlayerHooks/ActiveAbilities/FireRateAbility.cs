@@ -1,3 +1,5 @@
+using RogueDefense.Logic.PlayerCore;
+
 namespace RogueDefense
 {
     public class FireRateAbility : ActiveAbility

@@ -2,7 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RogueDefense
+namespace RogueDefense.Logic.PlayerCore
 {
     public class Player
     {
@@ -19,12 +19,12 @@ namespace RogueDefense
         public int[] augmentPoints;
         public Player(int id, int[] upgradePointDistribution)
         {
-            this.augmentPoints = upgradePointDistribution;
+            augmentPoints = upgradePointDistribution;
 
             hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this) };
 
             this.id = id;
-            Player.players.Add(id, this);
+            players.Add(id, this);
             shootManager = new ShootManager(this);
             upgradeManager = new UpgradeManager(this);
             abilityManager = new AbilityManager(this);

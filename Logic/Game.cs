@@ -1,5 +1,6 @@
 using Godot;
 using RogueDefense;
+using RogueDefense.Logic.PlayerCore;
 using System;
 using System.Security.Policy;
 

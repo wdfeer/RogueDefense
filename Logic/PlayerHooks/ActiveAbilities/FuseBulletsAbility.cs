@@ -1,6 +1,7 @@
 using System.Linq;
 using Godot;
 using RogueDefense.Logic;
+using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {

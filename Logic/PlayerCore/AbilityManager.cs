@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RogueDefense
+namespace RogueDefense.Logic.PlayerCore
 {
     public class AbilityManager
     {

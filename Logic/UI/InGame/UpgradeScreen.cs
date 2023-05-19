@@ -1,6 +1,6 @@
 using System.Linq;
 using Godot;
-using RogueDefense;
+using RogueDefense.Logic.PlayerCore;
 
 public class UpgradeScreen : Panel
 {

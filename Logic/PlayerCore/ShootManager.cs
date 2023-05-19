@@ -3,7 +3,7 @@ using RogueDefense.Logic;
 using System;
 using System.Collections.Generic;
 
-namespace RogueDefense
+namespace RogueDefense.Logic.PlayerCore
 {
     public class ShootManager
     {
