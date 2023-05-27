@@ -55,9 +55,11 @@ turretScene = ExtResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="DefenseObjective"]
 texture = ExtResource( 6 )
+vframes = 5
 region_rect = Rect2( 0, 0, 60, 60 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseObjective"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="HpBar" type="ProgressBar" parent="DefenseObjective"]

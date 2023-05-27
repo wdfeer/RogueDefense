@@ -21,7 +21,9 @@ namespace RogueDefense
         {
             instance = this;
 
-            hpBar = GetNode("./HpBar") as ProgressBar;
+            hpBar = GetNode<ProgressBar>("./HpBar");
+            sprite = GetNode<Sprite>("./Sprite");
+
             Hp = maxHp;
         }
 
@@ -36,6 +38,9 @@ namespace RogueDefense
         public const float BASE_MAX_HP = 100;
         public float maxHp = BASE_MAX_HP;
         private ProgressBar hpBar;
+
+        private Sprite sprite;
+        private int GetSpriteFrame() => 4 - (int)(HpRatio / 0.2f);
 
         public float damageMult = 1f;
         public float evasionChance = 0f;
@@ -59,6 +64,8 @@ namespace RogueDefense
             hpBar.Value = hpOfMaxHp;
             if (hpOfMaxHp < 0.5f) hpBar.Modulate = Colors.Red;
             else hpBar.Modulate = Colors.White;
+
+            sprite.Frame = GetSpriteFrame();
 
             foreach (var pair in Player.players)
             {
