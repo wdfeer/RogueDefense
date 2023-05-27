@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Logic/Bullet.cs" type="Script" id=1]
-[ext_resource path="res://Assets/blackCircle.png" type="Texture" id=2]
+[ext_resource path="res://Assets/black_circle.png" type="Texture" id=2]
 [ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Assets/default_theme.tres" type="Theme" id=4]
 

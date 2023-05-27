@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/check-mark.png-7547a85c1943597a592826b72566632c.stex"
+path="res://.import/check_mark.png-b2892036dc822a3aa763d1cd572059f9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/check-mark.png"
-dest_files=[ "res://.import/check-mark.png-7547a85c1943597a592826b72566632c.stex" ]
+source_file="res://Assets/check_mark.png"
+dest_files=[ "res://.import/check_mark.png-b2892036dc822a3aa763d1cd572059f9.stex" ]
 
 [params]
 

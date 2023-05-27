@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/anvil-impact.png-5ec4bd2ad9d14f4ff62ea69c46e58aba.stex"
+path="res://.import/anvil_impact.png-6b0fb8fd6892f4b46271cc160146e402.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/anvil-impact.png"
-dest_files=[ "res://.import/anvil-impact.png-5ec4bd2ad9d14f4ff62ea69c46e58aba.stex" ]
+source_file="res://Assets/anvil_impact.png"
+dest_files=[ "res://.import/anvil_impact.png-6b0fb8fd6892f4b46271cc160146e402.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/shieldIconBorder.png-664c4e181c0e695a9f24d7a46b609b7c.stex"
+path="res://.import/viral_icon.png-73bdf9e3deade2c28730068a1e07e62a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/shieldIconBorder.png"
-dest_files=[ "res://.import/shieldIconBorder.png-664c4e181c0e695a9f24d7a46b609b7c.stex" ]
+source_file="res://Assets/viral_icon.png"
+dest_files=[ "res://.import/viral_icon.png-73bdf9e3deade2c28730068a1e07e62a.stex" ]
 
 [params]
 

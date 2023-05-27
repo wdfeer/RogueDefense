@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coldIcon.png-defe1394fb07f6110f21aa2074d56be3.stex"
+path="res://.import/slash_icon.png-1d8d968e9aa23ec7aea617e40c506e8c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/coldIcon.png"
-dest_files=[ "res://.import/coldIcon.png-defe1394fb07f6110f21aa2074d56be3.stex" ]
+source_file="res://Assets/slash_icon.png"
+dest_files=[ "res://.import/slash_icon.png-1d8d968e9aa23ec7aea617e40c506e8c.stex" ]
 
 [params]
 

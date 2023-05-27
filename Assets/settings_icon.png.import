@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/corrosiveIcon.png-24e6664666447fbd331337fe561c0176.stex"
+path="res://.import/settings_icon.png-abc370f75f133e61c3c9ab7f7ad1a280.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/corrosiveIcon.png"
-dest_files=[ "res://.import/corrosiveIcon.png-24e6664666447fbd331337fe561c0176.stex" ]
+source_file="res://Assets/settings_icon.png"
+dest_files=[ "res://.import/settings_icon.png-abc370f75f133e61c3c9ab7f7ad1a280.stex" ]
 
 [params]
 

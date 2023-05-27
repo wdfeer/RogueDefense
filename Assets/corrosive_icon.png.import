@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slashIcon.png-184c0dd83829b1e3bcf95e522cb82422.stex"
+path="res://.import/corrosive_icon.png-456117c38bee374c16b9fce2fe65484b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/slashIcon.png"
-dest_files=[ "res://.import/slashIcon.png-184c0dd83829b1e3bcf95e522cb82422.stex" ]
+source_file="res://Assets/corrosive_icon.png"
+dest_files=[ "res://.import/corrosive_icon.png-456117c38bee374c16b9fce2fe65484b.stex" ]
 
 [params]
 
