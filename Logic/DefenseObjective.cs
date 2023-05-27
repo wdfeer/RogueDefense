@@ -40,7 +40,11 @@ namespace RogueDefense
         private ProgressBar hpBar;
 
         private Sprite sprite;
-        private int GetSpriteFrame() => 4 - (int)(HpRatio / 0.2f);
+        private int GetSpriteFrame()
+        {
+            int result = 4 - (int)(HpRatio / 0.2f);
+            return result >= 0 ? result : 0;
+        }
 
         public float damageMult = 1f;
         public float evasionChance = 0f;
