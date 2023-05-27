@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/UpgradeButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Bullet.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/godot.png" type="Texture" id=6]
+[ext_resource path="res://Assets/defense_objective.svg" type="Texture" id=6]
 [ext_resource path="res://Assets/default_theme.tres" type="Theme" id=7]
 [ext_resource path="res://Logic/UI/InGame/UpgradeScreen.cs" type="Script" id=8]
 [ext_resource path="res://Logic/UI/CustomButton.cs" type="Script" id=9]
@@ -55,6 +55,7 @@ turretScene = ExtResource( 17 )
 
 [node name="Sprite" type="Sprite" parent="DefenseObjective"]
 texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 60, 60 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseObjective"]
 shape = SubResource( 1 )
