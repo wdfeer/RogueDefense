@@ -16,7 +16,11 @@ namespace RogueDefense
 
                 name = file.GetLine();
                 lastIp = file.GetLine();
-                showCombatText = file.GetLine() == "1";
+                {
+                    string line = file.GetLine();
+                    showCombatText = line[0] == '1';
+                    showHpBar = line[1] == '1';
+                }
                 int.TryParse(file.GetLine(), out highscoreSingleplayer);
                 int.TryParse(file.GetLine(), out highscoreMultiplayer);
                 int.TryParse(file.GetLine(), out gameCount);
@@ -49,7 +53,10 @@ namespace RogueDefense
 
             file.StoreLine(name);
             file.StoreLine(lastIp);
-            file.StoreLine(showCombatText ? "1" : "0");
+            file.StoreLine(String.Concat(new string[] {
+                showCombatText ? "1" : "0",
+                showHpBar ? "1" : "0"
+            }));
             file.StoreLine(highscoreSingleplayer.ToString());
             file.StoreLine(highscoreMultiplayer.ToString());
             file.StoreLine(gameCount.ToString());
@@ -78,6 +85,7 @@ namespace RogueDefense
         public static string name = "";
         public static string lastIp = "";
         public static bool showCombatText = false;
+        public static bool showHpBar = false;
         public static int highscoreSingleplayer = 0;
         public static int highscoreMultiplayer = 0;
         public static int gameCount = 0;

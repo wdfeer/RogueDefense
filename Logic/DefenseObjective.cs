@@ -22,6 +22,8 @@ namespace RogueDefense
             instance = this;
 
             hpBar = GetNode<ProgressBar>("./HpBar");
+            hpBar.Visible = SaveData.showHpBar;
+
             sprite = GetNode<Sprite>("./Sprite");
 
             Hp = maxHp;
@@ -64,10 +66,12 @@ namespace RogueDefense
             if (GameSettings.healthDrain)
                 DealPassiveDamage(delta);
 
-            float hpOfMaxHp = hp / maxHp;
-            hpBar.Value = hpOfMaxHp;
-            if (hpOfMaxHp < 0.5f) hpBar.Modulate = Colors.Red;
-            else hpBar.Modulate = Colors.White;
+            if (hpBar.Visible)
+            {
+                hpBar.Value = HpRatio;
+                if (HpRatio < 0.5f) hpBar.Modulate = Colors.Red;
+                else hpBar.Modulate = Colors.White;
+            }
 
             sprite.Frame = GetSpriteFrame();
 
