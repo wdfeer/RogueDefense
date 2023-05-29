@@ -7,7 +7,7 @@
 [ext_resource path="res://Logic/UI/Lobby/StartButton.cs" type="Script" id=5]
 [ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Logic/UI/Lobby/MyPlayerData.cs" type="Script" id=7]
-[ext_resource path="res://Assets/settings_icon.png" type="Texture" id=8]
+[ext_resource path="res://Assets/settings_icon.svg" type="Texture" id=8]
 [ext_resource path="res://Assets/font32.tres" type="DynamicFont" id=9]
 [ext_resource path="res://Scenes/Lobby/SettingsSlider.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Logic/UI/Lobby/Settings/SettingsButton.cs" type="Script" id=11]
@@ -52,13 +52,14 @@ valign = 1
 
 [node name="NetPoller" parent="." instance=ExtResource( 6 )]
 
-[node name="SettingsButton" type="Button" parent="."]
+[node name="SettingsButton" type="TextureButton" parent="."]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 170.0
 margin_bottom = 170.0
 rect_scale = Vector2( 0.5, 0.5 )
-icon = ExtResource( 8 )
+texture_normal = ExtResource( 8 )
+expand = true
 script = ExtResource( 11 )
 
 [node name="PPMult" type="Label" parent="."]

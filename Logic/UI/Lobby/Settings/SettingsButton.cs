@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class SettingsButton : Button
+public class SettingsButton : TextureButton
 {
     public static Panel panel;
     public override void _Ready()
