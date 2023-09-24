@@ -32,7 +32,7 @@ namespace RogueDefense.Logic.PlayerCore
 
             if (Local) hooks.Add(new HpResetter(this));
         }
-        public void _Process(float delta)
+        public void _Process(double delta)
         {
             hooks.ForEach(x => x.PreUpdate(delta));
             upgradeManager.Process(delta);

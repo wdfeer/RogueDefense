@@ -37,7 +37,7 @@ public partial class ShieldOrbGenerator : Node2D
             pos = pos.Rotated(angleStep);
         }
     }
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         for (int i = 0; i < orbs.Length; i++)
         {

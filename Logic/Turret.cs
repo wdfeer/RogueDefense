@@ -3,7 +3,7 @@ using System;
 
 public partial class Turret : Node2D
 {
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         if (IsInstanceValid(Enemy.instance))
         {

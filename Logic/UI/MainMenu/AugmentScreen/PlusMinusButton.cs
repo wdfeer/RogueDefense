@@ -11,7 +11,7 @@ public partial class PlusMinusButton : Button
         GetParent<AugmentContainer>().ChangeStat(effect);
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         Disabled = effect > SaveData.SpareAugmentPoints ||
             (GetParent<AugmentContainer>().points == AugmentContainer.MIN_POINTS && effect < 0);

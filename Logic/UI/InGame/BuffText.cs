@@ -5,7 +5,7 @@ using System;
 
 public partial class BuffText : Label
 {
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         Text = "";
 

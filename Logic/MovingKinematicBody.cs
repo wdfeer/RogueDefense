@@ -13,7 +13,7 @@ namespace RogueDefense.Logic
         /// Position change per second
         /// </summary>
         public Godot.Vector2 velocity = Godot.Vector2.Zero;
-        public override void _PhysicsProcess(float delta)
+        public override void _PhysicsProcess(double delta)
         {
             var collision = MoveAndCollide(velocity);
             if (collision != null)

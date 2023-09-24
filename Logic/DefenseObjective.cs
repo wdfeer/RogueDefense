@@ -61,7 +61,7 @@ namespace RogueDefense
                 Death();
             }
         }
-        public override void _Process(float delta)
+        public override void _Process(double delta)
         {
             if (GameSettings.healthDrain)
                 DealPassiveDamage(delta);

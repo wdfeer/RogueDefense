@@ -14,7 +14,7 @@ namespace RogueDefense
             Game.instance.enemy.AddBleed(totalDmg, 5f);
         }
 
-        public override void _Process(float delta)
+        public override void _Process(double delta)
         {
             base._Process(delta);
 

@@ -27,7 +27,7 @@ public partial class Game : Node2D
         Client.instance.others.ForEach(x => new Player(x.id, x.upgradePoints));
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         if (enemy == null)
         {
