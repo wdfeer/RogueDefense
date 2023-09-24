@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RogueDefense.Logic
 {
-    public class MovingKinematicBody2D : KinematicBody2D
+    public partial class MovingKinematicBody2D : CharacterBody2D
     {
         /// <summary>
         /// Position change per second

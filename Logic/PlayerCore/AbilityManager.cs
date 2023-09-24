@@ -1,11 +1,11 @@
-﻿using Godot;
+using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace RogueDefense.Logic.PlayerCore
 {
-    public class AbilityManager
+    public partial class AbilityManager
     {
         public ActiveAbility ability1;
         Player player;

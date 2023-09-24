@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ShieldOrbGenerator : Node2D
+public partial class ShieldOrbGenerator : Node2D
 {
     [Export]
     public PackedScene shieldOrb;

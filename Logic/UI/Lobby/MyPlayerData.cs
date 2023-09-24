@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class MyPlayerData : PlayerData
+public partial class MyPlayerData : PlayerData
 {
     public override void _Ready()
     {

@@ -1,37 +1,37 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/font32.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/font64.tres" type="FontFile" id=1]
+[ext_resource path="res://Assets/font32.tres" type="FontFile" id=2]
 [ext_resource path="res://Logic/UI/MainMenu/AugmentScreen/AugmentContainer.cs" type="Script" id=3]
 [ext_resource path="res://Logic/UI/MainMenu/AugmentScreen/PlusMinusButton.cs" type="Script" id=4]
 
 [node name="AugmentContainer" type="HBoxContainer"]
-margin_right = 872.0
-margin_bottom = 178.0
+offset_right = 872.0
+offset_bottom = 178.0
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
-margin_top = 67.0
-margin_right = 381.0
-margin_bottom = 111.0
-custom_fonts/font = ExtResource( 2 )
+offset_top = 67.0
+offset_right = 381.0
+offset_bottom = 111.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "Base Status Multiplier: 1.00"
 
 [node name="MinusButton" type="Button" parent="."]
-margin_left = 385.0
-margin_right = 485.0
-margin_bottom = 178.0
-rect_min_size = Vector2( 100, 100 )
-custom_fonts/font = ExtResource( 1 )
+offset_left = 385.0
+offset_right = 485.0
+offset_bottom = 178.0
+custom_minimum_size = Vector2( 100, 100 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "-"
 script = ExtResource( 4 )
 effect = -1
 
 [node name="PlusButton" type="Button" parent="."]
-margin_left = 489.0
-margin_right = 589.0
-margin_bottom = 178.0
-rect_min_size = Vector2( 100, 100 )
-custom_fonts/font = ExtResource( 1 )
+offset_left = 489.0
+offset_right = 589.0
+offset_bottom = 178.0
+custom_minimum_size = Vector2( 100, 100 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "+"
 script = ExtResource( 4 )

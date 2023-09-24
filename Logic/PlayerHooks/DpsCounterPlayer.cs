@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class DpsCounterPlayer : PlayerHooks
+    public partial class DpsCounterPlayer : PlayerHooks
     {
         public DpsCounterPlayer(Player player) : base(player)
         {

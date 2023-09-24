@@ -1,14 +1,14 @@
 [gd_scene format=2]
 
 [node name="TopPlay" type="PanelContainer"]
-margin_top = 18.0
-margin_right = 256.0
-margin_bottom = 46.0
+offset_top = 18.0
+offset_right = 256.0
+offset_bottom = 46.0
 
 [node name="Label" type="Label" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 249.0
-margin_bottom = 21.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 249.0
+offset_bottom = 21.0
 text = "9000 pp"
 align = 1

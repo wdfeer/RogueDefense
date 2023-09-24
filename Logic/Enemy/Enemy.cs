@@ -8,7 +8,7 @@ using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using RogueDefense.Logic.Statuses;
 
-public class Enemy : Area2D
+public partial class Enemy : Area2D
 {
     public static Enemy instance;
     public const float BASE_SPEED = 1.15f;
@@ -16,7 +16,7 @@ public class Enemy : Area2D
     {
         instance = this;
 
-        Connect("body_entered", this, "BodyEntered");
+        Connect("body_entered", new Callable(this, "BodyEntered"));
 
         statuses = new Status[] { bleed, corrosive, viral, cold };
 

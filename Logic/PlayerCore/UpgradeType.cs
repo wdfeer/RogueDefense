@@ -6,7 +6,7 @@ using RogueDefense.Logic;
 
 namespace RogueDefense.Logic.PlayerCore
 {
-    public class UpgradeType
+    public partial class UpgradeType
     {
         public UpgradeType(Func<float, string> upgradeTextGetter)
         {

@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense.Logic.Statuses;
 using System;
 
-public class ColdContainer : StatusContainer
+public partial class ColdContainer : StatusContainer
 {
     public override Status GetStatus()
     {

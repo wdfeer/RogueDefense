@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class StatusPlayer : PlayerHooks
+    public partial class StatusPlayer : PlayerHooks
     {
         public const float STATUS_DURATION = 5f;
 

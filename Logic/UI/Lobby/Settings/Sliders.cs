@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Sliders : VBoxContainer
+public partial class Sliders : VBoxContainer
 {
     public static SettingsSlider dmgMult;
     public static SettingsSlider fireRateMult;

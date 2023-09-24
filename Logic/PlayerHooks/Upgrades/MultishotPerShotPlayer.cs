@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class MultishotPerShotPlayer : PlayerHooks
+    public partial class MultishotPerShotPlayer : PlayerHooks
     {
         public float multishotPerShot = 0;
         public float CurrentBuff => multishotPerShot * (player.shootManager.shootCount > MAX_STACK ? MAX_STACK : player.shootManager.shootCount);

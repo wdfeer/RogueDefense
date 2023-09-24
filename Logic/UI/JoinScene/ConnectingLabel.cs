@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 
-public class ConnectingLabel : Label
+public partial class ConnectingLabel : Label
 {
     public override void _Ready()
     {
@@ -17,7 +17,7 @@ public class ConnectingLabel : Label
     public void CreateTimer()
     {
         timer = GetTree().CreateTimer(0.5f);
-        timer.Connect("timeout", this, "TimerTimeout");
+        timer.Connect("timeout", new Callable(this, "TimerTimeout"));
     }
     int dotCount = 0;
     public void UpdateText()
@@ -36,6 +36,6 @@ public class ConnectingLabel : Label
 
     public override void _ExitTree()
     {
-        timer.Disconnect("timeout", this, "TimerTimeout");
+        timer.Disconnect("timeout", new Callable(this, "TimerTimeout"));
     }
 }

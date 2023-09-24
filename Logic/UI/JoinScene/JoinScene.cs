@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class JoinScene : CenterContainer
+public partial class JoinScene : CenterContainer
 {
     [Export]
     public PackedScene lobbyScene;
@@ -14,6 +14,6 @@ public class JoinScene : CenterContainer
     public static void TryChangeToLobbyScene()
     {
         if (instance == null || !IsInstanceValid(instance)) return;
-        instance.GetTree().ChangeSceneTo(instance.lobbyScene);
+        instance.GetTree().ChangeSceneToPacked(instance.lobbyScene);
     }
 }

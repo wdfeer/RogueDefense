@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class ShurikenAbility : ActiveAbility
+    public partial class ShurikenAbility : ActiveAbility
     {
 
         public static PackedScene shurikenScene = (PackedScene)ResourceLoader.Load("res://Scenes/Shuriken.tscn");

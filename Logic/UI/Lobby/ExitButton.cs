@@ -3,12 +3,12 @@ using System;
 
 namespace RogueDefense.Logic.UI.Lobby
 {
-    public class ExitButton : TextureButton
+    public partial class ExitButton : TextureButton
     {
         public override void _Pressed()
         {
             NetworkManager.NetStop();
-            GetTree().ChangeScene("Scenes/MainMenu/MainMenu.tscn");
+            GetTree().ChangeSceneToFile("Scenes/MainMenu/MainMenu.tscn");
         }
     }
 }

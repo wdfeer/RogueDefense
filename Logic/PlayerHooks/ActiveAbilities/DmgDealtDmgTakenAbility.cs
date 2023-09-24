@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class DmgDealtDmgTakenAbility : ActiveAbility
+    public partial class DmgDealtDmgTakenAbility : ActiveAbility
     {
         public DmgDealtDmgTakenAbility(Player player, CustomButton button) : base(player, button)
         {

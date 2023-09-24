@@ -1,13 +1,13 @@
 using Godot;
 using System;
 
-public class ShieldOrb : Area2D
+public partial class ShieldOrb : Area2D
 {
     public static float damageConsumed = 0f;
 
     public override void _Ready()
     {
-        Connect("body_entered", this, "BodyEntered");
+        Connect("body_entered", new Callable(this, "BodyEntered"));
     }
     public void BodyEntered(Node body)
     {

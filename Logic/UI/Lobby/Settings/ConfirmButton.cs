@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ConfirmButton : Button
+public partial class ConfirmButton : Button
 {
     public override void _Pressed()
     {

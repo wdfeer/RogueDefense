@@ -3,11 +3,11 @@ using RogueDefense;
 using System;
 using System.Linq;
 
-public class UsernameInput : LineEdit
+public partial class UsernameInput : LineEdit
 {
     public override void _Ready()
     {
-        Connect("text_changed", this, "OnTextChanged");
+        Connect("text_changed", new Callable(this, "OnTextChanged"));
         ToSignal(GetTree().CreateTimer(0.001f), "timeout").OnCompleted(() =>
         {
             if (RogueDefense.SaveData.name == "")

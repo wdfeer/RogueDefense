@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace RogueDefense
 {
-    public class MaxHpPerKillPlayer : PlayerHooks
+    public partial class MaxHpPerKillPlayer : PlayerHooks
     {
         public float increase = 0f; // Used in UpgradeManager
 

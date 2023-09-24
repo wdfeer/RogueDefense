@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class NotificationPopup : PopupPanel
+public partial class NotificationPopup : PopupPanel
 {
     public static NotificationPopup instance;
     public Rect2 bounds;

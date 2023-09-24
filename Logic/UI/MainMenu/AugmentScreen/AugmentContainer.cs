@@ -3,7 +3,7 @@ using RogueDefense;
 using RogueDefense.Logic.PlayerCore;
 using System;
 
-public class AugmentContainer : HBoxContainer
+public partial class AugmentContainer : HBoxContainer
 {
     [Export]
     public string augmentText;

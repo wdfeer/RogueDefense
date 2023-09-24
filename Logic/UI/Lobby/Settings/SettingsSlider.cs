@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class SettingsSlider : VBoxContainer
+public partial class SettingsSlider : VBoxContainer
 {
     public Label Label => GetNode("Label") as Label;
     public Slider Slider => GetNode("Slider") as Slider;
@@ -12,7 +12,7 @@ public class SettingsSlider : VBoxContainer
         defaultText = Label.Text;
         defaultValue = Slider.Value;
         UpdateLabel((float)defaultValue);
-        Slider.Connect("value_changed", this, "UpdateLabel");
+        Slider.Connect("value_changed", new Callable(this, "UpdateLabel"));
     }
     public void UpdateLabel(float value)
     {

@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class NthShotMultishotPlayer : PlayerHooks
+    public partial class NthShotMultishotPlayer : PlayerHooks
     {
         int shots = 0;
 

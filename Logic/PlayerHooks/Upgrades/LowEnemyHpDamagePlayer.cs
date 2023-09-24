@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class LowEnemyHpDamagePlayer : PlayerHooks
+    public partial class LowEnemyHpDamagePlayer : PlayerHooks
     {
         public bool ConditionMet => Game.instance.enemy.Hp <= Game.instance.enemy.maxHp * 0.5f;
         public float buff = 0f;

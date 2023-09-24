@@ -43,7 +43,7 @@ public static class NetworkManager
         Client.instance.Poll();
     }
 }
-public class UserData
+public partial class UserData
 {
     public int id;
     public string name;

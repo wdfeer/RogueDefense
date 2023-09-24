@@ -4,7 +4,7 @@ using System.Linq;
 using Godot;
 using static Client;
 
-public class Server : Node
+public partial class Server : Node
 {
     public static Server instance = new Server();
     public static WebSocketServer server;
@@ -12,10 +12,10 @@ public class Server : Node
     public void Start()
     {
         server = new WebSocketServer();
-        server.Connect("client_connected", this, "Connected");
-        server.Connect("client_disconnected", this, "Disconnected");
-        server.Connect("client_close_request", this, "CloseRequest");
-        server.Connect("data_received", this, "OnData");
+        server.Connect("client_connected", new Callable(this, "Connected"));
+        server.Connect("client_disconnected", new Callable(this, "Disconnected"));
+        server.Connect("client_close_request", new Callable(this, "CloseRequest"));
+        server.Connect("data_received", new Callable(this, "OnData"));
 
         var err = server.Listen(PORT);
         GD.Print($"Server is listening on port {PORT}");

@@ -5,7 +5,7 @@ using RogueDefense.Logic.PlayerCore;
 using System;
 using System.Security.Policy;
 
-public class Game : Node2D
+public partial class Game : Node2D
 {
     public static Game instance;
 

@@ -3,7 +3,7 @@ using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System;
 
-public class Bullet : MovingKinematicBody2D
+public partial class Bullet : MovingKinematicBody2D
 {
     public Player owner;
     public override void _Ready()
@@ -75,7 +75,7 @@ public class Bullet : MovingKinematicBody2D
         }
     }
 
-    public Particles2D ParticleEmitter => (GetNode("Particles2D") as Particles2D);
+    public GPUParticles2D ParticleEmitter => (GetNode("GPUParticles2D") as GPUParticles2D);
     public void StartParticleEffect()
     {
         ParticleEmitter.Emitting = true;

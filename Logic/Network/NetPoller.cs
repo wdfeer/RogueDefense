@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class NetPoller : Node
+public partial class NetPoller : Node
 {
     public override void _Process(float delta)
     {

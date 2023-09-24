@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 using System;
 using System.Linq;
 
-public class AbilityChooser : MenuButton
+public partial class AbilityChooser : MenuButton
 {
     public PopupMenu popup;
     public override void _Ready()
@@ -14,7 +14,7 @@ public class AbilityChooser : MenuButton
             string name = AbilityManager.GetAbilityName(i);
             popup.AddItem(name, i);
         }
-        popup.Connect("id_pressed", this, "IdPressed");
+        popup.Connect("id_pressed", new Callable(this, "IdPressed"));
 
         ResetButtonText();
     }

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class SettingsPanel : Panel
+public partial class SettingsPanel : Panel
 {
     public override void _Ready()
     {

@@ -5,7 +5,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class FuseBulletsAbility : ActiveAbility
+    public partial class FuseBulletsAbility : ActiveAbility
     {
         public FuseBulletsAbility(Player player, CustomButton button) : base(player, button)
         {

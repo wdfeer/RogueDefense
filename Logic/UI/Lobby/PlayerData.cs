@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class PlayerData : PanelContainer
+public partial class PlayerData : PanelContainer
 {
     public HBoxContainer Container => (HBoxContainer)GetNode("./Container");
     public Label NameLabel => (GetNode("./Container/Name") as Label);

@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class ViralChanceAbility : ActiveAbility
+    public partial class ViralChanceAbility : ActiveAbility
     {
         public override void Activate()
         {

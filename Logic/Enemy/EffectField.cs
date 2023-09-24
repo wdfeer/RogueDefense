@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class EffectField : Area2D
+public partial class EffectField : Area2D
 {
     public EffectFieldMode mode;
     public void Enable(EffectFieldMode mode)
@@ -11,8 +11,8 @@ public class EffectField : Area2D
         Monitoring = true;
         Monitorable = true;
 
-        Connect("body_entered", this, "BodyEntered");
-        ((CircleShape2D)(GetNode("CollisionShape2D") as CollisionShape2D).Shape).Radius = radius;
+        Connect("body_entered", new Callable(this, "BodyEntered"));
+        ((CircleShape2D)(GetNode("CollisionShape2D") as CollisionShape2D).Shape3D).Radius = radius;
     }
     public void BodyEntered(Node body)
     {

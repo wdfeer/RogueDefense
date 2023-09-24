@@ -3,7 +3,7 @@ using RogueDefense;
 using RogueDefense.Logic;
 using System;
 
-public class TopPlays : VBoxContainer
+public partial class TopPlays : VBoxContainer
 {
     public override void _Ready()
     {

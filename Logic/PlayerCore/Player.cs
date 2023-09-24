@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace RogueDefense.Logic.PlayerCore
 {
-    public class Player
+    public partial class Player
     {
         public static Player my;
         public bool Local => id == Client.myId;

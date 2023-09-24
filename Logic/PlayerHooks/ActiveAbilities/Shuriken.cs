@@ -2,7 +2,7 @@ using Godot;
 
 namespace RogueDefense
 {
-    public class Shuriken : Bullet
+    public partial class Shuriken : Bullet
     {
         public override void _Ready()
         {

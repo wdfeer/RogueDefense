@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Client : Node
+public partial class Client : Node
 {
     public static string address;
     public static int port;
@@ -16,10 +16,10 @@ public class Client : Node
     public void Start()
     {
         client = new WebSocketClient();
-        client.Connect("connection_closed", this, "Closed");
-        client.Connect("connection_error", this, "Closed");
-        client.Connect("connection_established", this, "Connected");
-        client.Connect("data_received", this, "OnData");
+        client.Connect("connection_closed", new Callable(this, "Closed"));
+        client.Connect("connection_error", new Callable(this, "Closed"));
+        client.Connect("connection_established", new Callable(this, "Connected"));
+        client.Connect("data_received", new Callable(this, "OnData"));
         GD.Print($"Trying to connect to {URL}");
         var err = client.ConnectToUrl(URL);
         if (err != Error.Ok)
@@ -76,7 +76,7 @@ public class Client : Node
                 GameSettings.ReceiveSettings(args);
                 break;
             case MessageType.StartGame:
-                Lobby.Instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
+                Lobby.Instance.GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
                 break;
             case MessageType.EnemyKill:
                 if (IsInstanceValid(Game.instance))
@@ -99,7 +99,7 @@ public class Client : Node
                 break;
             case MessageType.Retry:
                 Game.instance.GetTree().Paused = false;
-                Game.instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
+                Game.instance.GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
                 break;
             case MessageType.AbilityActivated:
                 id = args[0].ToInt();

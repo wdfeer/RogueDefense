@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using RogueDefense;
-public class HpBarButton : CheckBox
+public partial class HpBarButton : CheckBox
 {
     public override void _Ready()
     {

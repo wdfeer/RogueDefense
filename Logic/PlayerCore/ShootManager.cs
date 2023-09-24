@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace RogueDefense.Logic.PlayerCore
 {
-    public class ShootManager
+    public partial class ShootManager
     {
         readonly Player player;
         public ShootManager(Player player)
@@ -64,7 +64,7 @@ namespace RogueDefense.Logic.PlayerCore
         public Bullet Shoot(Vector2 pos, float speed, float spread = -1)
         {
             Vector2 velocity = speed * pos.DirectionTo(Game.instance.enemy.GlobalPosition);
-            Bullet bullet = NewBullet(pos, velocity.Rotated(spread == -1 ? Mathf.Deg2Rad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread));
+            Bullet bullet = NewBullet(pos, velocity.Rotated(spread == -1 ? Mathf.DegToRad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread));
             return bullet;
         }
         public Bullet NewBullet(Vector2 gposition, Vector2 velocity)

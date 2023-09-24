@@ -2,12 +2,12 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class JoinButton : Button
+public partial class JoinButton : Button
 {
     LineEdit AddressEdit => (GetNode("../IP Input/LineEdit") as LineEdit);
     public override void _Ready()
     {
-        GetTree().CreateTimer(0.001f).Connect("timeout", this, "LoadLastIp");
+        GetTree().CreateTimer(0.001f).Connect("timeout", new Callable(this, "LoadLastIp"));
     }
     public void LoadLastIp()
     {

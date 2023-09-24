@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class DpsLabel : Label
+public partial class DpsLabel : Label
 {
     public static DpsLabel instance;
     public override void _Ready()

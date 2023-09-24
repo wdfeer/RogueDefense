@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 using System;
 using System.Collections.Generic;
 
-public class Lobby : Control
+public partial class Lobby : Control
 {
     [Export]
     public PackedScene userDataScene;

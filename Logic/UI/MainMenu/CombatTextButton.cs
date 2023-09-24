@@ -1,7 +1,7 @@
 using Godot;
 using System;
 using RogueDefense;
-public class CombatTextButton : CheckBox
+public partial class CombatTextButton : CheckBox
 {
     public override void _Ready()
     {
