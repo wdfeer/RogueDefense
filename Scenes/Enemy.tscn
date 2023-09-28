@@ -1,66 +1,67 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=23 format=3 uid="uid://dcw1pfahgswms"]
 
-[ext_resource path="res://Assets/enemy.png" type="Texture2D" id=1]
-[ext_resource path="res://Logic/Enemy/Enemy.cs" type="Script" id=2]
-[ext_resource path="res://Assets/default_theme.tres" type="Theme" id=3]
-[ext_resource path="res://Scenes/CombatText.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/slash_icon.png" type="Texture2D" id=5]
-[ext_resource path="res://Logic/Enemy/StatusContainers/BleedContainer.cs" type="Script" id=6]
-[ext_resource path="res://Assets/shield_filled.png" type="Texture2D" id=7]
-[ext_resource path="res://Assets/font64.tres" type="FontFile" id=8]
-[ext_resource path="res://Assets/shield_border.png" type="Texture2D" id=9]
-[ext_resource path="res://Logic/Enemy/ArmorBar.cs" type="Script" id=10]
-[ext_resource path="res://Logic/Enemy/StatusContainers/ViralContainer.cs" type="Script" id=11]
-[ext_resource path="res://Assets/viral_icon.png" type="Texture2D" id=12]
-[ext_resource path="res://Logic/Enemy/ShieldOrbGenerator.cs" type="Script" id=13]
-[ext_resource path="res://Scenes/ShieldOrb.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Logic/Enemy/HpBar.cs" type="Script" id=15]
-[ext_resource path="res://Assets/cold_icon.png" type="Texture2D" id=16]
-[ext_resource path="res://Logic/Enemy/StatusContainers/ColdContainer.cs" type="Script" id=17]
-[ext_resource path="res://Assets/corrosive_icon.png" type="Texture2D" id=18]
-[ext_resource path="res://Logic/Enemy/EffectField.cs" type="Script" id=19]
-[ext_resource path="res://Logic/Enemy/StatusContainers/CorrosiveContainer.cs" type="Script" id=20]
+[ext_resource type="Texture2D" uid="uid://cu3tpecvqde7u" path="res://Assets/enemy.png" id="1"]
+[ext_resource type="Script" path="res://Logic/Enemy/Enemy.cs" id="2"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="3"]
+[ext_resource type="PackedScene" path="res://Scenes/CombatText.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://dr1urwwgoukda" path="res://Assets/slash_icon.png" id="5"]
+[ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/BleedContainer.cs" id="6"]
+[ext_resource type="Texture2D" uid="uid://dwotxf7hje6as" path="res://Assets/shield_filled.png" id="7"]
+[ext_resource type="FontFile" path="res://Assets/font64.tres" id="8"]
+[ext_resource type="Texture2D" uid="uid://rewrv0hgspug" path="res://Assets/shield_border.png" id="9"]
+[ext_resource type="Script" path="res://Logic/Enemy/ArmorBar.cs" id="10"]
+[ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/ViralContainer.cs" id="11"]
+[ext_resource type="Texture2D" uid="uid://db4cftuv5i83w" path="res://Assets/viral_icon.png" id="12"]
+[ext_resource type="Script" path="res://Logic/Enemy/ShieldOrbGenerator.cs" id="13"]
+[ext_resource type="PackedScene" path="res://Scenes/ShieldOrb.tscn" id="14"]
+[ext_resource type="Script" path="res://Logic/Enemy/HpBar.cs" id="15"]
+[ext_resource type="Texture2D" uid="uid://bv8dg1w5jjqwu" path="res://Assets/cold_icon.png" id="16"]
+[ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/ColdContainer.cs" id="17"]
+[ext_resource type="Texture2D" uid="uid://io0wq1mb4pyu" path="res://Assets/corrosive_icon.png" id="18"]
+[ext_resource type="Script" path="res://Logic/Enemy/EffectField.cs" id="19"]
+[ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/CorrosiveContainer.cs" id="20"]
 
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(68, 68)
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 68, 68 )
-
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 radius = 100.0
 
 [node name="Enemy" type="Area2D"]
 collision_layer = 2
 collision_mask = 4
-script = ExtResource( 2 )
-combatText = ExtResource( 4 )
+script = ExtResource("2")
+combatText = ExtResource("4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 1 )
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1")
 
 [node name="HpBar" type="ProgressBar" parent="."]
 offset_left = -60.0
 offset_top = -100.0
 offset_right = 60.0
 offset_bottom = -76.0
-theme = ExtResource( 3 )
+theme = ExtResource("3")
 max_value = 1.0
 step = 0.001
 value = 1.0
-percent_visible = false
-script = ExtResource( 15 )
+show_percentage = false
+script = ExtResource("15")
 
 [node name="HpText" type="Label" parent="HpBar"]
+layout_mode = 0
 offset_right = 480.0
 offset_bottom = 100.0
-scale = Vector2( 0.25, 0.25 )
-theme = ExtResource( 3 )
-theme_override_fonts/font = ExtResource( 8 )
+scale = Vector2(0.25, 0.25)
+theme_override_fonts/font = ExtResource("8")
+theme_override_font_sizes/font_size = 64
 text = "10 / 10"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true
 
 [node name="Statuses" type="VBoxContainer" parent="."]
@@ -70,102 +71,95 @@ offset_right = 110.0
 offset_bottom = 82.0
 
 [node name="BleedContainer" type="HBoxContainer" parent="Statuses"]
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource( 6 )
+layout_mode = 2
+script = ExtResource("6")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/BleedContainer"]
-offset_right = 20.0
-offset_bottom = 23.0
-custom_minimum_size = Vector2( 20, 20 )
-texture = ExtResource( 5 )
-expand = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("5")
 
 [node name="Counter" type="Label" parent="Statuses/BleedContainer"]
-offset_left = 24.0
-offset_right = 33.0
-offset_bottom = 23.0
-theme = ExtResource( 3 )
+layout_mode = 2
+theme = ExtResource("3")
+theme_override_fonts/font = ExtResource("8")
+theme_override_font_sizes/font_size = 0
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CorrosiveContainer" type="HBoxContainer" parent="Statuses"]
-offset_top = 27.0
-offset_right = 40.0
-offset_bottom = 50.0
-script = ExtResource( 20 )
+layout_mode = 2
+script = ExtResource("20")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/CorrosiveContainer"]
-offset_right = 20.0
-offset_bottom = 23.0
-custom_minimum_size = Vector2( 20, 20 )
-texture = ExtResource( 18 )
-expand = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("18")
 
 [node name="Counter" type="Label" parent="Statuses/CorrosiveContainer"]
-offset_left = 24.0
-offset_right = 33.0
-offset_bottom = 23.0
-theme = ExtResource( 3 )
+layout_mode = 2
+theme = ExtResource("3")
+theme_override_fonts/font = ExtResource("8")
+theme_override_font_sizes/font_size = 0
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ViralContainer" type="HBoxContainer" parent="Statuses"]
-offset_top = 54.0
-offset_right = 40.0
-offset_bottom = 77.0
-script = ExtResource( 11 )
+layout_mode = 2
+script = ExtResource("11")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/ViralContainer"]
-offset_right = 20.0
-offset_bottom = 23.0
-custom_minimum_size = Vector2( 20, 20 )
-texture = ExtResource( 12 )
-expand = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("12")
 
 [node name="Counter" type="Label" parent="Statuses/ViralContainer"]
-offset_left = 24.0
-offset_right = 33.0
-offset_bottom = 23.0
-theme = ExtResource( 3 )
+layout_mode = 2
+theme = ExtResource("3")
+theme_override_fonts/font = ExtResource("8")
+theme_override_font_sizes/font_size = 0
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ColdContainer" type="HBoxContainer" parent="Statuses"]
-offset_top = 81.0
-offset_right = 40.0
-offset_bottom = 104.0
-script = ExtResource( 17 )
+layout_mode = 2
+script = ExtResource("17")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/ColdContainer"]
-offset_right = 20.0
-offset_bottom = 23.0
-custom_minimum_size = Vector2( 20, 20 )
-texture = ExtResource( 16 )
-expand = true
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("16")
 
 [node name="Counter" type="Label" parent="Statuses/ColdContainer"]
-offset_left = 24.0
-offset_right = 33.0
-offset_bottom = 23.0
-theme = ExtResource( 3 )
+layout_mode = 2
+theme = ExtResource("3")
+theme_override_fonts/font = ExtResource("8")
+theme_override_font_sizes/font_size = 0
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ArmorBar" type="TextureProgressBar" parent="."]
 offset_left = -88.0
 offset_top = -101.0
 offset_right = 72.0
 offset_bottom = 59.0
-scale = Vector2( 0.16, 0.16 )
+scale = Vector2(0.16, 0.16)
 min_value = 7.0
 max_value = 91.0
 step = 0.1
 value = 7.0
-texture_under = ExtResource( 9 )
-texture_progress = ExtResource( 7 )
 fill_mode = 3
-script = ExtResource( 10 )
+texture_under = ExtResource("9")
+texture_progress = ExtResource("7")
+script = ExtResource("10")
 
 [node name="ShieldOrbGenerator" type="Node2D" parent="."]
-script = ExtResource( 13 )
-shieldOrb = ExtResource( 14 )
+script = ExtResource("13")
+shieldOrb = ExtResource("14")
 
 [node name="EffectField" type="Area2D" parent="."]
 visible = false
@@ -174,12 +168,13 @@ collision_layer = 0
 collision_mask = 4
 monitoring = false
 monitorable = false
-gravity_direction = Vector2( -1, 0 )
+gravity_point_center = Vector2(-1, 0)
+gravity_direction = Vector2(-1, 0)
 gravity = 0.0
-script = ExtResource( 19 )
+script = ExtResource("19")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EffectField"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="BottomInfo" type="Label" parent="."]
 visible = false
@@ -187,6 +182,4 @@ offset_left = -90.0
 offset_top = 70.0
 offset_right = 90.0
 offset_bottom = 110.0
-theme = ExtResource( 3 )
-align = 1
-valign = 1
+theme = ExtResource("3")

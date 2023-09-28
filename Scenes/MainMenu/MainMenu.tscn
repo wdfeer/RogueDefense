@@ -1,13 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=22 format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="FontFile" path="res://Assets/font64.tres" id="1"]
-[ext_resource type="PackedScene" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
-[ext_resource type="Theme" path="res://Assets/default_theme.tres" id="5"]
+[ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://d7hydk75hi01" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="5"]
 [ext_resource type="Texture2D" uid="uid://b024el17xormx" path="res://Assets/check_mark.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://cx7erggsc6wr" path="res://Assets/anvil_impact.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://c17qn0pu5avpn" path="res://Assets/edit_icon.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://d4n1tobo1ylie" path="res://Assets/edit_icon_small.png" id="7_5ef50"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/Statview.cs" id="9"]
 [ext_resource type="Script" path="res://Logic/GameInitializer.cs" id="10"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/CombatTextButton.cs" id="11"]
@@ -22,12 +22,16 @@
 
 [sub_resource type="Theme" id="1"]
 default_font = ExtResource("1")
+default_font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y15b"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 
 [node name="Control" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1024.0
+offset_right = 1025.0
 offset_bottom = 600.0
 
 [node name="GameInitializer" type="Node" parent="."]
@@ -63,18 +67,19 @@ script = ExtResource("14")
 goToScene = ExtResource("4")
 
 [node name="UsernameInput" type="LineEdit" parent="."]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 0
 offset_left = 13.0
 offset_top = 16.0
-offset_right = 613.0
-offset_bottom = 154.0
-scale = Vector2(0.4, 0.4)
+offset_right = 253.0
+offset_bottom = 72.0
 theme = ExtResource("5")
 theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 32
 text = "Player123"
+context_menu_enabled = false
 selecting_enabled = false
-right_icon = ExtResource("8")
+right_icon = ExtResource("7_5ef50")
 script = ExtResource("13")
 
 [node name="ClientSettings" type="VBoxContainer" parent="."]
@@ -99,9 +104,9 @@ script = ExtResource("19")
 [node name="TopPlays" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 462.0
+offset_top = 446.0
 offset_right = 269.0
-offset_bottom = 574.0
+offset_bottom = 592.0
 script = ExtResource("18")
 
 [node name="Label" type="Label" parent="TopPlays"]
@@ -125,9 +130,9 @@ text = "= 100 pp"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 0
 offset_left = 412.0
-offset_top = 460.0
+offset_top = 452.0
 offset_right = 612.0
-offset_bottom = 534.0
+offset_bottom = 592.0
 theme = ExtResource("5")
 script = ExtResource("9")
 
@@ -166,9 +171,14 @@ script = ExtResource("12")
 
 [node name="AugmentPanel" type="Panel" parent="."]
 visible = false
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_1y15b")
 
 [node name="PointLabel" type="Label" parent="AugmentPanel"]
 layout_mode = 0

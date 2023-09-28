@@ -1,23 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://ck8gmgjr1lmqk"]
 
-[ext_resource path="res://Logic/UI/CustomButton.cs" type="Script" id=1]
-[ext_resource path="res://Assets/default_theme.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/font64.tres" type="FontFile" id=3]
+[ext_resource type="Script" path="res://Logic/UI/CustomButton.cs" id="1"]
+[ext_resource type="FontFile" path="res://Assets/font64.tres" id="3"]
 
 [node name="UpgradeButton" type="Button"]
 offset_left = 437.0
 offset_top = 260.0
 offset_right = 637.0
 offset_bottom = 380.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_right = 600.0
 offset_bottom = 360.0
-scale = Vector2( 0.333, 0.333 )
-theme = ExtResource( 2 )
-theme_override_fonts/font = ExtResource( 3 )
+scale = Vector2(0.333, 0.333)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 64
 text = "+{value}{UpgradeText}"
-align = 1
-valign = 1
-autowrap = true
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3

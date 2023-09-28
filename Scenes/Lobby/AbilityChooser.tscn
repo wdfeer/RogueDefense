@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://burmb0d3vmml3"]
 
-[ext_resource path="res://Assets/default_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Logic/UI/MainMenu/AbilityChooser.cs" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AbilityChooser.cs" id="2"]
 
 [node name="AbilityChooser" type="MenuButton"]
-offset_left = 412.0
-offset_top = 15.0
-offset_right = 612.0
-offset_bottom = 44.0
-custom_minimum_size = Vector2( 200, 0 )
+custom_minimum_size = Vector2(200, 0)
+offset_right = 200.0
+offset_bottom = 31.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 focus_mode = 2
-theme = ExtResource( 1 )
+theme = ExtResource("1")
 text = "Chosen Ability: Random"
-script = ExtResource( 2 )
+script = ExtResource("2")

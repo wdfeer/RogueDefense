@@ -1,19 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cbgccxqtdj6tt"]
 
-[ext_resource path="res://Assets/font32.tres" type="FontFile" id=1]
-[ext_resource path="res://Assets/turret.png" type="Texture2D" id=2]
-[ext_resource path="res://Logic/Turret.cs" type="Script" id=3]
+[ext_resource type="Texture2D" uid="uid://d3xo65538yce4" path="res://Assets/turret.png" id="2"]
+[ext_resource type="Script" path="res://Logic/Turret.cs" id="3"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="3_ynhuv"]
 
 [node name="Turret" type="Node2D"]
 z_index = -4
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 2 )
-offset = Vector2( 115, 0 )
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2")
+offset = Vector2(115, 0)
 
 [node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(80, 50)
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -22,9 +24,9 @@ offset_left = -20.0
 offset_top = -12.5
 offset_right = 60.0
 offset_bottom = 37.5
-custom_minimum_size = Vector2( 80, 50 )
-scale = Vector2( 0.5, 0.5 )
-theme_override_fonts/font = ExtResource( 1 )
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("3_ynhuv")
+theme_override_font_sizes/font_size = 32
 text = "###"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,37 +1,32 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://lq2blybll7l5"]
 
-[ext_resource path="res://Assets/font64.tres" type="FontFile" id=1]
-[ext_resource path="res://Assets/font32.tres" type="FontFile" id=2]
-[ext_resource path="res://Logic/UI/MainMenu/AugmentScreen/AugmentContainer.cs" type="Script" id=3]
-[ext_resource path="res://Logic/UI/MainMenu/AugmentScreen/PlusMinusButton.cs" type="Script" id=4]
+[ext_resource type="FontFile" path="res://Assets/font64.tres" id="1"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2_3vc1x"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/AugmentContainer.cs" id="3"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/PlusMinusButton.cs" id="4"]
 
 [node name="AugmentContainer" type="HBoxContainer"]
 offset_right = 872.0
-offset_bottom = 178.0
-script = ExtResource( 3 )
+offset_bottom = 100.0
+script = ExtResource("3")
 
 [node name="Label" type="Label" parent="."]
-offset_top = 67.0
-offset_right = 381.0
-offset_bottom = 111.0
-theme_override_fonts/font = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2_3vc1x")
+theme_override_font_sizes/font_size = 32
 text = "Base Status Multiplier: 1.00"
 
 [node name="MinusButton" type="Button" parent="."]
-offset_left = 385.0
-offset_right = 485.0
-offset_bottom = 178.0
-custom_minimum_size = Vector2( 100, 100 )
-theme_override_fonts/font = ExtResource( 1 )
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
 text = "-"
-script = ExtResource( 4 )
+script = ExtResource("4")
 effect = -1
 
 [node name="PlusButton" type="Button" parent="."]
-offset_left = 489.0
-offset_right = 589.0
-offset_bottom = 178.0
-custom_minimum_size = Vector2( 100, 100 )
-theme_override_fonts/font = ExtResource( 1 )
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1")
 text = "+"
-script = ExtResource( 4 )
+script = ExtResource("4")
