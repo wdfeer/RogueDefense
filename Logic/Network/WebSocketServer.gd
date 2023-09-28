@@ -1,7 +1,0 @@
-class_name WebSocketServer
-extends Node
-
-signal connection_closed
-signal connection_error
-signal connection_established
-signal data_received

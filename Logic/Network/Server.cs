@@ -7,19 +7,19 @@ using static Client;
 public partial class Server : Node
 {
     public static Server instance = new Server();
-    public static WebSocketServer server;
+    public static WebSocketMultiplayerPeer server;
     public const int PORT = 7777;
     public void Start()
     {
-        server = new WebSocketServer();
+        server = new();
         server.Connect("client_connected", new Callable(this, "Connected"));
         server.Connect("client_disconnected", new Callable(this, "Disconnected"));
         server.Connect("client_close_request", new Callable(this, "CloseRequest"));
         server.Connect("data_received", new Callable(this, "OnData"));
 
-        var err = server.Listen(PORT);
+        var err = server.CreateServer(PORT);
         GD.Print($"Server is listening on port {PORT}");
-        if (err != Error.Ok || !server.IsListening())
+        if (err != Error.Ok)
         {
             GD.PrintErr($"Unable to start server ({err})");
             SetProcess(false);
@@ -32,13 +32,13 @@ public partial class Server : Node
         if (x.Key != ignore)
             SendPacket(x.Key, data);
     });
-    public void Broadcast(string data, int ignore = -1) => Broadcast(data.ToUTF8(), ignore);
+    public void Broadcast(string data, int ignore = -1) => Broadcast(data.ToUtf8Buffer(), ignore);
     public void Connected(int id, string protocol)
     {
         string data = $"{(char)MessageType.FetchLobby}{id.ToString()}";
         if (users.Count > 0)
             data += " " + String.Join(" ", users.Select(x => $"{x.Key.ToString()};{x.Value.name};{x.Value.ability};{UserData.UpgradePointsAsString(x.Value.upgradePoints)}"));
-        SendPacket(id, data.ToUTF8());
+        SendPacket(id, data.ToUtf8Buffer());
         users.Add(id, new UserData(id, "", -1, null));
         GD.Print($"Client {id} connected with protocol: {protocol}");
     }
@@ -57,10 +57,10 @@ public partial class Server : Node
     public void OnData(int id)
     {
         byte[] data = server.GetPeer(id).GetPacket();
-        GD.Print($"Server: got packet from {id}: {data.GetStringFromUTF8()} ... broadcasting");
+        GD.Print($"Server: got packet from {id}: {data.GetStringFromUtf8()} ... broadcasting");
         Broadcast(data, id);
 
-        string str = data.GetStringFromUTF8();
+        string str = data.GetStringFromUtf8();
         string[] args = str.Substring(1).Split(" ");
         AfterBroadcastMessage(id, (MessageType)str[0], args);
     }

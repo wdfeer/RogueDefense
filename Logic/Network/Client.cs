@@ -11,17 +11,17 @@ public partial class Client : Node
     public static int port;
     public static string URL => $"ws://{address}:{port}";
     public static Client instance = new Client();
-    public static WebSocketClient client;
+    public static WebSocketMultiplayerPeer client;
     public static int myId = -1;
     public void Start()
     {
-        client = new WebSocketClient();
+        client = new();
         client.Connect("connection_closed", new Callable(this, "Closed"));
         client.Connect("connection_error", new Callable(this, "Closed"));
         client.Connect("connection_established", new Callable(this, "Connected"));
         client.Connect("data_received", new Callable(this, "OnData"));
         GD.Print($"Trying to connect to {URL}");
-        var err = client.ConnectToUrl(URL);
+        var err = client.CreateClient(URL);
         if (err != Error.Ok)
         {
             GD.PrintErr("Unable to start client");
@@ -40,7 +40,7 @@ public partial class Client : Node
     public void Closed(bool wasCleanClose = false) { }
     public void OnData()
     {
-        string data = client.GetPeer(1).GetPacket().GetStringFromUTF8();
+        string data = client.GetPeer(1).GetPacket().GetStringFromUtf8();
         MessageType type = (MessageType)data[0];
         ProcessMessage(type, data.Substring(1).Split(' '));
     }
