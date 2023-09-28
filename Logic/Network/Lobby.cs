@@ -28,7 +28,7 @@ public partial class Lobby : Control
     Dictionary<int, PlayerData> userDisplayNodes = new Dictionary<int, PlayerData>();
     public void AddUser(UserData data)
     {
-        var node = userDataScene.Instantiate() as PlayerData;
+        var node = userDataScene.Instantiate<PlayerData>();
         node.SetName(data.name);
         node.SetAbilityText(AbilityManager.GetAbilityName(data.ability));
         userDisplayNodes.Add(data.id, node);

@@ -18,9 +18,9 @@ public partial class UpgradeScreen : Panel
         Show();
         buttons = new CustomButton[]
         {
-            upgradeButtonScene.Instantiate() as CustomButton,
-            upgradeButtonScene.Instantiate() as CustomButton,
-            upgradeButtonScene.Instantiate() as CustomButton
+            upgradeButtonScene.Instantiate<CustomButton>(),
+            upgradeButtonScene.Instantiate<CustomButton>(),
+            upgradeButtonScene.Instantiate<CustomButton>()
         };
 
         upgrades = Upgrade.RandomUniqueUpgrades(3);

@@ -141,7 +141,7 @@ public partial class Enemy : Area2D
 
         if (SaveData.showCombatText || unhideable)
         {
-            CombatText dmgText = combatText.Instantiate() as CombatText;
+            CombatText dmgText = combatText.Instantiate<CombatText>();
             GetNode("/root/Game").AddChild(dmgText);
             if (combatTextDirection != null)
                 dmgText.direction = (Vector2)combatTextDirection;

@@ -45,8 +45,8 @@ theme = SubResource("1")
 text = "HOST"
 icon_alignment = 1
 script = ExtResource("14")
-goToScene = ExtResource("3")
 host = true
+goToScene = ExtResource("3")
 
 [node name="JoinButton" type="Button" parent="."]
 layout_mode = 0

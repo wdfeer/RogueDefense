@@ -12,7 +12,7 @@ namespace RogueDefense
         {
             for (int i = 0; i < ShurikenCount; i++)
             {
-                Shuriken proj = ((Shuriken)shurikenScene.Instantiate());
+                Shuriken proj = shurikenScene.Instantiate<Shuriken>();
                 proj.owner = player;
                 proj.velocity = new Vector2(20f, 0f).Rotated(0.1f * GD.Randf());
                 proj.damage = Damage;
