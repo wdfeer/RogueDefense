@@ -18,7 +18,7 @@ namespace RogueDefense
         {
             base._Process(delta);
 
-            this.Rotate(delta * Mathf.Pi * 2);
+            this.Rotate((float)delta * Mathf.Pi * 2);
         }
 
         protected override bool UnhideableDamageNumbers => true;

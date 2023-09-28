@@ -12,7 +12,7 @@ public partial class EffectField : Area2D
         Monitorable = true;
 
         Connect("body_entered", new Callable(this, "BodyEntered"));
-        ((CircleShape2D)(GetNode("CollisionShape2D") as CollisionShape2D).Shape3D).Radius = radius;
+        ((CircleShape2D)(GetNode("CollisionShape2D") as CollisionShape2D).Shape).Radius = radius;
     }
     public void BodyEntered(Node body)
     {

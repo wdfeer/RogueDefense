@@ -11,8 +11,7 @@ namespace RogueDefense
         {
             try
             {
-                Godot.File file = new File();
-                file.Open(SAVE_PATH, Godot.File.ModeFlags.Read);
+                FileAccess file = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Read);
 
                 name = file.GetLine();
                 lastIp = file.GetLine();
@@ -48,8 +47,7 @@ namespace RogueDefense
         }
         public static void Save()
         {
-            File file = new File();
-            file.Open(SAVE_PATH, File.ModeFlags.Write);
+            FileAccess file = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
 
             file.StoreLine(name);
             file.StoreLine(lastIp);

@@ -36,7 +36,7 @@ public partial class Game : Node2D
     }
     void SpawnEnemy()
     {
-        enemy = enemyScene.Instance() as Enemy;
+        enemy = enemyScene.Instantiate() as Enemy;
         enemy.Position = new Vector2(900, 300);
         AddChild(enemy);
 

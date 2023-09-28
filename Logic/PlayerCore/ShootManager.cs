@@ -24,7 +24,7 @@ namespace RogueDefense.Logic.PlayerCore
         public float multishot = 1f;
         public void Process(float delta)
         {
-            timeSinceLastShot += delta;
+            timeSinceLastShot += (float)delta;
             if (timeSinceLastShot > shootInterval)
             {
                 timeSinceLastShot = 0;
@@ -69,7 +69,7 @@ namespace RogueDefense.Logic.PlayerCore
         }
         public Bullet NewBullet(Vector2 gposition, Vector2 velocity)
         {
-            Bullet bullet = DefenseObjective.instance.bulletScene.Instance<Bullet>();
+            Bullet bullet = DefenseObjective.instance.bulletScene.Instantiate<Bullet>();
             bullet.owner = player;
             bullet.velocity = velocity;
             bullet.GlobalPosition = gposition;
@@ -81,7 +81,7 @@ namespace RogueDefense.Logic.PlayerCore
         {
             foreach (Bullet bull in bullets)
             {
-                if (Godot.Object.IsInstanceValid(bull))
+                if (Godot.GodotObject.IsInstanceValid(bull))
                 {
                     if (filter != null && !filter(bull))
                         continue;

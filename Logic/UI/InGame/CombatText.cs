@@ -8,10 +8,10 @@ public partial class CombatText : Label
     public const float LIFESPAN = 0.75f;
     public override void _Process(double delta)
     {
-        SetPosition(Position + direction * delta * SPEED);
+        SetPosition(Position + direction * (float)delta * SPEED);
         var mod = Modulate;
-        mod.a -= delta / LIFESPAN;
-        if (mod.a <= 0f)
+        mod.A -= (float)delta / LIFESPAN;
+        if (mod.A <= 0f)
             QueueFree();
         Modulate = mod;
     }

@@ -25,6 +25,11 @@ public partial class Server : Node
             SetProcess(false);
         }
     }
+    public void Stop()
+    {
+        server = null;
+        throw new NotImplementedException();
+    }
     public Dictionary<int, UserData> users = new Dictionary<int, UserData>();
     public void SendPacket(int id, byte[] data) => server.GetPeer(id).PutPacket(data);
     public void Broadcast(byte[] data, int ignore = -1) => users.ToList().ForEach(x =>

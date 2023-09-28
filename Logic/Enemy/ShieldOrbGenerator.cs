@@ -29,7 +29,7 @@ public partial class ShieldOrbGenerator : Node2D
         orbs = new ShieldOrb[count];
         for (int i = 0; i < count; i++)
         {
-            var orb = shieldOrb.Instance() as ShieldOrb;
+            var orb = shieldOrb.Instantiate() as ShieldOrb;
             AddChild(orb);
             orbs[i] = orb;
 
@@ -42,7 +42,7 @@ public partial class ShieldOrbGenerator : Node2D
         for (int i = 0; i < orbs.Length; i++)
         {
             if (IsInstanceValid(orbs[i]))
-                orbs[i].Position = orbs[i].Position.Rotated(Mathf.Pi * 0.4f * delta);
+                orbs[i].Position = orbs[i].Position.Rotated(Mathf.Pi * 0.4f * (float)delta);
         }
     }
 }

@@ -141,7 +141,7 @@ public partial class Enemy : Area2D
 
         if (SaveData.showCombatText || unhideable)
         {
-            CombatText dmgText = combatText.Instance() as CombatText;
+            CombatText dmgText = combatText.Instantiate() as CombatText;
             GetNode("/root/Game").AddChild(dmgText);
             if (combatTextDirection != null)
                 dmgText.direction = (Vector2)combatTextDirection;
@@ -165,7 +165,7 @@ public partial class Enemy : Area2D
         base._Process(delta);
         if (attacking)
         {
-            attackTimer += delta;
+            attackTimer += (float)delta;
             if (attackTimer > attackInterval)
             {
                 attackTimer = 0f;
@@ -176,16 +176,16 @@ public partial class Enemy : Area2D
         dynamicDamageMult = 1f;
         dynamicArmorMult = 1f;
 
-        bleed.TryProcess(delta);
-        viral.TryProcess(delta);
-        cold.TryProcess(delta);
-        corrosive.TryProcess(delta);
+        bleed.TryProcess((float)delta);
+        viral.TryProcess((float)delta);
+        cold.TryProcess((float)delta);
+        corrosive.TryProcess((float)delta);
 
         ResetArmorDisplay();
 
         if (!attacking)
         {
-            GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult * delta * 60, 0);
+            GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult * (float)delta * 60, 0);
         }
     }
     public void BodyEntered(Node body)

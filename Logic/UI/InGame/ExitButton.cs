@@ -8,7 +8,7 @@ public partial class ExitButton : Button
     public override void _Ready()
     {
         ConfirmationPopup.GetOkButton().Connect("pressed", new Callable(this, "ExitConfirmed"));
-        popupBounds = ConfirmationPopup.GetRect();
+        popupBounds = ConfirmationPopup.GetVisibleRect();
     }
     public void ExitConfirmed()
     {
@@ -17,6 +17,6 @@ public partial class ExitButton : Button
     Rect2 popupBounds;
     public override void _Pressed()
     {
-        ConfirmationPopup.Popup_(popupBounds);
+        ConfirmationPopup.Popup((Rect2I)popupBounds);
     }
 }

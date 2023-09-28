@@ -34,17 +34,17 @@ namespace RogueDefense.Logic.PlayerCore
         }
         public void _Process(double delta)
         {
-            hooks.ForEach(x => x.PreUpdate(delta));
-            upgradeManager.Process(delta);
-            hooks.ForEach(x => x.PostUpgradeUpdate(delta));
-            shootManager.Process(delta);
-            hooks.ForEach(x => x.PostUpdate(delta));
+            hooks.ForEach(x => x.PreUpdate((float)delta));
+            upgradeManager.Process((float)delta);
+            hooks.ForEach(x => x.PostUpgradeUpdate((float)delta));
+            shootManager.Process((float)delta);
+            hooks.ForEach(x => x.PostUpdate((float)delta));
         }
 
         public List<Turret> turrets = new List<Turret>();
         public void SpawnTurret()
         {
-            Turret turret = DefenseObjective.instance.turretScene.Instance<Turret>();
+            Turret turret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
             DefenseObjective.instance.AddChild(turret);
             turret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
             turrets.Add(turret);

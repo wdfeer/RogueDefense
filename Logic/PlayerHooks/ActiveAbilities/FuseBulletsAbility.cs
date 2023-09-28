@@ -12,13 +12,13 @@ namespace RogueDefense
         }
 
         public override bool CanBeActivated()
-            => player.shootManager.bullets.Any(x => Object.IsInstanceValid(x) && !x.fused);
+            => player.shootManager.bullets.Any(x => GodotObject.IsInstanceValid(x) && !x.fused);
         public override void Activate()
         {
             ShootManager shooter = player.shootManager;
 
             float hitMult = shooter.bullets.Aggregate(0f, (a, b) =>
-                a + ((Object.IsInstanceValid(b) && !b.fused) ? b.hitMult : 0));
+                a + ((GodotObject.IsInstanceValid(b) && !b.fused) ? b.hitMult : 0));
             shooter.ClearBullets(x => !x.fused);
             Bullet bullet = shooter.Shoot(player.shootManager.bulletSpawns[0], 3f);
             bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));

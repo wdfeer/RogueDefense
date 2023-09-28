@@ -17,7 +17,7 @@ public partial class DpsLabel : Label
     const float HIT_SAVE_DURATION = 1f;
     public override void _Process(double delta)
     {
-        secondTimer += delta;
+        secondTimer += (float)delta;
         if (secondTimer >= 1f)
         {
             UpdateShownDps();

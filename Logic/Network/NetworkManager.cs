@@ -30,8 +30,7 @@ public static class NetworkManager
         active = false;
         if (NetworkManager.mode == NetMode.Server)
         {
-            Server.server.Stop();
-            Server.server = null;
+            Server.instance.Stop();
             Server.instance = new Server();
         }
         Client.client = null;

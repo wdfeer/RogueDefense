@@ -64,7 +64,7 @@ namespace RogueDefense
         public override void _Process(double delta)
         {
             if (GameSettings.healthDrain)
-                DealPassiveDamage(delta);
+                DealPassiveDamage((float)delta);
 
             if (hpBar.Visible)
             {
