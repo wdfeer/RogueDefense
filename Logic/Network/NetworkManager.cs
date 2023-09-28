@@ -15,7 +15,7 @@ public static class NetworkManager
         if (NetworkManager.mode == NetMode.Server)
         {
             Server.instance.Start();
-            Client.address = "localhost";
+            Client.host = "localhost";
             Client.port = Server.PORT;
             Client.instance.Start();
         }
@@ -33,7 +33,7 @@ public static class NetworkManager
             Server.instance.Stop();
             Server.instance = new Server();
         }
-        Client.client = null;
+        Client.instance.Stop();
         Client.instance = new Client();
     }
     public static void Poll()

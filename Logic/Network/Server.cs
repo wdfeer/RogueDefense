@@ -2,66 +2,62 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using RogueDefense.Logic.Statuses;
 using static Client;
 
 public partial class Server : Node
 {
     public static Server instance = new Server();
-    public static WebSocketMultiplayerPeer server;
-    public const int PORT = 7777;
+    public static TcpServer server;
+    public static StreamPeerTcp[] peers = new StreamPeerTcp[16];
+    public const ushort PORT = 7777;
     public void Start()
     {
         server = new();
-        server.Connect("client_connected", new Callable(this, "Connected"));
-        server.Connect("client_disconnected", new Callable(this, "Disconnected"));
-        server.Connect("client_close_request", new Callable(this, "CloseRequest"));
-        server.Connect("data_received", new Callable(this, "OnData"));
 
-        var err = server.CreateServer(PORT);
-        GD.Print($"Server is listening on port {PORT}");
-        if (err != Error.Ok)
+        var err = server.Listen(PORT);
+        if (err == Error.Ok)
+        {
+            GD.Print($"Server is listening on port {PORT}");
+        }
+        else
         {
             GD.PrintErr($"Unable to start server ({err})");
             SetProcess(false);
         }
+
     }
     public void Stop()
     {
+        server.Stop();
         server = null;
-        throw new NotImplementedException();
     }
     public Dictionary<int, UserData> users = new Dictionary<int, UserData>();
-    public void SendPacket(int id, byte[] data) => server.GetPeer(id).PutPacket(data);
+    public void SendPacket(int id, byte[] data) => peers[id].PutData(data);
     public void Broadcast(byte[] data, int ignore = -1) => users.ToList().ForEach(x =>
     {
         if (x.Key != ignore)
             SendPacket(x.Key, data);
     });
     public void Broadcast(string data, int ignore = -1) => Broadcast(data.ToUtf8Buffer(), ignore);
-    public void Connected(int id, string protocol)
+    public void OnConnect(int id)
     {
         string data = $"{(char)MessageType.FetchLobby}{id.ToString()}";
         if (users.Count > 0)
             data += " " + String.Join(" ", users.Select(x => $"{x.Key.ToString()};{x.Value.name};{x.Value.ability};{UserData.UpgradePointsAsString(x.Value.upgradePoints)}"));
         SendPacket(id, data.ToUtf8Buffer());
         users.Add(id, new UserData(id, "", -1, null));
-        GD.Print($"Client {id} connected with protocol: {protocol}");
+        GD.Print($"Client {id} connected");
     }
-    public void Disconnected(int id, bool wasCleanClose = false)
+    public void OnDisconnect(int id)
     {
         users.Remove(id);
-        GD.Print($"Client {id} disconnected, clean: {wasCleanClose}");
+        GD.Print($"Client {id} disconnected");
 
         SendMessage(MessageType.Unregister, new string[] { id.ToString() });
     }
-    public void CloseRequest(int id, int code, string reason)
+    public void ReceiveData(int id, byte[] data)
     {
-        users.Remove(id);
-        GD.Print($"Client {id} disconnecting with code {code}, reason: {reason}");
-    }
-    public void OnData(int id)
-    {
-        byte[] data = server.GetPeer(id).GetPacket();
         GD.Print($"Server: got packet from {id}: {data.GetStringFromUtf8()} ... broadcasting");
         Broadcast(data, id);
 
@@ -96,6 +92,36 @@ public partial class Server : Node
 
     public void Poll() // important to always keep polling
     {
-        server.Poll();
+        if (server.IsConnectionAvailable())
+        {
+            var connection = server.TakeConnection();
+            int id = -1;
+            for (int i = 0; i < peers.Length; i++)
+            {
+                if (peers[i] == null)
+                {
+                    id = i;
+                    break;
+                }
+            }
+            OnConnect(id);
+        }
+
+        for (int i = 0; i < peers.Length; i++)
+        {
+            StreamPeerTcp client = peers[i];
+
+            StreamPeerTcp.Status status = client.GetStatus();
+            if (status == StreamPeerTcp.Status.None || status == StreamPeerTcp.Status.Error)
+            {
+                OnDisconnect(i);
+            }
+
+            int byteCount = client.GetAvailableBytes();
+            if (byteCount > 0)
+            {
+                ReceiveData(i, client.GetData(byteCount).Cast<byte>().ToArray());
+            }
+        }
     }
 }

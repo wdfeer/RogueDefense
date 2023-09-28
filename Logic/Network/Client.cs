@@ -7,48 +7,49 @@ using System.Linq;
 
 public partial class Client : Node
 {
-    public static string address;
-    public static int port;
-    public static string URL => $"ws://{address}:{port}";
+    public static string host;
+    public static ushort port;
     public static Client instance = new Client();
-    public static WebSocketMultiplayerPeer client;
+    public static StreamPeerTcp client;
     public static int myId = -1;
     public void Start()
     {
         client = new();
-        client.Connect("connection_closed", new Callable(this, "Closed"));
-        client.Connect("connection_error", new Callable(this, "Closed"));
-        client.Connect("connection_established", new Callable(this, "Connected"));
-        client.Connect("data_received", new Callable(this, "OnData"));
-        GD.Print($"Trying to connect to {URL}");
-        var err = client.CreateClient(URL);
+
+        GD.Print($"Trying to connect to {host}:{port}");
+        var err = client.ConnectToHost(host, port);
         if (err != Error.Ok)
         {
             GD.PrintErr("Unable to start client");
             SetProcess(false);
         }
     }
+    public void Stop()
+    {
+        client.DisconnectFromHost();
+        client = null;
+    }
     public List<UserData> others = new List<UserData>();
     public UserData GetUserData(int id) => others.Find(x => x.id == id);
     public void RemoveUserData(int id) => others.Remove(GetUserData(id));
-    public void Connected(string protocol = "")
+    public void ChangeSceneToLobby()
     {
         GD.Print("This client connected! Loading lobby...");
         if (NetworkManager.mode == NetMode.Client)
             JoinScene.TryChangeToLobbyScene();
     }
-    public void Closed(bool wasCleanClose = false) { }
-    public void OnData()
+    public void ReceiveData(byte[] data)
     {
-        string data = client.GetPeer(1).GetPacket().GetStringFromUtf8();
+        string str = data.GetStringFromUtf8();
         MessageType type = (MessageType)data[0];
-        ProcessMessage(type, data.Substring(1).Split(' '));
+        ProcessMessage(type, str.Substring(1).Split(' '));
     }
     public void ProcessMessage(MessageType type, string[] args)
     {
         switch (type)
         {
             case MessageType.FetchLobby:
+                ChangeSceneToLobby();
                 SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, AbilityChooser.chosen.ToString(), UserData.UpgradePointsAsString(SaveData.augmentAllotment) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
@@ -130,7 +131,7 @@ public partial class Client : Node
             Lobby.Instance.RemoveUser(id);
         }
     }
-    void Broadcast(string data) => client.GetPeer(1).PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
+    void Broadcast(string data) => client.PutData(System.Text.Encoding.UTF8.GetBytes(data));
     public void SendMessage(MessageType type, string[] args = null)
     {
         string msg = $"{(char)type}";
@@ -143,6 +144,13 @@ public partial class Client : Node
     public void Poll() // important to always keep polling
     {
         client.Poll();
+
+        int byteCount = client.GetAvailableBytes();
+        if (byteCount > 0)
+        {
+            byte[] data = client.GetData(byteCount).Cast<byte>().ToArray();
+            ReceiveData(data);
+        }
     }
 }
 public enum MessageType
