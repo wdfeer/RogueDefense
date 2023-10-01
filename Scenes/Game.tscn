@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=23 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -19,7 +19,6 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/NotificationPopup.cs" id="19"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/BuffText.cs" id="20"]
-[ext_resource type="FontFile" path="res://Assets/font24.tres" id="21"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
@@ -161,7 +160,10 @@ script = ExtResource("9")
 layout_mode = 0
 offset_right = 90.0
 offset_bottom = 81.0
-theme_override_fonts/font = ExtResource("21")
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="AbilityContainer/AbilityButton1"]
 layout_mode = 0
@@ -180,6 +182,7 @@ z_index = 1
 
 [node name="DeathScreen" type="Panel" parent="z-index1"]
 process_mode = 3
+visible = false
 offset_right = 1024.0
 offset_bottom = 600.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
