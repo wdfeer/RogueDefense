@@ -29,7 +29,7 @@ public partial class Lobby : Control
 	public void AddUser(UserData data)
 	{
 		var node = userDataScene.Instantiate<PlayerData>();
-		node.SetName(data.name);
+		node.SetPlayerName(data.name);
 		node.SetAbilityText(AbilityManager.GetAbilityName(data.ability));
 		userDisplayNodes.Add(data.id, node);
 		GetNode("PlayerList").AddChild(node);

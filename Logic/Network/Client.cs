@@ -143,6 +143,8 @@ public partial class Client : Node
 
     public void Poll() // important to always keep polling
     {
+        if (client.GetStatus() != StreamPeerTcp.Status.Connected)
+            return;
         client.Poll();
 
         int byteCount = client.GetAvailableBytes();

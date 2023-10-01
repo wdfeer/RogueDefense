@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
 [ext_resource type="FontFile" path="res://Assets/font32.tres" id="15"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/PointLabel.cs" id="16"]
-[ext_resource type="PackedScene" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/HpBarButton.cs" id="19"]
 

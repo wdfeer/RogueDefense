@@ -22,7 +22,7 @@
 [ext_resource type="FontFile" path="res://Assets/font24.tres" id="21"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(31, 31)
+size = Vector2(62, 62)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(512, 300)
@@ -48,7 +48,6 @@ vframes = 5
 region_rect = Rect2(0, 0, 60, 60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseObjective"]
-visible = false
 shape = SubResource("1")
 
 [node name="HpBar" type="ProgressBar" parent="DefenseObjective"]
