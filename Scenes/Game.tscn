@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=24 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -26,6 +26,9 @@ size = Vector2(62, 62)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(512, 300)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
@@ -177,10 +180,9 @@ z_index = 1
 
 [node name="DeathScreen" type="Panel" parent="z-index1"]
 process_mode = 3
-visible = false
-modulate = Color(1, 1, 1, 0.784314)
 offset_right = 1024.0
 offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
 script = ExtResource("15")
 
 [node name="Label" type="Label" parent="z-index1/DeathScreen"]

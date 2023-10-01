@@ -24,7 +24,7 @@
 default_font = ExtResource("1")
 default_font_size = 64
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1y15b"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enlh7"]
 bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 
 [node name="Control" type="Control"]
@@ -178,7 +178,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("5")
-theme_override_styles/panel = SubResource("StyleBoxFlat_1y15b")
+theme_override_styles/panel = SubResource("StyleBoxFlat_enlh7")
 
 [node name="PointLabel" type="Label" parent="AugmentPanel"]
 layout_mode = 0
