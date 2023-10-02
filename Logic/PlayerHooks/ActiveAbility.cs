@@ -70,7 +70,8 @@ namespace RogueDefense
             }
             else
             {
-                cooldownLabel.Text = "";
+                cooldownLabel.Text = "0";
+                cooldownLabel.Modulate = Colors.Green;
             }
         }
 
