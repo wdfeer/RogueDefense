@@ -13,6 +13,8 @@ emission_sphere_radius = 20.0
 direction = Vector3(-1, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
 
 [node name="Bullet" type="CharacterBody2D"]
 z_index = -5
@@ -40,7 +42,7 @@ theme_override_font_sizes/font_size = 64
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GpuParticles2D" type="GPUParticles2D" parent="."]
 z_index = -2
 emitting = false
 amount = 16
