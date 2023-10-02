@@ -241,14 +241,23 @@ dialog_text = "Give up (progress will NOT be saved!)"
 
 [node name="NotificationPopup" type="PopupPanel" parent="."]
 process_mode = 3
+initial_position = 1
+size = Vector2i(452, 60)
 exclusive = true
 script = ExtResource("19")
 
 [node name="Label" type="Label" parent="NotificationPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 224.0
-offset_bottom = 96.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("7")
-theme_override_fonts/font = ExtResource("12")
+theme_override_font_sizes/font_size = 32
 text = "[Username] used [AbilityName]"
+horizontal_alignment = 1
+vertical_alignment = 1
