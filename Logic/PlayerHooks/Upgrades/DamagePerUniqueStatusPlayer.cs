@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class DamagePerUniqueStatusPlayer : PlayerHooks
+    public partial class DamagePerUniqueStatusPlayer : PlayerHooks
     {
         public float damageIncreasePerUniqueStatus = 0f;
 

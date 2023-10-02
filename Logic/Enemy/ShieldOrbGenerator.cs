@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ShieldOrbGenerator : Node2D
+public partial class ShieldOrbGenerator : Node2D
 {
     [Export]
     public PackedScene shieldOrb;
@@ -29,7 +29,7 @@ public class ShieldOrbGenerator : Node2D
         orbs = new ShieldOrb[count];
         for (int i = 0; i < count; i++)
         {
-            var orb = shieldOrb.Instance() as ShieldOrb;
+            var orb = shieldOrb.Instantiate<ShieldOrb>();
             AddChild(orb);
             orbs[i] = orb;
 
@@ -37,12 +37,12 @@ public class ShieldOrbGenerator : Node2D
             pos = pos.Rotated(angleStep);
         }
     }
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         for (int i = 0; i < orbs.Length; i++)
         {
             if (IsInstanceValid(orbs[i]))
-                orbs[i].Position = orbs[i].Position.Rotated(Mathf.Pi * 0.4f * delta);
+                orbs[i].Position = orbs[i].Position.Rotated(Mathf.Pi * 0.4f * (float)delta);
         }
     }
 }

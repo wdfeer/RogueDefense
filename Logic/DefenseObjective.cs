@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RogueDefense
 {
-    public class DefenseObjective : Node2D
+    public partial class DefenseObjective : Node2D
     {
         public static DefenseObjective instance;
 
@@ -24,7 +24,7 @@ namespace RogueDefense
             hpBar = GetNode<ProgressBar>("./HpBar");
             hpBar.Visible = SaveData.showHpBar;
 
-            sprite = GetNode<Sprite>("./Sprite");
+            sprite = GetNode<Sprite2D>("./Sprite2D");
 
             Hp = maxHp;
         }
@@ -41,7 +41,7 @@ namespace RogueDefense
         public float maxHp = BASE_MAX_HP;
         private ProgressBar hpBar;
 
-        private Sprite sprite;
+        private Sprite2D sprite;
         private int GetSpriteFrame()
         {
             int result = 4 - (int)(HpRatio / 0.2f);
@@ -61,10 +61,10 @@ namespace RogueDefense
                 Death();
             }
         }
-        public override void _Process(float delta)
+        public override void _Process(double delta)
         {
             if (GameSettings.healthDrain)
-                DealPassiveDamage(delta);
+                DealPassiveDamage((float)delta);
 
             if (hpBar.Visible)
             {

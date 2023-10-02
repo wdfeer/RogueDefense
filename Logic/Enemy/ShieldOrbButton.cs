@@ -3,7 +3,7 @@ using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System;
 
-public class ShieldOrbButton : TextureButton
+public partial class ShieldOrbButton : TextureButton
 {
     public override void _Pressed()
     {

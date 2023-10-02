@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class DamageReductionAbility : ActiveAbility
+    public partial class DamageReductionAbility : ActiveAbility
     {
         public DamageReductionAbility(Player player, CustomButton button) : base(player, button)
         {

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ResetButton : Button
+public partial class ResetButton : Button
 {
     public override void _Pressed()
     {

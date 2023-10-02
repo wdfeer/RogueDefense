@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class ArmorBar : TextureProgress
+public partial class ArmorBar : TextureProgressBar
 {
     public static ArmorBar instance;
     public override void _Ready()

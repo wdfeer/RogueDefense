@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class MPButton : GoToSceneButton
+public partial class MPButton : GoToSceneButton
 {
     [Export]
     public bool host;

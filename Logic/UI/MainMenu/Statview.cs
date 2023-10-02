@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class Statview : VBoxContainer
+public partial class Statview : VBoxContainer
 {
     public Label SingleplayerHighscore => (Label)GetNode("HighscoreSP");
     public Label MultiplayerHighscore => (Label)GetNode("HighscoreMP");

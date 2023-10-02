@@ -2,12 +2,12 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class MyPlayerData : PlayerData
+public partial class MyPlayerData : PlayerData
 {
-    public override void _Ready()
-    {
-        SetName(RogueDefense.SaveData.name);
-        AbilityLabel.Visible = false;
-        Container.AddChild(new AbilityChooser());
-    }
+	public override void _Ready()
+	{
+		SetPlayerName(SaveData.name);
+		AbilityLabel.Visible = false;
+		Container.AddChild(new AbilityChooser());
+	}
 }

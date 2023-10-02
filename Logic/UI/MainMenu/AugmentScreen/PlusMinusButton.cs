@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class PlusMinusButton : Button
+public partial class PlusMinusButton : Button
 {
     [Export]
     public int effect = 1;
@@ -11,7 +11,7 @@ public class PlusMinusButton : Button
         GetParent<AugmentContainer>().ChangeStat(effect);
     }
 
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         Disabled = effect > SaveData.SpareAugmentPoints ||
             (GetParent<AugmentContainer>().points == AugmentContainer.MIN_POINTS && effect < 0);

@@ -5,51 +5,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class Client : Node
+public partial class Client : Node
 {
-    public static string address;
-    public static int port;
-    public static string URL => $"ws://{address}:{port}";
+    public static string host;
+    public static ushort port;
     public static Client instance = new Client();
-    public static WebSocketClient client;
+    public static StreamPeerTcp client;
     public static int myId = -1;
     public void Start()
     {
-        client = new WebSocketClient();
-        client.Connect("connection_closed", this, "Closed");
-        client.Connect("connection_error", this, "Closed");
-        client.Connect("connection_established", this, "Connected");
-        client.Connect("data_received", this, "OnData");
-        GD.Print($"Trying to connect to {URL}");
-        var err = client.ConnectToUrl(URL);
+        client = new();
+
+        GD.Print($"Trying to connect to {host}:{port}");
+        var err = client.ConnectToHost(host, port);
         if (err != Error.Ok)
         {
             GD.PrintErr("Unable to start client");
             SetProcess(false);
         }
     }
+    public void Stop()
+    {
+        client.DisconnectFromHost();
+        client = null;
+    }
     public List<UserData> others = new List<UserData>();
     public UserData GetUserData(int id) => others.Find(x => x.id == id);
     public void RemoveUserData(int id) => others.Remove(GetUserData(id));
-    public void Connected(string protocol = "")
+    public void ChangeSceneToLobby()
     {
         GD.Print("This client connected! Loading lobby...");
         if (NetworkManager.mode == NetMode.Client)
             JoinScene.TryChangeToLobbyScene();
     }
-    public void Closed(bool wasCleanClose = false) { }
-    public void OnData()
+    public void ReceiveMessage(string message)
     {
-        string data = client.GetPeer(1).GetPacket().GetStringFromUTF8();
-        MessageType type = (MessageType)data[0];
-        ProcessMessage(type, data.Substring(1).Split(' '));
+        MessageType type = (MessageType)message[0];
+        GD.Print($"Client received msg of type {type} with contents: {message}");
+        ProcessMessage(type, message[1..].Split(' '));
     }
     public void ProcessMessage(MessageType type, string[] args)
     {
+        GD.Print($"Client processing message of type {type} with args: {String.Concat(args)}");
         switch (type)
         {
             case MessageType.FetchLobby:
-                SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, AbilityChooser.chosen.ToString(), UserData.UpgradePointsAsString(SaveData.augmentAllotment) });
+                ChangeSceneToLobby();
+                GD.Print($"Sending Register Message with augments {String.Join(",", SaveData.augmentAllotment)}");
+                SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(SaveData.augmentAllotment) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
@@ -58,7 +61,7 @@ public class Client : Node
                 }
                 break;
             case MessageType.Register:
-                RegisterUser(args[0].ToInt(), args[1], args[2].ToInt(), UserData.UpgradePointsFromString(args[3]));
+                RegisterUser(args[0].ToInt(), args[1], args[2].ToInt(), UserData.AugmentPointsFromString(args[3]));
                 break;
             case MessageType.SetAbility:
                 if (Lobby.Instance == null) break;
@@ -66,7 +69,7 @@ public class Client : Node
                 UserData data = GetUserData(id);
                 data.ability = args[1].ToInt();
                 UnregisterUser(id);
-                RegisterUser(id, data.name, data.ability, data.upgradePoints);
+                RegisterUser(id, data.name, data.ability, data.augmentPoints);
                 break;
             case MessageType.Unregister:
                 id = args[0].ToInt();
@@ -76,7 +79,7 @@ public class Client : Node
                 GameSettings.ReceiveSettings(args);
                 break;
             case MessageType.StartGame:
-                Lobby.Instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
+                Lobby.Instance.GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
                 break;
             case MessageType.EnemyKill:
                 if (IsInstanceValid(Game.instance))
@@ -99,7 +102,7 @@ public class Client : Node
                 break;
             case MessageType.Retry:
                 Game.instance.GetTree().Paused = false;
-                Game.instance.GetTree().ChangeScene("res://Scenes/Game.tscn");
+                Game.instance.GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
                 break;
             case MessageType.AbilityActivated:
                 id = args[0].ToInt();
@@ -130,12 +133,17 @@ public class Client : Node
             Lobby.Instance.RemoveUser(id);
         }
     }
-    void Broadcast(string data) => client.GetPeer(1).PutPacket(System.Text.Encoding.UTF8.GetBytes(data));
+    void Broadcast(string data)
+    {
+        client.PutUtf8String(data);
+    }
+
     public void SendMessage(MessageType type, string[] args = null)
     {
         string msg = $"{(char)type}";
         if (args != null)
             msg += String.Join(" ", args);
+        GD.Print($"Sending message to Server: {msg}");
         Broadcast(msg);
     }
 
@@ -143,6 +151,16 @@ public class Client : Node
     public void Poll() // important to always keep polling
     {
         client.Poll();
+        if (client.GetStatus() != StreamPeerTcp.Status.Connected)
+            return;
+
+        int byteCount = client.GetAvailableBytes();
+        if (byteCount > 0)
+        {
+            GD.Print($"Client: {byteCount} bytes are available");
+            string data = client.GetUtf8String();
+            ReceiveMessage(data);
+        }
     }
 }
 public enum MessageType

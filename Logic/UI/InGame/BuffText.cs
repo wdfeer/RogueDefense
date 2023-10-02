@@ -3,9 +3,9 @@ using RogueDefense;
 using RogueDefense.Logic;
 using System;
 
-public class BuffText : Label
+public partial class BuffText : Label
 {
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         Text = "";
 

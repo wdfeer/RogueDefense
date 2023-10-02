@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class FirstShotPlayer : PlayerHooks
+    public partial class FirstShotPlayer : PlayerHooks
     {
         public float damageMult = 1f;
         bool affectingThisShot = false;

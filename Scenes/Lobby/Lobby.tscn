@@ -1,143 +1,156 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=3 uid="uid://dtm1dpgedp8k2"]
 
-[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Assets/default_theme.tres" type="Theme" id=2]
-[ext_resource path="res://Scenes/Lobby/PlayerData.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Logic/Network/Lobby.cs" type="Script" id=4]
-[ext_resource path="res://Logic/UI/Lobby/StartButton.cs" type="Script" id=5]
-[ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Logic/UI/Lobby/MyPlayerData.cs" type="Script" id=7]
-[ext_resource path="res://Assets/settings_icon.svg" type="Texture" id=8]
-[ext_resource path="res://Assets/font32.tres" type="DynamicFont" id=9]
-[ext_resource path="res://Scenes/Lobby/SettingsSlider.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Logic/UI/Lobby/Settings/SettingsButton.cs" type="Script" id=11]
-[ext_resource path="res://Logic/UI/Lobby/Settings/ResetButton.cs" type="Script" id=12]
-[ext_resource path="res://Logic/UI/Lobby/Settings/ConfirmButton.cs" type="Script" id=13]
-[ext_resource path="res://Logic/UI/Lobby/Settings/SettingsPanel.cs" type="Script" id=14]
-[ext_resource path="res://Logic/UI/Lobby/Settings/Sliders.cs" type="Script" id=15]
-[ext_resource path="res://Assets/font24.tres" type="DynamicFont" id=16]
-[ext_resource path="res://Assets/exit_door.svg" type="Texture" id=17]
-[ext_resource path="res://Logic/UI/Lobby/ExitButton.cs" type="Script" id=18]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://bdpste7hjr5v5" path="res://Scenes/Lobby/PlayerData.tscn" id="3"]
+[ext_resource type="Script" path="res://Logic/Network/Lobby.cs" id="4"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/StartButton.cs" id="5"]
+[ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="6"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/MyPlayerData.cs" id="7"]
+[ext_resource type="Texture2D" uid="uid://du73bpn2vb8wx" path="res://Assets/settings_icon.svg" id="8"]
+[ext_resource type="FontFile" path="res://Assets/font32.tres" id="9"]
+[ext_resource type="PackedScene" path="res://Scenes/Lobby/SettingsSlider.tscn" id="10"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/SettingsButton.cs" id="11"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/ResetButton.cs" id="12"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/ConfirmButton.cs" id="13"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/SettingsPanel.cs" id="14"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/Sliders.cs" id="15"]
+[ext_resource type="Texture2D" uid="uid://clrybavsuy0pw" path="res://Assets/exit_door.svg" id="17"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/ExitButton.cs" id="18"]
 
 [node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 4 )
-userDataScene = ExtResource( 3 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4")
+userDataScene = ExtResource("3")
+
+[node name="NetPoller" parent="." instance=ExtResource("6")]
 
 [node name="PlayerList" type="VFlowContainer" parent="."]
-margin_top = 100.0
-margin_right = 1024.0
-margin_bottom = 500.0
+layout_mode = 0
+offset_top = 100.0
+offset_right = 1024.0
+offset_bottom = 500.0
 
-[node name="MyData" parent="PlayerList" instance=ExtResource( 3 )]
-margin_right = 231.0
-script = ExtResource( 7 )
+[node name="MyData" parent="PlayerList" instance=ExtResource("3")]
+layout_mode = 2
+script = ExtResource("7")
 
 [node name="StartButton" type="Button" parent="."]
-margin_top = 500.0
-margin_right = 1024.0
-margin_bottom = 600.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 1 )
+layout_mode = 0
+offset_top = 500.0
+offset_right = 1024.0
+offset_bottom = 600.0
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "START"
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="Title" type="Label" parent="."]
-margin_right = 1024.0
-margin_bottom = 100.0
-theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 1 )
+layout_mode = 0
+offset_right = 1024.0
+offset_bottom = 100.0
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 64
 text = "Lobby"
-align = 1
-valign = 1
-
-[node name="NetPoller" parent="." instance=ExtResource( 6 )]
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SettingsButton" type="TextureButton" parent="."]
-margin_left = 8.0
-margin_top = 10.0
-margin_right = 168.0
-margin_bottom = 170.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 8 )
-expand = true
-script = ExtResource( 11 )
+layout_mode = 0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = 88.0
+offset_bottom = 90.0
+texture_normal = ExtResource("8")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("11")
 
 [node name="ExitButton" type="TextureButton" parent="."]
-margin_left = 936.0
-margin_top = 10.0
-margin_right = 1096.0
-margin_bottom = 170.0
-rect_scale = Vector2( 0.5, 0.5 )
-texture_normal = ExtResource( 17 )
-expand = true
-script = ExtResource( 18 )
+layout_mode = 0
+offset_left = 936.0
+offset_top = 10.0
+offset_right = 1016.0
+offset_bottom = 90.0
+texture_normal = ExtResource("17")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("18")
 
 [node name="PPMult" type="Label" parent="."]
-margin_left = 104.0
-margin_right = 338.0
-margin_bottom = 100.0
-custom_fonts/font = ExtResource( 16 )
+layout_mode = 0
+offset_left = 104.0
+offset_right = 338.0
+offset_bottom = 100.0
+theme = ExtResource("2")
+theme_override_font_sizes/font_size = 24
 text = "pp Multiplier: 1.000"
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SettingsPanel" type="Panel" parent="."]
 visible = false
-self_modulate = Color( 1, 1, 1, 0.784314 )
-margin_left = 704.0
-margin_right = 1024.0
-margin_bottom = 600.0
-script = ExtResource( 14 )
+self_modulate = Color(1, 1, 1, 0.784314)
+layout_mode = 0
+offset_left = 704.0
+offset_right = 1024.0
+offset_bottom = 600.0
+script = ExtResource("14")
 
 [node name="Container" type="VBoxContainer" parent="SettingsPanel"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 316.0
-margin_bottom = 596.0
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 316.0
+offset_bottom = 596.0
 
 [node name="Label" type="Label" parent="SettingsPanel/Container"]
-margin_right = 312.0
-margin_bottom = 44.0
-custom_fonts/font = ExtResource( 9 )
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9")
 text = "Game Settings"
-align = 1
 
 [node name="Sliders" type="VBoxContainer" parent="SettingsPanel/Container"]
-margin_top = 48.0
-margin_right = 312.0
-margin_bottom = 483.0
-rect_min_size = Vector2( 0, 435 )
-script = ExtResource( 15 )
+custom_minimum_size = Vector2(0, 435)
+layout_mode = 2
+script = ExtResource("15")
 
-[node name="DmgMult" parent="SettingsPanel/Container/Sliders" instance=ExtResource( 10 )]
+[node name="DmgMult" parent="SettingsPanel/Container/Sliders" instance=ExtResource("10")]
+layout_mode = 2
 
 [node name="Label" parent="SettingsPanel/Container/Sliders/DmgMult" index="0"]
+layout_mode = 2
 text = "Damage Multiplier: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/DmgMult" index="1"]
+layout_mode = 2
 min_value = 0.5
 max_value = 2.0
 
-[node name="FireRateMult" parent="SettingsPanel/Container/Sliders" instance=ExtResource( 10 )]
-margin_top = 47.0
-margin_bottom = 90.0
+[node name="FireRateMult" parent="SettingsPanel/Container/Sliders" instance=ExtResource("10")]
+layout_mode = 2
 
 [node name="Label" parent="SettingsPanel/Container/Sliders/FireRateMult" index="0"]
+layout_mode = 2
 text = "Fire Rate Multiplier: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/FireRateMult" index="1"]
+layout_mode = 2
 min_value = 0.5
 max_value = 2.0
 
-[node name="HpDrain" parent="SettingsPanel/Container/Sliders" instance=ExtResource( 10 )]
-margin_top = 94.0
-margin_bottom = 137.0
+[node name="HpDrain" parent="SettingsPanel/Container/Sliders" instance=ExtResource("10")]
+layout_mode = 2
 
 [node name="Label" parent="SettingsPanel/Container/Sliders/HpDrain" index="0"]
+layout_mode = 2
 text = "Health Drain: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/HpDrain" index="1"]
+layout_mode = 2
 min_value = 0.0
 max_value = 1.0
 step = 1.0
@@ -145,26 +158,23 @@ value = 0.0
 rounded = true
 
 [node name="ResetButton" type="Button" parent="SettingsPanel/Container"]
-margin_top = 487.0
-margin_right = 312.0
-margin_bottom = 537.0
-custom_fonts/font = ExtResource( 9 )
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9")
 text = "Reset"
-script = ExtResource( 12 )
+script = ExtResource("12")
 
 [node name="ConfirmButton" type="Button" parent="SettingsPanel/Container"]
-margin_top = 541.0
-margin_right = 312.0
-margin_bottom = 591.0
-custom_fonts/font = ExtResource( 9 )
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9")
 text = "Confirm"
-script = ExtResource( 13 )
+script = ExtResource("13")
 
 [node name="ShadowingPanel" type="Panel" parent="SettingsPanel"]
 visible = false
-modulate = Color( 1, 1, 1, 0.313726 )
-margin_right = 320.0
-margin_bottom = 600.0
+modulate = Color(1, 1, 1, 0.313726)
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 600.0
 
 [editable path="SettingsPanel/Container/Sliders/DmgMult"]
 [editable path="SettingsPanel/Container/Sliders/FireRateMult"]

@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class ArmorStripAbility : ActiveAbility
+    public partial class ArmorStripAbility : ActiveAbility
     {
         public ArmorStripAbility(Player player, CustomButton button) : base(player, button)
         {

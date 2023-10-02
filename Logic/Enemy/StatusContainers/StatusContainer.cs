@@ -2,11 +2,11 @@ using Godot;
 using RogueDefense.Logic.Statuses;
 using System;
 
-public abstract class StatusContainer : HBoxContainer
+public abstract partial class StatusContainer : HBoxContainer
 {
     public Label Counter => ((Label)GetNode("Counter"));
     public abstract Status GetStatus();
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
         if (GetStatus().immune)
         {

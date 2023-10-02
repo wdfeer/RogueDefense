@@ -2,7 +2,7 @@ using Godot;
 
 namespace RogueDefense.Logic.Statuses
 {
-    public class Corrosive : SpecialStatus
+    public partial class Corrosive : SpecialStatus
     {
         public override void SpecialProcess(float delta)
         {

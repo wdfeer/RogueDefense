@@ -1,12 +1,12 @@
 using Godot;
 using System;
 
-public class GoToSceneButton : Button
+public partial class GoToSceneButton : Button
 {
     [Export]
     public PackedScene goToScene;
     public override void _Pressed()
     {
-        GetTree().ChangeSceneTo(goToScene);
+        GetTree().ChangeSceneToPacked(goToScene);
     }
 }

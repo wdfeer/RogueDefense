@@ -1,229 +1,230 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=3 uid="uid://kt63cqpw2db5"]
 
-[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=1]
-[ext_resource path="res://Scenes/MainMenu/UpgradeContainer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Lobby/Lobby.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/MainMenu/JoinScene.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/default_theme.tres" type="Theme" id=5]
-[ext_resource path="res://Assets/check_mark.png" type="Texture" id=6]
-[ext_resource path="res://Assets/anvil_impact.png" type="Texture" id=7]
-[ext_resource path="res://Assets/edit_icon.png" type="Texture" id=8]
-[ext_resource path="res://Logic/UI/MainMenu/Statview.cs" type="Script" id=9]
-[ext_resource path="res://Logic/GameInitializer.cs" type="Script" id=10]
-[ext_resource path="res://Logic/UI/MainMenu/CombatTextButton.cs" type="Script" id=11]
-[ext_resource path="res://Logic/UI/MainMenu/AugmentsButton.cs" type="Script" id=12]
-[ext_resource path="res://Logic/UI/MainMenu/UsernameInput.cs" type="Script" id=13]
-[ext_resource path="res://Logic/UI/MainMenu/MPButton.cs" type="Script" id=14]
-[ext_resource path="res://Assets/font32.tres" type="DynamicFont" id=15]
-[ext_resource path="res://Logic/UI/MainMenu/AugmentScreen/PointLabel.cs" type="Script" id=16]
-[ext_resource path="res://Scenes/MainMenu/TopPlay.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Logic/UI/MainMenu/TopPlays.cs" type="Script" id=18]
-[ext_resource path="res://Logic/UI/MainMenu/HpBarButton.cs" type="Script" id=19]
+[ext_resource type="FontFile" path="res://Assets/font64.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://d7hydk75hi01" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="5"]
+[ext_resource type="Texture2D" uid="uid://b024el17xormx" path="res://Assets/check_mark.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://cx7erggsc6wr" path="res://Assets/anvil_impact.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://d4n1tobo1ylie" path="res://Assets/edit_icon_small.png" id="7_5ef50"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/Statview.cs" id="9"]
+[ext_resource type="Script" path="res://Logic/GameInitializer.cs" id="10"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/CombatTextButton.cs" id="11"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentsButton.cs" id="12"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
+[ext_resource type="FontFile" path="res://Assets/font32.tres" id="15"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/PointLabel.cs" id="16"]
+[ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/HpBarButton.cs" id="19"]
 
-[sub_resource type="Theme" id=1]
-default_font = ExtResource( 1 )
+[sub_resource type="Theme" id="1"]
+default_font = ExtResource("1")
+default_font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enlh7"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 
 [node name="Control" type="Control"]
-pause_mode = 2
-margin_right = 1024.0
-margin_bottom = 600.0
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1025.0
+offset_bottom = 600.0
 
 [node name="GameInitializer" type="Node" parent="."]
-script = ExtResource( 10 )
+script = ExtResource("10")
 
 [node name="HostButton" type="Button" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -362.0
-margin_top = 220.0
-margin_right = -62.0
-margin_bottom = 370.0
-theme = SubResource( 1 )
+offset_left = -362.0
+offset_top = 220.0
+offset_right = -62.0
+offset_bottom = 370.0
+theme = SubResource("1")
 text = "HOST"
-icon_align = 1
-script = ExtResource( 14 )
-goToScene = ExtResource( 3 )
+icon_alignment = 1
+script = ExtResource("14")
 host = true
+goToScene = ExtResource("3")
 
 [node name="JoinButton" type="Button" parent="."]
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 62.0
-margin_top = 220.0
-margin_right = 362.0
-margin_bottom = 370.0
-theme = SubResource( 1 )
+offset_left = 62.0
+offset_top = 220.0
+offset_right = 362.0
+offset_bottom = 370.0
+theme = SubResource("1")
 text = "JOIN"
-icon_align = 1
-script = ExtResource( 14 )
-goToScene = ExtResource( 4 )
+icon_alignment = 1
+script = ExtResource("14")
+goToScene = ExtResource("4")
 
 [node name="UsernameInput" type="LineEdit" parent="."]
-margin_left = 13.0
-margin_top = 16.0
-margin_right = 613.0
-margin_bottom = 154.0
-rect_min_size = Vector2( 600, 0 )
-rect_scale = Vector2( 0.4, 0.4 )
-theme = ExtResource( 5 )
-custom_fonts/font = ExtResource( 1 )
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 0
+offset_left = 13.0
+offset_top = 16.0
+offset_right = 253.0
+offset_bottom = 72.0
+theme = ExtResource("5")
+theme_override_fonts/font = ExtResource("1")
+theme_override_font_sizes/font_size = 32
 text = "Player123"
+context_menu_enabled = false
 selecting_enabled = false
-right_icon = ExtResource( 8 )
-script = ExtResource( 13 )
+right_icon = ExtResource("7_5ef50")
+script = ExtResource("13")
 
 [node name="ClientSettings" type="VBoxContainer" parent="."]
-margin_left = 744.0
-margin_top = 16.0
-margin_right = 1011.0
-margin_bottom = 56.0
+layout_mode = 0
+offset_left = 744.0
+offset_top = 16.0
+offset_right = 1011.0
+offset_bottom = 56.0
 
 [node name="CombatTextButton" type="CheckBox" parent="ClientSettings"]
-margin_right = 267.0
-margin_bottom = 31.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "Show Common Damage Numbers"
-script = ExtResource( 11 )
+script = ExtResource("11")
 
 [node name="HpBarButton" type="CheckBox" parent="ClientSettings"]
-margin_top = 35.0
-margin_right = 267.0
-margin_bottom = 66.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "Show your HP Bar"
-script = ExtResource( 19 )
+script = ExtResource("19")
 
 [node name="TopPlays" type="VBoxContainer" parent="."]
-margin_left = 13.0
-margin_top = 462.0
-margin_right = 269.0
-margin_bottom = 574.0
-script = ExtResource( 18 )
+layout_mode = 0
+offset_left = 13.0
+offset_top = 446.0
+offset_right = 269.0
+offset_bottom = 592.0
+script = ExtResource("18")
 
 [node name="Label" type="Label" parent="TopPlays"]
-margin_right = 256.0
-margin_bottom = 14.0
+layout_mode = 2
 text = "Top Plays:"
 
-[node name="TopPlay0" parent="TopPlays" instance=ExtResource( 17 )]
+[node name="TopPlay0" parent="TopPlays" instance=ExtResource("17")]
+layout_mode = 2
 
-[node name="TopPlay1" parent="TopPlays" instance=ExtResource( 17 )]
-margin_top = 50.0
-margin_bottom = 78.0
+[node name="TopPlay1" parent="TopPlays" instance=ExtResource("17")]
+layout_mode = 2
 
-[node name="TopPlay2" parent="TopPlays" instance=ExtResource( 17 )]
-margin_top = 82.0
-margin_bottom = 110.0
+[node name="TopPlay2" parent="TopPlays" instance=ExtResource("17")]
+layout_mode = 2
 
 [node name="TotalPP" type="Label" parent="TopPlays"]
-margin_top = 114.0
-margin_right = 256.0
-margin_bottom = 128.0
+layout_mode = 2
 text = "= 100 pp"
-align = 2
 
 [node name="Statview" type="VBoxContainer" parent="."]
-margin_left = 412.0
-margin_top = 460.0
-margin_right = 612.0
-margin_bottom = 534.0
-rect_min_size = Vector2( 200, 0 )
-theme = ExtResource( 5 )
-script = ExtResource( 9 )
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 412.0
+offset_top = 452.0
+offset_right = 612.0
+offset_bottom = 592.0
+theme = ExtResource("5")
+script = ExtResource("9")
 
 [node name="HighscoreSP" type="Label" parent="Statview"]
-margin_right = 200.0
-margin_bottom = 23.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "Singleplayer Highscore: "
 
 [node name="HighscoreMP" type="Label" parent="Statview"]
-margin_top = 27.0
-margin_right = 200.0
-margin_bottom = 50.0
-theme = ExtResource( 5 )
+layout_mode = 2
+theme = ExtResource("5")
 text = "Multiplayer Highscore: "
 
 [node name="Splitter" type="Control" parent="Statview"]
-margin_top = 54.0
-margin_right = 200.0
-margin_bottom = 74.0
-rect_min_size = Vector2( 0, 20 )
-theme = ExtResource( 5 )
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("5")
 
 [node name="GameCount" type="Label" parent="Statview"]
-margin_top = 78.0
-margin_right = 200.0
-margin_bottom = 101.0
+layout_mode = 2
 text = "Games completed: "
 
 [node name="KillCount" type="Label" parent="Statview"]
-margin_top = 105.0
-margin_right = 200.0
-margin_bottom = 128.0
+layout_mode = 2
 text = "Enemies killed: "
 
 [node name="AugmentsButton" type="TextureButton" parent="."]
-margin_left = 896.0
-margin_top = 480.0
-margin_right = 1408.0
-margin_bottom = 992.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 7 )
-script = ExtResource( 12 )
+layout_mode = 0
+offset_left = 896.0
+offset_top = 480.0
+offset_right = 1408.0
+offset_bottom = 992.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("7")
+script = ExtResource("12")
 
 [node name="AugmentPanel" type="Panel" parent="."]
 visible = false
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5")
+theme_override_styles/panel = SubResource("StyleBoxFlat_enlh7")
 
 [node name="PointLabel" type="Label" parent="AugmentPanel"]
-margin_left = 888.0
-margin_top = 16.0
-margin_right = 1018.0
-margin_bottom = 60.0
-custom_fonts/font = ExtResource( 15 )
+layout_mode = 0
+offset_left = 888.0
+offset_top = 16.0
+offset_right = 1018.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("15")
 text = "10 Points"
-align = 2
-script = ExtResource( 16 )
+script = ExtResource("16")
 
 [node name="AugmentsButton" type="TextureButton" parent="AugmentPanel"]
-margin_left = 896.0
-margin_top = 480.0
-margin_right = 1408.0
-margin_bottom = 992.0
-rect_scale = Vector2( 0.2, 0.2 )
-texture_normal = ExtResource( 6 )
-script = ExtResource( 12 )
+layout_mode = 0
+offset_left = 896.0
+offset_top = 480.0
+offset_right = 1408.0
+offset_bottom = 992.0
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("6")
+script = ExtResource("12")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AugmentPanel"]
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 16.0
-margin_right = -136.0
-margin_bottom = -16.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -136.0
+offset_bottom = -16.0
 
-[node name="0" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_bottom = 100.0
+[node name="0" parent="AugmentPanel/VBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
 augmentText = "Base Damage: "
 
-[node name="1" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 104.0
-margin_bottom = 204.0
+[node name="1" parent="AugmentPanel/VBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
 augmentText = "Base Fire Rate: "
 
-[node name="2" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 208.0
-margin_bottom = 308.0
+[node name="2" parent="AugmentPanel/VBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
 augmentText = "Base Multishot: "
 
-[node name="3" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 312.0
-margin_bottom = 412.0
+[node name="3" parent="AugmentPanel/VBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
 augmentText = "Status Chance Mult: "
 
-[node name="4" parent="AugmentPanel/VBoxContainer" instance=ExtResource( 2 )]
-margin_top = 416.0
-margin_bottom = 516.0
+[node name="4" parent="AugmentPanel/VBoxContainer" instance=ExtResource("2")]
+layout_mode = 2
 augmentText = "Crit Damage Mult: "

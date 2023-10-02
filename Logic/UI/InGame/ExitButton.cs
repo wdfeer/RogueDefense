@@ -2,13 +2,13 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class ExitButton : Button
+public partial class ExitButton : Button
 {
     ConfirmationDialog ConfirmationPopup => (ConfirmationDialog)GetNode("ConfirmPopup");
     public override void _Ready()
     {
-        ConfirmationPopup.GetOk().Connect("pressed", this, "ExitConfirmed");
-        popupBounds = ConfirmationPopup.GetRect();
+        ConfirmationPopup.GetOkButton().Connect("pressed", new Callable(this, "ExitConfirmed"));
+        popupBounds = ConfirmationPopup.GetVisibleRect();
     }
     public void ExitConfirmed()
     {
@@ -17,6 +17,6 @@ public class ExitButton : Button
     Rect2 popupBounds;
     public override void _Pressed()
     {
-        ConfirmationPopup.Popup_(popupBounds);
+        ConfirmationPopup.Popup((Rect2I)popupBounds);
     }
 }

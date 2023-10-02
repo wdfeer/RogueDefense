@@ -64,13 +64,14 @@ namespace RogueDefense
             Label cooldownLabel = button.GetNode<Label>("CooldownLabel");
             if (Cooling)
             {
-                cooldownTimer += delta;
+                cooldownTimer += (float)delta;
                 cooldownLabel.Text = TimeRemaining.ToString("0.0");
                 cooldownLabel.Modulate = (TimeRemaining / Cooldown) > 0.5f ? Colors.DarkRed : Colors.Yellow;
             }
             else
             {
-                cooldownLabel.Text = "";
+                cooldownLabel.Text = "0";
+                cooldownLabel.Modulate = Colors.Green;
             }
         }
 

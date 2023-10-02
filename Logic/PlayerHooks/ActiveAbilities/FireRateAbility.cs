@@ -2,7 +2,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
 {
-    public class FireRateAbility : ActiveAbility
+    public partial class FireRateAbility : ActiveAbility
     {
         public override void Activate()
         {

@@ -1,265 +1,263 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=3 uid="uid://cprj4bjfqvxyh"]
 
-[ext_resource path="res://Logic/Game.cs" type="Script" id=1]
-[ext_resource path="res://Assets/segoeui.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://Scenes/UpgradeButton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Bullet.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/defense_objective.svg" type="Texture" id=6]
-[ext_resource path="res://Assets/default_theme.tres" type="Theme" id=7]
-[ext_resource path="res://Logic/UI/InGame/UpgradeScreen.cs" type="Script" id=8]
-[ext_resource path="res://Logic/UI/CustomButton.cs" type="Script" id=9]
-[ext_resource path="res://Logic/DefenseObjective.cs" type="Script" id=10]
-[ext_resource path="res://Scenes/NetPoller.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=12]
-[ext_resource path="res://Logic/UI/InGame/MainMenuButton.cs" type="Script" id=13]
-[ext_resource path="res://Logic/UI/InGame/DpsLabel.cs" type="Script" id=14]
-[ext_resource path="res://Logic/UI/InGame/DeathScreen.cs" type="Script" id=15]
-[ext_resource path="res://Logic/PlayArea.cs" type="Script" id=16]
-[ext_resource path="res://Scenes/Turret.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Logic/UI/InGame/ExitButton.cs" type="Script" id=18]
-[ext_resource path="res://Logic/UI/InGame/NotificationPopup.cs" type="Script" id=19]
-[ext_resource path="res://Logic/UI/InGame/BuffText.cs" type="Script" id=20]
-[ext_resource path="res://Assets/font24.tres" type="DynamicFont" id=21]
+[ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
+[ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemy.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://b7e7eteghmjq0" path="res://Scenes/Bullet.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/defense_objective.svg" id="6"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="7"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
+[ext_resource type="Script" path="res://Logic/UI/CustomButton.cs" id="9"]
+[ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
+[ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
+[ext_resource type="FontFile" path="res://Assets/font64.tres" id="12"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/MainMenuButton.cs" id="13"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/DpsLabel.cs" id="14"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
+[ext_resource type="Script" path="res://Logic/PlayArea.cs" id="16"]
+[ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/NotificationPopup.cs" id="19"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/BuffText.cs" id="20"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 31, 31 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(62, 62)
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 512, 300 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(512, 300)
 
-[sub_resource type="DynamicFont" id=3]
-use_filter = true
-extra_spacing_top = -2
-extra_spacing_bottom = -2
-font_data = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 
 [node name="Game" type="Node2D"]
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_horizontal_guides_": [  ]
-}
-enemyScene = ExtResource( 4 )
+script = ExtResource("1")
+enemyScene = ExtResource("4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-pause_mode = 2
+process_mode = 3
 anchor_mode = 0
-current = true
 
 [node name="DefenseObjective" type="StaticBody2D" parent="."]
-position = Vector2( 100, 300 )
+position = Vector2(100, 300)
 collision_mask = 3
-script = ExtResource( 10 )
-bulletScene = ExtResource( 5 )
-turretScene = ExtResource( 17 )
+script = ExtResource("10")
+bulletScene = ExtResource("5")
+turretScene = ExtResource("17")
 
-[node name="Sprite" type="Sprite" parent="DefenseObjective"]
-texture = ExtResource( 6 )
+[node name="Sprite2D" type="Sprite2D" parent="DefenseObjective"]
+texture = ExtResource("6")
 vframes = 5
-region_rect = Rect2( 0, 0, 60, 60 )
+region_rect = Rect2(0, 0, 60, 60)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseObjective"]
-visible = false
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="HpBar" type="ProgressBar" parent="DefenseObjective"]
-margin_left = -31.0
-margin_top = -47.0
-margin_right = 31.0
-margin_bottom = -33.0
-theme = ExtResource( 7 )
+offset_left = -31.0
+offset_top = -59.0
+offset_right = 31.0
+offset_bottom = -32.0
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 16
 max_value = 1.0
 step = 0.001
 value = 1.0
 
 [node name="PlayArea" type="Area2D" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2(0, 1)
 collision_layer = 0
 collision_mask = 4
-script = ExtResource( 16 )
+script = ExtResource("16")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
 visible = false
-position = Vector2( 512, 300 )
-shape = SubResource( 2 )
+position = Vector2(512, 300)
+shape = SubResource("2")
 
 [node name="UpgradeScreen" type="Panel" parent="."]
-pause_mode = 2
+process_mode = 3
 visible = false
-margin_top = 100.0
-margin_right = 1024.0
-margin_bottom = 500.0
-script = ExtResource( 8 )
-upgradeButtonScene = ExtResource( 3 )
+offset_top = 100.0
+offset_right = 1024.0
+offset_bottom = 500.0
+script = ExtResource("8")
+upgradeButtonScene = ExtResource("3")
 
 [node name="UpgradeText" type="Label" parent="UpgradeScreen"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 263.0
-margin_bottom = 396.0
-theme = ExtResource( 7 )
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 263.0
+offset_bottom = 396.0
+theme = ExtResource("7")
 text = "This text
 should be
 updated on start"
 
 [node name="DpsLabel" type="Label" parent="."]
-pause_mode = 2
-modulate = Color( 1, 1, 1, 0.627451 )
-margin_left = 432.0
-margin_top = 82.0
-margin_right = 592.0
-margin_bottom = 105.0
-theme = ExtResource( 7 )
+process_mode = 3
+modulate = Color(1, 1, 1, 0.627451)
+offset_left = 432.0
+offset_top = 82.0
+offset_right = 592.0
+offset_bottom = 105.0
+theme = ExtResource("7")
 text = "Avg DPS: 0.0"
-align = 1
-valign = 1
-script = ExtResource( 14 )
+script = ExtResource("14")
 
 [node name="LevelText" type="Label" parent="."]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 432.0
-margin_top = 45.0
-margin_right = 592.0
-margin_bottom = 69.0
-theme = ExtResource( 7 )
+offset_left = 432.0
+offset_top = 45.0
+offset_right = 592.0
+offset_bottom = 69.0
+theme = ExtResource("7")
 text = "Level 1"
-align = 1
-valign = 1
 
 [node name="PPLabel" type="Label" parent="."]
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 432.0
-margin_top = 19.0
-margin_right = 592.0
-margin_bottom = 43.0
-theme = ExtResource( 7 )
+offset_left = 432.0
+offset_top = 19.0
+offset_right = 592.0
+offset_bottom = 43.0
+theme = ExtResource("7")
 text = "0.000 pp"
-align = 1
-valign = 1
 
 [node name="BuffText" type="Label" parent="."]
-modulate = Color( 0.662745, 0.784314, 1, 1 )
-margin_left = 12.0
-margin_top = 492.0
-margin_right = 652.0
-margin_bottom = 717.0
-rect_scale = Vector2( 0.36, 0.36 )
-custom_fonts/font = ExtResource( 12 )
+modulate = Color(0.662745, 0.784314, 1, 1)
+offset_left = 12.0
+offset_top = 492.0
+offset_right = 652.0
+offset_bottom = 717.0
+scale = Vector2(0.36, 0.36)
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 64
 text = "+999% Multishot
 +5000% Crit Chance"
-script = ExtResource( 20 )
+script = ExtResource("20")
 
 [node name="AbilityContainer" type="Control" parent="."]
-margin_left = 256.0
-margin_top = 500.0
-margin_right = 768.0
-margin_bottom = 580.0
-theme = ExtResource( 7 )
+layout_mode = 3
+anchors_preset = 0
+offset_left = 256.0
+offset_top = 500.0
+offset_right = 768.0
+offset_bottom = 580.0
+theme = ExtResource("7")
 
 [node name="AbilityButton1" type="Button" parent="AbilityContainer"]
-margin_top = -8.0
-margin_right = 90.0
-margin_bottom = 72.0
-script = ExtResource( 9 )
+layout_mode = 0
+offset_top = -8.0
+offset_right = 90.0
+offset_bottom = 72.0
+script = ExtResource("9")
 
 [node name="CooldownLabel" type="Label" parent="AbilityContainer/AbilityButton1"]
-margin_right = 90.0
-margin_bottom = 81.0
-custom_fonts/font = ExtResource( 21 )
-align = 1
-valign = 1
+layout_mode = 0
+offset_right = 90.0
+offset_bottom = 81.0
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Label" type="Label" parent="AbilityContainer/AbilityButton1"]
-margin_left = 99.0
-margin_right = 252.0
-margin_bottom = 75.0
-theme = ExtResource( 7 )
-custom_fonts/font = SubResource( 3 )
+layout_mode = 0
+offset_left = 99.0
+offset_right = 252.0
+offset_bottom = 75.0
+theme = ExtResource("7")
 text = "+100% Total Fire Rate
 Duration: 5 s
 Cooldown: 30 s"
 
-[node name="NetPoller" parent="." instance=ExtResource( 11 )]
+[node name="NetPoller" parent="." instance=ExtResource("11")]
 
 [node name="z-index1" type="Node2D" parent="."]
 z_index = 1
 
 [node name="DeathScreen" type="Panel" parent="z-index1"]
-pause_mode = 2
+process_mode = 3
 visible = false
-modulate = Color( 1, 1, 1, 0.784314 )
-margin_right = 1024.0
-margin_bottom = 600.0
-script = ExtResource( 15 )
+offset_right = 1024.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
+script = ExtResource("15")
 
 [node name="Label" type="Label" parent="z-index1/DeathScreen"]
-margin_top = 69.0
-margin_right = 1024.0
-margin_bottom = 83.0
-theme = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 12 )
+layout_mode = 0
+offset_top = 69.0
+offset_right = 1024.0
+offset_bottom = 83.0
+theme = ExtResource("7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
 text = "YOU ARE DEAD!"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="z-index1/DeathScreen"]
-margin_top = 259.0
-margin_right = 1024.0
-margin_bottom = 346.0
-theme = ExtResource( 7 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 12 )
+layout_mode = 0
+offset_top = 259.0
+offset_right = 1024.0
+offset_bottom = 346.0
+theme = ExtResource("7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
 text = "Level 9999 reached"
-align = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="z-index1/DeathScreen"]
-margin_left = 256.0
-margin_top = 440.0
-margin_right = 768.0
-margin_bottom = 540.0
-theme = ExtResource( 7 )
-custom_fonts/font = ExtResource( 12 )
+layout_mode = 0
+offset_left = 256.0
+offset_top = 440.0
+offset_right = 768.0
+offset_bottom = 540.0
+theme = ExtResource("7")
+theme_override_fonts/font = ExtResource("12")
 text = "MAIN MENU"
-script = ExtResource( 13 )
+script = ExtResource("13")
 
 [node name="ExitButton" type="Button" parent="z-index1"]
-pause_mode = 2
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 84.0
-margin_bottom = 60.0
-theme = ExtResource( 7 )
+process_mode = 3
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 84.0
+offset_bottom = 60.0
+theme = ExtResource("7")
 text = "EXIT"
-script = ExtResource( 18 )
+script = ExtResource("18")
 
 [node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/ExitButton"]
-margin_left = 390.0
-margin_top = 260.0
-margin_right = 635.0
-margin_bottom = 340.0
-theme = ExtResource( 7 )
+initial_position = 2
+size = Vector2i(280, 100)
+theme = ExtResource("7")
 dialog_text = "Give up (progress will NOT be saved!)"
 
 [node name="NotificationPopup" type="PopupPanel" parent="."]
-pause_mode = 2
-self_modulate = Color( 1, 1, 1, 0.392157 )
-margin_left = 256.0
-margin_top = 80.0
-margin_right = 1280.0
-margin_bottom = 180.0
-rect_scale = Vector2( 0.5, 0.5 )
-popup_exclusive = true
-script = ExtResource( 19 )
+process_mode = 3
+initial_position = 1
+size = Vector2i(452, 60)
+exclusive = true
+script = ExtResource("19")
 
 [node name="Label" type="Label" parent="NotificationPopup"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 1020.0
-margin_bottom = 96.0
-theme = ExtResource( 7 )
-custom_fonts/font = ExtResource( 12 )
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 32
 text = "[Username] used [AbilityName]"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1

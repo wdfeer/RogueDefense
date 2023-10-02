@@ -1,41 +1,41 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://deocyt6mxr5yd"]
 
-[ext_resource path="res://Assets/black_circle.png" type="Texture" id=1]
-[ext_resource path="res://Assets/font64.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Logic/Enemy/ShieldOrbButton.cs" type="Script" id=3]
-[ext_resource path="res://Logic/Enemy/ShieldOrb.cs" type="Script" id=4]
+[ext_resource type="Texture2D" uid="uid://bn01iu853ualw" path="res://Assets/black_circle.png" id="1"]
+[ext_resource type="Script" path="res://Logic/Enemy/ShieldOrbButton.cs" id="3"]
+[ext_resource type="Script" path="res://Logic/Enemy/ShieldOrb.cs" id="4"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="4_1b5k1"]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 radius = 38.4
 
 [node name="Orb" type="Area2D"]
-scale = Vector2( 0.8, 0.8 )
+scale = Vector2(0.8, 0.8)
 collision_layer = 2
 collision_mask = 4
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="TextureButton" type="TextureButton" parent="."]
-modulate = Color( 1, 1, 1, 0.643137 )
-margin_left = -38.4
-margin_top = -38.4
-margin_right = 217.6
-margin_bottom = 217.6
-rect_scale = Vector2( 0.3, 0.3 )
-texture_normal = ExtResource( 1 )
-expand = true
-script = ExtResource( 3 )
+modulate = Color(1, 1, 1, 0.643137)
+offset_left = -38.4
+offset_top = -38.4
+offset_right = 217.6
+offset_bottom = 217.6
+scale = Vector2(0.3, 0.3)
+texture_normal = ExtResource("1")
+script = ExtResource("3")
 
 [node name="Label" type="Label" parent="."]
-margin_left = -26.0
-margin_top = -23.0
-margin_right = 80.0
-margin_bottom = 64.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = ExtResource( 2 )
+offset_left = -26.0
+offset_top = -23.0
+offset_right = 80.0
+offset_bottom = 64.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("4_1b5k1")
+theme_override_font_sizes/font_size = 64
 text = "TAP"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource( 2 )
+shape = SubResource("2")

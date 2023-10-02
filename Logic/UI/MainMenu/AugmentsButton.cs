@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class AugmentsButton : TextureButton
+public partial class AugmentsButton : TextureButton
 {
     public override void _Pressed()
     {

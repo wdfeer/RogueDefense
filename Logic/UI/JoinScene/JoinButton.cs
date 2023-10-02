@@ -2,29 +2,29 @@ using Godot;
 using RogueDefense;
 using System;
 
-public class JoinButton : Button
+public partial class JoinButton : Button
 {
-    LineEdit AddressEdit => (GetNode("../IP Input/LineEdit") as LineEdit);
-    public override void _Ready()
-    {
-        GetTree().CreateTimer(0.001f).Connect("timeout", this, "LoadLastIp");
-    }
-    public void LoadLastIp()
-    {
-        AddressEdit.Text = RogueDefense.SaveData.lastIp;
-    }
-    ConnectingLabel connectingLabel => (ConnectingLabel)GetNode("../ConnectingLabel");
-    public override void _Pressed()
-    {
-        NetworkManager.mode = NetMode.Client;
-        string addr = AddressEdit.Text;
-        Client.address = addr;
-        RogueDefense.SaveData.lastIp = addr;
-        RogueDefense.SaveData.Save();
-        Client.port = int.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
+	LineEdit AddressEdit => (GetNode("../IP Input/LineEdit") as LineEdit);
+	public override void _Ready()
+	{
+		GetTree().CreateTimer(0.001f).Connect("timeout", new Callable(this, "LoadLastIp"));
+	}
+	public void LoadLastIp()
+	{
+		AddressEdit.Text = RogueDefense.SaveData.lastIp;
+	}
+	ConnectingLabel connectingLabel => (ConnectingLabel)GetNode("../ConnectingLabel");
+	public override void _Pressed()
+	{
+		NetworkManager.mode = NetMode.Client;
+		string addr = AddressEdit.Text;
+		Client.host = addr;
+		RogueDefense.SaveData.lastIp = addr;
+		RogueDefense.SaveData.Save();
+		Client.port = ushort.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
 
-        connectingLabel.Visible = true;
+		connectingLabel.Visible = true;
 
-        NetworkManager.NetStart();
-    }
+		NetworkManager.NetStart();
+	}
 }

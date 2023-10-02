@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class MainMenuButton : Button
+public partial class MainMenuButton : Button
 {
     public override void _Pressed()
     {
@@ -9,7 +9,7 @@ public class MainMenuButton : Button
         {
             NetworkManager.NetStop();
         }
-        GetTree().ChangeScene("res://Scenes/MainMenu/MainMenu.tscn");
+        GetTree().ChangeSceneToFile("res://Scenes/MainMenu/MainMenu.tscn");
         GetTree().Paused = false;
     }
 }

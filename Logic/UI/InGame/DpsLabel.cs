@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class DpsLabel : Label
+public partial class DpsLabel : Label
 {
     public static DpsLabel instance;
     public override void _Ready()
@@ -15,9 +15,9 @@ public class DpsLabel : Label
     public List<(float damage, float timeAgo)> hits = new List<(float damage, float timeAgo)>();
     float secondTimer = 0f;
     const float HIT_SAVE_DURATION = 1f;
-    public override void _Process(float delta)
+    public override void _Process(double delta)
     {
-        secondTimer += delta;
+        secondTimer += (float)delta;
         if (secondTimer >= 1f)
         {
             UpdateShownDps();

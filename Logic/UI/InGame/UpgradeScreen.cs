@@ -2,7 +2,7 @@ using System.Linq;
 using Godot;
 using RogueDefense.Logic.PlayerCore;
 
-public class UpgradeScreen : Panel
+public partial class UpgradeScreen : Panel
 {
     public static UpgradeScreen instance;
     public override void _Ready()
@@ -18,9 +18,9 @@ public class UpgradeScreen : Panel
         Show();
         buttons = new CustomButton[]
         {
-            upgradeButtonScene.Instance() as CustomButton,
-            upgradeButtonScene.Instance() as CustomButton,
-            upgradeButtonScene.Instance() as CustomButton
+            upgradeButtonScene.Instantiate<CustomButton>(),
+            upgradeButtonScene.Instantiate<CustomButton>(),
+            upgradeButtonScene.Instantiate<CustomButton>()
         };
 
         upgrades = Upgrade.RandomUniqueUpgrades(3);
@@ -40,9 +40,9 @@ public class UpgradeScreen : Panel
             butt.onClick = () => OnButtonClicked(index);
             (butt.GetNode("Label") as Label).Text = upgrades[i].ToString();
         }
-        buttons[0].RectPosition += new Vector2(-250, -60);
-        buttons[1].RectPosition += new Vector2(-25, -60);
-        buttons[2].RectPosition += new Vector2(200, -60);
+        buttons[0].Position += new Vector2(-250, -60);
+        buttons[1].Position += new Vector2(-25, -60);
+        buttons[2].Position += new Vector2(200, -60);
     }
     CustomButton[] buttons;
     Upgrade[] upgrades;
