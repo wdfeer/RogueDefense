@@ -38,19 +38,21 @@ public partial class Client : Node
         if (NetworkManager.mode == NetMode.Client)
             JoinScene.TryChangeToLobbyScene();
     }
-    public void ReceiveData(byte[] data)
+    public void ReceiveMessage(string message)
     {
-        string str = data.GetStringFromUtf8();
-        MessageType type = (MessageType)data[0];
-        ProcessMessage(type, str.Substring(1).Split(' '));
+        MessageType type = (MessageType)message[0];
+        GD.Print($"Client received msg of type {type} with contents: {message}");
+        ProcessMessage(type, message[1..].Split(' '));
     }
     public void ProcessMessage(MessageType type, string[] args)
     {
+        GD.Print($"Client processing message of type {type} with args: {String.Concat(args)}");
         switch (type)
         {
             case MessageType.FetchLobby:
                 ChangeSceneToLobby();
-                SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, AbilityChooser.chosen.ToString(), UserData.UpgradePointsAsString(SaveData.augmentAllotment) });
+                GD.Print($"Sending Register Message with augments {String.Join(",", SaveData.augmentAllotment)}");
+                SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(SaveData.augmentAllotment) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
@@ -59,7 +61,7 @@ public partial class Client : Node
                 }
                 break;
             case MessageType.Register:
-                RegisterUser(args[0].ToInt(), args[1], args[2].ToInt(), UserData.UpgradePointsFromString(args[3]));
+                RegisterUser(args[0].ToInt(), args[1], args[2].ToInt(), UserData.AugmentPointsFromString(args[3]));
                 break;
             case MessageType.SetAbility:
                 if (Lobby.Instance == null) break;
@@ -67,7 +69,7 @@ public partial class Client : Node
                 UserData data = GetUserData(id);
                 data.ability = args[1].ToInt();
                 UnregisterUser(id);
-                RegisterUser(id, data.name, data.ability, data.upgradePoints);
+                RegisterUser(id, data.name, data.ability, data.augmentPoints);
                 break;
             case MessageType.Unregister:
                 id = args[0].ToInt();
@@ -131,27 +133,33 @@ public partial class Client : Node
             Lobby.Instance.RemoveUser(id);
         }
     }
-    void Broadcast(string data) => client.PutData(System.Text.Encoding.UTF8.GetBytes(data));
+    void Broadcast(string data)
+    {
+        client.PutUtf8String(data);
+    }
+
     public void SendMessage(MessageType type, string[] args = null)
     {
         string msg = $"{(char)type}";
         if (args != null)
             msg += String.Join(" ", args);
+        GD.Print($"Sending message to Server: {msg}");
         Broadcast(msg);
     }
 
 
     public void Poll() // important to always keep polling
     {
+        client.Poll();
         if (client.GetStatus() != StreamPeerTcp.Status.Connected)
             return;
-        client.Poll();
 
         int byteCount = client.GetAvailableBytes();
         if (byteCount > 0)
         {
-            byte[] data = client.GetData(byteCount).Cast<byte>().ToArray();
-            ReceiveData(data);
+            GD.Print($"Client: {byteCount} bytes are available");
+            string data = client.GetUtf8String();
+            ReceiveMessage(data);
         }
     }
 }

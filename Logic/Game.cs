@@ -24,7 +24,7 @@ public partial class Game : Node2D
 		Enemy.ResetRngSeed();
 
 		Player.my = new Player(Client.myId, SaveData.augmentAllotment);
-		Client.instance.others.ForEach(x => new Player(x.id, x.upgradePoints));
+		Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
 	}
 
 	public override void _Process(double delta)

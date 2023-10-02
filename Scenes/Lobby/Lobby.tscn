@@ -27,6 +27,8 @@ grow_vertical = 2
 script = ExtResource("4")
 userDataScene = ExtResource("3")
 
+[node name="NetPoller" parent="." instance=ExtResource("6")]
+
 [node name="PlayerList" type="VFlowContainer" parent="."]
 layout_mode = 0
 offset_top = 100.0
@@ -56,8 +58,6 @@ theme_override_font_sizes/font_size = 64
 text = "Lobby"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="NetPoller" parent="." instance=ExtResource("6")]
 
 [node name="SettingsButton" type="TextureButton" parent="."]
 layout_mode = 0

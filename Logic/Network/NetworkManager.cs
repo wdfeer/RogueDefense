@@ -47,17 +47,15 @@ public partial class UserData
     public int id;
     public string name;
     public int ability;
-    public int[] upgradePoints;
-    public static string UpgradePointsAsString(int[] upgradePoints) => String.Join("/", upgradePoints.Select(x => x.ToString()));
-    public string UpgradePointsAsString() => UpgradePointsAsString(upgradePoints);
-    public static int[] UpgradePointsFromString(string str) => str.Split("/").Select(x => int.Parse(x)).ToArray();
-    public void SetUpgradePointsFromString(string str) => upgradePoints = UpgradePointsFromString(str);
-    public UserData(int id, string name, int ability, int[] upgradePoints)
+    public int[] augmentPoints;
+    public static string AugmentPointsAsString(int[] augments) => String.Join("/", augments.Select(x => x.ToString()));
+    public static int[] AugmentPointsFromString(string str) => str.Split("/").Select(x => int.Parse(x)).ToArray();
+    public UserData(int id, string name, int ability, int[] augments)
     {
         this.id = id;
         this.name = name;
         this.ability = ability;
-        this.upgradePoints = upgradePoints;
+        this.augmentPoints = augments;
     }
 }
 public enum NetMode

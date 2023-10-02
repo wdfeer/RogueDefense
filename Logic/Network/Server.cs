@@ -33,19 +33,25 @@ public partial class Server : Node
 		server = null;
 	}
 	public Dictionary<int, UserData> users = new Dictionary<int, UserData>();
-	public void SendPacket(int id, byte[] data) => peers[id].PutData(data);
-	public void Broadcast(byte[] data, int ignore = -1) => users.ToList().ForEach(x =>
+	public void SendPacket(int id, string data)
+	{
+		peers[id].PutUtf8String(data);
+	}
+
+	public void Broadcast(string data, int ignore = -1) => users.ToList().ForEach(x =>
 	{
 		if (x.Key != ignore)
 			SendPacket(x.Key, data);
 	});
-	public void Broadcast(string data, int ignore = -1) => Broadcast(data.ToUtf8Buffer(), ignore);
 	public void OnConnect(int id)
 	{
-		string data = $"{(char)MessageType.FetchLobby}{id.ToString()}";
+		string msg = $"{(char)MessageType.FetchLobby}{id}";
 		if (users.Count > 0)
-			data += " " + String.Join(" ", users.Select(x => $"{x.Key.ToString()};{x.Value.name};{x.Value.ability};{UserData.UpgradePointsAsString(x.Value.upgradePoints)}"));
-		SendPacket(id, data.ToUtf8Buffer());
+		{
+			msg += " " + String.Join(" ", users.Select(x => $"{x.Key};{x.Value.name};{x.Value.ability};{UserData.AugmentPointsAsString(x.Value.augmentPoints)}"));
+		}
+		GD.Print($"Sending FetchLobby message: {msg}");
+		SendPacket(id, msg);
 		users.Add(id, new UserData(id, "", -1, null));
 		GD.Print($"Client {id} connected");
 	}
@@ -56,25 +62,26 @@ public partial class Server : Node
 
 		SendMessage(MessageType.Unregister, new string[] { id.ToString() });
 	}
-	public void ReceiveData(int id, byte[] data)
+	public void ReceiveData(int id, string data)
 	{
-		GD.Print($"Server: got packet from {id}: {data.GetStringFromUtf8()} ... broadcasting");
+		GD.Print($"Server is broadcasting packet with from {id}: {data}");
+
 		Broadcast(data, id);
 
-		string str = data.GetStringFromUtf8();
-		string[] args = str.Substring(1).Split(" ");
-		AfterBroadcastMessage(id, (MessageType)str[0], args);
+		string[] args = data.Substring(1).Split(" ");
+		AfterBroadcastMessage(id, (MessageType)data[0], args);
 	}
 	public void AfterBroadcastMessage(int from, MessageType type, string[] args)
 	{
 		switch (type)
 		{
 			case MessageType.Register:
-				users[from] = new UserData(from, args[1], args[2].ToInt(), UserData.UpgradePointsFromString(args[3]));
+				users[from] = new UserData(from, args[1], args[2].ToInt(), UserData.AugmentPointsFromString(args[3]));
 				GD.Print($"Registered user {args[1]} with ability {args[2]} as {from}");
 				return;
 			case MessageType.SetAbility:
-				users[from] = new UserData(from, users[from].name, args[1].ToInt(), users[from].upgradePoints);
+				GD.Print($"Got a SetAbility message from {from}");
+				users[from] = new UserData(from, users[from].name, args[1].ToInt(), users[from].augmentPoints);
 				GD.Print($"Set ability {users[from].ability} for {users[from].name}");
 				return;
 			default:
@@ -100,6 +107,7 @@ public partial class Server : Node
 			{
 				if (peers[i] == null)
 				{
+					peers[i] = connection;
 					id = i;
 					break;
 				}
@@ -118,11 +126,17 @@ public partial class Server : Node
 			{
 				OnDisconnect(i);
 			}
+			else if (status == StreamPeerTcp.Status.Connecting)
+			{
+				GD.Print($"Client {i} is still connecting, skipping data check");
+				continue;
+			}
 
 			int byteCount = client.GetAvailableBytes();
 			if (byteCount > 0)
 			{
-				ReceiveData(i, client.GetData(byteCount).Cast<byte>().ToArray());
+				GD.Print($"Server: {byteCount} bytes are available from {i}");
+				ReceiveData(i, client.GetUtf8String());
 			}
 		}
 	}
