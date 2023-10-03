@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=25 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -25,6 +25,22 @@ size = Vector2(62, 62)
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(512, 300)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkjwx"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25098, 1, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3v27"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.25098, 0.25098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
 bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
@@ -154,6 +170,8 @@ layout_mode = 0
 offset_top = -8.0
 offset_right = 90.0
 offset_bottom = 72.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
 script = ExtResource("9")
 
 [node name="CooldownLabel" type="Label" parent="AbilityContainer/AbilityButton1"]
@@ -252,8 +270,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 448.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
