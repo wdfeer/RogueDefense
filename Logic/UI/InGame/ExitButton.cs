@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public partial class ExitButton : Button
+public partial class ExitButton : TextureButton
 {
     ConfirmationDialog ConfirmationPopup => (ConfirmationDialog)GetNode("ConfirmPopup");
     public override void _Ready()
