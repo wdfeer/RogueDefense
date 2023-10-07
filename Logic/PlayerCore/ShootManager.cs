@@ -30,6 +30,12 @@ namespace RogueDefense.Logic.PlayerCore
                 timeSinceLastShot = 0;
                 CreateBullets();
                 shootCount++;
+
+                foreach (Turret turret in player.turrets)
+                {
+                    turret.animationPlayer.Stop();
+                    turret.animationPlayer.Play("ShootEffects");
+                }
             }
         }
         public List<Bullet> bullets = new List<Bullet>();
@@ -37,7 +43,7 @@ namespace RogueDefense.Logic.PlayerCore
         public float shootSpeed = BASE_SHOOT_SPEED;
         public const float SPREAD_DEGREES = 10f;
         public int shootCount = 0;
-        public List<Vector2> bulletSpawns = new List<Vector2>();
+        public List<Node2D> bulletSpawns = new List<Node2D>();
         private void CreateBullets()
         {
             player.hooks.ForEach(x => x.PreShoot(this));
@@ -52,7 +58,7 @@ namespace RogueDefense.Logic.PlayerCore
             {
                 for (int k = 0; k < bulletCount * 1; k++)
                 {
-                    Bullet bullet = Shoot(bulletSpawns[i], shootSpeed);
+                    Bullet bullet = Shoot(bulletSpawns[i].GlobalPosition, shootSpeed);
                     bullet.damage = damage;
                     bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 

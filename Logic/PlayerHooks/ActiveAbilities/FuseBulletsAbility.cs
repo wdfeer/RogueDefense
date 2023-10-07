@@ -20,7 +20,7 @@ namespace RogueDefense
             float hitMult = shooter.bullets.Aggregate(0f, (a, b) =>
                 a + ((GodotObject.IsInstanceValid(b) && !b.fused) ? b.hitMult : 0));
             shooter.ClearBullets(x => !x.fused);
-            Bullet bullet = shooter.Shoot(player.shootManager.bulletSpawns[0], 3f);
+            Bullet bullet = shooter.Shoot(player.shootManager.bulletSpawns[0].GlobalPosition, 3f);
             bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
             bullet.damage = shooter.damage;
             bullet.Scale *= 2f;

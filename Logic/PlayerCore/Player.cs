@@ -49,7 +49,7 @@ namespace RogueDefense.Logic.PlayerCore
             turret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
             turrets.Add(turret);
 
-            shootManager.bulletSpawns.Add(turret.GlobalPosition);
+            shootManager.bulletSpawns.Add(turret.bulletSpawnpoint);
 
             turret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
         }
