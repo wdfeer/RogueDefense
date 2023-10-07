@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ck8gmgjr1lmqk"]
 
 [ext_resource type="Script" path="res://Logic/UI/CustomButton.cs" id="1"]
-[ext_resource type="FontFile" path="res://Assets/font64.tres" id="3"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2_2twcg"]
 
 [node name="UpgradeButton" type="Button"]
 offset_left = 437.0
@@ -15,7 +15,7 @@ layout_mode = 0
 offset_right = 600.0
 offset_bottom = 360.0
 scale = Vector2(0.333, 0.333)
-theme_override_fonts/font = ExtResource("3")
+theme = ExtResource("2_2twcg")
 theme_override_font_sizes/font_size = 64
 text = "+{value}{UpgradeText}"
 horizontal_alignment = 1

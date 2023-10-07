@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dcw1pfahgswms"]
+[gd_scene load_steps=22 format=3 uid="uid://dcw1pfahgswms"]
 
 [ext_resource type="Texture2D" uid="uid://cu3tpecvqde7u" path="res://Assets/enemy.png" id="1"]
 [ext_resource type="Script" path="res://Logic/Enemy/Enemy.cs" id="2"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dr1urwwgoukda" path="res://Assets/slash_icon.png" id="5"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/BleedContainer.cs" id="6"]
 [ext_resource type="Texture2D" uid="uid://dwotxf7hje6as" path="res://Assets/shield_filled.png" id="7"]
-[ext_resource type="FontFile" path="res://Assets/font64.tres" id="8"]
 [ext_resource type="Texture2D" uid="uid://rewrv0hgspug" path="res://Assets/shield_border.png" id="9"]
 [ext_resource type="Script" path="res://Logic/Enemy/ArmorBar.cs" id="10"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/ViralContainer.cs" id="11"]
@@ -57,7 +56,7 @@ layout_mode = 0
 offset_right = 480.0
 offset_bottom = 100.0
 scale = Vector2(0.25, 0.25)
-theme_override_fonts/font = ExtResource("8")
+theme = ExtResource("3")
 theme_override_font_sizes/font_size = 64
 text = "10 / 10"
 horizontal_alignment = 1
@@ -82,7 +81,6 @@ texture = ExtResource("5")
 [node name="Counter" type="Label" parent="Statuses/BleedContainer"]
 layout_mode = 2
 theme = ExtResource("3")
-theme_override_fonts/font = ExtResource("8")
 theme_override_font_sizes/font_size = 0
 text = "0"
 horizontal_alignment = 1
@@ -100,7 +98,6 @@ texture = ExtResource("18")
 [node name="Counter" type="Label" parent="Statuses/CorrosiveContainer"]
 layout_mode = 2
 theme = ExtResource("3")
-theme_override_fonts/font = ExtResource("8")
 theme_override_font_sizes/font_size = 0
 text = "0"
 horizontal_alignment = 1
@@ -118,7 +115,6 @@ texture = ExtResource("12")
 [node name="Counter" type="Label" parent="Statuses/ViralContainer"]
 layout_mode = 2
 theme = ExtResource("3")
-theme_override_fonts/font = ExtResource("8")
 theme_override_font_sizes/font_size = 0
 text = "0"
 horizontal_alignment = 1
@@ -136,7 +132,6 @@ texture = ExtResource("16")
 [node name="Counter" type="Label" parent="Statuses/ColdContainer"]
 layout_mode = 2
 theme = ExtResource("3")
-theme_override_fonts/font = ExtResource("8")
 theme_override_font_sizes/font_size = 0
 text = "0"
 horizontal_alignment = 1

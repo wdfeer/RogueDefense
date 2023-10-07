@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://lq2blybll7l5"]
+[gd_scene load_steps=4 format=3 uid="uid://lq2blybll7l5"]
 
-[ext_resource type="FontFile" path="res://Assets/font64.tres" id="1"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2_3vc1x"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/AugmentContainer.cs" id="3"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/PlusMinusButton.cs" id="4"]
@@ -19,7 +18,8 @@ text = "Base Status Multiplier: 1.00"
 [node name="MinusButton" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
+theme = ExtResource("2_3vc1x")
+theme_override_font_sizes/font_size = 64
 text = "-"
 script = ExtResource("4")
 effect = -1
@@ -27,6 +27,7 @@ effect = -1
 [node name="PlusButton" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1")
+theme = ExtResource("2_3vc1x")
+theme_override_font_sizes/font_size = 64
 text = "+"
 script = ExtResource("4")

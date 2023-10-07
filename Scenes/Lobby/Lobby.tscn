@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dtm1dpgedp8k2"]
+[gd_scene load_steps=16 format=3 uid="uid://dtm1dpgedp8k2"]
 
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://bdpste7hjr5v5" path="res://Scenes/Lobby/PlayerData.tscn" id="3"]
@@ -7,8 +7,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="6"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/MyPlayerData.cs" id="7"]
 [ext_resource type="Texture2D" uid="uid://du73bpn2vb8wx" path="res://Assets/settings_icon.svg" id="8"]
-[ext_resource type="FontFile" path="res://Assets/font32.tres" id="9"]
-[ext_resource type="PackedScene" path="res://Scenes/Lobby/SettingsSlider.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://dxi23vhlhulyj" path="res://Scenes/Lobby/SettingsSlider.tscn" id="10"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/SettingsButton.cs" id="11"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/ResetButton.cs" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/ConfirmButton.cs" id="13"]
@@ -41,9 +40,9 @@ script = ExtResource("7")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_top = 500.0
+offset_top = 501.0
 offset_right = 1024.0
-offset_bottom = 600.0
+offset_bottom = 601.0
 theme = ExtResource("2")
 theme_override_font_sizes/font_size = 64
 text = "START"
@@ -110,7 +109,7 @@ offset_bottom = 596.0
 
 [node name="Label" type="Label" parent="SettingsPanel/Container"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9")
+theme = ExtResource("2")
 text = "Game Settings"
 
 [node name="Sliders" type="VBoxContainer" parent="SettingsPanel/Container"]
@@ -122,11 +121,9 @@ script = ExtResource("15")
 layout_mode = 2
 
 [node name="Label" parent="SettingsPanel/Container/Sliders/DmgMult" index="0"]
-layout_mode = 2
 text = "Damage Multiplier: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/DmgMult" index="1"]
-layout_mode = 2
 min_value = 0.5
 max_value = 2.0
 
@@ -134,11 +131,9 @@ max_value = 2.0
 layout_mode = 2
 
 [node name="Label" parent="SettingsPanel/Container/Sliders/FireRateMult" index="0"]
-layout_mode = 2
 text = "Fire Rate Multiplier: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/FireRateMult" index="1"]
-layout_mode = 2
 min_value = 0.5
 max_value = 2.0
 
@@ -146,11 +141,9 @@ max_value = 2.0
 layout_mode = 2
 
 [node name="Label" parent="SettingsPanel/Container/Sliders/HpDrain" index="0"]
-layout_mode = 2
 text = "Health Drain: "
 
 [node name="Slider" parent="SettingsPanel/Container/Sliders/HpDrain" index="1"]
-layout_mode = 2
 min_value = 0.0
 max_value = 1.0
 step = 1.0
@@ -159,13 +152,13 @@ rounded = true
 
 [node name="ResetButton" type="Button" parent="SettingsPanel/Container"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9")
+theme = ExtResource("2")
 text = "Reset"
 script = ExtResource("12")
 
 [node name="ConfirmButton" type="Button" parent="SettingsPanel/Container"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9")
+theme = ExtResource("2")
 text = "Confirm"
 script = ExtResource("13")
 

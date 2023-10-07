@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=25 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://Logic/UI/CustomButton.cs" id="9"]
 [ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
-[ext_resource type="FontFile" path="res://Assets/font64.tres" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/MainMenuButton.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DpsLabel.cs" id="14"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
@@ -241,7 +240,7 @@ offset_top = 440.0
 offset_right = 768.0
 offset_bottom = 540.0
 theme = ExtResource("7")
-theme_override_fonts/font = ExtResource("12")
+theme_override_font_sizes/font_size = 64
 text = "MAIN MENU"
 script = ExtResource("13")
 

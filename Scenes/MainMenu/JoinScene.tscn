@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://d7hydk75hi01"]
+[gd_scene load_steps=7 format=3 uid="uid://d7hydk75hi01"]
 
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1"]
-[ext_resource type="FontFile" path="res://Assets/font64.tres" id="2"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/JoinButton.cs" id="3"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="4"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/ConnectingLabel.cs" id="5"]
@@ -76,6 +75,6 @@ layout_mode = 2
 [node name="ConnectingLabel" type="Label" parent="Container"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2")
+theme = ExtResource("1")
 text = "Connecting..."
 script = ExtResource("5")

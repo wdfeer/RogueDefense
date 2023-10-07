@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://cgin3ow5quv68"]
 
-[ext_resource type="FontFile" path="res://Assets/font64.tres" id="1_u6q84"]
+[ext_resource type="FontFile" uid="uid://idbujal30pa6" path="res://Assets/segoeui.ttf" id="1_ayu04"]
 
 [resource]
-default_font = ExtResource("1_u6q84")
+default_font = ExtResource("1_ayu04")
