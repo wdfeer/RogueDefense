@@ -30,12 +30,7 @@ namespace RogueDefense.Logic.PlayerCore
                 timeSinceLastShot = 0;
                 CreateBullets();
                 shootCount++;
-
-                foreach (Turret turret in player.turrets)
-                {
-                    turret.animationPlayer.Stop();
-                    turret.animationPlayer.Play("ShootEffects");
-                }
+                PlayShootAnimation();
             }
         }
         public List<Bullet> bullets = new List<Bullet>();
@@ -95,6 +90,16 @@ namespace RogueDefense.Logic.PlayerCore
                 }
             }
             bullets = new List<Bullet>();
+        }
+
+        private void PlayShootAnimation()
+        {
+            float speed = shootInterval < 0.5f ? Mathf.Pow(0.5f / shootInterval, 2) : 1f;
+            foreach (Turret turret in player.turrets)
+            {
+                turret.animationPlayer.Stop();
+                turret.animationPlayer.Play("ShootEffects");
+            }
         }
     }
 }
