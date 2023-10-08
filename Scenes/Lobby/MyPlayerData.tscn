@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj24sijrviwde"]
+
+[ext_resource type="PackedScene" uid="uid://bdpste7hjr5v5" path="res://Scenes/Lobby/PlayerData.tscn" id="1_2eq0j"]
+[ext_resource type="PackedScene" uid="uid://burmb0d3vmml3" path="res://Scenes/Lobby/AbilityChooser.tscn" id="2_b6otd"]
+[ext_resource type="Script" path="res://Logic/UI/Lobby/MyPlayerData.cs" id="2_hcw7m"]
+
+[node name="MyData" instance=ExtResource("1_2eq0j")]
+script = ExtResource("2_hcw7m")
+
+[node name="AbilityLabel" parent="Container" index="2"]
+visible = false
+
+[node name="AbilityChooser" parent="Container" index="3" instance=ExtResource("2_b6otd")]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2

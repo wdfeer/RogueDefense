@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://Logic/Network/Lobby.cs" id="4"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="4_c2b1h"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/StartButton.cs" id="5"]
+[ext_resource type="PackedScene" uid="uid://dj24sijrviwde" path="res://Scenes/Lobby/MyPlayerData.tscn" id="5_hp6bq"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="6"]
-[ext_resource type="Script" path="res://Logic/UI/Lobby/MyPlayerData.cs" id="7"]
 [ext_resource type="Texture2D" uid="uid://6em6vwabqc1g" path="res://Assets/settings-knobs.svg" id="8_a4p73"]
 [ext_resource type="PackedScene" uid="uid://dxi23vhlhulyj" path="res://Scenes/Lobby/SettingsSlider.tscn" id="10"]
 [ext_resource type="Texture2D" uid="uid://37n6jj6mia1l" path="res://Assets/exit-door.svg" id="10_dibfd"]
@@ -38,9 +38,8 @@ offset_top = 100.0
 offset_right = 1024.0
 offset_bottom = 500.0
 
-[node name="MyData" parent="PlayerList" instance=ExtResource("3")]
+[node name="MyData" parent="PlayerList" instance=ExtResource("5_hp6bq")]
 layout_mode = 2
-script = ExtResource("7")
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
