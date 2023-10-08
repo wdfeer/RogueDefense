@@ -1,6 +1,3 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cgin3ow5quv68"]
-
-[ext_resource type="FontFile" uid="uid://idbujal30pa6" path="res://Assets/segoeui.ttf" id="1_ayu04"]
+[gd_resource type="Theme" format=3 uid="uid://cgin3ow5quv68"]
 
 [resource]
-default_font = ExtResource("1_ayu04")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=20 format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://d7hydk75hi01" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="5"]
@@ -30,6 +31,9 @@ offset_bottom = 600.0
 
 [node name="GameInitializer" type="Node" parent="."]
 script = ExtResource("10")
+
+[node name="UISounds" parent="." instance=ExtResource("2_fmcyo")]
+root_path = NodePath("..")
 
 [node name="HostButton" type="Button" parent="."]
 layout_mode = 0

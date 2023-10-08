@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=26 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="3_te3pu"]
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemy.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://b7e7eteghmjq0" path="res://Scenes/Bullet.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/defense_objective.svg" id="6"]
@@ -48,6 +49,9 @@ bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
 enemyScene = ExtResource("4")
+
+[node name="UISounds" parent="." instance=ExtResource("3_te3pu")]
+root_path = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 process_mode = 3
@@ -275,7 +279,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 448.0
+offset_right = 489.0
 offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2

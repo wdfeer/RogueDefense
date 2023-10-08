@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d7hydk75hi01"]
+[gd_scene load_steps=8 format=3 uid="uid://d7hydk75hi01"]
 
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/JoinButton.cs" id="3"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="4"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/ConnectingLabel.cs" id="5"]
+[ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="5_f4v3y"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/JoinScene.cs" id="6"]
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="7"]
 
@@ -18,6 +19,9 @@ script = ExtResource("6")
 lobbyScene = ExtResource("7")
 
 [node name="NetPoller" parent="." instance=ExtResource("4")]
+
+[node name="UISounds" parent="." instance=ExtResource("5_f4v3y")]
+root_path = NodePath("..")
 
 [node name="Container" type="VBoxContainer" parent="."]
 layout_mode = 2
