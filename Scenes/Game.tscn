@@ -101,7 +101,6 @@ offset_top = 100.0
 offset_right = 1024.0
 offset_bottom = 500.0
 script = ExtResource("8")
-upgradeButtonScene = ExtResource("3")
 
 [node name="UpgradeText" type="Label" parent="UpgradeScreen"]
 layout_mode = 0
@@ -113,6 +112,50 @@ theme = ExtResource("7")
 text = "This text
 should be
 updated on start"
+
+[node name="UpgradeButton1" parent="UpgradeScreen" instance=ExtResource("3")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = 0.0
+offset_right = -150.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpgradeButton2" parent="UpgradeScreen" instance=ExtResource("3")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "											"
+
+[node name="UpgradeButton3" parent="UpgradeScreen" instance=ExtResource("3")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = 0.0
+offset_right = 350.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "													"
 
 [node name="DpsLabel" type="Label" parent="."]
 process_mode = 3
