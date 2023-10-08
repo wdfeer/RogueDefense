@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b024el17xormx"
-path="res://.godot/imported/check_mark.png-b2892036dc822a3aa763d1cd572059f9.ctex"
+uid="uid://cmmg1navf2b37"
+path="res://.godot/imported/check-mark.svg-5f95fb21a3414c9687bcdb41d00d6451.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/check_mark.png"
-dest_files=["res://.godot/imported/check_mark.png-b2892036dc822a3aa763d1cd572059f9.ctex"]
+source_file="res://Assets/check-mark.svg"
+dest_files=["res://.godot/imported/check-mark.svg-5f95fb21a3414c9687bcdb41d00d6451.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

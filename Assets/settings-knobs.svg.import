@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clrybavsuy0pw"
-path="res://.godot/imported/exit_door.svg-de780b5c8b76d56c6e78fc90f38ebf6f.ctex"
+uid="uid://6em6vwabqc1g"
+path="res://.godot/imported/settings-knobs.svg-59c29a86157f9932e19b4e41c09d3271.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/exit_door.svg"
-dest_files=["res://.godot/imported/exit_door.svg-de780b5c8b76d56c6e78fc90f38ebf6f.ctex"]
+source_file="res://Assets/settings-knobs.svg"
+dest_files=["res://.godot/imported/settings-knobs.svg-59c29a86157f9932e19b4e41c09d3271.ctex"]
 
 [params]
 

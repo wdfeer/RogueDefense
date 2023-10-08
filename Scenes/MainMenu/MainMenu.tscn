@@ -5,8 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://d7hydk75hi01" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="5"]
-[ext_resource type="Texture2D" uid="uid://b024el17xormx" path="res://Assets/check_mark.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://cx7erggsc6wr" path="res://Assets/anvil_impact.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://d4n1tobo1ylie" path="res://Assets/edit_icon_small.png" id="7_5ef50"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/Statview.cs" id="9"]
 [ext_resource type="Script" path="res://Logic/GameInitializer.cs" id="10"]
@@ -14,8 +12,10 @@
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentsButton.cs" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
+[ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/anvil-impact.svg" id="14_jf53w"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/PointLabel.cs" id="16"]
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
+[ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/check-mark.svg" id="17_6ikjw"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/HpBarButton.cs" id="19"]
 
@@ -160,14 +160,14 @@ layout_mode = 2
 theme = ExtResource("5")
 text = "Enemies killed: "
 
-[node name="AugmentsButton" type="TextureButton" parent="."]
+[node name="AugmentsButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 896.0
 offset_top = 480.0
 offset_right = 1408.0
 offset_bottom = 992.0
 scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("7")
+icon = ExtResource("14_jf53w")
 script = ExtResource("12")
 
 [node name="AugmentPanel" type="Panel" parent="."]
@@ -192,14 +192,14 @@ theme_override_font_sizes/font_size = 32
 text = "10 Points"
 script = ExtResource("16")
 
-[node name="AugmentsButton" type="TextureButton" parent="AugmentPanel"]
+[node name="AugmentsButton" type="Button" parent="AugmentPanel"]
 layout_mode = 0
 offset_left = 896.0
 offset_top = 480.0
 offset_right = 1408.0
 offset_bottom = 992.0
 scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("6")
+icon = ExtResource("17_6ikjw")
 script = ExtResource("12")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AugmentPanel"]

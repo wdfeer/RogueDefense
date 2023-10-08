@@ -3,7 +3,7 @@ using System;
 
 namespace RogueDefense.Logic.UI.Lobby
 {
-    public partial class ExitButton : TextureButton
+    public partial class ExitButton : Button
     {
         public override void _Pressed()
         {

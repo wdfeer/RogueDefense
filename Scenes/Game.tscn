@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Logic/PlayArea.cs" id="16"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
-[ext_resource type="Texture2D" uid="uid://dbmw1powr1gb6" path="res://Assets/cancel.svg" id="18_7dhu8"]
+[ext_resource type="Texture2D" uid="uid://fqdgbhgv6ugk" path="res://Assets/cancel.svg" id="18_7dhu8"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/NotificationPopup.cs" id="19"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/BuffText.cs" id="20"]
 
@@ -291,16 +291,15 @@ theme_override_font_sizes/font_size = 64
 text = "MAIN MENU"
 script = ExtResource("13")
 
-[node name="ExitButton" type="TextureButton" parent="z-index1"]
+[node name="ExitButton" type="Button" parent="z-index1"]
 process_mode = 3
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 69.0
 offset_bottom = 69.0
 theme = ExtResource("7")
-texture_normal = ExtResource("18_7dhu8")
-ignore_texture_size = true
-stretch_mode = 4
+icon = ExtResource("18_7dhu8")
+expand_icon = true
 script = ExtResource("18")
 
 [node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/ExitButton"]
