@@ -78,4 +78,16 @@ public partial class Game : Node2D
 			item.Value.shootManager.shootCount = 0;
 		}
 	}
+
+
+	[Export]
+	PackedScene mainMenuScene;
+	public void GoToMainMenu()
+	{
+		if (!NetworkManager.Singleplayer)
+		{
+			NetworkManager.NetStop();
+		}
+		GetTree().ChangeSceneToFile("res://Scenes/MainMenu/MainMenu.tscn");
+	}
 }

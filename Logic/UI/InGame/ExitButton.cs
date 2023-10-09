@@ -12,7 +12,7 @@ public partial class ExitButton : Button
     }
     public void ExitConfirmed()
     {
-        DefenseObjective.instance.Death();
+        Game.instance.GoToMainMenu();
     }
     Rect2 popupBounds;
     public override void _Pressed()
