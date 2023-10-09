@@ -18,7 +18,7 @@ namespace RogueDefense.Logic.PlayerCore
             this.player = player;
             if (player.Local)
             {
-                var ability1Button = Game.instance.GetNode("AbilityContainer/AbilityButton1") as CustomButton;
+                var ability1Button = Game.instance.GetNode("AbilityContainer/AbilityButton1") as Button;
                 ability1 = GetAbility(ability1Button);
 
 
@@ -39,7 +39,7 @@ namespace RogueDefense.Logic.PlayerCore
             }
         }
 
-        ActiveAbility GetAbility(CustomButton button)
+        ActiveAbility GetAbility(Button button)
         {
             return CreateAbilityInstance(AbilityChooser.chosen, player, button);
         }
@@ -60,7 +60,7 @@ namespace RogueDefense.Logic.PlayerCore
             typeof(DmgDealtDmgTakenAbility),
             typeof(DamageReductionAbility)
         };
-        public static ActiveAbility CreateAbilityInstance(int index, Player player, CustomButton button = null)
+        public static ActiveAbility CreateAbilityInstance(int index, Player player, Button button = null)
         {
             if (index < 0) index = new Random().Next(0, abilityTypes.Length);
             return (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { player, button });

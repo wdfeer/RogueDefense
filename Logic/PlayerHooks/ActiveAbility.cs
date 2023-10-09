@@ -6,13 +6,13 @@ namespace RogueDefense
 {
     public abstract class ActiveAbility : PlayerHooks
     {
-        CustomButton button;
+        Button button;
         public ActiveAbility(Player player, CustomButton button) : base(player)
         {
             if (button == null)
                 return;
             this.button = button;
-            this.button.onClick = OnButtonClick;
+            this.button.Pressed += OnButtonClick;
         }
         void OnButtonClick()
         {
