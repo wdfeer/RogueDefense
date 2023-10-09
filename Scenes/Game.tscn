@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=31 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -17,8 +17,10 @@
 [ext_resource type="Script" path="res://Logic/PlayArea.cs" id="16"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
+[ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
 [ext_resource type="Texture2D" uid="uid://fqdgbhgv6ugk" path="res://Assets/game-icons.net/cancel.svg" id="18_xbath"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/NotificationPopup.cs" id="19"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/MenuButton.gd" id="19_culfp"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/BuffText.cs" id="20"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -43,10 +45,17 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 0.25098, 0.25098, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ramh"]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
 bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
+
+[sub_resource type="InputEventAction" id="InputEventAction_cdmt3"]
+action = &"menu"
+
+[sub_resource type="Shortcut" id="Shortcut_3a13u"]
+events = [SubResource("InputEventAction_cdmt3")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fync3"]
+bg_color = Color(0, 0, 0, 0.882353)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
@@ -222,9 +231,9 @@ layout_mode = 0
 offset_top = -8.0
 offset_right = 90.0
 offset_bottom = 72.0
+theme = ExtResource("7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_1ramh")
 script = ExtResource("9")
 
 [node name="CooldownLabel" type="Label" parent="AbilityContainer/AbilityButton1"]
@@ -283,7 +292,7 @@ text = "Level 9999 reached"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuButton" type="Button" parent="z-index1/DeathScreen"]
+[node name="ReturnButton" type="Button" parent="z-index1/DeathScreen"]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 440.0
@@ -294,20 +303,46 @@ theme_override_font_sizes/font_size = 64
 text = "MAIN MENU"
 script = ExtResource("13")
 
-[node name="ExitButton" type="Button" parent="z-index1"]
+[node name="MenuButton" type="Button" parent="z-index1"]
 process_mode = 3
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 69.0
-offset_bottom = 69.0
+offset_right = 64.0
+offset_bottom = 64.0
 theme = ExtResource("7")
+shortcut = SubResource("Shortcut_3a13u")
+icon = ExtResource("18_pat0i")
+expand_icon = true
+script = ExtResource("19_culfp")
+
+[node name="Menu" type="Panel" parent="z-index1"]
+process_mode = 3
+visible = false
+offset_right = 1025.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fync3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="z-index1/Menu"]
+layout_mode = 0
+offset_left = 170.833
+offset_top = 100.0
+offset_right = 854.166
+offset_bottom = 500.0
+alignment = 2
+
+[node name="ExitButton" type="Button" parent="z-index1/Menu/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme = ExtResource("7")
+text = "EXIT"
 icon = ExtResource("18_xbath")
 expand_icon = true
 script = ExtResource("18")
 
-[node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/ExitButton"]
+[node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/Menu/VBoxContainer/ExitButton"]
 initial_position = 2
-size = Vector2i(280, 100)
+size = Vector2i(310, 100)
+popup_window = true
 theme = ExtResource("7")
 dialog_text = "Give up (progress will NOT be saved!)"
 
@@ -333,3 +368,5 @@ theme_override_font_sizes/font_size = 32
 text = "[Username] used [AbilityName]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="z-index1/MenuButton" to="z-index1/MenuButton" method="_on_pressed"]
