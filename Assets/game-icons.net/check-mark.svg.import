@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6em6vwabqc1g"
-path="res://.godot/imported/settings-knobs.svg-59c29a86157f9932e19b4e41c09d3271.ctex"
+uid="uid://cmmg1navf2b37"
+path="res://.godot/imported/check-mark.svg-a7466dab837cb7e213d27661f02b7f96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/settings-knobs.svg"
-dest_files=["res://.godot/imported/settings-knobs.svg-59c29a86157f9932e19b4e41c09d3271.ctex"]
+source_file="res://Assets/game-icons.net/check-mark.svg"
+dest_files=["res://.godot/imported/check-mark.svg-a7466dab837cb7e213d27661f02b7f96.ctex"]
 
 [params]
 

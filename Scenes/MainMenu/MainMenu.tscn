@@ -12,10 +12,10 @@
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentsButton.cs" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
-[ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/anvil-impact.svg" id="14_jf53w"]
+[ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/game-icons.net/anvil-impact.svg" id="14_l3r0m"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/PointLabel.cs" id="16"]
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
-[ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/check-mark.svg" id="17_6ikjw"]
+[ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/HpBarButton.cs" id="19"]
 
@@ -167,7 +167,7 @@ offset_top = 480.0
 offset_right = 1408.0
 offset_bottom = 992.0
 scale = Vector2(0.2, 0.2)
-icon = ExtResource("14_jf53w")
+icon = ExtResource("14_l3r0m")
 script = ExtResource("12")
 
 [node name="AugmentPanel" type="Panel" parent="."]
@@ -199,7 +199,7 @@ offset_top = 480.0
 offset_right = 1408.0
 offset_bottom = 992.0
 scale = Vector2(0.2, 0.2)
-icon = ExtResource("17_6ikjw")
+icon = ExtResource("17_j8td6")
 script = ExtResource("12")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="AugmentPanel"]

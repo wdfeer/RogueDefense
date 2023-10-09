@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b65dsdcjq560t"
-path="res://.godot/imported/anvil-impact.svg-f70169baa253cc6c47a72545ed8d2f80.ctex"
+path="res://.godot/imported/anvil-impact.svg-6fda7e5c24976711db619838f4123cc1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/anvil-impact.svg"
-dest_files=["res://.godot/imported/anvil-impact.svg-f70169baa253cc6c47a72545ed8d2f80.ctex"]
+source_file="res://Assets/game-icons.net/anvil-impact.svg"
+dest_files=["res://.godot/imported/anvil-impact.svg-6fda7e5c24976711db619838f4123cc1.ctex"]
 
 [params]
 

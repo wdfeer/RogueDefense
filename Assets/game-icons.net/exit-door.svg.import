@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cmmg1navf2b37"
-path="res://.godot/imported/check-mark.svg-5f95fb21a3414c9687bcdb41d00d6451.ctex"
+uid="uid://37n6jj6mia1l"
+path="res://.godot/imported/exit-door.svg-e38c5ed8061a0d993ffad5272a580fe8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/check-mark.svg"
-dest_files=["res://.godot/imported/check-mark.svg-5f95fb21a3414c9687bcdb41d00d6451.ctex"]
+source_file="res://Assets/game-icons.net/exit-door.svg"
+dest_files=["res://.godot/imported/exit-door.svg-e38c5ed8061a0d993ffad5272a580fe8.ctex"]
 
 [params]
 

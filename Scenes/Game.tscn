@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://Logic/PlayArea.cs" id="16"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
-[ext_resource type="Texture2D" uid="uid://fqdgbhgv6ugk" path="res://Assets/cancel.svg" id="18_7dhu8"]
+[ext_resource type="Texture2D" uid="uid://fqdgbhgv6ugk" path="res://Assets/game-icons.net/cancel.svg" id="18_xbath"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/NotificationPopup.cs" id="19"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/BuffText.cs" id="20"]
 
@@ -301,7 +301,7 @@ offset_top = 8.0
 offset_right = 69.0
 offset_bottom = 69.0
 theme = ExtResource("7")
-icon = ExtResource("18_7dhu8")
+icon = ExtResource("18_xbath")
 expand_icon = true
 script = ExtResource("18")
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fqdgbhgv6ugk"
-path="res://.godot/imported/cancel.svg-b0088a7a5560544b5c9533e8768cdd02.ctex"
+path="res://.godot/imported/cancel.svg-3925ac48f31f36c776223a14708fba48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/cancel.svg"
-dest_files=["res://.godot/imported/cancel.svg-b0088a7a5560544b5c9533e8768cdd02.ctex"]
+source_file="res://Assets/game-icons.net/cancel.svg"
+dest_files=["res://.godot/imported/cancel.svg-3925ac48f31f36c776223a14708fba48.ctex"]
 
 [params]
 
