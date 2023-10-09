@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://q50meh6i02ee"]
+
+[ext_resource type="Material" uid="uid://db6s1tmcwewru" path="res://Assets/Shaders/blur_material.tres" id="1_is81t"]
+
+[node name="Blur" type="ColorRect"]
+material = ExtResource("1_is81t")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1024.0
+offset_bottom = -600.0
+grow_horizontal = 2
+grow_vertical = 2
