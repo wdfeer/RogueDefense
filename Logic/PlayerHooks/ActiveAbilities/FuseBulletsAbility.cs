@@ -7,7 +7,7 @@ namespace RogueDefense
 {
     public partial class FuseBulletsAbility : ActiveAbility
     {
-        public FuseBulletsAbility(Player player, CustomButton button) : base(player, button)
+        public FuseBulletsAbility(Player player, Button button) : base(player, button)
         {
         }
 

@@ -7,7 +7,7 @@ namespace RogueDefense
     public abstract class ActiveAbility : PlayerHooks
     {
         Button button;
-        public ActiveAbility(Player player, CustomButton button) : base(player)
+        public ActiveAbility(Player player, Button button) : base(player)
         {
             if (button == null)
                 return;

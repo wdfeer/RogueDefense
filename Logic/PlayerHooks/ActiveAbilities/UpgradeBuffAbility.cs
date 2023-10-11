@@ -1,3 +1,4 @@
+using Godot;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 
@@ -5,7 +6,7 @@ namespace RogueDefense
 {
     public partial class UpgradeBuffAbility : ActiveAbility
     {
-        public UpgradeBuffAbility(Player player, CustomButton button) : base(player, button)
+        public UpgradeBuffAbility(Player player, Button button) : base(player, button)
         {
             active = false;
         }

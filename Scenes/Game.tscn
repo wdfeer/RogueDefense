@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=33 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/defense_objective.svg" id="6"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="7"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
-[ext_resource type="Script" path="res://Logic/UI/CustomButton.cs" id="9"]
 [ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/MainMenuButton.cs" id="13"]
@@ -140,6 +139,7 @@ offset_right = -150.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+script = null
 
 [node name="UpgradeButton2" parent="UpgradeScreen" instance=ExtResource("3")]
 layout_mode = 1
@@ -155,6 +155,7 @@ offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "											"
+script = null
 
 [node name="UpgradeButton3" parent="UpgradeScreen" instance=ExtResource("3")]
 layout_mode = 1
@@ -170,6 +171,7 @@ offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "													"
+script = null
 
 [node name="DpsLabel" type="Label" parent="."]
 process_mode = 3
@@ -237,7 +239,6 @@ offset_bottom = 72.0
 theme = ExtResource("7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
-script = ExtResource("9")
 
 [node name="CooldownLabel" type="Label" parent="AbilityContainer/AbilityButton1"]
 layout_mode = 0

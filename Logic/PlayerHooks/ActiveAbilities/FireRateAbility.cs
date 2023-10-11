@@ -1,3 +1,4 @@
+using Godot;
 using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
@@ -10,7 +11,7 @@ namespace RogueDefense
         }
         public float buffLeft = 0;
 
-        public FireRateAbility(Player player, CustomButton button) : base(player, button)
+        public FireRateAbility(Player player, Button button) : base(player, button)
         {
         }
 

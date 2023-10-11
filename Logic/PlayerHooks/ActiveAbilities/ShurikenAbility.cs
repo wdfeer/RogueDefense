@@ -22,7 +22,7 @@ namespace RogueDefense
         }
         public const float BASE_DAMAGE = 4;
 
-        public ShurikenAbility(Player player, CustomButton button) : base(player, button)
+        public ShurikenAbility(Player player, Button button) : base(player, button)
         {
         }
 

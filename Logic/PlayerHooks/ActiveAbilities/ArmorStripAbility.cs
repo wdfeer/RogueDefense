@@ -6,7 +6,7 @@ namespace RogueDefense
 {
     public partial class ArmorStripAbility : ActiveAbility
     {
-        public ArmorStripAbility(Player player, CustomButton button) : base(player, button)
+        public ArmorStripAbility(Player player, Button button) : base(player, button)
         {
         }
         public override void Activate()

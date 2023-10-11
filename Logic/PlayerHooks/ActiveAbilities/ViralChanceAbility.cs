@@ -1,3 +1,4 @@
+using Godot;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 
@@ -22,7 +23,7 @@ namespace RogueDefense
         }
         public const float BASE_DURATION = 4f;
 
-        public ViralChanceAbility(Player player, CustomButton button) : base(player, button)
+        public ViralChanceAbility(Player player, Button button) : base(player, button)
         {
         }
 

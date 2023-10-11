@@ -6,7 +6,7 @@ namespace RogueDefense
 {
     public partial class DmgDealtDmgTakenAbility : ActiveAbility
     {
-        public DmgDealtDmgTakenAbility(Player player, CustomButton button) : base(player, button)
+        public DmgDealtDmgTakenAbility(Player player, Button button) : base(player, button)
         {
         }
 

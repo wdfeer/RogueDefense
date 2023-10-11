@@ -1,3 +1,4 @@
+using Godot;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 
@@ -5,7 +6,7 @@ namespace RogueDefense
 {
     public partial class CritChanceAbility : ActiveAbility
     {
-        public CritChanceAbility(Player player, CustomButton button) : base(player, button)
+        public CritChanceAbility(Player player, Button button) : base(player, button)
         {
         }
         public override void Activate()

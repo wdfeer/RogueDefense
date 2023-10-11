@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck8gmgjr1lmqk"]
+[gd_scene load_steps=2 format=3 uid="uid://ck8gmgjr1lmqk"]
 
-[ext_resource type="Script" path="res://Logic/UI/CustomButton.cs" id="1"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2_2twcg"]
 
 [node name="UpgradeButton" type="Button"]
@@ -8,7 +7,6 @@ offset_left = 437.0
 offset_top = 260.0
 offset_right = 637.0
 offset_bottom = 380.0
-script = ExtResource("1")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
