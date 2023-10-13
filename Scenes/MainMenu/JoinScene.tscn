@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d7hydk75hi01"]
+[gd_scene load_steps=9 format=3 uid="uid://d7hydk75hi01"]
 
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/JoinButton.cs" id="3"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="5_f4v3y"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/JoinScene.cs" id="6"]
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://cjt2h0rh6bswo" path="res://Scenes/Lobby/ExitButton.tscn" id="8_kxyci"]
 
-[node name="JoinScene" type="CenterContainer"]
+[node name="JoinScene" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,7 +26,18 @@ lobbyScene = ExtResource("7")
 root_path = NodePath("..")
 
 [node name="Container" type="VBoxContainer" parent="."]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.5
+offset_top = -192.0
+offset_right = 220.5
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="IP Input" type="HBoxContainer" parent="Container"]
 layout_mode = 2
@@ -82,3 +95,10 @@ layout_mode = 2
 theme = ExtResource("1")
 text = "Connecting..."
 script = ExtResource("5")
+
+[node name="ExitButton" parent="." instance=ExtResource("8_kxyci")]
+layout_mode = 0
+offset_left = 928.0
+offset_top = 16.0
+offset_right = 1008.0
+offset_bottom = 96.0

@@ -26,7 +26,8 @@ public partial class Client : Node
     }
     public void Stop()
     {
-        client.DisconnectFromHost();
+        if (client != null)
+            client.DisconnectFromHost();
         client = null;
     }
     public List<UserData> others = new List<UserData>();

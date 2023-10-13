@@ -91,12 +91,14 @@ offset_bottom = 56.0
 [node name="CombatTextButton" type="CheckBox" parent="ClientSettings"]
 layout_mode = 2
 theme = ExtResource("5")
+theme_override_font_sizes/font_size = 15
 text = "Show Common Damage Numbers"
 script = ExtResource("11")
 
 [node name="HpBarButton" type="CheckBox" parent="ClientSettings"]
 layout_mode = 2
 theme = ExtResource("5")
+theme_override_font_sizes/font_size = 15
 text = "Show your HP Bar"
 script = ExtResource("19")
 

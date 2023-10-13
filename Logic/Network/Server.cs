@@ -29,7 +29,8 @@ public partial class Server : Node
 	}
 	public void Stop()
 	{
-		server.Stop();
+		if (server != null)
+			server.Stop();
 		server = null;
 	}
 	public Dictionary<int, UserData> users = new Dictionary<int, UserData>();

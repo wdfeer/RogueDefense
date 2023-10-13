@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class JoinScene : CenterContainer
+public partial class JoinScene : Node
 {
 	[Export]
 	public PackedScene lobbyScene;

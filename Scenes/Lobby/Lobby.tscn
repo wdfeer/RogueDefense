@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dtm1dpgedp8k2"]
+[gd_scene load_steps=16 format=3 uid="uid://dtm1dpgedp8k2"]
 
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://bdpste7hjr5v5" path="res://Scenes/Lobby/PlayerData.tscn" id="3"]
@@ -9,13 +9,12 @@
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="6"]
 [ext_resource type="Texture2D" uid="uid://6em6vwabqc1g" path="res://Assets/game-icons.net/settings-knobs.svg" id="8_thxa7"]
 [ext_resource type="PackedScene" uid="uid://dxi23vhlhulyj" path="res://Scenes/Lobby/SettingsSlider.tscn" id="10"]
-[ext_resource type="Texture2D" uid="uid://37n6jj6mia1l" path="res://Assets/game-icons.net/exit-door.svg" id="10_p3eym"]
+[ext_resource type="PackedScene" uid="uid://cjt2h0rh6bswo" path="res://Scenes/Lobby/ExitButton.tscn" id="10_3pedh"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/SettingsButton.cs" id="11"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/ResetButton.cs" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/ConfirmButton.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/SettingsPanel.cs" id="14"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/Sliders.cs" id="15"]
-[ext_resource type="Script" path="res://Logic/UI/Lobby/ExitButton.cs" id="18"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
@@ -72,16 +71,12 @@ icon = ExtResource("8_thxa7")
 expand_icon = true
 script = ExtResource("11")
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="ExitButton" parent="." instance=ExtResource("10_3pedh")]
 layout_mode = 0
 offset_left = 936.0
 offset_top = 10.0
 offset_right = 1016.0
 offset_bottom = 90.0
-theme = ExtResource("2")
-icon = ExtResource("10_p3eym")
-expand_icon = true
-script = ExtResource("18")
 
 [node name="PPMult" type="Label" parent="."]
 layout_mode = 0
