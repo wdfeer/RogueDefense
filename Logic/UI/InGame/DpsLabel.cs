@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense;
 using RogueDefense.Logic;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ public partial class DpsLabel : Label
     public static DpsLabel instance;
     public override void _Ready()
     {
+        Visible = SaveData.showAvgDPS;
         instance = this;
     }
 
@@ -17,6 +19,9 @@ public partial class DpsLabel : Label
     const float HIT_SAVE_DURATION = 1f;
     public override void _Process(double delta)
     {
+        if (!Visible)
+            return;
+
         secondTimer += (float)delta;
         if (secondTimer >= 1f)
         {

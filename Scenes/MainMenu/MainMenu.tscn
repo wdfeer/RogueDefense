@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=21 format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/Statview.cs" id="9"]
 [ext_resource type="Script" path="res://Logic/GameInitializer.cs" id="10"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/CombatTextButton.cs" id="11"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AvgDPSButton.cs" id="11_x11kv"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentsButton.cs" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
@@ -101,6 +102,11 @@ theme = ExtResource("5")
 theme_override_font_sizes/font_size = 15
 text = "Show your HP Bar"
 script = ExtResource("19")
+
+[node name="AvgDPSButton" type="CheckBox" parent="ClientSettings"]
+layout_mode = 2
+text = "Show average DPS"
+script = ExtResource("11_x11kv")
 
 [node name="TopPlays" type="VBoxContainer" parent="."]
 layout_mode = 0
