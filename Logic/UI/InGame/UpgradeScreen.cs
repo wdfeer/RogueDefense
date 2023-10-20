@@ -24,6 +24,7 @@ public partial class UpgradeScreen : Panel
     }
     public void Activate()
     {
+        SetButtonsVisibility(true);
         Show();
 
         upgrades = Upgrade.RandomUniqueUpgrades(3);
@@ -62,10 +63,18 @@ public partial class UpgradeScreen : Panel
             Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
             if (EveryoneUpgraded())
                 HideAndUnpause();
+            else SetButtonsVisibility(false);
         }
     }
 
     public byte upgradesMade = 0; //Only for multiplayer
+    void SetButtonsVisibility(bool show)
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].Visible = show;
+        }
+    }
     public void HideAndUnpause()
     {
         Hide();
