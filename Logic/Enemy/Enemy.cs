@@ -126,6 +126,8 @@ public partial class Enemy : Area2D
 	[Export]
 	public PackedScene combatText;
 	public float dynamicDamageMult = 1f;
+	[Export]
+	public AnimationPlayer animationPlayer;
 	public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null, bool ignoreArmor = false)
 	{
 		damage *= dynamicDamageMult;
@@ -153,7 +155,10 @@ public partial class Enemy : Area2D
 		if (Hp <= 0)
 		{
 			Game.instance.DeleteEnemy(true);
+			return;
 		}
+
+		animationPlayer.Play("Hurt");
 	}
 	bool attacking = false;
 	public float damage = 10f;
