@@ -19,6 +19,7 @@ public partial class DpsLabel : Label
     const float HIT_SAVE_DURATION = 1f;
     public override void _Process(double delta)
     {
+        Visible = SaveData.showAvgDPS;
         if (!Visible)
             return;
 

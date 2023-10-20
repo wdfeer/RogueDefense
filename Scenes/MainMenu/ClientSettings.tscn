@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c86d8jw0um27y"]
+
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1_ncqh8"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/CombatTextButton.cs" id="2_04flm"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/HpBarButton.cs" id="3_yw6ce"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AvgDPSButton.cs" id="4_kd82x"]
+
+[node name="ClientSettings" type="VBoxContainer"]
+offset_right = 272.0
+offset_bottom = 99.0
+
+[node name="CombatTextButton" type="CheckBox" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ncqh8")
+theme_override_font_sizes/font_size = 15
+text = "Show Common Damage Numbers"
+script = ExtResource("2_04flm")
+
+[node name="HpBarButton" type="CheckBox" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ncqh8")
+theme_override_font_sizes/font_size = 15
+text = "Show your HP Bar"
+script = ExtResource("3_yw6ce")
+
+[node name="AvgDPSButton" type="CheckBox" parent="."]
+layout_mode = 2
+text = "Show average DPS"
+script = ExtResource("4_kd82x")

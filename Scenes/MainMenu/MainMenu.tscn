@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=19 format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
@@ -7,9 +7,8 @@
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="5"]
 [ext_resource type="Texture2D" uid="uid://d4n1tobo1ylie" path="res://Assets/edit_icon_small.png" id="7_5ef50"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/Statview.cs" id="9"]
+[ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="9_8to8e"]
 [ext_resource type="Script" path="res://Logic/GameInitializer.cs" id="10"]
-[ext_resource type="Script" path="res://Logic/UI/MainMenu/CombatTextButton.cs" id="11"]
-[ext_resource type="Script" path="res://Logic/UI/MainMenu/AvgDPSButton.cs" id="11_x11kv"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentsButton.cs" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
@@ -18,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
 [ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
-[ext_resource type="Script" path="res://Logic/UI/MainMenu/HpBarButton.cs" id="19"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enlh7"]
 bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
@@ -82,31 +80,12 @@ selecting_enabled = false
 right_icon = ExtResource("7_5ef50")
 script = ExtResource("13")
 
-[node name="ClientSettings" type="VBoxContainer" parent="."]
+[node name="ClientSettings" parent="." instance=ExtResource("9_8to8e")]
 layout_mode = 0
 offset_left = 744.0
 offset_top = 16.0
-offset_right = 1011.0
-offset_bottom = 56.0
-
-[node name="CombatTextButton" type="CheckBox" parent="ClientSettings"]
-layout_mode = 2
-theme = ExtResource("5")
-theme_override_font_sizes/font_size = 15
-text = "Show Common Damage Numbers"
-script = ExtResource("11")
-
-[node name="HpBarButton" type="CheckBox" parent="ClientSettings"]
-layout_mode = 2
-theme = ExtResource("5")
-theme_override_font_sizes/font_size = 15
-text = "Show your HP Bar"
-script = ExtResource("19")
-
-[node name="AvgDPSButton" type="CheckBox" parent="ClientSettings"]
-layout_mode = 2
-text = "Show average DPS"
-script = ExtResource("11_x11kv")
+offset_right = 1016.0
+offset_bottom = 115.0
 
 [node name="TopPlays" type="VBoxContainer" parent="."]
 layout_mode = 0

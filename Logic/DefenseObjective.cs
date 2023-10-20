@@ -66,6 +66,7 @@ namespace RogueDefense
             if (GameSettings.healthDrain)
                 DealPassiveDamage((float)delta);
 
+            hpBar.Visible = SaveData.showHpBar;
             if (hpBar.Visible)
             {
                 hpBar.Value = HpRatio;

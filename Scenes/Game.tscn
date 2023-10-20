@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=34 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/BuffText.cs" id="20"]
 [ext_resource type="Texture2D" uid="uid://c6pt4yqyytldg" path="res://Assets/game-icons.net/play-button.svg" id="20_ldo46"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/BackButton.gd" id="21_11t6h"]
+[ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="24_iflvr"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
@@ -323,7 +324,6 @@ script = ExtResource("13")
 
 [node name="Menu" type="Panel" parent="z-index1"]
 process_mode = 3
-visible = false
 offset_right = 1025.0
 offset_bottom = 600.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fync3")
@@ -335,8 +335,8 @@ offset_bottom = 0.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="z-index1/Menu"]
 layout_mode = 0
-offset_left = 256.0
-offset_right = 768.0
+offset_left = 192.0
+offset_right = 512.0
 offset_bottom = 600.0
 alignment = 1
 
@@ -363,6 +363,13 @@ size = Vector2i(310, 100)
 popup_window = true
 theme = ExtResource("7")
 dialog_text = "Give up (progress will NOT be saved!)"
+
+[node name="ClientSettings" parent="z-index1/Menu" instance=ExtResource("24_iflvr")]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 248.0
+offset_right = 784.0
+offset_bottom = 347.0
 
 [node name="NotificationPopup" type="PopupPanel" parent="."]
 process_mode = 3
