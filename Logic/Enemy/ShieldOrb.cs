@@ -7,9 +7,9 @@ public partial class ShieldOrb : Area2D
 
 	public override void _Ready()
 	{
-		Connect("body_entered", new Callable(this, "BodyEntered"));
+		BodyEntered += OnBodyEntered;
 	}
-	public void BodyEntered(Node body)
+	public void OnBodyEntered(Node body)
 	{
 		if (body is Bullet bullet)
 		{

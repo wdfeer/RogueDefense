@@ -28,7 +28,7 @@ namespace RogueDefense.Logic
             if (gen <= 25)
                 genMult = Mathf.Pow(gen / 25f, 1.5f);
             else
-                genMult = (gen / 25f);
+                genMult = gen / 25f;
 
             return GetGameSettingsPPMult() * hpRatio * genMult;
         }

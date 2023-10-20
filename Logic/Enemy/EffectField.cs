@@ -11,10 +11,10 @@ public partial class EffectField : Area2D
         Monitoring = true;
         Monitorable = true;
 
-        Connect("body_entered", new Callable(this, "BodyEntered"));
+        BodyEntered += OnBodyEntered;
         ((CircleShape2D)(GetNode("CollisionShape2D") as CollisionShape2D).Shape).Radius = radius;
     }
-    public void BodyEntered(Node body)
+    public void OnBodyEntered(Node body)
     {
         if (!(body is Bullet))
             return;

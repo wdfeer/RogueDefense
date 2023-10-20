@@ -16,7 +16,7 @@ public partial class Enemy : Area2D
 	{
 		instance = this;
 
-		Connect("body_entered", new Callable(this, "BodyEntered"));
+		BodyEntered += OnBodyEntered;
 
 		statuses = new Status[] { bleed, corrosive, viral, cold };
 
@@ -188,7 +188,7 @@ public partial class Enemy : Area2D
 			GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult * (float)delta * 60, 0);
 		}
 	}
-	public void BodyEntered(Node body)
+	public void OnBodyEntered(Node body)
 	{
 		if (body is Bullet bullet)
 		{
