@@ -59,6 +59,7 @@ public partial class Server : Node
 	public void OnDisconnect(int id)
 	{
 		users.Remove(id);
+		peers[id] = null;
 		GD.Print($"Client {id} disconnected");
 
 		SendMessage(MessageType.Unregister, new string[] { id.ToString() });
@@ -126,6 +127,7 @@ public partial class Server : Node
 			if (status == StreamPeerTcp.Status.None || status == StreamPeerTcp.Status.Error)
 			{
 				OnDisconnect(i);
+				continue;
 			}
 			else if (status == StreamPeerTcp.Status.Connecting)
 			{
