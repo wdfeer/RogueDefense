@@ -9,6 +9,10 @@ namespace RogueDefense
     {
         public FuseBulletsAbility(Player player, Button button) : base(player, button)
         {
+            if (button != null)
+            {
+                button.Icon = (Texture2D)GD.Load("res://Assets/game-icons.net/concentration-orb.svg");
+            }
         }
 
         public override bool CanBeActivated()
