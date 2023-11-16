@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=35 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/MainMenuButton.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DpsLabel.cs" id="14"]
+[ext_resource type="Texture2D" uid="uid://cpe4b1e162y5y" path="res://Assets/game-icons.net/embrassed-energy.svg" id="14_sx78e"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
 [ext_resource type="Script" path="res://Logic/PlayArea.cs" id="16"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
@@ -232,26 +233,30 @@ theme = ExtResource("7")
 [node name="AbilityButton1" type="Button" parent="AbilityContainer"]
 layout_mode = 0
 offset_top = -8.0
-offset_right = 90.0
+offset_right = 80.0
 offset_bottom = 72.0
 theme = ExtResource("7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
+icon = ExtResource("14_sx78e")
+expand_icon = true
 
 [node name="CooldownLabel" type="Label" parent="AbilityContainer/AbilityButton1"]
 layout_mode = 0
-offset_right = 90.0
-offset_bottom = 81.0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 72.0
+offset_bottom = 103.0
 theme = ExtResource("7")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label" type="Label" parent="AbilityContainer/AbilityButton1"]
 layout_mode = 0
-offset_left = 99.0
-offset_right = 252.0
-offset_bottom = 75.0
+offset_left = 88.0
+offset_right = 254.0
+offset_bottom = 78.0
 theme = ExtResource("7")
 text = "+100% Total Fire Rate
 Duration: 5 s
