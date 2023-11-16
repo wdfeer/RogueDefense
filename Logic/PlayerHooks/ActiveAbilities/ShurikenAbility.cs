@@ -5,7 +5,6 @@ namespace RogueDefense
 {
     public partial class ShurikenAbility : ActiveAbility
     {
-
         public static PackedScene shurikenScene = (PackedScene)ResourceLoader.Load("res://Scenes/Shuriken.tscn");
         public int ShurikenCount => Mathf.FloorToInt(Strength / 1f);
         public override void Activate()
@@ -24,6 +23,10 @@ namespace RogueDefense
 
         public ShurikenAbility(Player player, Button button) : base(player, button)
         {
+            if (button != null)
+            {
+                button.Icon = (Texture2D)GD.Load("res://Assets/game-icons.net/flying-shuriken.svg");
+            }
         }
 
         public override bool Shared => false;
