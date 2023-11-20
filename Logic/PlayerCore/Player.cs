@@ -53,5 +53,14 @@ namespace RogueDefense.Logic.PlayerCore
 
             turret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
         }
+
+        public void OnEnemyKill()
+        {
+            shootManager.ClearBullets();
+            hooks.ForEach(x => x.OnKill());
+            upgradeManager.UpdateUpgrades();
+            upgradeManager.UpdateUpgradeText();
+            shootManager.shootCount = 0;
+        }
     }
 }

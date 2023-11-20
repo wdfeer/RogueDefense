@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public partial class PointLabel : Label
+public partial class AugmentPointLabel : Label
 {
     public override void _Ready()
     {

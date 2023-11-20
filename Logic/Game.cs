@@ -69,13 +69,9 @@ public partial class Game : Node2D
 		GetTree().Paused = true;
 		(GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
 
-		foreach (var item in Player.players)
+		foreach (var keyValue in Player.players)
 		{
-			item.Value.shootManager.ClearBullets();
-			item.Value.hooks.ForEach(x => x.OnKill());
-			item.Value.upgradeManager.UpdateUpgrades();
-			item.Value.upgradeManager.UpdateUpgradeText();
-			item.Value.shootManager.shootCount = 0;
+			keyValue.Value.OnEnemyKill();
 		}
 	}
 

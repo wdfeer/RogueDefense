@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
 [ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/game-icons.net/anvil-impact.svg" id="14_l3r0m"]
-[ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/PointLabel.cs" id="16"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/AugmentPointLabel.cs" id="15_4r3tt"]
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
 [ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
@@ -170,14 +170,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_enlh7")
 
 [node name="PointLabel" type="Label" parent="AugmentPanel"]
 layout_mode = 0
-offset_left = 888.0
+offset_left = 720.0
 offset_top = 16.0
-offset_right = 1018.0
-offset_bottom = 60.0
+offset_right = 1011.0
+offset_bottom = 64.0
 theme = ExtResource("5")
 theme_override_font_sizes/font_size = 32
-text = "10 Points"
-script = ExtResource("16")
+text = "10 Augment Points"
+script = ExtResource("15_4r3tt")
 
 [node name="AugmentsButton" type="Button" parent="AugmentPanel"]
 layout_mode = 0
