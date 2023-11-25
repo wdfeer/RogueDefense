@@ -2,7 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
-public partial class PlusMinusButton : Button
+public partial class AugmentPlusMinusButton : Button
 {
     [Export]
     public int effect = 1;

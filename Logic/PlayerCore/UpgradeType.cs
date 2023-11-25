@@ -29,7 +29,7 @@ namespace RogueDefense.Logic.PlayerCore
         {
             chanceMult = 0.5f,
             valueMult = 0.52f,
-            canBeRolled = () => Game.instance.generation > 15
+            canBeRolled = () => Game.Wave > 15
         };
         public static readonly UpgradeType Damage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage") { chanceMult = 1.1f, valueMult = 1.2f };
         public static readonly UpgradeType FireRate = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate");
@@ -53,7 +53,7 @@ namespace RogueDefense.Logic.PlayerCore
             status = true,
             chanceMult = 0.6f,
             valueMult = 0.37f,
-            canBeRolled = () => Game.instance.generation > 15
+            canBeRolled = () => Game.Wave > 15
         };
         public static readonly UpgradeType ViralChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance")
         {
@@ -65,7 +65,7 @@ namespace RogueDefense.Logic.PlayerCore
         {
             status = true,
             valueMult = 0.13f,
-            canBeRolled = () => Game.instance.generation > 24 && Player.my.upgradeManager.coldChance < 0.13f
+            canBeRolled = () => Game.Wave > 24 && Player.my.upgradeManager.coldChance < 0.13f
         };
         public static readonly UpgradeType AbilityStrength = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Strength") { valueMult = 2f, chanceMult = 0.75f, canBeRolled = () => !Player.my.abilityManager.ability1.ConstantValues };
         public static readonly UpgradeType AbilityDuration = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration") { valueMult = 1.15f, chanceMult = 0.5f, canBeRolled = () => !Player.my.abilityManager.ability1.ConstantValues };
@@ -84,31 +84,31 @@ namespace RogueDefense.Logic.PlayerCore
         public static readonly UpgradeType MaxHpPerKill = new UpgradeType(x => $"On Kill: +{MathHelper.ToPercentAndRound(x)}% Max Hp")
         {
             chanceMult = 0.33f,
-            canBeRolled = () => Game.instance.generation < 10,
+            canBeRolled = () => Game.Wave < 10,
             getBaseRandomValue = () => 0.01f
         };
         public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a Turret")
         {
             chanceMult = 0.25f,
-            canBeRolled = () => Game.instance.generation > (NetworkManager.Singleplayer ? 22 : 36) &&
+            canBeRolled = () => Game.Wave > (NetworkManager.Singleplayer ? 22 : 36) &&
                 (float)Player.my.turrets.Count / NetworkManager.PlayerCount < 1.9f
         };
         public static readonly UpgradeType DamagePerUniqueStatus = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
         {
             chanceMult = 0.2f,
-            canBeRolled = () => Game.instance.generation > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.35f,
+            canBeRolled = () => Game.Wave > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.35f,
             valueMult = 0.3f
         };
         public static readonly UpgradeType FireRateMinusMultishot = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate, -{MathHelper.ToPercentAndRound(x / 2)}% Multishot")
         {
             chanceMult = 0.2f,
-            canBeRolled = () => Game.instance.generation > 10 && Player.my.shootManager.multishot > 1f,
+            canBeRolled = () => Game.Wave > 10 && Player.my.shootManager.multishot > 1f,
             valueMult = 2.2f
         };
         public static readonly UpgradeType LowEnemyHpDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage if Enemy HP is lower than 50%")
         {
             chanceMult = 0.2f,
-            canBeRolled = () => Game.instance.generation > 35,
+            canBeRolled = () => Game.Wave > 35,
             valueMult = 1.6f
         };
         public static readonly UpgradeType MultishotPerShot = new UpgradeType(x => $"On Shot: +{MathHelper.ToPercentAndRound(x)}% Total Multishot, stacks up to {MultishotPerShotPlayer.MAX_STACK} times")

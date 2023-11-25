@@ -74,7 +74,7 @@ namespace RogueDefense
         }
         public static void UpdateHighscore()
         {
-            int lvl = Game.instance.generation;
+            int lvl = Game.Wave;
             if (NetworkManager.Singleplayer && lvl > highscoreSingleplayer)
                 highscoreSingleplayer = lvl;
             else if (lvl > highscoreMultiplayer)

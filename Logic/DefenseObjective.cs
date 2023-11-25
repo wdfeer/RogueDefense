@@ -85,8 +85,8 @@ namespace RogueDefense
         {
             float dps = 6;
             if (!NetworkManager.Singleplayer) dps *= 2f;
-            if (Game.instance.generation > 40) dps *= 2f;
-            if (Game.instance.generation > 25) dps *= 2f;
+            if (Game.Wave > 40) dps *= 2f;
+            if (Game.Wave > 25) dps *= 2f;
             Damage(delta * dps);
         }
 
@@ -104,7 +104,7 @@ namespace RogueDefense
 
             Game.instance.GetTree().Paused = true;
             DeathScreen.instance.Show();
-            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"Level {Game.instance.generation} reached\n{PP.currentPP.ToString("0.000")} pp";
+            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"Level {Game.Wave} reached\n{PP.currentPP.ToString("0.000")} pp";
         }
     }
 }

@@ -40,12 +40,12 @@ public partial class Game : Node2D
 		enemy.Position = new Vector2(900, 300);
 		AddChild(enemy);
 
-		(GetNode("./LevelText") as Label).Text = $"Level {generation}";
+		(GetNode("./LevelText") as Label).Text = $"Level {wave}";
 	}
 
-	public static int Gen => instance.generation;
-	public int generation = 1;
-	public void DeleteEnemy(bool netUpdate)
+	public static int Wave => instance.wave;
+	private int wave = 1;
+	public void OnWaveEnd(bool netUpdate)
 	{
 		if (enemy == null)
 			return;
@@ -55,12 +55,12 @@ public partial class Game : Node2D
 			Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
 		}
 
-		PP.currentPP += PP.GetKillPP(generation, DefenseObjective.instance.HpRatio);
+		PP.currentPP += PP.GetKillPP(wave, DefenseObjective.instance.HpRatio);
 		((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
 		enemy.QueueFree();
 		enemy = null;
-		generation++;
+		wave++;
 
 		SaveData.UpdateHighscore();
 		SaveData.killCount++;

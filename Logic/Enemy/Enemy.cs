@@ -20,7 +20,7 @@ public partial class Enemy : Area2D
 
 		statuses = new Status[] { bleed, corrosive, viral, cold };
 
-		ScaleStats(Game.instance.generation);
+		ScaleStats(Game.Wave);
 	}
 	public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
 	public static void ResetRngSeed()
@@ -154,7 +154,7 @@ public partial class Enemy : Area2D
 
 		if (Hp <= 0)
 		{
-			Game.instance.DeleteEnemy(true);
+			Game.instance.OnWaveEnd(true);
 			return;
 		}
 
