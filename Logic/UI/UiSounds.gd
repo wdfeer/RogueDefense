@@ -45,5 +45,6 @@ func install_sounds(node: Node) -> void:
 
 
 func ui_sfx_play(sound : String) -> void:
-#	printt("Playing sound:", sound)
-	sounds[sound].play()
+	var player: AudioStreamPlayer = sounds[sound]
+	if player.is_inside_tree():
+		player.play()
