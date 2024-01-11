@@ -40,18 +40,28 @@ namespace RogueDefense.Logic.PlayerCore
             shootManager.Process((float)delta);
             hooks.ForEach(x => x.PostUpdate((float)delta));
         }
-
+        public void _PhysicsProcess(double delta)
+        {
+            if (this == my)
+                UpdateMovement(delta);
+        }
+        void UpdateMovement(double delta)
+        {
+            Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+            controlledTurret.GlobalPosition += inputDirection * Turret.SPEED;
+        }
         public List<Turret> turrets = new List<Turret>();
+        public Turret controlledTurret;
         public void SpawnTurret()
         {
-            Turret turret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
-            DefenseObjective.instance.AddChild(turret);
-            turret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
-            turrets.Add(turret);
+            controlledTurret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
+            DefenseObjective.instance.AddChild(controlledTurret);
+            controlledTurret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
+            turrets.Add(controlledTurret);
 
-            shootManager.bulletSpawns.Add(turret.bulletSpawnpoint);
+            shootManager.bulletSpawns.Add(controlledTurret.bulletSpawnpoint);
 
-            turret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
+            controlledTurret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
         }
 
         public void OnEnemyKill()

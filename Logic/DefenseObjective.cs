@@ -81,6 +81,13 @@ namespace RogueDefense
                 pair.Value._Process(delta);
             }
         }
+        public override void _PhysicsProcess(double delta)
+        {
+            foreach (var pair in Player.players)
+            {
+                pair.Value._PhysicsProcess(delta);
+            }
+        }
         void DealPassiveDamage(float delta)
         {
             float dps = 6;

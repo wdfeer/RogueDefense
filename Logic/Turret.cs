@@ -3,6 +3,7 @@ using System;
 
 public partial class Turret : Node2D
 {
+	public const int SPEED = 3;
 	[Export]
 	public AnimationPlayer animationPlayer;
 	[Export]
