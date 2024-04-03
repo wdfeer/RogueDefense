@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=23 format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
@@ -17,6 +17,22 @@
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
 [ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_7rens"]
+device = -1
+keycode = 72
+unicode = 104
+
+[sub_resource type="Shortcut" id="Shortcut_51jy2"]
+events = [SubResource("InputEventKey_7rens")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_c4ns1"]
+device = -1
+keycode = 74
+unicode = 106
+
+[sub_resource type="Shortcut" id="Shortcut_utl0v"]
+events = [SubResource("InputEventKey_c4ns1")]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enlh7"]
 bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
@@ -44,6 +60,7 @@ offset_right = -62.0
 offset_bottom = 370.0
 theme = ExtResource("5")
 theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_51jy2")
 text = "HOST"
 icon_alignment = 1
 script = ExtResource("14")
@@ -60,6 +77,7 @@ offset_right = 362.0
 offset_bottom = 370.0
 theme = ExtResource("5")
 theme_override_font_sizes/font_size = 64
+shortcut = SubResource("Shortcut_utl0v")
 text = "JOIN"
 icon_alignment = 1
 script = ExtResource("14")
