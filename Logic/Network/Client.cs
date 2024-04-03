@@ -113,6 +113,12 @@ public partial class Client : Node
                 ability.ActivateTryShare();
                 NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
+            case MessageType.PositionUpdated:
+                Player player = Player.players[args[0].ToInt()];
+                Turret turret = player.turrets[args[1].ToInt()];
+                float x = args[2].ToFloat(), y = args[3].ToFloat();
+                turret.GlobalPosition = new Vector2(x, y);
+                break;
             default:
                 break;
         }
@@ -176,5 +182,6 @@ public enum MessageType
     Upgrade = 'u',
     Death = 'd',
     Retry = 'r',
-    AbilityActivated = 'A'
+    AbilityActivated = 'A',
+    PositionUpdated = 'p'
 }

@@ -49,6 +49,13 @@ namespace RogueDefense.Logic.PlayerCore
         {
             Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
             controlledTurret.GlobalPosition += inputDirection * Turret.SPEED;
+
+            Vector2 pos = controlledTurret.GlobalPosition;
+            SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
+        }
+        static void SendPositionUpdateMessage(int client, int turretIndex, float x, float y)
+        {
+            Client.instance.SendMessage(MessageType.PositionUpdated, new string[] { client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString() });
         }
         public List<Turret> turrets = new List<Turret>();
         public Turret controlledTurret;
