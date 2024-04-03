@@ -50,6 +50,8 @@ namespace RogueDefense.Logic.PlayerCore
             Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
             controlledTurret.GlobalPosition += inputDirection * Turret.SPEED;
 
+            if (NetworkManager.Singleplayer)
+                return;
             Vector2 pos = controlledTurret.GlobalPosition;
             SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
         }
