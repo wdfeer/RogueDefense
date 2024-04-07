@@ -10,11 +10,11 @@ using RogueDefense.Logic.Statuses;
 
 public partial class Enemy : Area2D
 {
-	public static Enemy instance;
+	public static List<Enemy> enemies = new List<Enemy>();
 	public const float BASE_SPEED = 1.15f;
 	public override void _Ready()
 	{
-		instance = this;
+		enemies.Add(this);
 
 		BodyEntered += OnBodyEntered;
 
@@ -30,7 +30,7 @@ public partial class Enemy : Area2D
 		else
 		{
 			List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
-			firstChars.Add(RogueDefense.SaveData.name[0]);
+			firstChars.Add(SaveData.name[0]);
 
 			int seed = firstChars.Aggregate(0, (a, b) => a + b);
 			statsRng.Seed = (ulong)seed;

@@ -61,6 +61,21 @@ namespace RogueDefense.Logic.PlayerCore
         }
         public List<Turret> turrets = new List<Turret>();
         public Turret controlledTurret;
+        public Enemy target;
+        public void SetTarget(int enemyIndex, bool netUpdate = true)
+        {
+            Enemy enemy = Enemy.enemies[enemyIndex];
+            target = enemy;
+            foreach (Turret turret in turrets)
+            {
+                turret.target = enemy;
+            }
+
+            if (netUpdate)
+            {
+                Client.instance.SendMessage(MessageType.TargetSelected, new string[] { Client.myId.ToString(), enemyIndex.ToString() });
+            }
+        }
         public void SpawnTurret()
         {
             controlledTurret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
@@ -71,6 +86,8 @@ namespace RogueDefense.Logic.PlayerCore
             shootManager.bulletSpawns.Add(controlledTurret.bulletSpawnpoint);
 
             controlledTurret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
+
+            controlledTurret.target = target;
         }
 
         public void OnEnemyKill()

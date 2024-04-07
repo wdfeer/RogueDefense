@@ -10,11 +10,12 @@ public partial class Turret : Node2D
 	public Node2D bulletSpawnpoint;
 	public override void _Process(double delta)
 	{
-		if (IsInstanceValid(Enemy.instance))
+		if (target != null && IsInstanceValid(target))
 		{
-			(GetNode("TurretSprite") as Sprite2D).LookAt(Enemy.instance.GlobalPosition);
+			(GetNode("TurretSprite") as Sprite2D).LookAt(target.GlobalPosition);
 		}
 	}
+	public Enemy target;
 	public void SetLabel(string text)
 	{
 		Label label = (Label)GetNode("Label");

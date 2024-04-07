@@ -119,6 +119,11 @@ public partial class Client : Node
                 float x = args[2].ToFloat(), y = args[3].ToFloat();
                 turret.GlobalPosition = new Vector2(x, y);
                 break;
+            case MessageType.TargetSelected:
+                player = Player.players[args[0].ToInt()];
+                int enemyIndex = args[1].ToInt();
+                player.SetTarget(enemyIndex, false);
+                break;
             default:
                 break;
         }
@@ -183,5 +188,6 @@ public enum MessageType
     Death = 'd',
     Retry = 'r',
     AbilityActivated = 'A',
-    PositionUpdated = 'p'
+    PositionUpdated = 'p',
+    TargetSelected = 't'
 }
