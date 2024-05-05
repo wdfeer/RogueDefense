@@ -5,6 +5,10 @@ using System;
 public partial class HpBar : ProgressBar
 {
     public Enemy enemy;
+    public override void _Ready()
+    {
+        enemy = (Enemy)GetParent();
+    }
     public override void _Process(double delta)
     {
         Value = enemy.Hp / enemy.maxHp;

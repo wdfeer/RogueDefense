@@ -25,7 +25,7 @@ namespace RogueDefense.Logic.PlayerCore
         public void Process(float delta)
         {
             timeSinceLastShot += (float)delta;
-            if (timeSinceLastShot > shootInterval)
+            if (timeSinceLastShot > shootInterval && player.target != null)
             {
                 timeSinceLastShot = 0;
                 CreateBullets();

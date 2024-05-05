@@ -39,6 +39,9 @@ namespace RogueDefense.Logic.PlayerCore
             hooks.ForEach(x => x.PostUpgradeUpdate((float)delta));
             shootManager.Process((float)delta);
             hooks.ForEach(x => x.PostUpdate((float)delta));
+
+            if (target == null || target.Hp < 0)
+                FindTarget();
         }
         public void _PhysicsProcess(double delta)
         {
@@ -62,6 +65,18 @@ namespace RogueDefense.Logic.PlayerCore
         public List<Turret> turrets = new List<Turret>();
         public Turret controlledTurret;
         public Enemy target;
+        void FindTarget()
+        {
+            for (int i = 0; i < Enemy.enemies.Count; i++)
+            {
+                Enemy enemy = Enemy.enemies[i];
+                if (enemy.Hp > 0)
+                {
+                    SetTarget(i);
+                    return;
+                }
+            }
+        }
         public void SetTarget(int enemyIndex, bool netUpdate = true)
         {
             Enemy enemy = Enemy.enemies[enemyIndex];

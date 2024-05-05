@@ -14,7 +14,7 @@ public partial class Game : Node2D
 
 	public override void _Ready()
 	{
-		RogueDefense.SaveData.Save();
+		SaveData.Save();
 
 		instance = this;
 
@@ -24,7 +24,11 @@ public partial class Game : Node2D
 
 		Player.my = new Player(Client.myId, SaveData.augmentAllotment);
 		Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
+
+		SpawnEnemiesAfterDelay();
 	}
+	void SpawnEnemiesAfterDelay()
+		=> ToSignal(GetTree().CreateTimer(1f, false), "timeout").OnCompleted(SpawnEnemies);
 	void SpawnEnemies()
 	{
 		for (int i = 0; i < 2; i++)
@@ -64,6 +68,8 @@ public partial class Game : Node2D
 		{
 			keyValue.Value.OnEnemyKill();
 		}
+
+		SpawnEnemiesAfterDelay();
 	}
 
 
