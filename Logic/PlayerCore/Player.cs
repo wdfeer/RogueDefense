@@ -65,12 +65,14 @@ namespace RogueDefense.Logic.PlayerCore
         public List<Turret> turrets = new List<Turret>();
         public Turret controlledTurret;
         public Enemy target;
+        bool IsValidTarget(Enemy enemy)
+            => enemy != null && GodotObject.IsInstanceValid(enemy) && !enemy.Dead;
         void FindTarget()
         {
             for (int i = 0; i < Enemy.enemies.Count; i++)
             {
                 Enemy enemy = Enemy.enemies[i];
-                if (enemy != null && !enemy.Dead)
+                if (IsValidTarget(enemy))
                 {
                     SetTarget(i);
                     return;
@@ -79,7 +81,14 @@ namespace RogueDefense.Logic.PlayerCore
         }
         public void SetTarget(int enemyIndex, bool netUpdate = true)
         {
+            if (enemyIndex >= Enemy.enemies.Count)
+                return;
+
             Enemy enemy = Enemy.enemies[enemyIndex];
+
+            if (!IsValidTarget(enemy))
+                return;
+
             target = enemy;
             foreach (Turret turret in turrets)
             {

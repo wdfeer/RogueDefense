@@ -45,6 +45,9 @@ public partial class Game : Node2D
 	}
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
+		if (!IsInstanceValid(enemy))
+			return;
+
 		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
