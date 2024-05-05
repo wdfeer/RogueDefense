@@ -25,7 +25,7 @@ namespace RogueDefense.Logic.PlayerCore
         public void Process(float delta)
         {
             timeSinceLastShot += (float)delta;
-            if (timeSinceLastShot > shootInterval && player.target != null)
+            if (timeSinceLastShot > shootInterval && player.target != null && GodotObject.IsInstanceValid(player.target))
             {
                 timeSinceLastShot = 0;
                 CreateBullets();

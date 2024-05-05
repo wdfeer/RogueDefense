@@ -40,7 +40,7 @@ namespace RogueDefense.Logic.PlayerCore
             shootManager.Process((float)delta);
             hooks.ForEach(x => x.PostUpdate((float)delta));
 
-            if (target == null || target.Hp < 0)
+            if (target == null || !GodotObject.IsInstanceValid(target) || target.Dead)
                 FindTarget();
         }
         public void _PhysicsProcess(double delta)
@@ -70,7 +70,7 @@ namespace RogueDefense.Logic.PlayerCore
             for (int i = 0; i < Enemy.enemies.Count; i++)
             {
                 Enemy enemy = Enemy.enemies[i];
-                if (enemy.Hp > 0)
+                if (enemy != null && !enemy.Dead)
                 {
                     SetTarget(i);
                     return;
@@ -86,7 +86,7 @@ namespace RogueDefense.Logic.PlayerCore
                 turret.target = enemy;
             }
 
-            if (netUpdate)
+            if (netUpdate && Client.client != null)
             {
                 Client.instance.SendMessage(MessageType.TargetSelected, new string[] { Client.myId.ToString(), enemyIndex.ToString() });
             }

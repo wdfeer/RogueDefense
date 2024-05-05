@@ -162,10 +162,11 @@ public partial class Enemy : Area2D
 
 		animationPlayer.Play("Hurt");
 	}
-	public bool Dead => Hp < 0;
-	private void Die()
+	public bool Dead => Hp <= 0;
+	public void Die(bool netUpdate = true)
 	{
-		Game.instance.OnEnemyDeath(this);
+		Hp = 0;
+		Game.instance.OnEnemyDeath(this, netUpdate);
 	}
 	bool attacking = false;
 	public float damage = 10f;

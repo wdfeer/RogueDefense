@@ -84,7 +84,12 @@ public partial class Client : Node
                 break;
             case MessageType.EnemyKill:
                 if (IsInstanceValid(Game.instance))
-                    Game.instance.OnEnemyDeath(Enemy.enemies[args[0].ToInt()], false);
+                {
+                    int index = args[0].ToInt();
+                    if (Enemy.enemies[index] == null)
+                        break;
+                    Enemy.enemies[index].Die(false);
+                }
                 else
                     GD.PrintErr("Received an EnemyKill message when the Game is not active");
                 break;
@@ -147,6 +152,8 @@ public partial class Client : Node
     }
     void Broadcast(string data)
     {
+        if (client == null)
+            throw new NullReferenceException("variable StreamPeerTcp client is null! Please make sure it has initialized");
         client.PutUtf8String(data);
     }
 
