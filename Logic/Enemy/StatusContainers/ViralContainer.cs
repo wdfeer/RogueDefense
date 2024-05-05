@@ -6,6 +6,6 @@ public partial class ViralContainer : StatusContainer
 {
     public override Status GetStatus()
     {
-        return Enemy.instance.viral;
+        return enemy.viral;
     }
 }

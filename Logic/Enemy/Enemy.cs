@@ -154,11 +154,15 @@ public partial class Enemy : Area2D
 
 		if (Hp <= 0)
 		{
-			Game.instance.OnWaveEnd(true);
+			Die();
 			return;
 		}
 
 		animationPlayer.Play("Hurt");
+	}
+	private void Die()
+	{
+
 	}
 	bool attacking = false;
 	public float damage = 10f;
@@ -197,7 +201,7 @@ public partial class Enemy : Area2D
 	{
 		if (body is Bullet bullet)
 		{
-			bullet.EnemyCollision();
+			bullet.EnemyCollision(this);
 		}
 		else if (body == DefenseObjective.instance)
 			attacking = true;

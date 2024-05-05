@@ -2,7 +2,8 @@ namespace RogueDefense.Logic.Statuses
 {
     public abstract class Status
     {
-        public Enemy Enemy => Enemy.instance;
+        private Enemy enemy;
+        public Enemy Enemy => enemy;
         public abstract int Count { get; }
 
         public bool Active => Count > 0;

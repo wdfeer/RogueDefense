@@ -6,6 +6,6 @@ public partial class BleedContainer : StatusContainer
 {
     public override Status GetStatus()
     {
-        return Enemy.instance.bleed;
+        return enemy.bleed;
     }
 }

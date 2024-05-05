@@ -13,34 +13,34 @@ namespace RogueDefense
         {
         }
 
-        public override void OnHitWithBullet(Bullet b, float postCritDmg)
+        public override void OnHitWithBullet(Enemy enemy, Bullet b, float postCritDmg)
         {
             int bleedCount = MathHelper.RandomRound(player.upgradeManager.bleedChance);
             if (bleedCount > 0)
                 for (int i = 0; i < bleedCount; i++)
                 {
-                    Game.instance.enemy.AddBleed(postCritDmg, STATUS_DURATION);
+                    enemy.AddBleed(postCritDmg, STATUS_DURATION);
                 }
 
             int viralCount = MathHelper.RandomRound(player.upgradeManager.viralChance);
             if (viralCount > 0)
                 for (int i = 0; i < viralCount; i++)
                 {
-                    Game.instance.enemy.AddViral(STATUS_DURATION);
+                    enemy.AddViral(STATUS_DURATION);
                 }
 
             int coldCount = MathHelper.RandomRound(player.upgradeManager.coldChance);
             if (coldCount > 0)
                 for (int i = 0; i < coldCount; i++)
                 {
-                    Game.instance.enemy.AddCold(STATUS_DURATION);
+                    enemy.AddCold(STATUS_DURATION);
                 }
 
             int corrosiveCount = MathHelper.RandomRound(corrosiveChance);
             if (corrosiveCount > 0)
                 for (int i = 0; i < corrosiveCount; i++)
                 {
-                    Game.instance.enemy.corrosive.Add(STATUS_DURATION);
+                    enemy.corrosive.Add(STATUS_DURATION);
                 }
         }
     }

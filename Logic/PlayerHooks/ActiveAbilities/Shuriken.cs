@@ -9,9 +9,9 @@ namespace RogueDefense
 			base._Ready();
 			killShieldOrbs = true;
 		}
-		protected override void OnHit(float totalDmg)
+		protected override void OnHit(Enemy enemy, float totalDmg)
 		{
-			Game.instance.enemy.AddBleed(totalDmg, 5f);
+			enemy.AddBleed(totalDmg, 5f);
 		}
 
 		public override void _Process(double delta)

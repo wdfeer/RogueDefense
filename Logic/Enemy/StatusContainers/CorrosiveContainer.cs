@@ -6,6 +6,6 @@ public partial class CorrosiveContainer : StatusContainer
 {
     public override Status GetStatus()
     {
-        return Enemy.instance.corrosive;
+        return enemy.corrosive;
     }
 }

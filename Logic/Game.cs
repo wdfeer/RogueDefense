@@ -12,7 +12,6 @@ public partial class Game : Node2D
 	[Export]
 	public PackedScene enemyScene;
 
-	public Enemy enemy;
 	public override void _Ready()
 	{
 		RogueDefense.SaveData.Save();
@@ -26,19 +25,15 @@ public partial class Game : Node2D
 		Player.my = new Player(Client.myId, SaveData.augmentAllotment);
 		Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
 	}
-
-	public override void _Process(double delta)
+	void SpawnEnemies()
 	{
-		if (enemy == null)
+		for (int i = 0; i < 2; i++)
 		{
-			SpawnEnemy();
+			Enemy enemy = enemyScene.Instantiate<Enemy>();
+			Enemy.enemies.Add(enemy);
+			enemy.Position = new Vector2(900, 300 + i * 50 * (i % 2 == 0 ? 1 : -1));
+			AddChild(enemy);
 		}
-	}
-	void SpawnEnemy()
-	{
-		enemy = enemyScene.Instantiate<Enemy>();
-		enemy.Position = new Vector2(900, 300);
-		AddChild(enemy);
 
 		(GetNode("./LevelText") as Label).Text = $"Level {wave}";
 	}
@@ -47,9 +42,6 @@ public partial class Game : Node2D
 	private int wave = 1;
 	public void OnWaveEnd(bool netUpdate)
 	{
-		if (enemy == null)
-			return;
-
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
 			Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
@@ -58,8 +50,7 @@ public partial class Game : Node2D
 		PP.currentPP += PP.GetKillPP(wave, DefenseObjective.instance.HpRatio);
 		((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
-		enemy.QueueFree();
-		enemy = null;
+		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		wave++;
 
 		SaveData.UpdateHighscore();

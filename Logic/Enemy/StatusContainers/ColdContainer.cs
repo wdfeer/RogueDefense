@@ -6,6 +6,6 @@ public partial class ColdContainer : StatusContainer
 {
     public override Status GetStatus()
     {
-        return Enemy.instance.cold;
+        return enemy.cold;
     }
 }
