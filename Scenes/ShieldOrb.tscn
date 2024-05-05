@@ -14,7 +14,7 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("4")
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="Button" type="TextureButton" parent="."]
 modulate = Color(1, 1, 1, 0.643137)
 offset_left = -38.4
 offset_top = -38.4

@@ -121,7 +121,7 @@ public partial class Enemy : Area2D
 	public float GetArmorDamageMultiplier(float armor) => 300f / (300f + armor * dynamicArmorMult);
 	public void ResetArmorDisplay()
 	{
-		ArmorBar.instance.SetDisplay(1f - GetArmorDamageMultiplier(armor));
+		((ArmorBar)GetNode("ArmorBar")).SetDisplay(1f - GetArmorDamageMultiplier(armor));
 	}
 	[Export]
 	public PackedScene combatText;
