@@ -37,7 +37,7 @@ public partial class Game : Node2D
 		{
 			Enemy enemy = enemyScene.Instantiate<Enemy>();
 			Enemy.enemies.Add(enemy);
-			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 150), 300 + i * 50 * (i % 2 == 0 ? 1 : -1));
+			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 150), 300 + i * 20 * (i % 2 == 0 ? 1 : -1));
 			AddChild(enemy);
 		}
 
