@@ -130,6 +130,8 @@ public partial class Enemy : Area2D
 	public AnimationPlayer animationPlayer;
 	public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null, bool ignoreArmor = false)
 	{
+		if (Dead) return;
+
 		damage *= dynamicDamageMult;
 		if (damage < minDamage)
 			damage = 0;
@@ -160,9 +162,10 @@ public partial class Enemy : Area2D
 
 		animationPlayer.Play("Hurt");
 	}
+	public bool Dead => Hp < 0;
 	private void Die()
 	{
-
+		Game.instance.OnEnemyDeath(this);
 	}
 	bool attacking = false;
 	public float damage = 10f;

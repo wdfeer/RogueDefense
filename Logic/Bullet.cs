@@ -30,7 +30,7 @@ public partial class Bullet : MovingKinematicBody2D
 	{
 		for (int i = 0; i < hitMult; i++)
 		{
-			if (enemy.Hp < 0)
+			if (enemy.Dead)
 				break;
 			float dmg = this.damage;
 			int critLevel = GetCritLevel();

@@ -3,6 +3,7 @@ using RogueDefense;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System;
+using System.Linq;
 using System.Security.Policy;
 
 public partial class Game : Node2D
@@ -41,16 +42,20 @@ public partial class Game : Node2D
 
 		(GetNode("./LevelText") as Label).Text = $"Level {wave}";
 	}
-
-	public static int Wave => instance.wave;
-	private int wave = 1;
-	public void OnWaveEnd(bool netUpdate)
+	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
+		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
-			Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
+			Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.enemies.FindIndex(x => x == enemy).ToString() });
 		}
-
+		if (Enemy.enemies.All(x => x.Dead))
+			EndWave();
+	}
+	public static int Wave => instance.wave;
+	private int wave = 1;
+	public void EndWave()
+	{
 		PP.currentPP += PP.GetKillPP(wave, DefenseObjective.instance.HpRatio);
 		((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
