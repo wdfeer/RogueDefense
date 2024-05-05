@@ -174,7 +174,8 @@ public partial class Enemy : Area2D
 	public float dynamicSpeedMult = 1f;
 	public override void _Process(double delta)
 	{
-		base._Process(delta);
+		if (Dead) return;
+
 		if (attacking)
 		{
 			attackTimer += (float)delta;
