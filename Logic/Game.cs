@@ -32,11 +32,11 @@ public partial class Game : Node2D
 		=> ToSignal(GetTree().CreateTimer(1f, false), "timeout").OnCompleted(SpawnEnemies);
 	void SpawnEnemies()
 	{
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < Enemy.statsRng.RandiRange(1, 3); i++)
 		{
 			Enemy enemy = enemyScene.Instantiate<Enemy>();
 			Enemy.enemies.Add(enemy);
-			enemy.Position = new Vector2(900, 300 + i * 50 * (i % 2 == 0 ? 1 : -1));
+			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 150), 300 + i * 50 * (i % 2 == 0 ? 1 : -1));
 			AddChild(enemy);
 		}
 
