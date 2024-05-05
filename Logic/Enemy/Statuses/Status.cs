@@ -2,11 +2,12 @@ namespace RogueDefense.Logic.Statuses
 {
     public abstract class Status
     {
-        public Enemy Enemy => Enemy.instance;
+        private Enemy enemy;
+        public Enemy Enemy => enemy;
         public abstract int Count { get; }
 
         public bool Active => Count > 0;
-        public virtual bool ShouldProcess() => Active;
+        public virtual bool ShouldProcess() => Active && Enemy != null && !Enemy.Dead;
         public bool immune = false;
         public void TryProcess(float delta)
         {

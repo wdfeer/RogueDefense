@@ -25,7 +25,7 @@ namespace RogueDefense.Logic.PlayerCore
         public void Process(float delta)
         {
             timeSinceLastShot += (float)delta;
-            if (timeSinceLastShot > shootInterval)
+            if (timeSinceLastShot > shootInterval && player.target != null && GodotObject.IsInstanceValid(player.target))
             {
                 timeSinceLastShot = 0;
                 CreateBullets();
@@ -64,7 +64,7 @@ namespace RogueDefense.Logic.PlayerCore
         }
         public Bullet Shoot(Vector2 pos, float speed, float spread = -1)
         {
-            Vector2 velocity = speed * pos.DirectionTo(Game.instance.enemy.GlobalPosition);
+            Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
             Bullet bullet = NewBullet(pos, velocity.Rotated(spread == -1 ? Mathf.DegToRad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread));
             return bullet;
         }

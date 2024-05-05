@@ -14,9 +14,9 @@ namespace RogueDefense
         {
         }
 
-        public override void ModifyHitWithBullet(Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult)
+        public override void ModifyHitEnemyWithBullet(Enemy enemy, Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult)
         {
-            int statuses = Enemy.instance.statuses.Count(x => x.Active);
+            int statuses = enemy.statuses.Count(x => x.Active);
             if (statuses <= 0)
                 return;
             damagePreCrit *= 1f + damageIncreasePerUniqueStatus * statuses;

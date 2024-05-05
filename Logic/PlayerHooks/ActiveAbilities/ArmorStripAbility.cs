@@ -11,16 +11,23 @@ namespace RogueDefense
         }
         public override void Activate()
         {
+            foreach (Enemy enemy in Enemy.enemies)
+            {
+                ArmorStrip(enemy);
+            }
+        }
+        void ArmorStrip(Enemy enemy)
+        {
             if (Strip > 1f)
             {
-                Enemy.instance.armor = 0;
-                foreach (var status in Enemy.instance.statuses)
+                enemy.armor = 0;
+                foreach (var status in enemy.statuses)
                 {
                     status.immune = false;
                 }
             }
             else
-                Enemy.instance.armor *= 1 - Strip;
+                enemy.armor *= 1 - Strip;
         }
         public const float BASE_STRIP = 0.3f;
 

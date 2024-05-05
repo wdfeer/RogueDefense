@@ -10,11 +10,11 @@ using RogueDefense.Logic.Statuses;
 
 public partial class Enemy : Area2D
 {
-	public static Enemy instance;
+	public static List<Enemy> enemies = new List<Enemy>();
 	public const float BASE_SPEED = 1.15f;
 	public override void _Ready()
 	{
-		instance = this;
+		enemies.Add(this);
 
 		BodyEntered += OnBodyEntered;
 
@@ -30,7 +30,7 @@ public partial class Enemy : Area2D
 		else
 		{
 			List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
-			firstChars.Add(RogueDefense.SaveData.name[0]);
+			firstChars.Add(SaveData.name[0]);
 
 			int seed = firstChars.Aggregate(0, (a, b) => a + b);
 			statsRng.Seed = (ulong)seed;
@@ -121,7 +121,7 @@ public partial class Enemy : Area2D
 	public float GetArmorDamageMultiplier(float armor) => 300f / (300f + armor * dynamicArmorMult);
 	public void ResetArmorDisplay()
 	{
-		ArmorBar.instance.SetDisplay(1f - GetArmorDamageMultiplier(armor));
+		((ArmorBar)GetNode("ArmorBar")).SetDisplay(1f - GetArmorDamageMultiplier(armor));
 	}
 	[Export]
 	public PackedScene combatText;
@@ -130,6 +130,8 @@ public partial class Enemy : Area2D
 	public AnimationPlayer animationPlayer;
 	public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null, bool ignoreArmor = false)
 	{
+		if (Dead) return;
+
 		damage *= dynamicDamageMult;
 		if (damage < minDamage)
 			damage = 0;
@@ -154,11 +156,17 @@ public partial class Enemy : Area2D
 
 		if (Hp <= 0)
 		{
-			Game.instance.OnWaveEnd(true);
+			Die();
 			return;
 		}
 
 		animationPlayer.Play("Hurt");
+	}
+	public bool Dead => Hp <= 0;
+	public void Die(bool netUpdate = true)
+	{
+		Hp = 0;
+		Game.instance.OnEnemyDeath(this, netUpdate);
 	}
 	bool attacking = false;
 	public float damage = 10f;
@@ -167,7 +175,8 @@ public partial class Enemy : Area2D
 	public float dynamicSpeedMult = 1f;
 	public override void _Process(double delta)
 	{
-		base._Process(delta);
+		if (Dead) return;
+
 		if (attacking)
 		{
 			attackTimer += (float)delta;
@@ -197,7 +206,7 @@ public partial class Enemy : Area2D
 	{
 		if (body is Bullet bullet)
 		{
-			bullet.EnemyCollision();
+			bullet.EnemyCollision(this);
 		}
 		else if (body == DefenseObjective.instance)
 			attacking = true;

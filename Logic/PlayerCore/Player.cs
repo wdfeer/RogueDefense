@@ -39,19 +39,79 @@ namespace RogueDefense.Logic.PlayerCore
             hooks.ForEach(x => x.PostUpgradeUpdate((float)delta));
             shootManager.Process((float)delta);
             hooks.ForEach(x => x.PostUpdate((float)delta));
-        }
 
+            if (target == null || !GodotObject.IsInstanceValid(target) || target.Dead)
+                FindTarget();
+        }
+        public void _PhysicsProcess(double delta)
+        {
+            if (this == my)
+                UpdateMovement(delta);
+        }
+        void UpdateMovement(double delta)
+        {
+            Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+            controlledTurret.GlobalPosition += inputDirection * Turret.SPEED;
+
+            if (NetworkManager.Singleplayer || inputDirection == Vector2.Zero)
+                return;
+            Vector2 pos = controlledTurret.GlobalPosition;
+            SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
+        }
+        static void SendPositionUpdateMessage(int client, int turretIndex, float x, float y)
+        {
+            Client.instance.SendMessage(MessageType.PositionUpdated, new string[] { client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString() });
+        }
         public List<Turret> turrets = new List<Turret>();
+        public Turret controlledTurret;
+        public Enemy target;
+        bool IsValidTarget(Enemy enemy)
+            => enemy != null && GodotObject.IsInstanceValid(enemy) && !enemy.Dead;
+        void FindTarget()
+        {
+            for (int i = 0; i < Enemy.enemies.Count; i++)
+            {
+                Enemy enemy = Enemy.enemies[i];
+                if (IsValidTarget(enemy))
+                {
+                    SetTarget(i);
+                    return;
+                }
+            }
+        }
+        public void SetTarget(int enemyIndex, bool netUpdate = true)
+        {
+            if (enemyIndex >= Enemy.enemies.Count)
+                return;
+
+            Enemy enemy = Enemy.enemies[enemyIndex];
+
+            if (!IsValidTarget(enemy))
+                return;
+
+            target = enemy;
+            foreach (Turret turret in turrets)
+            {
+                turret.target = enemy;
+            }
+
+            if (netUpdate && Client.client != null)
+            {
+                Client.instance.SendMessage(MessageType.TargetSelected, new string[] { Client.myId.ToString(), enemyIndex.ToString() });
+            }
+        }
         public void SpawnTurret()
         {
-            Turret turret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
-            DefenseObjective.instance.AddChild(turret);
-            turret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
-            turrets.Add(turret);
+            controlledTurret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
+            DefenseObjective.instance.AddChild(controlledTurret);
+            controlledTurret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
+            turrets.Add(controlledTurret);
 
-            shootManager.bulletSpawns.Add(turret.bulletSpawnpoint);
+            shootManager.bulletSpawns.Add(controlledTurret.bulletSpawnpoint);
 
-            turret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
+            controlledTurret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
+
+            controlledTurret.target = target;
         }
 
         public void OnEnemyKill()

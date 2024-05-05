@@ -26,22 +26,23 @@ public partial class Bullet : MovingKinematicBody2D
 	public int hitMult = 1;
 	public float damage = 1;
 	public bool killShieldOrbs = false;
-	public void EnemyCollision()
+	public void EnemyCollision(Enemy enemy)
 	{
 		for (int i = 0; i < hitMult; i++)
 		{
-			if (Game.instance.enemy == null)
+			if (enemy.Dead)
 				break;
 			float dmg = this.damage;
 			int critLevel = GetCritLevel();
 			float critMult = owner.upgradeManager.critDamageMult;
 			owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref dmg, ref critLevel, ref critMult));
+			owner.hooks.ForEach(x => x.ModifyHitEnemyWithBullet(enemy, this, ref dmg, ref critLevel, ref critMult));
 			ModifyHit(ref dmg, ref critLevel, ref critMult);
 			if (critLevel > 0)
 				dmg *= critMult * critLevel;
-			owner.hooks.ForEach(x => x.OnHitWithBullet(this, dmg));
-			OnHit(dmg);
-			Game.instance.enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
+			owner.hooks.ForEach(x => x.OnHitWithBullet(enemy, this, dmg));
+			OnHit(enemy, dmg);
+			enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
 		}
 		QueueFree();
 	}
@@ -57,7 +58,7 @@ public partial class Bullet : MovingKinematicBody2D
 	}
 	protected virtual bool UnhideableDamageNumbers => false;
 	protected virtual void ModifyHit(ref float dmg, ref int critlevel, ref float critMult) { }
-	protected virtual void OnHit(float totalDmg) { }
+	protected virtual void OnHit(Enemy enemy, float totalDmg) { }
 	private int GetCritLevel()
 		=> MathHelper.RandomRound(owner.upgradeManager.critChance);
 	public static Color GetCritColor(int critLevel)

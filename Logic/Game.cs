@@ -3,6 +3,7 @@ using RogueDefense;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System;
+using System.Linq;
 using System.Security.Policy;
 
 public partial class Game : Node2D
@@ -12,54 +13,57 @@ public partial class Game : Node2D
 	[Export]
 	public PackedScene enemyScene;
 
-	public Enemy enemy;
 	public override void _Ready()
 	{
-		RogueDefense.SaveData.Save();
+		SaveData.Save();
 
 		instance = this;
 
 		PP.currentPP = 0f;
 
+		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		Enemy.ResetRngSeed();
 
 		Player.my = new Player(Client.myId, SaveData.augmentAllotment);
 		Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
-	}
 
-	public override void _Process(double delta)
-	{
-		if (enemy == null)
-		{
-			SpawnEnemy();
-		}
+		SpawnEnemiesAfterDelay();
 	}
-	void SpawnEnemy()
+	void SpawnEnemiesAfterDelay()
+		=> ToSignal(GetTree().CreateTimer(1f, false), "timeout").OnCompleted(SpawnEnemies);
+	void SpawnEnemies()
 	{
-		enemy = enemyScene.Instantiate<Enemy>();
-		enemy.Position = new Vector2(900, 300);
-		AddChild(enemy);
+		for (int i = 0; i < Enemy.statsRng.RandiRange(1, 3); i++)
+		{
+			Enemy enemy = enemyScene.Instantiate<Enemy>();
+			Enemy.enemies.Add(enemy);
+			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 150), 300 + i * 20 * (i % 2 == 0 ? 1 : -1));
+			AddChild(enemy);
+		}
 
 		(GetNode("./LevelText") as Label).Text = $"Level {wave}";
 	}
-
-	public static int Wave => instance.wave;
-	private int wave = 1;
-	public void OnWaveEnd(bool netUpdate)
+	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
-		if (enemy == null)
+		if (!IsInstanceValid(enemy))
 			return;
 
+		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
-			Client.instance.SendMessage(MessageType.EnemyKill, new string[0]);
+			Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.enemies.FindIndex(x => x == enemy).ToString() });
 		}
-
+		if (Enemy.enemies.All(x => x.Dead))
+			EndWave();
+	}
+	public static int Wave => instance.wave;
+	private int wave = 1;
+	public void EndWave()
+	{
 		PP.currentPP += PP.GetKillPP(wave, DefenseObjective.instance.HpRatio);
 		((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
-		enemy.QueueFree();
-		enemy = null;
+		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		wave++;
 
 		SaveData.UpdateHighscore();
@@ -73,6 +77,8 @@ public partial class Game : Node2D
 		{
 			keyValue.Value.OnEnemyKill();
 		}
+
+		SpawnEnemiesAfterDelay();
 	}
 
 
