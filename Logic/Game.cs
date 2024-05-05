@@ -21,6 +21,7 @@ public partial class Game : Node2D
 
 		PP.currentPP = 0f;
 
+		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		Enemy.ResetRngSeed();
 
 		Player.my = new Player(Client.myId, SaveData.augmentAllotment);
