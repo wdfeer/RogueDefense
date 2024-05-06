@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayArea : Area2D
+public partial class BulletDeleter : Area2D
 {
     public override void _Ready()
     {

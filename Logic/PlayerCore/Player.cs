@@ -51,7 +51,8 @@ namespace RogueDefense.Logic.PlayerCore
         void UpdateMovement(double delta)
         {
             Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-            controlledTurret.GlobalPosition += inputDirection * Turret.SPEED;
+            controlledTurret.Velocity = inputDirection * Turret.SPEED * 1000 * (float)delta;
+            controlledTurret.MoveAndSlide();
 
             if (NetworkManager.Singleplayer || inputDirection == Vector2.Zero)
                 return;

@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public partial class Turret : Node2D
+public partial class Turret : CharacterBody2D
 {
-	public const int SPEED = 3;
+	public const int SPEED = 9;
 	[Export]
 	public AnimationPlayer animationPlayer;
 	[Export]

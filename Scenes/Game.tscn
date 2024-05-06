@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=39 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -8,13 +8,13 @@
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/defense_objective.svg" id="6"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="7"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
+[ext_resource type="Script" path="res://Logic/BulletDeleter.cs" id="9_gd0wn"]
 [ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/MainMenuButton.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DpsLabel.cs" id="14"]
 [ext_resource type="Texture2D" uid="uid://cpe4b1e162y5y" path="res://Assets/game-icons.net/embrassed-energy.svg" id="14_sx78e"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
-[ext_resource type="Script" path="res://Logic/PlayArea.cs" id="16"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
@@ -29,6 +29,17 @@
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bunfs"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ap78q"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wugso"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hvse4"]
 
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(1200, 640)
@@ -98,13 +109,41 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
-[node name="PlayArea" type="Area2D" parent="."]
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="LeftWall" type="StaticBody2D" parent="Boundaries"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/LeftWall"]
+shape = SubResource("WorldBoundaryShape2D_bunfs")
+
+[node name="TopWall" type="StaticBody2D" parent="Boundaries"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/TopWall"]
+shape = SubResource("WorldBoundaryShape2D_ap78q")
+
+[node name="RightWall" type="StaticBody2D" parent="Boundaries"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightWall"]
+position = Vector2(1056, 0)
+shape = SubResource("WorldBoundaryShape2D_wugso")
+
+[node name="BottomWall" type="StaticBody2D" parent="Boundaries"]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BottomWall"]
+position = Vector2(0, 600)
+shape = SubResource("WorldBoundaryShape2D_hvse4")
+
+[node name="BulletDeleter" type="Area2D" parent="Boundaries"]
 position = Vector2(0, 1)
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("16")
+script = ExtResource("9_gd0wn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BulletDeleter"]
 position = Vector2(512, 300)
 shape = SubResource("2")
 
@@ -389,8 +428,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 37.0
-offset_bottom = -4.0
+offset_right = 489.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
