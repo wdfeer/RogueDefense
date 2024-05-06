@@ -86,7 +86,7 @@ public partial class Client : Node
                 if (IsInstanceValid(Game.instance))
                 {
                     int index = args[0].ToInt();
-                    if (Enemy.enemies[index] == null)
+                    if (index >= Enemy.enemies.Count || Enemy.enemies[index] == null)
                         break;
                     Enemy.enemies[index].Die(false);
                 }
