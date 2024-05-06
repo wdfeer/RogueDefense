@@ -6,7 +6,7 @@ namespace RogueDefense.Logic.Statuses
     {
         public override void SpecialProcess(float delta)
         {
-            Enemy.dynamicSpeedMult = 1f / Mathf.Pow(instances.Count + 1f, 0.33f);
+            enemy.dynamicSpeedMult = 1f / Mathf.Pow(instances.Count + 1f, 0.33f);
         }
     }
 }

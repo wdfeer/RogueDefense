@@ -15,7 +15,7 @@ namespace RogueDefense.Logic.Statuses
         }
         public override void Process(float delta)
         {
-            tickTimer += (float)delta;
+            tickTimer += delta;
             if (tickTimer > TICK_INTERVAL)
             {
                 tickTimer %= TICK_INTERVAL;
@@ -30,7 +30,7 @@ namespace RogueDefense.Logic.Statuses
         public void Damage()
         {
             float damage = instances.Aggregate(0f, (x, instance) => x += instance.dpt);
-            Enemy.Damage(damage, true, DamageColor, new Vector2(0, -0.6f), IgnoreArmor);
+            enemy.Damage(damage, true, DamageColor, new Vector2(0, -0.6f), IgnoreArmor);
         }
     }
     public struct DamagingStatusInstance

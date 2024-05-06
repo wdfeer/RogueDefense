@@ -14,7 +14,7 @@ namespace RogueDefense.Logic.Statuses
         }
         public override void Process(float delta)
         {
-            tickTimer += (float)delta;
+            tickTimer += delta;
             if (tickTimer > TICK_INTERVAL)
             {
                 tickTimer %= TICK_INTERVAL;

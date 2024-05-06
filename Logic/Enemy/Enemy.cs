@@ -19,6 +19,10 @@ public partial class Enemy : Area2D
 		BodyEntered += OnBodyEntered;
 
 		statuses = new Status[] { bleed, corrosive, viral, cold };
+		foreach (Status status in statuses)
+		{
+			status.enemy = this;
+		}
 
 		ScaleStats(Game.Wave, enemies.FindIndex(x => x == this));
 	}
