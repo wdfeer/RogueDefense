@@ -5,21 +5,28 @@ using System;
 
 public partial class ShieldOrbButton : TextureButton
 {
-    public Enemy enemy;
     public override void _Pressed()
     {
         if (ShieldOrb.damageConsumed > 0)
         {
-            float oldArmor = enemy.armor;
-            enemy.armor = 0;
+            for (int i = 0; i < Enemy.enemies.Count; i++)
+            {
+                Enemy enemy = Enemy.enemies[i];
 
-            float damage = ShieldOrb.damageConsumed;
-            int critLevel = MathHelper.RandomRound(Player.my.upgradeManager.critChance);
-            if (critLevel > 0)
-                damage *= Player.my.upgradeManager.critDamageMult;
-            enemy.Damage(damage, true, Bullet.GetCritColor(critLevel), new Vector2(0, -1.5f));
+                if (enemy == null || !GodotObject.IsInstanceValid(enemy) || enemy.Dead)
+                    continue;
 
-            enemy.armor = oldArmor;
+                float oldArmor = enemy.armor;
+                enemy.armor = 0;
+
+                float damage = ShieldOrb.damageConsumed;
+                int critLevel = MathHelper.RandomRound(Player.my.upgradeManager.critChance);
+                if (critLevel > 0)
+                    damage *= Player.my.upgradeManager.critDamageMult;
+                enemy.Damage(damage, true, Colors.Black, new Vector2(0, -1.5f));
+
+                enemy.armor = oldArmor;
+            }
             ShieldOrb.damageConsumed = 0;
         }
         GetParent().QueueFree();

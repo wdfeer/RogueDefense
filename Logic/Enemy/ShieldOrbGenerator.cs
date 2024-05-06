@@ -30,7 +30,6 @@ public partial class ShieldOrbGenerator : Node2D
         for (int i = 0; i < count; i++)
         {
             ShieldOrb orb = shieldOrb.Instantiate<ShieldOrb>();
-            ((ShieldOrbButton)orb.GetNode("Button")).enemy = (Enemy)GetParent();
             AddChild(orb);
             orbs[i] = orb;
 
