@@ -1,10 +1,12 @@
-[gd_scene load_steps=25 format=3 uid="uid://dcw1pfahgswms"]
+[gd_scene load_steps=27 format=3 uid="uid://dcw1pfahgswms"]
 
 [ext_resource type="Texture2D" uid="uid://cu3tpecvqde7u" path="res://Assets/enemy.png" id="1"]
 [ext_resource type="Script" path="res://Logic/Enemy/Enemy.cs" id="2"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="3"]
 [ext_resource type="PackedScene" path="res://Scenes/CombatText.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://dcrprmbxi2ubo" path="res://Assets/Target.png" id="4_lug5y"]
 [ext_resource type="Texture2D" uid="uid://dr1urwwgoukda" path="res://Assets/slash_icon.png" id="5"]
+[ext_resource type="Script" path="res://Logic/Enemy/Target.cs" id="5_3qqur"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/BleedContainer.cs" id="6"]
 [ext_resource type="Texture2D" uid="uid://dwotxf7hje6as" path="res://Assets/shield_filled.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://rewrv0hgspug" path="res://Assets/shield_border.png" id="9"]
@@ -76,6 +78,11 @@ shape = SubResource("1")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1")
+
+[node name="Target" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.501953)
+texture = ExtResource("4_lug5y")
+script = ExtResource("5_3qqur")
 
 [node name="HpBar" type="ProgressBar" parent="."]
 offset_left = -60.0
