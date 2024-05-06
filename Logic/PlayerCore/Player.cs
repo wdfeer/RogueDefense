@@ -114,10 +114,10 @@ namespace RogueDefense.Logic.PlayerCore
             controlledTurret.target = target;
         }
 
-        public void OnEnemyKill()
+        public void OnWaveEnd()
         {
             shootManager.ClearBullets();
-            hooks.ForEach(x => x.OnKill());
+            hooks.ForEach(x => x.OnWaveEnd());
             upgradeManager.UpdateUpgrades();
             upgradeManager.UpdateUpgradeText();
             shootManager.shootCount = 0;

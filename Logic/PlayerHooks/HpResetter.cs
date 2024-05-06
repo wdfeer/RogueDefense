@@ -12,7 +12,7 @@ namespace RogueDefense
         {
         }
 
-        public override void OnKill()
+        public override void OnWaveEnd()
         {
             player.upgradeManager.UpdateMaxHp();
             DefenseObjective.instance.Hp = DefenseObjective.instance.maxHp;

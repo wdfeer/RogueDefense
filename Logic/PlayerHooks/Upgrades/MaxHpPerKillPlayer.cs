@@ -16,7 +16,7 @@ namespace RogueDefense
             => Player.players
                 .Select(pair => PlayerHooks.GetHooks<MaxHpPerKillPlayer>(pair.Value).increase)
                 .Aggregate(0f, (a, b) => a + b);
-        public override void OnKill()
+        public override void OnKill(Enemy enemy)
         {
             increase += player.upgradeManager.SumAllUpgradeValues(UpgradeType.MaxHpPerKill);
         }

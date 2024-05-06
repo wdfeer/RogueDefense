@@ -48,6 +48,14 @@ public partial class Game : Node2D
 		if (!IsInstanceValid(enemy))
 			return;
 
+		foreach (Player player in Player.players.Values)
+		{
+			foreach (PlayerHooks hook in player.hooks)
+			{
+				hook.OnKill(enemy);
+			}
+		}
+
 		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
@@ -75,7 +83,7 @@ public partial class Game : Node2D
 
 		foreach (var keyValue in Player.players)
 		{
-			keyValue.Value.OnEnemyKill();
+			keyValue.Value.OnWaveEnd();
 		}
 
 		SpawnEnemiesAfterDelay();

@@ -21,7 +21,8 @@ namespace RogueDefense
         public virtual void OnAnyHit(float afterEffectsDmg) { }
         public virtual void PreShoot(ShootManager shooter) { }
         public virtual void PostShoot(Bullet bullet) { }
-        public virtual void OnKill() { }
+        public virtual void OnWaveEnd() { }
+        public virtual void OnKill(Enemy enemy) { }
 
         public static T GetLocalHooks<T>() where T : PlayerHooks
         {
