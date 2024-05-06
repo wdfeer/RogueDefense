@@ -20,7 +20,7 @@ public partial class Enemy : Area2D
 
 		statuses = new Status[] { bleed, corrosive, viral, cold };
 
-		ScaleStats(Game.Wave);
+		ScaleStats(Game.Wave, enemies.FindIndex(x => x == this));
 	}
 	public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
 	public static void ResetRngSeed()
@@ -39,12 +39,24 @@ public partial class Enemy : Area2D
 	public static float oneTimeHpMult = 1f;
 	public static float oneTimeArmorMult = 1f;
 	public static float oneTimeDamageMult = 1f;
-	void ScaleStats(int gen)
+	void ScaleStats(int gen, int index)
 	{
+		gen = Math.Max(1, gen - index * 3);
 		ScaleMaxHp(gen);
 		ScaleDamage(gen);
 		ScaleArmor(gen);
 
+		if (index == 0)
+		{
+			ResetImmunities(gen);
+			ResetShieldOrbs(gen);
+
+			if (statsRng.Randf() < 0.15f)
+				ActivateEffectField();
+		}
+	}
+	void ResetImmunities(int gen)
+	{
 		if (gen >= (NetworkManager.Singleplayer ? 75 : 24) && gen % (NetworkManager.Singleplayer ? 25 : 12) == 0)
 		{
 			bleed.immune = true;
@@ -57,10 +69,9 @@ public partial class Enemy : Area2D
 			viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
 			cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
 		}
-
-		if (statsRng.Randf() < 0.15f)
-			ActivateEffectField();
-
+	}
+	void ResetShieldOrbs(int gen)
+	{
 		if (!bleed.immune && !corrosive.immune)
 		{
 			ShieldOrbGenerator GetShieldOrbGenerator() => GetNode("ShieldOrbGenerator") as ShieldOrbGenerator;

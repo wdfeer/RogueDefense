@@ -37,7 +37,7 @@ public partial class Game : Node2D
 		{
 			Enemy enemy = enemyScene.Instantiate<Enemy>();
 			Enemy.enemies.Add(enemy);
-			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 150), 300 + i * 20 * (i % 2 == 0 ? 1 : -1));
+			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 250), 300 + i * 20 * (i % 2 == 0 ? 1 : -1));
 			AddChild(enemy);
 		}
 
@@ -60,7 +60,7 @@ public partial class Game : Node2D
 	private int wave = 1;
 	public void EndWave()
 	{
-		PP.currentPP += PP.GetKillPP(wave, DefenseObjective.instance.HpRatio);
+		PP.currentPP += PP.GetWavePP(wave, DefenseObjective.instance.HpRatio, Enemy.enemies.Count);
 		((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();

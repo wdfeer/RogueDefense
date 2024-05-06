@@ -22,7 +22,7 @@ namespace RogueDefense.Logic
             return result;
         }
         public static float currentPP = 0f;
-        public static float GetKillPP(int gen, float hpRatio)
+        public static float GetWavePP(int gen, float hpRatio, int enemyCount)
         {
             float genMult;
             if (gen <= 25)
@@ -30,7 +30,7 @@ namespace RogueDefense.Logic
             else
                 genMult = gen / 25f;
 
-            return GetGameSettingsPPMult() * hpRatio * genMult;
+            return GetGameSettingsPPMult() * hpRatio * genMult * MathF.Sqrt(enemyCount);
         }
 
 
