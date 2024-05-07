@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=24 format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
 [ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/Version.gd" id="18_867ui"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_7rens"]
 device = -1
@@ -248,3 +249,6 @@ offset_bottom = 31.0
 grow_horizontal = 2
 text = "v2.0.5"
 uri = "https://github.com/wdfeer/RogueDefense/releases"
+script = ExtResource("18_867ui")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Version"]
