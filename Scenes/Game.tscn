@@ -214,13 +214,12 @@ text = "													"
 [node name="DpsLabel" type="Label" parent="."]
 process_mode = 3
 modulate = Color(1, 1, 1, 0.627451)
-offset_left = 432.0
-offset_top = 82.0
-offset_right = 592.0
-offset_bottom = 105.0
+offset_left = 898.0
+offset_top = 19.0
+offset_right = 992.0
+offset_bottom = 42.0
 theme = ExtResource("7")
 text = "Avg DPS: 0.0"
-horizontal_alignment = 1
 script = ExtResource("14")
 
 [node name="LevelText" type="Label" parent="."]
@@ -249,38 +248,31 @@ horizontal_alignment = 1
 
 [node name="BuffText" type="Label" parent="."]
 modulate = Color(0.662745, 0.784314, 1, 1)
-offset_left = 12.0
-offset_top = 492.0
-offset_right = 652.0
-offset_bottom = 717.0
+offset_left = 400.0
+offset_top = 480.0
+offset_right = 1040.0
+offset_bottom = 702.0
 scale = Vector2(0.36, 0.36)
 theme = ExtResource("7")
 theme_override_font_sizes/font_size = 64
 text = "+999% Multishot
 +5000% Crit Chance"
+horizontal_alignment = 1
+vertical_alignment = 2
 script = ExtResource("20")
 
-[node name="AbilityContainer" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 256.0
-offset_top = 500.0
-offset_right = 768.0
-offset_bottom = 580.0
-theme = ExtResource("7")
-
-[node name="AbilityButton1" type="Button" parent="AbilityContainer"]
-layout_mode = 0
-offset_top = -8.0
-offset_right = 80.0
-offset_bottom = 72.0
+[node name="AbilityButton" type="Button" parent="."]
+offset_left = 902.0
+offset_top = 480.0
+offset_right = 982.0
+offset_bottom = 560.0
 theme = ExtResource("7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
 icon = ExtResource("14_sx78e")
 expand_icon = true
 
-[node name="CooldownLabel" type="Label" parent="AbilityContainer/AbilityButton1"]
+[node name="CooldownLabel" type="Label" parent="AbilityButton"]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 80.0
@@ -291,15 +283,16 @@ theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="AbilityContainer/AbilityButton1"]
+[node name="Label" type="Label" parent="AbilityButton"]
 layout_mode = 0
-offset_left = 88.0
-offset_right = 254.0
+offset_left = -176.0
+offset_right = -10.0
 offset_bottom = 78.0
 theme = ExtResource("7")
 text = "+100% Total Fire Rate
 Duration: 5 s
 Cooldown: 30 s"
+horizontal_alignment = 2
 
 [node name="NetPoller" parent="." instance=ExtResource("11")]
 
@@ -419,7 +412,7 @@ offset_bottom = 347.0
 [node name="NotificationPopup" type="PopupPanel" parent="."]
 process_mode = 3
 initial_position = 1
-size = Vector2i(452, 60)
+size = Vector2i(493, 60)
 exclusive = true
 script = ExtResource("19")
 
@@ -429,8 +422,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 489.0
-offset_bottom = 56.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")

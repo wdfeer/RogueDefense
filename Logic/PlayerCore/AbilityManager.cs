@@ -18,7 +18,7 @@ namespace RogueDefense.Logic.PlayerCore
             this.player = player;
             if (player.Local)
             {
-                var ability1Button = Game.instance.GetNode("AbilityContainer/AbilityButton1") as Button;
+                var ability1Button = Game.instance.GetNode("AbilityButton") as Button;
                 ability1 = GetAbility(ability1Button);
 
 
