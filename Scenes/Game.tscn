@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=40 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://c6pt4yqyytldg" path="res://Assets/game-icons.net/play-button.svg" id="20_ldo46"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/BackButton.gd" id="21_11t6h"]
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="24_iflvr"]
+[ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="27_1jjpa"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
@@ -248,10 +249,10 @@ horizontal_alignment = 1
 
 [node name="BuffText" type="Label" parent="."]
 modulate = Color(0.662745, 0.784314, 1, 1)
-offset_left = 400.0
-offset_top = 480.0
-offset_right = 1040.0
-offset_bottom = 702.0
+offset_left = 397.0
+offset_top = 504.0
+offset_right = 1037.0
+offset_bottom = 726.0
 scale = Vector2(0.36, 0.36)
 theme = ExtResource("7")
 theme_override_font_sizes/font_size = 64
@@ -262,10 +263,10 @@ vertical_alignment = 2
 script = ExtResource("20")
 
 [node name="AbilityButton" type="Button" parent="."]
-offset_left = 902.0
-offset_top = 480.0
-offset_right = 982.0
-offset_bottom = 560.0
+offset_left = 887.0
+offset_top = 464.0
+offset_right = 967.0
+offset_bottom = 544.0
 theme = ExtResource("7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
@@ -284,10 +285,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label" type="Label" parent="AbilityButton"]
-layout_mode = 0
-offset_left = -176.0
-offset_right = -10.0
-offset_bottom = 78.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -40.0
+offset_right = -6.0
+offset_bottom = 38.0
+grow_vertical = 2
 theme = ExtResource("7")
 text = "+100% Total Fire Rate
 Duration: 5 s
@@ -422,8 +428,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 489.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
@@ -431,6 +437,24 @@ theme_override_font_sizes/font_size = 32
 text = "[Username] used [AbilityName]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("27_1jjpa")]
+modulate = Color(1, 1, 1, 0.25098)
+anchors_preset = 0
+anchor_top = 0.0
+anchor_bottom = 0.0
+offset_left = 77.0
+offset_top = 464.0
+offset_right = 141.0
+offset_bottom = 528.0
+grow_vertical = 1
+scale = Vector2(0.9, 0.9)
+deadzone_size = 2.0
+visibility_mode = 1
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
 
 [connection signal="pressed" from="z-index1/MenuButton" to="z-index1/MenuButton" method="_on_pressed"]
 [connection signal="pressed" from="z-index1/Menu/VBoxContainer/BackButton" to="z-index1/Menu/VBoxContainer/BackButton" method="_on_pressed"]
