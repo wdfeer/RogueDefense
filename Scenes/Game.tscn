@@ -28,6 +28,18 @@
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="24_iflvr"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="27_1jjpa"]
 
+[sub_resource type="InputEventAction" id="InputEventAction_cdmt3"]
+action = &"menu"
+
+[sub_resource type="Shortcut" id="Shortcut_3a13u"]
+events = [SubResource("InputEventAction_cdmt3")]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fync3"]
+bg_color = Color(0, 0, 0, 0.627451)
+
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
 
@@ -67,21 +79,174 @@ action = &"ability"
 [sub_resource type="Shortcut" id="Shortcut_5tqol"]
 events = [SubResource("InputEventAction_kb0q4")]
 
-[sub_resource type="InputEventAction" id="InputEventAction_cdmt3"]
-action = &"menu"
-
-[sub_resource type="Shortcut" id="Shortcut_3a13u"]
-events = [SubResource("InputEventAction_cdmt3")]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fync3"]
-bg_color = Color(0, 0, 0, 0.627451)
-
-[node name="Game" type="Node2D"]
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1")
 enemyScene = ExtResource("4")
+
+[node name="z-index1" type="Control" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MenuButton" type="Button" parent="z-index1"]
+process_mode = 3
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("7")
+shortcut = SubResource("Shortcut_3a13u")
+icon = ExtResource("18_pat0i")
+expand_icon = true
+script = ExtResource("19_culfp")
+
+[node name="DeathScreen" type="Panel" parent="z-index1"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
+script = ExtResource("15")
+
+[node name="Blur" parent="z-index1/DeathScreen" instance=ExtResource("19_kdd8b")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Label" type="Label" parent="z-index1/DeathScreen"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 88.0
+offset_bottom = 176.0
+grow_horizontal = 2
+theme = ExtResource("7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "YOU ARE DEAD!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="z-index1/DeathScreen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -41.5
+offset_bottom = 41.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Level 9999 reached"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="z-index1/DeathScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -156.0
+offset_right = 256.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 64
+text = "MAIN MENU"
+script = ExtResource("13")
+
+[node name="Menu" type="Panel" parent="z-index1"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fync3")
+
+[node name="Blur" parent="z-index1/Menu" instance=ExtResource("19_kdd8b")]
+layout_mode = 1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="z-index1/Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -296.5
+offset_top = -299.0
+offset_right = 23.5
+offset_bottom = 301.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="BackButton" type="Button" parent="z-index1/Menu/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 20
+text = "PLAY"
+icon = ExtResource("20_ldo46")
+expand_icon = true
+script = ExtResource("21_11t6h")
+
+[node name="ExitButton" type="Button" parent="z-index1/Menu/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 20
+text = "EXIT"
+icon = ExtResource("18_xbath")
+expand_icon = true
+script = ExtResource("18")
+
+[node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/Menu/VBoxContainer/ExitButton"]
+initial_position = 2
+size = Vector2i(310, 100)
+popup_window = true
+theme = ExtResource("7")
+dialog_text = "Give up (progress will NOT be saved!)"
+
+[node name="ClientSettings" parent="z-index1/Menu" instance=ExtResource("24_iflvr")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -49.5
+offset_right = 296.0
+offset_bottom = 49.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="UISounds" parent="." instance=ExtResource("3_te3pu")]
 root_path = NodePath("..")
@@ -155,12 +320,154 @@ script = ExtResource("9_gd0wn")
 position = Vector2(512, 300)
 shape = SubResource("2")
 
+[node name="DpsLabel" type="Label" parent="."]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.627451)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 16.0
+offset_right = -24.0
+offset_bottom = 39.0
+grow_horizontal = 0
+theme = ExtResource("7")
+text = "Avg DPS: 0.0"
+script = ExtResource("14")
+
+[node name="LevelText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 42.0
+offset_right = 80.0
+offset_bottom = 66.0
+grow_horizontal = 2
+theme = ExtResource("7")
+text = "Level 1"
+horizontal_alignment = 1
+
+[node name="PPLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme = ExtResource("7")
+text = "0.000 pp"
+horizontal_alignment = 1
+
+[node name="BuffText" type="Label" parent="."]
+modulate = Color(0.662745, 0.784314, 1, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -116.5
+offset_top = -100.0
+offset_right = 523.5
+offset_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.36, 0.36)
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 64
+text = "+999% Multishot
++5000% Crit Chance"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("20")
+
+[node name="AbilityButton" type="Button" parent="."]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -153.0
+offset_top = -152.0
+offset_right = -65.0
+offset_bottom = -64.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("7")
+theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
+shortcut = SubResource("Shortcut_5tqol")
+icon = ExtResource("14_sx78e")
+expand_icon = true
+
+[node name="CooldownLabel" type="Label" parent="AbilityButton"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 88.0
+offset_right = 72.0
+offset_bottom = 111.0
+theme = ExtResource("7")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="AbilityButton"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -344.0
+offset_top = -37.0
+offset_right = -91.0
+offset_bottom = 38.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("7")
+text = "+100% Total Fire Rate
+Duration: 5 s
+Cooldown: 30 s"
+horizontal_alignment = 2
+
+[node name="NetPoller" parent="." instance=ExtResource("11")]
+
+[node name="Virtual Joystick" parent="." instance=ExtResource("27_1jjpa")]
+modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 1
+offset_left = 87.0
+offset_top = -144.0
+offset_right = 151.0
+offset_bottom = -80.0
+scale = Vector2(0.9, 0.9)
+deadzone_size = 2.0
+visibility_mode = 1
+action_left = "move_left"
+action_right = "move_right"
+action_up = "move_up"
+action_down = "move_down"
+
 [node name="UpgradeScreen" type="Panel" parent="."]
 process_mode = 3
 visible = false
-offset_top = 100.0
-offset_right = 1024.0
-offset_bottom = 500.0
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("8")
 
 [node name="UpgradeText" type="Label" parent="UpgradeScreen"]
@@ -218,210 +525,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "													"
 
-[node name="DpsLabel" type="Label" parent="."]
-process_mode = 3
-modulate = Color(1, 1, 1, 0.627451)
-offset_left = 887.0
-offset_top = 19.0
-offset_right = 981.0
-offset_bottom = 42.0
-theme = ExtResource("7")
-text = "Avg DPS: 0.0"
-script = ExtResource("14")
-
-[node name="LevelText" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 432.0
-offset_top = 45.0
-offset_right = 592.0
-offset_bottom = 69.0
-theme = ExtResource("7")
-text = "Level 1"
-horizontal_alignment = 1
-
-[node name="PPLabel" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 432.0
-offset_top = 19.0
-offset_right = 592.0
-offset_bottom = 43.0
-theme = ExtResource("7")
-text = "0.000 pp"
-horizontal_alignment = 1
-
-[node name="BuffText" type="Label" parent="."]
-modulate = Color(0.662745, 0.784314, 1, 1)
-offset_left = 397.0
-offset_top = 504.0
-offset_right = 1037.0
-offset_bottom = 726.0
-scale = Vector2(0.36, 0.36)
-theme = ExtResource("7")
-theme_override_font_sizes/font_size = 64
-text = "+999% Multishot
-+5000% Crit Chance"
-horizontal_alignment = 1
-vertical_alignment = 2
-script = ExtResource("20")
-
-[node name="AbilityButton" type="Button" parent="."]
-offset_left = 887.0
-offset_top = 464.0
-offset_right = 967.0
-offset_bottom = 544.0
-theme = ExtResource("7")
-theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
-shortcut = SubResource("Shortcut_5tqol")
-icon = ExtResource("14_sx78e")
-expand_icon = true
-
-[node name="CooldownLabel" type="Label" parent="AbilityButton"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 80.0
-offset_right = 72.0
-offset_bottom = 103.0
-theme = ExtResource("7")
-theme_override_font_sizes/font_size = 16
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="AbilityButton"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -272.0
-offset_top = -40.0
-offset_right = -6.0
-offset_bottom = 38.0
-grow_vertical = 2
-theme = ExtResource("7")
-text = "+100% Total Fire Rate
-Duration: 5 s
-Cooldown: 30 s"
-horizontal_alignment = 2
-
-[node name="NetPoller" parent="." instance=ExtResource("11")]
-
-[node name="z-index1" type="Node2D" parent="."]
-z_index = 1
-
-[node name="MenuButton" type="Button" parent="z-index1"]
-process_mode = 3
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 64.0
-offset_bottom = 64.0
-theme = ExtResource("7")
-shortcut = SubResource("Shortcut_3a13u")
-icon = ExtResource("18_pat0i")
-expand_icon = true
-script = ExtResource("19_culfp")
-
-[node name="DeathScreen" type="Panel" parent="z-index1"]
-process_mode = 3
-visible = false
-offset_right = 1024.0
-offset_bottom = 600.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
-script = ExtResource("15")
-
-[node name="Blur" parent="z-index1/DeathScreen" instance=ExtResource("19_kdd8b")]
-layout_mode = 1
-offset_right = 0.0
-offset_bottom = 0.0
-
-[node name="Label" type="Label" parent="z-index1/DeathScreen"]
-layout_mode = 0
-offset_top = 69.0
-offset_right = 1024.0
-offset_bottom = 83.0
-theme = ExtResource("7")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
-text = "YOU ARE DEAD!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScoreLabel" type="Label" parent="z-index1/DeathScreen"]
-layout_mode = 0
-offset_top = 259.0
-offset_right = 1024.0
-offset_bottom = 346.0
-theme = ExtResource("7")
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 60
-text = "Level 9999 reached"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ReturnButton" type="Button" parent="z-index1/DeathScreen"]
-layout_mode = 0
-offset_left = 256.0
-offset_top = 440.0
-offset_right = 768.0
-offset_bottom = 540.0
-theme = ExtResource("7")
-theme_override_font_sizes/font_size = 64
-text = "MAIN MENU"
-script = ExtResource("13")
-
-[node name="Menu" type="Panel" parent="z-index1"]
-process_mode = 3
-visible = false
-offset_right = 1025.0
-offset_bottom = 600.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_fync3")
-
-[node name="Blur" parent="z-index1/Menu" instance=ExtResource("19_kdd8b")]
-layout_mode = 1
-offset_right = 0.0
-offset_bottom = 0.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="z-index1/Menu"]
-layout_mode = 0
-offset_left = 192.0
-offset_right = 512.0
-offset_bottom = 600.0
-alignment = 1
-
-[node name="BackButton" type="Button" parent="z-index1/Menu/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("7")
-text = "PLAY"
-icon = ExtResource("20_ldo46")
-expand_icon = true
-script = ExtResource("21_11t6h")
-
-[node name="ExitButton" type="Button" parent="z-index1/Menu/VBoxContainer"]
-process_mode = 3
-layout_mode = 2
-theme = ExtResource("7")
-text = "EXIT"
-icon = ExtResource("18_xbath")
-expand_icon = true
-script = ExtResource("18")
-
-[node name="ConfirmPopup" type="ConfirmationDialog" parent="z-index1/Menu/VBoxContainer/ExitButton"]
-initial_position = 2
-size = Vector2i(310, 100)
-popup_window = true
-theme = ExtResource("7")
-dialog_text = "Give up (progress will NOT be saved!)"
-
-[node name="ClientSettings" parent="z-index1/Menu" instance=ExtResource("24_iflvr")]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 248.0
-offset_right = 784.0
-offset_bottom = 347.0
-
 [node name="NotificationPopup" type="PopupPanel" parent="."]
 process_mode = 3
 initial_position = 1
@@ -435,8 +538,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 489.0
-offset_bottom = 56.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
@@ -444,24 +547,6 @@ theme_override_font_sizes/font_size = 32
 text = "[Username] used [AbilityName]"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Virtual Joystick" parent="." instance=ExtResource("27_1jjpa")]
-modulate = Color(1, 1, 1, 0.25098)
-anchors_preset = 0
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_left = 77.0
-offset_top = 464.0
-offset_right = 141.0
-offset_bottom = 528.0
-grow_vertical = 1
-scale = Vector2(0.9, 0.9)
-deadzone_size = 2.0
-visibility_mode = 1
-action_left = "move_left"
-action_right = "move_right"
-action_up = "move_up"
-action_down = "move_down"
 
 [connection signal="pressed" from="z-index1/MenuButton" to="z-index1/MenuButton" method="_on_pressed"]
 [connection signal="pressed" from="z-index1/Menu/VBoxContainer/BackButton" to="z-index1/Menu/VBoxContainer/BackButton" method="_on_pressed"]

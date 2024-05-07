@@ -32,28 +32,39 @@ userDataScene = ExtResource("3")
 root_path = NodePath("..")
 
 [node name="PlayerList" type="VFlowContainer" parent="."]
-layout_mode = 0
-offset_top = 100.0
-offset_right = 1024.0
-offset_bottom = 500.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -204.0
+offset_bottom = 196.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MyData" parent="PlayerList" instance=ExtResource("5_hp6bq")]
 layout_mode = 2
 
 [node name="StartButton" type="Button" parent="."]
-layout_mode = 0
-offset_top = 501.0
-offset_right = 1024.0
-offset_bottom = 601.0
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -96.0
+grow_horizontal = 2
+grow_vertical = 0
 theme = ExtResource("2")
 theme_override_font_sizes/font_size = 64
 text = "START"
 script = ExtResource("5")
 
 [node name="Title" type="Label" parent="."]
-layout_mode = 0
-offset_right = 1024.0
-offset_bottom = 100.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 88.0
+grow_horizontal = 2
 theme = ExtResource("2")
 theme_override_font_sizes/font_size = 64
 text = "Lobby"
@@ -72,11 +83,15 @@ expand_icon = true
 script = ExtResource("11")
 
 [node name="ExitButton" parent="." instance=ExtResource("10_3pedh")]
-layout_mode = 0
-offset_left = 936.0
-offset_top = 10.0
-offset_right = 1016.0
-offset_bottom = 90.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -89.0
+offset_top = 8.0
+offset_right = -9.0
+offset_bottom = 88.0
+grow_horizontal = 0
 
 [node name="PPMult" type="Label" parent="."]
 layout_mode = 0
@@ -92,10 +107,17 @@ vertical_alignment = 1
 [node name="SettingsPanel" type="Panel" parent="."]
 visible = false
 self_modulate = Color(1, 1, 1, 0.784314)
-layout_mode = 0
-offset_left = 704.0
-offset_right = 1024.0
-offset_bottom = 600.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -300.0
+offset_bottom = 300.0
+grow_horizontal = 0
+grow_vertical = 2
 script = ExtResource("14")
 
 [node name="Container" type="VBoxContainer" parent="SettingsPanel"]

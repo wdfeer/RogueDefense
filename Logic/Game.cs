@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Security.Policy;
 
-public partial class Game : Node2D
+public partial class Game : Node
 {
 	public static Game instance;
 

@@ -21,7 +21,7 @@ config/icon="res://Assets/icon.png"
 window/size/viewport_width=1025
 window/size/viewport_height=600
 window/stretch/mode="canvas_items"
-window/stretch/aspect="ignore"
+window/stretch/aspect="expand"
 window/handheld/orientation="sensor_landscape"
 
 [dotnet]
