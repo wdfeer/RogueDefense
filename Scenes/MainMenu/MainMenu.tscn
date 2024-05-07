@@ -235,3 +235,16 @@ augmentText = "Status Chance Mult: "
 [node name="4" parent="AugmentPanel/VBoxContainer" instance=ExtResource("2")]
 layout_mode = 2
 augmentText = "Crit Damage Mult: "
+
+[node name="Version" type="LinkButton" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_top = 8.0
+offset_right = 22.5
+offset_bottom = 31.0
+grow_horizontal = 2
+text = "v2.0.5"
+uri = "https://github.com/wdfeer/RogueDefense/releases"
