@@ -110,6 +110,7 @@ step = 0.001
 value = 1.0
 
 [node name="Boundaries" type="Node2D" parent="."]
+visible = false
 
 [node name="LeftWall" type="StaticBody2D" parent="Boundaries"]
 collision_layer = 16
