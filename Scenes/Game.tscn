@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=42 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -60,6 +60,12 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 0.25098, 0.25098, 1)
+
+[sub_resource type="InputEventAction" id="InputEventAction_kb0q4"]
+action = &"ability"
+
+[sub_resource type="Shortcut" id="Shortcut_5tqol"]
+events = [SubResource("InputEventAction_kb0q4")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_cdmt3"]
 action = &"menu"
@@ -215,9 +221,9 @@ text = "													"
 [node name="DpsLabel" type="Label" parent="."]
 process_mode = 3
 modulate = Color(1, 1, 1, 0.627451)
-offset_left = 898.0
+offset_left = 887.0
 offset_top = 19.0
-offset_right = 992.0
+offset_right = 981.0
 offset_bottom = 42.0
 theme = ExtResource("7")
 text = "Avg DPS: 0.0"
@@ -270,6 +276,7 @@ offset_bottom = 544.0
 theme = ExtResource("7")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
+shortcut = SubResource("Shortcut_5tqol")
 icon = ExtResource("14_sx78e")
 expand_icon = true
 
