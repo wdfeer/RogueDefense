@@ -4,7 +4,7 @@ using System;
 
 public abstract partial class StatusContainer : HBoxContainer
 {
-    public Label Counter => ((Label)GetNode("Counter"));
+    public Label Counter => (Label)GetNode("Counter");
     public Enemy enemy;
     public override void _Ready()
     {

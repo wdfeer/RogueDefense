@@ -14,8 +14,6 @@ namespace RogueDefense
         public virtual void PreUpdate(float delta) { }
         public virtual void PostUpgradeUpdate(float delta) { }
         public virtual void PostUpdate(float delta) { }
-        [Obsolete("Use ModifyHitEnemyWithBullet instead")]
-        public virtual void ModifyHitWithBullet(Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult) { }
         public virtual void ModifyHitEnemyWithBullet(Enemy enemy, Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult) { }
         public virtual void OnHitWithBullet(Enemy enemy, Bullet b, float postCritDmg) { }
         public virtual void OnAnyHit(float afterEffectsDmg) { }

@@ -7,7 +7,7 @@ public partial class Lobby : Control
 {
 	[Export]
 	public PackedScene userDataScene;
-	public static Lobby Instance => GDScript.IsInstanceValid(instance) ? instance : null;
+	public static Lobby Instance => IsInstanceValid(instance) ? instance : null;
 	private static Lobby instance;
 	public override void _Ready()
 	{

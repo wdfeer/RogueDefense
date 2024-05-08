@@ -80,7 +80,7 @@ namespace RogueDefense
 
         public void ResetText()
         {
-            var label = (button.GetNode("./Label") as Label);
+            var label = button.GetNode("./Label") as Label;
             label.Text = GetAbilityText();
             if (ConstantValues) label.Text += "\n\n(These values are constant)";
         }

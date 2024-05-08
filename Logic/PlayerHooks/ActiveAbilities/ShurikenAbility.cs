@@ -33,7 +33,7 @@ namespace RogueDefense
         public float Damage => BASE_DAMAGE * Strength * player.shootManager.damage;
         public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);
         protected override string GetAbilityText()
-            => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)(Damage)} Damage
+            => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)Damage} Damage
 Cooldown: {Cooldown.ToString("0.00")} s";
     }
 }

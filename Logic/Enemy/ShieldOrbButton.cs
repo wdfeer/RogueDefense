@@ -13,7 +13,7 @@ public partial class ShieldOrbButton : TextureButton
             {
                 Enemy enemy = Enemy.enemies[i];
 
-                if (enemy == null || !GodotObject.IsInstanceValid(enemy) || enemy.Dead)
+                if (enemy == null || !IsInstanceValid(enemy) || enemy.Dead)
                     continue;
 
                 float oldArmor = enemy.armor;

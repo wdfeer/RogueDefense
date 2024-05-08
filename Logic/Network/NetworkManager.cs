@@ -12,14 +12,14 @@ public static class NetworkManager
     public static bool active = false;
     public static void NetStart()
     {
-        if (NetworkManager.mode == NetMode.Server)
+        if (mode == NetMode.Server)
         {
             Server.instance.Start();
             Client.host = "localhost";
             Client.port = Server.PORT;
             Client.instance.Start();
         }
-        else if (NetworkManager.mode == NetMode.Client)
+        else if (mode == NetMode.Client)
         {
             Client.instance.Start();
         }
@@ -28,7 +28,7 @@ public static class NetworkManager
     public static void NetStop()
     {
         active = false;
-        if (NetworkManager.mode == NetMode.Server)
+        if (mode == NetMode.Server)
         {
             Server.instance.Stop();
             Server.instance = new Server();

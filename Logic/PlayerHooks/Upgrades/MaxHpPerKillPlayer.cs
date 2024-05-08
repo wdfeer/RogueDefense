@@ -14,7 +14,7 @@ namespace RogueDefense
 
         public static float GetTotalIncrease()
             => Player.players
-                .Select(pair => PlayerHooks.GetHooks<MaxHpPerKillPlayer>(pair.Value).increase)
+                .Select(pair => GetHooks<MaxHpPerKillPlayer>(pair.Value).increase)
                 .Aggregate(0f, (a, b) => a + b);
         public override void OnKill(Enemy enemy)
         {

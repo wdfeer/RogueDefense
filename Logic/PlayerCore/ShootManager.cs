@@ -60,12 +60,11 @@ namespace RogueDefense.Logic.PlayerCore
                     player.hooks.ForEach(x => x.PostShoot(bullet));
                 }
             }
-
         }
-        public Bullet Shoot(Vector2 pos, float speed, float spread = -1)
+        public Bullet Shoot(Vector2 pos, float speed, float spreadDeg = SPREAD_DEGREES)
         {
             Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
-            Bullet bullet = NewBullet(pos, velocity.Rotated(spread == -1 ? Mathf.DegToRad(GD.Randf() * SPREAD_DEGREES - SPREAD_DEGREES / 2f) : spread));
+            Bullet bullet = NewBullet(pos, velocity.Rotated(Mathf.DegToRad(GD.Randf() * spreadDeg - spreadDeg / 2f)));
             return bullet;
         }
         public Bullet NewBullet(Vector2 gposition, Vector2 velocity)
@@ -82,7 +81,7 @@ namespace RogueDefense.Logic.PlayerCore
         {
             foreach (Bullet bull in bullets)
             {
-                if (Godot.GodotObject.IsInstanceValid(bull))
+                if (GodotObject.IsInstanceValid(bull))
                 {
                     if (filter != null && !filter(bull))
                         continue;

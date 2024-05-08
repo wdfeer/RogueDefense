@@ -35,7 +35,6 @@ public partial class Bullet : MovingKinematicBody2D
 			float dmg = this.damage;
 			int critLevel = GetCritLevel();
 			float critMult = owner.upgradeManager.critDamageMult;
-			owner.hooks.ForEach(x => x.ModifyHitWithBullet(this, ref dmg, ref critLevel, ref critMult));
 			owner.hooks.ForEach(x => x.ModifyHitEnemyWithBullet(enemy, this, ref dmg, ref critLevel, ref critMult));
 			ModifyHit(ref dmg, ref critLevel, ref critMult);
 			if (critLevel > 0)
@@ -75,7 +74,7 @@ public partial class Bullet : MovingKinematicBody2D
 				return Color.Color8(204, 0, 0);
 		}
 	}
-	public GpuParticles2D ParticleEmitter => (GetNode("GpuParticles2D") as GpuParticles2D);
+	public GpuParticles2D ParticleEmitter => GetNode("GpuParticles2D") as GpuParticles2D;
 	public void StartParticleEffect()
 	{
 		ParticleEmitter.Emitting = true;
