@@ -42,7 +42,7 @@ public partial class Game : Node
 		}
 
 		Enemy.oneTimeCountIncrease = 0;
-		(GetNode("./LevelText") as Label).Text = $"Stage {GetCurrentStage()} - {wave % 10 + 1}";
+		(GetNode("./LevelText") as Label).Text = $"Stage {GetStage()} - {wave % 10 + 1}";
 	}
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
@@ -67,7 +67,7 @@ public partial class Game : Node
 	}
 	public static int Wave => instance.wave;
 	private int wave = 0;
-	public int GetCurrentStage()
+	public int GetStage()
 		=> (int)(wave / 10f) + 1;
 	[Export]
 	private Background background;
@@ -78,7 +78,7 @@ public partial class Game : Node
 
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		wave++;
-		background.UpdateBackground(GetCurrentStage());
+		background.UpdateBackground(GetStage());
 
 
 		SaveData.UpdateHighscore();

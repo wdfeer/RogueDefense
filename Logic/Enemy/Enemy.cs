@@ -92,6 +92,8 @@ public partial class Enemy : Area2D
 	}
 	void ResetShieldOrbs(int gen)
 	{
+		bool exploding = gen > 19;
+
 		if (gen % 10 == 9)
 		{
 			shieldOrbGenerator.CreateOrbs(5, false);
@@ -99,7 +101,7 @@ public partial class Enemy : Area2D
 		}
 
 		if (gen % 2 == 0 && GD.Randf() < 0.5f)
-			shieldOrbGenerator.CreateOrbs(1 + Mathf.RoundToInt(GD.Randf() * 4));
+			shieldOrbGenerator.CreateOrbs(1 + Mathf.RoundToInt(GD.Randf() * 4), exploding: exploding);
 		else shieldOrbGenerator.count = 0;
 	}
 	void ScaleMaxHp(int gen)
@@ -126,7 +128,7 @@ public partial class Enemy : Area2D
 	void ScaleArmor(int gen)
 	{
 		if (gen > 9)
-			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 9f) * oneTimeArmorMult + (Game.instance.GetCurrentStage() == 2 ? 150 : 0);
+			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 9f) * oneTimeArmorMult + (Game.instance.GetStage() == 2 ? 150 : 0);
 		else
 			armor = 0f;
 

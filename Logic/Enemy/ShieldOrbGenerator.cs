@@ -7,7 +7,7 @@ public partial class ShieldOrbGenerator : Node2D
     public PackedScene shieldOrb;
     public ShieldOrb[] orbs = new ShieldOrb[0];
     public int count = 0;
-    public void CreateOrbs(int count, bool tappable = true)
+    public void CreateOrbs(int count, bool tappable = true, bool exploding = false)
     {
         this.count = count;
 
@@ -26,6 +26,7 @@ public partial class ShieldOrbGenerator : Node2D
             ShieldOrb orb = shieldOrb.Instantiate<ShieldOrb>();
             AddChild(orb);
             orb.SetTappability(tappable);
+            orb.SetExploding(exploding);
             orbs[i] = orb;
 
             orb.Position = pos;

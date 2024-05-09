@@ -196,7 +196,7 @@ offset_top = 8.0
 offset_right = 22.5
 offset_bottom = 31.0
 grow_horizontal = 2
-text = "v2.0.6"
+text = "v2.1.0"
 uri = "https://github.com/wdfeer/RogueDefense/releases"
 script = ExtResource("18_867ui")
 
