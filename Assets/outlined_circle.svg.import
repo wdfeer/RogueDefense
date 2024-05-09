@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmk622ada2dm0"
-path="res://.godot/imported/white_circle.svg-672ad990d23c1d60df4db843941e1a5c.ctex"
+uid="uid://diu0rw1b6xipw"
+path="res://.godot/imported/outlined_circle.svg-78e28cde131ae358b8d99ec9eaf3528b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/white_circle.svg"
-dest_files=["res://.godot/imported/white_circle.svg-672ad990d23c1d60df4db843941e1a5c.ctex"]
+source_file="res://Assets/outlined_circle.svg"
+dest_files=["res://.godot/imported/outlined_circle.svg-78e28cde131ae358b8d99ec9eaf3528b.ctex"]
 
 [params]
 
