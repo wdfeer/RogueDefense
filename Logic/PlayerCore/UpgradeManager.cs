@@ -30,9 +30,9 @@ namespace RogueDefense.Logic.PlayerCore
         {
             if (upgrade.risky)
             {
-                Enemy.oneTimeHpMult += 2f;
+                Enemy.oneTimeHpMult += 1f;
                 Enemy.oneTimeArmorMult += 1f;
-                Enemy.oneTimeDamageMult += 2f;
+                Enemy.oneTimeCountIncrease += 2;
             }
 
             if (upgrade.type == UpgradeType.Turret)

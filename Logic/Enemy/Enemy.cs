@@ -43,6 +43,7 @@ public partial class Enemy : Area2D
 	public static float oneTimeHpMult = 1f;
 	public static float oneTimeArmorMult = 1f;
 	public static float oneTimeDamageMult = 1f;
+	public static int oneTimeCountIncrease = 0;
 	void ScaleStats(int gen, int index)
 	{
 		gen = Math.Max(1, gen - index * 3);

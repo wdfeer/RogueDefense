@@ -33,7 +33,7 @@ public partial class Game : Node
 		=> ToSignal(GetTree().CreateTimer(1f, false), "timeout").OnCompleted(SpawnEnemies);
 	void SpawnEnemies()
 	{
-		for (int i = 0; i < Enemy.statsRng.RandiRange(1, 3); i++)
+		for (int i = 0; i < Enemy.statsRng.RandiRange(1, 3) + Enemy.oneTimeCountIncrease; i++)
 		{
 			Enemy enemy = enemyScene.Instantiate<Enemy>();
 			Enemy.enemies.Add(enemy);
@@ -41,6 +41,7 @@ public partial class Game : Node
 			GetNode("Enemies").AddChild(enemy);
 		}
 
+		Enemy.oneTimeCountIncrease = 0;
 		(GetNode("./LevelText") as Label).Text = $"Stage {(int)(wave / 10f) + 1} - {wave % 10 + 1}";
 	}
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
