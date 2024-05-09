@@ -5,15 +5,9 @@ public partial class ShieldOrbGenerator : Node2D
 {
     [Export]
     public PackedScene shieldOrb;
-    public override void _Ready()
-    {
-        if ((Game.Wave % 2 == 0 && GD.Randf() < 0.5f) || Game.Wave % 5 == 0)
-            CreateOrbs(1 + Mathf.RoundToInt(GD.Randf() * 4));
-        else count = 0;
-    }
     public ShieldOrb[] orbs = new ShieldOrb[0];
     public int count = 0;
-    void CreateOrbs(int count)
+    public void CreateOrbs(int count, bool tappable = true)
     {
         this.count = count;
 
@@ -31,6 +25,7 @@ public partial class ShieldOrbGenerator : Node2D
         {
             ShieldOrb orb = shieldOrb.Instantiate<ShieldOrb>();
             AddChild(orb);
+            orb.SetTappability(tappable);
             orbs[i] = orb;
 
             orb.Position = pos;

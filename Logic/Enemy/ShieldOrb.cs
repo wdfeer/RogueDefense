@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense;
 using System;
 
 public partial class ShieldOrb : Area2D
@@ -15,5 +16,22 @@ public partial class ShieldOrb : Area2D
 		{
 			bullet.ShieldOrbCollision(this);
 		}
+		else if (body is DefenseObjective defObjective && !tappable)
+		{
+			defObjective.Damage(10f * Game.instance.GetCurrentStage());
+		}
+	}
+
+	bool tappable = true;
+	public void SetTappability(bool tappable)
+	{
+		this.tappable = tappable;
+
+		((Label)GetNode("Label")).Visible = tappable;
+
+		ShieldOrbButton button = (ShieldOrbButton)GetNode("Button");
+		button.Disabled = !tappable;
+
+		button.Modulate = tappable ? Colors.White : Colors.Red;
 	}
 }

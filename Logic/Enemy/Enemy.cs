@@ -14,6 +14,8 @@ public partial class Enemy : Area2D
 	public const float BASE_SPEED = 1.15f;
 	public override void _Ready()
 	{
+		shieldOrbGenerator = GetNode("ShieldOrbGenerator") as ShieldOrbGenerator;
+
 		enemies.Add(this);
 
 		BodyEntered += OnBodyEntered;
@@ -53,10 +55,11 @@ public partial class Enemy : Area2D
 
 		if (index == 0)
 		{
-			ResetImmunities(gen);
 			ResetShieldOrbs(gen);
+			ResetImmunities(gen);
+			ResetEffects(gen);
 
-			if (statsRng.Randf() < 0.15f)
+			if (statsRng.Randf() < 0.15f && gen % 10 != 9)
 				ActivateEffectField();
 		}
 	}
@@ -75,18 +78,29 @@ public partial class Enemy : Area2D
 			cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
 		}
 	}
-	void ResetShieldOrbs(int gen)
+	ShieldOrbGenerator shieldOrbGenerator;
+	void ResetEffects(int gen)
 	{
 		if (!bleed.immune && !corrosive.immune)
 		{
-			ShieldOrbGenerator GetShieldOrbGenerator() => GetNode("ShieldOrbGenerator") as ShieldOrbGenerator;
-
 			float rand = statsRng.Randf();
 			if (rand < 0.1f)
 				SetDamageCap(GetDamageCap(gen));
-			else if (GetShieldOrbGenerator().count > 0 && gen < 40 && rand < 0.2f)
+			else if (shieldOrbGenerator.count > 0 && gen < 40 && rand < 0.2f)
 				SetMinDamage(GetMinDamage(gen));
 		}
+	}
+	void ResetShieldOrbs(int gen)
+	{
+		if (gen % 10 == 9)
+		{
+			shieldOrbGenerator.CreateOrbs(5, false);
+			return;
+		}
+
+		if (gen % 2 == 0 && GD.Randf() < 0.5f)
+			shieldOrbGenerator.CreateOrbs(1 + Mathf.RoundToInt(GD.Randf() * 4));
+		else shieldOrbGenerator.count = 0;
 	}
 	void ScaleMaxHp(int gen)
 	{
@@ -111,8 +125,8 @@ public partial class Enemy : Area2D
 	}
 	void ScaleArmor(int gen)
 	{
-		if (gen > 10f)
-			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 10f) * oneTimeArmorMult;
+		if (gen > 9)
+			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 9f) * oneTimeArmorMult;
 		else
 			armor = 0f;
 
