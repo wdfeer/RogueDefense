@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dtm1dpgedp8k2"]
+[gd_scene load_steps=17 format=3 uid="uid://dtm1dpgedp8k2"]
 
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://bdpste7hjr5v5" path="res://Scenes/Lobby/PlayerData.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://djlwd1jt4bb3k" path="res://Scenes/MainMenu/background.tscn" id="3_rh4s4"]
 [ext_resource type="Script" path="res://Logic/Network/Lobby.cs" id="4"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="4_c2b1h"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/StartButton.cs" id="5"]
@@ -25,6 +26,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4")
 userDataScene = ExtResource("3")
+
+[node name="Background" parent="." instance=ExtResource("3_rh4s4")]
 
 [node name="NetPoller" parent="." instance=ExtResource("6")]
 

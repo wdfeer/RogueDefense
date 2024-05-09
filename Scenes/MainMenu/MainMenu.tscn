@@ -1,5 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=25 format=3 uid="uid://kt63cqpw2db5"]
 
+[ext_resource type="PackedScene" uid="uid://djlwd1jt4bb3k" path="res://Scenes/MainMenu/background.tscn" id="1_u76gu"]
 [ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
@@ -46,6 +47,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Background" parent="." instance=ExtResource("1_u76gu")]
 
 [node name="GameInitializer" type="Node" parent="."]
 script = ExtResource("10")
@@ -218,6 +221,7 @@ script = ExtResource("12")
 
 [node name="AugmentPanel" type="Panel" parent="."]
 visible = false
+self_modulate = Color(0.5, 0.5, 0.5, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

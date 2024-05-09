@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://djlwd1jt4bb3k"]
+
+[ext_resource type="Texture2D" uid="uid://ct2pypueivbak" path="res://Assets/Backgrounds/MainMenuBackground.png" id="1_3raq4"]
+
+[node name="Background" type="Node2D"]
+modulate = Color(0.4, 0.4, 0.4, 1)
+position = Vector2(0, 280)
+scale = Vector2(0.5, 0.5)
+
+[node name="BG1" type="Sprite2D" parent="."]
+texture = ExtResource("1_3raq4")
+
+[node name="BG2" type="Sprite2D" parent="."]
+position = Vector2(2000, 0)
+texture = ExtResource("1_3raq4")
