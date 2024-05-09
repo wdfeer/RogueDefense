@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=49 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -9,8 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://b7e7eteghmjq0" path="res://Scenes/Bullet.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://cjl26paddv1b1" path="res://Assets/Backgrounds/Stage2.png" id="5_cqq2p"]
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/defense_objective.svg" id="6"]
+[ext_resource type="Texture2D" uid="uid://cragqgc6dufek" path="res://Assets/Backgrounds/Stage3.png" id="6_osbn0"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="7"]
+[ext_resource type="Texture2D" uid="uid://cctlucpinf1je" path="res://Assets/Backgrounds/Stage4.png" id="7_vp4ep"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
+[ext_resource type="Texture2D" uid="uid://5tdagghqrgur" path="res://Assets/Backgrounds/Stage5.png" id="8_58s5q"]
+[ext_resource type="Texture2D" uid="uid://c7qhy88w6eqs1" path="res://Assets/Backgrounds/Stage6.png" id="9_dpyxg"]
 [ext_resource type="Script" path="res://Logic/BulletDeleter.cs" id="9_gd0wn"]
 [ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
@@ -100,7 +104,7 @@ position = Vector2(612, 315)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("3_hvrda")
 script = ExtResource("4_bil5u")
-backgrounds = Array[CompressedTexture2D]([ExtResource("3_hvrda"), ExtResource("5_cqq2p")])
+backgrounds = Array[CompressedTexture2D]([ExtResource("3_hvrda"), ExtResource("5_cqq2p"), ExtResource("6_osbn0"), ExtResource("7_vp4ep"), ExtResource("8_58s5q"), ExtResource("9_dpyxg")])
 
 [node name="UISounds" parent="." instance=ExtResource("3_te3pu")]
 root_path = NodePath("..")
