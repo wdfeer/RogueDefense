@@ -38,7 +38,7 @@ public partial class Game : Node
 			Enemy enemy = enemyScene.Instantiate<Enemy>();
 			Enemy.enemies.Add(enemy);
 			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 250), 300 + i * 20 * (i % 2 == 0 ? 1 : -1));
-			AddChild(enemy);
+			GetNode("Enemies").AddChild(enemy);
 		}
 
 		(GetNode("./LevelText") as Label).Text = $"Level {wave}";
