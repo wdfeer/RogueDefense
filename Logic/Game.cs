@@ -42,7 +42,7 @@ public partial class Game : Node
 		}
 
 		Enemy.oneTimeCountIncrease = 0;
-		(GetNode("./LevelText") as Label).Text = $"Stage {(int)(wave / 10f) + 1} - {wave % 10 + 1}";
+		(GetNode("./LevelText") as Label).Text = $"Stage {GetCurrentStage()} - {wave % 10 + 1}";
 	}
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
@@ -67,6 +67,10 @@ public partial class Game : Node
 	}
 	public static int Wave => instance.wave;
 	private int wave = 0;
+	public int GetCurrentStage()
+		=> (int)(wave / 10f) + 1;
+	[Export]
+	private Background background;
 	public void EndWave()
 	{
 		PP.currentPP += PP.GetWavePP(wave, DefenseObjective.instance.HpRatio, Enemy.enemies.Count);
@@ -74,6 +78,8 @@ public partial class Game : Node
 
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		wave++;
+		background.UpdateBackground(GetCurrentStage());
+
 
 		SaveData.UpdateHighscore();
 		SaveData.killCount++;
@@ -90,9 +96,6 @@ public partial class Game : Node
 		SpawnEnemiesAfterDelay();
 	}
 
-
-	[Export]
-	PackedScene mainMenuScene;
 	public void GoToMainMenu()
 	{
 		if (!NetworkManager.Singleplayer)

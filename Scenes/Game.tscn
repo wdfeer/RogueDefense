@@ -1,11 +1,13 @@
-[gd_scene load_steps=43 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=45 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bcqofi6xuow8e" path="res://Assets/Backgrounds/Stage1.png" id="3_hvrda"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="3_te3pu"]
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemy.tscn" id="4"]
+[ext_resource type="Script" path="res://Logic/Background.cs" id="4_bil5u"]
 [ext_resource type="PackedScene" uid="uid://b7e7eteghmjq0" path="res://Scenes/Bullet.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://cjl26paddv1b1" path="res://Assets/Backgrounds/Stage2.png" id="5_cqq2p"]
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/defense_objective.svg" id="6"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="7"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
@@ -80,7 +82,7 @@ bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fync3"]
 bg_color = Color(0, 0, 0, 0.627451)
 
-[node name="Game" type="Control"]
+[node name="Game" type="Control" node_paths=PackedStringArray("background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,6 +91,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 enemyScene = ExtResource("4")
+background = NodePath("Background")
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.5, 0.5, 0.5, 1)
@@ -96,6 +99,8 @@ z_index = -3
 position = Vector2(612, 315)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("3_hvrda")
+script = ExtResource("4_bil5u")
+backgrounds = Array[CompressedTexture2D]([ExtResource("3_hvrda"), ExtResource("5_cqq2p")])
 
 [node name="UISounds" parent="." instance=ExtResource("3_te3pu")]
 root_path = NodePath("..")
