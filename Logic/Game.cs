@@ -41,7 +41,7 @@ public partial class Game : Node
 			GetNode("Enemies").AddChild(enemy);
 		}
 
-		(GetNode("./LevelText") as Label).Text = $"Level {wave}";
+		(GetNode("./LevelText") as Label).Text = $"Stage {(int)(wave / 10f) + 1} - {wave % 10 + 1}";
 	}
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
@@ -65,7 +65,7 @@ public partial class Game : Node
 			EndWave();
 	}
 	public static int Wave => instance.wave;
-	private int wave = 1;
+	private int wave = 0;
 	public void EndWave()
 	{
 		PP.currentPP += PP.GetWavePP(wave, DefenseObjective.instance.HpRatio, Enemy.enemies.Count);
