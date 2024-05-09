@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://deocyt6mxr5yd"]
 
-[ext_resource type="Texture2D" uid="uid://bn01iu853ualw" path="res://Assets/black_circle.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dmk622ada2dm0" path="res://Assets/white_circle.svg" id="2_nk3ql"]
 [ext_resource type="Script" path="res://Logic/Enemy/ShieldOrbButton.cs" id="3"]
 [ext_resource type="Script" path="res://Logic/Enemy/ShieldOrb.cs" id="4"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="4_1b5k1"]
@@ -21,17 +21,22 @@ offset_top = -38.4
 offset_right = 217.6
 offset_bottom = 217.6
 scale = Vector2(0.3, 0.3)
-texture_normal = ExtResource("1")
+texture_normal = ExtResource("2_nk3ql")
 script = ExtResource("3")
 
-[node name="Label" type="Label" parent="."]
-offset_left = -26.0
-offset_top = -23.0
-offset_right = 80.0
-offset_bottom = 64.0
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 258.0
+offset_bottom = 258.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 theme = ExtResource("4_1b5k1")
-theme_override_font_sizes/font_size = 64
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 160
 text = "TAP"
 horizontal_alignment = 1
 vertical_alignment = 1
