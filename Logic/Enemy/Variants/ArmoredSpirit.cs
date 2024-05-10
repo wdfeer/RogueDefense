@@ -26,6 +26,7 @@ public partial class ArmoredSpirit : Enemy
 			bleed.immune = true;
 		}
 	}
+	protected override bool ShieldOrbsAllowed => false;
 
 	protected virtual float RotationSpeed => MathF.PI / 3;
 	public override void _Process(double delta)

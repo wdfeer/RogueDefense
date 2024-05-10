@@ -91,6 +91,8 @@ public abstract partial class Enemy : Area2D
 	}
 	void ResetShieldOrbs(int gen)
 	{
+		if (!ShieldOrbsAllowed) return;
+
 		bool exploding = gen > 19;
 
 		if (gen % 10 == 9)
@@ -153,6 +155,7 @@ public abstract partial class Enemy : Area2D
 	protected virtual void ModifyDamage(ref float damage) { }
 	protected virtual void ModifyArmor(ref float armor) { }
 	protected virtual void ModifyImmunities(ref Status[] statuses) { }
+	protected virtual bool ShieldOrbsAllowed => true;
 
 	public float maxHp;
 	private float hp;
