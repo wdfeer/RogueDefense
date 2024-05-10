@@ -12,6 +12,10 @@ public partial class ExplodingEye : Enemy
 	{
 		armor = 0;
 	}
+	protected override void ModifyDamage(ref float damage)
+	{
+		damage /= 2;
+	}
 	protected override bool ShieldOrbsAllowed => false;
 
 	[Export]
@@ -23,15 +27,15 @@ public partial class ExplodingEye : Enemy
 	void SpawnBullets()
 	{
 		float angle = GD.Randf() * MathF.PI;
-		int count = 8;
+		int count = 20;
 		for (int i = 0; i < count; i++)
 		{
 			EnemyBullet bullet = bulletScene.Instantiate<EnemyBullet>();
 			AddSibling(bullet);
 			bullet.Position = Position;
-			bullet.damage = damage / 2;
+			bullet.damage = damage;
 
-			bullet.velocity = new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * 125f;
+			bullet.velocity = new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * 110f;
 			angle += MathF.Tau / count;
 		}
 	}
