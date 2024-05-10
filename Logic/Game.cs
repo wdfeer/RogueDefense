@@ -9,15 +9,11 @@ using System.Security.Policy;
 public partial class Game : Node
 {
 	public static Game instance;
-
-	[Export]
-	public PackedScene enemyScene;
-
 	public override void _Ready()
 	{
-		SaveData.Save();
-
 		instance = this;
+
+		SaveData.Save();
 
 		PP.currentPP = 0f;
 
@@ -30,19 +26,11 @@ public partial class Game : Node
 		SpawnEnemiesAfterDelay();
 	}
 	void SpawnEnemiesAfterDelay()
-		=> ToSignal(GetTree().CreateTimer(1f, false), "timeout").OnCompleted(SpawnEnemies);
-	void SpawnEnemies()
-	{
-		for (int i = 0; i < Enemy.statsRng.RandiRange(1, 3); i++)
-		{
-			Enemy enemy = enemyScene.Instantiate<Enemy>();
-			Enemy.enemies.Add(enemy);
-			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 250), 300 + i * 20 * (i % 2 == 0 ? 1 : -1));
-			AddChild(enemy);
-		}
-
-		(GetNode("./LevelText") as Label).Text = $"Level {wave}";
-	}
+		=> ToSignal(GetTree().CreateTimer(0.5, false), "timeout").OnCompleted(() =>
+			{
+				((EnemySpawner)GetNode("EnemySpawner")).SpawnEnemies();
+				background.UpdateBackground(GetStage());
+			});
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
 		if (!IsInstanceValid(enemy))
@@ -65,7 +53,11 @@ public partial class Game : Node
 			EndWave();
 	}
 	public static int Wave => instance.wave;
-	private int wave = 1;
+	private int wave = 0;
+	public static int GetStage()
+		=> (int)(Wave / 10f) + 1;
+	[Export]
+	private Background background;
 	public void EndWave()
 	{
 		PP.currentPP += PP.GetWavePP(wave, DefenseObjective.instance.HpRatio, Enemy.enemies.Count);
@@ -87,11 +79,9 @@ public partial class Game : Node
 		}
 
 		SpawnEnemiesAfterDelay();
+		(GetNode("./LevelText") as Label).Text = $"Stage {GetStage()} - {wave % 10 + 1}";
 	}
 
-
-	[Export]
-	PackedScene mainMenuScene;
 	public void GoToMainMenu()
 	{
 		if (!NetworkManager.Singleplayer)

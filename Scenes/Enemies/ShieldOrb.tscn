@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://deocyt6mxr5yd"]
+
+[ext_resource type="Script" path="res://Logic/Enemy/ShieldOrb.cs" id="1_4vmte"]
+[ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="2_giaor"]
+[ext_resource type="Texture2D" uid="uid://diu0rw1b6xipw" path="res://Assets/outlined_circle.svg" id="3_dtcmt"]
+[ext_resource type="Script" path="res://Logic/Enemy/ShieldOrbButton.cs" id="4_fm1tg"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="5_qag8p"]
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 38.4
+
+[node name="Orb" type="Area2D"]
+scale = Vector2(0.8, 0.8)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_4vmte")
+enemyBullet = ExtResource("2_giaor")
+
+[node name="Button" type="TextureButton" parent="."]
+modulate = Color(1, 1, 1, 0.643137)
+offset_left = -38.0
+offset_top = -38.0
+offset_right = 90.0
+offset_bottom = 90.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("3_dtcmt")
+script = ExtResource("4_fm1tg")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -23.75
+offset_top = -16.25
+offset_right = 76.25
+offset_bottom = 50.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("5_qag8p")
+theme_override_font_sizes/font_size = 48
+text = "TAP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("2")

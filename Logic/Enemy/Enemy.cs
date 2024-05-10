@@ -8,13 +8,17 @@ using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using RogueDefense.Logic.Statuses;
 
-public partial class Enemy : Area2D
+public abstract partial class Enemy : Area2D
 {
 	public static List<Enemy> enemies = new List<Enemy>();
-	public const float BASE_SPEED = 1.15f;
+	public abstract float GetBaseSpeed();
 	public override void _Ready()
 	{
-		enemies.Add(this);
+		shieldOrbGenerator = GetNode<ShieldOrbGenerator>("ShieldOrbGenerator");
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+
+		if (!enemies.Contains(this))
+			enemies.Add(this);
 
 		BodyEntered += OnBodyEntered;
 
@@ -43,6 +47,7 @@ public partial class Enemy : Area2D
 	public static float oneTimeHpMult = 1f;
 	public static float oneTimeArmorMult = 1f;
 	public static float oneTimeDamageMult = 1f;
+	public static int oneTimeCountIncrease = 0;
 	void ScaleStats(int gen, int index)
 	{
 		gen = Math.Max(1, gen - index * 3);
@@ -52,10 +57,11 @@ public partial class Enemy : Area2D
 
 		if (index == 0)
 		{
-			ResetImmunities(gen);
 			ResetShieldOrbs(gen);
+			ResetImmunities(gen);
+			ResetEffects(gen);
 
-			if (statsRng.Randf() < 0.15f)
+			if (statsRng.Randf() < 0.15f && gen % 10 != 9)
 				ActivateEffectField();
 		}
 	}
@@ -73,19 +79,34 @@ public partial class Enemy : Area2D
 			viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
 			cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
 		}
+
+		ModifyImmunities(ref statuses);
 	}
-	void ResetShieldOrbs(int gen)
+	ShieldOrbGenerator shieldOrbGenerator;
+	void ResetEffects(int gen)
 	{
 		if (!bleed.immune && !corrosive.immune)
 		{
-			ShieldOrbGenerator GetShieldOrbGenerator() => GetNode("ShieldOrbGenerator") as ShieldOrbGenerator;
-
 			float rand = statsRng.Randf();
 			if (rand < 0.1f)
 				SetDamageCap(GetDamageCap(gen));
-			else if (GetShieldOrbGenerator().count > 0 && gen < 40 && rand < 0.2f)
+			else if (shieldOrbGenerator.count > 0 && gen < 40 && rand < 0.2f)
 				SetMinDamage(GetMinDamage(gen));
 		}
+	}
+	void ResetShieldOrbs(int gen)
+	{
+		bool exploding = gen > 19;
+
+		if (gen % 10 == 9)
+		{
+			shieldOrbGenerator.CreateOrbs(5, false);
+			return;
+		}
+
+		if (gen % 2 == 0 && GD.Randf() < 0.5f)
+			shieldOrbGenerator.CreateOrbs(1 + Mathf.RoundToInt(GD.Randf() * 4), exploding: exploding);
+		else shieldOrbGenerator.count = 0;
 	}
 	void ScaleMaxHp(int gen)
 	{
@@ -99,6 +120,9 @@ public partial class Enemy : Area2D
 			baseMaxHp *= NetworkManager.PlayerCount;
 		}
 		maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power) * (0.8f + statsRng.Randf() * 0.4f)) * oneTimeHpMult;
+
+		ModifyMaxHp(ref maxHp);
+
 		Hp = maxHp;
 
 		oneTimeHpMult = 1f;
@@ -106,14 +130,19 @@ public partial class Enemy : Area2D
 	void ScaleDamage(int gen)
 	{
 		damage = 12.5f * Mathf.Sqrt(1f + gen) * oneTimeDamageMult;
+
+		ModifyDamage(ref damage);
+
 		oneTimeDamageMult = 1f;
 	}
 	void ScaleArmor(int gen)
 	{
-		if (gen > 10f)
-			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 10f) * oneTimeArmorMult;
+		if (gen > 9)
+			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 9f) * oneTimeArmorMult;
 		else
 			armor = 0f;
+
+		ModifyArmor(ref armor);
 
 		oneTimeArmorMult = 1f;
 
@@ -124,6 +153,11 @@ public partial class Enemy : Area2D
 		((EffectField)GetNode("EffectField")).Enable(GD.Randf() < 0.5f ? EffectField.EffectFieldMode.Slow : EffectField.EffectFieldMode.Diffuse);
 	}
 
+
+	protected virtual void ModifyMaxHp(ref float maxHp) { }
+	protected virtual void ModifyDamage(ref float damage) { }
+	protected virtual void ModifyArmor(ref float armor) { }
+	protected virtual void ModifyImmunities(ref Status[] statuses) { }
 
 	public float maxHp;
 	private float hp;
@@ -138,11 +172,11 @@ public partial class Enemy : Area2D
 	{
 		((ArmorBar)GetNode("ArmorBar")).SetDisplay(1f - GetArmorDamageMultiplier(armor));
 	}
+
 	[Export]
 	public PackedScene combatText;
 	public float dynamicDamageMult = 1f;
-	[Export]
-	public AnimationPlayer animationPlayer;
+	AnimationPlayer animationPlayer;
 	public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null, bool ignoreArmor = false)
 	{
 		if (Dead) return;
@@ -214,7 +248,7 @@ public partial class Enemy : Area2D
 
 		if (!attacking)
 		{
-			GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult * (float)delta * 60, 0);
+			GlobalPosition += new Vector2(-GetBaseSpeed() * dynamicSpeedMult * (float)delta * 60, 0);
 		}
 	}
 	public void OnBodyEntered(Node body)

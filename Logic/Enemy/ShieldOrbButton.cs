@@ -7,6 +7,15 @@ public partial class ShieldOrbButton : TextureButton
 {
     public override void _Pressed()
     {
+        DamageEnemies();
+
+        GetParent<ShieldOrb>().TryExplode();
+
+        GetParent().QueueFree();
+    }
+
+    void DamageEnemies()
+    {
         if (ShieldOrb.damageConsumed > 0)
         {
             for (int i = 0; i < Enemy.enemies.Count; i++)
@@ -29,6 +38,5 @@ public partial class ShieldOrbButton : TextureButton
             }
             ShieldOrb.damageConsumed = 0;
         }
-        GetParent().QueueFree();
     }
 }

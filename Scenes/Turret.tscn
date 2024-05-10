@@ -45,7 +45,7 @@ _data = {
 }
 
 [node name="Turret" type="CharacterBody2D" node_paths=PackedStringArray("animationPlayer", "bulletSpawnpoint")]
-z_index = -4
+z_index = -1
 collision_mask = 16
 motion_mode = 1
 script = ExtResource("3")
