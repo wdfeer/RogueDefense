@@ -18,6 +18,10 @@ public partial class ExplodingEye : Enemy
 	public PackedScene bulletScene;
 	protected override void OnDeath()
 	{
+		CallDeferred("SpawnBullets");
+	}
+	void SpawnBullets()
+	{
 		float angle = GD.Randf() * MathF.PI;
 		int count = 8;
 		for (int i = 0; i < count; i++)
@@ -27,7 +31,7 @@ public partial class ExplodingEye : Enemy
 			bullet.Position = Position;
 			bullet.damage = damage / 2;
 
-			bullet.velocity = new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * 200f;
+			bullet.velocity = new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * 125f;
 			angle += MathF.Tau / count;
 		}
 	}

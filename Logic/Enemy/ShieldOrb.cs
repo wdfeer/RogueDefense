@@ -50,6 +50,10 @@ public partial class ShieldOrb : Area2D
 		if (!exploding)
 			return;
 
+		CallDeferred("SpawnBullets");
+	}
+	void SpawnBullets()
+	{
 		for (int i = 0; i < 5; i++)
 		{
 			EnemyBullet bullet = enemyBullet.Instantiate<EnemyBullet>();
