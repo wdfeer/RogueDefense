@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=58 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -76,6 +76,24 @@ action = &"ability"
 
 [sub_resource type="Shortcut" id="Shortcut_5tqol"]
 events = [SubResource("InputEventAction_kb0q4")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_vr4lq"]
+action = &"upgrade1"
+
+[sub_resource type="Shortcut" id="Shortcut_ejynp"]
+events = [SubResource("InputEventAction_vr4lq")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_25v3l"]
+action = &"upgrade2"
+
+[sub_resource type="Shortcut" id="Shortcut_hj2em"]
+events = [SubResource("InputEventAction_25v3l")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_sbve0"]
+action = &"upgrade3"
+
+[sub_resource type="Shortcut" id="Shortcut_rdled"]
+events = [SubResource("InputEventAction_sbve0")]
 
 [sub_resource type="InputEventAction" id="InputEventAction_cdmt3"]
 action = &"menu"
@@ -361,6 +379,7 @@ offset_right = -150.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+shortcut = SubResource("Shortcut_ejynp")
 
 [node name="UpgradeButton2" parent="UpgradeScreen" instance=ExtResource("3")]
 layout_mode = 1
@@ -375,6 +394,7 @@ offset_right = 100.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+shortcut = SubResource("Shortcut_hj2em")
 text = "											"
 
 [node name="UpgradeButton3" parent="UpgradeScreen" instance=ExtResource("3")]
@@ -390,6 +410,7 @@ offset_right = 350.0
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+shortcut = SubResource("Shortcut_rdled")
 text = "													"
 
 [node name="NotificationLabel" type="Label" parent="UpgradeScreen"]
