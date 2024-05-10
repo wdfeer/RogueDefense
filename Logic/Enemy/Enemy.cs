@@ -128,9 +128,12 @@ public partial class Enemy : Area2D
 	void ScaleArmor(int gen)
 	{
 		if (gen > 9)
-			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 9f) * oneTimeArmorMult + (Game.instance.GetStage() == 2 ? 150 : 0);
+			armor = (NetworkManager.Singleplayer ? 30f : (gen > 55 ? 150f : 75f)) * (gen - 9f) * oneTimeArmorMult;
 		else
 			armor = 0f;
+
+		if (Game.GetStage() == 2)
+			armor += 300;
 
 		oneTimeArmorMult = 1f;
 

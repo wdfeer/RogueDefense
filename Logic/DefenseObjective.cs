@@ -111,7 +111,7 @@ namespace RogueDefense
 
             Game.instance.GetTree().Paused = true;
             DeathScreen.instance.Show();
-            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"{Game.instance.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
+            (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
         }
     }
 }

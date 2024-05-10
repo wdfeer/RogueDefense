@@ -67,8 +67,8 @@ public partial class Game : Node
 	}
 	public static int Wave => instance.wave;
 	private int wave = 0;
-	public int GetStage()
-		=> (int)(wave / 10f) + 1;
+	public static int GetStage()
+		=> (int)(Wave / 10f) + 1;
 	[Export]
 	private Background background;
 	public void EndWave()

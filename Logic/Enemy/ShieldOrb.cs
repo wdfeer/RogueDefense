@@ -19,7 +19,7 @@ public partial class ShieldOrb : Area2D
 		}
 		else if (body is DefenseObjective defObjective && !tappable)
 		{
-			defObjective.Damage(10f * Game.instance.GetStage());
+			defObjective.Damage(10f * Game.GetStage());
 		}
 	}
 

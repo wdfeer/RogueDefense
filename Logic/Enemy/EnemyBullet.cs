@@ -20,7 +20,7 @@ public partial class EnemyBullet : Area2D
 	{
 		if (body is DefenseObjective defenseObjective)
 		{
-			defenseObjective.Damage(5f * Game.instance.GetStage());
+			defenseObjective.Damage(5f * Game.GetStage());
 		}
 	}
 }
