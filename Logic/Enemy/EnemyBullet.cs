@@ -10,10 +10,16 @@ public partial class EnemyBullet : Area2D
 		BodyEntered += OnBodyEntered;
 	}
 
+	public float lifespan = 5;
 	public Vector2 velocity;
 	public override void _PhysicsProcess(double delta)
 	{
 		Position += velocity * (float)delta;
+
+		lifespan -= (float)delta;
+		Modulate = Modulate with { A = MathF.Min(lifespan, 1f) };
+		if (lifespan < 0)
+			QueueFree();
 	}
 
 	public float damage = 20f;
