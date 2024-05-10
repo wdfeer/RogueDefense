@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cg55ebhgoye21" path="res://Scenes/Enemies/ArmoredSpirit.tscn" id="12_icdcw"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/MainMenuButton.cs" id="13"]
-[ext_resource type="PackedScene" uid="uid://yab223bobamr" path="res://Scenes/Enemies/MiniArmoredSpirit.tscn" id="13_383pk"]
+[ext_resource type="PackedScene" uid="uid://ceqqj3eds3twh" path="res://Scenes/Enemies/MiniArmoredSpirit.tscn" id="13_383pk"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DpsLabel.cs" id="14"]
 [ext_resource type="Texture2D" uid="uid://cpe4b1e162y5y" path="res://Assets/game-icons.net/embrassed-energy.svg" id="14_sx78e"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]

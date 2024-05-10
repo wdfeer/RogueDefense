@@ -31,12 +31,7 @@ namespace RogueDefense
                     topPP[i] = file.GetFloat();
                 }
 
-                SpareAugmentPoints = 10;
-                for (int i = 0; i < augmentAllotment.Length; i++)
-                {
-                    augmentAllotment[i] = (int)file.Get64();
-                    SpareAugmentPoints -= augmentAllotment[i];
-                }
+                LoadAugments(file);
 
                 file.Close();
                 return true;
@@ -44,6 +39,21 @@ namespace RogueDefense
             catch (Exception)
             {
                 return false;
+            }
+        }
+        static void LoadAugments(FileAccess file)
+        {
+            int stages = Math.Max(highscoreSingleplayer, highscoreMultiplayer) / 10;
+            SpareAugmentPoints = stages * (stages + 1) / 2;
+            for (int i = 0; i < augmentAllotment.Length; i++)
+            {
+                augmentAllotment[i] = (int)file.Get64();
+                SpareAugmentPoints -= augmentAllotment[i];
+            }
+            if (SpareAugmentPoints < 0)
+            {
+                augmentAllotment = new int[augmentAllotment.Length];
+                SpareAugmentPoints = stages * (stages + 1) / 2;
             }
         }
         public static void Save()
