@@ -55,26 +55,21 @@ public abstract partial class Enemy : Area2D
 		ScaleDamage(gen);
 		ScaleArmor(gen);
 
+		ResetImmunities(gen, index);
+
 		if (index == 0)
 		{
 			ResetShieldOrbs(gen);
-			ResetImmunities(gen);
 			ResetEffects(gen);
 
 			if (statsRng.Randf() < 0.15f && gen % 10 != 9)
 				ActivateEffectField();
 		}
 	}
-	void ResetImmunities(int gen)
+	void ResetImmunities(int gen, int index)
 	{
-		if (gen >= (NetworkManager.Singleplayer ? 75 : 24) && gen % (NetworkManager.Singleplayer ? 25 : 12) == 0)
+		if (index == 0)
 		{
-			bleed.immune = true;
-			corrosive.immune = true;
-		}
-		else
-		{
-			bleed.immune = gen >= 20 && gen % 10 == 0;
 			corrosive.immune = gen >= 30 && (gen + 5) % 10 == 0;
 			viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
 			cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;

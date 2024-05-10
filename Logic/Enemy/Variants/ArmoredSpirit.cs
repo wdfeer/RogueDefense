@@ -6,12 +6,12 @@ using System.Linq;
 public partial class ArmoredSpirit : Enemy
 {
 	public override float GetBaseSpeed()
-		=> 0.75f;
+		=> 0.6f;
 
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
-		maxHp *= 1.25f;
-		maxHp += 50f;
+		maxHp /= GetBaseSpeed();
+		maxHp += 100f;
 	}
 	protected override void ModifyArmor(ref float armor)
 	{
@@ -27,10 +27,11 @@ public partial class ArmoredSpirit : Enemy
 		}
 	}
 
+	protected virtual float RotationSpeed => MathF.PI / 3;
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 
-		GetNode<Sprite2D>("Sprite2D").Rotate(MathF.PI / 2 * (float)delta);
+		GetNode<Sprite2D>("Sprite2D").Rotate(RotationSpeed * (float)delta);
 	}
 }

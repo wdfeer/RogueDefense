@@ -8,13 +8,28 @@ public partial class EnemySpawner : Node2D
 	public PackedScene regularEnemyScene;
 	[Export]
 	public PackedScene armoredSpiritScene;
+	[Export]
+	public PackedScene miniArmoredSpiritScene;
 
 	Enemy InstantiateEnemy(int gen)
 	{
+		Enemy InstantiateRandomNonBoss()
+		{
+			switch (Enemy.statsRng.RandiRange(0, 1))
+			{
+				case 0:
+					return regularEnemyScene.Instantiate<Enemy>();
+				default:
+					return miniArmoredSpiritScene.Instantiate<Enemy>();
+			}
+		}
+
 		switch (gen)
 		{
 			case 19:
 				return armoredSpiritScene.Instantiate<Enemy>();
+			case > 24:
+				return InstantiateRandomNonBoss();
 			default:
 				return regularEnemyScene.Instantiate<Enemy>();
 		}
