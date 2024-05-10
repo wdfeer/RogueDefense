@@ -8,15 +8,17 @@ using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using RogueDefense.Logic.Statuses;
 
-public partial class Enemy : Area2D
+public abstract partial class Enemy : Area2D
 {
 	public static List<Enemy> enemies = new List<Enemy>();
-	public const float BASE_SPEED = 1.15f;
+	public abstract float GetBaseSpeed();
 	public override void _Ready()
 	{
-		shieldOrbGenerator = GetNode("ShieldOrbGenerator") as ShieldOrbGenerator;
+		shieldOrbGenerator = GetNode<ShieldOrbGenerator>("ShieldOrbGenerator");
+		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
-		enemies.Add(this);
+		if (!enemies.Contains(this))
+			enemies.Add(this);
 
 		BodyEntered += OnBodyEntered;
 
@@ -116,6 +118,9 @@ public partial class Enemy : Area2D
 			baseMaxHp *= NetworkManager.PlayerCount;
 		}
 		maxHp = Mathf.Round(baseMaxHp * Mathf.Pow(1f + gen, power) * (0.8f + statsRng.Randf() * 0.4f)) * oneTimeHpMult;
+
+		ModifyMaxHp(ref maxHp);
+
 		Hp = maxHp;
 
 		oneTimeHpMult = 1f;
@@ -123,6 +128,9 @@ public partial class Enemy : Area2D
 	void ScaleDamage(int gen)
 	{
 		damage = 12.5f * Mathf.Sqrt(1f + gen) * oneTimeDamageMult;
+
+		ModifyDamage(ref damage);
+
 		oneTimeDamageMult = 1f;
 	}
 	void ScaleArmor(int gen)
@@ -132,8 +140,7 @@ public partial class Enemy : Area2D
 		else
 			armor = 0f;
 
-		if (Game.GetStage() == 2)
-			armor += 300;
+		ModifyArmor(ref armor);
 
 		oneTimeArmorMult = 1f;
 
@@ -143,6 +150,11 @@ public partial class Enemy : Area2D
 	{
 		((EffectField)GetNode("EffectField")).Enable(GD.Randf() < 0.5f ? EffectField.EffectFieldMode.Slow : EffectField.EffectFieldMode.Diffuse);
 	}
+
+
+	protected virtual void ModifyMaxHp(ref float maxHp) { }
+	protected virtual void ModifyDamage(ref float damage) { }
+	protected virtual void ModifyArmor(ref float armor) { }
 
 
 	public float maxHp;
@@ -158,11 +170,11 @@ public partial class Enemy : Area2D
 	{
 		((ArmorBar)GetNode("ArmorBar")).SetDisplay(1f - GetArmorDamageMultiplier(armor));
 	}
+
 	[Export]
 	public PackedScene combatText;
 	public float dynamicDamageMult = 1f;
-	[Export]
-	public AnimationPlayer animationPlayer;
+	AnimationPlayer animationPlayer;
 	public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null, bool ignoreArmor = false)
 	{
 		if (Dead) return;
@@ -234,7 +246,7 @@ public partial class Enemy : Area2D
 
 		if (!attacking)
 		{
-			GlobalPosition += new Vector2(-BASE_SPEED * dynamicSpeedMult * (float)delta * 60, 0);
+			GlobalPosition += new Vector2(-GetBaseSpeed() * dynamicSpeedMult * (float)delta * 60, 0);
 		}
 	}
 	public void OnBodyEntered(Node body)

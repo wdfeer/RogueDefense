@@ -9,15 +9,11 @@ using System.Security.Policy;
 public partial class Game : Node
 {
 	public static Game instance;
-
-	[Export]
-	public PackedScene enemyScene;
-
 	public override void _Ready()
 	{
-		SaveData.Save();
-
 		instance = this;
+
+		SaveData.Save();
 
 		PP.currentPP = 0f;
 
@@ -30,20 +26,11 @@ public partial class Game : Node
 		SpawnEnemiesAfterDelay();
 	}
 	void SpawnEnemiesAfterDelay()
-		=> ToSignal(GetTree().CreateTimer(1f, false), "timeout").OnCompleted(SpawnEnemies);
-	void SpawnEnemies()
-	{
-		for (int i = 0; i < Enemy.statsRng.RandiRange(1, 3) + Enemy.oneTimeCountIncrease; i++)
-		{
-			Enemy enemy = enemyScene.Instantiate<Enemy>();
-			Enemy.enemies.Add(enemy);
-			enemy.Position = new Vector2(900 + Enemy.statsRng.RandiRange(0, 250), 300 + i * 20 * (i % 2 == 0 ? 1 : -1));
-			GetNode("Enemies").AddChild(enemy);
-		}
-
-		Enemy.oneTimeCountIncrease = 0;
-		(GetNode("./LevelText") as Label).Text = $"Stage {GetStage()} - {wave % 10 + 1}";
-	}
+		=> ToSignal(GetTree().CreateTimer(0.5, false), "timeout").OnCompleted(() =>
+			{
+				((EnemySpawner)GetNode("EnemySpawner")).SpawnEnemies();
+				background.UpdateBackground(GetStage());
+			});
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
 		if (!IsInstanceValid(enemy))
@@ -78,8 +65,6 @@ public partial class Game : Node
 
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		wave++;
-		background.UpdateBackground(GetStage());
-
 
 		SaveData.UpdateHighscore();
 		SaveData.killCount++;
@@ -94,6 +79,7 @@ public partial class Game : Node
 		}
 
 		SpawnEnemiesAfterDelay();
+		(GetNode("./LevelText") as Label).Text = $"Stage {GetStage()} - {wave % 10 + 1}";
 	}
 
 	public void GoToMainMenu()
