@@ -26,4 +26,11 @@ public partial class ArmoredSpirit : Enemy
 			bleed.immune = true;
 		}
 	}
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+
+		GetNode<Sprite2D>("Sprite2D").Rotate(MathF.PI / 2 * (float)delta);
+	}
 }
