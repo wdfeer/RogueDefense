@@ -9,7 +9,7 @@ public partial class BulletDeleter : Area2D
     }
     public void OnBodyExited(Node body)
     {
-        if (body is Bullet)
+        if (body is Bullet or EnemyBullet)
             body.QueueFree();
     }
 }
