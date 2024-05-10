@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Godot;
+using RogueDefense;
 using RogueDefense.Logic.PlayerCore;
 
 public partial class UpgradeScreen : Panel
@@ -11,9 +13,9 @@ public partial class UpgradeScreen : Panel
     {
         instance = this;
         buttons = new Button[] {
-            (Button)GetNode("UpgradeButton1"),
-            (Button)GetNode("UpgradeButton2"),
-            (Button)GetNode("UpgradeButton3"),
+            GetNode<Button>("UpgradeButton1"),
+            GetNode<Button>("UpgradeButton2"),
+            GetNode<Button>("UpgradeButton3"),
         };
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -45,7 +47,19 @@ public partial class UpgradeScreen : Panel
             (buttons[i].GetNode("Label") as Label).Text = upgrades[i].ToString();
         }
     }
+    public void ResetNotificationLabel()
+    {
+        var label = GetNode<Label>("NotificationLabel");
 
+        int highscore = Math.Max(SaveData.highscoreSingleplayer, SaveData.highscoreMultiplayer);
+        if (Game.Wave > highscore && Game.Wave % 10 == 0)
+        {
+            label.Visible = true;
+            int stage = Game.Wave / 10;
+            label.Text = $"Stage {stage} Clear:\n+{stage} Augment Point";
+        }
+        else label.Visible = false;
+    }
     void OnButtonClicked(int index)
     {
         if (buttons.Any(x => !IsInstanceValid(x)))

@@ -55,7 +55,7 @@ public partial class Game : Node
 	public static int Wave => instance.wave;
 	private int wave = 0;
 	public static int GetStage()
-		=> (int)(Wave / 10f) + 1;
+		=> Wave / 10 + 1;
 	[Export]
 	private Background background;
 	public void EndWave()
@@ -66,12 +66,14 @@ public partial class Game : Node
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		wave++;
 
+		GetNode<UpgradeScreen>("./UpgradeScreen").ResetNotificationLabel();
+
 		SaveData.UpdateHighscore();
 		SaveData.killCount++;
 		SaveData.Save();
 
 		GetTree().Paused = true;
-		(GetNode("./UpgradeScreen") as UpgradeScreen).Activate();
+		GetNode<UpgradeScreen>("./UpgradeScreen").Activate();
 
 		foreach (var keyValue in Player.players)
 		{

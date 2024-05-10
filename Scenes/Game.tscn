@@ -392,6 +392,24 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "													"
 
+[node name="NotificationLabel" type="Label" parent="UpgradeScreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -137.5
+offset_top = 27.0
+offset_right = 137.5
+offset_bottom = 120.0
+grow_horizontal = 2
+theme = ExtResource("7")
+theme_override_colors/font_color = Color(0.264, 0.88, 0.264, 1)
+theme_override_font_sizes/font_size = 32
+text = "Stage 1 Clear:
++1 Augment Point"
+horizontal_alignment = 1
+
 [node name="NotificationPopup" type="PopupPanel" parent="."]
 process_mode = 3
 initial_position = 1
