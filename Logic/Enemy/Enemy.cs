@@ -79,6 +79,8 @@ public abstract partial class Enemy : Area2D
 			viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
 			cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
 		}
+
+		ModifyImmunities(ref statuses);
 	}
 	ShieldOrbGenerator shieldOrbGenerator;
 	void ResetEffects(int gen)
@@ -155,7 +157,7 @@ public abstract partial class Enemy : Area2D
 	protected virtual void ModifyMaxHp(ref float maxHp) { }
 	protected virtual void ModifyDamage(ref float damage) { }
 	protected virtual void ModifyArmor(ref float armor) { }
-
+	protected virtual void ModifyImmunities(ref Status[] statuses) { }
 
 	public float maxHp;
 	private float hp;
