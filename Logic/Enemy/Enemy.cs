@@ -156,6 +156,7 @@ public abstract partial class Enemy : Area2D
 	protected virtual void ModifyArmor(ref float armor) { }
 	protected virtual void ModifyImmunities(ref Status[] statuses) { }
 	protected virtual bool ShieldOrbsAllowed => true;
+	protected virtual void OnDeath() { }
 
 	public float maxHp;
 	private float hp;
@@ -213,6 +214,7 @@ public abstract partial class Enemy : Area2D
 	public void Die(bool netUpdate = true)
 	{
 		Hp = 0;
+		OnDeath();
 		Game.instance.OnEnemyDeath(this, netUpdate);
 	}
 	bool attacking = false;

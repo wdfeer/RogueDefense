@@ -16,11 +16,12 @@ public partial class EnemyBullet : Area2D
 		Position += velocity * (float)delta;
 	}
 
+	public float damage = 20f;
 	void OnBodyEntered(Node body)
 	{
 		if (body is DefenseObjective defenseObjective)
 		{
-			defenseObjective.Damage(5f * Game.GetStage());
+			defenseObjective.Damage(damage);
 		}
 	}
 }
