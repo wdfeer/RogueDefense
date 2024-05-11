@@ -52,7 +52,7 @@ public partial class EnemySpawner : Node2D
 			case 19:
 				return Vector2.Zero;
 			default:
-				return new Vector2(Enemy.statsRng.RandiRange(0, 250), index * 20 * (index % 2 == 0 ? 1 : -1));
+				return new Vector2(Enemy.statsRng.RandiRange(0, 250), MathF.Sqrt(index) * 80 * (index % 2 == 0 ? 1 : -1));
 		}
 	}
 
