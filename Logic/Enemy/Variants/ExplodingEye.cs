@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense;
 using System;
 
 public partial class ExplodingEye : Enemy
@@ -38,5 +39,13 @@ public partial class ExplodingEye : Enemy
 			bullet.velocity = new Vector2(MathF.Sin(angle), MathF.Cos(angle)) * 110f;
 			angle += MathF.Tau / count;
 		}
+	}
+
+
+	public override void _Process(double delta)
+	{
+		base._Process(delta);
+
+		GetNode<Sprite2D>("Sprite2D").Rotation = GlobalPosition.AngleToPoint(DefenseObjective.instance.GlobalPosition) + MathF.PI;
 	}
 }
