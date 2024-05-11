@@ -248,7 +248,8 @@ public abstract partial class Enemy : Area2D
 
 		if (!attacking)
 		{
-			GlobalPosition += new Vector2(-GetBaseSpeed() * dynamicSpeedMult * (float)delta * 60, 0);
+			var direction = GlobalPosition.DirectionTo(DefenseObjective.instance.GlobalPosition);
+			GlobalPosition += direction * GetBaseSpeed() * dynamicSpeedMult * (float)delta * 60;
 		}
 	}
 	public void OnBodyEntered(Node body)
