@@ -2,6 +2,7 @@ using Godot;
 using RogueDefense.Logic.PlayerCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public partial class Lobby : Control
 {
@@ -31,6 +32,7 @@ public partial class Lobby : Control
 		var node = userDataScene.Instantiate<PlayerData>();
 		node.SetPlayerName(data.name);
 		node.SetAbilityText(AbilityManager.GetAbilityName(data.ability));
+		node.SetAugmentPoints(data.augmentPoints.Sum());
 		userDisplayNodes.Add(data.id, node);
 		GetNode("PlayerList").AddChild(node);
 	}

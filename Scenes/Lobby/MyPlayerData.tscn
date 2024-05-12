@@ -7,9 +7,33 @@
 [node name="MyData" instance=ExtResource("1_2eq0j")]
 script = ExtResource("2_hcw7m")
 
-[node name="AbilityLabel" parent="Container" index="2"]
-visible = false
+[node name="Name" parent="." index="1"]
+theme_override_colors/font_color = Color(0.75, 1, 0.75, 1)
 
-[node name="AbilityChooser" parent="Container" index="3" instance=ExtResource("2_b6otd")]
+[node name="AbilityLabel" parent="." index="2"]
+visible = false
+theme_override_colors/font_color = Color(0.75, 1, 0.75, 1)
+
+[node name="AbilityChooser" parent="." index="3" instance=ExtResource("2_b6otd")]
 custom_minimum_size = Vector2(120, 0)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -15.0
+offset_right = 128.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.75, 1, 0.75, 1)
+theme_override_colors/font_pressed_color = Color(0.75, 1, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.75, 1, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.75, 1, 0.75, 1)
+theme_override_colors/font_disabled_color = Color(0.75, 1, 0.75, 1)
+theme_override_colors/font_outline_color = Color(0.75, 1, 0.75, 1)
+
+[node name="AugmentPoints" parent="." index="4"]
+theme_override_colors/font_color = Color(0.75, 1, 0.75, 1)

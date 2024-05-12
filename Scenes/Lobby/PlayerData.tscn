@@ -4,30 +4,66 @@
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/PlayerData.cs" id="3"]
 
-[node name="PlayerData" type="PanelContainer"]
+[node name="PlayerData" type="Panel"]
+custom_minimum_size = Vector2(0, 80)
 offset_right = 1024.0
 offset_bottom = 78.0
-size_flags_horizontal = 3
+size_flags_vertical = 0
 script = ExtResource("3")
 
-[node name="Container" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="Container"]
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -39.0
+offset_right = 64.0
+offset_bottom = 39.0
+grow_vertical = 2
+size_flags_horizontal = 0
 texture = ExtResource("1")
 stretch_mode = 5
 
-[node name="Name" type="Label" parent="Container"]
+[node name="Name" type="Label" parent="."]
 layout_mode = 2
+offset_left = 72.0
+offset_top = 27.0
+offset_right = 147.0
+offset_bottom = 50.0
+size_flags_horizontal = 0
 theme = ExtResource("2")
 text = "Loading..."
 vertical_alignment = 1
 
-[node name="AbilityLabel" type="Label" parent="Container"]
-modulate = Color(0, 0, 0, 1)
+[node name="AbilityLabel" type="Label" parent="."]
 custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -11.5
+offset_right = 128.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2")
 text = "Random"
+horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AugmentPoints" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "0 AP"
