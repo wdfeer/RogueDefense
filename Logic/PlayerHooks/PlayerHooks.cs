@@ -18,7 +18,6 @@ namespace RogueDefense
         public virtual void OnHitWithBullet(Enemy enemy, Bullet b, float postCritDmg) { }
         public virtual void OnAnyHit(float afterEffectsDmg) { }
         public virtual void PreShoot(ShootManager shooter) { }
-        public virtual void PostShoot(Bullet bullet) { }
         public virtual void OnWaveEnd() { }
         public virtual void OnKill(Enemy enemy) { }
 

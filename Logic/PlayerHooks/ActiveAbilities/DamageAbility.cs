@@ -23,12 +23,12 @@ namespace RogueDefense
                 player.shootManager.shootSpeed *= 2;
             }
         }
-        public override void PostShoot(Bullet bullet)
+        public override void PreShoot(ShootManager shooter)
         {
             if (buffLeft > 0)
             {
-                bullet.damage *= 1f + 1f * Strength;
-                bullet.StartParticleEffect();
+                shooter.damage *= 1f + 1f * Strength;
+                shooter.EnableParticles();
             }
         }
 

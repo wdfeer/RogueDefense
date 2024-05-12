@@ -24,7 +24,7 @@ namespace RogueDefense.Logic.PlayerCore
         public float multishot = 1f;
         public void Process(float delta)
         {
-            timeSinceLastShot += (float)delta;
+            timeSinceLastShot += delta;
             if (timeSinceLastShot > shootInterval && player.target != null && GodotObject.IsInstanceValid(player.target))
             {
                 timeSinceLastShot = 0;
@@ -39,6 +39,14 @@ namespace RogueDefense.Logic.PlayerCore
         public const float SPREAD_DEGREES = 10f;
         public int shootCount = 0;
         public List<Node2D> bulletSpawns = new List<Node2D>();
+
+        public void EnableParticles(Color? color = null)
+        {
+            particles = true;
+            if (color != null) particleModulate = (Color)color;
+        }
+        private bool particles = false;
+        private Color particleModulate = Colors.White;
         private void CreateBullets()
         {
             player.hooks.ForEach(x => x.PreShoot(this));
@@ -57,10 +65,18 @@ namespace RogueDefense.Logic.PlayerCore
                     bullet.damage = damage;
                     bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 
-                    player.hooks.ForEach(x => x.PostShoot(bullet));
+                    if (particles)
+                    {
+                        bullet.ParticleEmitter.Modulate = particleModulate;
+                        bullet.StartParticleEffect();
+                    }
                 }
             }
+
+            particles = false;
+            particleModulate = Colors.White;
         }
+
         public Bullet Shoot(Vector2 pos, float speed, float spreadDeg = SPREAD_DEGREES)
         {
             Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);

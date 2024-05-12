@@ -23,13 +23,12 @@ namespace RogueDefense
                 DefenseObjective.instance.damageMult *= 1f + DamageTaken;
             }
         }
-        public override void PostShoot(Bullet bullet)
+        public override void PreShoot(ShootManager shooter)
         {
             if (buffLeft > 0)
             {
-                bullet.damage *= 1f + 2f * Strength;
-                bullet.StartParticleEffect();
-                bullet.ParticleEmitter.Modulate = new Color(1f, 0f, 1f);
+                shooter.damage *= 1f + 2f * Strength;
+                shooter.EnableParticles(new Color(1f, 0f, 1f));
             }
         }
         public float DamageTaken => 0.5f * Strength;
