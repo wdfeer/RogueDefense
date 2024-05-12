@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=60 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -19,10 +19,11 @@
 [ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cg55ebhgoye21" path="res://Scenes/Enemies/ArmoredSpirit.tscn" id="12_icdcw"]
+[ext_resource type="PackedScene" uid="uid://b0oqoyg48rfi6" path="res://Scenes/Enemies/FirstBoss.tscn" id="12_srcxd"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/MainMenuButton.cs" id="13"]
 [ext_resource type="PackedScene" uid="uid://ceqqj3eds3twh" path="res://Scenes/Enemies/MiniArmoredSpirit.tscn" id="13_383pk"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DpsLabel.cs" id="14"]
-[ext_resource type="PackedScene" uid="uid://c82i70r32xdo1" path="res://Scenes/Enemies/exploding_eye.tscn" id="14_gxxuh"]
+[ext_resource type="PackedScene" uid="uid://c82i70r32xdo1" path="res://Scenes/Enemies/ExplodingEye.tscn" id="14_gxxuh"]
 [ext_resource type="Texture2D" uid="uid://cpe4b1e162y5y" path="res://Assets/game-icons.net/embrassed-energy.svg" id="14_sx78e"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
 [ext_resource type="Script" path="res://Logic/Enemy/EnemySpawner.cs" id="16_bbfcr"]
@@ -138,7 +139,8 @@ anchor_mode = 0
 position = Vector2(950, 300)
 script = ExtResource("16_bbfcr")
 regularEnemyScene = ExtResource("4")
-armoredSpiritScene = ExtResource("12_icdcw")
+firstBossScene = ExtResource("12_srcxd")
+armoredSpiritBossScene = ExtResource("12_icdcw")
 miniArmoredSpiritScene = ExtResource("13_383pk")
 explodingEyeScene = ExtResource("14_gxxuh")
 

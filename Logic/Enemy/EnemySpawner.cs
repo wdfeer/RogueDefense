@@ -7,7 +7,9 @@ public partial class EnemySpawner : Node2D
 	[Export]
 	public PackedScene regularEnemyScene;
 	[Export]
-	public PackedScene armoredSpiritScene;
+	public PackedScene firstBossScene;
+	[Export]
+	public PackedScene armoredSpiritBossScene;
 	[Export]
 	public PackedScene miniArmoredSpiritScene;
 	[Export]
@@ -15,7 +17,7 @@ public partial class EnemySpawner : Node2D
 
 	Enemy InstantiateEnemy(int gen, int index)
 	{
-		Enemy InstantiateRandomNonBoss()
+		Enemy InstantiateRandomNormal()
 		{
 			switch (Enemy.statsRng.RandiRange(0, 2))
 			{
@@ -27,13 +29,27 @@ public partial class EnemySpawner : Node2D
 					return regularEnemyScene.Instantiate<Enemy>();
 			}
 		}
+		Enemy InstantiateRandomBoss()
+		{
+			switch (Enemy.statsRng.RandiRange(0, 1))
+			{
+				case 0:
+					return armoredSpiritBossScene.Instantiate<Enemy>();
+				default:
+					return firstBossScene.Instantiate<Enemy>();
+			}
+		}
 
 		switch (gen)
 		{
+			case 9:
+				return firstBossScene.Instantiate<Enemy>();
 			case 19:
-				return armoredSpiritScene.Instantiate<Enemy>();
-			case > 22:
-				return InstantiateRandomNonBoss();
+				return armoredSpiritBossScene.Instantiate<Enemy>();
+			case > 19 when gen % 10 == 9:
+				return InstantiateRandomBoss();
+			case > 19:
+				return InstantiateRandomNormal();
 			default:
 				return regularEnemyScene.Instantiate<Enemy>();
 		}
