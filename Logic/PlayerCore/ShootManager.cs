@@ -86,10 +86,10 @@ namespace RogueDefense.Logic.PlayerCore
         public Bullet NewBullet(Vector2 gposition, Vector2 velocity)
         {
             Bullet bullet = DefenseObjective.instance.bulletScene.Instantiate<Bullet>();
+            DefenseObjective.instance.AddChild(bullet);
             bullet.owner = player;
             bullet.velocity = velocity;
             bullet.GlobalPosition = gposition;
-            Game.instance.AddChild(bullet);
             bullets.Add(bullet);
             return bullet;
         }

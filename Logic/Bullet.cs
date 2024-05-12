@@ -2,19 +2,11 @@ using Godot;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System;
+using System.Reflection;
 
 public partial class Bullet : MovingKinematicBody2D
 {
 	public Player owner;
-	public override void _Ready()
-	{
-		base._Ready();
-		ParticleEmitter.Modulate = Colors.Purple;
-	}
-	public override void _Process(double delta)
-	{
-		base._Process(delta);
-	}
 	public void SetHitMultiplier(float hitMult)
 	{
 		this.hitMult = MathHelper.RandomRound(hitMult);
