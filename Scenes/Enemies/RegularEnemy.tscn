@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Logic/Enemy/Variants/RegularEnemy.cs" id="1_lpeuu"]
 [ext_resource type="PackedScene" path="res://Scenes/CombatText.tscn" id="2_y3ud8"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="3"]
-[ext_resource type="Texture2D" uid="uid://cu3tpecvqde7u" path="res://Assets/Enemies/regular_enemy.png" id="3_bxm14"]
+[ext_resource type="Texture2D" uid="uid://c80sdypbt16dh" path="res://Assets/Enemies/regular_enemy.svg" id="3_ao3i5"]
 [ext_resource type="Texture2D" uid="uid://dcrprmbxi2ubo" path="res://Assets/target.png" id="4_lxucb"]
 [ext_resource type="Texture2D" uid="uid://dr1urwwgoukda" path="res://Assets/slash_icon.png" id="5"]
 [ext_resource type="Script" path="res://Logic/Enemy/Target.cs" id="5_3qqur"]
@@ -76,7 +76,7 @@ shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_bxm14")
+texture = ExtResource("3_ao3i5")
 
 [node name="Target" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.501953)
