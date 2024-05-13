@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=61 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://cpe4b1e162y5y" path="res://Assets/game-icons.net/embrassed-energy.svg" id="14_sx78e"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
 [ext_resource type="Script" path="res://Logic/Enemy/EnemySpawner.cs" id="16_bbfcr"]
+[ext_resource type="Script" path="res://Logic/BulletSpawner.cs" id="16_meflw"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
@@ -144,11 +145,14 @@ armoredSpiritBossScene = ExtResource("12_icdcw")
 miniArmoredSpiritScene = ExtResource("13_383pk")
 explodingEyeScene = ExtResource("14_gxxuh")
 
+[node name="BulletSpawner" type="Node" parent="."]
+script = ExtResource("16_meflw")
+bulletScene = ExtResource("5")
+
 [node name="DefenseObjective" type="StaticBody2D" parent="."]
 position = Vector2(100, 300)
 collision_mask = 3
 script = ExtResource("10")
-bulletScene = ExtResource("5")
 turretScene = ExtResource("17")
 
 [node name="Sprite2D" type="Sprite2D" parent="DefenseObjective"]
@@ -448,8 +452,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 489.0
-offset_bottom = 56.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")

@@ -14,6 +14,7 @@ namespace RogueDefense.Logic.PlayerCore
             baseDamage = 1f + player.augmentPoints[0] * AugmentContainer.STAT_PER_POINT[0];
             baseShootInterval = 1f / (1f + player.augmentPoints[1] * AugmentContainer.STAT_PER_POINT[1]);
             baseMultishot = 1f + player.augmentPoints[2] * AugmentContainer.STAT_PER_POINT[2];
+
         }
         public float baseDamage;
         public float damage = 1;
@@ -79,20 +80,16 @@ namespace RogueDefense.Logic.PlayerCore
 
         public Bullet Shoot(Vector2 pos, float speed, float spreadDeg = SPREAD_DEGREES)
         {
-            Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
-            Bullet bullet = NewBullet(pos, velocity.Rotated(Mathf.DegToRad(GD.Randf() * spreadDeg - spreadDeg / 2f)));
-            return bullet;
-        }
-        public Bullet NewBullet(Vector2 gposition, Vector2 velocity)
-        {
-            Bullet bullet = DefenseObjective.instance.bulletScene.Instantiate<Bullet>();
-            DefenseObjective.instance.AddChild(bullet);
+            Bullet bullet = BulletSpawner.instance.InstantiateBullet(pos);
             bullet.owner = player;
-            bullet.velocity = velocity;
-            bullet.GlobalPosition = gposition;
+
+            Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
+            bullet.velocity = velocity.Rotated(Mathf.DegToRad(GD.Randf() * spreadDeg - spreadDeg / 2f));
+
             bullets.Add(bullet);
             return bullet;
         }
+
         public void ClearBullets(Func<Bullet, bool> filter = null)
         {
             foreach (Bullet bull in bullets)
