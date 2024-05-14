@@ -114,8 +114,7 @@ namespace RogueDefense.Logic.PlayerCore
 
             player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
             player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
-            if (player.Local)
-                player.abilityManager.ResetAbilityText();
+            if (player.Local) player.abilityManager.ResetAbilityText();
 
             bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
             viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
@@ -123,17 +122,21 @@ namespace RogueDefense.Logic.PlayerCore
             PlayerHooks.GetHooks<StatusPlayer>(player).corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
 
             player.shootManager.shootSpeed = ShootManager.BASE_SHOOT_SPEED;
+
+            dynamicUpgradeModifier = 1f;
         }
-        public IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
+
+        public float dynamicUpgradeModifier = 1f;
+        private IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
             => upgrades.Where(x => x.type.Equals(type)).Select(x => x.Value);
         public float SumAllUpgradeValues(UpgradeType type)
-            => GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b);
+            => GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b) * dynamicUpgradeModifier;
         public float GetTotalUpgradeMultiplier(UpgradeType type)
             => 1f + SumAllUpgradeValues(type);
         public float SumEveryonesUpgradeValues(UpgradeType type)
             => Player.players.Select(x => x.Value.upgradeManager.SumAllUpgradeValues(type)).Aggregate(0f, (a, b) => a + b);
         public float GetReversedMultiplier(UpgradeType type) // Returns the product of all (1 - upgradeValue) on the player
-            => GetAllUpgradeValues(type).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b);
+            => GetAllUpgradeValues(type).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b) / dynamicUpgradeModifier;
 
         public void UpdateUpgradeText()
         {

@@ -8,21 +8,31 @@ namespace RogueDefense
     {
         public UpgradeBuffAbility(Player player, Button button) : base(player, button)
         {
-            active = false;
         }
         public override void Activate()
         {
-            active = true;
+            buffLeft = BASE_DURATION;
         }
-        public static bool active = false;
-        public const float UPGRADE_VALUE_INCREASE = 1f;
+        private float buffLeft = 0;
+        public const float BASE_DURATION = 10f;
+        public const float UPGRADE_INCREASE = 0.25f;
+        public override void PreUpdate(float delta)
+        {
+            base.PreUpdate(delta);
 
+            if (buffLeft > 0)
+            {
+                player.upgradeManager.dynamicUpgradeModifier += UPGRADE_INCREASE;
+                buffLeft -= delta;
+            }
+        }
 
-
-        public override float BaseCooldown => 30f;
-        public override bool ConstantValues => true;
+        public override float BaseCooldown => 60f;
         protected override string GetAbilityText()
-            => $@"+{MathHelper.ToPercentAndRound(UPGRADE_VALUE_INCREASE)}% Upgrade value on next upgrades
-Cooldown: {Cooldown.ToString("0.00")} s";
+            => $@"+{MathHelper.ToPercentAndRound(UPGRADE_INCREASE)}% Value on all previous upgrades
+Duration: {BASE_DURATION:0.00} s
+Cooldown: {Cooldown:0.00} s";
+        public override bool ConstantValues => true;
+        public override bool Shared => false;
     }
 }

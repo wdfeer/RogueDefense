@@ -29,16 +29,6 @@ namespace RogueDefense.Logic.PlayerCore
                 alreadyRolled.Add(upgrades[i].type);
             }
 
-
-            if (UpgradeBuffAbility.active)
-            {
-                for (int i = 0; i < upgrades.Length; i++)
-                {
-                    upgrades[i].valueMult += UpgradeBuffAbility.UPGRADE_VALUE_INCREASE;
-                }
-                UpgradeBuffAbility.active = false;
-            }
-
             return upgrades;
         }
         public static Upgrade RandomUpgrade(IEnumerable<UpgradeType> blacklist = null)

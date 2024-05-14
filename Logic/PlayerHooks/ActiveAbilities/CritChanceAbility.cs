@@ -13,8 +13,7 @@ namespace RogueDefense
         {
             buffLeft = Duration * 5f;
         }
-        public float buffLeft = 0;
-
+        private float buffLeft = 0;
 
 
         public override void PostUpgradeUpdate(float delta)
@@ -30,6 +29,6 @@ namespace RogueDefense
         protected override string GetAbilityText()
             => $@"+{MathHelper.ToPercentAndRound(CritChance)}% Crit Chance
 Duration: {(5f * Duration).ToString("0.00")} s
-Cooldown: {Cooldown.ToString("0.00")} s";
+Cooldown: {Cooldown:0.00} s";
     }
 }
