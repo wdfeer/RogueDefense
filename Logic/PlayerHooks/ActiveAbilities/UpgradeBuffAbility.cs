@@ -12,6 +12,7 @@ namespace RogueDefense
         public override void Activate()
         {
             buffLeft = BASE_DURATION;
+            player.turrets.ForEach((t) => t.EnableParticles(BASE_DURATION));
         }
         private float buffLeft = 0;
         public const float BASE_DURATION = 10f;

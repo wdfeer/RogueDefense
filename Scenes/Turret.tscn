@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cbgccxqtdj6tt"]
+[gd_scene load_steps=13 format=3 uid="uid://cbgccxqtdj6tt"]
 
 [ext_resource type="Texture2D" uid="uid://d3xo65538yce4" path="res://Assets/turret.png" id="2"]
 [ext_resource type="Script" path="res://Logic/Turret.cs" id="3"]
 [ext_resource type="Texture2D" uid="uid://2kqgnwv7khex" path="res://Assets/turret_shooting.png" id="3_tm8cl"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="3_ynhuv"]
+[ext_resource type="Script" path="res://Logic/TurretParticles.gd" id="5_1lw48"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jenu2"]
 radius = 24.0
@@ -43,6 +44,35 @@ _data = {
 "RESET": SubResource("Animation_ejjv2"),
 "ShootEffects": SubResource("Animation_1ogbw")
 }
+
+[sub_resource type="Curve" id="Curve_07ove"]
+max_value = 0.6
+_data = [Vector2(0.5, 0.6), 0.0, -1.2, 0, 1, Vector2(1, 0), -1.2, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lohlq"]
+curve = SubResource("Curve_07ove")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rgexs"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 10.0
+emission_ring_radius = 28.0
+emission_ring_inner_radius = 28.0
+angular_velocity_min = -15.16
+angular_velocity_max = 15.16
+radial_velocity_min = 75.0
+radial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = 1000.0
+tangential_accel_max = 1000.0
+scale_min = 3.0
+scale_max = 3.5
+color = Color(1, 0, 1, 1)
+alpha_curve = SubResource("CurveTexture_lohlq")
+hue_variation_min = -0.25
+hue_variation_max = 0.25
 
 [node name="Turret" type="CharacterBody2D" node_paths=PackedStringArray("animationPlayer", "bulletSpawnpoint")]
 z_index = -1
@@ -93,3 +123,11 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_7li00")
 }
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 2)
+emitting = false
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_rgexs")
+lifetime = 0.3
+script = ExtResource("5_1lw48")

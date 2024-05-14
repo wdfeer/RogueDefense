@@ -21,4 +21,11 @@ public partial class Turret : CharacterBody2D
 		Label label = (Label)GetNode("Label");
 		label.Text = text;
 	}
+
+	GpuParticles2D Particles => GetNode<GpuParticles2D>("GPUParticles2D");
+	public void EnableParticles(float duration)
+	{
+		Particles.Emitting = true;
+		ToSignal(GetTree().CreateTimer((float)duration), "timeout").OnCompleted(() => Particles.Emitting = false);
+	}
 }
