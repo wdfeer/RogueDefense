@@ -15,8 +15,8 @@ namespace RogueDefense
             player.turrets.ForEach((t) => t.EnableParticles(BASE_DURATION));
         }
         private float buffLeft = 0;
-        public const float BASE_DURATION = 10f;
-        public const float UPGRADE_INCREASE = 0.25f;
+        public const float BASE_DURATION = 5f;
+        public const float UPGRADE_INCREASE = 1f;
         public override void PreUpdate(float delta)
         {
             base.PreUpdate(delta);
@@ -28,7 +28,7 @@ namespace RogueDefense
             }
         }
 
-        public override float BaseCooldown => 60f;
+        public override float BaseCooldown => 90f;
         protected override string GetAbilityText()
             => $@"+{MathHelper.ToPercentAndRound(UPGRADE_INCREASE)}% Value on all previous upgrades
 Duration: {BASE_DURATION:0.00} s

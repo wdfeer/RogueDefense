@@ -26,6 +26,6 @@ public partial class Turret : CharacterBody2D
 	public void EnableParticles(float duration)
 	{
 		Particles.Emitting = true;
-		ToSignal(GetTree().CreateTimer((float)duration), "timeout").OnCompleted(() => Particles.Emitting = false);
+		ToSignal(GetTree().CreateTimer(duration, false), "timeout").OnCompleted(() => Particles.Emitting = false);
 	}
 }
