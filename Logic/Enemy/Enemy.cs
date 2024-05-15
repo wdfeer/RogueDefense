@@ -50,7 +50,7 @@ public abstract partial class Enemy : Area2D
 	public static int oneTimeCountIncrease = 0;
 	void ScaleStats(int gen, int index)
 	{
-		gen = Math.Max(1, gen - index * 3);
+		gen = Math.Max(1, gen - index * 2);
 		ScaleMaxHp(gen);
 		ScaleDamage(gen);
 		ScaleArmor(gen);
@@ -68,11 +68,22 @@ public abstract partial class Enemy : Area2D
 	}
 	void ResetImmunities(int gen, int index)
 	{
-		if (index == 0)
+		if (index != 0 && gen > 10 && statsRng.Randf() < 0.25f)
 		{
-			corrosive.immune = gen >= 30 && (gen + 5) % 10 == 0;
-			viral.immune = !bleed.immune && gen >= 10 && statsRng.Randf() < 0.1f;
-			cold.immune = !corrosive.immune && gen >= 40 && statsRng.Randf() < 0.1f;
+			switch (statsRng.RandiRange(0, 2))
+			{
+				case 0 when gen > 30:
+					cold.immune = true;
+					break;
+				case 1:
+					viral.immune = true;
+					break;
+				case 2:
+					corrosive.immune = true;
+					break;
+				default:
+					break;
+			}
 		}
 
 		ModifyImmunities(ref statuses);

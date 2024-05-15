@@ -10,8 +10,8 @@ public partial class FirstBoss : Enemy
 
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
-		maxHp *= 1.2f;
-		maxHp += 100f;
+		maxHp *= 1.5f;
+		maxHp += 60f;
 	}
 	protected override void ModifyImmunities(ref Status[] statuses)
 	{

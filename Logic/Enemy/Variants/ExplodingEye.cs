@@ -1,5 +1,6 @@
 using Godot;
 using RogueDefense;
+using RogueDefense.Logic.Statuses;
 using System;
 
 public partial class ExplodingEye : Enemy
@@ -16,6 +17,13 @@ public partial class ExplodingEye : Enemy
 	protected override void ModifyDamage(ref float damage)
 	{
 		damage /= 2;
+	}
+	protected override void ModifyImmunities(ref Status[] statuses)
+	{
+		foreach (Status status in statuses)
+		{
+			status.immune = false;
+		}
 	}
 	protected override bool ShieldOrbsAllowed => false;
 
