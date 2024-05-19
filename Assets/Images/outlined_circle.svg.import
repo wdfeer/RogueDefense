@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpyi8tduhmnw1"
-path="res://.godot/imported/enemy_bullet.svg-ba58d3ce6b97b8829336685ba4ef875b.ctex"
+uid="uid://diu0rw1b6xipw"
+path="res://.godot/imported/outlined_circle.svg-9a08920c9e4bf3a2d121a0412f40e988.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/enemy_bullet.svg"
-dest_files=["res://.godot/imported/enemy_bullet.svg-ba58d3ce6b97b8829336685ba4ef875b.ctex"]
+source_file="res://Assets/Images/outlined_circle.svg"
+dest_files=["res://.godot/imported/outlined_circle.svg-9a08920c9e4bf3a2d121a0412f40e988.ctex"]
 
 [params]
 

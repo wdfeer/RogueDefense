@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fqdgbhgv6ugk"
-path="res://.godot/imported/cancel.svg-3925ac48f31f36c776223a14708fba48.ctex"
+uid="uid://c6pt4yqyytldg"
+path="res://.godot/imported/play-button.svg-2019d1e1193855943752c6b4d34880e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/game-icons.net/cancel.svg"
-dest_files=["res://.godot/imported/cancel.svg-3925ac48f31f36c776223a14708fba48.ctex"]
+source_file="res://Assets/Images/game-icons.net/play-button.svg"
+dest_files=["res://.godot/imported/play-button.svg-2019d1e1193855943752c6b4d34880e9.ctex"]
 
 [params]
 

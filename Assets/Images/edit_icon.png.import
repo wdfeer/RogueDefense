@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg6bpe3ran01u"
-path="res://.godot/imported/defense_objective.svg-43e46396c45e907d42b445f7c20ac299.ctex"
+uid="uid://c17qn0pu5avpn"
+path="res://.godot/imported/edit_icon.png-05501c3124be30bb8df2590d2286ade5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/defense_objective.svg"
-dest_files=["res://.godot/imported/defense_objective.svg-43e46396c45e907d42b445f7c20ac299.ctex"]
+source_file="res://Assets/Images/edit_icon.png"
+dest_files=["res://.godot/imported/edit_icon.png-05501c3124be30bb8df2590d2286ade5.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

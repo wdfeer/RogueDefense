@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dan7pmxq1plgx"
-path="res://.godot/imported/shuriken.png-3683ffd067da2b40fd37e1d70c66572d.ctex"
+uid="uid://io0wq1mb4pyu"
+path="res://.godot/imported/corrosive_icon.png-09e007774e92dbe0b0407d6e58cab14c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/shuriken.png"
-dest_files=["res://.godot/imported/shuriken.png-3683ffd067da2b40fd37e1d70c66572d.ctex"]
+source_file="res://Assets/Images/corrosive_icon.png"
+dest_files=["res://.godot/imported/corrosive_icon.png-09e007774e92dbe0b0407d6e58cab14c.ctex"]
 
 [params]
 

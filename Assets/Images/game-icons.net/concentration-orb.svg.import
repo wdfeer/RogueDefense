@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://db4cftuv5i83w"
-path="res://.godot/imported/viral_icon.png-73bdf9e3deade2c28730068a1e07e62a.ctex"
+uid="uid://c0qkfm8o6i4jo"
+path="res://.godot/imported/concentration-orb.svg-90f3c5c08a380b501541916baf790fc5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/viral_icon.png"
-dest_files=["res://.godot/imported/viral_icon.png-73bdf9e3deade2c28730068a1e07e62a.ctex"]
+source_file="res://Assets/Images/game-icons.net/concentration-orb.svg"
+dest_files=["res://.godot/imported/concentration-orb.svg-90f3c5c08a380b501541916baf790fc5.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

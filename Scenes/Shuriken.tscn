@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource path="res://Scenes/Bullet.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/shuriken.png" type="Texture2D" id=2]
-[ext_resource path="res://Logic/PlayerHooks/ActiveAbilities/Shuriken.cs" type="Script" id=3]
+[ext_resource type="PackedScene" uid="uid://b7e7eteghmjq0" path="res://Scenes/Bullet.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://dan7pmxq1plgx" path="res://Assets/Images/shuriken.png" id="2"]
+[ext_resource type="Script" path="res://Logic/PlayerHooks/ActiveAbilities/Shuriken.cs" id="3"]
 
 [node name="Shuriken" instance=ExtResource( 1 )]
 script = ExtResource( 3 )

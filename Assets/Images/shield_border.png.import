@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://io0wq1mb4pyu"
-path="res://.godot/imported/corrosive_icon.png-456117c38bee374c16b9fce2fe65484b.ctex"
+uid="uid://rewrv0hgspug"
+path="res://.godot/imported/shield_border.png-df5550c1b3414f85e655be5a14792a74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/corrosive_icon.png"
-dest_files=["res://.godot/imported/corrosive_icon.png-456117c38bee374c16b9fce2fe65484b.ctex"]
+source_file="res://Assets/Images/shield_border.png"
+dest_files=["res://.godot/imported/shield_border.png-df5550c1b3414f85e655be5a14792a74.ctex"]
 
 [params]
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdpste7hjr5v5"]
 
-[ext_resource type="Texture2D" uid="uid://t3p5mfkxc68l" path="res://Assets/godot.png" id="1"]
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://t3p5mfkxc68l" path="res://Assets/Images/godot.png" id="2_4of0t"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/PlayerData.cs" id="3"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="3_qvrnw"]
 
 [node name="PlayerData" type="Panel"]
 custom_minimum_size = Vector2(0, 80)
@@ -21,7 +21,7 @@ offset_right = 64.0
 offset_bottom = 39.0
 grow_vertical = 2
 size_flags_horizontal = 0
-texture = ExtResource("1")
+texture = ExtResource("2_4of0t")
 stretch_mode = 5
 
 [node name="Name" type="Label" parent="."]
@@ -31,7 +31,7 @@ offset_top = 27.0
 offset_right = 147.0
 offset_bottom = 50.0
 size_flags_horizontal = 0
-theme = ExtResource("2")
+theme = ExtResource("3_qvrnw")
 text = "Loading..."
 vertical_alignment = 1
 
@@ -49,7 +49,7 @@ offset_right = 128.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2")
+theme = ExtResource("3_qvrnw")
 text = "Random"
 horizontal_alignment = 1
 vertical_alignment = 1

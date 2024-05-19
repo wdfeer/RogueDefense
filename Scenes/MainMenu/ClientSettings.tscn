@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c86d8jw0um27y"]
 
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1_ncqh8"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="1_ncqh8"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/CombatTextButton.cs" id="2_04flm"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/HpBarButton.cs" id="3_yw6ce"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AvgDPSButton.cs" id="4_kd82x"]

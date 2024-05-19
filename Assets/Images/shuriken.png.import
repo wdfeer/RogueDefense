@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rewrv0hgspug"
-path="res://.godot/imported/shield_border.png-a028f1d47bfd7cc1eac9875a16992bb0.ctex"
+uid="uid://dan7pmxq1plgx"
+path="res://.godot/imported/shuriken.png-79fcfdfcb6d659d7f1a637de87690329.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/shield_border.png"
-dest_files=["res://.godot/imported/shield_border.png-a028f1d47bfd7cc1eac9875a16992bb0.ctex"]
+source_file="res://Assets/Images/shuriken.png"
+dest_files=["res://.godot/imported/shuriken.png-79fcfdfcb6d659d7f1a637de87690329.ctex"]
 
 [params]
 

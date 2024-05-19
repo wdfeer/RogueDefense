@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwotxf7hje6as"
-path="res://.godot/imported/shield_filled.png-3cbc9030a985a0b1b06f4699f3283d7c.ctex"
+uid="uid://cpe4b1e162y5y"
+path="res://.godot/imported/embrassed-energy.svg-dcd7bf57eacb0818ea3dd1cf648bb02a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/shield_filled.png"
-dest_files=["res://.godot/imported/shield_filled.png-3cbc9030a985a0b1b06f4699f3283d7c.ctex"]
+source_file="res://Assets/Images/game-icons.net/embrassed-energy.svg"
+dest_files=["res://.godot/imported/embrassed-energy.svg-dcd7bf57eacb0818ea3dd1cf648bb02a.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

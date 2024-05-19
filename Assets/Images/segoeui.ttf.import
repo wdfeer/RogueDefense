@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://idbujal30pa6"
-path="res://.godot/imported/segoeui.ttf-ff5c456725c3e2ddb1f25ab386d4ab12.fontdata"
+path="res://.godot/imported/segoeui.ttf-eb0ba2074e7fb5931402467e9fd09d80.fontdata"
 
 [deps]
 
-source_file="res://Assets/segoeui.ttf"
-dest_files=["res://.godot/imported/segoeui.ttf-ff5c456725c3e2ddb1f25ab386d4ab12.fontdata"]
+source_file="res://Assets/Images/segoeui.ttf"
+dest_files=["res://.godot/imported/segoeui.ttf-eb0ba2074e7fb5931402467e9fd09d80.fontdata"]
 
 [params]
 

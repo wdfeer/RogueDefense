@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmmg1navf2b37"
-path="res://.godot/imported/check-mark.svg-a7466dab837cb7e213d27661f02b7f96.ctex"
+path="res://.godot/imported/check-mark.svg-04bbd3e880fc419a5a54efb65209c345.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/game-icons.net/check-mark.svg"
-dest_files=["res://.godot/imported/check-mark.svg-a7466dab837cb7e213d27661f02b7f96.ctex"]
+source_file="res://Assets/Images/game-icons.net/check-mark.svg"
+dest_files=["res://.godot/imported/check-mark.svg-04bbd3e880fc419a5a54efb65209c345.ctex"]
 
 [params]
 

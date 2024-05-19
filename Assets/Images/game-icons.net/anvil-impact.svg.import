@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6em6vwabqc1g"
-path="res://.godot/imported/settings-knobs.svg-e1873b594bacd83d7b13b4e96fd7f525.ctex"
+uid="uid://b65dsdcjq560t"
+path="res://.godot/imported/anvil-impact.svg-cb6f9d1be73f492d3e70f08a3394f966.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/game-icons.net/settings-knobs.svg"
-dest_files=["res://.godot/imported/settings-knobs.svg-e1873b594bacd83d7b13b4e96fd7f525.ctex"]
+source_file="res://Assets/Images/game-icons.net/anvil-impact.svg"
+dest_files=["res://.godot/imported/anvil-impact.svg-cb6f9d1be73f492d3e70f08a3394f966.ctex"]
 
 [params]
 

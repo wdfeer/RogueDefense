@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://dtm1dpgedp8k2"]
 
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://bdpste7hjr5v5" path="res://Scenes/Lobby/PlayerData.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://djlwd1jt4bb3k" path="res://Scenes/MainMenu/background.tscn" id="3_rh4s4"]
 [ext_resource type="Script" path="res://Logic/Network/Lobby.cs" id="4"]
@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Logic/UI/Lobby/StartButton.cs" id="5"]
 [ext_resource type="PackedScene" uid="uid://dj24sijrviwde" path="res://Scenes/Lobby/MyPlayerData.tscn" id="5_hp6bq"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="6"]
-[ext_resource type="Texture2D" uid="uid://6em6vwabqc1g" path="res://Assets/game-icons.net/settings-knobs.svg" id="8_thxa7"]
+[ext_resource type="Texture2D" uid="uid://6em6vwabqc1g" path="res://Assets/Images/game-icons.net/settings-knobs.svg" id="8_thxa7"]
 [ext_resource type="PackedScene" uid="uid://dxi23vhlhulyj" path="res://Scenes/Lobby/SettingsSlider.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://cjt2h0rh6bswo" path="res://Scenes/Lobby/ExitButton.tscn" id="10_3pedh"]
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/SettingsButton.cs" id="11"]

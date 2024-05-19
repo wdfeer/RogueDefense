@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diu0rw1b6xipw"
-path="res://.godot/imported/outlined_circle.svg-78e28cde131ae358b8d99ec9eaf3528b.ctex"
+uid="uid://fqdgbhgv6ugk"
+path="res://.godot/imported/cancel.svg-3b25ea6304b79d722c4f493e16c7492b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/outlined_circle.svg"
-dest_files=["res://.godot/imported/outlined_circle.svg-78e28cde131ae358b8d99ec9eaf3528b.ctex"]
+source_file="res://Assets/Images/game-icons.net/cancel.svg"
+dest_files=["res://.godot/imported/cancel.svg-3b25ea6304b79d722c4f493e16c7492b.ctex"]
 
 [params]
 

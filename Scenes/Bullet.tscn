@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7e7eteghmjq0"]
 
 [ext_resource type="Script" path="res://Logic/Bullet.cs" id="1"]
-[ext_resource type="Texture2D" uid="uid://diu0rw1b6xipw" path="res://Assets/outlined_circle.svg" id="2_noj5q"]
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://diu0rw1b6xipw" path="res://Assets/Images/outlined_circle.svg" id="2_noj5q"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="4"]
 
 [sub_resource type="CircleShape2D" id="1"]
 radius = 25.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ck8gmgjr1lmqk"]
 
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2_2twcg"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="2_2twcg"]
 
 [node name="UpgradeButton" type="Button"]
 offset_left = 437.0

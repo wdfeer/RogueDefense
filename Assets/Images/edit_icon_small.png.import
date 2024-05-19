@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b65dsdcjq560t"
-path="res://.godot/imported/anvil-impact.svg-6fda7e5c24976711db619838f4123cc1.ctex"
+uid="uid://d4n1tobo1ylie"
+path="res://.godot/imported/edit_icon_small.png-a5478bc9a073f0f58747f2337361576f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/game-icons.net/anvil-impact.svg"
-dest_files=["res://.godot/imported/anvil-impact.svg-6fda7e5c24976711db619838f4123cc1.ctex"]
+source_file="res://Assets/Images/edit_icon_small.png"
+dest_files=["res://.godot/imported/edit_icon_small.png-a5478bc9a073f0f58747f2337361576f.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

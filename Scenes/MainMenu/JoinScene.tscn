@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://d7hydk75hi01"]
 
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="1"]
 [ext_resource type="Script" path="res://Logic/UI/JoinScene/JoinButton.cs" id="3"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://djlwd1jt4bb3k" path="res://Scenes/MainMenu/background.tscn" id="4_batrb"]

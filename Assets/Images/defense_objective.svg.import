@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr1urwwgoukda"
-path="res://.godot/imported/slash_icon.png-1d8d968e9aa23ec7aea617e40c506e8c.ctex"
+uid="uid://cg6bpe3ran01u"
+path="res://.godot/imported/defense_objective.svg-dc163f38cf3df745504247c170b2b632.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/slash_icon.png"
-dest_files=["res://.godot/imported/slash_icon.png-1d8d968e9aa23ec7aea617e40c506e8c.ctex"]
+source_file="res://Assets/Images/defense_objective.svg"
+dest_files=["res://.godot/imported/defense_objective.svg-dc163f38cf3df745504247c170b2b632.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

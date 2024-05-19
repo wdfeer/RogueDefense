@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxi23vhlhulyj"]
 
 [ext_resource type="Script" path="res://Logic/UI/Lobby/Settings/SettingsSlider.cs" id="2"]
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2_mdajy"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="2_mdajy"]
 
 [node name="Slider" type="VBoxContainer"]
 offset_right = 312.0
