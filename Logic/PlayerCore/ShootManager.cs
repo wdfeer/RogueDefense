@@ -53,7 +53,7 @@ namespace RogueDefense.Logic.PlayerCore
             player.hooks.ForEach(x => x.PreShoot(this));
             int bulletCount = MathHelper.RandomRound(multishot);
             float hitMult = 1f;
-            if (bulletCount / shootInterval > 10f)
+            if (bulletCount / shootInterval > 100f)
             {
                 hitMult = bulletCount / 3f;
                 bulletCount = 3;

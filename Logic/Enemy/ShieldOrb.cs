@@ -8,20 +8,16 @@ public partial class ShieldOrb : Area2D
 	ShieldOrbButton button;
 	public override void _Ready()
 	{
-		// BodyEntered += OnBodyEntered;
+		BodyEntered += OnBodyEntered;
 		button = (ShieldOrbButton)GetNode("Button");
 	}
-	// public void OnBodyEntered(Node body)
-	// {
-	// 	if (body is Bullet bullet)
-	// 	{
-	// 		bullet.ShieldOrbCollision(this);
-	// 	}
-	// 	else if (body is DefenseObjective defObjective && !tappable)
-	// 	{
-	// 		defObjective.Damage(10f * Game.GetStage());
-	// 	}
-	// }
+	public void OnBodyEntered(Node body)
+	{
+		if (body is DefenseObjective defObjective && !tappable)
+		{
+			defObjective.Damage(10f * Game.GetStage());
+		}
+	}
 
 	bool tappable = true;
 	public void SetTappability(bool tappable)

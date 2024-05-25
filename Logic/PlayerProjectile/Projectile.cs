@@ -86,7 +86,10 @@ public abstract class Projectile
         if (result.Count == 0)
             return;
         Variant collider = result[0]["collider"];
-        EnemyCollision((Enemy)collider.Obj);
+        if (collider.Obj is Enemy enemy)
+            EnemyCollision(enemy);
+        else if (collider.Obj is ShieldOrb shieldOrb)
+            ShieldOrbCollision(shieldOrb);
     }
 
     public void EnemyCollision(Enemy enemy)
