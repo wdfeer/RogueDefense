@@ -4,6 +4,10 @@ using System;
 
 public partial class FpsLabel : Label
 {
+	public override void _Ready()
+	{
+		Visible = SaveData.showFPS;
+	}
 	public override void _Process(double delta)
 	{
 		Visible = SaveData.showFPS;

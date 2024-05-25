@@ -47,12 +47,11 @@ public partial class Client : Node
     }
     public void ProcessMessage(MessageType type, string[] args)
     {
-        GD.Print($"Client processing message of type {type} with args: {String.Concat(args)}");
         switch (type)
         {
             case MessageType.FetchLobby:
                 ChangeSceneToLobby();
-                GD.Print($"Sending Register Message with augments {String.Join(",", SaveData.augmentAllotment)}");
+                GD.Print($"Sending Register Message with augments {string.Join(",", SaveData.augmentAllotment)}");
                 SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(SaveData.augmentAllotment) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
@@ -161,7 +160,7 @@ public partial class Client : Node
     {
         string msg = $"{(char)type}";
         if (args != null)
-            msg += String.Join(" ", args);
+            msg += string.Join(" ", args);
         GD.Print($"Sending message to Server: {msg}");
         Broadcast(msg);
     }
