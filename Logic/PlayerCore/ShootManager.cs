@@ -91,7 +91,7 @@ namespace RogueDefense.Logic.PlayerCore
             Bullet bullet = projectileManager.SpawnBullet(pos);
             bullet.owner = player;
 
-            Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
+            Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition) * 100;
             bullet.velocity = velocity.Rotated(Mathf.DegToRad(GD.Randf() * spreadDeg - spreadDeg / 2f));
 
             return bullet;

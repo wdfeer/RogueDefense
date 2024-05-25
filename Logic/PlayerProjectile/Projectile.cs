@@ -55,26 +55,34 @@ public abstract class Projectile
 
     public bool fused = false;
 
-    public Vector2 position = Vector2.Zero;
-    public Vector2 velocity = Vector2.Zero;
-    private void QueueFree() => queuedForDeletion = true;
-    public bool queuedForDeletion = false;
-
 
     public abstract void Draw(CanvasItem drawer);
+
+
+    public Vector2 position = Vector2.Zero;
+    public Vector2 velocity = Vector2.Zero;
     public virtual void PhysicsProcess(float delta)
     {
         position += velocity * delta;
         CheckCollision();
     }
-    private const float RADIUS = 50;
+
+
+    private void QueueFree() => queuedForDeletion = true;
+    public bool queuedForDeletion = false;
+
+
+    protected abstract int Radius { get; }
+    protected int Diameter => 2 * Radius;
     private void CheckCollision()
     {
-        var spaceState = DefenseObjective.instance.GetWorld2D().DirectSpaceState;
-        var query = new PhysicsShapeQueryParameters2D() { CollisionMask = 2, Shape = new CircleShape2D() { Radius = RADIUS } };
+        var spaceState = Player.my.controlledTurret.GetWorld2D().DirectSpaceState;
+        var query = new PhysicsShapeQueryParameters2D() { CollisionMask = 0x2, Shape = new CircleShape2D() { Radius = Radius } };
         var result = spaceState.IntersectShape(query, 1);
+        if (result.Count == 0)
+            return;
         object collider = result[0]["collider"];
-        if (collider is Enemy enemy)
+        if (collider is Enemy enemy && !enemy.Dead)
             EnemyCollision(enemy);
     }
 
