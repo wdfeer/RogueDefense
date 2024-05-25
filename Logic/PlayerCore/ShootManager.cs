@@ -98,7 +98,7 @@ namespace RogueDefense.Logic.PlayerCore
             foreach (Turret turret in player.turrets)
             {
                 turret.animationPlayer.Stop();
-                turret.animationPlayer.Play("ShootEffects");
+                turret.animationPlayer.Play("ShootEffects", customSpeed: speed);
             }
         }
     }
