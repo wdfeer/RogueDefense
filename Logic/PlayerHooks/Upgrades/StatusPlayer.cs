@@ -13,7 +13,7 @@ namespace RogueDefense
         {
         }
 
-        public override void OnHitWithBullet(Enemy enemy, Bullet b, float postCritDmg)
+        public override void OnHitWithProj(Enemy enemy, Projectile p, float postCritDmg)
         {
             int bleedCount = MathHelper.RandomRound(player.upgradeManager.bleedChance);
             if (bleedCount > 0)

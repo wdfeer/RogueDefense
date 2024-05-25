@@ -8,9 +8,16 @@ namespace RogueDefense.Logic.PlayerCore
     public partial class ShootManager
     {
         readonly Player player;
+        readonly Projectiles projectileManager;
         public ShootManager(Player player)
         {
             this.player = player;
+            projectileManager = new Projectiles
+            {
+                Name = $"{player.Name}'s Projectiles"
+            };
+            Game.instance.AddChild(projectileManager);
+
             baseDamage = 1f + player.augmentPoints[0] * AugmentContainer.STAT_PER_POINT[0];
             baseShootInterval = 1f / (1f + player.augmentPoints[1] * AugmentContainer.STAT_PER_POINT[1]);
             baseMultishot = 1f + player.augmentPoints[2] * AugmentContainer.STAT_PER_POINT[2];
@@ -33,8 +40,9 @@ namespace RogueDefense.Logic.PlayerCore
                 shootCount++;
                 PlayShootAnimation();
             }
+
+
         }
-        public List<Bullet> bullets = new List<Bullet>();
         public const float BASE_SHOOT_SPEED = 6f;
         public float shootSpeed = BASE_SHOOT_SPEED;
         public const float SPREAD_DEGREES = 10f;
@@ -68,7 +76,7 @@ namespace RogueDefense.Logic.PlayerCore
 
                     if (particles)
                     {
-                        bullet.ParticleEmitter.Modulate = particleModulate;
+                        // bullet.ParticleEmitter.Modulate = particleModulate;
                         bullet.StartParticleEffect();
                     }
                 }
@@ -80,7 +88,7 @@ namespace RogueDefense.Logic.PlayerCore
 
         public Bullet Shoot(Vector2 pos, float speed, float spreadDeg = SPREAD_DEGREES)
         {
-            Bullet bullet = BulletSpawner.instance.InstantiateBullet(pos);
+            Bullet bullet = projectileManager.SpawnBullet(pos);
             bullet.owner = player;
 
             Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
@@ -101,7 +109,6 @@ namespace RogueDefense.Logic.PlayerCore
                     bull.QueueFree();
                 }
             }
-            bullets = new List<Bullet>();
         }
 
         private void PlayShootAnimation()

@@ -56,4 +56,6 @@ public partial class ExplodingEye : Enemy
 
 		GetNode<Sprite2D>("Sprite2D").Rotation = GlobalPosition.AngleToPoint(DefenseObjective.instance.GlobalPosition) + MathF.PI;
 	}
+
+
 }
