@@ -8,14 +8,12 @@ namespace RogueDefense.Logic.PlayerCore
     public partial class ShootManager
     {
         readonly Player player;
-        public readonly Projectiles projectileManager;
+        public readonly ProjectileManager projectileManager;
         public ShootManager(Player player)
         {
             this.player = player;
-            projectileManager = new Projectiles
-            {
-                Name = $"{player.Name}'s Projectiles"
-            };
+            projectileManager = DefenseObjective.instance.projectileManagerScene.Instantiate<ProjectileManager>();
+            projectileManager.Name = $"{player.Name}'s Projectiles";
             Game.instance.AddChild(projectileManager);
 
             baseDamage = 1f + player.augmentPoints[0] * AugmentContainer.STAT_PER_POINT[0];
@@ -49,13 +47,7 @@ namespace RogueDefense.Logic.PlayerCore
         public int shootCount = 0;
         public List<Node2D> bulletSpawns = new List<Node2D>();
 
-        public void EnableParticles(Color? color = null)
-        {
-            particles = true;
-            if (color != null) particleModulate = (Color)color;
-        }
-        private bool particles = false;
-        private Color particleModulate = Colors.White;
+        public bool colored = false;
         private void CreateBullets()
         {
             player.hooks.ForEach(x => x.PreShoot(this));
@@ -74,16 +66,14 @@ namespace RogueDefense.Logic.PlayerCore
                     bullet.damage = damage;
                     bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 
-                    if (particles)
+                    if (colored)
                     {
-                        // bullet.ParticleEmitter.Modulate = particleModulate;
-                        bullet.StartParticleEffect();
+                        bullet.modulate = Colors.LightCyan;
                     }
                 }
             }
 
-            particles = false;
-            particleModulate = Colors.White;
+            colored = false;
         }
 
         public Bullet Shoot(Vector2 pos, float speed, float spreadDeg = SPREAD_DEGREES)
@@ -91,7 +81,7 @@ namespace RogueDefense.Logic.PlayerCore
             Bullet bullet = projectileManager.SpawnBullet(pos);
             bullet.owner = player;
 
-            Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition) * 100;
+            Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
             bullet.velocity = velocity.Rotated(Mathf.DegToRad(GD.Randf() * spreadDeg - spreadDeg / 2f));
 
             return bullet;
@@ -99,7 +89,10 @@ namespace RogueDefense.Logic.PlayerCore
 
         public void ClearBullets(Func<Projectile, bool> filter = null)
         {
-            projectileManager.ClearProjectiles(filter);
+            if (filter != null)
+                projectileManager.ClearProjectiles(filter);
+            else
+                projectileManager.ClearProjectiles();
         }
 
         private void PlayShootAnimation()

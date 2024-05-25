@@ -46,7 +46,7 @@ public abstract class Projectile
     }
 
 
-    private bool emittingParticles = false;
+    protected bool emittingParticles = false;
     public void StartParticleEffect()
     {
         emittingParticles = true;
@@ -64,7 +64,7 @@ public abstract class Projectile
     public Rect2 playArea = new Rect2(-612, -300, new Vector2I(2050, 1200));
     public virtual void PhysicsProcess(float delta)
     {
-        position += velocity * delta;
+        position += velocity * delta * 60;
         CheckCollision();
 
         if (!playArea.HasPoint(position))

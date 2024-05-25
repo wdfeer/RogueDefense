@@ -22,7 +22,7 @@ namespace RogueDefense
             }
 
             shooter.damage *= damageMult;
-            shooter.EnableParticles();
+            shooter.colored = true;
         }
     }
 }

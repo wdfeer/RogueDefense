@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System;
@@ -6,8 +7,12 @@ using System.Security.Cryptography.X509Certificates;
 
 public class Bullet : Projectile
 {
-	private Texture2D texture = ImageTexture.CreateFromImage(Image.LoadFromFile("res://Assets/Images/outlined_circle.svg"));
-	protected override int Radius => 32;
+	public Bullet(Array<Texture2D> textures)
+	{
+		texture = textures[0];
+	}
+	readonly Texture2D texture;
+	protected override int Radius => 16;
 	public Color modulate = Colors.White;
 	public override void Draw(CanvasItem drawer)
 	{

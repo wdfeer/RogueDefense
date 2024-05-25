@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=58 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
 [ext_resource type="Script" path="res://Logic/Enemy/EnemySpawner.cs" id="16_bbfcr"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://43imkg4sl66e" path="res://Scenes/ProjectileManager.tscn" id="17_v5lu7"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/Images/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
 [ext_resource type="Texture2D" uid="uid://fqdgbhgv6ugk" path="res://Assets/Images/game-icons.net/cancel.svg" id="18_xbath"]
@@ -51,9 +52,6 @@ normal = Vector2(0, 1)
 normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hvse4"]
-
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(1200, 640)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkjwx"]
 bg_color = Color(0.101961, 0.101961, 0.101961, 1)
@@ -146,6 +144,7 @@ explodingEyeScene = ExtResource("14_gxxuh")
 position = Vector2(100, 300)
 collision_mask = 3
 script = ExtResource("10")
+projectileManagerScene = ExtResource("17_v5lu7")
 turretScene = ExtResource("17")
 
 [node name="Sprite2D" type="Sprite2D" parent="DefenseObjective"]
@@ -435,8 +434,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 489.0
-offset_bottom = 56.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")

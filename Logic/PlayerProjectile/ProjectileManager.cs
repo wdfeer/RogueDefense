@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Godot;
+using Godot.Collections;
 
 namespace RogueDefense.Logic;
 
-public partial class Projectiles : Node2D
+public partial class ProjectileManager : Node2D
 {
+    [Export]
+    public Array<Texture2D> textures;
+
     public List<Projectile> proj = new List<Projectile>();
     public Bullet SpawnBullet(Vector2 gposition)
     {
-        Bullet b = new Bullet();
+        Bullet b = new Bullet(textures);
         proj.Add(b);
         b.position = gposition;
         return b;

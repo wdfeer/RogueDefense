@@ -28,7 +28,6 @@ namespace RogueDefense
             bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
             bullet.damage = shooter.damage;
             bullet.modulate = Colors.HotPink;
-            bullet.StartParticleEffect();
             bullet.fused = true;
         }
         public override bool Shared => false;

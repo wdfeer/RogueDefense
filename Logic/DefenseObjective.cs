@@ -13,7 +13,7 @@ namespace RogueDefense
         public static DefenseObjective instance;
 
         [Export]
-        public PackedScene bulletScene;
+        public PackedScene projectileManagerScene;
         [Export]
         public PackedScene turretScene;
 
