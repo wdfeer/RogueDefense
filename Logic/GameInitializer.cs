@@ -1,6 +1,5 @@
 using Godot;
 using RogueDefense.Logic.PlayerCore;
-using System;
 using System.Collections.Generic;
 
 public partial class GameInitializer : Node

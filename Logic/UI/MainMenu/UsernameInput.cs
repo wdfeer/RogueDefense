@@ -27,7 +27,7 @@ public partial class UsernameInput : LineEdit
     public static readonly char[] ALLOWED_CHARACTERS = Enumerable.Range('\x1', 127).Select(x => (char)x).ToArray();
     public void OnTextChanged(string newText)
     {
-        newText = String.Concat(newText.Where(x => ALLOWED_CHARACTERS.Contains(x))).Replace(' ', '_');
+        newText = string.Concat(newText.Where(x => ALLOWED_CHARACTERS.Contains(x))).Replace(' ', '_');
         if (newText.Length > 0)
             SaveData.name = newText;
     }

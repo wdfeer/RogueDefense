@@ -1,6 +1,4 @@
-using Godot;
 using RogueDefense.Logic.Statuses;
-using System;
 using System.Linq;
 
 public partial class FirstBoss : Enemy

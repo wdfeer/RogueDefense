@@ -1,10 +1,6 @@
 using Godot;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
-using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RogueDefense
 {

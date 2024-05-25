@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic.Statuses
 {
     public partial class Corrosive : SpecialStatus

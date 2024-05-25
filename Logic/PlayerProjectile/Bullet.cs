@@ -1,9 +1,6 @@
 using Godot;
 using Godot.Collections;
 using RogueDefense.Logic;
-using RogueDefense.Logic.PlayerCore;
-using System;
-using System.Security.Cryptography.X509Certificates;
 
 public class Bullet : Projectile
 {

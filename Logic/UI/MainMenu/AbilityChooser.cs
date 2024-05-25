@@ -1,7 +1,5 @@
 using Godot;
 using RogueDefense.Logic.PlayerCore;
-using System;
-using System.Linq;
 
 public partial class AbilityChooser : MenuButton
 {

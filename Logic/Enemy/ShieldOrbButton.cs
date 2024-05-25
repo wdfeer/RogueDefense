@@ -1,7 +1,6 @@
 using Godot;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
-using System;
 
 public partial class ShieldOrbButton : TextureButton
 {

@@ -1,5 +1,3 @@
-using System;
-using Godot;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 

@@ -1,6 +1,5 @@
 using Godot;
 using RogueDefense.Logic.PlayerCore;
-using System;
 
 public partial class Target : Sprite2D
 {

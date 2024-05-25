@@ -1,6 +1,5 @@
 using Godot;
 using RogueDefense.Logic;
-using System;
 
 public partial class HpBar : ProgressBar
 {

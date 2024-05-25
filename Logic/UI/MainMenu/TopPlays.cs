@@ -1,7 +1,6 @@
 using Godot;
 using RogueDefense;
 using RogueDefense.Logic;
-using System;
 
 public partial class TopPlays : VBoxContainer
 {

@@ -1,4 +1,3 @@
-using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using System.Linq;
 

@@ -2,9 +2,7 @@ using Godot;
 using RogueDefense;
 using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
-using System;
 using System.Linq;
-using System.Security.Policy;
 
 public partial class Game : Node
 {

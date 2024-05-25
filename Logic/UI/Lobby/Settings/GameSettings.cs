@@ -1,6 +1,5 @@
 using Godot;
 using RogueDefense.Logic;
-using System;
 
 public static class GameSettings
 {

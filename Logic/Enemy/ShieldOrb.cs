@@ -1,6 +1,5 @@
 using Godot;
 using RogueDefense;
-using System;
 
 public partial class ShieldOrb : Area2D
 {

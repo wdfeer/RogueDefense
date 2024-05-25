@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using RogueDefense;
 public partial class CombatTextButton : CheckBox
 {

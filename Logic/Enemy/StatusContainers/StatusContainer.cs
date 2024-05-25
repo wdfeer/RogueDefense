@@ -1,6 +1,5 @@
 using Godot;
 using RogueDefense.Logic.Statuses;
-using System;
 
 public abstract partial class StatusContainer : HBoxContainer
 {

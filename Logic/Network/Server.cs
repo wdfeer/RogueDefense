@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using RogueDefense.Logic.Statuses;
-using static Client;
 
 public partial class Server : Node
 {
@@ -49,7 +46,7 @@ public partial class Server : Node
 		string msg = $"{(char)MessageType.FetchLobby}{id}";
 		if (users.Count > 0)
 		{
-			msg += " " + String.Join(" ", users.Select(x => $"{x.Key};{x.Value.name};{x.Value.ability};{UserData.AugmentPointsAsString(x.Value.augmentPoints)}"));
+			msg += " " + string.Join(" ", users.Select(x => $"{x.Key};{x.Value.name};{x.Value.ability};{UserData.AugmentPointsAsString(x.Value.augmentPoints)}"));
 		}
 		GD.Print($"Sending FetchLobby message: {msg}");
 		SendPacket(id, msg);
@@ -94,7 +91,7 @@ public partial class Server : Node
 	{
 		string msg = $"{(char)type}";
 		if (args != null)
-			msg += String.Join(" ", args);
+			msg += string.Join(" ", args);
 		Broadcast(msg);
 	}
 

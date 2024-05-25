@@ -1,7 +1,3 @@
-using Godot;
-using RogueDefense;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 public static class NetworkManager
@@ -48,7 +44,7 @@ public partial class UserData
     public string name;
     public int ability;
     public int[] augmentPoints;
-    public static string AugmentPointsAsString(int[] augments) => String.Join("/", augments.Select(x => x.ToString()));
+    public static string AugmentPointsAsString(int[] augments) => string.Join("/", augments.Select(x => x.ToString()));
     public static int[] AugmentPointsFromString(string str) => str.Split("/").Select(x => int.Parse(x)).ToArray();
     public UserData(int id, string name, int ability, int[] augments)
     {
