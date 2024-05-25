@@ -15,8 +15,7 @@ namespace RogueDefense
                 proj.owner = player;
                 proj.velocity = new Vector2(20f, 0f).Rotated(0.1f * GD.Randf());
                 proj.damage = Damage;
-                DefenseObjective.instance.AddChild(proj);
-                player.shootManager.bullets.Add(proj);
+                player.shootManager.projectileManager.proj.Add(proj);
             }
         }
         public const float BASE_DAMAGE = 4;

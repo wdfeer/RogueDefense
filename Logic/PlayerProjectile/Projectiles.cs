@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Godot;
 
 namespace RogueDefense.Logic;
@@ -22,6 +24,10 @@ public partial class Projectiles : Node2D
             proj[i].Draw(this);
         }
     }
+    public override void _Process(double delta)
+    {
+        QueueRedraw();
+    }
     public override void _PhysicsProcess(double delta)
     {
         int count = proj.Count;
@@ -36,6 +42,10 @@ public partial class Projectiles : Node2D
     public void DeleteQueuedProjectiles()
     {
         proj.RemoveAll(p => p.queuedForDeletion);
+    }
+    public void ClearProjectiles(Func<Projectile, bool> filter)
+    {
+        proj = proj.Where(filter).ToList();
     }
     public void ClearProjectiles()
     {

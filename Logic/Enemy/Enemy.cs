@@ -265,11 +265,7 @@ public abstract partial class Enemy : Area2D
 	}
 	public void OnBodyEntered(Node body)
 	{
-		if (body is Bullet bullet)
-		{
-			bullet.EnemyCollision(this);
-		}
-		else if (body == DefenseObjective.instance)
+		if (body == DefenseObjective.instance)
 			attacking = true;
 	}
 

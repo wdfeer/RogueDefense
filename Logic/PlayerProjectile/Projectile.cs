@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using RogueDefense.Logic.PlayerCore;
 
@@ -13,25 +14,7 @@ public abstract class Projectile
     public int hitMult = 1;
     public float damage = 1;
     public virtual bool KillShieldOrbs => false;
-    public void EnemyCollision(Enemy enemy)
-    {
-        for (int i = 0; i < hitMult; i++)
-        {
-            if (enemy.Dead)
-                break;
-            float dmg = this.damage;
-            int critLevel = GetCritLevel();
-            float critMult = owner.upgradeManager.critDamageMult;
-            owner.hooks.ForEach(x => x.ModifyHitEnemyWithProj(enemy, this, ref dmg, ref critLevel, ref critMult));
-            ModifyHit(ref dmg, ref critLevel, ref critMult);
-            if (critLevel > 0)
-                dmg *= critMult * critLevel;
-            owner.hooks.ForEach(x => x.OnHitWithProj(enemy, this, dmg));
-            OnHit(enemy, dmg);
-            enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
-        }
-        QueueFree();
-    }
+
     public void ShieldOrbCollision(ShieldOrb orb)
     {
         if (KillShieldOrbs)
@@ -82,11 +65,36 @@ public abstract class Projectile
     public virtual void PhysicsProcess(float delta)
     {
         position += velocity * delta;
+        CheckCollision();
     }
     private const float RADIUS = 50;
-    private CheckCollision()
+    private void CheckCollision()
     {
-        CircleShape2D circle = new CircleShape2D();
-        circle.Radius = RADIUS;
+        var spaceState = DefenseObjective.instance.GetWorld2D().DirectSpaceState;
+        var query = new PhysicsShapeQueryParameters2D() { CollisionMask = 2, Shape = new CircleShape2D() { Radius = RADIUS } };
+        var result = spaceState.IntersectShape(query, 1);
+        object collider = result[0]["collider"];
+        if (collider is Enemy enemy)
+            EnemyCollision(enemy);
+    }
+
+    public void EnemyCollision(Enemy enemy)
+    {
+        for (int i = 0; i < hitMult; i++)
+        {
+            if (enemy.Dead)
+                break;
+            float dmg = this.damage;
+            int critLevel = GetCritLevel();
+            float critMult = owner.upgradeManager.critDamageMult;
+            owner.hooks.ForEach(x => x.ModifyHitEnemyWithProj(enemy, this, ref dmg, ref critLevel, ref critMult));
+            ModifyHit(ref dmg, ref critLevel, ref critMult);
+            if (critLevel > 0)
+                dmg *= critMult * critLevel;
+            owner.hooks.ForEach(x => x.OnHitWithProj(enemy, this, dmg));
+            OnHit(enemy, dmg);
+            enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
+        }
+        QueueFree();
     }
 }

@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="3_te3pu"]
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="4"]
 [ext_resource type="Script" path="res://Logic/Background.cs" id="4_bil5u"]
-[ext_resource type="PackedScene" uid="uid://b7e7eteghmjq0" path="res://Scenes/Bullet.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://cjl26paddv1b1" path="res://Assets/Backgrounds/Stage2.png" id="5_cqq2p"]
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/Images/defense_objective.svg" id="6"]
 [ext_resource type="Texture2D" uid="uid://cragqgc6dufek" path="res://Assets/Backgrounds/Stage3.png" id="6_osbn0"]
@@ -15,7 +14,6 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
 [ext_resource type="Texture2D" uid="uid://5tdagghqrgur" path="res://Assets/Backgrounds/Stage5.png" id="8_58s5q"]
 [ext_resource type="Texture2D" uid="uid://c7qhy88w6eqs1" path="res://Assets/Backgrounds/Stage6.png" id="9_dpyxg"]
-[ext_resource type="Script" path="res://Logic/BulletDeleter.cs" id="9_gd0wn"]
 [ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cg55ebhgoye21" path="res://Scenes/Enemies/ArmoredSpirit.tscn" id="12_icdcw"]
@@ -27,7 +25,6 @@
 [ext_resource type="Texture2D" uid="uid://cpe4b1e162y5y" path="res://Assets/Images/game-icons.net/embrassed-energy.svg" id="14_sx78e"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
 [ext_resource type="Script" path="res://Logic/Enemy/EnemySpawner.cs" id="16_bbfcr"]
-[ext_resource type="Script" path="res://Logic/BulletSpawner.cs" id="16_meflw"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/Images/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
@@ -145,10 +142,6 @@ armoredSpiritBossScene = ExtResource("12_icdcw")
 miniArmoredSpiritScene = ExtResource("13_383pk")
 explodingEyeScene = ExtResource("14_gxxuh")
 
-[node name="BulletSpawner" type="Node" parent="."]
-script = ExtResource("16_meflw")
-bulletScene = ExtResource("5")
-
 [node name="DefenseObjective" type="StaticBody2D" parent="."]
 position = Vector2(100, 300)
 collision_mask = 3
@@ -202,16 +195,6 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BottomWall"]
 position = Vector2(0, 600)
 shape = SubResource("WorldBoundaryShape2D_hvse4")
-
-[node name="BulletDeleter" type="Area2D" parent="Boundaries"]
-position = Vector2(0, 1)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("9_gd0wn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BulletDeleter"]
-position = Vector2(512, 300)
-shape = SubResource("2")
 
 [node name="DpsLabel" type="Label" parent="."]
 process_mode = 3

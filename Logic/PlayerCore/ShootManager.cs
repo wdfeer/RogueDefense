@@ -8,7 +8,7 @@ namespace RogueDefense.Logic.PlayerCore
     public partial class ShootManager
     {
         readonly Player player;
-        readonly Projectiles projectileManager;
+        public readonly Projectiles projectileManager;
         public ShootManager(Player player)
         {
             this.player = player;
@@ -94,21 +94,12 @@ namespace RogueDefense.Logic.PlayerCore
             Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
             bullet.velocity = velocity.Rotated(Mathf.DegToRad(GD.Randf() * spreadDeg - spreadDeg / 2f));
 
-            bullets.Add(bullet);
             return bullet;
         }
 
-        public void ClearBullets(Func<Bullet, bool> filter = null)
+        public void ClearBullets(Func<Projectile, bool> filter = null)
         {
-            foreach (Bullet bull in bullets)
-            {
-                if (GodotObject.IsInstanceValid(bull))
-                {
-                    if (filter != null && !filter(bull))
-                        continue;
-                    bull.QueueFree();
-                }
-            }
+            projectileManager.ClearProjectiles(filter);
         }
 
         private void PlayShootAnimation()
