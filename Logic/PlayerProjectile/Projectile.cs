@@ -61,10 +61,14 @@ public abstract class Projectile
 
     public Vector2 position = Vector2.Zero;
     public Vector2 velocity = Vector2.Zero;
+    public Rect2 playArea = new Rect2(-612, -300, new Vector2I(2050, 1200));
     public virtual void PhysicsProcess(float delta)
     {
         position += velocity * delta;
         CheckCollision();
+
+        if (!playArea.HasPoint(position))
+            QueueFree();
     }
 
 
@@ -77,13 +81,12 @@ public abstract class Projectile
     private void CheckCollision()
     {
         var spaceState = Player.my.controlledTurret.GetWorld2D().DirectSpaceState;
-        var query = new PhysicsShapeQueryParameters2D() { CollisionMask = 0x2, Shape = new CircleShape2D() { Radius = Radius } };
+        var query = new PhysicsShapeQueryParameters2D() { Shape = new CircleShape2D() { Radius = Radius }, Transform = new Transform2D() { Origin = position }, CollideWithAreas = true, CollisionMask = 2 };
         var result = spaceState.IntersectShape(query, 1);
         if (result.Count == 0)
             return;
-        object collider = result[0]["collider"];
-        if (collider is Enemy enemy && !enemy.Dead)
-            EnemyCollision(enemy);
+        Variant collider = result[0]["collider"];
+        EnemyCollision((Enemy)collider.Obj);
     }
 
     public void EnemyCollision(Enemy enemy)
