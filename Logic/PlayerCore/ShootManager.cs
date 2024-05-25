@@ -14,7 +14,7 @@ namespace RogueDefense.Logic.PlayerCore
             this.player = player;
             projectileManager = DefenseObjective.instance.projectileManagerScene.Instantiate<ProjectileManager>();
             projectileManager.Name = $"{player.Name}'s Projectiles";
-            Game.instance.AddChild(projectileManager);
+            DefenseObjective.instance.AddSibling(projectileManager);
 
             baseDamage = 1f + player.augmentPoints[0] * AugmentContainer.STAT_PER_POINT[0];
             baseShootInterval = 1f / (1f + player.augmentPoints[1] * AugmentContainer.STAT_PER_POINT[1]);
