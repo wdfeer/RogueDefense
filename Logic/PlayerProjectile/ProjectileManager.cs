@@ -34,12 +34,9 @@ public partial class ProjectileManager : Node2D
     }
     public override void _PhysicsProcess(double delta)
     {
-        int count = proj.Count;
         float deltaTime = (float)delta;
-        for (int i = 0; i < count; i++)
-        {
+        for (int i = 0; i < proj.Count; i++)
             proj[i].PhysicsProcess(deltaTime);
-        }
 
         DeleteQueuedProjectiles();
     }
@@ -47,9 +44,9 @@ public partial class ProjectileManager : Node2D
     {
         proj.RemoveAll(p => p.queuedForDeletion);
     }
-    public void ClearProjectiles(Func<Projectile, bool> filter)
+    public void ClearProjectiles(Func<Projectile, bool> except)
     {
-        proj = proj.Where(filter).ToList();
+        proj = proj.Where(except).ToList();
     }
     public void ClearProjectiles()
     {

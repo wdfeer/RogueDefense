@@ -19,7 +19,6 @@ namespace RogueDefense.Logic.PlayerCore
             baseDamage = 1f + player.augmentPoints[0] * AugmentContainer.STAT_PER_POINT[0];
             baseShootInterval = 1f / (1f + player.augmentPoints[1] * AugmentContainer.STAT_PER_POINT[1]);
             baseMultishot = 1f + player.augmentPoints[2] * AugmentContainer.STAT_PER_POINT[2];
-
         }
         public float baseDamage;
         public float damage = 1;
@@ -38,8 +37,6 @@ namespace RogueDefense.Logic.PlayerCore
                 shootCount++;
                 PlayShootAnimation();
             }
-
-
         }
         public const float BASE_SHOOT_SPEED = 6f;
         public float shootSpeed = BASE_SHOOT_SPEED;
@@ -87,10 +84,10 @@ namespace RogueDefense.Logic.PlayerCore
             return bullet;
         }
 
-        public void ClearBullets(Func<Projectile, bool> filter = null)
+        public void ClearBullets(Func<Projectile, bool> exception = null)
         {
-            if (filter != null)
-                projectileManager.ClearProjectiles(filter);
+            if (exception != null)
+                projectileManager.ClearProjectiles(exception);
             else
                 projectileManager.ClearProjectiles();
         }
