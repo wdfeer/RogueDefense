@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=59 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -38,6 +38,7 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/BackButton.gd" id="21_11t6h"]
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="24_iflvr"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="27_1jjpa"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/FpsLabel.cs" id="39_uohka"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
@@ -593,6 +594,25 @@ offset_right = 296.0
 offset_bottom = 49.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FpsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 2
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("39_uohka")
 
 [connection signal="pressed" from="MenuButton" to="MenuButton" method="_on_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/BackButton" to="Menu/VBoxContainer/BackButton" method="_on_pressed"]
