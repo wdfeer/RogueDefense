@@ -23,7 +23,7 @@ namespace RogueDefense
             return buff > 0f && IsConditionMet(enemy);
         }
 
-        public override void ModifyHitEnemyWithBullet(Enemy enemy, Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult)
+        public override void ModifyHitEnemyWithProj(Enemy enemy, Projectile p, ref float damagePreCrit, ref int critLevel, ref float critMult)
         {
             if (IsAffecting(enemy))
             {

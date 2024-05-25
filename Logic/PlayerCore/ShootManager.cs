@@ -8,13 +8,17 @@ namespace RogueDefense.Logic.PlayerCore
     public partial class ShootManager
     {
         readonly Player player;
+        public readonly ProjectileManager projectileManager;
         public ShootManager(Player player)
         {
             this.player = player;
+            projectileManager = DefenseObjective.instance.projectileManagerScene.Instantiate<ProjectileManager>();
+            projectileManager.Name = $"{player.Name}'s Projectiles";
+            DefenseObjective.instance.AddSibling(projectileManager);
+
             baseDamage = 1f + player.augmentPoints[0] * AugmentContainer.STAT_PER_POINT[0];
             baseShootInterval = 1f / (1f + player.augmentPoints[1] * AugmentContainer.STAT_PER_POINT[1]);
             baseMultishot = 1f + player.augmentPoints[2] * AugmentContainer.STAT_PER_POINT[2];
-
         }
         public float baseDamage;
         public float damage = 1;
@@ -34,26 +38,19 @@ namespace RogueDefense.Logic.PlayerCore
                 PlayShootAnimation();
             }
         }
-        public List<Bullet> bullets = new List<Bullet>();
         public const float BASE_SHOOT_SPEED = 6f;
         public float shootSpeed = BASE_SHOOT_SPEED;
         public const float SPREAD_DEGREES = 10f;
         public int shootCount = 0;
         public List<Node2D> bulletSpawns = new List<Node2D>();
 
-        public void EnableParticles(Color? color = null)
-        {
-            particles = true;
-            if (color != null) particleModulate = (Color)color;
-        }
-        private bool particles = false;
-        private Color particleModulate = Colors.White;
+        public bool colored = false;
         private void CreateBullets()
         {
             player.hooks.ForEach(x => x.PreShoot(this));
             int bulletCount = MathHelper.RandomRound(multishot);
             float hitMult = 1f;
-            if (bulletCount / shootInterval > 10f)
+            if (bulletCount / shootInterval > 100f)
             {
                 hitMult = bulletCount / 3f;
                 bulletCount = 3;
@@ -66,42 +63,33 @@ namespace RogueDefense.Logic.PlayerCore
                     bullet.damage = damage;
                     bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 
-                    if (particles)
+                    if (colored)
                     {
-                        bullet.ParticleEmitter.Modulate = particleModulate;
-                        bullet.StartParticleEffect();
+                        bullet.modulate = Colors.LightCyan;
                     }
                 }
             }
 
-            particles = false;
-            particleModulate = Colors.White;
+            colored = false;
         }
 
         public Bullet Shoot(Vector2 pos, float speed, float spreadDeg = SPREAD_DEGREES)
         {
-            Bullet bullet = BulletSpawner.instance.InstantiateBullet(pos);
+            Bullet bullet = projectileManager.SpawnBullet(pos);
             bullet.owner = player;
 
             Vector2 velocity = speed * pos.DirectionTo(player.target.GlobalPosition);
             bullet.velocity = velocity.Rotated(Mathf.DegToRad(GD.Randf() * spreadDeg - spreadDeg / 2f));
 
-            bullets.Add(bullet);
             return bullet;
         }
 
-        public void ClearBullets(Func<Bullet, bool> filter = null)
+        public void ClearBullets(Func<Projectile, bool> exception = null)
         {
-            foreach (Bullet bull in bullets)
-            {
-                if (GodotObject.IsInstanceValid(bull))
-                {
-                    if (filter != null && !filter(bull))
-                        continue;
-                    bull.QueueFree();
-                }
-            }
-            bullets = new List<Bullet>();
+            if (exception != null)
+                projectileManager.ClearProjectiles(exception);
+            else
+                projectileManager.ClearProjectiles();
         }
 
         private void PlayShootAnimation()
@@ -110,7 +98,7 @@ namespace RogueDefense.Logic.PlayerCore
             foreach (Turret turret in player.turrets)
             {
                 turret.animationPlayer.Stop();
-                turret.animationPlayer.Play("ShootEffects");
+                turret.animationPlayer.Play("ShootEffects", customSpeed: speed);
             }
         }
     }

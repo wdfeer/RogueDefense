@@ -28,7 +28,7 @@ namespace RogueDefense
             if (buffLeft > 0)
             {
                 shooter.damage *= 1f + 1f * Strength;
-                shooter.EnableParticles();
+                shooter.colored = true;
             }
         }
 

@@ -1,26 +1,29 @@
 using Godot;
+using Godot.Collections;
+using RogueDefense.Logic;
 
 namespace RogueDefense
 {
-	public partial class Shuriken : Bullet
+	public partial class Shuriken : Projectile
 	{
-		public override void _Ready()
+		public Shuriken(Array<Texture2D> textures)
 		{
-			base._Ready();
-			killShieldOrbs = true;
+			texture = textures[1];
 		}
+
+		protected override int Radius => 16;
+		readonly Texture2D texture;
+		public override void Draw(CanvasItem drawer)
+		{
+			Rect2 rect = new Rect2() { Position = position - new Vector2(Radius, Radius), Size = new Vector2(Diameter, Diameter) };
+			drawer.DrawTextureRect(texture, rect, false);
+		}
+
+		public override bool KillShieldOrbs => true;
 		protected override void OnHit(Enemy enemy, float totalDmg)
 		{
 			enemy.AddBleed(totalDmg, 5f);
 		}
-
-		public override void _Process(double delta)
-		{
-			base._Process(delta);
-
-			this.Rotate((float)delta * Mathf.Pi * 2);
-		}
-
 		protected override bool UnhideableDamageNumbers => true;
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=59 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="3_te3pu"]
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="4"]
 [ext_resource type="Script" path="res://Logic/Background.cs" id="4_bil5u"]
-[ext_resource type="PackedScene" uid="uid://b7e7eteghmjq0" path="res://Scenes/Bullet.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://cjl26paddv1b1" path="res://Assets/Backgrounds/Stage2.png" id="5_cqq2p"]
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/Images/defense_objective.svg" id="6"]
 [ext_resource type="Texture2D" uid="uid://cragqgc6dufek" path="res://Assets/Backgrounds/Stage3.png" id="6_osbn0"]
@@ -15,7 +14,6 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
 [ext_resource type="Texture2D" uid="uid://5tdagghqrgur" path="res://Assets/Backgrounds/Stage5.png" id="8_58s5q"]
 [ext_resource type="Texture2D" uid="uid://c7qhy88w6eqs1" path="res://Assets/Backgrounds/Stage6.png" id="9_dpyxg"]
-[ext_resource type="Script" path="res://Logic/BulletDeleter.cs" id="9_gd0wn"]
 [ext_resource type="Script" path="res://Logic/DefenseObjective.cs" id="10"]
 [ext_resource type="PackedScene" path="res://Scenes/NetPoller.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cg55ebhgoye21" path="res://Scenes/Enemies/ArmoredSpirit.tscn" id="12_icdcw"]
@@ -27,8 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://cpe4b1e162y5y" path="res://Assets/Images/game-icons.net/embrassed-energy.svg" id="14_sx78e"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
 [ext_resource type="Script" path="res://Logic/Enemy/EnemySpawner.cs" id="16_bbfcr"]
-[ext_resource type="Script" path="res://Logic/BulletSpawner.cs" id="16_meflw"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://43imkg4sl66e" path="res://Scenes/ProjectileManager.tscn" id="17_v5lu7"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/Images/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
 [ext_resource type="Texture2D" uid="uid://fqdgbhgv6ugk" path="res://Assets/Images/game-icons.net/cancel.svg" id="18_xbath"]
@@ -40,6 +38,7 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/BackButton.gd" id="21_11t6h"]
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="24_iflvr"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="27_1jjpa"]
+[ext_resource type="Script" path="res://Logic/UI/InGame/FpsLabel.cs" id="39_uohka"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
@@ -54,9 +53,6 @@ normal = Vector2(0, 1)
 normal = Vector2(-1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hvse4"]
-
-[sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(1200, 640)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkjwx"]
 bg_color = Color(0.101961, 0.101961, 0.101961, 1)
@@ -145,14 +141,11 @@ armoredSpiritBossScene = ExtResource("12_icdcw")
 miniArmoredSpiritScene = ExtResource("13_383pk")
 explodingEyeScene = ExtResource("14_gxxuh")
 
-[node name="BulletSpawner" type="Node" parent="."]
-script = ExtResource("16_meflw")
-bulletScene = ExtResource("5")
-
 [node name="DefenseObjective" type="StaticBody2D" parent="."]
 position = Vector2(100, 300)
 collision_mask = 3
 script = ExtResource("10")
+projectileManagerScene = ExtResource("17_v5lu7")
 turretScene = ExtResource("17")
 
 [node name="Sprite2D" type="Sprite2D" parent="DefenseObjective"]
@@ -202,16 +195,6 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BottomWall"]
 position = Vector2(0, 600)
 shape = SubResource("WorldBoundaryShape2D_hvse4")
-
-[node name="BulletDeleter" type="Area2D" parent="Boundaries"]
-position = Vector2(0, 1)
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("9_gd0wn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BulletDeleter"]
-position = Vector2(512, 300)
-shape = SubResource("2")
 
 [node name="DpsLabel" type="Label" parent="."]
 process_mode = 3
@@ -452,8 +435,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 489.0
-offset_bottom = 56.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
@@ -611,6 +594,25 @@ offset_right = 296.0
 offset_bottom = 49.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FpsLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
+theme_override_constants/outline_size = 2
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("39_uohka")
 
 [connection signal="pressed" from="MenuButton" to="MenuButton" method="_on_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/BackButton" to="Menu/VBoxContainer/BackButton" method="_on_pressed"]

@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense
@@ -14,8 +15,8 @@ namespace RogueDefense
         public virtual void PreUpdate(float delta) { }
         public virtual void PostUpgradeUpdate(float delta) { }
         public virtual void PostUpdate(float delta) { }
-        public virtual void ModifyHitEnemyWithBullet(Enemy enemy, Bullet b, ref float damagePreCrit, ref int critLevel, ref float critMult) { }
-        public virtual void OnHitWithBullet(Enemy enemy, Bullet b, float postCritDmg) { }
+        public virtual void ModifyHitEnemyWithProj(Enemy enemy, Projectile p, ref float damagePreCrit, ref int critLevel, ref float critMult) { }
+        public virtual void OnHitWithProj(Enemy enemy, Projectile p, float postCritDmg) { }
         public virtual void OnAnyHit(float afterEffectsDmg) { }
         public virtual void PreShoot(ShootManager shooter) { }
         public virtual void OnWaveEnd() { }

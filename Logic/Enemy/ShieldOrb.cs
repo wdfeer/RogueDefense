@@ -13,11 +13,7 @@ public partial class ShieldOrb : Area2D
 	}
 	public void OnBodyEntered(Node body)
 	{
-		if (body is Bullet bullet)
-		{
-			bullet.ShieldOrbCollision(this);
-		}
-		else if (body is DefenseObjective defObjective && !tappable)
+		if (body is DefenseObjective defObjective && !tappable)
 		{
 			defObjective.Damage(10f * Game.GetStage());
 		}

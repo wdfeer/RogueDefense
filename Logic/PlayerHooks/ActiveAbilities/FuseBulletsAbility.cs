@@ -11,24 +11,23 @@ namespace RogueDefense
         {
             if (button != null)
             {
-                button.Icon = (Texture2D)GD.Load("res://Assets/game-icons.net/concentration-orb.svg");
+                button.Icon = (Texture2D)GD.Load("res://Assets/Images/game-icons.net/concentration-orb.svg");
             }
         }
 
         public override bool CanBeActivated()
-            => player.shootManager.bullets.Any(x => GodotObject.IsInstanceValid(x) && !x.fused);
+            => player.shootManager.projectileManager.proj.Any(x => !x.fused);
         public override void Activate()
         {
             ShootManager shooter = player.shootManager;
 
-            float hitMult = shooter.bullets.Aggregate(0f, (a, b) =>
-                a + ((GodotObject.IsInstanceValid(b) && !b.fused) ? b.hitMult : 0));
-            shooter.ClearBullets(x => !x.fused);
+            float hitMult = shooter.projectileManager.proj.Aggregate(0f, (a, b) =>
+                a + (!b.fused ? b.hitMult : 0));
+            shooter.ClearBullets(x => x.fused);
             Bullet bullet = shooter.Shoot(player.shootManager.bulletSpawns[0].GlobalPosition, 3f);
             bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
             bullet.damage = shooter.damage;
-            bullet.Scale *= 2f;
-            bullet.StartParticleEffect();
+            bullet.modulate = Colors.HotPink;
             bullet.fused = true;
         }
         public override bool Shared => false;
