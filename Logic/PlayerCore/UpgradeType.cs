@@ -126,6 +126,13 @@ namespace RogueDefense.Logic.PlayerCore
             getBaseRandomValue = () => 15f,
             canBeRolled = () => PlayerHooks.GetLocalHooks<FirstShotPlayer>().damageMult > 1f
         };
+        public static readonly UpgradeType TotalDamageVsArmor = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage vs Armored Enemy")
+        {
+            chanceMult = 0.33f,
+            getBaseRandomValue = () => (20 + SaveData.augmentAllotment[0]) / 100f,
+            canBeRolled = () => Game.Wave > 15 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().mult < 1.1f
+        };
+
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
             DamageReduction,
@@ -150,7 +157,8 @@ namespace RogueDefense.Logic.PlayerCore
             FireRateMinusMultishot,
             LowEnemyHpDamage,
             MultishotPerShot,
-            FirstShotTotalDamage
+            FirstShotTotalDamage,
+            TotalDamageVsArmor
         };
         public static void Initialize()
         {

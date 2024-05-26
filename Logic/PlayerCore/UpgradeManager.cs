@@ -54,6 +54,10 @@ namespace RogueDefense.Logic.PlayerCore
             {
                 PlayerHooks.GetHooks<LowEnemyHpDamagePlayer>(Player.players[from]).buff += upgrade.Value;
             }
+            else if (upgrade.type == UpgradeType.TotalDamageVsArmor)
+            {
+                PlayerHooks.GetHooks<DamageVsArmorPlayer>(Player.players[from]).mult += upgrade.Value;
+            }
             else
             {
                 var upgradeManager = Player.players[from].upgradeManager;

@@ -68,7 +68,7 @@ public abstract partial class Enemy : Area2D
 	}
 	void ResetImmunities(int gen, int index)
 	{
-		if (index != 0 && gen > 10 && statsRng.Randf() < 0.25f)
+		if (index != 0 && gen > 10 && statsRng.Randf() < 0.3f)
 		{
 			switch (statsRng.RandiRange(0, 2))
 			{
