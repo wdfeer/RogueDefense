@@ -28,6 +28,7 @@ script = ExtResource("4")
 userDataScene = ExtResource("3")
 
 [node name="Background" parent="." instance=ExtResource("3_rh4s4")]
+layout_mode = 0
 
 [node name="NetPoller" parent="." instance=ExtResource("6")]
 

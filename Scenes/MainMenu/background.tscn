@@ -1,15 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://djlwd1jt4bb3k"]
+[gd_scene load_steps=5 format=3 uid="uid://djlwd1jt4bb3k"]
 
 [ext_resource type="Texture2D" uid="uid://ct2pypueivbak" path="res://Assets/Backgrounds/MainMenuBackground.png" id="1_3raq4"]
+[ext_resource type="Shader" path="res://Assets/Shaders/scrolling_background.gdshader" id="1_vf6e4"]
+[ext_resource type="Script" path="res://Logic/UI/MainMenu/ScrollingBackground.gd" id="2_gvv47"]
 
-[node name="Background" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqjs4"]
+shader = ExtResource("1_vf6e4")
+shader_parameter/offset = Vector2(0, 0)
+
+[node name="Background" type="TextureRect"]
 modulate = Color(0.4, 0.4, 0.4, 1)
-position = Vector2(0, 280)
+material = SubResource("ShaderMaterial_gqjs4")
+offset_right = 4000.0
+offset_bottom = 2000.0
 scale = Vector2(0.5, 0.5)
-
-[node name="BG1" type="Sprite2D" parent="."]
 texture = ExtResource("1_3raq4")
-
-[node name="BG2" type="Sprite2D" parent="."]
-position = Vector2(2000, 0)
-texture = ExtResource("1_3raq4")
+stretch_mode = 1
+script = ExtResource("2_gvv47")

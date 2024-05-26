@@ -49,6 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" parent="." instance=ExtResource("1_u76gu")]
+layout_mode = 0
 
 [node name="GameInitializer" type="Node" parent="."]
 script = ExtResource("10")
@@ -196,7 +197,7 @@ offset_top = 8.0
 offset_right = 22.5
 offset_bottom = 31.0
 grow_horizontal = 2
-text = "v2.5.2"
+text = "v2.5.3"
 uri = "https://github.com/wdfeer/RogueDefense/releases"
 script = ExtResource("18_867ui")
 
