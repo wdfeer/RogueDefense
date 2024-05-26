@@ -4,7 +4,7 @@ using RogueDefense.Logic;
 
 public class Bullet : Projectile
 {
-	public Bullet(Array<Texture2D> textures)
+	public Bullet(Array<Texture2D> textures) : base()
 	{
 		texture = textures[0];
 	}

@@ -26,7 +26,7 @@ namespace RogueDefense
         {
             if (button != null)
             {
-                button.Icon = (Texture2D)GD.Load("res://Assets/Images/game-icons.net/flying-shuriken.svg");
+                button.Icon = (Texture2D)GD.Load("res://Assets/Images/Icons/game-icons.net/flying-shuriken.svg");
             }
         }
 

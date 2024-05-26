@@ -249,11 +249,14 @@ public abstract partial class Enemy : Area2D
 		corrosive.TryProcess((float)delta);
 
 		ResetArmorDisplay();
-
-		if (!attacking)
+	}
+	public override void _PhysicsProcess(double delta)
+	{
+		if (!Dead && !attacking)
 		{
 			var direction = GlobalPosition.DirectionTo(DefenseObjective.instance.GlobalPosition);
-			GlobalPosition += direction * GetBaseSpeed() * dynamicSpeedMult * (float)delta * 60;
+			var velocity = direction * GetBaseSpeed() * dynamicSpeedMult * (float)delta * 60;
+			GlobalPosition += velocity;
 		}
 	}
 	public void OnBodyEntered(Node body)

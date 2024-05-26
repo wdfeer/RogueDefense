@@ -1,15 +1,25 @@
+using System;
+using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense.Logic;
 
 public abstract class Projectile
 {
+    public Projectile()
+    {
+        shape = new CircleShape2D() { Radius = Radius };
+        hitEnemies = new List<Rid>();
+    }
+
     public Player owner;
     public void SetHitMultiplier(float hitMult)
     {
         this.hitMult = MathHelper.RandomRound(hitMult);
     }
+    public int penetration = 0;
     public int hitMult = 1;
     public float damage = 1;
     public virtual bool KillShieldOrbs => false;
@@ -71,33 +81,41 @@ public abstract class Projectile
     }
 
 
-    private void QueueFree() => queuedForDeletion = true;
+    public void QueueFree() => queuedForDeletion = true;
     public bool queuedForDeletion = false;
 
 
     protected abstract int Radius { get; }
     protected int Diameter => 2 * Radius;
-    private void CheckCollision()
+    private CircleShape2D shape;
+    protected virtual void CheckCollision()
     {
-        var spaceState = Player.my.controlledTurret.GetWorld2D().DirectSpaceState;
-        var query = new PhysicsShapeQueryParameters2D() { Shape = new CircleShape2D() { Radius = Radius }, Transform = new Transform2D() { Origin = position }, CollideWithAreas = true, CollisionMask = 2 };
-        var result = spaceState.IntersectShape(query, 1);
-        if (result.Count == 0)
-            return;
-        Variant collider = result[0]["collider"];
-        if (collider.Obj is Enemy enemy)
-            EnemyCollision(enemy);
-        else if (collider.Obj is ShieldOrb shieldOrb)
-            ShieldOrbCollision(shieldOrb);
+        var spaceState = owner.shootManager.projectileManager.GetWorld2D().DirectSpaceState;
+        var query = new PhysicsShapeQueryParameters2D() { Shape = shape, Transform = new Transform2D() { Origin = position }, CollideWithAreas = true, CollisionMask = 2, Exclude = new Array<Rid>(hitEnemies), Motion = velocity };
+        Array<Dictionary> result = spaceState.IntersectShape(query, penetration + 1);
+
+        for (int i = 0; i < result.Count; i++)
+        {
+            Variant collider = result[i]["collider"];
+            Variant rid = result[i]["rid"];
+            if (collider.Obj is Enemy enemy)
+                EnemyCollision(enemy, (Rid)rid);
+            else if (collider.Obj is ShieldOrb shieldOrb)
+                ShieldOrbCollision(shieldOrb);
+        }
     }
 
-    public void EnemyCollision(Enemy enemy)
+    readonly List<Rid> hitEnemies;
+    public void EnemyCollision(Enemy enemy, Rid rid)
     {
+        if (hitEnemies.Contains(rid))
+            return;
+
         for (int i = 0; i < hitMult; i++)
         {
             if (enemy.Dead)
                 break;
-            float dmg = this.damage;
+            float dmg = damage;
             int critLevel = GetCritLevel();
             float critMult = owner.upgradeManager.critDamageMult;
             owner.hooks.ForEach(x => x.ModifyHitEnemyWithProj(enemy, this, ref dmg, ref critLevel, ref critMult));
@@ -108,6 +126,10 @@ public abstract class Projectile
             OnHit(enemy, dmg);
             enemy.Damage(dmg, UnhideableDamageNumbers, GetCritColor(critLevel));
         }
-        QueueFree();
+
+        penetration--;
+        hitEnemies.Add(rid);
+        if (penetration < 0)
+            QueueFree();
     }
 }

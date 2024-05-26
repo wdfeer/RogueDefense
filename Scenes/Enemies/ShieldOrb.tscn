@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Logic/Enemy/ShieldOrb.cs" id="1_4vmte"]
 [ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="2_giaor"]
-[ext_resource type="Texture2D" uid="uid://diu0rw1b6xipw" path="res://Assets/Images/outlined_circle.svg" id="3_dtcmt"]
+[ext_resource type="Texture2D" uid="uid://diu0rw1b6xipw" path="res://Assets/Images/Projectiles/bullet.svg" id="3_dtcmt"]
 [ext_resource type="Script" path="res://Logic/Enemy/ShieldOrbButton.cs" id="4_fm1tg"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="5_qag8p"]
 

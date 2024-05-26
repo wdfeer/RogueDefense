@@ -6,17 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://d7hydk75hi01" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="5"]
-[ext_resource type="Texture2D" uid="uid://d4n1tobo1ylie" path="res://Assets/Images/edit_icon_small.png" id="7_5ef50"]
+[ext_resource type="Texture2D" uid="uid://d4n1tobo1ylie" path="res://Assets/Images/Icons/edit_icon_small.png" id="7_5ef50"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/Statview.cs" id="9"]
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="9_8to8e"]
 [ext_resource type="Script" path="res://Logic/GameInitializer.cs" id="10"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentsButton.cs" id="12"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
-[ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/Images/game-icons.net/anvil-impact.svg" id="14_l3r0m"]
+[ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/Images/Icons/game-icons.net/anvil-impact.svg" id="14_l3r0m"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/AugmentPointLabel.cs" id="15_4r3tt"]
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
-[ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/Images/game-icons.net/check-mark.svg" id="17_j8td6"]
+[ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/Images/Icons/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/Version.gd" id="18_867ui"]
 
@@ -197,7 +197,7 @@ offset_top = 8.0
 offset_right = 22.5
 offset_bottom = 31.0
 grow_horizontal = 2
-text = "v2.5.4"
+text = "v2.6.0"
 uri = "https://github.com/wdfeer/RogueDefense/releases"
 script = ExtResource("18_867ui")
 

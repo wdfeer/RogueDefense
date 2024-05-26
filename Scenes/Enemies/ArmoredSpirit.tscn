@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_5kke7"]
 [ext_resource type="Script" path="res://Logic/Enemy/Variants/ArmoredSpirit.cs" id="2_sr5g1"]
-[ext_resource type="Texture2D" uid="uid://bta4xw4p5neii" path="res://Assets/Enemies/armored_spirit.svg" id="3_177j7"]
+[ext_resource type="Texture2D" uid="uid://bta4xw4p5neii" path="res://Assets/Images/Enemies/armored_spirit.svg" id="3_177j7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6jkxt"]
 size = Vector2(125, 125)

@@ -58,6 +58,10 @@ namespace RogueDefense.Logic.PlayerCore
             {
                 PlayerHooks.GetHooks<DamageVsArmorPlayer>(Player.players[from]).mult += upgrade.Value;
             }
+            else if (upgrade.type == UpgradeType.ExplosionChance)
+            {
+                PlayerHooks.GetHooks<ExplosionPlayer>(Player.players[from]).chance += upgrade.Value;
+            }
             else
             {
                 var upgradeManager = Player.players[from].upgradeManager;

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ceqqj3eds3twh"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_0w0ch"]
-[ext_resource type="Texture2D" uid="uid://6554yb1yy45u" path="res://Assets/Enemies/armored_spirit_mini.svg" id="2_1wc6m"]
+[ext_resource type="Texture2D" uid="uid://6554yb1yy45u" path="res://Assets/Images/Enemies/armored_spirit_mini.svg" id="2_1wc6m"]
 [ext_resource type="Script" path="res://Logic/Enemy/Variants/MiniArmoredSpirit.cs" id="2_tlhsm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2a"]

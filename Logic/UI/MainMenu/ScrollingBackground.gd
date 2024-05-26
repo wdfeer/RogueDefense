@@ -7,4 +7,5 @@ var offset: Vector2 = Vector2(randf(), 0)
 func _process(delta):
 	offset.x += delta * speed
 	
-	material.set("shader_param/offset", offset)
+	var shader: ShaderMaterial = material
+	shader.set_shader_parameter("offset", offset)

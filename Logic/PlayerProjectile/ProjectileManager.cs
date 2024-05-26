@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
+using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense.Logic;
 
@@ -12,6 +13,7 @@ public partial class ProjectileManager : Node2D
     public Array<Texture2D> textures;
 
     public List<Projectile> proj = new List<Projectile>();
+    public List<Projectile> projDeffered = new List<Projectile>();
     public Bullet SpawnBullet(Vector2 gposition)
     {
         Bullet b = new Bullet(textures);
@@ -37,11 +39,13 @@ public partial class ProjectileManager : Node2D
         for (int i = 0; i < proj.Count; i++)
             proj[i].PhysicsProcess(deltaTime);
 
-        DeleteQueuedProjectiles();
+        PostPhysicsUpdate();
     }
-    public void DeleteQueuedProjectiles()
+    public void PostPhysicsUpdate()
     {
         proj.RemoveAll(p => p.queuedForDeletion);
+        proj.AddRange(projDeffered);
+        projDeffered = new List<Projectile>();
     }
     public void ClearProjectiles(Func<Projectile, bool> except)
     {

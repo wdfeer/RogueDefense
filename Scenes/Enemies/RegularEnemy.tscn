@@ -3,21 +3,21 @@
 [ext_resource type="Script" path="res://Logic/Enemy/Variants/RegularEnemy.cs" id="1_lpeuu"]
 [ext_resource type="PackedScene" path="res://Scenes/CombatText.tscn" id="2_y3ud8"]
 [ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="3"]
-[ext_resource type="Texture2D" uid="uid://c80sdypbt16dh" path="res://Assets/Enemies/regular_enemy.svg" id="3_ao3i5"]
+[ext_resource type="Texture2D" uid="uid://c80sdypbt16dh" path="res://Assets/Images/Enemies/regular_enemy.svg" id="3_ao3i5"]
 [ext_resource type="Texture2D" uid="uid://dcrprmbxi2ubo" path="res://Assets/Images/target.png" id="4_lxucb"]
-[ext_resource type="Texture2D" uid="uid://dr1urwwgoukda" path="res://Assets/Images/slash_icon.png" id="5"]
 [ext_resource type="Script" path="res://Logic/Enemy/Target.cs" id="5_3qqur"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/BleedContainer.cs" id="6"]
 [ext_resource type="Texture2D" uid="uid://dwotxf7hje6as" path="res://Assets/Images/shield_filled.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://rewrv0hgspug" path="res://Assets/Images/shield_border.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://dr1urwwgoukda" path="res://Assets/Images/Icons/slash_icon.png" id="9_3gjx1"]
 [ext_resource type="Script" path="res://Logic/Enemy/ArmorBar.cs" id="10"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/ViralContainer.cs" id="11"]
-[ext_resource type="Texture2D" uid="uid://db4cftuv5i83w" path="res://Assets/Images/viral_icon.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://io0wq1mb4pyu" path="res://Assets/Images/Icons/corrosive_icon.png" id="11_0xneq"]
 [ext_resource type="Script" path="res://Logic/Enemy/ShieldOrbGenerator.cs" id="13"]
+[ext_resource type="Texture2D" uid="uid://db4cftuv5i83w" path="res://Assets/Images/Icons/viral_icon.png" id="13_7qcr1"]
 [ext_resource type="Script" path="res://Logic/Enemy/HpBar.cs" id="15"]
-[ext_resource type="Texture2D" uid="uid://bv8dg1w5jjqwu" path="res://Assets/Images/cold_icon.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://bv8dg1w5jjqwu" path="res://Assets/Images/Icons/cold_icon.png" id="15_xrbrr"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/ColdContainer.cs" id="17"]
-[ext_resource type="Texture2D" uid="uid://io0wq1mb4pyu" path="res://Assets/Images/corrosive_icon.png" id="18"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/CorrosiveContainer.cs" id="20"]
 [ext_resource type="PackedScene" uid="uid://deocyt6mxr5yd" path="res://Scenes/Enemies/ShieldOrb.tscn" id="20_i0wyg"]
 
@@ -116,7 +116,7 @@ script = ExtResource("6")
 [node name="TextureRect" type="TextureRect" parent="Statuses/BleedContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("5")
+texture = ExtResource("9_3gjx1")
 
 [node name="Counter" type="Label" parent="Statuses/BleedContainer"]
 layout_mode = 2
@@ -133,7 +133,7 @@ script = ExtResource("20")
 [node name="TextureRect" type="TextureRect" parent="Statuses/CorrosiveContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("18")
+texture = ExtResource("11_0xneq")
 
 [node name="Counter" type="Label" parent="Statuses/CorrosiveContainer"]
 layout_mode = 2
@@ -150,7 +150,7 @@ script = ExtResource("11")
 [node name="TextureRect" type="TextureRect" parent="Statuses/ViralContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("12")
+texture = ExtResource("13_7qcr1")
 
 [node name="Counter" type="Label" parent="Statuses/ViralContainer"]
 layout_mode = 2
@@ -167,7 +167,7 @@ script = ExtResource("17")
 [node name="TextureRect" type="TextureRect" parent="Statuses/ColdContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("16")
+texture = ExtResource("15_xrbrr")
 
 [node name="Counter" type="Label" parent="Statuses/ColdContainer"]
 layout_mode = 2

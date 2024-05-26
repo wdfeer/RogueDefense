@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0oqoyg48rfi6"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_sf884"]
-[ext_resource type="Texture2D" uid="uid://dq2eblc5c5xij" path="res://Assets/Enemies/first_boss.svg" id="2_0m6dj"]
+[ext_resource type="Texture2D" uid="uid://dq2eblc5c5xij" path="res://Assets/Images/Enemies/first_boss.svg" id="2_0m6dj"]
 [ext_resource type="Script" path="res://Logic/Enemy/Variants/FirstBoss.cs" id="2_2jc4l"]
 
 [node name="FirstBoss" instance=ExtResource("1_sf884")]

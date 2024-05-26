@@ -21,7 +21,7 @@ namespace RogueDefense.Logic.PlayerCore
         {
             augmentPoints = upgradePointDistribution;
 
-            hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this) };
+            hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this), new ExplosionPlayer(this) };
 
             this.id = id;
             players.Add(id, this);

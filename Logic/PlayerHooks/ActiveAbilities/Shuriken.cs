@@ -6,7 +6,7 @@ namespace RogueDefense
 {
 	public partial class Shuriken : Projectile
 	{
-		public Shuriken(Array<Texture2D> textures)
+		public Shuriken(Array<Texture2D> textures) : base()
 		{
 			texture = textures[1];
 		}
