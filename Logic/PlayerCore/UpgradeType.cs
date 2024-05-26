@@ -134,9 +134,9 @@ namespace RogueDefense.Logic.PlayerCore
         };
         public static readonly UpgradeType ExplosionChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Explosion Chance")
         {
-            chanceMult = 0.33f,
+            chanceMult = 0.25f,
             getBaseRandomValue = () => 0.33f,
-            canBeRolled = () => Game.Wave > 40 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().mult < 1.1f
+            canBeRolled = () => Game.Wave > 30 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().chance < 0.5f
         };
         public static UpgradeType[] AllTypes = new UpgradeType[] {
             MaxHp,
