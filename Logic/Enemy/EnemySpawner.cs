@@ -58,7 +58,7 @@ public partial class EnemySpawner : Node2D
 		if (gen % 10 == 9)
 			return 1;
 
-		return Enemy.statsRng.RandiRange(1, 3) + Enemy.oneTimeCountIncrease;
+		return Enemy.statsRng.RandiRange(1, 3) + gen / 20 + Enemy.oneTimeCountIncrease;
 	}
 	Vector2 GetPositionOffset(int gen, int index)
 	{
