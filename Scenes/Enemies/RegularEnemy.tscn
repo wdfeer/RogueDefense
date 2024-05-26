@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dcw1pfahgswms"]
+[gd_scene load_steps=25 format=3 uid="uid://dcw1pfahgswms"]
 
 [ext_resource type="Script" path="res://Logic/Enemy/Variants/RegularEnemy.cs" id="1_lpeuu"]
 [ext_resource type="PackedScene" path="res://Scenes/CombatText.tscn" id="2_y3ud8"]
@@ -18,15 +18,11 @@
 [ext_resource type="Texture2D" uid="uid://bv8dg1w5jjqwu" path="res://Assets/Images/cold_icon.png" id="16"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/ColdContainer.cs" id="17"]
 [ext_resource type="Texture2D" uid="uid://io0wq1mb4pyu" path="res://Assets/Images/corrosive_icon.png" id="18"]
-[ext_resource type="Script" path="res://Logic/Enemy/EffectField.cs" id="19"]
 [ext_resource type="Script" path="res://Logic/Enemy/StatusContainers/CorrosiveContainer.cs" id="20"]
 [ext_resource type="PackedScene" uid="uid://deocyt6mxr5yd" path="res://Scenes/Enemies/ShieldOrb.tscn" id="20_i0wyg"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(130, 130)
-
-[sub_resource type="CircleShape2D" id="2"]
-radius = 160.0
 
 [sub_resource type="Animation" id="Animation_klqbq"]
 resource_name = "Hurt"
@@ -199,21 +195,6 @@ script = ExtResource("10")
 [node name="ShieldOrbGenerator" type="Node2D" parent="."]
 script = ExtResource("13")
 shieldOrb = ExtResource("20_i0wyg")
-
-[node name="EffectField" type="Area2D" parent="."]
-visible = false
-z_index = -2
-collision_layer = 0
-collision_mask = 4
-monitoring = false
-monitorable = false
-gravity_point_center = Vector2(-1, 0)
-gravity_direction = Vector2(-1, 0)
-gravity = 0.0
-script = ExtResource("19")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EffectField"]
-shape = SubResource("2")
 
 [node name="BottomInfo" type="Label" parent="."]
 visible = false

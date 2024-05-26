@@ -61,9 +61,6 @@ public abstract partial class Enemy : Area2D
 		{
 			ResetShieldOrbs(gen);
 			ResetEffects(gen);
-
-			if (statsRng.Randf() < 0.15f && gen % 10 != 9)
-				ActivateEffectField();
 		}
 	}
 	void ResetImmunities(int gen, int index)
@@ -155,10 +152,6 @@ public abstract partial class Enemy : Area2D
 		oneTimeArmorMult = 1f;
 
 		ResetArmorDisplay();
-	}
-	void ActivateEffectField()
-	{
-		((EffectField)GetNode("EffectField")).Enable(GD.Randf() < 0.5f ? EffectField.EffectFieldMode.Slow : EffectField.EffectFieldMode.Diffuse);
 	}
 
 
@@ -293,8 +286,6 @@ public abstract partial class Enemy : Area2D
 		this.minDamage = maxHp * minDamage;
 	}
 
-
-	public EffectField slowingField;
 
 
 	public Bleed bleed = new Bleed();
