@@ -54,6 +54,8 @@ public partial class DefenseObjective : Node2D
         if (GD.Randf() < evasionChance)
             return;
 
+        dmg *= damageMult;
+
         CombatTextDisplay.instance.AddCombatText(new CombatText()
         {
             direction = Vector2.Up * 1.5f,
@@ -62,7 +64,7 @@ public partial class DefenseObjective : Node2D
             text = dmg.ToString("0.0")
         });
 
-        Hp -= dmg * damageMult;
+        Hp -= dmg;
         if (Hp <= 0)
         {
             Death();
@@ -70,8 +72,6 @@ public partial class DefenseObjective : Node2D
     }
     public override void _Process(double delta)
     {
-
-
         hpBar.Visible = SaveData.showHpBar;
         if (hpBar.Visible)
         {
@@ -106,7 +106,7 @@ public partial class DefenseObjective : Node2D
     void DrainHealth()
     {
         float dps = 6;
-        if (!NetworkManager.Singleplayer) dps *= 2f;
+        if (!NetworkManager.Singleplayer) dps *= 1.5f;
         if (Game.Wave > 40) dps *= 2f;
         if (Game.Wave > 25) dps *= 2f;
         Damage(dps);
