@@ -84,6 +84,7 @@ animationPlayer = NodePath("AnimationPlayer")
 bulletSpawnpoint = NodePath("TurretSprite/BulletSpawn")
 
 [node name="StunIndicator" type="HBoxContainer" parent="."]
+visible = false
 offset_left = -20.0
 offset_top = -51.0
 offset_right = 20.0

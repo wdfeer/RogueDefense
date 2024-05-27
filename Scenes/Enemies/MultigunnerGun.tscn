@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl7qsuudqjod4"]
+
+[ext_resource type="Texture2D" uid="uid://b57p48645gwk0" path="res://Assets/Images/Enemies/multigunner1.svg" id="1_jd0qp"]
+
+[node name="Gun" type="Sprite2D"]
+texture = ExtResource("1_jd0qp")
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(144, 0)

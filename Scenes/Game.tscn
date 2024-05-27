@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=61 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://Logic/UI/InGame/DeathScreen.cs" id="15"]
 [ext_resource type="Script" path="res://Logic/Enemies/CombatTextDisplay.cs" id="16_8utqd"]
 [ext_resource type="Script" path="res://Logic/Enemies/EnemySpawner.cs" id="16_bbfcr"]
+[ext_resource type="PackedScene" uid="uid://cs6usky6tq505" path="res://Scenes/Enemies/Multigunner.tscn" id="16_brqtq"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="PackedScene" uid="uid://43imkg4sl66e" path="res://Scenes/ProjectileManager.tscn" id="17_v5lu7"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
@@ -141,6 +142,7 @@ firstBossScene = ExtResource("12_srcxd")
 armoredSpiritBossScene = ExtResource("12_icdcw")
 miniArmoredSpiritScene = ExtResource("13_383pk")
 explodingEyeScene = ExtResource("14_gxxuh")
+multigunnerScene = ExtResource("16_brqtq")
 
 [node name="CombatTextDisplay" type="Node2D" parent="."]
 script = ExtResource("16_8utqd")

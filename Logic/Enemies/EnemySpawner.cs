@@ -1,6 +1,7 @@
 using Godot;
 using RogueDefense.Logic.Enemies;
 using System;
+using System.Collections.Generic;
 
 public partial class EnemySpawner : Node2D
 {
@@ -14,45 +15,41 @@ public partial class EnemySpawner : Node2D
 	public PackedScene miniArmoredSpiritScene;
 	[Export]
 	public PackedScene explodingEyeScene;
+	[Export]
+	public PackedScene multigunnerScene;
 
 	Enemy InstantiateEnemy(int gen, int index)
 	{
 		Enemy InstantiateRandomNormal()
 		{
-			switch (Enemy.statsRng.RandiRange(0, 2))
+			List<PackedScene> possibilities = new List<PackedScene>
 			{
-				case 0:
-					return miniArmoredSpiritScene.Instantiate<Enemy>();
-				case 1 when index != 0:
-					return explodingEyeScene.Instantiate<Enemy>();
-				default:
-					return regularEnemyScene.Instantiate<Enemy>();
-			}
+				regularEnemyScene,
+				multigunnerScene
+			};
+			if (gen > 15)
+				possibilities.Add(miniArmoredSpiritScene);
+			if (gen > 19 && index != 0)
+				possibilities.Add(explodingEyeScene);
+
+			return possibilities[Enemy.statsRng.RandiRange(0, possibilities.Count - 1)].Instantiate<Enemy>();
 		}
 		Enemy InstantiateRandomBoss()
 		{
-			switch (Enemy.statsRng.RandiRange(0, 1))
+			List<PackedScene> possibilities = new List<PackedScene>
 			{
-				case 0:
-					return armoredSpiritBossScene.Instantiate<Enemy>();
-				default:
-					return firstBossScene.Instantiate<Enemy>();
-			}
+				firstBossScene,
+				multigunnerScene
+			};
+			if (gen >= 19)
+				possibilities.Add(armoredSpiritBossScene);
+
+			return possibilities[Enemy.statsRng.RandiRange(0, possibilities.Count - 1)].Instantiate<Enemy>();
 		}
 
-		switch (gen)
-		{
-			case 9:
-				return firstBossScene.Instantiate<Enemy>();
-			case 19:
-				return armoredSpiritBossScene.Instantiate<Enemy>();
-			case > 19 when gen % 10 == 9:
-				return InstantiateRandomBoss();
-			case > 19:
-				return InstantiateRandomNormal();
-			default:
-				return regularEnemyScene.Instantiate<Enemy>();
-		}
+		if (gen > 19 && gen % 10 == 9)
+			return InstantiateRandomBoss();
+		return InstantiateRandomNormal();
 	}
 	int GetEnemyCount(int gen)
 	{

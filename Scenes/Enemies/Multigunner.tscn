@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs6usky6tq505"]
+
+[ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_un6kx"]
+[ext_resource type="Script" path="res://Logic/Enemies/Variants/Multigunner.cs" id="2_mkl5y"]
+[ext_resource type="Texture2D" uid="uid://c6pu0n1nidmv8" path="res://Assets/Images/Enemies/multigunner0.svg" id="2_yanl1"]
+[ext_resource type="PackedScene" uid="uid://dl7qsuudqjod4" path="res://Scenes/Enemies/MultigunnerGun.tscn" id="3_a180i"]
+[ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="4_ggyym"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_omhc4"]
+radius = 56.0
+
+[node name="Multigunner" instance=ExtResource("1_un6kx")]
+script = ExtResource("2_mkl5y")
+gunScene = ExtResource("3_a180i")
+bulletScene = ExtResource("4_ggyym")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_omhc4")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_yanl1")
