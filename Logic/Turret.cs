@@ -10,9 +10,9 @@ public partial class Turret : CharacterBody2D
 	public Node2D bulletSpawnpoint;
 	public override void _Process(double delta)
 	{
-		if (stunTimer > 0)
+		if (StunTimer > 0)
 		{
-			stunTimer -= (float)delta;
+			StunTimer -= (float)delta;
 			return;
 		}
 
@@ -36,10 +36,21 @@ public partial class Turret : CharacterBody2D
 	}
 
 
+	private float StunTimer
+	{
+		get => stunTimer; set
+		{
+			stunTimer = value;
+			GetNode<Control>("StunIndicator").Visible = stunTimer > 0;
+			GetNode<Label>("StunIndicator/Label").Text = stunTimer.ToString("0.0");
+		}
+	}
 	private float stunTimer = 0;
-	public bool Stunned => stunTimer > 0;
+	public bool Stunned => StunTimer > 0;
+
+
 	public void Stun(float duration)
 	{
-		stunTimer += duration;
+		StunTimer += duration;
 	}
 }
