@@ -3,6 +3,8 @@ extends LinkButton
 @onready var request: HTTPRequest = $HTTPRequest
 
 func _ready():
+	text = "v" + ProjectSettings.get_setting("application/config/version")
+	
 	request.request_completed.connect(_on_request_completed)
 	
 	request.request("https://api.github.com/repos/wdfeer/roguedefense/releases/latest")
