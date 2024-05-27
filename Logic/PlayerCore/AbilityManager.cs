@@ -56,7 +56,7 @@ public partial class AbilityManager
         typeof(ArmorStripAbility),
         typeof(UpgradeBuffAbility),
         typeof(CritChanceAbility),
-        typeof(DmgDealtDmgTakenAbility),
+        typeof(DamageDealtTakenAbility),
         typeof(DamageReductionAbility)
     };
     public static ActiveAbility CreateAbilityInstance(int index, Player player, Button button = null)

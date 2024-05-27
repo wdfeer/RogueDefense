@@ -4,15 +4,15 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class DmgDealtDmgTakenAbility : ActiveAbility
+public partial class DamageDealtTakenAbility : ActiveAbility
 {
-    public DmgDealtDmgTakenAbility(Player player, Button button) : base(player, button)
+    public DamageDealtTakenAbility(Player player, Button button) : base(player, button)
     {
     }
 
     public override void Activate()
     {
-        buffLeft = Duration * 5f;
+        buffLeft = Duration * 10f;
     }
     public float buffLeft = 0;
     public override void PostUpgradeUpdate(float delta)
@@ -32,9 +32,10 @@ public partial class DmgDealtDmgTakenAbility : ActiveAbility
         }
     }
     public float DamageTaken => 0.5f * Strength;
+    public override float BaseCooldown => 60f;
     protected override string GetAbilityText()
         => $@"+{(int)(200f * Strength)}% Total Damage but
 +{MathHelper.ToPercentAndRound(DamageTaken)}% Damage Taken
-Duration: {(5f * Duration).ToString("0.00")} s
+Duration: {(10f * Duration).ToString("0.00")} s
 Cooldown: {Cooldown.ToString("0.00")} s";
 }
