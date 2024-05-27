@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Enemies;
 using System;
 
 public partial class EnemySpawner : Node2D

@@ -1,22 +1,21 @@
 using Godot;
 
-namespace RogueDefense.Logic
-{
-    public partial class MovingKinematicBody2D : CharacterBody2D
-    {
-        /// <summary>
-        /// Position change per second
-        /// </summary>
-        public Vector2 velocity = Vector2.Zero;
-        public override void _PhysicsProcess(double delta)
-        {
-            var collision = MoveAndCollide(velocity);
-            if (collision != null)
-            {
-                OnCollision(collision);
-            }
-        }
+namespace RogueDefense.Logic;
 
-        protected virtual void OnCollision(KinematicCollision2D collision) { }
+public partial class MovingKinematicBody2D : CharacterBody2D
+{
+    /// <summary>
+    /// Position change per second
+    /// </summary>
+    public Vector2 velocity = Vector2.Zero;
+    public override void _PhysicsProcess(double delta)
+    {
+        var collision = MoveAndCollide(velocity);
+        if (collision != null)
+        {
+            OnCollision(collision);
+        }
     }
+
+    protected virtual void OnCollision(KinematicCollision2D collision) { }
 }

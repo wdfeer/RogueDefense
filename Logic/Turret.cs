@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Enemies;
 
 public partial class Turret : CharacterBody2D
 {

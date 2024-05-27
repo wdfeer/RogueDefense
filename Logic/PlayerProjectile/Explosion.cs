@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 using RogueDefense.Logic;
+using RogueDefense.Logic.Enemies;
 
 public class Explosion : Projectile
 {

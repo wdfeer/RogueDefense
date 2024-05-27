@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.Statuses;
 
 public abstract partial class StatusContainer : HBoxContainer

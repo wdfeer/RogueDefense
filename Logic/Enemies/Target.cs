@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.PlayerCore;
 
 public partial class Target : Sprite2D

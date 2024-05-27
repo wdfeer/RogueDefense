@@ -2,6 +2,7 @@ using Godot;
 using RogueDefense;
 using System;
 
+namespace RogueDefense.Logic.Enemies;
 public partial class EnemyBullet : Area2D
 {
 	public override void _Ready()

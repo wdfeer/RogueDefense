@@ -1,6 +1,7 @@
 using Godot;
 using RogueDefense;
 using RogueDefense.Logic;
+using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.PlayerCore;
 using System.Linq;
 

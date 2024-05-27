@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using RogueDefense;
-using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using RogueDefense.Logic.Statuses;
+
+namespace RogueDefense.Logic.Enemies;
 
 public abstract partial class Enemy : Area2D
 {
@@ -93,7 +93,7 @@ public abstract partial class Enemy : Area2D
 			float rand = statsRng.Randf();
 			if (rand < 0.1f)
 				SetDamageCap(GetDamageCap(gen));
-			else if (shieldOrbGenerator.count > 0 && gen < 40 && rand < 0.2f)
+			else if (shieldOrbGenerator.count > 0 && gen > 15 && gen < 35 && rand < 0.2f)
 				SetMinDamage(GetMinDamage(gen));
 		}
 	}
@@ -176,11 +176,9 @@ public abstract partial class Enemy : Area2D
 		((ArmorBar)GetNode("ArmorBar")).SetDisplay(1f - GetArmorDamageMultiplier(armor));
 	}
 
-	[Export]
-	public PackedScene combatText;
 	public float dynamicDamageMult = 1f;
 	AnimationPlayer animationPlayer;
-	public void Damage(float damage, bool unhideable, Color textColor, Vector2? combatTextDirection = null, bool ignoreArmor = false)
+	public void Damage(float damage, bool unhideable, Color textColor, Vector2? textVelocity = null, bool ignoreArmor = false)
 	{
 		if (Dead) return;
 
@@ -197,13 +195,13 @@ public abstract partial class Enemy : Area2D
 
 		if (SaveData.showCombatText || unhideable)
 		{
-			CombatText dmgText = combatText.Instantiate<CombatText>();
-			GetNode("/root/Game").AddChild(dmgText);
-			if (combatTextDirection != null)
-				dmgText.direction = (Vector2)combatTextDirection;
-			dmgText.Modulate = textColor;
-			dmgText.Text = damage.ToString("0.0");
-			dmgText.SetGlobalPosition(GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120));
+			CombatTextDisplay.instance.AddCombatText(new CombatText()
+			{
+				position = GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120),
+				direction = textVelocity == null ? Vector2.Up : (Vector2)textVelocity,
+				modulate = textColor,
+				text = MathHelper.ToShortenedString(damage)
+			});
 		}
 
 		if (Hp <= 0)

@@ -1,13 +1,12 @@
 using Godot;
 
-namespace RogueDefense.Logic.UI.Lobby
+namespace RogueDefense.Logic.UI.Lobby;
+
+public partial class ExitButton : Button
 {
-    public partial class ExitButton : Button
+    public override void _Pressed()
     {
-        public override void _Pressed()
-        {
-            NetworkManager.NetStop();
-            GetTree().ChangeSceneToFile("Scenes/MainMenu/MainMenu.tscn");
-        }
+        NetworkManager.NetStop();
+        GetTree().ChangeSceneToFile("Scenes/MainMenu/MainMenu.tscn");
     }
 }
