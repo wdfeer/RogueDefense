@@ -51,6 +51,9 @@ public partial class Player
     }
     void UpdateMovement(double delta)
     {
+        if (controlledTurret.Stunned)
+            return;
+
         Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
         controlledTurret.Velocity = inputDirection * Turret.SPEED * 1000 * (float)delta;
         controlledTurret.MoveAndSlide();
@@ -65,6 +68,7 @@ public partial class Player
         Client.instance.SendMessage(MessageType.PositionUpdated, new string[] { client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString() });
     }
     public List<Turret> turrets = new List<Turret>();
+    public IEnumerable<Turret> ActiveTurrets => turrets.Where(x => !x.Stunned);
     public Turret controlledTurret;
     public Enemy target;
     bool IsValidTarget(Enemy enemy)
@@ -108,8 +112,6 @@ public partial class Player
         DefenseObjective.instance.AddChild(controlledTurret);
         controlledTurret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
         turrets.Add(controlledTurret);
-
-        shootManager.bulletSpawns.Add(controlledTurret.bulletSpawnpoint);
 
         controlledTurret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
 

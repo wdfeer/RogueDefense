@@ -10,6 +10,12 @@ public partial class Turret : CharacterBody2D
 	public Node2D bulletSpawnpoint;
 	public override void _Process(double delta)
 	{
+		if (stunTimer > 0)
+		{
+			stunTimer -= (float)delta;
+			return;
+		}
+
 		if (target != null && IsInstanceValid(target))
 		{
 			(GetNode("TurretSprite") as Sprite2D).LookAt(target.GlobalPosition);
@@ -27,5 +33,13 @@ public partial class Turret : CharacterBody2D
 	{
 		Particles.Emitting = true;
 		ToSignal(GetTree().CreateTimer(duration, false), "timeout").OnCompleted(() => Particles.Emitting = false);
+	}
+
+
+	private float stunTimer = 0;
+	public bool Stunned => stunTimer > 0;
+	public void Stun(float duration)
+	{
+		stunTimer += duration;
 	}
 }

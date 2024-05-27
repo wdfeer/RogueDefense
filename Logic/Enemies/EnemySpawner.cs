@@ -17,6 +17,7 @@ public partial class EnemySpawner : Node2D
 
 	Enemy InstantiateEnemy(int gen, int index)
 	{
+		return explodingEyeScene.Instantiate<Enemy>(); // DEBUG
 		Enemy InstantiateRandomNormal()
 		{
 			switch (Enemy.statsRng.RandiRange(0, 2))

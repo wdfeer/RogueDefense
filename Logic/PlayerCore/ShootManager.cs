@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RogueDefense.Logic.PlayerCore;
 
@@ -41,7 +42,6 @@ public partial class ShootManager
     public float shootSpeed = BASE_SHOOT_SPEED;
     public const float SPREAD_DEGREES = 10f;
     public int shootCount = 0;
-    public List<Node2D> bulletSpawns = new List<Node2D>();
 
     public bool colored = false;
     private void CreateBullets()
@@ -54,11 +54,13 @@ public partial class ShootManager
             hitMult = bulletCount / 3f;
             bulletCount = 3;
         }
-        for (int i = 0; i < bulletSpawns.Count; i++)
+
+        Vector2[] bulletSpawns = player.ActiveTurrets.Select(x => x.bulletSpawnpoint.GlobalPosition).ToArray();
+        for (int i = 0; i < bulletSpawns.Length; i++)
         {
             for (int k = 0; k < bulletCount * 1; k++)
             {
-                Bullet bullet = Shoot(bulletSpawns[i].GlobalPosition, shootSpeed);
+                Bullet bullet = Shoot(bulletSpawns[i], shootSpeed);
                 bullet.damage = damage;
                 bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 
@@ -94,7 +96,7 @@ public partial class ShootManager
     private void PlayShootAnimation()
     {
         float speed = shootInterval < 0.5f ? Mathf.Pow(0.5f / shootInterval, 2) : 1f;
-        foreach (Turret turret in player.turrets)
+        foreach (Turret turret in player.ActiveTurrets)
         {
             turret.animationPlayer.Stop();
             turret.animationPlayer.Play("ShootEffects", customSpeed: speed);

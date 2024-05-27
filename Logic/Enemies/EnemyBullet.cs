@@ -23,11 +23,16 @@ public partial class EnemyBullet : Area2D
 	}
 
 	public float damage = 20f;
+	const float STUN_DURATION = 5;
 	void OnBodyEntered(Node body)
 	{
 		if (body is DefenseObjective defenseObjective)
 		{
 			defenseObjective.Damage(damage);
+		}
+		else if (body is Turret turret && !turret.Stunned)
+		{
+			turret.Stun(STUN_DURATION);
 		}
 	}
 }
