@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic;
 using RogueDefense.Logic.Enemies;
 using System.Collections.Generic;
 using System.Linq;

@@ -23,6 +23,9 @@ public partial class DefenseObjective : Node2D
         sprite = GetNode<Sprite2D>("./Sprite2D");
 
         Hp = maxHp;
+
+        if (GameSettings.healthDrain)
+            SetHealthDrainTimer();
     }
 
 
@@ -51,6 +54,14 @@ public partial class DefenseObjective : Node2D
         if (GD.Randf() < evasionChance)
             return;
 
+        CombatTextDisplay.instance.AddCombatText(new CombatText()
+        {
+            direction = Vector2.Up * 1.5f,
+            modulate = Colors.Red,
+            position = GlobalPosition + Vector2.Up * 60,
+            text = dmg.ToString("0.0")
+        });
+
         Hp -= dmg * damageMult;
         if (Hp <= 0)
         {
@@ -59,8 +70,7 @@ public partial class DefenseObjective : Node2D
     }
     public override void _Process(double delta)
     {
-        if (GameSettings.healthDrain)
-            DealPassiveDamage((float)delta);
+
 
         hpBar.Visible = SaveData.showHpBar;
         if (hpBar.Visible)
@@ -84,13 +94,22 @@ public partial class DefenseObjective : Node2D
             pair.Value._PhysicsProcess(delta);
         }
     }
-    void DealPassiveDamage(float delta)
+
+    void SetHealthDrainTimer()
+    {
+        ToSignal(GetTree().CreateTimer(1, false), "timeout").OnCompleted(() =>
+        {
+            DrainHealth();
+            SetHealthDrainTimer();
+        });
+    }
+    void DrainHealth()
     {
         float dps = 6;
         if (!NetworkManager.Singleplayer) dps *= 2f;
         if (Game.Wave > 40) dps *= 2f;
         if (Game.Wave > 25) dps *= 2f;
-        Damage(delta * dps);
+        Damage(dps);
     }
 
     public bool dead = false;

@@ -1,7 +1,7 @@
 
 using Godot;
 
-namespace RogueDefense.Logic.Enemies;
+namespace RogueDefense.Logic;
 
 public class CombatText
 {
@@ -14,14 +14,14 @@ public class CombatText
     public Vector2 direction;
     public Color modulate;
     public string text;
+    public int fontSize = 15;
 
     private static Font Font => ThemeDB.FallbackFont;
-    private const int FONT_SIZE = 15;
     private const float SPEED = 50;
 
     public void Draw(CanvasItem canvas)
     {
-        canvas.DrawString(Font, position, text, HorizontalAlignment.Center, fontSize: FONT_SIZE, modulate: modulate);
+        canvas.DrawString(Font, position, text, HorizontalAlignment.Center, fontSize: fontSize, modulate: modulate);
     }
 
     public const float LIFESPAN = 0.75f;

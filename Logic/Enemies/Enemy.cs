@@ -197,7 +197,7 @@ public abstract partial class Enemy : Area2D
 		{
 			CombatTextDisplay.instance.AddCombatText(new CombatText()
 			{
-				position = GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -120),
+				position = GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -100),
 				direction = textVelocity == null ? Vector2.Up : (Vector2)textVelocity,
 				modulate = textColor,
 				text = MathHelper.ToShortenedString(damage)
