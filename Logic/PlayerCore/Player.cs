@@ -22,7 +22,7 @@ public partial class Player
     {
         augmentPoints = upgradePointDistribution;
 
-        hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this), new ExplosionPlayer(this) };
+        hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this), new ExplosionPlayer(this), new RecoveryPlayer(this) };
 
         this.id = id;
         players.Add(id, this);
@@ -109,6 +109,7 @@ public partial class Player
     public void SpawnTurret()
     {
         controlledTurret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
+        controlledTurret.owner = this;
         DefenseObjective.instance.AddChild(controlledTurret);
         controlledTurret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
         turrets.Add(controlledTurret);

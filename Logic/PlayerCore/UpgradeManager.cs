@@ -63,6 +63,10 @@ public partial class UpgradeManager
         {
             PlayerHooks.GetHooks<ExplosionPlayer>(Player.players[from]).chance += upgrade.Value;
         }
+        else if (upgrade.type == UpgradeType.RecoverySpeed)
+        {
+            PlayerHooks.GetHooks<RecoveryPlayer>(Player.players[from]).recoverySpeed += upgrade.Value;
+        }
         else
         {
             var upgradeManager = Player.players[from].upgradeManager;

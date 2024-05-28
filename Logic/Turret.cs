@@ -1,5 +1,7 @@
 using Godot;
+using RogueDefense;
 using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.PlayerCore;
 
 public partial class Turret : CharacterBody2D
 {
@@ -36,6 +38,7 @@ public partial class Turret : CharacterBody2D
 	}
 
 
+	public Player owner;
 	private float StunTimer
 	{
 		get => stunTimer; set
@@ -51,6 +54,6 @@ public partial class Turret : CharacterBody2D
 
 	public void Stun(float duration)
 	{
-		StunTimer += duration;
+		StunTimer += duration / PlayerHooks.GetHooks<RecoveryPlayer>(owner).recoverySpeed;
 	}
 }

@@ -138,6 +138,12 @@ public partial class UpgradeType
         getBaseRandomValue = () => 0.33f,
         canBeRolled = () => Game.Wave > 30 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().chance < 0.5f
     };
+    public static readonly UpgradeType RecoverySpeed = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Recovery Speed")
+    {
+        chanceMult = 0.2f,
+        getBaseRandomValue = () => 0.5f,
+        canBeRolled = () => Game.Wave > 12 && PlayerHooks.GetLocalHooks<RecoveryPlayer>().recoverySpeed < 2f
+    };
     public static UpgradeType[] AllTypes = new UpgradeType[] {
         MaxHp,
         DamageReduction,
@@ -164,7 +170,8 @@ public partial class UpgradeType
         MultishotPerShot,
         FirstShotTotalDamage,
         TotalDamageVsArmor,
-        ExplosionChance
+        ExplosionChance,
+        RecoverySpeed
     };
     public static void Initialize()
     {
