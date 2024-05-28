@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RogueDefense"
-config/version="2.8.2"
+config/version="2.8.3"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#")
 boot_splash/bg_color=Color(0, 0, 0, 1)

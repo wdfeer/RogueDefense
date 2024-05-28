@@ -5,5 +5,3 @@
 
 [node name="MultigunnerBoss" instance=ExtResource("1_sssut")]
 script = ExtResource("2_kx574")
-gunScene = null
-bulletScene = null
