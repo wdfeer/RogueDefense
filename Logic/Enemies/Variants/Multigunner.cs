@@ -82,7 +82,7 @@ public partial class Multigunner : Enemy
 			Vector2 velocity = GlobalPosition.DirectionTo(pos) * ShootSpeed;
 			bullet.velocity = velocity;
 
-			bullet.damage = damage;
+			bullet.damage = damage / 2;
 			bullet.lifespan = 10 / HpCriticalModifier;
 		}
 	}
