@@ -12,7 +12,7 @@ public partial class Multigunner : Enemy
 	[Export]
 	PackedScene bulletScene;
 
-	static int GunCount => Game.GetStage() + 1;
+	protected virtual int GunCount => Game.GetStage() + 1;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -45,7 +45,7 @@ public partial class Multigunner : Enemy
 	}
 
 
-	float HpCriticalModifier => (Hp / maxHp < 0.5f) ? 2 : 1;
+	protected virtual float HpCriticalModifier => (Hp / maxHp < 0.5f) ? 2 : 1;
 
 	float RotationSpeed => MathF.PI / 3 * HpCriticalModifier;
 
@@ -82,6 +82,7 @@ public partial class Multigunner : Enemy
 			Vector2 velocity = GlobalPosition.DirectionTo(pos) * ShootSpeed;
 			bullet.velocity = velocity;
 
+			bullet.damage = damage;
 			bullet.lifespan = 10 / HpCriticalModifier;
 		}
 	}

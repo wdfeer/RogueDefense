@@ -17,7 +17,8 @@ public partial class EnemySpawner : Node2D
 	public PackedScene explodingEyeScene;
 	[Export]
 	public PackedScene multigunnerScene;
-
+	[Export]
+	public PackedScene multigunnerBossScene;
 	Enemy InstantiateEnemy(int gen, int index)
 	{
 		Enemy InstantiateRandomNormal()
@@ -34,21 +35,32 @@ public partial class EnemySpawner : Node2D
 
 			return possibilities[Enemy.statsRng.RandiRange(0, possibilities.Count - 1)].Instantiate<Enemy>();
 		}
-		Enemy InstantiateRandomBoss()
+		Enemy InstantiateBoss()
 		{
-			List<PackedScene> possibilities = new List<PackedScene>
+			switch (gen)
 			{
-				firstBossScene,
-				multigunnerScene
-			};
-			if (gen >= 19)
-				possibilities.Add(armoredSpiritBossScene);
+				case 9:
+					return firstBossScene.Instantiate<Enemy>();
+				case 19:
+					return armoredSpiritBossScene.Instantiate<Enemy>();
+				case 29:
+					return multigunnerBossScene.Instantiate<Enemy>();
+				default:
+					List<PackedScene> possibilities = new()
+					{
+						firstBossScene,
+						multigunnerBossScene,
+						armoredSpiritBossScene
+					};
 
-			return possibilities[Enemy.statsRng.RandiRange(0, possibilities.Count - 1)].Instantiate<Enemy>();
+					return possibilities[Enemy.statsRng.RandiRange(0, possibilities.Count - 1)].Instantiate<Enemy>();
+			}
+
+
 		}
 
-		if (gen > 19 && gen % 10 == 9)
-			return InstantiateRandomBoss();
+		if (gen % 10 == 9)
+			return InstantiateBoss();
 		return InstantiateRandomNormal();
 	}
 	int GetEnemyCount(int gen)

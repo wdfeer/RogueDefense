@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cprj4bjfqvxyh"]
+[gd_scene load_steps=62 format=3 uid="uid://cprj4bjfqvxyh"]
 
 [ext_resource type="Script" path="res://Logic/Game.cs" id="1"]
 [ext_resource type="PackedScene" uid="uid://ck8gmgjr1lmqk" path="res://Scenes/UpgradeButton.tscn" id="3"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://Logic/Enemies/EnemySpawner.cs" id="16_bbfcr"]
 [ext_resource type="PackedScene" uid="uid://cs6usky6tq505" path="res://Scenes/Enemies/Multigunner.tscn" id="16_brqtq"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://cf5k47mxihymy" path="res://Scenes/Enemies/MultigunnerBoss.tscn" id="17_8qcy2"]
 [ext_resource type="PackedScene" uid="uid://43imkg4sl66e" path="res://Scenes/ProjectileManager.tscn" id="17_v5lu7"]
 [ext_resource type="Script" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/Images/Icons/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
@@ -143,6 +144,7 @@ armoredSpiritBossScene = ExtResource("12_icdcw")
 miniArmoredSpiritScene = ExtResource("13_383pk")
 explodingEyeScene = ExtResource("14_gxxuh")
 multigunnerScene = ExtResource("16_brqtq")
+multigunnerBossScene = ExtResource("17_8qcy2")
 
 [node name="CombatTextDisplay" type="Node2D" parent="."]
 script = ExtResource("16_8utqd")
