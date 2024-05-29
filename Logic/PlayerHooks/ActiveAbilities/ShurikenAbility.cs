@@ -5,7 +5,7 @@ namespace RogueDefense;
 
 public partial class ShurikenAbility : ActiveAbility
 {
-    public int ShurikenCount => Mathf.FloorToInt(Strength / 1f);
+    public int ShurikenCount => Mathf.FloorToInt(Strength / 0.8f);
     public override void Activate()
     {
         for (int i = 0; i < ShurikenCount; i++)
@@ -20,7 +20,7 @@ public partial class ShurikenAbility : ActiveAbility
             player.shootManager.projectileManager.proj.Add(proj);
         }
     }
-    public const float BASE_DAMAGE = 4;
+    public const float BASE_DAMAGE = 5;
 
     public ShurikenAbility(Player player, Button button) : base(player, button)
     {
@@ -32,8 +32,8 @@ public partial class ShurikenAbility : ActiveAbility
 
     public override bool Shared => false;
     public float Damage => BASE_DAMAGE * Strength * player.shootManager.damage;
-    public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);
+    public override float BaseCooldown => 10f / Mathf.Pow(Duration, 0.65f);
     protected override string GetAbilityText()
         => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)Damage} Damage
-Cooldown: {Cooldown.ToString("0.00")} s";
+Cooldown: {Cooldown:0.00} s";
 }
