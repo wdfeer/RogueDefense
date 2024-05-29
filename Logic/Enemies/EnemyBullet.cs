@@ -29,10 +29,12 @@ public partial class EnemyBullet : Area2D
 		if (body is DefenseObjective defenseObjective)
 		{
 			defenseObjective.Damage(damage);
+			QueueFree();
 		}
 		else if (body is Turret turret && !turret.Stunned)
 		{
 			turret.Stun(STUN_DURATION);
+			QueueFree();
 		}
 	}
 }
