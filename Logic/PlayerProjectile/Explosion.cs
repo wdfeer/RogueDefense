@@ -27,7 +27,7 @@ public class Explosion : Projectile
 	public override void Draw(CanvasItem drawer)
 	{
 		Rect2 rect = new Rect2() { Position = position - new Vector2(Radius, Radius), Size = new Vector2(Diameter, Diameter) };
-		drawer.DrawTextureRect(texture, rect, false, Colors.White with { A = timeLeft * 2f });
+		drawer.DrawTextureRect(texture, rect, false, Colors.White with { A = timeLeft });
 	}
 
 
