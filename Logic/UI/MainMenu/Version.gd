@@ -17,4 +17,5 @@ func _on_request_completed(result, response_code, headers, body):
 	var latest_version: String = json["tag_name"]
 	if latest_version != text:
 		print("Found a newer version " + latest_version + " (current: " + text + ")")
-		add_theme_color_override("font_color", Color.DARK_RED)
+		$Underline.visible = true
+		$Underline.modulate = Color.RED

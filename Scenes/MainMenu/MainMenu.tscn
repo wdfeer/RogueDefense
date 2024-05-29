@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://kt63cqpw2db5"]
+[gd_scene load_steps=28 format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="PackedScene" uid="uid://djlwd1jt4bb3k" path="res://Scenes/MainMenu/background.tscn" id="1_u76gu"]
 [ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
 [ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/Images/Icons/game-icons.net/anvil-impact.svg" id="14_l3r0m"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/AugmentScreen/AugmentPointLabel.cs" id="15_4r3tt"]
+[ext_resource type="Texture2D" uid="uid://coybaj0ak2fgt" path="res://Assets/Images/Icons/github-mark-white.svg" id="15_avmqa"]
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
 [ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/Images/Icons/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
@@ -35,6 +36,13 @@ unicode = 106
 
 [sub_resource type="Shortcut" id="Shortcut_utl0v"]
 events = [SubResource("InputEventKey_c4ns1")]
+
+[sub_resource type="Gradient" id="Gradient_1gf4l"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fp4qk"]
+gradient = SubResource("Gradient_1gf4l")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enlh7"]
 bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
@@ -198,10 +206,42 @@ offset_right = 22.5
 offset_bottom = 31.0
 grow_horizontal = 2
 text = "v0.0.0"
+underline = 2
 uri = "https://github.com/wdfeer/RogueDefense/releases"
 script = ExtResource("18_867ui")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="Version"]
+
+[node name="GitHubLogo" type="TextureRect" parent="Version"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -8.5
+offset_right = -2.0
+offset_bottom = 7.5
+grow_vertical = 2
+texture = ExtResource("15_avmqa")
+expand_mode = 1
+
+[node name="Underline" type="TextureRect" parent="Version"]
+visible = false
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.5
+offset_top = -3.0
+offset_right = 22.5
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture1D_fp4qk")
+expand_mode = 1
 
 [node name="AugmentsButton" type="Button" parent="."]
 layout_mode = 1
