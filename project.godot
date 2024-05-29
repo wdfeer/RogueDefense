@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="RogueDefense"
+config/description="A game"
 config/version="2.8.5"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#")
