@@ -23,7 +23,8 @@ public class Explosion : Projectile
 	}
 
 	Texture2D texture;
-	protected override int Radius => 100;
+	public float radius = 100;
+	protected override int Radius => (int)radius;
 	public override void Draw(CanvasItem drawer)
 	{
 		Rect2 rect = new Rect2() { Position = position - new Vector2(Radius, Radius), Size = new Vector2(Diameter, Diameter) };

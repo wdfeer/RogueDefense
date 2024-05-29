@@ -138,9 +138,15 @@ public partial class UpgradeType
         getBaseRandomValue = () => 0.33f,
         canBeRolled = () => Game.Wave > 30 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().chance < 0.5f
     };
+    public static readonly UpgradeType ExplosionRadius = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Explosion Radius")
+    {
+        chanceMult = 0.35f,
+        getBaseRandomValue = () => 0.3f,
+        canBeRolled = () => PlayerHooks.GetLocalHooks<ExplosionPlayer>().chance > 0 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().radiusMult < 1.5f
+    };
     public static readonly UpgradeType RecoverySpeed = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Recovery Speed")
     {
-        chanceMult = 0.2f,
+        chanceMult = 0.22f,
         getBaseRandomValue = () => 0.5f,
         canBeRolled = () => Game.Wave > 12 && PlayerHooks.GetLocalHooks<RecoveryPlayer>().recoverySpeed < 2f
     };
@@ -171,6 +177,7 @@ public partial class UpgradeType
         FirstShotTotalDamage,
         TotalDamageVsArmor,
         ExplosionChance,
+        ExplosionRadius,
         RecoverySpeed
     };
     public static void Initialize()

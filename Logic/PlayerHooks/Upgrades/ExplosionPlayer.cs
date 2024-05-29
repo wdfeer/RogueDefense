@@ -12,6 +12,8 @@ public partial class ExplosionPlayer : PlayerHooks
     }
 
     public float chance = 0;
+    const int BASE_RADIUS = 100;
+    public float radiusMult = 1;
     public override void OnHitWithProj(Enemy enemy, Projectile p, float postCritDmg)
     {
         if (p is Explosion || GD.Randf() > chance)
@@ -22,6 +24,7 @@ public partial class ExplosionPlayer : PlayerHooks
             owner = player,
             position = p.position,
             damage = p.damage,
+            radius = BASE_RADIUS * radiusMult
         };
         player.shootManager.projectileManager.projDeffered.Add(explosion);
     }
