@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bri5xipnwwce4"]
+
+[ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_6wjo7"]
+[ext_resource type="Texture2D" uid="uid://bmtqnllok7mks" path="res://Assets/Images/Enemies/ArcaneBoss/core.svg" id="2_e3gnc"]
+
+[node name="ArcaneBoss" instance=ExtResource("1_6wjo7")]
+script = null
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_e3gnc")
