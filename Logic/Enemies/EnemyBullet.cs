@@ -23,7 +23,7 @@ public partial class EnemyBullet : Area2D
 	}
 
 	public float damage = 20f;
-	const float STUN_DURATION = 5;
+	const float STUN_DURATION = 4;
 	void OnBodyEntered(Node body)
 	{
 		if (body is DefenseObjective defenseObjective)
