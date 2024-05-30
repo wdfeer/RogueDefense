@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://diecg660ktie5"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_6wjo7"]
-[ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss.cs" id="1_oaget"]
 [ext_resource type="Texture2D" uid="uid://bmtqnllok7mks" path="res://Assets/Images/Enemies/ArcaneBoss/core.svg" id="2_e3gnc"]
+[ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss/ArcaneBoss.cs" id="2_iaxn1"]
 [ext_resource type="PackedScene" uid="uid://2vl1li6ld01h" path="res://Scenes/Enemies/ArcaneBossNode.tscn" id="4_0pnbj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vopwm"]
@@ -20,7 +20,7 @@ height = 124
 size = Vector2(800, 124)
 
 [node name="ArcaneBoss" instance=ExtResource("1_6wjo7")]
-script = ExtResource("1_oaget")
+script = ExtResource("2_iaxn1")
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_vopwm")
@@ -58,6 +58,7 @@ visible = false
 visible = false
 
 [node name="Beam" type="Area2D" parent="." index="9"]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Beam" index="0"]
 position = Vector2(-500, 0)
