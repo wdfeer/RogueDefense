@@ -11,12 +11,20 @@ public partial class ArcaneBoss : Enemy
 
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
-		maxHp += 100000 * NetworkManager.PlayerCount;
+		maxHp += 10 ^ Game.GetStage() * NetworkManager.PlayerCount;
 	}
 	protected override void ModifyArmor(ref float armor)
 	{
 		armor = 600;
 	}
+	protected override void ModifyImmunities(ref Status[] statuses)
+	{
+		foreach (var status in statuses)
+		{
+			status.immune = false;
+		}
+	}
+	protected override bool ShieldOrbsAllowed => false;
 
 
 	public ArcaneBossNode[] nodes = new ArcaneBossNode[4];
