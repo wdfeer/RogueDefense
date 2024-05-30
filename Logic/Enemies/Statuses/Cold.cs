@@ -6,6 +6,6 @@ public partial class Cold : SpecialStatus
 {
     public override void SpecialProcess(float delta)
     {
-        enemy.dynamicSpeedMult = 1f / Mathf.Pow(instances.Count + 1f, 0.33f);
+        enemy.dynamicSpeedMult /= 1.25f + Mathf.Pow(Count, 0.33f);
     }
 }
