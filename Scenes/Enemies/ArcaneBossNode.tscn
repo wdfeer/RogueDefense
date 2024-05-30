@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://2vl1li6ld01h"]
+
+[ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_a8cco"]
+[ext_resource type="Texture2D" uid="uid://bpuxecyc3w0ow" path="res://Assets/Images/Enemies/ArcaneBoss/node.svg" id="2_mys2h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knmt2"]
+radius = 16.0
+
+[node name="ArcaneBossNode" instance=ExtResource("1_a8cco")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_knmt2")
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(1, 1)
+texture = ExtResource("2_mys2h")
+
+[node name="Target" parent="." index="2"]
+scale = Vector2(0.25, 0.25)
+
+[node name="HpBar" parent="." index="3"]
+offset_top = -52.0
+offset_bottom = -28.0
+
+[node name="Statuses" parent="." index="4"]
+offset_left = 64.0
+offset_top = -56.0
+offset_bottom = 124.0
+scale = Vector2(0.8, 0.8)
+
+[node name="ArmorBar" parent="." index="5"]
+visible = false
+
+[node name="ShieldOrbGenerator" parent="." index="6"]
+visible = false

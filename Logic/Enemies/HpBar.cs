@@ -7,7 +7,7 @@ public partial class HpBar : ProgressBar
     public Enemy enemy;
     public override void _Ready()
     {
-        enemy = (Enemy)GetParent();
+        enemy = GetParent<Enemy>();
     }
     public override void _Process(double delta)
     {

@@ -8,4 +8,9 @@ public partial class ArcaneBossNode : Enemy
 {
 	public override float GetBaseSpeed()
 		=> 0;
+
+	protected override void ModifyMaxHp(ref float maxHp)
+	{
+		base.ModifyMaxHp(ref maxHp);
+	}
 }

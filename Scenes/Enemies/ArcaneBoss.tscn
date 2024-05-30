@@ -1,10 +1,68 @@
-[gd_scene load_steps=3 format=3 uid="uid://bri5xipnwwce4"]
+[gd_scene load_steps=9 format=3 uid="uid://diecg660ktie5"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_6wjo7"]
+[ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss.cs" id="1_oaget"]
 [ext_resource type="Texture2D" uid="uid://bmtqnllok7mks" path="res://Assets/Images/Enemies/ArcaneBoss/core.svg" id="2_e3gnc"]
+[ext_resource type="PackedScene" uid="uid://2vl1li6ld01h" path="res://Scenes/Enemies/ArcaneBossNode.tscn" id="4_0pnbj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vopwm"]
+radius = 64.0
+
+[sub_resource type="Gradient" id="Gradient_5sews"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_58t7c"]
+gradient = SubResource("Gradient_5sews")
+width = 1000
+height = 124
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l57sv"]
+size = Vector2(800, 124)
 
 [node name="ArcaneBoss" instance=ExtResource("1_6wjo7")]
-script = null
+script = ExtResource("1_oaget")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CircleShape2D_vopwm")
 
 [node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_e3gnc")
+
+[node name="Node1" parent="Sprite2D" index="0" instance=ExtResource("4_0pnbj")]
+position = Vector2(-256, -256)
+
+[node name="Node2" parent="Sprite2D" index="1" instance=ExtResource("4_0pnbj")]
+position = Vector2(256, -258)
+
+[node name="Node3" parent="Sprite2D" index="2" instance=ExtResource("4_0pnbj")]
+position = Vector2(256, 256)
+
+[node name="Node4" parent="Sprite2D" index="3" instance=ExtResource("4_0pnbj")]
+position = Vector2(-256, 256)
+
+[node name="Target" parent="." index="2"]
+visible = false
+scale = Vector2(1, 1)
+script = null
+
+[node name="HpBar" parent="." index="3"]
+visible = false
+
+[node name="Statuses" parent="." index="4"]
+visible = false
+
+[node name="ArmorBar" parent="." index="5"]
+visible = false
+
+[node name="ShieldOrbGenerator" parent="." index="6"]
+visible = false
+
+[node name="Beam" type="Area2D" parent="." index="9"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Beam" index="0"]
+position = Vector2(-500, 0)
+texture = SubResource("GradientTexture2D_58t7c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Beam" index="1"]
+position = Vector2(-400, 0)
+shape = SubResource("RectangleShape2D_l57sv")

@@ -26,7 +26,7 @@
      inkscape:document-units="px"
      inkscape:zoom="1.5987892"
      inkscape:cx="267.07711"
-     inkscape:cy="291.47057"
+     inkscape:cy="290.8451"
      inkscape:window-width="2560"
      inkscape:window-height="1410"
      inkscape:window-x="0"
@@ -134,9 +134,9 @@
          id="path17" />
     </g>
     <path
+       id="path12"
        style="fill:none;fill-opacity:1;stroke:url(#radialGradient13);stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 31.043703,45.946007 H 166.51036 V 181.41267 H 31.043703 Z"
-       id="path12" />
+       d="M 38.569569 45.946233 A 7.5259285 7.5259285 0 0 1 31.04393 53.471872 L 31.04393 173.88674 A 7.5259285 7.5259285 0 0 1 38.569569 181.4129 L 158.98444 181.4129 A 7.5259285 7.5259285 0 0 1 159.53944 178.62237 A 7.5259285 7.5259285 0 0 1 159.59215 178.48026 A 7.5259285 7.5259285 0 0 1 161.13573 176.17084 A 7.5259285 7.5259285 0 0 1 161.26854 176.03803 A 7.5259285 7.5259285 0 0 1 163.57951 174.49394 A 7.5259285 7.5259285 0 0 1 163.71748 174.44278 A 7.5259285 7.5259285 0 0 1 166.51059 173.88674 L 166.51059 53.471872 A 7.5259285 7.5259285 0 0 1 158.98444 45.946233 L 38.569569 45.946233 z " />
     <circle
        style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient12);stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="path1"
@@ -144,25 +144,25 @@
        cy="113.66761"
        r="33.602352" />
     <circle
-       style="fill:#000000;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
        id="circle16"
        cx="166.51036"
        cy="181.41267"
        r="7.5259285" />
     <circle
-       style="fill:#000000;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
        id="circle15"
        cx="31.043703"
        cy="181.41267"
        r="7.5259285" />
     <circle
-       style="fill:#000000;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
        id="circle14"
        cx="166.51036"
        cy="45.946007"
        r="7.5259285" />
     <circle
-       style="fill:#000000;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
        id="circle8"
        cx="31.043703"
        cy="45.946007"
