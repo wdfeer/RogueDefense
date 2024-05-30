@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss/ArcaneBossNode.cs" id="2_t8wji"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_knmt2"]
-radius = 16.0
+radius = 32.0
 
 [node name="ArcaneBossNode" instance=ExtResource("1_a8cco")]
 script = ExtResource("2_t8wji")
