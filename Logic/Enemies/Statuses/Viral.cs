@@ -9,7 +9,15 @@ public partial class Viral : SpecialStatus
         if (instances.Count == 0)
             return;
         enemy.dynamicDamageMult *= 1.5f;
-        enemy.dynamicDamageMult *= 1f +
-            (instances.Count > 10 ? (Mathf.Pow(instances.Count - 10, 0.75f) + 10) : instances.Count) / 10f;
+
+        const int LINEAR_SCALING_BOUNDARY = 5;
+        float flat;
+        if (instances.Count > LINEAR_SCALING_BOUNDARY)
+            flat = (Mathf.Sqrt(instances.Count - LINEAR_SCALING_BOUNDARY) + LINEAR_SCALING_BOUNDARY) / 10f;
+        else
+            flat = instances.Count / 10f;
+        flat *= Mathf.Log(instances.Count);
+
+        enemy.dynamicDamageMult += flat;
     }
 }

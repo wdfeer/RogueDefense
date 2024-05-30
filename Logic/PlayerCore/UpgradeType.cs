@@ -58,7 +58,7 @@ public partial class UpgradeType
     {
         status = true,
         chanceMult = 0.5f,
-        valueMult = 0.8f
+        valueMult = 0.7f
     };
     public static readonly UpgradeType ColdChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance")
     {
