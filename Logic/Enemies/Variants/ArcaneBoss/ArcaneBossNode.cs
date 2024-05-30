@@ -4,6 +4,7 @@ using RogueDefense.Logic.Statuses;
 using System;
 using System.Linq;
 
+namespace RogueDefense.Logic.Enemies.Variants.ArcaneBoss;
 public partial class ArcaneBossNode : Enemy
 {
 	public override float GetBaseSpeed()
@@ -32,5 +33,7 @@ public partial class ArcaneBossNode : Enemy
 		base._Process(delta);
 
 		GlobalRotation = 0;
+
+		GetNode<ArcaneBoss>("../..").charge += (float)delta;
 	}
 }

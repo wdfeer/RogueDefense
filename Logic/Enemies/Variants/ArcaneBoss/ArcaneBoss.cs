@@ -1,9 +1,12 @@
 using Godot;
+using RogueDefense;
 using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.Statuses;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
+namespace RogueDefense.Logic.Enemies.Variants.ArcaneBoss;
 public partial class ArcaneBoss : Enemy
 {
 	public override float GetBaseSpeed()
@@ -41,6 +44,8 @@ public partial class ArcaneBoss : Enemy
 	}
 
 
+	public float charge = 0;
+	const float MIN_CHARGE = 6;
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
@@ -53,6 +58,37 @@ public partial class ArcaneBoss : Enemy
 		{
 			GetNode<Control>("HpBar").Visible = true;
 			GetNode<Control>("Statuses").Visible = true;
+		}
+
+		Sprite2D energy = GetNode<Sprite2D>("EnergySprite");
+		energy.Modulate = energy.Modulate with { A = charge / MIN_CHARGE };
+
+		charge += (float)delta;
+		if (charge >= MIN_CHARGE)
+		{
+			charge = 0;
+			Shoot();
+		}
+
+		QueueRedraw();
+	}
+
+	[Export]
+	PackedScene arcaneBulletScene;
+	void Shoot()
+	{
+		Vector2 target = DefenseObjective.instance.GlobalPosition;
+
+		for (int i = 0; i < 10; i++)
+		{
+			ArcaneBullet bullet = arcaneBulletScene.Instantiate<ArcaneBullet>();
+			AddSibling(bullet);
+
+			bullet.GlobalPosition = GlobalPosition;
+			bullet.velocity = GlobalPosition.DirectionTo(target).Rotated((GD.Randf() - 0.5f) * 0.1f) * (200 + i * 20);
+
+			bullet.damage = damage / 3;
+			bullet.lifespan = 3;
 		}
 	}
 }

@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://diecg660ktie5"]
+[gd_scene load_steps=8 format=3 uid="uid://diecg660ktie5"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_6wjo7"]
 [ext_resource type="Texture2D" uid="uid://bmtqnllok7mks" path="res://Assets/Images/Enemies/ArcaneBoss/core.svg" id="2_e3gnc"]
 [ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss/ArcaneBoss.cs" id="2_iaxn1"]
-[ext_resource type="PackedScene" uid="uid://2vl1li6ld01h" path="res://Scenes/Enemies/ArcaneBossNode.tscn" id="4_0pnbj"]
+[ext_resource type="PackedScene" uid="uid://c8nj1xv4t2idt" path="res://Scenes/Enemies/ArcaneBoss/ArcaneBullet.tscn" id="3_1d1fx"]
+[ext_resource type="PackedScene" uid="uid://2vl1li6ld01h" path="res://Scenes/Enemies/ArcaneBoss/ArcaneBossNode.tscn" id="4_0pnbj"]
+[ext_resource type="Texture2D" uid="uid://do5fkvd27kg0h" path="res://Assets/Images/Enemies/ArcaneBoss/energy.svg" id="5_sgq4p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vopwm"]
 radius = 64.0
 
 [node name="ArcaneBoss" instance=ExtResource("1_6wjo7")]
 script = ExtResource("2_iaxn1")
+arcaneBulletScene = ExtResource("3_1d1fx")
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_vopwm")
@@ -29,19 +32,24 @@ position = Vector2(256, 256)
 [node name="Node4" parent="Sprite2D" index="3" instance=ExtResource("4_0pnbj")]
 position = Vector2(-256, 256)
 
-[node name="Target" parent="." index="2"]
+[node name="EnergySprite" type="Sprite2D" parent="." index="2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_sgq4p")
+
+[node name="Target" parent="." index="3"]
 visible = false
 scale = Vector2(1, 1)
+texture = ExtResource("5_sgq4p")
 script = null
 
-[node name="HpBar" parent="." index="3"]
+[node name="HpBar" parent="." index="4"]
 visible = false
 
-[node name="Statuses" parent="." index="4"]
+[node name="Statuses" parent="." index="5"]
 visible = false
 
-[node name="ArmorBar" parent="." index="5"]
+[node name="ArmorBar" parent="." index="6"]
 visible = false
 
-[node name="ShieldOrbGenerator" parent="." index="6"]
+[node name="ShieldOrbGenerator" parent="." index="7"]
 visible = false

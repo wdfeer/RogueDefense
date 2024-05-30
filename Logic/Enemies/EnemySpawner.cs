@@ -39,6 +39,7 @@ public partial class EnemySpawner : Node2D
 		}
 		Enemy InstantiateBoss()
 		{
+			return arcaneBossScene.Instantiate<Enemy>();
 			switch (gen)
 			{
 				case 9:

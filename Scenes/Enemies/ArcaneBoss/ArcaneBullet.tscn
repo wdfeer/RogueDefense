@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8nj1xv4t2idt"]
+
+[ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="1_q6xbf"]
+[ext_resource type="Texture2D" uid="uid://b71s0g52ptdt4" path="res://Assets/Images/Enemies/ArcaneBoss/arcane_bullet.svg" id="2_5af3g"]
+[ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss/ArcaneBullet.cs" id="2_iilc8"]
+
+[node name="ArcaneBullet" instance=ExtResource("1_q6xbf")]
+script = ExtResource("2_iilc8")
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_5af3g")
