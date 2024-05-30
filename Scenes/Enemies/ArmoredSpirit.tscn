@@ -10,8 +10,8 @@ size = Vector2(125, 125)
 [node name="ArmoredSpirit" instance=ExtResource("1_5kke7")]
 script = ExtResource("2_sr5g1")
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("RectangleShape2D_6jkxt")
 
-[node name="Sprite2D" parent="." index="2"]
+[node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_177j7")

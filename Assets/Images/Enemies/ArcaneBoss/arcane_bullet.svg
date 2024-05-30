@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="25.400002mm"
+   height="25.400002mm"
+   viewBox="0 0 25.400002 25.400002"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="bullet.svg"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     inkscape:zoom="2.1843715"
+     inkscape:cx="62.718269"
+     inkscape:cy="55.393508"
+     inkscape:window-width="2560"
+     inkscape:window-height="1410"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient7"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#cc00ff;stop-opacity:1;"
+         offset="0"
+         id="stop7" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop8" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient7"
+       id="radialGradient8"
+       cx="79.177017"
+       cy="118.66333"
+       fx="79.177017"
+       fy="118.66333"
+       r="16.933332"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.1608321,-1.1589509,0.74359514,0.74359477,-105.20564,117.95484)"
+       spreadMethod="pad" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-62.243061,-101.73)">
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:url(#radialGradient8);stroke-width:3.14789;stroke-linejoin:bevel;stroke-dasharray:none"
+       id="path3"
+       cx="74.943062"
+       cy="114.43"
+       r="11.126057" />
+  </g>
+</svg>

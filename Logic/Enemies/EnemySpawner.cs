@@ -19,6 +19,8 @@ public partial class EnemySpawner : Node2D
 	public PackedScene multigunnerScene;
 	[Export]
 	public PackedScene multigunnerBossScene;
+	[Export]
+	public PackedScene arcaneBossScene;
 	Enemy InstantiateEnemy(int gen, int index)
 	{
 		Enemy InstantiateRandomNormal()
@@ -37,6 +39,7 @@ public partial class EnemySpawner : Node2D
 		}
 		Enemy InstantiateBoss()
 		{
+			return arcaneBossScene.Instantiate<Enemy>();
 			switch (gen)
 			{
 				case 9:
@@ -45,12 +48,15 @@ public partial class EnemySpawner : Node2D
 					return armoredSpiritBossScene.Instantiate<Enemy>();
 				case 29:
 					return multigunnerBossScene.Instantiate<Enemy>();
+				case 39:
+					return arcaneBossScene.Instantiate<Enemy>();
 				default:
 					List<PackedScene> possibilities = new()
 					{
 						firstBossScene,
 						multigunnerBossScene,
-						armoredSpiritBossScene
+						armoredSpiritBossScene,
+						arcaneBossScene
 					};
 
 					return possibilities[Enemy.statsRng.RandiRange(0, possibilities.Count - 1)].Instantiate<Enemy>();

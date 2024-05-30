@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_un6kx"]
 [ext_resource type="Script" path="res://Logic/Enemies/Variants/Multigunner.cs" id="2_mkl5y"]
-[ext_resource type="Texture2D" uid="uid://c6pu0n1nidmv8" path="res://Assets/Images/Enemies/multigunner0.svg" id="2_yanl1"]
+[ext_resource type="Texture2D" uid="uid://c6pu0n1nidmv8" path="res://Assets/Images/Enemies/Multigunner/multigunner0.svg" id="2_yanl1"]
 [ext_resource type="PackedScene" uid="uid://dl7qsuudqjod4" path="res://Scenes/Enemies/MultigunnerGun.tscn" id="3_a180i"]
 [ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="4_ggyym"]
 

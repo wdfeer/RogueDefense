@@ -297,4 +297,8 @@ public abstract partial class Enemy : Area2D
 	public void AddBleed(float totalDmg, float duration) => bleed.Add(totalDmg / 5f, duration);
 	public void AddViral(float duration) => viral.Add(duration);
 	public void AddCold(float duration) => cold.Add(duration);
+
+
+
+	public virtual bool Targetable => !Dead;
 }

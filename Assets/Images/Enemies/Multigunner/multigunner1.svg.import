@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6pu0n1nidmv8"
-path="res://.godot/imported/multigunner0.svg-7e566e0363332d39088358967ac422e7.ctex"
+uid="uid://b57p48645gwk0"
+path="res://.godot/imported/multigunner1.svg-8f0e67e349a4a71d7b15e3f0c61366bf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Enemies/multigunner0.svg"
-dest_files=["res://.godot/imported/multigunner0.svg-7e566e0363332d39088358967ac422e7.ctex"]
+source_file="res://Assets/Images/Enemies/Multigunner/multigunner1.svg"
+dest_files=["res://.godot/imported/multigunner1.svg-8f0e67e349a4a71d7b15e3f0c61366bf.ctex"]
 
 [params]
 
