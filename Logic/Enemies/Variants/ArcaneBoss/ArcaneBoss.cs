@@ -45,7 +45,7 @@ public partial class ArcaneBoss : Enemy
 
 
 	public float charge = 0;
-	const float MIN_CHARGE = 6;
+	const float MIN_CHARGE = 12;
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
