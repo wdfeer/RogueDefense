@@ -72,7 +72,7 @@ public partial class Player
     public Turret controlledTurret;
     public Enemy target;
     bool IsValidTarget(Enemy enemy)
-        => enemy != null && GodotObject.IsInstanceValid(enemy) && !enemy.Dead;
+        => enemy != null && GodotObject.IsInstanceValid(enemy) && enemy.Targetable;
     void FindTarget()
     {
         for (int i = 0; i < Enemy.enemies.Count; i++)

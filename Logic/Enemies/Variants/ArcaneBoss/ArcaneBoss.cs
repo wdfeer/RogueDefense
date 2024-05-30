@@ -13,6 +13,7 @@ public partial class ArcaneBoss : Enemy
 	HpBar hpBar;
 	public ArcaneBossNode[] nodes = new ArcaneBossNode[4];
 	public bool Vulnerable => nodes.All(x => !IsInstanceValid(x) || x.Dead);
+	public override bool Targetable => base.Targetable && Vulnerable;
 	public override void _Ready()
 	{
 		hpBar = GetNode<HpBar>("HpBar");
