@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://diecg660ktie5"]
+[gd_scene load_steps=6 format=3 uid="uid://diecg660ktie5"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_6wjo7"]
 [ext_resource type="Texture2D" uid="uid://bmtqnllok7mks" path="res://Assets/Images/Enemies/ArcaneBoss/core.svg" id="2_e3gnc"]
@@ -7,17 +7,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vopwm"]
 radius = 64.0
-
-[sub_resource type="Gradient" id="Gradient_5sews"]
-colors = PackedColorArray(0, 0, 0, 0, 1, 0, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_58t7c"]
-gradient = SubResource("Gradient_5sews")
-width = 1000
-height = 124
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l57sv"]
-size = Vector2(800, 124)
 
 [node name="ArcaneBoss" instance=ExtResource("1_6wjo7")]
 script = ExtResource("2_iaxn1")
@@ -56,14 +45,3 @@ visible = false
 
 [node name="ShieldOrbGenerator" parent="." index="6"]
 visible = false
-
-[node name="Beam" type="Area2D" parent="." index="9"]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="Beam" index="0"]
-position = Vector2(-500, 0)
-texture = SubResource("GradientTexture2D_58t7c")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Beam" index="1"]
-position = Vector2(-400, 0)
-shape = SubResource("RectangleShape2D_l57sv")

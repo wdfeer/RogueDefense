@@ -31,7 +31,8 @@ offset_bottom = 124.0
 scale = Vector2(0.8, 0.8)
 
 [node name="ArmorBar" parent="." index="5"]
-visible = false
+offset_top = -53.0
+offset_bottom = 107.0
 
-[node name="ShieldOrbGenerator" parent="." index="6"]
-visible = false
+[node name="BottomInfo" parent="." index="7"]
+visible = true
