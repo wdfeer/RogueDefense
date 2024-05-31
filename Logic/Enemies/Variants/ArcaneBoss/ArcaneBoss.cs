@@ -52,7 +52,7 @@ public partial class ArcaneBoss : Enemy
 
 		CollisionLayer = (uint)(Vulnerable ? 2 : 0);
 
-		GetNode<Node2D>("Sprite2D").Rotate(Mathf.Pi / 4 * (float)delta);
+		GetNode<Node2D>("Sprite2D").Rotate(Mathf.Pi / 6 * (float)delta);
 
 		if (Vulnerable)
 		{
