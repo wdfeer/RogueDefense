@@ -21,13 +21,11 @@ public partial class FireRateAbility : ActiveAbility
         {
             buffLeft -= delta;
             player.shootManager.shootInterval /= 1 + 0.75f * Strength;
-            player.shootManager.shootSpeed *= 2;
         }
     }
     public override float BaseCooldown => 22f;
     protected override string GetAbilityText()
         => $@"+{(int)(75f * Strength)}% Total Fire Rate and
-+100% Projectile velocity
 Duration: {(5f * Duration).ToString("0.00")} s
-Cooldown: {Cooldown.ToString("0.00")} s";
+Cooldown: {Cooldown:0.00} s";
 }
