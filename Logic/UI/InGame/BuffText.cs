@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Godot;
 using RogueDefense;
 using RogueDefense.Logic;
@@ -8,12 +10,10 @@ public partial class BuffText : Label
     {
         Text = "";
 
-        UpdateMultishotPerShotText();
+        foreach (var getText in textGetters)
+        {
+            Text += getText();
+        }
     }
-    void UpdateMultishotPerShotText()
-    {
-        var hook = PlayerHooks.GetLocalHooks<MultishotPerShotPlayer>();
-        if (hook.CurrentBuff > 0)
-            Text += $"+{MathHelper.ToPercentAndRound(hook.CurrentBuff)}% Multishot\n";
-    }
+    public List<Func<string>> textGetters = new List<Func<string>>();
 }

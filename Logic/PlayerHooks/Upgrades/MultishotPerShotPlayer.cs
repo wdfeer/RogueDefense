@@ -1,3 +1,4 @@
+using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
@@ -10,6 +11,13 @@ public partial class MultishotPerShotPlayer : PlayerHooks
 
     public MultishotPerShotPlayer(Player player) : base(player)
     {
+        Game.instance.GetNode<BuffText>("BuffText").textGetters.Add(GetBuffText);
+    }
+    string GetBuffText()
+    {
+        if (CurrentBuff > 0)
+            return $"+{MathHelper.ToPercentAndRound(CurrentBuff)}% Multishot\n";
+        return "";
     }
 
     public override void PreShoot(ShootManager shooter)

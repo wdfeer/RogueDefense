@@ -55,5 +55,7 @@ public partial class Turret : CharacterBody2D
 	public void Stun(float duration)
 	{
 		StunTimer += duration / PlayerHooks.GetHooks<RecoveryPlayer>(owner).recoverySpeed;
+
+		PlayerHooks.GetHooks<CritChanceOnStunnedPlayer>(owner).Activate();
 	}
 }

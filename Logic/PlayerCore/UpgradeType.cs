@@ -150,6 +150,12 @@ public partial class UpgradeType
         getBaseRandomValue = () => 0.5f,
         canBeRolled = () => Game.Wave > 12 && PlayerHooks.GetLocalHooks<RecoveryPlayer>().recoverySpeed < 2f
     };
+    public static readonly UpgradeType CritChanceOnStunned = new UpgradeType(x => $"On Stunned: +{MathHelper.ToPercentAndRound(x)}% Critical Chance for {CritChanceOnStunnedPlayer.DURATION} Seconds")
+    {
+        chanceMult = 0.15f,
+        getBaseRandomValue = () => 0.5f,
+        canBeRolled = () => Game.Wave > 18
+    };
     public static UpgradeType[] AllTypes = new UpgradeType[] {
         MaxHp,
         DamageReduction,
@@ -178,7 +184,8 @@ public partial class UpgradeType
         TotalDamageVsArmor,
         ExplosionChance,
         ExplosionRadius,
-        RecoverySpeed
+        RecoverySpeed,
+        CritChanceOnStunned
     };
     public static void Initialize()
     {

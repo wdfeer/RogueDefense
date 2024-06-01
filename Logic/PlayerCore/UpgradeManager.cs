@@ -71,6 +71,10 @@ public partial class UpgradeManager
         {
             PlayerHooks.GetHooks<RecoveryPlayer>(Player.players[from]).recoverySpeed += upgrade.Value;
         }
+        else if (upgrade.type == UpgradeType.CritChanceOnStunned)
+        {
+            PlayerHooks.GetHooks<CritChanceOnStunnedPlayer>(Player.players[from]).crit += upgrade.Value;
+        }
 
         else
         {

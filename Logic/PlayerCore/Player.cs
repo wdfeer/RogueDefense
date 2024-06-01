@@ -22,7 +22,7 @@ public partial class Player
     {
         augmentPoints = upgradePointDistribution;
 
-        hooks = new List<PlayerHooks>() { new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this), new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this), new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this), new ExplosionPlayer(this), new RecoveryPlayer(this) };
+        InitializeHooks();
 
         this.id = id;
         players.Add(id, this);
@@ -33,6 +33,14 @@ public partial class Player
 
         if (Local) hooks.Add(new HpResetter(this));
     }
+    void InitializeHooks()
+        => hooks = new List<PlayerHooks>()
+        {
+            new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this),
+            new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this),
+            new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this),
+            new ExplosionPlayer(this), new RecoveryPlayer(this), new CritChanceOnStunnedPlayer(this)
+        };
     public void _Process(double delta)
     {
         hooks.ForEach(x => x.PreUpdate((float)delta));
