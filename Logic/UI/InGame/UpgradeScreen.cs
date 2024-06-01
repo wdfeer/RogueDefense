@@ -97,5 +97,5 @@ public partial class UpgradeScreen : Panel
         upgradesMade = 0;
     }
     public bool EveryoneUpgraded()
-        => upgradesMade >= Client.instance.others.Count + 1;
+        => upgradesMade >= NetworkManager.PlayerCount;
 }

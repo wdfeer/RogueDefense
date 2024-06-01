@@ -94,8 +94,10 @@ public partial class Client : Node
                     GD.PrintErr("Received an EnemyKill message when the Game is not active");
                 break;
             case MessageType.Upgrade:
-                Upgrade up = new Upgrade(UpgradeType.AllTypes[args[1].ToInt()], args[2].ToFloat());
-                up.risky = args[3] == "R";
+                Upgrade up = new(UpgradeType.AllTypes[args[1].ToInt()], args[2].Replace(",", ".").ToFloat())
+                {
+                    risky = args[3] == "R"
+                };
                 UpgradeManager.AddUpgrade(up, args[0].ToInt());
                 UpgradeScreen.instance.upgradesMade++;
                 if (UpgradeScreen.instance.EveryoneUpgraded())
@@ -121,7 +123,7 @@ public partial class Client : Node
             case MessageType.PositionUpdated:
                 Player player = Player.players[args[0].ToInt()];
                 Turret turret = player.turrets[args[1].ToInt()];
-                float x = args[2].ToFloat(), y = args[3].ToFloat();
+                float x = args[2].Replace(",", ".").ToFloat(), y = args[3].Replace(",", ".").ToFloat();
                 turret.GlobalPosition = new Vector2(x, y);
                 break;
             case MessageType.TargetSelected:
