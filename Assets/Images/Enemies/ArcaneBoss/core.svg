@@ -26,7 +26,7 @@
      inkscape:document-units="px"
      inkscape:zoom="1.5987892"
      inkscape:cx="304.60551"
-     inkscape:cy="259.57143"
+     inkscape:cy="258.94596"
      inkscape:window-width="2560"
      inkscape:window-height="1410"
      inkscape:window-x="0"
@@ -35,22 +35,6 @@
      inkscape:current-layer="layer1" />
   <defs
      id="defs1">
-    <linearGradient
-       id="linearGradient18"
-       inkscape:collect="always">
-      <stop
-         style="stop-color:#cc00ff;stop-opacity:0;"
-         offset="0.55328262"
-         id="stop17" />
-      <stop
-         style="stop-color:#cc00ff;stop-opacity:1;"
-         offset="0.70355189"
-         id="stop19" />
-      <stop
-         style="stop-color:#cc00ff;stop-opacity:0;"
-         offset="0.84699458"
-         id="stop18" />
-    </linearGradient>
     <linearGradient
        id="linearGradient14"
        inkscape:collect="always">
@@ -104,35 +88,12 @@
        r="68.527077"
        gradientTransform="matrix(2.2469433,0,1.1482608e-5,1.0579151,-126.77285,-10.140929)"
        gradientUnits="userSpaceOnUse" />
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient18"
-       id="radialGradient17"
-       cx="98.776878"
-       cy="113.66761"
-       fx="98.776878"
-       fy="113.66761"
-       r="68.527078"
-       gradientTransform="matrix(0.98841702,1.7116086e-4,-1.7754481e-4,0.99999999,1.1644642,-0.01690593)"
-       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-22.724025,-37.626328)">
-    <g
-       id="g17"
-       style="fill-opacity:1;stroke:url(#radialGradient17);stroke-width:1.58749997;stroke-dasharray:none">
-      <path
-         style="fill:none;stroke:url(#radialGradient17);stroke-width:1.58749997;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;fill-opacity:1"
-         d="M 31.043703,45.946007 98.777029,113.66761 31.043703,181.41267"
-         id="path16" />
-      <path
-         style="fill:none;stroke:url(#radialGradient17);stroke-width:1.58749997;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;fill-opacity:1"
-         d="M 166.51036,181.41267 98.777029,113.66761 166.51036,45.946007"
-         id="path17" />
-    </g>
     <path
        id="path12"
        style="fill:none;fill-opacity:1;stroke:url(#radialGradient13);stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"

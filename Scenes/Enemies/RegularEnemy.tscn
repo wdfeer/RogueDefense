@@ -203,7 +203,7 @@ offset_right = 90.0
 offset_bottom = 110.0
 theme = ExtResource("3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="HurtAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_aq26v")
 }

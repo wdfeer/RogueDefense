@@ -15,7 +15,7 @@ public abstract partial class Enemy : Area2D
 	public override void _Ready()
 	{
 		shieldOrbGenerator = GetNode<ShieldOrbGenerator>("ShieldOrbGenerator");
-		animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		hurtAnimator = GetNode<AnimationPlayer>("HurtAnimator");
 
 		if (!enemies.Contains(this))
 			enemies.Add(this);
@@ -177,7 +177,7 @@ public abstract partial class Enemy : Area2D
 	}
 
 	public float dynamicDamageMult = 1f;
-	AnimationPlayer animationPlayer;
+	AnimationPlayer hurtAnimator;
 	public void Damage(float damage, bool unhideable, Color textColor, Vector2? textVelocity = null, bool ignoreArmor = false)
 	{
 		if (Dead) return;
@@ -210,7 +210,7 @@ public abstract partial class Enemy : Area2D
 			return;
 		}
 
-		animationPlayer.Play("Hurt");
+		hurtAnimator.Play("Hurt");
 	}
 	public bool Dead => Hp <= 0;
 	public void Die(bool netUpdate = true)
