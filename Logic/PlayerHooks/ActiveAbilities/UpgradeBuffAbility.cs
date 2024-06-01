@@ -15,7 +15,7 @@ public partial class UpgradeBuffAbility : ActiveAbility
         player.turrets.ForEach((t) => t.EnableParticles(BASE_DURATION));
     }
     private float buffLeft = 0;
-    public const float BASE_DURATION = 5f;
+    public const float BASE_DURATION = 8f;
     public const float UPGRADE_INCREASE = 1f;
     public override void PreUpdate(float delta)
     {
