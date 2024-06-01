@@ -22,7 +22,7 @@ public partial class FuseBulletsAbility : ActiveAbility
     {
         ShootManager shooter = player.shootManager;
 
-        float hitMult = shooter.projectileManager.proj.Aggregate(0f, (a, b) =>
+        int hitMult = shooter.projectileManager.proj.Aggregate(0, (a, b) =>
             a + (b is FusedBullet ? 0 : b.hitMult));
         shooter.ClearBullets(x => x is FusedBullet);
 
@@ -40,7 +40,7 @@ public partial class FuseBulletsAbility : ActiveAbility
     }
     public override bool Shared => false;
     public float PowerMultBonus => 1f * Strength;
-    public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);
+    public override float BaseCooldown => 15f / Mathf.Sqrt(Duration);
     protected override string GetAbilityText()
         => $@"Fuse all your bullets into one
 with +{MathHelper.ToPercentAndRound(PowerMultBonus)}% Power
