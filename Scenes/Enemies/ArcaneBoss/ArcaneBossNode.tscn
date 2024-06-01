@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://2vl1li6ld01h"]
+[gd_scene load_steps=10 format=3 uid="uid://2vl1li6ld01h"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_a8cco"]
 [ext_resource type="Texture2D" uid="uid://bpuxecyc3w0ow" path="res://Assets/Images/Enemies/ArcaneBoss/node.svg" id="2_mys2h"]
@@ -7,32 +7,119 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_knmt2"]
 radius = 32.0
 
+[sub_resource type="Gradient" id="Gradient_blhff"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cbxpg"]
+gradient = SubResource("Gradient_blhff")
+width = 128
+height = 8
+
+[sub_resource type="Animation" id="Animation_qqw6f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutgoingEnergy/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OutgoingEnergy/Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cmjtm"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OutgoingEnergy/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(24, 24), Vector2(240, 240)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OutgoingEnergy/Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q0c0g"]
+_data = {
+"RESET": SubResource("Animation_qqw6f"),
+"idle": SubResource("Animation_cmjtm")
+}
+
 [node name="ArcaneBossNode" instance=ExtResource("1_a8cco")]
 script = ExtResource("2_t8wji")
+animationRotationDegrees = 0.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_knmt2")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="OutgoingEnergy" type="Node2D" parent="." index="1"]
+
+[node name="Sprite2D" type="Sprite2D" parent="OutgoingEnergy" index="0"]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+position = Vector2(24, 24)
+rotation = 0.785398
+texture = SubResource("GradientTexture2D_cbxpg")
+
+[node name="Animator" type="AnimationPlayer" parent="OutgoingEnergy" index="1"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_q0c0g")
+}
+autoplay = "idle"
+
+[node name="Sprite2D" parent="." index="2"]
 scale = Vector2(1, 1)
 texture = ExtResource("2_mys2h")
 
-[node name="Target" parent="." index="2"]
+[node name="Target" parent="." index="3"]
 scale = Vector2(0.25, 0.25)
 
-[node name="HpBar" parent="." index="3"]
+[node name="HpBar" parent="." index="4"]
 offset_top = -52.0
 offset_bottom = -28.0
 
-[node name="Statuses" parent="." index="4"]
+[node name="Statuses" parent="." index="5"]
 offset_left = 64.0
 offset_top = -56.0
 offset_bottom = 124.0
 scale = Vector2(0.8, 0.8)
 
-[node name="ArmorBar" parent="." index="5"]
+[node name="ArmorBar" parent="." index="6"]
 offset_top = -53.0
 offset_bottom = 107.0
 
-[node name="BottomInfo" parent="." index="7"]
+[node name="BottomInfo" parent="." index="8"]
 visible = true

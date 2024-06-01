@@ -7,6 +7,13 @@ using System.Linq;
 namespace RogueDefense.Logic.Enemies.Variants.ArcaneBoss;
 public partial class ArcaneBossNode : Enemy
 {
+	[Export]
+	public float animationRotationDegrees = 0;
+	public override void _Ready()
+	{
+		GetNode<Node2D>("OutgoingEnergy").Rotate(Mathf.DegToRad(animationRotationDegrees));
+	}
+
 	public override float GetBaseSpeed()
 		=> 0;
 
@@ -32,6 +39,7 @@ public partial class ArcaneBossNode : Enemy
 	{
 		base._Process(delta);
 
+		GetNode<Node2D>("OutgoingEnergy").Rotation += GlobalRotation;
 		GlobalRotation = 0;
 
 		GetNode<ArcaneBoss>("../..").charge += (float)delta;
