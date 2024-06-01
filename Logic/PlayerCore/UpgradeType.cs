@@ -83,7 +83,7 @@ public partial class UpgradeType
     public static readonly UpgradeType MaxHpPerKill = new UpgradeType(x => $"On Kill: +{MathHelper.ToPercentAndRound(x)}% Max Hp")
     {
         chanceMult = 0.33f,
-        canBeRolled = () => Game.Wave < 10,
+        canBeRolled = () => Game.Wave < 12 || GD.Randf() < 0.3f,
         getBaseRandomValue = () => 0.01f
     };
     public static readonly UpgradeType Turret = new UpgradeType(x => $"Summon a Turret")
