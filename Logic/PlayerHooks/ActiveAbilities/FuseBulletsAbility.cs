@@ -31,9 +31,8 @@ public partial class FuseBulletsAbility : ActiveAbility
         {
             owner = player,
             position = pos,
-            velocity = pos.DirectionTo(player.target.GlobalPosition) * ShootManager.BASE_SHOOT_SPEED * 1.2f,
+            velocity = pos.DirectionTo(player.target.GlobalPosition) * ShootManager.BASE_SHOOT_SPEED,
             damage = shooter.damage,
-            modulate = Colors.HotPink
         };
         bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
 
@@ -43,7 +42,7 @@ public partial class FuseBulletsAbility : ActiveAbility
     public float PowerMultBonus => 1f * Strength;
     public override float BaseCooldown => 10f / Mathf.Sqrt(Duration);
     protected override string GetAbilityText()
-        => $@"Fuse all bullets on screen into one
+        => $@"Fuse all your bullets into one
 with +{MathHelper.ToPercentAndRound(PowerMultBonus)}% Power
 Cooldown: {Cooldown:0.00} s";
 }
