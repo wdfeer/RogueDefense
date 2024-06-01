@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="1"
      inkscape:deskcolor="#505050"
      inkscape:document-units="px"
-     inkscape:zoom="1.5987892"
-     inkscape:cx="304.60551"
-     inkscape:cy="258.94596"
+     inkscape:zoom="1.1305147"
+     inkscape:cx="147.72033"
+     inkscape:cy="257.40488"
      inkscape:window-width="2560"
      inkscape:window-height="1410"
      inkscape:window-x="0"
@@ -36,16 +36,16 @@
   <defs
      id="defs1">
     <linearGradient
-       id="linearGradient14"
+       id="linearGradient5"
        inkscape:collect="always">
       <stop
          style="stop-color:#cc00ff;stop-opacity:1;"
-         offset="0.90300542"
-         id="stop14" />
+         offset="0"
+         id="stop5" />
       <stop
-         style="stop-color:#ff00cc;stop-opacity:1"
+         style="stop-color:#ff00cc;stop-opacity:1;"
          offset="1"
-         id="stop13" />
+         id="stop6" />
     </linearGradient>
     <linearGradient
        id="linearGradient11"
@@ -79,14 +79,14 @@
        gradientTransform="matrix(-1.0000041,-1.000337,1.0000001,-0.99965915,80.390125,322.6091)" />
     <radialGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient14"
-       id="radialGradient13"
-       cx="98.813156"
-       cy="113.67934"
-       fx="98.813156"
-       fy="113.67934"
-       r="68.527077"
-       gradientTransform="matrix(2.2469433,0,1.1482608e-5,1.0579151,-126.77285,-10.140929)"
+       xlink:href="#linearGradient5"
+       id="radialGradient6"
+       cx="99.842369"
+       cy="115.07556"
+       fx="99.842369"
+       fy="115.07556"
+       r="65.469644"
+       gradientTransform="matrix(5.5177603,1.3758924e-7,0,1.9448557,-451.06399,-108.72981)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <g
@@ -95,38 +95,38 @@
      id="layer1"
      transform="translate(-22.724025,-37.626328)">
     <path
-       id="path12"
-       style="fill:none;fill-opacity:1;stroke:url(#radialGradient13);stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       d="M 38.569569 45.946233 A 7.5259285 7.5259285 0 0 1 31.04393 53.471872 L 31.04393 173.88674 A 7.5259285 7.5259285 0 0 1 38.569569 181.4129 L 158.98444 181.4129 A 7.5259285 7.5259285 0 0 1 159.53944 178.62237 A 7.5259285 7.5259285 0 0 1 159.59215 178.48026 A 7.5259285 7.5259285 0 0 1 161.13573 176.17084 A 7.5259285 7.5259285 0 0 1 161.26854 176.03803 A 7.5259285 7.5259285 0 0 1 163.57951 174.49394 A 7.5259285 7.5259285 0 0 1 163.71748 174.44278 A 7.5259285 7.5259285 0 0 1 166.51059 173.88674 L 166.51059 53.471872 A 7.5259285 7.5259285 0 0 1 158.98444 45.946233 L 38.569569 45.946233 z " />
+       id="rect4"
+       style="fill:none;stroke-width:2.64583329;stroke-linecap:round;stroke-linejoin:round;stroke:url(#radialGradient6);stroke-dasharray:none;fill-opacity:1"
+       d="M 45.400677 49.532578 A 10.77032 10.77032 0 0 1 34.630275 60.30298 L 34.630275 167.01688 A 10.77032 10.77032 0 0 1 45.400677 177.78728 A 10.77032 10.77032 0 0 1 45.398093 177.82604 L 152.15333 177.82604 A 10.77032 10.77032 0 0 1 162.92373 167.05563 L 162.92373 60.30298 A 10.77032 10.77032 0 0 1 152.15333 49.532578 L 45.400677 49.532578 z " />
     <circle
-       style="fill:#0a0a0a;fill-opacity:1;stroke:url(#radialGradient12);stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#0a0a0a;fill-opacity:1;stroke:url(#radialGradient12);stroke-width:1.58749;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="path1"
-       cx="98.813194"
-       cy="113.66761"
-       r="33.602352" />
+       cx="98.777031"
+       cy="113.67934"
+       r="33.602089" />
     <circle
-       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       id="circle16"
-       cx="166.51036"
-       cy="181.41267"
-       r="7.5259285" />
-    <circle
-       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       id="circle15"
-       cx="31.043703"
-       cy="181.41267"
-       r="7.5259285" />
-    <circle
-       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       style="fill:none;stroke:#ff00cc;stroke-width:2.27186;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
        id="circle14"
-       cx="166.51036"
-       cy="45.946007"
-       r="7.5259285" />
+       cx="162.92378"
+       cy="49.532578"
+       r="10.77032" />
     <circle
-       style="fill:none;stroke:#ff00cc;stroke-width:1.5875;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
-       id="circle8"
-       cx="31.043703"
-       cy="45.946007"
-       r="7.5259285" />
+       style="fill:none;stroke:#ff00cc;stroke-width:2.27186;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle2"
+       cx="34.630276"
+       cy="49.532578"
+       r="10.77032" />
+    <circle
+       style="fill:none;stroke:#ff00cc;stroke-width:2.27186;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle3"
+       cx="34.630276"
+       cy="177.78719"
+       r="10.77032" />
+    <circle
+       style="fill:none;stroke:#ff00cc;stroke-width:2.27186;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       id="circle4"
+       cx="162.92378"
+       cy="177.8261"
+       r="10.77032" />
   </g>
 </svg>

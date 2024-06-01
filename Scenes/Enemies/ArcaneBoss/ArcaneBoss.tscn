@@ -21,18 +21,18 @@ shape = SubResource("CircleShape2D_vopwm")
 texture = ExtResource("2_e3gnc")
 
 [node name="Node1" parent="Sprite2D" index="0" instance=ExtResource("4_0pnbj")]
-position = Vector2(-256, -256)
+position = Vector2(-242, -242)
 
 [node name="Node2" parent="Sprite2D" index="1" instance=ExtResource("4_0pnbj")]
-position = Vector2(256, -258)
+position = Vector2(242, -242)
 animationRotationDegrees = 90.0
 
 [node name="Node3" parent="Sprite2D" index="2" instance=ExtResource("4_0pnbj")]
-position = Vector2(256, 256)
+position = Vector2(242, 242)
 animationRotationDegrees = 180.0
 
 [node name="Node4" parent="Sprite2D" index="3" instance=ExtResource("4_0pnbj")]
-position = Vector2(-256, 256)
+position = Vector2(-242, 242)
 animationRotationDegrees = 270.0
 
 [node name="EnergySprite" type="Sprite2D" parent="." index="2"]
