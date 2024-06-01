@@ -48,9 +48,13 @@ public abstract partial class Enemy : Area2D
 	public static float oneTimeArmorMult = 1f;
 	public static float oneTimeDamageMult = 1f;
 	public static int oneTimeCountIncrease = 0;
-	void ScaleStats(int gen, int index)
+	protected virtual void ModifyGen(ref int gen, int index)
 	{
 		gen = Math.Max(1, gen - index * 2);
+	}
+	void ScaleStats(int gen, int index)
+	{
+		ModifyGen(ref gen, index);
 		ScaleMaxHp(gen);
 		ScaleDamage(gen);
 		ScaleArmor(gen);

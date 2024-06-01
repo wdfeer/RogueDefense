@@ -11,12 +11,15 @@ public partial class ArcaneBossNode : Enemy
 	public float animationRotationDegrees = 0;
 	public override void _Ready()
 	{
+		base._Ready();
+
 		GetNode<Node2D>("OutgoingEnergy").Rotate(Mathf.DegToRad(animationRotationDegrees));
 	}
 
 	public override float GetBaseSpeed()
 		=> 0;
 
+	protected override void ModifyGen(ref int gen, int index) { }
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
 		maxHp += 10 ^ Game.GetStage() * NetworkManager.PlayerCount;
