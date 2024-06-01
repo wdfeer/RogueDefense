@@ -30,20 +30,4 @@ public class Explosion : Projectile
 		Rect2 rect = new Rect2() { Position = position - new Vector2(Radius, Radius), Size = new Vector2(Diameter, Diameter) };
 		drawer.DrawTextureRect(texture, rect, false, Colors.White with { A = timeLeft });
 	}
-
-
-	protected override void CheckCollision()
-	{
-		// Default collision detection doesn't work for some reason
-
-		for (int i = 0; i < Enemy.enemies.Count; i++)
-		{
-			Enemy enemy = Enemy.enemies[i];
-			if (!GodotObject.IsInstanceValid(enemy) || enemy.Dead)
-				continue;
-
-			if (enemy.GlobalPosition.DistanceTo(position) < Radius)
-				EnemyCollision(enemy, enemy.GetRid());
-		}
-	}
 }

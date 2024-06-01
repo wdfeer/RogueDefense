@@ -89,7 +89,7 @@ public abstract class Projectile
     protected virtual void CheckCollision()
     {
         var spaceState = owner.shootManager.projectileManager.GetWorld2D().DirectSpaceState;
-        var query = new PhysicsShapeQueryParameters2D() { Shape = shape, Transform = new Transform2D() { Origin = position }, CollideWithAreas = true, CollisionMask = 2, Exclude = new Array<Rid>(hitEnemies), Motion = velocity };
+        var query = new PhysicsShapeQueryParameters2D() { Shape = shape, Transform = new Transform2D() { Origin = position, X = Vector2.Right, Y = Vector2.Down }, CollideWithAreas = true, CollisionMask = 2, Exclude = new Array<Rid>(hitEnemies), Motion = velocity };
         Array<Dictionary> result = spaceState.IntersectShape(query, penetration + 1);
 
         for (int i = 0; i < result.Count; i++)
