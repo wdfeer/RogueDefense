@@ -8,7 +8,7 @@ public class Bullet : Projectile
 	{
 		texture = textures[0];
 	}
-	readonly Texture2D texture;
+	protected Texture2D texture;
 	protected override int Radius => 16;
 	public Color modulate = Colors.White;
 	public override void Draw(CanvasItem drawer)

@@ -63,9 +63,6 @@ public abstract class Projectile
     }
 
 
-    public bool fused = false;
-
-
     public abstract void Draw(CanvasItem drawer);
 
 
@@ -100,7 +97,7 @@ public abstract class Projectile
             Variant collider = result[i]["collider"];
             Variant rid = result[i]["rid"];
             if (collider.Obj is Enemy enemy)
-                EnemyCollision(enemy, (Rid)rid);
+                EnemyCollision(enemy, (Rid)rid.Obj);
             else if (collider.Obj is ShieldOrb shieldOrb)
                 ShieldOrbCollision(shieldOrb);
         }

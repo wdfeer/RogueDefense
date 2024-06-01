@@ -2,6 +2,7 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.PlayerProjectile;
 
 namespace RogueDefense.Logic.PlayerCore;
 
@@ -129,7 +130,7 @@ public partial class Player
 
     public void OnWaveEnd()
     {
-        shootManager.ClearBullets();
+        shootManager.ClearBullets(x => x is FusedBullet);
         hooks.ForEach(x => x.OnWaveEnd());
         upgradeManager.UpdateUpgrades();
         upgradeManager.UpdateUpgradeText();

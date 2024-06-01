@@ -22,7 +22,6 @@ texture = ExtResource("2_e3gnc")
 
 [node name="Node1" parent="Sprite2D" index="0" instance=ExtResource("4_0pnbj")]
 position = Vector2(-256, -256)
-animationRotationDegrees = 0.0
 
 [node name="Node2" parent="Sprite2D" index="1" instance=ExtResource("4_0pnbj")]
 position = Vector2(256, -258)
