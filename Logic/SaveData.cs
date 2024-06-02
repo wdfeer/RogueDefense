@@ -112,11 +112,7 @@ public static class SaveData
     {
         get => spareAugmentPoints; set
         {
-            try
-            {
-                updateAugmentPointCounter(value);
-            }
-            catch (Exception) { }
+            updateAugmentPointCounter(value);
             spareAugmentPoints = value;
         }
     }

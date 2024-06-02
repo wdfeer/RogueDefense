@@ -10,6 +10,7 @@ public partial class AugmentPointLabel : Label
     }
     void UpdateText(int points)
     {
-        Text = points.ToString() + " Points";
+        if (IsInstanceValid(this))
+            Text = points.ToString() + " Points";
     }
 }
