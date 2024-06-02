@@ -27,16 +27,19 @@ public partial class FuseBulletsAbility : ActiveAbility
         shooter.ClearBullets(x => x is FusedBullet);
 
         Vector2 pos = player.controlledTurret.bulletSpawnpoint.GlobalPosition;
+        Vector2 velocity = pos.DirectionTo(player.target.GlobalPosition) * ShootManager.BASE_SHOOT_SPEED;
         FusedBullet bullet = new(shooter.projectileManager.textures)
         {
             owner = player,
             position = pos,
-            velocity = pos.DirectionTo(player.target.GlobalPosition) * ShootManager.BASE_SHOOT_SPEED,
+            velocity = velocity,
             damage = shooter.damage,
         };
         bullet.SetHitMultiplier(hitMult * (1f + PowerMultBonus));
 
         shooter.projectileManager.proj.Add(bullet);
+
+        player.controlledTurret.Velocity += -velocity * 70 * Mathf.Sqrt(hitMult);
     }
     public override bool Shared => false;
     public float PowerMultBonus => 1f * Strength;
