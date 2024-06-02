@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dr1urwwgoukda"
-path="res://.godot/imported/slash_icon.png-367d38e7dc7148490a866ff51bdb710b.ctex"
+uid="uid://b7axkhwlus1t"
+path="res://.godot/imported/cold.svg-3a444c7264f6077b3309843d244362ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Icons/slash_icon.png"
-dest_files=["res://.godot/imported/slash_icon.png-367d38e7dc7148490a866ff51bdb710b.ctex"]
+source_file="res://Assets/Images/Icons/cold.svg"
+dest_files=["res://.godot/imported/cold.svg-3a444c7264f6077b3309843d244362ab.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

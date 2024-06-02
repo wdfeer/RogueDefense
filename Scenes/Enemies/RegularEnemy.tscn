@@ -7,15 +7,15 @@
 [ext_resource type="Script" path="res://Logic/Enemies/Target.cs" id="5_3qqur"]
 [ext_resource type="Script" path="res://Logic/Enemies/StatusContainers/BleedContainer.cs" id="6"]
 [ext_resource type="Texture2D" uid="uid://dwotxf7hje6as" path="res://Assets/Images/shield_filled.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://djnbpdetq3uub" path="res://Assets/Images/Icons/slash.svg" id="8_0ang2"]
 [ext_resource type="Texture2D" uid="uid://rewrv0hgspug" path="res://Assets/Images/shield_border.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://dr1urwwgoukda" path="res://Assets/Images/Icons/slash_icon.png" id="9_3gjx1"]
 [ext_resource type="Script" path="res://Logic/Enemies/ArmorBar.cs" id="10"]
+[ext_resource type="Texture2D" uid="uid://cr77x458pvew8" path="res://Assets/Images/Icons/corrosive.svg" id="10_4csgm"]
 [ext_resource type="Script" path="res://Logic/Enemies/StatusContainers/ViralContainer.cs" id="11"]
-[ext_resource type="Texture2D" uid="uid://io0wq1mb4pyu" path="res://Assets/Images/Icons/corrosive_icon.png" id="11_0xneq"]
+[ext_resource type="Texture2D" uid="uid://bwdbq3ohess3h" path="res://Assets/Images/Icons/viral.svg" id="12_b2c63"]
 [ext_resource type="Script" path="res://Logic/Enemies/ShieldOrbGenerator.cs" id="13"]
-[ext_resource type="Texture2D" uid="uid://db4cftuv5i83w" path="res://Assets/Images/Icons/viral_icon.png" id="13_7qcr1"]
+[ext_resource type="Texture2D" uid="uid://b7axkhwlus1t" path="res://Assets/Images/Icons/cold.svg" id="14_yaduj"]
 [ext_resource type="Script" path="res://Logic/Enemies/HpBar.cs" id="15"]
-[ext_resource type="Texture2D" uid="uid://bv8dg1w5jjqwu" path="res://Assets/Images/Icons/cold_icon.png" id="15_xrbrr"]
 [ext_resource type="Script" path="res://Logic/Enemies/StatusContainers/ColdContainer.cs" id="17"]
 [ext_resource type="Script" path="res://Logic/Enemies/StatusContainers/CorrosiveContainer.cs" id="20"]
 [ext_resource type="PackedScene" uid="uid://deocyt6mxr5yd" path="res://Scenes/Enemies/ShieldOrb.tscn" id="20_i0wyg"]
@@ -109,13 +109,14 @@ offset_right = 110.0
 offset_bottom = 82.0
 
 [node name="BleedContainer" type="HBoxContainer" parent="Statuses"]
+visible = false
 layout_mode = 2
 script = ExtResource("6")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/BleedContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("9_3gjx1")
+texture = ExtResource("8_0ang2")
 
 [node name="Counter" type="Label" parent="Statuses/BleedContainer"]
 layout_mode = 2
@@ -126,13 +127,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CorrosiveContainer" type="HBoxContainer" parent="Statuses"]
+visible = false
 layout_mode = 2
 script = ExtResource("20")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/CorrosiveContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("11_0xneq")
+texture = ExtResource("10_4csgm")
 
 [node name="Counter" type="Label" parent="Statuses/CorrosiveContainer"]
 layout_mode = 2
@@ -143,13 +145,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ViralContainer" type="HBoxContainer" parent="Statuses"]
+visible = false
 layout_mode = 2
 script = ExtResource("11")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/ViralContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("13_7qcr1")
+texture = ExtResource("12_b2c63")
 
 [node name="Counter" type="Label" parent="Statuses/ViralContainer"]
 layout_mode = 2
@@ -160,13 +163,14 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ColdContainer" type="HBoxContainer" parent="Statuses"]
+visible = false
 layout_mode = 2
 script = ExtResource("17")
 
 [node name="TextureRect" type="TextureRect" parent="Statuses/ColdContainer"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-texture = ExtResource("15_xrbrr")
+texture = ExtResource("14_yaduj")
 
 [node name="Counter" type="Label" parent="Statuses/ColdContainer"]
 layout_mode = 2

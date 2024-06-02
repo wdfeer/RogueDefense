@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv8dg1w5jjqwu"
-path="res://.godot/imported/cold_icon.png-c4cdd833669f098e71e50c09d9cd053d.ctex"
+uid="uid://cr77x458pvew8"
+path="res://.godot/imported/corrosive.svg-9e9e51a49d8e79b72d843d52393a1721.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Icons/cold_icon.png"
-dest_files=["res://.godot/imported/cold_icon.png-c4cdd833669f098e71e50c09d9cd053d.ctex"]
+source_file="res://Assets/Images/Icons/corrosive.svg"
+dest_files=["res://.godot/imported/corrosive.svg-9e9e51a49d8e79b72d843d52393a1721.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
