@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RogueDefense"
-config/description="A game"
+config/description="Multiplayer tower defense roguelike game licensed under GPL-3.0"
 config/version="2.9.13"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#")
