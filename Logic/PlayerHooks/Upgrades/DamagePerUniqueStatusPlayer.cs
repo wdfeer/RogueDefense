@@ -8,7 +8,7 @@ namespace RogueDefense;
 
 public partial class DamagePerUniqueStatusPlayer : PlayerHooks
 {
-    public float damageIncreasePerUniqueStatus = 0f;
+    public float IncreasePerStatus => player.upgradeManager.SumAllUpgradeValues(UpgradeType.DamagePerUniqueStatus);
 
     public DamagePerUniqueStatusPlayer(Player player) : base(player)
     {
@@ -19,6 +19,6 @@ public partial class DamagePerUniqueStatusPlayer : PlayerHooks
         int statuses = enemy.statuses.Count(x => x.Active);
         if (statuses <= 0)
             return;
-        damagePreCrit *= 1f + damageIncreasePerUniqueStatus * statuses;
+        damagePreCrit *= 1f + IncreasePerStatus * statuses;
     }
 }

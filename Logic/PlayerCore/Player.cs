@@ -40,7 +40,7 @@ public partial class Player
             new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this),
             new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this),
             new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this),
-            new ExplosionPlayer(this), new RecoveryPlayer(this), new CritChanceOnStunnedPlayer(this)
+            new ExplosionPlayer(this), new CritChanceOnStunnedPlayer(this)
         };
     public void _Process(double delta)
     {

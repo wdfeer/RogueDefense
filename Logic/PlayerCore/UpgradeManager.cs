@@ -39,43 +39,6 @@ public partial class UpgradeManager
         {
             Player.players[from].SpawnTurret();
         }
-        else if (upgrade.type == UpgradeType.DamagePerUniqueStatus)
-        {
-            PlayerHooks.GetHooks<DamagePerUniqueStatusPlayer>(Player.players[from]).damageIncreasePerUniqueStatus += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.MultishotPerShot)
-        {
-            PlayerHooks.GetHooks<MultishotPerShotPlayer>(Player.players[from]).multishotPerShot += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.FirstShotTotalDamage)
-        {
-            PlayerHooks.GetHooks<FirstShotPlayer>(Player.players[from]).damageMult += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.LowEnemyHpDamage)
-        {
-            PlayerHooks.GetHooks<LowEnemyHpDamagePlayer>(Player.players[from]).buff += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.TotalDamageVsArmor)
-        {
-            PlayerHooks.GetHooks<DamageVsArmorPlayer>(Player.players[from]).mult += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.ExplosionChance)
-        {
-            PlayerHooks.GetHooks<ExplosionPlayer>(Player.players[from]).chance += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.ExplosionRadius)
-        {
-            PlayerHooks.GetHooks<ExplosionPlayer>(Player.players[from]).radiusMult += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.RecoverySpeed)
-        {
-            PlayerHooks.GetHooks<RecoveryPlayer>(Player.players[from]).recoverySpeed += upgrade.Value;
-        }
-        else if (upgrade.type == UpgradeType.CritChanceOnStunned)
-        {
-            PlayerHooks.GetHooks<CritChanceOnStunnedPlayer>(Player.players[from]).crit += upgrade.Value;
-        }
-
         else
         {
             var upgradeManager = Player.players[from].upgradeManager;

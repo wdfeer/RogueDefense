@@ -4,7 +4,7 @@ namespace RogueDefense;
 
 public partial class FirstShotPlayer : PlayerHooks
 {
-    public float damageMult = 1f;
+    public float DamageMult => 1f + player.upgradeManager.SumAllUpgradeValues(UpgradeType.FirstShotTotalDamage);
 
     public FirstShotPlayer(Player player) : base(player)
     {
@@ -12,12 +12,12 @@ public partial class FirstShotPlayer : PlayerHooks
 
     public override void PreShoot(ShootManager shooter)
     {
-        if (damageMult <= 1f || shooter.shootCount > 0)
+        if (DamageMult <= 1f || shooter.shootCount > 0)
         {
             return;
         }
 
-        shooter.damage *= damageMult;
+        shooter.damage *= DamageMult;
         shooter.colored = true;
     }
 }

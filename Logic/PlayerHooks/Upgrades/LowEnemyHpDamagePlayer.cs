@@ -10,7 +10,7 @@ public partial class LowEnemyHpDamagePlayer : PlayerHooks
     {
     }
 
-    public float buff = 0f;
+    public float DmgIncrease => player.upgradeManager.SumAllUpgradeValues(UpgradeType.LowEnemyHpDamage);
 
     public bool IsConditionMet(Enemy enemy)
     {
@@ -18,14 +18,14 @@ public partial class LowEnemyHpDamagePlayer : PlayerHooks
     }
     public bool IsAffecting(Enemy enemy)
     {
-        return buff > 0f && IsConditionMet(enemy);
+        return DmgIncrease > 0f && IsConditionMet(enemy);
     }
 
     public override void ModifyHitEnemyWithProj(Enemy enemy, Projectile p, ref float damagePreCrit, ref int critLevel, ref float critMult)
     {
         if (IsAffecting(enemy))
         {
-            damagePreCrit *= 1f + buff;
+            damagePreCrit *= 1f + DmgIncrease;
         }
     }
 }

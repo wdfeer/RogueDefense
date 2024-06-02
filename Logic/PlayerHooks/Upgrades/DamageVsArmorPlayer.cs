@@ -10,12 +10,12 @@ public partial class DamageVsArmorPlayer : PlayerHooks
     {
     }
 
-    public float mult = 1f;
+    public float Mult => 1f + player.upgradeManager.SumAllUpgradeValues(UpgradeType.TotalDamageVsArmor);
     public override void ModifyHitEnemyWithProj(Enemy enemy, Projectile p, ref float damagePreCrit, ref int critLevel, ref float critMult)
     {
         if (enemy.armor > 0)
         {
-            damagePreCrit *= mult;
+            damagePreCrit *= Mult;
         }
     }
 }

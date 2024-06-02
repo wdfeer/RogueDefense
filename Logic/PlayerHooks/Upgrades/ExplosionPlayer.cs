@@ -11,12 +11,12 @@ public partial class ExplosionPlayer : PlayerHooks
     {
     }
 
-    public float chance = 0;
+    public float Chance => player.upgradeManager.SumAllUpgradeValues(UpgradeType.ExplosionChance);
     const int BASE_RADIUS = 100;
-    public float radiusMult = 1;
+    public float RadiusMult => player.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.ExplosionRadius);
     public override void OnHitWithProj(Enemy enemy, Projectile p, float postCritDmg)
     {
-        if (p is Explosion || GD.Randf() > chance)
+        if (p is Explosion || GD.Randf() > Chance)
             return;
 
         Explosion explosion = new Explosion(player.shootManager.projectileManager.textures)
@@ -24,7 +24,7 @@ public partial class ExplosionPlayer : PlayerHooks
             owner = player,
             position = p.position,
             damage = p.damage,
-            radius = BASE_RADIUS * radiusMult
+            radius = BASE_RADIUS * RadiusMult
         };
         player.shootManager.projectileManager.projDeffered.Add(explosion);
     }

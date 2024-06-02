@@ -95,7 +95,7 @@ public partial class UpgradeType
     public static readonly UpgradeType DamagePerUniqueStatus = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
     {
         chanceMult = 0.2f,
-        canBeRolled = () => Game.Wave > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().damageIncreasePerUniqueStatus < 0.35f,
+        canBeRolled = () => Game.Wave > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().IncreasePerStatus < 0.35f,
         valueMult = 0.3f
     };
     public static readonly UpgradeType FireRateMinusMultishot = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate, -{MathHelper.ToPercentAndRound(x / 2)}% Multishot")
@@ -124,31 +124,31 @@ public partial class UpgradeType
     {
         chanceMult = 0.25f,
         getBaseRandomValue = () => 15f,
-        canBeRolled = () => PlayerHooks.GetLocalHooks<FirstShotPlayer>().damageMult > 1f
+        canBeRolled = () => PlayerHooks.GetLocalHooks<FirstShotPlayer>().DamageMult > 1f
     };
     public static readonly UpgradeType TotalDamageVsArmor = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage vs Armored Enemy")
     {
         chanceMult = 0.33f,
         getBaseRandomValue = () => (20 + SaveData.augmentAllotment[0]) / 100f,
-        canBeRolled = () => Game.Wave > 15 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().mult < 1.1f
+        canBeRolled = () => Game.Wave > 15 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().Mult < 1.1f
     };
     public static readonly UpgradeType ExplosionChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Explosion Chance")
     {
         chanceMult = 0.25f,
         getBaseRandomValue = () => 0.33f,
-        canBeRolled = () => Game.Wave > 30 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().chance < 0.5f
+        canBeRolled = () => Game.Wave > 30 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().Chance < 0.5f
     };
     public static readonly UpgradeType ExplosionRadius = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Explosion Radius")
     {
         chanceMult = 0.35f,
         getBaseRandomValue = () => 0.3f,
-        canBeRolled = () => PlayerHooks.GetLocalHooks<ExplosionPlayer>().chance > 0 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().radiusMult < 1.5f
+        canBeRolled = () => PlayerHooks.GetLocalHooks<ExplosionPlayer>().Chance > 0 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().RadiusMult < 1.5f
     };
     public static readonly UpgradeType RecoverySpeed = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Recovery Speed")
     {
         chanceMult = 0.22f,
         getBaseRandomValue = () => 0.5f,
-        canBeRolled = () => Game.Wave > 12 && PlayerHooks.GetLocalHooks<RecoveryPlayer>().recoverySpeed < 2f
+        canBeRolled = () => Game.Wave > 12 && Player.my.upgradeManager.SumAllUpgradeValues(RecoverySpeed) < 1f
     };
     public static readonly UpgradeType CritChanceOnStunned = new UpgradeType(x => $"On Stunned: +{MathHelper.ToPercentAndRound(x)}% Critical Chance for {CritChanceOnStunnedPlayer.DURATION} Seconds")
     {
