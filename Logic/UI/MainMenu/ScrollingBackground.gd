@@ -1,6 +1,6 @@
 extends TextureRect
 
-var speed: float = 0.02 * (randf() - 0.5)
+var speed: float = (0.01 * randf() + 0.005) * (1 if randi_range(0, 1) == 0 else -1)
 
 var offset: Vector2 = Vector2(randf(), 0)
 
