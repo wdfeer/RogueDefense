@@ -12,6 +12,7 @@ public abstract partial class Enemy : Area2D
 {
 	public static List<Enemy> enemies = new List<Enemy>();
 	public abstract float GetBaseSpeed();
+	EnemySound sound;
 	public override void _Ready()
 	{
 		shieldOrbGenerator = GetNode<ShieldOrbGenerator>("ShieldOrbGenerator");
@@ -29,6 +30,8 @@ public abstract partial class Enemy : Area2D
 		}
 
 		ScaleStats(Game.Wave, enemies.FindIndex(x => x == this));
+
+		sound = new EnemySound(this);
 	}
 	public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
 	public static void ResetRngSeed()
@@ -222,6 +225,7 @@ public abstract partial class Enemy : Area2D
 		Hp = 0;
 		OnDeath();
 		Game.instance.OnEnemyDeath(this, netUpdate);
+		sound.PlayDeathSound();
 	}
 	bool attacking = false;
 	public float damage = 10f;
