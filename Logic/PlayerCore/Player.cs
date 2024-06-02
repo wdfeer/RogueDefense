@@ -60,11 +60,12 @@ public partial class Player
     }
     void UpdateMovement(double delta)
     {
-        if (controlledTurret.Stunned)
-            return;
+        Vector2 inputDirection = Vector2.Zero;
+        if (!controlledTurret.Stunned)
+            inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-        Vector2 inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-        controlledTurret.Velocity = inputDirection * Turret.SPEED * 1000 * (float)delta;
+        controlledTurret.Velocity /= 2;
+        controlledTurret.Velocity += inputDirection * Turret.SPEED * 650 * (float)delta;
         controlledTurret.MoveAndSlide();
 
         if (NetworkManager.Singleplayer || inputDirection == Vector2.Zero)
