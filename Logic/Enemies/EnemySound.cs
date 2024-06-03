@@ -14,6 +14,7 @@ public class EnemySound
         enemy.AddSibling(deathSound);
         deathSound.Stream = (AudioStream)GD.Load("res://Assets/SFX/kill.wav");
         deathSound.ProcessMode = Node.ProcessModeEnum.Always;
+        deathSound.Bus = "SFX";
     }
     public void PlayDeathSound()
     {

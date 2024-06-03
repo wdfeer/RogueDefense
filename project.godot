@@ -12,11 +12,15 @@ config_version=5
 
 config/name="RogueDefense"
 config/description="Multiplayer tower defense roguelike game licensed under GPL-3.0"
-config/version="2.10.1"
+config/version="2.10.2"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.2", "C#")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Images/icon.png"
+
+[audio]
+
+buses/default_bus_layout="res://Assets/default_bus_layout.tres"
 
 [autoload]
 
