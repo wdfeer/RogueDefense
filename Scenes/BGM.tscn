@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxxlx5wsfl3ex"]
+
+[ext_resource type="Script" path="res://Logic/BGM.cs" id="1_pm5ng"]
+
+[node name="BGM" type="AudioStreamPlayer"]
+process_mode = 3
+autoplay = true
+script = ExtResource("1_pm5ng")

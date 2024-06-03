@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace RogueDefense.Logic;
@@ -28,5 +29,10 @@ internal static class MathHelper
             return (x / 1e6f).ToString("0.0") + "M";
         else
             return (x / 1e9f).ToString("0.0") + "B";
+    }
+
+    public static T GetRandomElement<T>(IList<T> list)
+    {
+        return list[(int)(GD.Randi() % list.Count)];
     }
 }
