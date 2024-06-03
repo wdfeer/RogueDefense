@@ -1,5 +1,4 @@
 using Godot;
-using RogueDefense;
 using System;
 
 namespace RogueDefense.Logic.Enemies;

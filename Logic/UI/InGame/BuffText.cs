@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using RogueDefense;
-using RogueDefense.Logic;
 
 public partial class BuffText : Label
 {

@@ -1,7 +1,8 @@
 using Godot;
 using RogueDefense.Logic;
-using System;
 using System.Collections.Generic;
+
+namespace RogueDefense.Logic;
 
 public partial class BGM : AudioStreamPlayer
 {

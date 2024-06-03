@@ -1,8 +1,5 @@
 using Godot;
-using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.Statuses;
-using System;
-using System.Linq;
 
 namespace RogueDefense.Logic.Enemies.Variants.ArcaneBoss;
 public partial class ArcaneBossNode : Enemy

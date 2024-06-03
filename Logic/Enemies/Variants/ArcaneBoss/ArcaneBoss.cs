@@ -1,9 +1,5 @@
 using Godot;
-using RogueDefense;
-using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.Statuses;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RogueDefense.Logic.Enemies.Variants.ArcaneBoss;
