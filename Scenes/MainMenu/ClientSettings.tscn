@@ -12,30 +12,6 @@
 offset_right = 272.0
 offset_bottom = 99.0
 
-[node name="CombatTextButton" type="CheckBox" parent="."]
-layout_mode = 2
-theme = ExtResource("1_ncqh8")
-theme_override_font_sizes/font_size = 15
-text = "Show Common Damage Numbers"
-script = ExtResource("2_04flm")
-
-[node name="HpBarButton" type="CheckBox" parent="."]
-layout_mode = 2
-theme = ExtResource("1_ncqh8")
-theme_override_font_sizes/font_size = 15
-text = "Show your HP Bar"
-script = ExtResource("3_yw6ce")
-
-[node name="AvgDPSButton" type="CheckBox" parent="."]
-layout_mode = 2
-text = "Show average DPS"
-script = ExtResource("4_kd82x")
-
-[node name="FpsButton" type="CheckBox" parent="."]
-layout_mode = 2
-text = "Show FPS"
-script = ExtResource("5_l7k0i")
-
 [node name="BgmToggle" type="CheckButton" parent="."]
 layout_mode = 2
 button_pressed = true
@@ -47,6 +23,34 @@ layout_mode = 2
 button_pressed = true
 text = "Sound Effects"
 script = ExtResource("7_awqyt")
+
+[node name="CombatTextButton" type="CheckBox" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ncqh8")
+theme_override_font_sizes/font_size = 15
+button_pressed = true
+text = "Show Common Damage Numbers"
+script = ExtResource("2_04flm")
+
+[node name="HpBarButton" type="CheckBox" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ncqh8")
+theme_override_font_sizes/font_size = 15
+button_pressed = true
+text = "Show your HP Bar"
+script = ExtResource("3_yw6ce")
+
+[node name="AvgDPSButton" type="CheckBox" parent="."]
+layout_mode = 2
+button_pressed = true
+text = "Show average DPS"
+script = ExtResource("4_kd82x")
+
+[node name="FpsButton" type="CheckBox" parent="."]
+layout_mode = 2
+button_pressed = true
+text = "Show FPS"
+script = ExtResource("5_l7k0i")
 
 [connection signal="toggled" from="BgmToggle" to="BgmToggle" method="_on_toggled"]
 [connection signal="toggled" from="SfxToggle" to="SfxToggle" method="_on_toggled"]
