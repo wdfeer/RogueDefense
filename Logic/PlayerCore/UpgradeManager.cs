@@ -32,7 +32,7 @@ public partial class UpgradeManager
         {
             Enemy.oneTimeHpMult += 1f;
             Enemy.oneTimeArmorMult += 1f;
-            Enemy.oneTimeCountIncrease += 2;
+            Enemy.oneTimeCountIncrease += Game.GetStage();
         }
 
         if (upgrade.type == UpgradeType.Turret)
