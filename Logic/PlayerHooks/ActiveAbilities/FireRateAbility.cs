@@ -25,7 +25,7 @@ public partial class FireRateAbility : ActiveAbility
     }
     public override float BaseCooldown => 22f;
     protected override string GetAbilityText()
-        => $@"+{(int)(75f * Strength)}% Total Fire Rate and
+        => $@"+{(int)(75f * Strength)}% Total Fire Rate
 Duration: {(5f * Duration).ToString("0.00")} s
 Cooldown: {Cooldown:0.00} s";
 }

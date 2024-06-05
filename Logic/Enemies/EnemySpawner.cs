@@ -77,13 +77,9 @@ public partial class EnemySpawner : Node2D
 	}
 	Vector2 GetPositionOffset(int gen, int index)
 	{
-		switch (gen)
-		{
-			case 19:
-				return Vector2.Zero;
-			default:
-				return new Vector2(Enemy.statsRng.RandiRange(0, 250), MathF.Sqrt(index) * 80 * (index % 2 == 0 ? 1 : -1));
-		}
+		if (gen % 10 == 9)
+			return Vector2.Zero;
+		return new Vector2(Enemy.statsRng.RandiRange(0, 250), MathF.Sqrt(index) * 80 * (index % 2 == 0 ? 1 : -1));
 	}
 
 	public void SpawnEnemies()
