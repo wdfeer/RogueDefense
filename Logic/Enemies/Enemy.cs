@@ -31,6 +31,10 @@ public abstract partial class Enemy : Area2D
 
 		ScaleStats(Game.Wave, enemies.FindIndex(x => x == this));
 
+		CallDeferred("InitializeSound");
+	}
+	void InitializeSound()
+	{
 		sound = new EnemySound(this);
 	}
 	public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
