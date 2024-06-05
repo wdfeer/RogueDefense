@@ -22,7 +22,10 @@ public partial class UpgradeType
 
     public int uniqueId;
 
-    public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Max Hp") { valueMult = 0.55f };
+    public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Max Hp")
+    {
+        getBaseRandomValue = () => GD.Randf() * 0.05f + 0.01f * (10 + Game.Wave / 2)
+    };
     public static readonly UpgradeType DamageReduction = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.455f };
     public static readonly UpgradeType Evasion = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Evasion")
     {
