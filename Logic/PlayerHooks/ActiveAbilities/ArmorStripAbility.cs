@@ -20,29 +20,20 @@ public partial class ArmorStripAbility : ActiveAbility
     }
     void ArmorStrip(Enemy enemy)
     {
-        if (Strip >= 1f)
-        {
-            enemy.armor = 0;
-            foreach (var status in enemy.statuses)
-            {
-                status.immune = false;
-            }
-        }
-        else
-            enemy.armor *= 1 - Strip;
+        float strip = Math.Min(Strip * enemy.armor, enemy.armor);
+        enemy.armor -= strip;
+        if (strip > 0)
+            enemy.Damage(strip * Damage, true, Colors.Gold);
     }
     public const float BASE_STRIP = 0.5f;
 
 
 
-    public override float BaseCooldown => (NetworkManager.Singleplayer ? 25f : 30f) / Mathf.Sqrt(Duration);
-    public float Strip => BASE_STRIP * Strength;
+    public override float BaseCooldown => (NetworkManager.Singleplayer ? 25f : 33f) / Mathf.Sqrt(Duration);
+    public float Strip => BASE_STRIP * Mathf.Sqrt(Strength);
+    float Damage => 1f + (Strength - 1) / Mathf.Min(Mathf.Sqrt(Strength), 2);
     protected override string GetAbilityText()
-    {
-        string str = $"Remove {Math.Min(100, MathHelper.ToPercentAndRound(Strip))}% Enemy Armor\n";
-        if (Strip >= 1f)
-            str += "and remove all Enemy Immunities\n";
-        str += $"Cooldown: {Cooldown:0.00} s";
-        return str;
-    }
+        => @$"Remove {Math.Min(100, MathHelper.ToPercentAndRound(Strip))}% Enemy Armor
+Deal {MathHelper.ToPercentAndRound(Damage)}% of it as damage 
+Cooldown: {Cooldown:0.00} s";
 }
