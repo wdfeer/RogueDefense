@@ -14,10 +14,17 @@ public partial class Shuriken : Projectile
 
 	protected override int Radius => 16;
 	readonly Texture2D texture;
+	float rotation = 0;
 	public override void Draw(CanvasItem drawer)
 	{
 		Rect2 rect = new Rect2() { Position = position - new Vector2(Radius, Radius), Size = new Vector2(Diameter, Diameter) };
 		drawer.DrawTextureRect(texture, rect, false);
+	}
+	public override void PhysicsProcess(float delta)
+	{
+		base.PhysicsProcess(delta);
+
+		rotation += delta * Mathf.Pi;
 	}
 
 	public override bool KillShieldOrbs => true;
