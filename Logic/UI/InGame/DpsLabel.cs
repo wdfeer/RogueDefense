@@ -9,7 +9,7 @@ public partial class DpsLabel : Label
     public static DpsLabel instance;
     public override void _Ready()
     {
-        Visible = SaveData.showAvgDPS;
+        Visible = SaveData.ShowAvgDPS;
         instance = this;
     }
 
@@ -18,7 +18,7 @@ public partial class DpsLabel : Label
     const float HIT_SAVE_DURATION = 1f;
     public override void _Process(double delta)
     {
-        Visible = SaveData.showAvgDPS;
+        Visible = SaveData.ShowAvgDPS;
         if (!Visible)
             return;
 

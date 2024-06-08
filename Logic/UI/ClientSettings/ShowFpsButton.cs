@@ -5,13 +5,13 @@ public partial class ShowFpsButton : CheckBox
 {
 	public override void _Ready()
 	{
-		ToSignal(GetTree().CreateTimer(0.001f), "timeout").OnCompleted(() => ButtonPressed = SaveData.showAvgDPS);
+		ToSignal(GetTree().CreateTimer(0.001f), "timeout").OnCompleted(() => ButtonPressed = SaveData.ShowAvgDPS);
 
 		Toggled += OnToggled;
 	}
 
 	void OnToggled(bool toggled)
 	{
-		SaveData.showFPS = toggled;
+		SaveData.ShowFPS = toggled;
 	}
 }

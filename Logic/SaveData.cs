@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using RogueDefense.Logic;
 
 namespace RogueDefense;
 
@@ -14,13 +15,7 @@ public static class SaveData
 
             name = file.GetLine();
             lastIp = file.GetLine();
-            {
-                string line = file.GetLine();
-                showCombatText = line[0] == '1';
-                showHpBar = line[1] == '1';
-                showAvgDPS = line[2] == '1';
-                showFPS = line[3] == '1';
-            }
+            clientSettings = MathHelper.ByteToBoolArray(file.Get8());
             int.TryParse(file.GetLine(), out highscoreSingleplayer);
             int.TryParse(file.GetLine(), out highscoreMultiplayer);
             int.TryParse(file.GetLine(), out gameCount);
@@ -62,12 +57,7 @@ public static class SaveData
 
         file.StoreLine(name);
         file.StoreLine(lastIp);
-        file.StoreLine(string.Concat(new string[] {
-            showCombatText ? "1" : "0",
-            showHpBar ? "1" : "0",
-            showAvgDPS ? "1" : "0",
-            showFPS ? "1" : "0"
-        }));
+        file.Store8(MathHelper.BoolArrayToByte(clientSettings));
         file.StoreLine(highscoreSingleplayer.ToString());
         file.StoreLine(highscoreMultiplayer.ToString());
         file.StoreLine(gameCount.ToString());
@@ -95,10 +85,40 @@ public static class SaveData
 
     public static string name = "";
     public static string lastIp = "";
-    public static bool showCombatText = false;
-    public static bool showHpBar = false;
-    public static bool showAvgDPS = false;
-    public static bool showFPS = false;
+
+    public static bool[] clientSettings = new bool[8] { true, true, true, false, true, true, false, false };
+    public static bool ShowCombatText
+    {
+        get { return clientSettings[0]; }
+        set { clientSettings[0] = value; }
+    }
+    public static bool ShowHpBar
+    {
+        get { return clientSettings[1]; }
+        set { clientSettings[1] = value; }
+    }
+    public static bool ShowAvgDPS
+    {
+        get { return clientSettings[2]; }
+        set { clientSettings[2] = value; }
+    }
+    public static bool ShowFPS
+    {
+        get { return clientSettings[3]; }
+        set { clientSettings[3] = value; }
+    }
+    public static bool Music
+    {
+        get { return clientSettings[4]; }
+        set { clientSettings[4] = value; }
+    }
+    public static bool Sound
+    {
+        get { return clientSettings[5]; }
+        set { clientSettings[5] = value; }
+    }
+
+
     public static int highscoreSingleplayer = 0;
     public static int highscoreMultiplayer = 0;
     public static int gameCount = 0;

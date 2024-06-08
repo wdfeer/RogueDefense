@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -35,4 +36,35 @@ internal static class MathHelper
     {
         return list[(int)(GD.Randi() % list.Count)];
     }
+
+    public static byte BoolArrayToByte(bool[] boolArray)
+    {
+        if (boolArray.Length != 8)
+            throw new ArgumentException("The array must contain exactly 8 elements.");
+
+        byte result = 0;
+
+        for (int i = 0; i < 8; i++)
+        {
+            if (boolArray[i])
+            {
+                result |= (byte)(1 << i);
+            }
+        }
+
+        return result;
+    }
+
+    public static bool[] ByteToBoolArray(byte b)
+    {
+        bool[] boolArray = new bool[8];
+
+        for (int i = 0; i < 8; i++)
+        {
+            boolArray[i] = (b & (1 << i)) != 0;
+        }
+
+        return boolArray;
+    }
+
 }

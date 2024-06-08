@@ -5,11 +5,11 @@ public partial class FpsLabel : Label
 {
 	public override void _Ready()
 	{
-		Visible = SaveData.showFPS;
+		Visible = SaveData.ShowFPS;
 	}
 	public override void _Process(double delta)
 	{
-		Visible = SaveData.showFPS;
+		Visible = SaveData.ShowFPS;
 		if (!Visible)
 			return;
 

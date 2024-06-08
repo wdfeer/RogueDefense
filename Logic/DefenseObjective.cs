@@ -18,7 +18,7 @@ public partial class DefenseObjective : Node2D
         instance = this;
 
         hpBar = GetNode<ProgressBar>("./HpBar");
-        hpBar.Visible = SaveData.showHpBar;
+        hpBar.Visible = SaveData.ShowHpBar;
 
         sprite = GetNode<Sprite2D>("./Sprite2D");
 
@@ -72,7 +72,7 @@ public partial class DefenseObjective : Node2D
     }
     public override void _Process(double delta)
     {
-        hpBar.Visible = SaveData.showHpBar;
+        hpBar.Visible = SaveData.ShowHpBar;
         if (hpBar.Visible)
         {
             hpBar.Value = HpRatio;
