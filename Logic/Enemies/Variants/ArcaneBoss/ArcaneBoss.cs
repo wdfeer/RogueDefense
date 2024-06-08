@@ -81,7 +81,7 @@ public partial class ArcaneBoss : Enemy
 			AddSibling(bullet);
 
 			bullet.GlobalPosition = GlobalPosition;
-			bullet.velocity = GlobalPosition.DirectionTo(target).Rotated((GD.Randf() - 0.5f) * 0.1f) * (200 + i * 20);
+			bullet.velocity = GlobalPosition.DirectionTo(target).Rotated((GD.Randf() - 0.5f) * 0.12f) * (200 + i * 40);
 
 			bullet.damage = damage / 3;
 			bullet.lifespan = 3;
