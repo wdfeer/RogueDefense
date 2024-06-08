@@ -22,7 +22,7 @@ public partial class UpgradeType
 
     public int uniqueId;
 
-    public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Max Hp")
+    public static readonly UpgradeType MaxHp = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)} Max Hp")
     {
         getBaseRandomValue = () => GD.Randf() * 0.05f + 0.01f * (10 + Game.Wave / 2)
     };
@@ -83,7 +83,7 @@ public partial class UpgradeType
         canBeRolled = () => Player.my.shootManager.shootInterval < 1.4f,
         getBaseRandomValue = () => 0.9f
     };
-    public static readonly UpgradeType MaxHpPerKill = new UpgradeType(x => $"On Kill: +{MathHelper.ToPercentAndRound(x)}% Max Hp")
+    public static readonly UpgradeType MaxHpPerKill = new UpgradeType(x => $"On Kill: +{MathHelper.ToPercentAndRound(x)} Max Hp")
     {
         chanceMult = 0.33f,
         canBeRolled = () => Game.Wave < 12 || GD.Randf() < 0.3f,
@@ -159,6 +159,12 @@ public partial class UpgradeType
         getBaseRandomValue = () => 0.5f,
         canBeRolled = () => Game.Wave > 18
     };
+    public static readonly UpgradeType RecoilDamage = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)} Recoil\n+{MathHelper.ToPercentAndRound(x)}% Total Damage")
+    {
+        chanceMult = 0.15f,
+        getBaseRandomValue = () => 0.2f,
+        canBeRolled = () => Player.my.shootManager.Recoil == 0
+    };
     public static UpgradeType[] AllTypes = new UpgradeType[] {
         MaxHp,
         DamageReduction,
@@ -188,7 +194,8 @@ public partial class UpgradeType
         ExplosionChance,
         ExplosionRadius,
         RecoverySpeed,
-        CritChanceOnStunned
+        CritChanceOnStunned,
+        RecoilDamage
     };
     public static void Initialize()
     {

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace RogueDefense.Logic.PlayerCore;
@@ -43,6 +44,8 @@ public partial class ShootManager
     public int shootCount = 0;
 
     public bool colored = false;
+
+    public float Recoil => player.upgradeManager.SumAllUpgradeValues(UpgradeType.RecoilDamage) * 25;
     private void CreateBullets()
     {
         player.hooks.ForEach(x => x.PreShoot(this));
@@ -54,12 +57,13 @@ public partial class ShootManager
             bulletCount = 3;
         }
 
-        Vector2[] bulletSpawns = player.ActiveTurrets.Select(x => x.bulletSpawnpoint.GlobalPosition).ToArray();
-        for (int i = 0; i < bulletSpawns.Length; i++)
+        IEnumerable<Turret> turrets = player.ActiveTurrets;
+        foreach (Turret turret in turrets)
         {
+            Vector2 recoil = Vector2.Zero;
             for (int k = 0; k < bulletCount * 1; k++)
             {
-                Bullet bullet = Shoot(bulletSpawns[i], shootSpeed);
+                Bullet bullet = Shoot(turret.bulletSpawnpoint.GlobalPosition, shootSpeed);
                 bullet.damage = damage;
                 bullet.SetHitMultiplier(MathHelper.RandomRound(hitMult));
 
@@ -67,7 +71,11 @@ public partial class ShootManager
                 {
                     bullet.modulate = Colors.LightCyan;
                 }
+
+                recoil -= bullet.velocity;
             }
+
+            turret.Velocity += recoil * Recoil;
         }
 
         colored = false;

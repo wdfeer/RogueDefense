@@ -87,7 +87,7 @@ public partial class UpgradeManager
         player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
         float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);
-        player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult;
+        player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult * GetTotalUpgradeMultiplier(UpgradeType.RecoilDamage);
 
         float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot) - SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) / 2f;
         player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
