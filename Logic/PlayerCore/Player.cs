@@ -64,9 +64,15 @@ public partial class Player
         if (!controlledTurret.Stunned)
             inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 
-        controlledTurret.Velocity /= 2;
-        controlledTurret.Velocity += inputDirection * Turret.SPEED * 650 * (float)delta;
-        controlledTurret.MoveAndSlide();
+        foreach (Turret turret in turrets)
+        {
+            turret.Velocity /= 2;
+            if (turret == controlledTurret)
+            {
+                turret.Velocity += inputDirection * Turret.SPEED * 650 * (float)delta;
+            }
+            turret.MoveAndSlide();
+        }
 
         if (NetworkManager.Singleplayer || inputDirection == Vector2.Zero)
             return;
