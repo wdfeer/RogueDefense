@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://diecg660ktie5"]
+[gd_scene load_steps=10 format=3 uid="uid://diecg660ktie5"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_6wjo7"]
 [ext_resource type="Texture2D" uid="uid://bmtqnllok7mks" path="res://Assets/Images/Enemies/ArcaneBoss/core.svg" id="2_e3gnc"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://c8nj1xv4t2idt" path="res://Scenes/Enemies/ArcaneBoss/ArcaneBullet.tscn" id="3_1d1fx"]
 [ext_resource type="PackedScene" uid="uid://2vl1li6ld01h" path="res://Scenes/Enemies/ArcaneBoss/ArcaneBossNode.tscn" id="4_0pnbj"]
 [ext_resource type="Texture2D" uid="uid://do5fkvd27kg0h" path="res://Assets/Images/Enemies/ArcaneBoss/energy.svg" id="5_sgq4p"]
+[ext_resource type="Texture2D" uid="uid://uu1qqc46qbey" path="res://Assets/Images/Enemies/ArcaneBoss/shield.svg" id="7_h0otj"]
+[ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss/Shield.gd" id="8_eyp2p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vopwm"]
 radius = 64.0
@@ -40,20 +42,25 @@ z_index = -1
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_sgq4p")
 
-[node name="Target" parent="." index="3"]
+[node name="ShieldSprite" type="Sprite2D" parent="." index="3"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_h0otj")
+script = ExtResource("8_eyp2p")
+
+[node name="Target" parent="." index="4"]
 visible = false
 scale = Vector2(1, 1)
 texture = ExtResource("5_sgq4p")
 script = null
 
-[node name="HpBar" parent="." index="4"]
+[node name="HpBar" parent="." index="5"]
 visible = false
 
-[node name="Statuses" parent="." index="5"]
+[node name="Statuses" parent="." index="6"]
 visible = false
 
-[node name="ArmorBar" parent="." index="6"]
+[node name="ArmorBar" parent="." index="7"]
 visible = false
 
-[node name="ShieldOrbGenerator" parent="." index="7"]
+[node name="ShieldOrbGenerator" parent="." index="8"]
 visible = false

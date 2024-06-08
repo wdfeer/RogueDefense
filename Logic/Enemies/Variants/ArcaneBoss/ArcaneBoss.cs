@@ -47,6 +47,7 @@ public partial class ArcaneBoss : Enemy
 		base._Process(delta);
 
 		CollisionLayer = (uint)(Vulnerable ? 2 : 0);
+		GetNode<Sprite2D>("ShieldSprite").Visible = !Vulnerable;
 
 		GetNode<Node2D>("Sprite2D").Rotate(Mathf.Pi / 6 * (float)delta);
 
