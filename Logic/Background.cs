@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic;
+
 public partial class Background : Sprite2D
 {
 	[Export]

@@ -1,5 +1,6 @@
-using RogueDefense;
 using System.Linq;
+
+namespace RogueDefense.Logic.UI.Lobby;
 
 public partial class MyPlayerData : PlayerData
 {

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.UI.Lobby.Settings;
+
 public partial class SettingsSlider : VBoxContainer
 {
     public Label Label => GetNode("Label") as Label;

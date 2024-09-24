@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Linq;
+using RogueDefense.Logic.PlayerHooks;
+using RogueDefense.Logic.PlayerHooks.ActiveAbilities;
 
 namespace RogueDefense.Logic.PlayerCore;
 
@@ -25,7 +27,7 @@ public class AbilityManager
         }
         else
         {
-            ability1 = CreateAbilityInstance(Client.instance.GetUserData(player.id).ability, player);
+            ability1 = CreateAbilityInstance(Network.Client.instance.GetUserData(player.id).ability, player);
         }
         player.hooks.Add(ability1);
         int ability1Index = ability1.GetAbilityIndex();
@@ -40,7 +42,7 @@ public class AbilityManager
 
     ActiveAbility GetAbility(Button button)
     {
-        return CreateAbilityInstance(AbilityChooser.chosen, player, button);
+        return CreateAbilityInstance(UI.MainMenu.AbilityChooser.chosen, player, button);
     }
     public static string GetAbilityName(int index)
     {

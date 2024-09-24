@@ -1,6 +1,6 @@
 using Godot;
 
-namespace RogueDefense.Logic.Statuses;
+namespace RogueDefense.Logic.Enemies.Statuses;
 
 public class Viral : SpecialStatus
 {

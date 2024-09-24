@@ -1,10 +1,9 @@
 using System.Linq;
 using Godot;
-using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 using RogueDefense.Logic.PlayerProjectile;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.ActiveAbilities;
 
 public class FuseBulletsAbility : ActiveAbility
 {

@@ -1,7 +1,8 @@
-using Godot;
-using RogueDefense.Logic;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
+
+namespace RogueDefense.Logic.Enemies;
 
 public partial class CombatTextDisplay : Node2D
 {

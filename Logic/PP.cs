@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using RogueDefense.Logic.UI.Lobby.Settings;
 
 namespace RogueDefense.Logic;
 
@@ -9,7 +10,7 @@ public class PP
 {
     public static void UpdateLobbyPPMultDisplay()
     {
-        ((Label)Lobby.Instance.GetNode("PPMult")).Text = "pp Multiplier: " + GetGameSettingsPPMult().ToString("0.000");
+        ((Label)Network.Lobby.Instance.GetNode("PPMult")).Text = "pp Multiplier: " + GetGameSettingsPPMult().ToString("0.000");
     }
     public static float GetGameSettingsPPMult()
     {

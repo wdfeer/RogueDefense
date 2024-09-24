@@ -1,4 +1,4 @@
-namespace RogueDefense.Logic.Statuses;
+namespace RogueDefense.Logic.Enemies.Statuses;
 
 public class Bleed : DamagingStatus
 {

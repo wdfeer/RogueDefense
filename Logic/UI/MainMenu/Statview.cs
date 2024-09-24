@@ -1,5 +1,6 @@
 using Godot;
-using RogueDefense;
+
+namespace RogueDefense.Logic.UI.MainMenu;
 
 public partial class Statview : VBoxContainer
 {

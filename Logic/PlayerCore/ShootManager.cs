@@ -2,23 +2,24 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RogueDefense.Logic.PlayerProjectile;
 
 namespace RogueDefense.Logic.PlayerCore;
 
 public class ShootManager
 {
     readonly Player player;
-    public readonly ProjectileManager projectileManager;
+    public readonly PlayerProjectile.ProjectileManager projectileManager;
     public ShootManager(Player player)
     {
         this.player = player;
-        projectileManager = DefenseObjective.instance.projectileManagerScene.Instantiate<ProjectileManager>();
+        projectileManager = DefenseObjective.instance.projectileManagerScene.Instantiate<PlayerProjectile.ProjectileManager>();
         projectileManager.Name = $"{player.Name}'s Projectiles";
         DefenseObjective.instance.AddSibling(projectileManager);
 
-        baseDamage = 1f + player.augmentPoints[0] * AugmentContainer.STAT_PER_POINT[0];
-        baseShootInterval = 1f / (1f + player.augmentPoints[1] * AugmentContainer.STAT_PER_POINT[1]);
-        baseMultishot = 1f + player.augmentPoints[2] * AugmentContainer.STAT_PER_POINT[2];
+        baseDamage = 1f + player.augmentPoints[0] * UI.MainMenu.AugmentScreen.AugmentContainer.STAT_PER_POINT[0];
+        baseShootInterval = 1f / (1f + player.augmentPoints[1] * UI.MainMenu.AugmentScreen.AugmentContainer.STAT_PER_POINT[1]);
+        baseMultishot = 1f + player.augmentPoints[2] * UI.MainMenu.AugmentScreen.AugmentContainer.STAT_PER_POINT[2];
     }
     public float baseDamage;
     public float damage = 1;

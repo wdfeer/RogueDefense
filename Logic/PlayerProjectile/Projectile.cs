@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
-using RogueDefense.Logic.PlayerCore;
 using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense.Logic;
+namespace RogueDefense.Logic.PlayerProjectile;
 
 public abstract class Projectile
 {
@@ -24,13 +24,13 @@ public abstract class Projectile
     public float damage = 1;
     public virtual bool KillShieldOrbs => false;
 
-    public void ShieldOrbCollision(ShieldOrb orb)
+    public void ShieldOrbCollision(Enemies.ShieldOrb orb)
     {
         if (KillShieldOrbs)
             orb.QueueFree();
         else
         {
-            ShieldOrb.damageConsumed += damage * hitMult;
+            Enemies.ShieldOrb.damageConsumed += damage * hitMult;
             QueueFree();
         }
     }
@@ -97,7 +97,7 @@ public abstract class Projectile
             Variant rid = result[i]["rid"];
             if (collider.Obj is Enemy enemy)
                 EnemyCollision(enemy, (Rid)rid.Obj);
-            else if (collider.Obj is ShieldOrb shieldOrb)
+            else if (collider.Obj is Enemies.ShieldOrb shieldOrb)
                 ShieldOrbCollision(shieldOrb);
         }
     }

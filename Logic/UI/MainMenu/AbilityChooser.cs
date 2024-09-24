@@ -1,5 +1,8 @@
 using Godot;
+using RogueDefense.Logic.Network;
 using RogueDefense.Logic.PlayerCore;
+
+namespace RogueDefense.Logic.UI.MainMenu;
 
 public partial class AbilityChooser : MenuButton
 {
@@ -20,7 +23,7 @@ public partial class AbilityChooser : MenuButton
 	public void IdPressed(int id)
 	{
 		chosen = id;
-		Client.instance.SendMessage(MessageType.SetAbility, new string[] { Client.myId.ToString(), id.ToString() });
+		Network.Client.instance.SendMessage(MessageType.SetAbility, new string[] { Network.Client.myId.ToString(), id.ToString() });
 		ResetButtonText();
 	}
 

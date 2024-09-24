@@ -1,8 +1,9 @@
 using System;
 using Godot;
+using RogueDefense.Logic.Network;
 using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks;
 
 public abstract class ActiveAbility : PlayerHooks
 {
@@ -46,7 +47,7 @@ public abstract class ActiveAbility : PlayerHooks
     }
     public void NetSendActivation()
     {
-        Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { Client.myId.ToString(), GetAbilityIndex().ToString() });
+        Network.Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { Network.Client.myId.ToString(), GetAbilityIndex().ToString() });
     }
 
     public virtual float BaseCooldown => 25f;

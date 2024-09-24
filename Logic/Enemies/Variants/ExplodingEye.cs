@@ -1,8 +1,8 @@
-using Godot;
-using RogueDefense;
-using RogueDefense.Logic.Enemies;
-using RogueDefense.Logic.Statuses;
 using System;
+using Godot;
+using RogueDefense.Logic.Enemies.Statuses;
+
+namespace RogueDefense.Logic.Enemies.Variants;
 
 public partial class ExplodingEye : Enemy
 {

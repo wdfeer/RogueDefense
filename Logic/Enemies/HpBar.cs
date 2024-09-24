@@ -1,6 +1,6 @@
 using Godot;
-using RogueDefense.Logic;
-using RogueDefense.Logic.Enemies;
+
+namespace RogueDefense.Logic.Enemies;
 
 public partial class HpBar : ProgressBar
 {

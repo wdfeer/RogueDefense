@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.UI.Lobby;
+
 public partial class PlayerData : Panel
 {
 	public Label NameLabel => GetNode("./Name") as Label;

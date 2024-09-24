@@ -1,4 +1,7 @@
 using Godot;
+using RogueDefense.Logic.Network;
+
+namespace RogueDefense.Logic.UI.MainMenu;
 
 public partial class MPButton : GoToSceneButton
 {

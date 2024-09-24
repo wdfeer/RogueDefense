@@ -1,8 +1,9 @@
-using Godot;
-using RogueDefense.Logic.Enemies;
-using RogueDefense.Logic.Statuses;
 using System;
 using System.Linq;
+using Godot;
+using RogueDefense.Logic.Enemies.Statuses;
+
+namespace RogueDefense.Logic.Enemies.Variants;
 
 public partial class ArmoredSpirit : Enemy
 {

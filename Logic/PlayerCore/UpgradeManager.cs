@@ -2,6 +2,8 @@ using Godot;
 using RogueDefense.Logic.Enemies;
 using System.Collections.Generic;
 using System.Linq;
+using RogueDefense.Logic.PlayerHooks.Upgrades;
+using RogueDefense.Logic.UI.Lobby.Settings;
 
 namespace RogueDefense.Logic.PlayerCore;
 
@@ -93,7 +95,7 @@ public class UpgradeManager
         player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
         critChance = SumAllUpgradeValues(UpgradeType.CritChance);
-        baseCritMult = 2f * AugmentContainer.GetStatMult(4);
+        baseCritMult = 2f * UI.MainMenu.AugmentScreen.AugmentContainer.GetStatMult(4);
         critDamageMult = baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
 
         player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
@@ -103,7 +105,7 @@ public class UpgradeManager
         bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
         viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
         coldChance = SumAllUpgradeValues(UpgradeType.ColdChance);
-        PlayerHooks.GetHooks<StatusPlayer>(player).corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
+        PlayerHooks.PlayerHooks.GetHooks<StatusPlayer>(player).corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
 
         player.shootManager.shootSpeed = ShootManager.BASE_SHOOT_SPEED;
 
@@ -141,7 +143,7 @@ Critical Chance: {(critChance * 100f).ToString("0.0")}%
 Critical Multiplier: {critDamageMult.ToString("0.00")}x
 ";
         if (bleedChance > 0f) upgradeText.Text += $"\nBleeding Chance: {(bleedChance * 100f).ToString("0.0")}%";
-        float corrosiveChance = PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance;
+        float corrosiveChance = PlayerHooks.PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance;
         if (corrosiveChance > 0f) upgradeText.Text += $"\nCorrosive Chance: {(corrosiveChance * 100f).ToString("0.0")}%"; if (viralChance > 0f) upgradeText.Text += $"\nViral Chance: {(viralChance * 100f).ToString("0.0")}%";
         if (coldChance > 0f) upgradeText.Text += $"\nCold Chance: {(coldChance * 100f).ToString("0.0")}% ";
     }

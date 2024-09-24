@@ -1,7 +1,9 @@
 using Godot;
-using RogueDefense;
 using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.PlayerCore;
+using RogueDefense.Logic.PlayerHooks.Upgrades;
+
+namespace RogueDefense.Logic;
 
 public partial class Turret : CharacterBody2D
 {
@@ -56,6 +58,6 @@ public partial class Turret : CharacterBody2D
 	{
 		StunTimer += duration / owner.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.RecoverySpeed);
 
-		PlayerHooks.GetHooks<CritChanceOnStunnedPlayer>(owner).Activate();
+		PlayerHooks.PlayerHooks.GetHooks<CritChanceOnStunnedPlayer>(owner).Activate();
 	}
 }

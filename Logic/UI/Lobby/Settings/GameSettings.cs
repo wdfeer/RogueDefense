@@ -1,5 +1,7 @@
 using Godot;
-using RogueDefense.Logic;
+using RogueDefense.Logic.Network;
+
+namespace RogueDefense.Logic.UI.Lobby.Settings;
 
 public static class GameSettings
 {
@@ -10,7 +12,7 @@ public static class GameSettings
     {
         if (NetworkManager.mode != NetMode.Server) return;
 
-        Client.instance.SendMessage(MessageType.UpdateSettings, new string[]
+        Network.Client.instance.SendMessage(MessageType.UpdateSettings, new string[]
         {
             totalDmgMult.ToString("0.0"),
             totalFireRateMult.ToString("0.0"),

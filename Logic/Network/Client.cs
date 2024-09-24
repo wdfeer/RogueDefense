@@ -1,10 +1,13 @@
-using Godot;
-using RogueDefense;
-using RogueDefense.Logic.Enemies;
-using RogueDefense.Logic.PlayerCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
+using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.PlayerCore;
+using RogueDefense.Logic.PlayerHooks;
+using RogueDefense.Logic.UI.Lobby.Settings;
+
+namespace RogueDefense.Logic.Network;
 
 public partial class Client : Node
 {
@@ -38,7 +41,7 @@ public partial class Client : Node
     {
         GD.Print("This client connected! Loading lobby...");
         if (NetworkManager.mode == NetMode.Client)
-            JoinScene.TryChangeToLobbyScene();
+            UI.JoinScene.JoinScene.TryChangeToLobbyScene();
     }
     public void ReceiveMessage(string message)
     {
@@ -53,7 +56,7 @@ public partial class Client : Node
             case MessageType.FetchLobby:
                 ChangeSceneToLobby();
                 GD.Print($"Sending Register Message with augments {string.Join(",", SaveData.augmentAllotment)}");
-                SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(SaveData.augmentAllotment) });
+                SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, UI.MainMenu.AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(SaveData.augmentAllotment) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
@@ -99,10 +102,10 @@ public partial class Client : Node
                     risky = args[3] == "R"
                 };
                 UpgradeManager.AddUpgrade(up, args[0].ToInt());
-                UpgradeScreen.instance.upgradesMade++;
-                if (UpgradeScreen.instance.EveryoneUpgraded())
+                UI.InGame.UpgradeScreen.instance.upgradesMade++;
+                if (UI.InGame.UpgradeScreen.instance.EveryoneUpgraded())
                 {
-                    UpgradeScreen.instance.HideAndUnpause();
+                    UI.InGame.UpgradeScreen.instance.HideAndUnpause();
                 }
                 break;
             case MessageType.Death:
@@ -118,7 +121,7 @@ public partial class Client : Node
                 int abilityTypeIndex = args[1].ToInt();
                 ActiveAbility ability = (ActiveAbility)Player.players[id].hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
                 ability.ActivateTryShare();
-                NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
+                UI.InGame.NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
             case MessageType.PositionUpdated:
                 Player player = Player.players[args[0].ToInt()];

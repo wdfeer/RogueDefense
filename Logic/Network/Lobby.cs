@@ -1,7 +1,9 @@
-using Godot;
-using RogueDefense.Logic.PlayerCore;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
+using RogueDefense.Logic.PlayerCore;
+
+namespace RogueDefense.Logic.Network;
 
 public partial class Lobby : Control
 {
@@ -25,10 +27,10 @@ public partial class Lobby : Control
 		else
 			NetworkManager.NetStart(); // clients' NetworkManager is already started by JoinButton
 	}
-	Dictionary<int, PlayerData> userDisplayNodes = new Dictionary<int, PlayerData>();
+	Dictionary<int, UI.Lobby.PlayerData> userDisplayNodes = new Dictionary<int, UI.Lobby.PlayerData>();
 	public void AddUser(UserData data)
 	{
-		var node = userDataScene.Instantiate<PlayerData>();
+		var node = userDataScene.Instantiate<UI.Lobby.PlayerData>();
 		node.SetPlayerName(data.name);
 		node.SetAbilityText(AbilityManager.GetAbilityName(data.ability));
 		node.SetAugmentPoints(data.augmentPoints.Sum());

@@ -2,6 +2,9 @@ using Godot;
 using System.Collections.Generic;
 using System.Linq;
 using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.Network;
+using RogueDefense.Logic.PlayerHooks;
+using RogueDefense.Logic.PlayerHooks.Upgrades;
 using RogueDefense.Logic.PlayerProjectile;
 
 namespace RogueDefense.Logic.PlayerCore;
@@ -9,12 +12,12 @@ namespace RogueDefense.Logic.PlayerCore;
 public class Player
 {
     public static Player my;
-    public bool Local => id == Client.myId;
+    public bool Local => id == Network.Client.myId;
     public static Dictionary<int, Player> players;
     public int id;
-    public string Name => Local ? SaveData.name : Client.instance.GetUserData(id).name;
+    public string Name => Local ? SaveData.name : Network.Client.instance.GetUserData(id).name;
 
-    public List<PlayerHooks> hooks;
+    public List<PlayerHooks.PlayerHooks> hooks;
     public ShootManager shootManager;
     public UpgradeManager upgradeManager;
     public AbilityManager abilityManager;
@@ -35,7 +38,7 @@ public class Player
         if (Local) hooks.Add(new HpResetter(this));
     }
     void InitializeHooks()
-        => hooks = new List<PlayerHooks>()
+        => hooks = new List<PlayerHooks.PlayerHooks>()
         {
             new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this),
             new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this),
@@ -77,11 +80,11 @@ public class Player
         if (NetworkManager.Singleplayer || inputDirection == Vector2.Zero)
             return;
         Vector2 pos = controlledTurret.GlobalPosition;
-        SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
+        SendPositionUpdateMessage(Network.Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
     }
     static void SendPositionUpdateMessage(int client, int turretIndex, float x, float y)
     {
-        Client.instance.SendMessage(MessageType.PositionUpdated, new string[] { client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString() });
+        Network.Client.instance.SendMessage(MessageType.PositionUpdated, new string[] { client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString() });
     }
     public List<Turret> turrets = new List<Turret>();
     public IEnumerable<Turret> ActiveTurrets => turrets.Where(x => !x.Stunned);
@@ -117,9 +120,9 @@ public class Player
             turret.target = enemy;
         }
 
-        if (netUpdate && Client.client != null)
+        if (netUpdate && Network.Client.client != null)
         {
-            Client.instance.SendMessage(MessageType.TargetSelected, new string[] { Client.myId.ToString(), enemyIndex.ToString() });
+            Network.Client.instance.SendMessage(MessageType.TargetSelected, new string[] { Network.Client.myId.ToString(), enemyIndex.ToString() });
         }
     }
     public void SpawnTurret()

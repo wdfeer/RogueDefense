@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
+namespace RogueDefense.Logic.Network;
+
 public partial class Server : Node
 {
 	public static Server instance = new Server();

@@ -1,13 +1,12 @@
-using RogueDefense.Logic;
 using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.Upgrades;
 
 public class CritChanceOnStunnedPlayer : PlayerHooks
 {
     public CritChanceOnStunnedPlayer(Player player) : base(player)
     {
-        Game.instance.GetNode<BuffText>("BuffText").textGetters.Add(GetBuffText);
+        Game.instance.GetNode<UI.InGame.BuffText>("BuffText").textGetters.Add(GetBuffText);
     }
 
     public float Crit => player.upgradeManager.SumAllUpgradeValues(UpgradeType.CritChanceOnStunned);

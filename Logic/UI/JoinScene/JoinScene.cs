@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.UI.JoinScene;
+
 public partial class JoinScene : Node
 {
 	[Export]

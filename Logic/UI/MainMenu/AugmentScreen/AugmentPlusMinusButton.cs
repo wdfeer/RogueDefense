@@ -1,5 +1,6 @@
 using Godot;
-using RogueDefense;
+
+namespace RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 
 public partial class AugmentPlusMinusButton : Button
 {
@@ -13,6 +14,6 @@ public partial class AugmentPlusMinusButton : Button
     public override void _Process(double delta)
     {
         Disabled = effect > SaveData.SpareAugmentPoints ||
-            (GetParent<AugmentContainer>().points == AugmentContainer.MIN_POINTS && effect < 0);
+                   (GetParent<AugmentContainer>().points == AugmentContainer.MIN_POINTS && effect < 0);
     }
 }

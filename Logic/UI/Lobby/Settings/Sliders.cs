@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.UI.Lobby.Settings;
+
 public partial class Sliders : VBoxContainer
 {
     public static SettingsSlider dmgMult;

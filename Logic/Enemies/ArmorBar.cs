@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.Enemies;
+
 public partial class ArmorBar : TextureProgressBar
 {
     public void SetDisplay(float damageReduction)

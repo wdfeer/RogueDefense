@@ -1,7 +1,8 @@
-using Godot;
-using RogueDefense;
 using System;
 using System.Linq;
+using Godot;
+
+namespace RogueDefense.Logic.UI.MainMenu;
 
 public partial class UsernameInput : LineEdit
 {

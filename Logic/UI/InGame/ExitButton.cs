@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.UI.InGame;
+
 public partial class ExitButton : Button
 {
     ConfirmationDialog ConfirmationPopup => (ConfirmationDialog)GetNode("ConfirmPopup");

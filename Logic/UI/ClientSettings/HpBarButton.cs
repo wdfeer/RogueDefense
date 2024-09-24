@@ -1,5 +1,7 @@
 using Godot;
-using RogueDefense;
+
+namespace RogueDefense.Logic.UI.ClientSettings;
+
 public partial class HpBarButton : CheckBox
 {
     public override void _Ready()

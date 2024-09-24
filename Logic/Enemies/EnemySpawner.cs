@@ -1,7 +1,8 @@
-using Godot;
-using RogueDefense.Logic.Enemies;
 using System;
 using System.Collections.Generic;
+using Godot;
+
+namespace RogueDefense.Logic.Enemies;
 
 public partial class EnemySpawner : Node2D
 {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 
-namespace RogueDefense.Logic.Statuses;
+namespace RogueDefense.Logic.Enemies.Statuses;
 
 public abstract class DamagingStatus : Status
 {

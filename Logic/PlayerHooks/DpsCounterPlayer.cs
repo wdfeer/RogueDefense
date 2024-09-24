@@ -1,6 +1,6 @@
 using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks;
 
 public class DpsCounterPlayer : PlayerHooks
 {
@@ -10,6 +10,6 @@ public class DpsCounterPlayer : PlayerHooks
 
     public override void OnAnyHit(float afterEffectsDmg)
     {
-        DpsLabel.instance.hits.Add((afterEffectsDmg, 0f));
+        UI.InGame.DpsLabel.instance.hits.Add((afterEffectsDmg, 0f));
     }
 }

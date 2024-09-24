@@ -1,5 +1,7 @@
 using System;
 
+namespace RogueDefense.Logic.Enemies.Variants;
+
 public partial class MiniArmoredSpirit : ArmoredSpirit
 {
 	public override float GetBaseSpeed()

@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
-using RogueDefense.Logic;
+
+namespace RogueDefense.Logic.PlayerProjectile;
 
 public class Bullet : Projectile
 {

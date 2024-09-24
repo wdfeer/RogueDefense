@@ -1,6 +1,4 @@
-using RogueDefense.Logic.Enemies;
-
-namespace RogueDefense.Logic.Statuses;
+namespace RogueDefense.Logic.Enemies.Statuses;
 public abstract class Status
 {
     public Enemy enemy;

@@ -1,6 +1,6 @@
 using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.Upgrades;
 
 public class FirstShotPlayer : PlayerHooks
 {

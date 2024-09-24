@@ -1,9 +1,10 @@
-using Godot;
-using RogueDefense;
-using RogueDefense.Logic;
-using RogueDefense.Logic.Enemies;
-using RogueDefense.Logic.PlayerCore;
 using System.Linq;
+using Godot;
+using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.Network;
+using RogueDefense.Logic.PlayerCore;
+
+namespace RogueDefense.Logic;
 
 public partial class Game : Node
 {
@@ -19,17 +20,17 @@ public partial class Game : Node
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		Enemy.ResetRngSeed();
 
-		Player.my = new Player(Client.myId, SaveData.augmentAllotment);
-		Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
+		Player.my = new Player(Network.Client.myId, SaveData.augmentAllotment);
+		Network.Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
 
 		SpawnEnemiesAfterDelay();
 	}
 	void SpawnEnemiesAfterDelay()
 		=> ToSignal(GetTree().CreateTimer(0.5, false), "timeout").OnCompleted(() =>
-			{
-				((EnemySpawner)GetNode("EnemySpawner")).SpawnEnemies();
-				background.UpdateBackground(GetStage());
-			});
+		{
+			((Enemies.EnemySpawner)GetNode("EnemySpawner")).SpawnEnemies();
+			background.UpdateBackground(GetStage());
+		});
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
 	{
 		if (!IsInstanceValid(enemy))
@@ -37,7 +38,7 @@ public partial class Game : Node
 
 		foreach (Player player in Player.players.Values)
 		{
-			foreach (PlayerHooks hook in player.hooks)
+			foreach (PlayerHooks.PlayerHooks hook in player.hooks)
 			{
 				hook.OnKill(enemy);
 			}
@@ -46,7 +47,7 @@ public partial class Game : Node
 		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
-			Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.enemies.FindIndex(x => x == enemy).ToString() });
+			Network.Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.enemies.FindIndex(x => x == enemy).ToString() });
 		}
 		if (Enemy.enemies.All(x => x.Dead))
 			EndWave();
@@ -65,14 +66,14 @@ public partial class Game : Node
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		wave++;
 
-		GetNode<UpgradeScreen>("./UpgradeScreen").ResetNotificationLabel();
+		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").ResetNotificationLabel();
 
 		SaveData.UpdateHighscore();
 		SaveData.killCount++;
 		SaveData.Save();
 
 		GetTree().Paused = true;
-		GetNode<UpgradeScreen>("./UpgradeScreen").Activate();
+		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").Activate();
 
 		foreach (var keyValue in Player.players)
 		{

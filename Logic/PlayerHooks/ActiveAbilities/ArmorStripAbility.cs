@@ -1,10 +1,10 @@
 using System;
 using Godot;
-using RogueDefense.Logic;
 using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.Network;
 using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.ActiveAbilities;
 
 public class ArmorStripAbility : ActiveAbility
 {

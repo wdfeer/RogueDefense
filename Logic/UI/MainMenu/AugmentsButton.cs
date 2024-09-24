@@ -1,5 +1,6 @@
 using Godot;
-using RogueDefense;
+
+namespace RogueDefense.Logic.UI.MainMenu;
 
 public partial class AugmentsButton : Button
 {
@@ -8,7 +9,7 @@ public partial class AugmentsButton : Button
         var upgradePanel = GetNode<Panel>("/root/Control/AugmentPanel");
         upgradePanel.Visible = !upgradePanel.Visible;
 
-        foreach (AugmentContainer upgrader in upgradePanel.GetNode("VBoxContainer").GetChildren())
+        foreach (AugmentScreen.AugmentContainer upgrader in upgradePanel.GetNode("VBoxContainer").GetChildren())
         {
             upgrader.Save();
         }

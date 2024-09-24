@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Godot;
 using RogueDefense.Logic.PlayerCore;
-using System.Collections.Generic;
+
+namespace RogueDefense.Logic;
 
 public partial class GameInitializer : Node
 {
@@ -9,7 +11,7 @@ public partial class GameInitializer : Node
 		Player.my = null;
 		Player.players = new Dictionary<int, Player>();
 
-		RogueDefense.SaveData.Load();
+		SaveData.Load();
 
 		UpgradeType.Initialize();
 	}

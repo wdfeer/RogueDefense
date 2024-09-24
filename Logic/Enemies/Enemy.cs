@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using RogueDefense.Logic.Enemies.Statuses;
+using RogueDefense.Logic.Network;
 using RogueDefense.Logic.PlayerCore;
-using RogueDefense.Logic.Statuses;
 
 namespace RogueDefense.Logic.Enemies;
 
@@ -44,7 +45,7 @@ public abstract partial class Enemy : Area2D
 			statsRng.Randomize();
 		else
 		{
-			List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
+			List<char> firstChars = Network.Client.instance.others.Select(x => x.name[0]).ToList();
 			firstChars.Add(SaveData.name[0]);
 
 			int seed = firstChars.Aggregate(0, (a, b) => a + b);

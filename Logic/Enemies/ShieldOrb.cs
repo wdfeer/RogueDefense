@@ -1,6 +1,6 @@
 using Godot;
-using RogueDefense;
-using RogueDefense.Logic.Enemies;
+
+namespace RogueDefense.Logic.Enemies;
 
 public partial class ShieldOrb : Area2D
 {

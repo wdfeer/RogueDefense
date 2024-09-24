@@ -1,6 +1,7 @@
-using Godot;
-using RogueDefense.Logic.Enemies;
 using System;
+using Godot;
+
+namespace RogueDefense.Logic.Enemies.Variants;
 
 public partial class Multigunner : Enemy
 {

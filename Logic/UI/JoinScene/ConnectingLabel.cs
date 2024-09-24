@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.UI.JoinScene;
+
 public partial class ConnectingLabel : Label
 {
     public override void _Ready()

@@ -1,5 +1,6 @@
 using Godot;
-using RogueDefense;
+
+namespace RogueDefense.Logic.UI.ClientSettings;
 
 public partial class ShowFpsButton : CheckBox
 {

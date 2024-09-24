@@ -1,4 +1,7 @@
 using Godot;
+using RogueDefense.Logic.Network;
+
+namespace RogueDefense.Logic.UI.Lobby.Settings;
 
 public partial class SettingsPanel : Panel
 {

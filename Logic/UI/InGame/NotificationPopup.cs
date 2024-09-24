@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.UI.InGame;
+
 public partial class NotificationPopup : PopupPanel
 {
     public static NotificationPopup instance;

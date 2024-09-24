@@ -1,4 +1,6 @@
-using RogueDefense.Logic.Statuses;
+using RogueDefense.Logic.Enemies.Statuses;
+
+namespace RogueDefense.Logic.Enemies.StatusContainers;
 
 public partial class BleedContainer : StatusContainer
 {

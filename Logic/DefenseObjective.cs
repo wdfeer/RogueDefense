@@ -1,8 +1,9 @@
 using Godot;
-using RogueDefense.Logic;
+using RogueDefense.Logic.Network;
 using RogueDefense.Logic.PlayerCore;
+using RogueDefense.Logic.UI.Lobby.Settings;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic;
 
 public partial class DefenseObjective : Node2D
 {
@@ -56,7 +57,7 @@ public partial class DefenseObjective : Node2D
 
         dmg *= damageMult;
 
-        CombatTextDisplay.instance.AddCombatText(new CombatText()
+        Enemies.CombatTextDisplay.instance.AddCombatText(new CombatText()
         {
             direction = Vector2.Up * 1.5f,
             modulate = Colors.Red,
@@ -117,7 +118,7 @@ public partial class DefenseObjective : Node2D
     {
         if (local && !NetworkManager.Singleplayer)
         {
-            Client.instance.SendMessage(MessageType.Death);
+            Network.Client.instance.SendMessage(MessageType.Death);
         }
 
         PP.TryRecordPP();
@@ -125,7 +126,7 @@ public partial class DefenseObjective : Node2D
         SaveData.Save();
 
         Game.instance.GetTree().Paused = true;
-        DeathScreen.instance.Show();
-        (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
+        UI.InGame.DeathScreen.instance.Show();
+        (UI.InGame.DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
     }
 }

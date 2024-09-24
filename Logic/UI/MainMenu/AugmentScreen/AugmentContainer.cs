@@ -1,6 +1,7 @@
 using Godot;
-using RogueDefense;
 using RogueDefense.Logic.PlayerCore;
+
+namespace RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 
 public partial class AugmentContainer : HBoxContainer
 {

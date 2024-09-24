@@ -1,5 +1,6 @@
 using Godot;
-using RogueDefense;
+
+namespace RogueDefense.Logic.UI.InGame;
 
 public partial class FpsLabel : Label
 {

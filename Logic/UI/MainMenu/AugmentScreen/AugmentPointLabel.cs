@@ -1,5 +1,6 @@
 using Godot;
-using RogueDefense;
+
+namespace RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 
 public partial class AugmentPointLabel : Label
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RogueDefense.Logic.Statuses;
+namespace RogueDefense.Logic.Enemies.Statuses;
 
 public abstract class SpecialStatus : Status
 {

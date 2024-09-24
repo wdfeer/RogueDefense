@@ -4,7 +4,7 @@ using System.Linq;
 using Godot;
 using Godot.Collections;
 
-namespace RogueDefense.Logic;
+namespace RogueDefense.Logic.PlayerProjectile;
 
 public partial class ProjectileManager : Node2D
 {

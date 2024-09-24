@@ -1,8 +1,10 @@
 using System;
 using System.Linq;
 using Godot;
-using RogueDefense;
+using RogueDefense.Logic.Network;
 using RogueDefense.Logic.PlayerCore;
+
+namespace RogueDefense.Logic.UI.InGame;
 
 public partial class UpgradeScreen : Panel
 {
@@ -74,7 +76,7 @@ public partial class UpgradeScreen : Panel
         else
         {
             upgradesMade++;
-            Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
+            Network.Client.instance.SendMessage(MessageType.Upgrade, new string[] { Network.Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
             if (EveryoneUpgraded())
                 HideAndUnpause();
             else SetButtonsVisibility(false);

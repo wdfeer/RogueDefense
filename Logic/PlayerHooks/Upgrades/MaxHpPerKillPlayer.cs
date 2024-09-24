@@ -1,8 +1,8 @@
+using System.Linq;
 using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.PlayerCore;
-using System.Linq;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.Upgrades;
 
 public class MaxHpPerKillPlayer : PlayerHooks
 {

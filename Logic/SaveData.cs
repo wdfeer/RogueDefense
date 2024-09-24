@@ -1,8 +1,8 @@
 using System;
 using Godot;
-using RogueDefense.Logic;
+using RogueDefense.Logic.Network;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic;
 
 public static class SaveData
 {

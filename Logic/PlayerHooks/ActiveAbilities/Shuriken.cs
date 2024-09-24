@@ -1,10 +1,9 @@
-using System;
 using Godot;
 using Godot.Collections;
-using RogueDefense.Logic;
 using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.PlayerProjectile;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.ActiveAbilities;
 
 public class Shuriken : Projectile
 {

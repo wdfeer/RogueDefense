@@ -1,5 +1,7 @@
 using Godot;
-using RogueDefense;
+using RogueDefense.Logic.Network;
+
+namespace RogueDefense.Logic.UI.JoinScene;
 
 public partial class JoinButton : Button
 {
@@ -17,10 +19,10 @@ public partial class JoinButton : Button
 	{
 		NetworkManager.mode = NetMode.Client;
 		string addr = AddressEdit.Text;
-		Client.host = addr;
+		Network.Client.host = addr;
 		SaveData.lastIp = addr;
 		SaveData.Save();
-		Client.port = ushort.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
+		Network.Client.port = ushort.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
 
 		connectingLabel.Visible = true;
 

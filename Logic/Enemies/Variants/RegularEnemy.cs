@@ -1,4 +1,4 @@
-using RogueDefense.Logic.Enemies;
+namespace RogueDefense.Logic.Enemies.Variants;
 
 public partial class RegularEnemy : Enemy
 {

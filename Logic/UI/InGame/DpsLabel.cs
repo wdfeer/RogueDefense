@@ -1,8 +1,8 @@
-using Godot;
-using RogueDefense;
-using RogueDefense.Logic;
 using System.Collections.Generic;
 using System.Linq;
+using Godot;
+
+namespace RogueDefense.Logic.UI.InGame;
 
 public partial class DpsLabel : Label
 {

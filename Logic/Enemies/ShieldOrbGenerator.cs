@@ -1,5 +1,7 @@
 using Godot;
 
+namespace RogueDefense.Logic.Enemies;
+
 public partial class ShieldOrbGenerator : Node2D
 {
     [Export]

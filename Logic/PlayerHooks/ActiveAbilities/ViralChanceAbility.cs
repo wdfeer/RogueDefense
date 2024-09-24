@@ -1,9 +1,8 @@
 using Godot;
-using RogueDefense.Logic;
 using RogueDefense.Logic.Enemies;
 using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.ActiveAbilities;
 
 public class ViralChanceAbility : ActiveAbility
 {

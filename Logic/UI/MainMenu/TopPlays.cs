@@ -1,6 +1,6 @@
 using Godot;
-using RogueDefense;
-using RogueDefense.Logic;
+
+namespace RogueDefense.Logic.UI.MainMenu;
 
 public partial class TopPlays : VBoxContainer
 {

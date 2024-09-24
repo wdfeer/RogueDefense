@@ -1,7 +1,7 @@
 using Godot;
 using RogueDefense.Logic.PlayerCore;
 
-namespace RogueDefense;
+namespace RogueDefense.Logic.PlayerHooks.ActiveAbilities;
 
 public class FireRateAbility : ActiveAbility
 {

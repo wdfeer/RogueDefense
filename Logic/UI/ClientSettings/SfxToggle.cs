@@ -1,6 +1,6 @@
 using Godot;
-using RogueDefense;
-using System;
+
+namespace RogueDefense.Logic.UI.ClientSettings;
 
 public partial class SfxToggle : CheckButton
 {
