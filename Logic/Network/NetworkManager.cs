@@ -38,7 +38,7 @@ public static class NetworkManager
         Client.instance.Poll();
     }
 }
-public partial class UserData
+public class UserData
 {
     public int id;
     public string name;

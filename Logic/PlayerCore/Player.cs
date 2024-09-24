@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerProjectile;
 
 namespace RogueDefense.Logic.PlayerCore;
 
-public partial class Player
+public class Player
 {
     public static Player my;
     public bool Local => id == Client.myId;

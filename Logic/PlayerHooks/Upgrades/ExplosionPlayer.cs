@@ -5,7 +5,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class ExplosionPlayer : PlayerHooks
+public class ExplosionPlayer : PlayerHooks
 {
     public ExplosionPlayer(Player player) : base(player)
     {

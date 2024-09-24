@@ -2,7 +2,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class HpResetter : PlayerHooks
+public class HpResetter : PlayerHooks
 {
     public HpResetter(Player player) : base(player) // Only created on the local player
     {

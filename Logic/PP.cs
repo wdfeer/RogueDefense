@@ -5,7 +5,7 @@ using Godot;
 
 namespace RogueDefense.Logic;
 
-public partial class PP
+public class PP
 {
     public static void UpdateLobbyPPMultDisplay()
     {

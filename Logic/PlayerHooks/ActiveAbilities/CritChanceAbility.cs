@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class CritChanceAbility : ActiveAbility
+public class CritChanceAbility : ActiveAbility
 {
     public CritChanceAbility(Player player, Button button) : base(player, button)
     {

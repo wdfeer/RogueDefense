@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RogueDefense.Logic.PlayerCore;
 
-public partial class UpgradeManager
+public class UpgradeManager
 {
     public static UpgradeManager local;
     public static Dictionary<int, UpgradeManager> others = new Dictionary<int, UpgradeManager>();

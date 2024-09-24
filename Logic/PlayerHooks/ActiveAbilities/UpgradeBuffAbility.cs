@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class UpgradeBuffAbility : ActiveAbility
+public class UpgradeBuffAbility : ActiveAbility
 {
     public UpgradeBuffAbility(Player player, Button button) : base(player, button)
     {

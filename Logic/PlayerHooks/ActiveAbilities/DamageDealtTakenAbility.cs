@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class DamageDealtTakenAbility : ActiveAbility
+public class DamageDealtTakenAbility : ActiveAbility
 {
     public DamageDealtTakenAbility(Player player, Button button) : base(player, button)
     {

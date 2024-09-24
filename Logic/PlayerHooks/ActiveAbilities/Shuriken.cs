@@ -6,7 +6,7 @@ using RogueDefense.Logic.Enemies;
 
 namespace RogueDefense;
 
-public partial class Shuriken : Projectile
+public class Shuriken : Projectile
 {
 	public Shuriken(Array<Texture2D> textures) : base()
 	{

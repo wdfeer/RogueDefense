@@ -2,7 +2,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class FirstShotPlayer : PlayerHooks
+public class FirstShotPlayer : PlayerHooks
 {
     public float DamageMult => 1f + player.upgradeManager.SumAllUpgradeValues(UpgradeType.FirstShotTotalDamage);
 

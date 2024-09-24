@@ -2,7 +2,7 @@ using Godot;
 
 namespace RogueDefense.Logic.Statuses;
 
-public partial class Viral : SpecialStatus
+public class Viral : SpecialStatus
 {
     public override void SpecialProcess(float delta)
     {

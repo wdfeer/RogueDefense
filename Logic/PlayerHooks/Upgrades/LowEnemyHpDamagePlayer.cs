@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class LowEnemyHpDamagePlayer : PlayerHooks
+public class LowEnemyHpDamagePlayer : PlayerHooks
 {
     public LowEnemyHpDamagePlayer(Player player) : base(player)
     {

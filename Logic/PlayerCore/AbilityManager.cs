@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace RogueDefense.Logic.PlayerCore;
 
-public partial class AbilityManager
+public class AbilityManager
 {
     public ActiveAbility ability1;
     Player player;

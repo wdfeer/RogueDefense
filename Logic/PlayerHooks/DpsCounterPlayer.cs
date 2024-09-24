@@ -2,7 +2,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class DpsCounterPlayer : PlayerHooks
+public class DpsCounterPlayer : PlayerHooks
 {
     public DpsCounterPlayer(Player player) : base(player)
     {

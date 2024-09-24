@@ -5,7 +5,7 @@ using Godot;
 
 namespace RogueDefense.Logic.PlayerCore;
 
-public partial class UpgradeType
+public class UpgradeType
 {
     public UpgradeType(Func<float, string> upgradeTextGetter)
     {

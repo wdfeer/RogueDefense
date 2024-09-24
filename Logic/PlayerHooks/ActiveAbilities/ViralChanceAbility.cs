@@ -5,7 +5,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class ViralChanceAbility : ActiveAbility
+public class ViralChanceAbility : ActiveAbility
 {
     public ViralChanceAbility(Player player, Button button) : base(player, button)
     {

@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class ShurikenAbility : ActiveAbility
+public class ShurikenAbility : ActiveAbility
 {
     public int ShurikenCount => Mathf.FloorToInt(Strength / 0.8f);
     public override void Activate()

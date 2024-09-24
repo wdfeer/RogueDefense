@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class DamageVsArmorPlayer : PlayerHooks
+public class DamageVsArmorPlayer : PlayerHooks
 {
     public DamageVsArmorPlayer(Player player) : base(player)
     {

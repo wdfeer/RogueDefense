@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class CritChanceOnStunnedPlayer : PlayerHooks
+public class CritChanceOnStunnedPlayer : PlayerHooks
 {
     public CritChanceOnStunnedPlayer(Player player) : base(player)
     {

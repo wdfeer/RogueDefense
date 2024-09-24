@@ -1,6 +1,6 @@
 namespace RogueDefense.Logic.Statuses;
 
-public partial class Corrosive : SpecialStatus
+public class Corrosive : SpecialStatus
 {
     public override void SpecialProcess(float delta)
     {

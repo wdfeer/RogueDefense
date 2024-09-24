@@ -6,7 +6,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class DamagePerUniqueStatusPlayer : PlayerHooks
+public class DamagePerUniqueStatusPlayer : PlayerHooks
 {
     public float IncreasePerStatus => player.upgradeManager.SumAllUpgradeValues(UpgradeType.DamagePerUniqueStatus);
 

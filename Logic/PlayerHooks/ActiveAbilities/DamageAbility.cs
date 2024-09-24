@@ -3,7 +3,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class DamageAbility : ActiveAbility
+public class DamageAbility : ActiveAbility
 {
     public override void Activate()
     {

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RogueDefense.Logic.PlayerCore;
 
-public partial class ShootManager
+public class ShootManager
 {
     readonly Player player;
     public readonly ProjectileManager projectileManager;

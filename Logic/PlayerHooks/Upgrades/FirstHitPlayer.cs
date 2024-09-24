@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class FirstHitPlayer : PlayerHooks
+public class FirstHitPlayer : PlayerHooks
 {
     public FirstHitPlayer(Player player) : base(player)
     {

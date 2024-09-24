@@ -4,7 +4,7 @@ using RogueDefense.Logic.PlayerCore;
 
 namespace RogueDefense;
 
-public partial class MultishotPerShotPlayer : PlayerHooks
+public class MultishotPerShotPlayer : PlayerHooks
 {
     public float MultishotPerShot => player.upgradeManager.SumAllUpgradeValues(UpgradeType.MultishotPerShot);
     public float CurrentBuff => MultishotPerShot * Mathf.Min(player.shootManager.shootCount, MAX_STACK);
