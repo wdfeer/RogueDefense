@@ -4,6 +4,9 @@
 # Visual Studio Code
 .vscode
 
+# IntelliJ
+.idea
+
 # Godot-specific ignores
 .godot/
 .import/
