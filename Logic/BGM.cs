@@ -1,20 +1,21 @@
+using System;
 using Godot;
-using RogueDefense.Logic;
 using System.Collections.Generic;
 
 namespace RogueDefense.Logic;
 
 public partial class BGM : AudioStreamPlayer
 {
-	readonly List<AudioStream> streams = new List<AudioStream>();
+	private const string MUSIC_PATH = "res://Assets/Music";
+
+	private readonly List<AudioStream> streams = new();
 	public override void _Ready()
 	{
-		const string MUSIC_PATH = "res://Assets/Music";
 		using var dir = DirAccess.Open(MUSIC_PATH);
 		if (dir != null)
 		{
 			dir.ListDirBegin();
-			string fileName = dir.GetNext();
+			var fileName = dir.GetNext();
 			while (fileName != "")
 			{
 				if (!dir.CurrentIsDir() && fileName.EndsWith(".mp3"))
@@ -26,12 +27,26 @@ public partial class BGM : AudioStreamPlayer
 		}
 		else
 		{
-			GD.Print("An error occurred when trying to access the path.");
+			GD.PrintErr("An error occurred when trying to access the music directory.");
 		}
-
-		PlayRandom();
-		Finished += PlayRandom;
 	}
+	
+	private int interval = new Random().Next(10, 31);
+	private float timer = 0;
+	public override void _Process(double delta)
+	{
+		if (Playing) return;
+
+		timer += (float)delta;
+		if (timer > interval)
+		{
+			PlayRandom();
+
+			timer = 0;
+			interval = new Random().Next(30, 61);
+		}
+	}
+	
 	void PlayRandom()
 	{
 		Stream = MathHelper.GetRandomElement(streams);
