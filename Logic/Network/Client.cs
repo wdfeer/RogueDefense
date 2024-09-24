@@ -119,18 +119,18 @@ public partial class Client : Node
                 id = args[0].ToInt();
                 string username = GetUserData(id).name;
                 int abilityTypeIndex = args[1].ToInt();
-                ActiveAbility ability = (ActiveAbility)Player.players[id].hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
+                ActiveAbility ability = (ActiveAbility)PlayerManager.players[id].hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
                 ability.ActivateTryShare();
                 UI.InGame.NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
             case MessageType.PositionUpdated:
-                Player player = Player.players[args[0].ToInt()];
+                Player player = PlayerManager.players[args[0].ToInt()];
                 Turret turret = player.turrets[args[1].ToInt()];
                 float x = args[2].Replace(",", ".").ToFloat(), y = args[3].Replace(",", ".").ToFloat();
                 turret.GlobalPosition = new Vector2(x, y);
                 break;
             case MessageType.TargetSelected:
-                player = Player.players[args[0].ToInt()];
+                player = PlayerManager.players[args[0].ToInt()];
                 int enemyIndex = args[1].ToInt();
                 player.SetTarget(enemyIndex, false);
                 break;

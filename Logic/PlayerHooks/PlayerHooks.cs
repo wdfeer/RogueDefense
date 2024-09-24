@@ -23,7 +23,7 @@ public abstract class PlayerHooks
 
     public static T GetLocalHooks<T>() where T : PlayerHooks
     {
-        return GetHooks<T>(Player.my);
+        return GetHooks<T>(PlayerManager.my);
     }
     public static T GetHooks<T>(Player player) where T : PlayerHooks
     {

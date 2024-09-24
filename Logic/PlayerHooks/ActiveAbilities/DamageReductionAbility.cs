@@ -17,7 +17,7 @@ public class DamageReductionAbility : ActiveAbility
     public float buffLeft = 0;
     public override void PostUpgradeUpdate(float delta)
     {
-        if (buffLeft > 0 && player.Local)
+        if (buffLeft > 0 && player.IsLocal)
         {
             buffLeft -= delta;
             DefenseObjective.instance.damageMult *= DamageTakenMult;

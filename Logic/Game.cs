@@ -20,15 +20,15 @@ public partial class Game : Node
 		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
 		Enemy.ResetRngSeed();
 
-		Player.my = new Player(Network.Client.myId, SaveData.augmentAllotment);
-		Network.Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
+		PlayerManager.my = new Player(Client.myId, SaveData.augmentAllotment);
+		Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
 
 		SpawnEnemiesAfterDelay();
 	}
 	void SpawnEnemiesAfterDelay()
 		=> ToSignal(GetTree().CreateTimer(0.5, false), "timeout").OnCompleted(() =>
 		{
-			((Enemies.EnemySpawner)GetNode("EnemySpawner")).SpawnEnemies();
+			((EnemySpawner)GetNode("EnemySpawner")).SpawnEnemies();
 			background.UpdateBackground(GetStage());
 		});
 	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
@@ -36,7 +36,7 @@ public partial class Game : Node
 		if (!IsInstanceValid(enemy))
 			return;
 
-		foreach (Player player in Player.players.Values)
+		foreach (Player player in PlayerManager.players.Values)
 		{
 			foreach (PlayerHooks.PlayerHooks hook in player.hooks)
 			{
@@ -47,7 +47,7 @@ public partial class Game : Node
 		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
-			Network.Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.enemies.FindIndex(x => x == enemy).ToString() });
+			Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.enemies.FindIndex(x => x == enemy).ToString() });
 		}
 		if (Enemy.enemies.All(x => x.Dead))
 			EndWave();
@@ -75,7 +75,7 @@ public partial class Game : Node
 		GetTree().Paused = true;
 		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").Activate();
 
-		foreach (var keyValue in Player.players)
+		foreach (var keyValue in PlayerManager.players)
 		{
 			keyValue.Value.OnWaveEnd();
 		}

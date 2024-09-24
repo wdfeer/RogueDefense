@@ -12,7 +12,7 @@ public partial class Target : Sprite2D
 	}
 	public override void _Process(double delta)
 	{
-		Visible = enemy == Player.my.target;
+		Visible = enemy == PlayerManager.my.target;
 		if (!Visible)
 			return;
 

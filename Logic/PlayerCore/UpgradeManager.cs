@@ -39,16 +39,16 @@ public class UpgradeManager
 
         if (upgrade.type == UpgradeType.Turret)
         {
-            Player.players[from].SpawnTurret();
+            PlayerManager.players[from].SpawnTurret();
         }
         else
         {
-            var upgradeManager = Player.players[from].upgradeManager;
+            var upgradeManager = PlayerManager.players[from].upgradeManager;
             upgradeManager.upgrades.Add(upgrade);
-            foreach (var item in Player.players)
+            foreach (var item in PlayerManager.players)
             {
                 item.Value.upgradeManager.UpdateUpgrades();
-                Player.my.upgradeManager.UpdateUpgradeText();
+                PlayerManager.my.upgradeManager.UpdateUpgradeText();
             }
         }
     }
@@ -66,18 +66,18 @@ public class UpgradeManager
     }
     public void UpdateDamageReduction()
     {
-        float damageTakenMult = Player.players.Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.DamageReduction)).Aggregate(1f, (a, b) => a * b);
+        float damageTakenMult = PlayerManager.players.Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.DamageReduction)).Aggregate(1f, (a, b) => a * b);
         DefenseObjective.instance.damageMult = damageTakenMult;
     }
     public void UpdateEvasion()
     {
-        float chanceToTakeDamage = Player.players.Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.Evasion)).Aggregate(1f, (a, b) => a * b);
+        float chanceToTakeDamage = PlayerManager.players.Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.Evasion)).Aggregate(1f, (a, b) => a * b);
         float evasionChance = 1 - chanceToTakeDamage;
         DefenseObjective.instance.evasionChance = evasionChance;
     }
     public void UpdateUpgrades()
     {
-        if (player.Local)
+        if (player.IsLocal)
         {
             UpdateDamageReduction();
             UpdateEvasion();
@@ -100,7 +100,7 @@ public class UpgradeManager
 
         player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
         player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
-        if (player.Local) player.abilityManager.ResetAbilityText();
+        if (player.IsLocal) player.abilityManager.ResetAbilityText();
 
         bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
         viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
@@ -120,13 +120,13 @@ public class UpgradeManager
     public float GetTotalUpgradeMultiplier(UpgradeType type)
         => 1f + SumAllUpgradeValues(type);
     public float SumEveryonesUpgradeValues(UpgradeType type)
-        => Player.players.Select(x => x.Value.upgradeManager.SumAllUpgradeValues(type)).Aggregate(0f, (a, b) => a + b);
+        => PlayerManager.players.Select(x => x.Value.upgradeManager.SumAllUpgradeValues(type)).Aggregate(0f, (a, b) => a + b);
     public float GetReversedMultiplier(UpgradeType type) // Returns the product of all (1 - upgradeValue) on the player
         => GetAllUpgradeValues(type).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b) / dynamicUpgradeModifier;
 
     public void UpdateUpgradeText()
     {
-        if (player != Player.my) return;
+        if (player != PlayerManager.my) return;
 
         var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
         upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";

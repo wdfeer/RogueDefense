@@ -9,11 +9,11 @@ namespace RogueDefense.Logic.PlayerCore;
 public class ShootManager
 {
     readonly Player player;
-    public readonly PlayerProjectile.ProjectileManager projectileManager;
+    public readonly ProjectileManager projectileManager;
     public ShootManager(Player player)
     {
         this.player = player;
-        projectileManager = DefenseObjective.instance.projectileManagerScene.Instantiate<PlayerProjectile.ProjectileManager>();
+        projectileManager = DefenseObjective.instance.projectileManagerScene.Instantiate<ProjectileManager>();
         projectileManager.Name = $"{player.Name}'s Projectiles";
         DefenseObjective.instance.AddSibling(projectileManager);
 

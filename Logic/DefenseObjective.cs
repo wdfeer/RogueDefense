@@ -83,14 +83,14 @@ public partial class DefenseObjective : Node2D
 
         sprite.Frame = GetSpriteFrame();
 
-        foreach (var pair in Player.players)
+        foreach (var pair in PlayerManager.players)
         {
             pair.Value._Process(delta);
         }
     }
     public override void _PhysicsProcess(double delta)
     {
-        foreach (var pair in Player.players)
+        foreach (var pair in PlayerManager.players)
         {
             pair.Value._PhysicsProcess(delta);
         }
@@ -118,7 +118,7 @@ public partial class DefenseObjective : Node2D
     {
         if (local && !NetworkManager.Singleplayer)
         {
-            Network.Client.instance.SendMessage(MessageType.Death);
+            Client.instance.SendMessage(MessageType.Death);
         }
 
         PP.TryRecordPP();

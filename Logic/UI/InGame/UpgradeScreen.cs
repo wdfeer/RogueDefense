@@ -67,7 +67,7 @@ public partial class UpgradeScreen : Panel
         if (buttons.Any(x => !IsInstanceValid(x)))
             return;
         Upgrade up = upgrades[index];
-        UpgradeManager.AddUpgrade(up, Player.my.id);
+        UpgradeManager.AddUpgrade(up, PlayerManager.my.id);
 
         if (NetworkManager.Singleplayer)
         {
@@ -76,7 +76,7 @@ public partial class UpgradeScreen : Panel
         else
         {
             upgradesMade++;
-            Network.Client.instance.SendMessage(MessageType.Upgrade, new string[] { Network.Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
+            Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
             if (EveryoneUpgraded())
                 HideAndUnpause();
             else SetButtonsVisibility(false);

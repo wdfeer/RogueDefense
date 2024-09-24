@@ -13,7 +13,7 @@ public class MaxHpPerKillPlayer : PlayerHooks
     }
 
     public static float GetTotalIncrease()
-        => Player.players
+        => PlayerManager.players
             .Select(pair => GetHooks<MaxHpPerKillPlayer>(pair.Value).increase)
             .Aggregate(0f, (a, b) => a + b);
     public override void OnKill(Enemy enemy)

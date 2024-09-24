@@ -8,8 +8,8 @@ public partial class GameInitializer : Node
 {
 	public override void _Ready()
 	{
-		Player.my = null;
-		Player.players = new Dictionary<int, Player>();
+		PlayerManager.my = null;
+		PlayerManager.players = new Dictionary<int, Player>();
 
 		SaveData.Load();
 

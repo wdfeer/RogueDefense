@@ -9,42 +9,31 @@ using RogueDefense.Logic.PlayerProjectile;
 
 namespace RogueDefense.Logic.PlayerCore;
 
-public class Player
+public partial class Player
 {
-    public static Player my;
-    public bool Local => id == Network.Client.myId;
-    public static Dictionary<int, Player> players;
+    public bool IsLocal => id == Client.myId;
     public int id;
-    public string Name => Local ? SaveData.name : Network.Client.instance.GetUserData(id).name;
+    public string Name => IsLocal ? SaveData.name : Client.instance.GetUserData(id).name;
 
-    public List<PlayerHooks.PlayerHooks> hooks;
     public ShootManager shootManager;
     public UpgradeManager upgradeManager;
     public AbilityManager abilityManager;
     public int[] augmentPoints;
-    public Player(int id, int[] upgradePointDistribution)
+    public Player(int id, int[] augmentPoints)
     {
-        augmentPoints = upgradePointDistribution;
+        this.id = id;
+        this.augmentPoints = augmentPoints;
 
         InitializeHooks();
 
-        this.id = id;
-        players.Add(id, this);
+        PlayerManager.players.Add(id, this);
         shootManager = new ShootManager(this);
         upgradeManager = new UpgradeManager(this);
         abilityManager = new AbilityManager(this);
+        
         SpawnTurret();
-
-        if (Local) hooks.Add(new HpResetter(this));
     }
-    void InitializeHooks()
-        => hooks = new List<PlayerHooks.PlayerHooks>()
-        {
-            new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this),
-            new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this),
-            new LowEnemyHpDamagePlayer(this), new MultishotPerShotPlayer(this), new DamageVsArmorPlayer(this),
-            new ExplosionPlayer(this), new CritChanceOnStunnedPlayer(this)
-        };
+
     public void _Process(double delta)
     {
         hooks.ForEach(x => x.PreUpdate((float)delta));
@@ -56,86 +45,11 @@ public class Player
         if (target == null || !GodotObject.IsInstanceValid(target) || target.Dead)
             FindTarget();
     }
+    
     public void _PhysicsProcess(double delta)
     {
-        if (this == my)
+        if (this == PlayerManager.my)
             UpdateMovement(delta);
-    }
-    void UpdateMovement(double delta)
-    {
-        Vector2 inputDirection = Vector2.Zero;
-        if (!controlledTurret.Stunned)
-            inputDirection = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-
-        foreach (Turret turret in turrets)
-        {
-            turret.Velocity /= 2;
-            if (turret == controlledTurret)
-            {
-                turret.Velocity += inputDirection * Turret.SPEED * 650 * (float)delta;
-            }
-            turret.MoveAndSlide();
-        }
-
-        if (NetworkManager.Singleplayer || inputDirection == Vector2.Zero)
-            return;
-        Vector2 pos = controlledTurret.GlobalPosition;
-        SendPositionUpdateMessage(Network.Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
-    }
-    static void SendPositionUpdateMessage(int client, int turretIndex, float x, float y)
-    {
-        Network.Client.instance.SendMessage(MessageType.PositionUpdated, new string[] { client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString() });
-    }
-    public List<Turret> turrets = new List<Turret>();
-    public IEnumerable<Turret> ActiveTurrets => turrets.Where(x => !x.Stunned);
-    public Turret controlledTurret;
-    public Enemy target;
-    bool IsValidTarget(Enemy enemy)
-        => enemy != null && GodotObject.IsInstanceValid(enemy) && enemy.Targetable;
-    void FindTarget()
-    {
-        for (int i = 0; i < Enemy.enemies.Count; i++)
-        {
-            Enemy enemy = Enemy.enemies[i];
-            if (IsValidTarget(enemy))
-            {
-                SetTarget(i);
-                return;
-            }
-        }
-    }
-    public void SetTarget(int enemyIndex, bool netUpdate = true)
-    {
-        if (enemyIndex >= Enemy.enemies.Count)
-            return;
-
-        Enemy enemy = Enemy.enemies[enemyIndex];
-
-        if (!IsValidTarget(enemy))
-            return;
-
-        target = enemy;
-        foreach (Turret turret in turrets)
-        {
-            turret.target = enemy;
-        }
-
-        if (netUpdate && Network.Client.client != null)
-        {
-            Network.Client.instance.SendMessage(MessageType.TargetSelected, new string[] { Network.Client.myId.ToString(), enemyIndex.ToString() });
-        }
-    }
-    public void SpawnTurret()
-    {
-        controlledTurret = DefenseObjective.instance.turretScene.Instantiate<Turret>();
-        controlledTurret.owner = this;
-        DefenseObjective.instance.AddChild(controlledTurret);
-        controlledTurret.Position += new Vector2(-50f + GD.Randf() * 200f, (GD.Randf() - 0.5f) * 300);
-        turrets.Add(controlledTurret);
-
-        controlledTurret.SetLabel(string.Concat(Name.Take(3)).ToUpper());
-
-        controlledTurret.target = target;
     }
 
     public void OnWaveEnd()

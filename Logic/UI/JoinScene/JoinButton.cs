@@ -19,10 +19,10 @@ public partial class JoinButton : Button
 	{
 		NetworkManager.mode = NetMode.Client;
 		string addr = AddressEdit.Text;
-		Network.Client.host = addr;
+		Client.host = addr;
 		SaveData.lastIp = addr;
 		SaveData.Save();
-		Network.Client.port = ushort.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
+		Client.port = ushort.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
 
 		connectingLabel.Visible = true;
 

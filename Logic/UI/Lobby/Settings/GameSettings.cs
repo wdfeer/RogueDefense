@@ -12,7 +12,7 @@ public static class GameSettings
     {
         if (NetworkManager.mode != NetMode.Server) return;
 
-        Network.Client.instance.SendMessage(MessageType.UpdateSettings, new string[]
+        Client.instance.SendMessage(MessageType.UpdateSettings, new string[]
         {
             totalDmgMult.ToString("0.0"),
             totalFireRateMult.ToString("0.0"),

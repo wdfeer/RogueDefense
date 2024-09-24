@@ -24,13 +24,13 @@ public abstract class Projectile
     public float damage = 1;
     public virtual bool KillShieldOrbs => false;
 
-    public void ShieldOrbCollision(Enemies.ShieldOrb orb)
+    public void ShieldOrbCollision(ShieldOrb orb)
     {
         if (KillShieldOrbs)
             orb.QueueFree();
         else
         {
-            Enemies.ShieldOrb.damageConsumed += damage * hitMult;
+            ShieldOrb.damageConsumed += damage * hitMult;
             QueueFree();
         }
     }
@@ -97,7 +97,7 @@ public abstract class Projectile
             Variant rid = result[i]["rid"];
             if (collider.Obj is Enemy enemy)
                 EnemyCollision(enemy, (Rid)rid.Obj);
-            else if (collider.Obj is Enemies.ShieldOrb shieldOrb)
+            else if (collider.Obj is ShieldOrb shieldOrb)
                 ShieldOrbCollision(shieldOrb);
         }
     }

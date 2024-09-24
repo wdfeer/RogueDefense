@@ -53,7 +53,7 @@ public class UserData
         this.id = id;
         this.name = name;
         this.ability = ability;
-        this.augmentPoints = augments;
+        augmentPoints = augments;
     }
 }
 public enum NetMode

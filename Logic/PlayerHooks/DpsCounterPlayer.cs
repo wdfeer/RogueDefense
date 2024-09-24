@@ -4,9 +4,7 @@ namespace RogueDefense.Logic.PlayerHooks;
 
 public class DpsCounterPlayer : PlayerHooks
 {
-    public DpsCounterPlayer(Player player) : base(player)
-    {
-    }
+    public DpsCounterPlayer(Player player) : base(player) { }
 
     public override void OnAnyHit(float afterEffectsDmg)
     {

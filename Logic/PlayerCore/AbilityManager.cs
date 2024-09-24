@@ -17,7 +17,7 @@ public class AbilityManager
     public AbilityManager(Player player)
     {
         this.player = player;
-        if (player.Local)
+        if (player.IsLocal)
         {
             var ability1Button = Game.instance.GetNode("AbilityButton") as Button;
             ability1 = GetAbility(ability1Button);

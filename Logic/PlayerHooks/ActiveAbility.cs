@@ -34,11 +34,11 @@ public abstract class ActiveAbility : PlayerHooks
     public virtual bool Shared => true;
     public void ActivateForceShare()
     {
-        foreach (var item in Player.players)
+        foreach (var item in PlayerManager.players)
         {
             item.Value.hooks.ForEach(x =>
             {
-                if (x is ActiveAbility ability && ability.GetType() == this.GetType())
+                if (x is ActiveAbility ability && ability.GetType() == GetType())
                 {
                     ability.Activate();
                 }
@@ -47,7 +47,7 @@ public abstract class ActiveAbility : PlayerHooks
     }
     public void NetSendActivation()
     {
-        Network.Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { Network.Client.myId.ToString(), GetAbilityIndex().ToString() });
+        Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { Client.myId.ToString(), GetAbilityIndex().ToString() });
     }
 
     public virtual float BaseCooldown => 25f;
@@ -58,7 +58,7 @@ public abstract class ActiveAbility : PlayerHooks
     public bool Cooling => cooldownTimer < Cooldown;
     public override void PreUpdate(float delta)
     {
-        if (button == null || !player.Local)
+        if (button == null || !player.IsLocal)
             return;
 
         button.Disabled = Cooling;
