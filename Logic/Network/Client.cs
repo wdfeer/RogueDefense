@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
-using RogueDefense.Logic.Enemies;
-using RogueDefense.Logic.PlayerCore;
-using RogueDefense.Logic.PlayerHooks;
+using RogueDefense.Logic.Enemy;
+using RogueDefense.Logic.Player.Core;
+using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.UI.Lobby.Settings;
 
 namespace RogueDefense.Logic.Network;
@@ -89,9 +89,9 @@ public partial class Client : Node
                 if (IsInstanceValid(Game.instance))
                 {
                     int index = args[0].ToInt();
-                    if (index >= Enemy.enemies.Count || Enemy.enemies[index] == null)
+                    if (index >= Enemy.Enemy.enemies.Count || Enemy.Enemy.enemies[index] == null)
                         break;
-                    Enemy.enemies[index].Die(false);
+                    Enemy.Enemy.enemies[index].Die(false);
                 }
                 else
                     GD.PrintErr("Received an EnemyKill message when the Game is not active");
@@ -124,8 +124,8 @@ public partial class Client : Node
                 UI.InGame.NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
             case MessageType.PositionUpdated:
-                Player player = PlayerManager.players[args[0].ToInt()];
-                Turret turret = player.turrets[args[1].ToInt()];
+                Player.Core.Player player = PlayerManager.players[args[0].ToInt()];
+                Player.Turret.Turret turret = player.turrets[args[1].ToInt()];
                 float x = args[2].Replace(",", ".").ToFloat(), y = args[3].Replace(",", ".").ToFloat();
                 turret.GlobalPosition = new Vector2(x, y);
                 break;

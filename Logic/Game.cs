@@ -1,8 +1,10 @@
 using System.Linq;
 using Godot;
-using RogueDefense.Logic.Enemies;
+using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
-using RogueDefense.Logic.PlayerCore;
+using RogueDefense.Logic.Player.Core;
+using RogueDefense.Logic.Player.Hooks;
+using EnemySpawner = RogueDefense.Logic.Enemy.EnemySpawner;
 
 namespace RogueDefense.Logic;
 
@@ -17,11 +19,11 @@ public partial class Game : Node
 
 		PP.currentPP = 0f;
 
-		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
-		Enemy.ResetRngSeed();
+		Enemy.Enemy.enemies = new System.Collections.Generic.List<Enemy.Enemy>();
+		Enemy.Enemy.ResetRngSeed();
 
-		PlayerManager.my = new Player(Client.myId, SaveData.augmentAllotment);
-		Client.instance.others.ForEach(x => new Player(x.id, x.augmentPoints));
+		PlayerManager.my = new Player.Core.Player(Client.myId, SaveData.augmentAllotment);
+		Client.instance.others.ForEach(x => new Player.Core.Player(x.id, x.augmentPoints));
 
 		SpawnEnemiesAfterDelay();
 	}
@@ -31,14 +33,14 @@ public partial class Game : Node
 			((EnemySpawner)GetNode("EnemySpawner")).SpawnEnemies();
 			background.UpdateBackground(GetStage());
 		});
-	public void OnEnemyDeath(Enemy enemy, bool netUpdate = true)
+	public void OnEnemyDeath(Enemy.Enemy enemy, bool netUpdate = true)
 	{
 		if (!IsInstanceValid(enemy))
 			return;
 
-		foreach (Player player in PlayerManager.players.Values)
+		foreach (Player.Core.Player player in PlayerManager.players.Values)
 		{
-			foreach (PlayerHooks.PlayerHooks hook in player.hooks)
+			foreach (PlayerHooks hook in player.hooks)
 			{
 				hook.OnKill(enemy);
 			}
@@ -47,9 +49,9 @@ public partial class Game : Node
 		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
-			Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.enemies.FindIndex(x => x == enemy).ToString() });
+			Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.Enemy.enemies.FindIndex(x => x == enemy).ToString() });
 		}
-		if (Enemy.enemies.All(x => x.Dead))
+		if (Enemy.Enemy.enemies.All(x => x.Dead))
 			EndWave();
 	}
 	public static int Wave => instance.wave;
@@ -57,13 +59,13 @@ public partial class Game : Node
 	public static int GetStage()
 		=> Wave / 10 + 1;
 	[Export]
-	private Background background;
+	private UI.Background background;
 	public void EndWave()
 	{
-		PP.currentPP += PP.GetWavePP(wave, DefenseObjective.instance.HpRatio, Enemy.enemies.Count);
+		PP.currentPP += PP.GetWavePP(wave, DefenseObjective.instance.HpRatio, Enemy.Enemy.enemies.Count);
 		((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
-		Enemy.enemies = new System.Collections.Generic.List<Enemy>();
+		Enemy.Enemy.enemies = new System.Collections.Generic.List<Enemy.Enemy>();
 		wave++;
 
 		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").ResetNotificationLabel();

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bihd7f4474w3i"]
 
 [ext_resource type="Texture2D" uid="uid://dpyi8tduhmnw1" path="res://Assets/Images/Enemies/enemy_bullet.svg" id="1_juc6t"]
-[ext_resource type="Script" path="res://Logic/Enemies/EnemyBullet.cs" id="1_sojjj"]
+[ext_resource type="Script" path="res://Logic/Enemy/EnemyBullet.cs" id="1_sojjj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jqjrs"]
 radius = 15.0

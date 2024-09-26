@@ -1,6 +1,6 @@
 using Godot;
 using RogueDefense.Logic.Network;
-using RogueDefense.Logic.PlayerCore;
+using RogueDefense.Logic.Player.Core;
 
 namespace RogueDefense.Logic.UI.MainMenu;
 

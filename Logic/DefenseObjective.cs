@@ -1,6 +1,8 @@
 using Godot;
+using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
-using RogueDefense.Logic.PlayerCore;
+using RogueDefense.Logic.Player.Core;
+using RogueDefense.Logic.UI.InGame;
 using RogueDefense.Logic.UI.Lobby.Settings;
 
 namespace RogueDefense.Logic;
@@ -57,7 +59,7 @@ public partial class DefenseObjective : Node2D
 
         dmg *= damageMult;
 
-        Enemies.CombatTextDisplay.instance.AddCombatText(new CombatText()
+        CombatTextDisplay.instance.AddCombatText(new CombatText()
         {
             direction = Vector2.Up * 1.5f,
             modulate = Colors.Red,

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c82i70r32xdo1"]
 
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_dmmmh"]
-[ext_resource type="Script" path="res://Logic/Enemies/Variants/ExplodingEye.cs" id="2_gaqml"]
+[ext_resource type="Script" path="res://Logic/Enemy/Variants/ExplodingEye.cs" id="2_gaqml"]
 [ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="3_l3hea"]
 [ext_resource type="Texture2D" uid="uid://bhwo4ulko7wdo" path="res://Assets/Images/Enemies/exploding_eye.svg" id="3_sxa8t"]
 

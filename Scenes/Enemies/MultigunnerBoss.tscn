@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cf5k47mxihymy"]
 
 [ext_resource type="PackedScene" uid="uid://cs6usky6tq505" path="res://Scenes/Enemies/Multigunner.tscn" id="1_sssut"]
-[ext_resource type="Script" path="res://Logic/Enemies/Variants/MultigunnerBoss.cs" id="2_kx574"]
+[ext_resource type="Script" path="res://Logic/Enemy/Variants/MultigunnerBoss.cs" id="2_kx574"]
 
 [node name="MultigunnerBoss" instance=ExtResource("1_sssut")]
 script = ExtResource("2_kx574")

@@ -1,5 +1,5 @@
 using Godot;
-using RogueDefense.Logic.PlayerCore;
+using RogueDefense.Logic.Player.Core;
 
 namespace RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 

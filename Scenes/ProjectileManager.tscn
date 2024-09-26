@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://43imkg4sl66e"]
 
-[ext_resource type="Script" path="res://Logic/PlayerProjectile/ProjectileManager.cs" id="1_5me4k"]
+[ext_resource type="Script" path="res://Logic/Player/Projectile/ProjectileManager.cs" id="1_5me4k"]
 [ext_resource type="Texture2D" uid="uid://diu0rw1b6xipw" path="res://Assets/Images/Projectiles/bullet.svg" id="2_dm4bi"]
 [ext_resource type="Texture2D" uid="uid://d1io3pn3wfu3v" path="res://Assets/Images/Projectiles/shuriken.svg" id="3_ctk0k"]
 [ext_resource type="Texture2D" uid="uid://bs5c5lxdwvoqc" path="res://Assets/Images/Projectiles/explosion.svg" id="4_yfe4c"]

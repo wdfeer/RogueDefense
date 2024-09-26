@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="1_q6xbf"]
 [ext_resource type="Texture2D" uid="uid://b71s0g52ptdt4" path="res://Assets/Images/Enemies/ArcaneBoss/arcane_bullet.svg" id="2_5af3g"]
-[ext_resource type="Script" path="res://Logic/Enemies/Variants/ArcaneBoss/ArcaneBullet.cs" id="2_iilc8"]
+[ext_resource type="Script" path="res://Logic/Enemy/Variants/ArcaneBoss/ArcaneBullet.cs" id="2_iilc8"]
 
 [node name="ArcaneBullet" instance=ExtResource("1_q6xbf")]
 script = ExtResource("2_iilc8")
