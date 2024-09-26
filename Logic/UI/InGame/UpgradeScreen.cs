@@ -3,6 +3,8 @@ using System.Linq;
 using Godot;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Core;
+using RogueDefense.Logic.Save;
+using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic.UI.InGame;
 
@@ -53,7 +55,7 @@ public partial class UpgradeScreen : Panel
     {
         var label = GetNode<Label>("NotificationLabel");
 
-        int highscore = Math.Max(SaveData.highscoreSingleplayer, SaveData.highscoreMultiplayer);
+        int highscore = Math.Max(UserData.highscoreSingleplayer, UserData.highscoreMultiplayer);
         if (Game.Wave > highscore && Game.Wave % 10 == 0)
         {
             label.Visible = true;

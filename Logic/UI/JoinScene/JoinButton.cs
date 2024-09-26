@@ -1,5 +1,7 @@
 using Godot;
 using RogueDefense.Logic.Network;
+using RogueDefense.Logic.Save;
+using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic.UI.JoinScene;
 
@@ -12,7 +14,7 @@ public partial class JoinButton : Button
 	}
 	public void LoadLastIp()
 	{
-		AddressEdit.Text = SaveData.lastIp;
+		AddressEdit.Text = UserData.lastIp;
 	}
 	ConnectingLabel connectingLabel => (ConnectingLabel)GetNode("../ConnectingLabel");
 	public override void _Pressed()
@@ -20,8 +22,8 @@ public partial class JoinButton : Button
 		NetworkManager.mode = NetMode.Client;
 		string addr = AddressEdit.Text;
 		Client.host = addr;
-		SaveData.lastIp = addr;
-		SaveData.Save();
+		UserData.lastIp = addr;
+		SaveManager.Save();
 		Client.port = ushort.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
 
 		connectingLabel.Visible = true;

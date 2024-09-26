@@ -1,12 +1,13 @@
 using System;
 using Godot;
 using RogueDefense.Logic.Network;
+using static RogueDefense.Logic.Save.UserData;
 
-namespace RogueDefense.Logic;
+namespace RogueDefense.Logic.Save;
 
-public static class SaveData
+public static class SaveManager
 {
-    public const string SAVE_PATH = "user://user.txt";
+    private const string SAVE_PATH = "user://user.txt";
     public static bool Load()
     {
         try
@@ -36,6 +37,7 @@ public static class SaveData
             return false;
         }
     }
+    
     static void LoadAugments(FileAccess file)
     {
         int stages = Math.Max(highscoreSingleplayer, highscoreMultiplayer) / 10;
@@ -51,6 +53,7 @@ public static class SaveData
             SpareAugmentPoints = stages * (stages + 1) / 2;
         }
     }
+    
     public static void Save()
     {
         FileAccess file = FileAccess.Open(SAVE_PATH, FileAccess.ModeFlags.Write);
@@ -73,68 +76,12 @@ public static class SaveData
 
         file.Close();
     }
+    
     public static void UpdateHighscore()
     {
         int lvl = Game.Wave;
         if (NetworkManager.Singleplayer && lvl > highscoreSingleplayer)
             highscoreSingleplayer = lvl;
-        else if (lvl > highscoreMultiplayer)
-            highscoreMultiplayer = lvl;
+        else if (lvl > highscoreMultiplayer) highscoreMultiplayer = lvl;
     }
-
-
-    public static string name = "";
-    public static string lastIp = "";
-
-    public static bool[] clientSettings = new bool[8] { true, true, true, false, true, true, false, false };
-    public static bool ShowCombatText
-    {
-        get { return clientSettings[0]; }
-        set { clientSettings[0] = value; }
-    }
-    public static bool ShowHpBar
-    {
-        get { return clientSettings[1]; }
-        set { clientSettings[1] = value; }
-    }
-    public static bool ShowAvgDPS
-    {
-        get { return clientSettings[2]; }
-        set { clientSettings[2] = value; }
-    }
-    public static bool ShowFPS
-    {
-        get { return clientSettings[3]; }
-        set { clientSettings[3] = value; }
-    }
-    public static bool Music
-    {
-        get { return clientSettings[4]; }
-        set { clientSettings[4] = value; }
-    }
-    public static bool Sound
-    {
-        get { return clientSettings[5]; }
-        set { clientSettings[5] = value; }
-    }
-
-
-    public static int highscoreSingleplayer = 0;
-    public static int highscoreMultiplayer = 0;
-    public static int gameCount = 0;
-    public static int killCount = 0;
-    public static float[] topPP = new float[] { 0f, 0f, 0f };
-    public static int[] augmentAllotment = new int[] { 0, 0, 0, 0, 0 };
-
-
-    private static int spareAugmentPoints = 10;
-    public static int SpareAugmentPoints
-    {
-        get => spareAugmentPoints; set
-        {
-            updateAugmentPointCounter(value);
-            spareAugmentPoints = value;
-        }
-    }
-    public static Action<int> updateAugmentPointCounter = (value) => { };
 }

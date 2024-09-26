@@ -2,8 +2,10 @@ using Godot;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Core;
+using RogueDefense.Logic.Save;
 using RogueDefense.Logic.UI.InGame;
 using RogueDefense.Logic.UI.Lobby.Settings;
+using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic;
 
@@ -21,7 +23,7 @@ public partial class DefenseObjective : Node2D
         instance = this;
 
         hpBar = GetNode<ProgressBar>("./HpBar");
-        hpBar.Visible = SaveData.ShowHpBar;
+        hpBar.Visible = UserData.ShowHpBar;
 
         sprite = GetNode<Sprite2D>("./Sprite2D");
 
@@ -75,7 +77,7 @@ public partial class DefenseObjective : Node2D
     }
     public override void _Process(double delta)
     {
-        hpBar.Visible = SaveData.ShowHpBar;
+        hpBar.Visible = UserData.ShowHpBar;
         if (hpBar.Visible)
         {
             hpBar.Value = HpRatio;
@@ -124,8 +126,8 @@ public partial class DefenseObjective : Node2D
         }
 
         PP.TryRecordPP();
-        SaveData.gameCount++;
-        SaveData.Save();
+        UserData.gameCount++;
+        SaveManager.Save();
 
         Game.instance.GetTree().Paused = true;
         UI.InGame.DeathScreen.instance.Show();

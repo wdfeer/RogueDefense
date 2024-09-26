@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Save;
 
 namespace RogueDefense.Logic.UI.MainMenu;
 
@@ -13,6 +14,6 @@ public partial class AugmentsButton : Button
         {
             upgrader.Save();
         }
-        SaveData.Save();
+        SaveManager.Save();
     }
 }

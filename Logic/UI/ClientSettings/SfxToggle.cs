@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Save;
 
 namespace RogueDefense.Logic.UI.ClientSettings;
 
@@ -6,8 +7,8 @@ public partial class SfxToggle : CheckButton
 {
 	public override void _Ready()
 	{
-		ButtonPressed = SaveData.Sound;
-		AudioServer.SetBusMute(AudioServer.GetBusIndex("SFX"), !SaveData.Sound);
+		ButtonPressed = UserData.Sound;
+		AudioServer.SetBusMute(AudioServer.GetBusIndex("SFX"), !UserData.Sound);
 
 		Toggled += OnToggled;
 	}
@@ -15,6 +16,6 @@ public partial class SfxToggle : CheckButton
 	void OnToggled(bool enabled)
 	{
 		AudioServer.SetBusMute(AudioServer.GetBusIndex("SFX"), !enabled);
-		SaveData.Sound = enabled;
+		UserData.Sound = enabled;
 	}
 }

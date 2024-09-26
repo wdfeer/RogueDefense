@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Save;
 
 namespace RogueDefense.Logic.UI.MainMenu;
 
@@ -12,10 +13,10 @@ public partial class Statview : VBoxContainer
     {
         ToSignal(GetTree().CreateTimer(0.01f), "timeout").OnCompleted(() =>
         {
-            SingleplayerHighscore.Text += SaveData.highscoreSingleplayer.ToString();
-            MultiplayerHighscore.Text += SaveData.highscoreMultiplayer.ToString();
-            GameCounter.Text += SaveData.gameCount.ToString();
-            KillCounter.Text += SaveData.killCount.ToString();
+            SingleplayerHighscore.Text += UserData.highscoreSingleplayer.ToString();
+            MultiplayerHighscore.Text += UserData.highscoreMultiplayer.ToString();
+            GameCounter.Text += UserData.gameCount.ToString();
+            KillCounter.Text += UserData.killCount.ToString();
         });
     }
 }

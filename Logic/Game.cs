@@ -4,7 +4,9 @@ using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Player.Hooks;
+using RogueDefense.Logic.Save;
 using EnemySpawner = RogueDefense.Logic.Enemy.EnemySpawner;
+using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic;
 
@@ -15,14 +17,14 @@ public partial class Game : Node
 	{
 		instance = this;
 
-		SaveData.Save();
+		SaveManager.Save();
 
 		PP.currentPP = 0f;
 
 		Enemy.Enemy.enemies = new System.Collections.Generic.List<Enemy.Enemy>();
 		Enemy.Enemy.ResetRngSeed();
 
-		PlayerManager.my = new Player.Core.Player(Client.myId, SaveData.augmentAllotment);
+		PlayerManager.my = new Player.Core.Player(Client.myId, UserData.augmentAllotment);
 		Client.instance.others.ForEach(x => new Player.Core.Player(x.id, x.augmentPoints));
 
 		SpawnEnemiesAfterDelay();
@@ -70,9 +72,9 @@ public partial class Game : Node
 
 		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").ResetNotificationLabel();
 
-		SaveData.UpdateHighscore();
-		SaveData.killCount++;
-		SaveData.Save();
+		SaveManager.UpdateHighscore();
+		UserData.killCount++;
+		SaveManager.Save();
 
 		GetTree().Paused = true;
 		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").Activate();

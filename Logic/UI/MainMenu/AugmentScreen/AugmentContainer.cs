@@ -1,5 +1,6 @@
 using Godot;
 using RogueDefense.Logic.Player.Core;
+using RogueDefense.Logic.Save;
 
 namespace RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 
@@ -28,7 +29,7 @@ public partial class AugmentContainer : HBoxContainer
 
 	public void ChangeStat(int effect)
 	{
-		SaveData.SpareAugmentPoints -= effect;
+		UserData.SpareAugmentPoints -= effect;
 		points += effect;
 		UpdateStatBasedOnPoints();
 		UpdateLabelText();
@@ -40,7 +41,7 @@ public partial class AugmentContainer : HBoxContainer
 
 	public void Load()
 	{
-		points = SaveData.augmentAllotment[GetAugmentIndex()];
+		points = UserData.augmentAllotment[GetAugmentIndex()];
 		UpdateStatBasedOnPoints();
 		UpdateLabelText();
 	}
@@ -49,6 +50,6 @@ public partial class AugmentContainer : HBoxContainer
 		int.Parse(Name);
 	public void Save()
 	{
-		SaveData.augmentAllotment[GetAugmentIndex()] = points;
+		UserData.augmentAllotment[GetAugmentIndex()] = points;
 	}
 }

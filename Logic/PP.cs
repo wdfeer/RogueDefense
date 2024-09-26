@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using RogueDefense.Logic.Save;
 using RogueDefense.Logic.UI.Lobby.Settings;
 
 namespace RogueDefense.Logic;
@@ -36,13 +37,13 @@ public class PP
 
     public static bool TryRecordPP()
     {
-        if (currentPP < SaveData.topPP.Last())
+        if (currentPP < UserData.topPP.Last())
             return false;
 
-        List<float> newTopPP = SaveData.topPP.Concat(new float[] { currentPP }).ToList();
+        List<float> newTopPP = UserData.topPP.Concat(new float[] { currentPP }).ToList();
         newTopPP.Sort((x, y) => y.CompareTo(x));
 
-        SaveData.topPP = newTopPP.Take(3).ToArray();
+        UserData.topPP = newTopPP.Take(3).ToArray();
         return true;
     }
 
@@ -50,9 +51,9 @@ public class PP
     {
         float result = 0f;
         float mult = 1f;
-        for (int i = 0; i < SaveData.topPP.Length; i++)
+        for (int i = 0; i < UserData.topPP.Length; i++)
         {
-            result += SaveData.topPP[i] * mult;
+            result += UserData.topPP[i] * mult;
             mult /= 2f;
         }
         return result;

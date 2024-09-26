@@ -1,6 +1,8 @@
 using Godot;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Projectile;
+using RogueDefense.Logic.Save;
+using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic.Player.Core;
 
@@ -8,7 +10,7 @@ public partial class Player
 {
     public bool IsLocal => id == Client.myId;
     public int id;
-    public string Name => IsLocal ? SaveData.name : Client.instance.GetUserData(id).name;
+    public string Name => IsLocal ? UserData.name : Client.instance.GetUserData(id).name;
 
     public ShootManager shootManager;
     public UpgradeManager upgradeManager;

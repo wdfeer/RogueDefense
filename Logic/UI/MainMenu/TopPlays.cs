@@ -1,4 +1,5 @@
 using Godot;
+using RogueDefense.Logic.Save;
 
 namespace RogueDefense.Logic.UI.MainMenu;
 
@@ -15,7 +16,7 @@ public partial class TopPlays : VBoxContainer
         {
             Label label = (Label)GetNode($"TopPlay{i}/Label");
 
-            string text = $"{SaveData.topPP[i].ToString("0.000")} pp  *  {MathHelper.ToPercentAndRound(Mathf.Pow(0.5f, i))}%";
+            string text = $"{UserData.topPP[i].ToString("0.000")} pp  *  {MathHelper.ToPercentAndRound(Mathf.Pow(0.5f, i))}%";
 
             label.Text = text;
         }

@@ -5,6 +5,8 @@ using Godot;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.Player.Hooks.Upgrades;
+using RogueDefense.Logic.Save;
+using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic.Player.Core;
 
@@ -135,7 +137,7 @@ public class UpgradeType
     public static readonly UpgradeType TotalDamageVsArmor = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage vs Armored Enemy")
     {
         chanceMult = 0.33f,
-        getBaseRandomValue = () => (20 + SaveData.augmentAllotment[0]) / 100f,
+        getBaseRandomValue = () => (20 + UserData.augmentAllotment[0]) / 100f,
         canBeRolled = () => Game.Wave > 15 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().Mult < 1.1f
     };
     public static readonly UpgradeType ExplosionChance = new UpgradeType(x => $"+{MathHelper.ToPercentAndRound(x)}% Explosion Chance")

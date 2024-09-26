@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Godot;
+using RogueDefense.Logic.Save;
 
 namespace RogueDefense.Logic.UI.MainMenu;
 
@@ -11,10 +12,10 @@ public partial class UsernameInput : LineEdit
         Connect("text_changed", new Callable(this, "OnTextChanged"));
         ToSignal(GetTree().CreateTimer(0.001f), "timeout").OnCompleted(() =>
         {
-            if (SaveData.name == "")
+            if (UserData.name == "")
                 GenerateRandomName();
             else
-                Text = SaveData.name;
+                Text = UserData.name;
         });
     }
     void GenerateRandomName()
@@ -30,6 +31,6 @@ public partial class UsernameInput : LineEdit
     {
         newText = string.Concat(newText.Where(x => ALLOWED_CHARACTERS.Contains(x))).Replace(' ', '_');
         if (newText.Length > 0)
-            SaveData.name = newText;
+            UserData.name = newText;
     }
 }

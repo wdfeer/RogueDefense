@@ -5,6 +5,7 @@ using Godot;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Player.Hooks;
+using RogueDefense.Logic.Save;
 using RogueDefense.Logic.UI.Lobby.Settings;
 
 namespace RogueDefense.Logic.Network;
@@ -55,8 +56,8 @@ public partial class Client : Node
         {
             case MessageType.FetchLobby:
                 ChangeSceneToLobby();
-                GD.Print($"Sending Register Message with augments {string.Join(",", SaveData.augmentAllotment)}");
-                SendMessage(MessageType.Register, new string[] { args[0], SaveData.name, UI.MainMenu.AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(SaveData.augmentAllotment) });
+                GD.Print($"Sending Register Message with augments {string.Join(",", Save.UserData.augmentAllotment)}");
+                SendMessage(MessageType.Register, new string[] { args[0], Save.UserData.name, UI.MainMenu.AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(Save.UserData.augmentAllotment) });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
