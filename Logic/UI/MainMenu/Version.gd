@@ -9,7 +9,7 @@ func _ready():
 	
 	request.request("https://api.github.com/repos/wdfeer/roguedefense/releases/latest")
 
-func _on_request_completed(result, response_code, headers, body):
+func _on_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		return
 	
@@ -35,4 +35,4 @@ func is_version_greater(v1: String, v2: String):
 	return true
 
 func split_version(version: String) -> Array :
-	return (version.substr(1).split(".") as Array).map(func (str): return int(str))
+	return (version.substr(1).split(".") as Array).map(func (s): return int(s))
