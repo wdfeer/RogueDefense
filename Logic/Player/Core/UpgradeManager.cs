@@ -1,16 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Godot;
 using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.Player.Hooks.Upgrades;
 using RogueDefense.Logic.UI.Lobby.Settings;
+using RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 
 namespace RogueDefense.Logic.Player.Core;
 
 public class UpgradeManager
 {
-    public static UpgradeManager local;
-    public static Dictionary<int, UpgradeManager> others = new Dictionary<int, UpgradeManager>();
     readonly Player player;
     public UpgradeManager(Player player)
     {
@@ -27,7 +26,7 @@ public class UpgradeManager
         UpdateUpgrades();
     }
 
-    public List<Upgrade> upgrades = new List<Upgrade>();
+    public List<Upgrade> upgrades = new();
     public static void AddUpgrade(Upgrade upgrade, int from)
     {
         if (upgrade.risky)
@@ -53,12 +52,12 @@ public class UpgradeManager
         }
     }
 
-    public float critChance = 0f;
+    public float critChance;
     public float baseCritMult = 2f;
     public float critDamageMult = 2f;
-    public float bleedChance = 0f;
-    public float viralChance = 0f;
-    public float coldChance = 0f;
+    public float bleedChance;
+    public float viralChance;
+    public float coldChance;
     public void UpdateMaxHp()
     {
         float hpMult = 1f + SumEveryonesUpgradeValues(UpgradeType.MaxHp) + MaxHpPerKillPlayer.GetTotalIncrease();
@@ -66,12 +65,16 @@ public class UpgradeManager
     }
     public void UpdateDamageReduction()
     {
-        float damageTakenMult = PlayerManager.players.Select<KeyValuePair<int, Player>, float>(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.DamageReduction)).Aggregate(1f, (a, b) => a * b);
+        float damageTakenMult = PlayerManager.players
+            .Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.DamageReduction))
+            .Aggregate(1f, (a, b) => a * b);
         DefenseObjective.instance.damageMult = damageTakenMult;
     }
     public void UpdateEvasion()
     {
-        float chanceToTakeDamage = PlayerManager.players.Select<KeyValuePair<int, Player>, float>(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.Evasion)).Aggregate(1f, (a, b) => a * b);
+        float chanceToTakeDamage = PlayerManager.players
+            .Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.Evasion))
+            .Aggregate(1f, (a, b) => a * b);
         float evasionChance = 1 - chanceToTakeDamage;
         DefenseObjective.instance.evasionChance = evasionChance;
     }
@@ -83,19 +86,22 @@ public class UpgradeManager
             UpdateEvasion();
         }
 
-        float fireRateMult = (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) - SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
+        float fireRateMult =
+            (GetTotalUpgradeMultiplier(UpgradeType.FireRate) + SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) -
+             SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) / 2) * GameSettings.totalFireRateMult;
         if (fireRateMult <= 0)
             fireRateMult = 0.001f;
         player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
         float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);
-        player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult * GetTotalUpgradeMultiplier(UpgradeType.RecoilDamage);
+        player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult *
+                                     GetTotalUpgradeMultiplier(UpgradeType.RecoilDamage);
 
         float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot) - SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) / 2f;
         player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
         critChance = SumAllUpgradeValues(UpgradeType.CritChance);
-        baseCritMult = 2f * UI.MainMenu.AugmentScreen.AugmentContainer.GetStatMult(4);
+        baseCritMult = 2f * AugmentContainer.GetStatMult(4);
         critDamageMult = baseCritMult * GetTotalUpgradeMultiplier(UpgradeType.CritDamage);
 
         player.abilityManager.strengthMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityStrength);
@@ -120,7 +126,8 @@ public class UpgradeManager
     public float GetTotalUpgradeMultiplier(UpgradeType type)
         => 1f + SumAllUpgradeValues(type);
     public float SumEveryonesUpgradeValues(UpgradeType type)
-        => PlayerManager.players.Select<KeyValuePair<int, Player>, float>(x => x.Value.upgradeManager.SumAllUpgradeValues(type)).Aggregate(0f, (a, b) => a + b);
+        => PlayerManager.players.Select(x => x.Value.upgradeManager.SumAllUpgradeValues(type))
+            .Aggregate(0f, (a, b) => a + b);
     public float GetReversedMultiplier(UpgradeType type) // Returns the product of all (1 - upgradeValue) on the player
         => GetAllUpgradeValues(type).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b) / dynamicUpgradeModifier;
 
@@ -130,7 +137,7 @@ public class UpgradeManager
 
         var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
         upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
-        if (DefenseObjective.instance.damageMult != 1f)
+        if (Math.Abs(DefenseObjective.instance.damageMult - 1f) > 0.01f)
             upgradeText.Text += $"Damage Reduction: {MathHelper.ToPercentAndRound(1 - DefenseObjective.instance.damageMult)}%\n";
         if (DefenseObjective.instance.evasionChance > 0f)
             upgradeText.Text += $"Evasion: {MathHelper.ToPercentAndRound(DefenseObjective.instance.evasionChance)}%\n";

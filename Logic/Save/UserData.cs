@@ -61,5 +61,5 @@ public static class UserData
         }
     }
 
-    public static Action<int> updateAugmentPointCounter = (value) => { };
+    public static Action<int> updateAugmentPointCounter = _ => { };
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Godot;
 
 namespace RogueDefense.Logic.UI.InGame;
 

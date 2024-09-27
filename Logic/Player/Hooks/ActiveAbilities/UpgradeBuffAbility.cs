@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic.Player.Hooks.ActiveAbilities;
 
 public class UpgradeBuffAbility : ActiveAbility

@@ -1,5 +1,4 @@
 using System.Linq;
-using Godot;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Player.Projectile;
 

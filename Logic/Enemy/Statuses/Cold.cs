@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic.Enemy.Statuses;
 
 public class Cold : SpecialStatus

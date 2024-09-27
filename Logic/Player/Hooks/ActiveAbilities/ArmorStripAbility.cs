@@ -1,5 +1,4 @@
 using System;
-using Godot;
 using RogueDefense.Logic.Network;
 
 namespace RogueDefense.Logic.Player.Hooks.ActiveAbilities;

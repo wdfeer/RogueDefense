@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic.UI.Lobby.Settings;
 
 public partial class ConfirmButton : Button

@@ -1,6 +1,4 @@
 
-using Godot;
-
 namespace RogueDefense.Logic.UI.InGame;
 
 public class CombatText

@@ -1,5 +1,4 @@
 using System.Linq;
-using Godot;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Core;

@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic.UI;
 
 public partial class GoToSceneButton : Button

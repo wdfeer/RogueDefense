@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic;
 
 public partial class MovingKinematicBody2D : CharacterBody2D

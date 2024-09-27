@@ -1,5 +1,4 @@
 using System;
-using Godot;
 
 namespace RogueDefense.Logic.Enemy;
 public partial class EnemyBullet : Area2D

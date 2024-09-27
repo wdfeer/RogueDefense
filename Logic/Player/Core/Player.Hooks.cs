@@ -10,7 +10,7 @@ public partial class Player
 
     private void InitializeHooks()
     {
-        hooks = new List<PlayerHooks>()
+        hooks = new List<PlayerHooks>
         {
             new DpsCounterPlayer(this), new StatusPlayer(this), new FirstShotPlayer(this), new FirstHitPlayer(this),
             new NthShotMultishotPlayer(this), new MaxHpPerKillPlayer(this), new DamagePerUniqueStatusPlayer(this),

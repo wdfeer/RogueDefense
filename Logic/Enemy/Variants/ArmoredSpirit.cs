@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Godot;
 using RogueDefense.Logic.Enemy.Statuses;
 
 namespace RogueDefense.Logic.Enemy.Variants;

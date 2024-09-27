@@ -1,8 +1,9 @@
 using System;
 using System.Linq;
-using Godot;
+using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.Player.Hooks.ActiveAbilities;
+using RogueDefense.Logic.UI.MainMenu;
 
 namespace RogueDefense.Logic.Player.Core;
 
@@ -27,7 +28,7 @@ public class AbilityManager
         }
         else
         {
-            ability1 = CreateAbilityInstance(Network.Client.instance.GetUserData(player.id).ability, player);
+            ability1 = CreateAbilityInstance(Client.instance.GetUserData(player.id).ability, player);
         }
         player.hooks.Add(ability1);
         int ability1Index = ability1.GetAbilityIndex();
@@ -42,14 +43,14 @@ public class AbilityManager
 
     ActiveAbility GetAbility(Button button)
     {
-        return CreateAbilityInstance(UI.MainMenu.AbilityChooser.chosen, player, button);
+        return CreateAbilityInstance(AbilityChooser.chosen, player, button);
     }
     public static string GetAbilityName(int index)
     {
         if (index == -1) return "Random";
         return abilityTypes[index].ToString().Split(".").Last();
     }
-    public static readonly Type[] abilityTypes = new Type[] {
+    public static readonly Type[] abilityTypes = {
         typeof(DamageAbility),
         typeof(FireRateAbility),
         typeof(ShurikenAbility),
@@ -64,7 +65,7 @@ public class AbilityManager
     public static ActiveAbility CreateAbilityInstance(int index, Player player, Button button = null)
     {
         if (index < 0) index = new Random().Next(0, abilityTypes.Length);
-        return (ActiveAbility)Activator.CreateInstance(abilityTypes[index], new object[] { player, button });
+        return (ActiveAbility)Activator.CreateInstance(abilityTypes[index], player, button);
     }
     public void ResetAbilityText()
     {

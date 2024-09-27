@@ -1,4 +1,3 @@
-using Godot;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Player.Projectile;
 

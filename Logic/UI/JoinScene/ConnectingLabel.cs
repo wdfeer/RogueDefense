@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic.UI.JoinScene;
 
 public partial class ConnectingLabel : Label

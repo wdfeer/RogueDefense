@@ -1,5 +1,3 @@
-using Godot;
-
 namespace RogueDefense.Logic.Enemy;
 
 public partial class ArmorBar : TextureProgressBar

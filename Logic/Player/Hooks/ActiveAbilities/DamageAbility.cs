@@ -1,4 +1,3 @@
-using Godot;
 using RogueDefense.Logic.Player.Core;
 
 namespace RogueDefense.Logic.Player.Hooks.ActiveAbilities;
