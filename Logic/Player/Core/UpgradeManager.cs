@@ -93,11 +93,14 @@ public class UpgradeManager
             fireRateMult = 0.001f;
         player.shootManager.shootInterval = player.shootManager.baseShootInterval / fireRateMult;
 
-        float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) + SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate);
+        float damageMult = GetTotalUpgradeMultiplier(UpgradeType.Damage) +
+                           SumAllUpgradeValues(UpgradeType.PlusDamageMinusFireRate) -
+                           SumAllUpgradeValues(UpgradeType.BleedChanceMinusDamage) / 2f;
         player.shootManager.damage = player.shootManager.baseDamage * damageMult * GameSettings.totalDmgMult *
                                      GetTotalUpgradeMultiplier(UpgradeType.RecoilDamage);
 
-        float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot) - SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) / 2f;
+        float multishotMult = GetTotalUpgradeMultiplier(UpgradeType.Multishot) -
+                              SumAllUpgradeValues(UpgradeType.FireRateMinusMultishot) / 2f;
         player.shootManager.multishot = player.shootManager.baseMultishot * multishotMult;
 
         critChance = SumAllUpgradeValues(UpgradeType.CritChance);
@@ -108,7 +111,8 @@ public class UpgradeManager
         player.abilityManager.durationMult = GetTotalUpgradeMultiplier(UpgradeType.AbilityDuration);
         if (player.IsLocal) player.abilityManager.ResetAbilityText();
 
-        bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance);
+        bleedChance = SumAllUpgradeValues(UpgradeType.BleedChance) +
+                      SumAllUpgradeValues(UpgradeType.BleedChanceMinusDamage);
         viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
         coldChance = SumAllUpgradeValues(UpgradeType.ColdChance);
         PlayerHooks.GetHooks<StatusPlayer>(player).corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);

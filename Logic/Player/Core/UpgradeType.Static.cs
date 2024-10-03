@@ -212,6 +212,17 @@ public partial class UpgradeType
             getBaseRandomValue = () => 0.2f,
             canBeRolled = () => PlayerManager.my.shootManager.Recoil == 0
         };
+    
+    public static readonly UpgradeType BleedChanceMinusDamage =
+        new(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance, -{MathHelper.ToPercentAndRound(x / 2f)}% Damage")
+    {
+        status = true,
+        getBaseRandomValue = () => 0.24f,
+        canBeRolled = () =>
+            PlayerManager.my.upgradeManager.bleedChance < 0.33f * AugmentContainer.GetStatMult(3) &&
+            PlayerManager.my.shootManager.damage > 1f,
+        chanceMult = 0.5f
+    };
 
     public static UpgradeType[] AllTypes =
     {
@@ -244,7 +255,8 @@ public partial class UpgradeType
         ExplosionRadius,
         RecoverySpeed,
         CritChanceOnStunned,
-        RecoilDamage
+        RecoilDamage,
+        BleedChanceMinusDamage
     };
 
     public static void Initialize()
