@@ -4,6 +4,7 @@ using System.Linq;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.Player.Hooks.Upgrades;
+using RogueDefense.Logic.Save;
 using RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 using UserData = RogueDefense.Logic.Save.UserData;
 
@@ -167,7 +168,7 @@ public partial class UpgradeType
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage vs Armored Enemy")
         {
             chanceMult = 0.33f,
-            getBaseRandomValue = () => (20 + UserData.augmentAllotment[0]) / 100f,
+            getBaseRandomValue = () => (20 + SaveManager.user.augmentAllotment[0]) / 100f,
             canBeRolled = () => Game.Wave > 15 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().Mult < 1.1f
         };
 

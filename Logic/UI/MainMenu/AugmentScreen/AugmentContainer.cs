@@ -28,7 +28,7 @@ public partial class AugmentContainer : HBoxContainer
 
 	public void ChangeStat(int effect)
 	{
-		UserData.SpareAugmentPoints -= effect;
+		SaveManager.user.SpareAugmentPoints -= effect;
 		points += effect;
 		UpdateStatBasedOnPoints();
 		UpdateLabelText();
@@ -40,7 +40,7 @@ public partial class AugmentContainer : HBoxContainer
 
 	public void Load()
 	{
-		points = UserData.augmentAllotment[GetAugmentIndex()];
+		points = SaveManager.user.augmentAllotment[GetAugmentIndex()];
 		UpdateStatBasedOnPoints();
 		UpdateLabelText();
 	}
@@ -49,6 +49,6 @@ public partial class AugmentContainer : HBoxContainer
 		int.Parse(Name);
 	public void Save()
 	{
-		UserData.augmentAllotment[GetAugmentIndex()] = points;
+		SaveManager.user.augmentAllotment[GetAugmentIndex()] = points;
 	}
 }

@@ -47,7 +47,7 @@ public abstract partial class Enemy : Area2D
 		else
 		{
 			List<char> firstChars = Client.instance.others.Select(x => x.name[0]).ToList();
-			firstChars.Add(UserData.name[0]);
+			firstChars.Add(SaveManager.user.name[0]);
 
 			int seed = firstChars.Aggregate(0, (a, b) => a + b);
 			statsRng.Seed = (ulong)seed;
@@ -206,7 +206,7 @@ public abstract partial class Enemy : Area2D
 
 		PlayerManager.my.hooks.ForEach(x => x.OnAnyHit(damage));
 
-		if (UserData.clientSettings.ShowCombatText || unhideable)
+		if (SaveManager.client.ShowCombatText || unhideable)
 		{
 			CombatTextDisplay.instance.AddCombatText(new CombatText()
 			{

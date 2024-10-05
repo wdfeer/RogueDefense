@@ -9,16 +9,16 @@ public partial class DpsLabel : Label
     public static DpsLabel instance;
     public override void _Ready()
     {
-        Visible = UserData.clientSettings.ShowAvgDps;
+        Visible = SaveManager.client.ShowAvgDps;
         instance = this;
     }
 
-    public List<(float damage, float timeAgo)> hits = new List<(float damage, float timeAgo)>();
-    float secondTimer = 0f;
+    public List<(float damage, float timeAgo)> hits = new();
+    float secondTimer;
     const float HIT_SAVE_DURATION = 1f;
     public override void _Process(double delta)
     {
-        Visible = UserData.clientSettings.ShowAvgDps;
+        Visible = SaveManager.client.ShowAvgDps;
         if (!Visible)
             return;
 

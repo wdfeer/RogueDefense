@@ -7,7 +7,7 @@ public partial class MyPlayerData : PlayerData
 {
 	public override void _Ready()
 	{
-		SetPlayerName(UserData.name);
-		SetAugmentPoints(UserData.augmentAllotment.Sum());
+		SetPlayerName(SaveManager.user.name);
+		SetAugmentPoints(SaveManager.user.augmentAllotment.Sum());
 	}
 }

@@ -11,10 +11,10 @@ public partial class UsernameInput : LineEdit
         Connect("text_changed", new Callable(this, "OnTextChanged"));
         ToSignal(GetTree().CreateTimer(0.001f), "timeout").OnCompleted(() =>
         {
-            if (UserData.name == "")
+            if (SaveManager.user.name == "")
                 GenerateRandomName();
             else
-                Text = UserData.name;
+                Text = SaveManager.user.name;
         });
     }
     void GenerateRandomName()
@@ -30,6 +30,6 @@ public partial class UsernameInput : LineEdit
     {
         newText = string.Concat(newText.Where(x => ALLOWED_CHARACTERS.Contains(x))).Replace(' ', '_');
         if (newText.Length > 0)
-            UserData.name = newText;
+            SaveManager.user.name = newText;
     }
 }

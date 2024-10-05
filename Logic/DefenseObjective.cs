@@ -4,7 +4,6 @@ using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Save;
 using RogueDefense.Logic.UI.InGame;
 using RogueDefense.Logic.UI.Lobby.Settings;
-using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic;
 
@@ -22,7 +21,7 @@ public partial class DefenseObjective : Node2D
         instance = this;
 
         hpBar = GetNode<ProgressBar>("./HpBar");
-        hpBar.Visible = UserData.clientSettings.ShowHpBar;
+        hpBar.Visible = SaveManager.client.ShowHpBar;
 
         sprite = GetNode<Sprite2D>("./Sprite2D");
 
@@ -60,7 +59,7 @@ public partial class DefenseObjective : Node2D
 
         dmg *= damageMult;
 
-        CombatTextDisplay.instance.AddCombatText(new CombatText()
+        CombatTextDisplay.instance.AddCombatText(new CombatText
         {
             direction = Vector2.Up * 1.5f,
             modulate = Colors.Red,
@@ -76,7 +75,7 @@ public partial class DefenseObjective : Node2D
     }
     public override void _Process(double delta)
     {
-        hpBar.Visible = UserData.clientSettings.ShowHpBar;
+        hpBar.Visible = SaveManager.client.ShowHpBar;
         if (hpBar.Visible)
         {
             hpBar.Value = HpRatio;
@@ -125,11 +124,11 @@ public partial class DefenseObjective : Node2D
         }
 
         PP.TryRecordPP();
-        UserData.gameCount++;
+        SaveManager.user.gameCount++;
         SaveManager.Save();
 
         Game.instance.GetTree().Paused = true;
-        UI.InGame.DeathScreen.instance.Show();
-        (UI.InGame.DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
+        DeathScreen.instance.Show();
+        (DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
     }
 }

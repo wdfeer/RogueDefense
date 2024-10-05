@@ -15,7 +15,7 @@ public partial class UpgradeScreen : Panel
     public override void _Ready()
     {
         instance = this;
-        buttons = new Button[] {
+        buttons = new[] {
             GetNode<Button>("UpgradeButton1"),
             GetNode<Button>("UpgradeButton2"),
             GetNode<Button>("UpgradeButton3"),
@@ -54,7 +54,7 @@ public partial class UpgradeScreen : Panel
     {
         var label = GetNode<Label>("NotificationLabel");
 
-        int highscore = Math.Max(UserData.highscoreSingleplayer, UserData.highscoreMultiplayer);
+        int highscore = Math.Max(SaveManager.user.highscoreSingleplayer, SaveManager.user.highscoreMultiplayer);
         if (Game.Wave > highscore && Game.Wave % 10 == 0)
         {
             label.Visible = true;
@@ -77,14 +77,14 @@ public partial class UpgradeScreen : Panel
         else
         {
             upgradesMade++;
-            Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
+            Client.instance.SendMessage(MessageType.Upgrade, new[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
             if (EveryoneUpgraded())
                 HideAndUnpause();
             else SetButtonsVisibility(false);
         }
     }
 
-    public byte upgradesMade = 0; //Only for multiplayer
+    public byte upgradesMade; //Only for multiplayer
     void SetButtonsVisibility(bool show)
     {
         for (int i = 0; i < buttons.Length; i++)

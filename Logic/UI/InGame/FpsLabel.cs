@@ -6,11 +6,11 @@ public partial class FpsLabel : Label
 {
 	public override void _Ready()
 	{
-		Visible = UserData.clientSettings.ShowFps;
+		Visible = SaveManager.client.ShowFps;
 	}
 	public override void _Process(double delta)
 	{
-		Visible = UserData.clientSettings.ShowFps;
+		Visible = SaveManager.client.ShowFps;
 		if (!Visible)
 			return;
 

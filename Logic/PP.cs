@@ -12,7 +12,7 @@ public class PP
     {
         ((Label)Network.Lobby.Instance.GetNode("PPMult")).Text = "pp Multiplier: " + GetGameSettingsPPMult().ToString("0.000");
     }
-    public static float GetGameSettingsPPMult()
+    private static float GetGameSettingsPPMult()
     {
         float result = 1f;
         result /= GameSettings.totalDmgMult > 1f ? GameSettings.totalDmgMult : Mathf.Sqrt(GameSettings.totalDmgMult);
@@ -36,13 +36,13 @@ public class PP
 
     public static bool TryRecordPP()
     {
-        if (currentPP < UserData.topPP.Last())
+        if (currentPP < SaveManager.user.topPP.Last())
             return false;
 
-        List<float> newTopPP = UserData.topPP.Concat(new float[] { currentPP }).ToList();
+        List<float> newTopPP = SaveManager.user.topPP.Concat(new[] { currentPP }).ToList();
         newTopPP.Sort((x, y) => y.CompareTo(x));
 
-        UserData.topPP = newTopPP.Take(3).ToArray();
+        SaveManager.user.topPP = newTopPP.Take(3).ToArray();
         return true;
     }
 
@@ -50,9 +50,9 @@ public class PP
     {
         float result = 0f;
         float mult = 1f;
-        for (int i = 0; i < UserData.topPP.Length; i++)
+        foreach (var pp in SaveManager.user.topPP)
         {
-            result += UserData.topPP[i] * mult;
+            result += pp * mult;
             mult /= 2f;
         }
         return result;

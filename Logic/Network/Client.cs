@@ -55,8 +55,13 @@ public partial class Client : Node
         {
             case MessageType.FetchLobby:
                 ChangeSceneToLobby();
-                GD.Print($"Sending Register Message with augments {string.Join(",", Save.UserData.augmentAllotment)}");
-                SendMessage(MessageType.Register, new string[] { args[0], Save.UserData.name, UI.MainMenu.AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(Save.UserData.augmentAllotment) });
+                GD.Print($"Sending Register Message with augments {string.Join(",", SaveManager.user.augmentAllotment)}");
+                SendMessage(MessageType.Register,
+                    new string[]
+                    {
+                        args[0], SaveManager.user.name, UI.MainMenu.AbilityChooser.chosen.ToString(),
+                        UserData.AugmentPointsAsString(SaveManager.user.augmentAllotment)
+                    });
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {

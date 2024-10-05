@@ -13,7 +13,7 @@ public partial class JoinButton : Button
 	}
 	public void LoadLastIp()
 	{
-		AddressEdit.Text = UserData.lastIp;
+		AddressEdit.Text = SaveManager.user.lastIp;
 	}
 	ConnectingLabel connectingLabel => (ConnectingLabel)GetNode("../ConnectingLabel");
 	public override void _Pressed()
@@ -21,7 +21,7 @@ public partial class JoinButton : Button
 		NetworkManager.mode = NetMode.Client;
 		string addr = AddressEdit.Text;
 		Client.host = addr;
-		UserData.lastIp = addr;
+		SaveManager.user.lastIp = addr;
 		SaveManager.Save();
 		Client.port = ushort.Parse((GetNode("../Port Input/LineEdit") as LineEdit).Text);
 

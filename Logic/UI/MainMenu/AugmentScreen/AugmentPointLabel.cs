@@ -6,8 +6,8 @@ public partial class AugmentPointLabel : Label
 {
     public override void _Ready()
     {
-        UserData.updateAugmentPointCounter = UpdateText;
-        UpdateText(UserData.SpareAugmentPoints);
+        SaveManager.user.updateAugmentPointCounter = UpdateText;
+        UpdateText(SaveManager.user.SpareAugmentPoints);
     }
     void UpdateText(int points)
     {

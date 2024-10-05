@@ -13,7 +13,7 @@ public partial class AugmentPlusMinusButton : Button
 
     public override void _Process(double delta)
     {
-        Disabled = effect > UserData.SpareAugmentPoints ||
+        Disabled = effect > SaveManager.user.SpareAugmentPoints ||
                    (GetParent<AugmentContainer>().points == AugmentContainer.MIN_POINTS && effect < 0);
     }
 }

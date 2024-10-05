@@ -1,5 +1,4 @@
 using System.Linq;
-using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Player.Hooks;
@@ -23,7 +22,7 @@ public partial class Game : Node
 		Enemy.Enemy.enemies = new System.Collections.Generic.List<Enemy.Enemy>();
 		Enemy.Enemy.ResetRngSeed();
 
-		PlayerManager.my = new Player.Core.Player(Client.myId, UserData.augmentAllotment);
+		PlayerManager.my = new Player.Core.Player(Client.myId, SaveManager.user.augmentAllotment);
 		Client.instance.others.ForEach(x => new Player.Core.Player(x.id, x.augmentPoints));
 
 		SpawnEnemiesAfterDelay();
@@ -71,8 +70,8 @@ public partial class Game : Node
 
 		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").ResetNotificationLabel();
 
-		SaveManager.UpdateHighscore();
-		UserData.killCount++;
+		SaveManager.user.UpdateHighscore();
+		SaveManager.user.killCount++;
 		SaveManager.Save();
 
 		GetTree().Paused = true;

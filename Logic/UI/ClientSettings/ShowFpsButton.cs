@@ -7,13 +7,13 @@ public partial class ShowFpsButton : CheckBox
 	public override void _Ready()
 	{
 		ToSignal(GetTree().CreateTimer(0.001f), "timeout")
-			.OnCompleted(() => ButtonPressed = UserData.clientSettings.ShowFps);
+			.OnCompleted(() => ButtonPressed = SaveManager.client.ShowFps);
 
 		Toggled += OnToggled;
 	}
 
-	void OnToggled(bool toggled)
+	static void OnToggled(bool toggled)
 	{
-		UserData.clientSettings.ShowFps = toggled;
+		SaveManager.client.ShowFps = toggled;
 	}
 }
