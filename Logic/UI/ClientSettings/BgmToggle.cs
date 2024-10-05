@@ -6,8 +6,8 @@ public partial class BgmToggle : CheckButton
 {
 	public override void _Ready()
 	{
-		ButtonPressed = UserData.Music;
-		AudioServer.SetBusMute(AudioServer.GetBusIndex("Music"), !UserData.Music);
+		ButtonPressed = UserData.clientSettings.MusicOn;
+		AudioServer.SetBusMute(AudioServer.GetBusIndex("Music"), !UserData.clientSettings.MusicOn);
 
 		Toggled += OnToggled;
 	}
@@ -15,6 +15,6 @@ public partial class BgmToggle : CheckButton
 	void OnToggled(bool enabled)
 	{
 		AudioServer.SetBusMute(AudioServer.GetBusIndex("Music"), !enabled);
-		UserData.Music = enabled;
+		UserData.clientSettings.MusicOn = enabled;
 	}
 }

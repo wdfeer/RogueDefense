@@ -7,7 +7,7 @@ namespace RogueDefense.Logic.Save;
 public static class SaveManager
 {
     private const string SAVE_PATH = "user://user.txt";
-    public static bool Load()
+    public static void Load()
     {
         try
         {
@@ -15,7 +15,7 @@ public static class SaveManager
 
             name = file.GetLine();
             lastIp = file.GetLine();
-            clientSettings = MathHelper.ByteToBoolArray(file.Get8());
+            clientSettings = ClientSettings.FromByte(file.Get8());
             int.TryParse(file.GetLine(), out highscoreSingleplayer);
             int.TryParse(file.GetLine(), out highscoreMultiplayer);
             int.TryParse(file.GetLine(), out gameCount);
@@ -29,11 +29,10 @@ public static class SaveManager
             LoadAugments(file);
 
             file.Close();
-            return true;
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            return false;
+            GD.PrintErr("Encountered an error while loading user data:", e.ToString());
         }
     }
     
@@ -59,7 +58,7 @@ public static class SaveManager
 
         file.StoreLine(name);
         file.StoreLine(lastIp);
-        file.Store8(MathHelper.BoolArrayToByte(clientSettings));
+        file.Store8(clientSettings.ToByte());
         file.StoreLine(highscoreSingleplayer.ToString());
         file.StoreLine(highscoreMultiplayer.ToString());
         file.StoreLine(gameCount.ToString());

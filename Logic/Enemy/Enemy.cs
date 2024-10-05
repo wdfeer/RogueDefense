@@ -206,7 +206,7 @@ public abstract partial class Enemy : Area2D
 
 		PlayerManager.my.hooks.ForEach(x => x.OnAnyHit(damage));
 
-		if (UserData.ShowCombatText || unhideable)
+		if (UserData.clientSettings.ShowCombatText || unhideable)
 		{
 			CombatTextDisplay.instance.AddCombatText(new CombatText()
 			{

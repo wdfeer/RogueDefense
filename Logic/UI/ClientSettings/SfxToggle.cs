@@ -6,8 +6,8 @@ public partial class SfxToggle : CheckButton
 {
 	public override void _Ready()
 	{
-		ButtonPressed = UserData.Sound;
-		AudioServer.SetBusMute(AudioServer.GetBusIndex("SFX"), !UserData.Sound);
+		ButtonPressed = UserData.clientSettings.SoundOn;
+		AudioServer.SetBusMute(AudioServer.GetBusIndex("SFX"), !UserData.clientSettings.SoundOn);
 
 		Toggled += OnToggled;
 	}
@@ -15,6 +15,6 @@ public partial class SfxToggle : CheckButton
 	void OnToggled(bool enabled)
 	{
 		AudioServer.SetBusMute(AudioServer.GetBusIndex("SFX"), !enabled);
-		UserData.Sound = enabled;
+		UserData.clientSettings.SoundOn = enabled;
 	}
 }
