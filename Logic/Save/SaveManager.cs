@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace RogueDefense.Logic.Save;
 
 public static class SaveManager
@@ -20,12 +22,18 @@ public static class SaveManager
     private static void SerializeStruct<T>(T obj, string path)
     {
         FileAccess fileAccess = FileAccess.Open(path, FileAccess.ModeFlags.Write);
-        // TODO: store the 'obj' as serialized json in the file
+        using (fileAccess)
+        {
+            fileAccess.StoreString(JsonSerializer.Serialize(obj));
+        }
     }
     
     private static T DeserializeStruct<T>(string path)
     {
         FileAccess fileAccess = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-        // TODO: create a struct from serialized json in the file
+        using (fileAccess)
+        {
+            return JsonSerializer.Deserialize<T>(fileAccess.GetAsText());
+        }
     }
 }
