@@ -1,22 +1,24 @@
 using System;
+using RogueDefense.Logic.Network;
 
 namespace RogueDefense.Logic.Save;
 
-public static class UserData
+public struct UserData
 {
-    public static string name = "";
-    public static string lastIp = "";
-    public static ClientSettings clientSettings = new();
+    public UserData() { }
+    
+    public string name = "";
+    public string lastIp = "";
 
-    public static int highscoreSingleplayer = 0;
-    public static int highscoreMultiplayer = 0;
-    public static int gameCount = 0;
-    public static int killCount = 0;
-    public static float[] topPP = { 0f, 0f, 0f };
-    public static int[] augmentAllotment = { 0, 0, 0, 0, 0 };
-    private static int spareAugmentPoints = 10;
+    public int highscoreSingleplayer = 0;
+    public int highscoreMultiplayer = 0;
+    public int gameCount = 0;
+    public int killCount = 0;
+    public float[] topPP = { 0f, 0f, 0f };
+    public int[] augmentAllotment = { 0, 0, 0, 0, 0 };
+    private int spareAugmentPoints = 10;
 
-    public static int SpareAugmentPoints
+    public int SpareAugmentPoints
     {
         get => spareAugmentPoints; set
         {
@@ -25,5 +27,15 @@ public static class UserData
         }
     }
 
-    public static Action<int> updateAugmentPointCounter = _ => { };
+    public Action<int> updateAugmentPointCounter = _ => { };
+    
+    public void UpdateHighscore()
+    {
+        int lvl = Game.Wave;
+        if (NetworkManager.Singleplayer && lvl > highscoreSingleplayer)
+            highscoreSingleplayer = lvl;
+        else if (lvl > highscoreMultiplayer) highscoreMultiplayer = lvl;
+    }
+    
+    public const string PATH = "user://data.json";
 }

@@ -1,11 +1,13 @@
 namespace RogueDefense.Logic.Save;
 
-public class ClientSettings
+public struct ClientSettings
 {
+    public ClientSettings() { }
+    
     public bool ShowCombatText { get; set; } = true;
     public bool ShowHpBar { get; set; } = true;
     public bool ShowAvgDps { get; set; } = true;
-    public bool ShowFps { get; set; }
+    public bool ShowFps { get; set; } = false;
     public bool MusicOn { get; set; } = true;
     public bool SoundOn { get; set; } = true;
 
@@ -28,4 +30,6 @@ public class ClientSettings
             SoundOn = array[5]
         };
     }
+    
+    public const string PATH = "user://settings.json";
 }
