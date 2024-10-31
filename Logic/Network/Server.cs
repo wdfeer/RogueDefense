@@ -5,13 +5,13 @@ namespace RogueDefense.Logic.Network;
 
 public partial class Server : Node
 {
-	public static Server instance = new Server();
-	public static TcpServer server;
-	public static StreamPeerTcp[] peers = new StreamPeerTcp[16];
+	public static Server instance = new();
+	private static TcpServer server;
+	private static readonly StreamPeerTcp[] peers = new StreamPeerTcp[16];
 	public const ushort PORT = 7777;
 	public void Start()
 	{
-		server = new();
+		server = new TcpServer();
 
 		var err = server.Listen(PORT);
 		if (err == Error.Ok)
@@ -27,22 +27,21 @@ public partial class Server : Node
 	}
 	public void Stop()
 	{
-		if (server != null)
-			server.Stop();
+		server?.Stop();
 		server = null;
 	}
-	public Dictionary<int, UserData> users = new Dictionary<int, UserData>();
-	public void SendPacket(int id, string data)
+	private readonly Dictionary<int, UserData> users = new();
+	private void SendPacket(int id, string data)
 	{
 		peers[id].PutUtf8String(data);
 	}
 
-	public void Broadcast(string data, int ignore = -1) => users.ToList().ForEach(x =>
+	private void Broadcast(string data, int ignore = -1) => users.ToList().ForEach(x =>
 	{
 		if (x.Key != ignore)
 			SendPacket(x.Key, data);
 	});
-	public void OnConnect(int id)
+	private void OnConnect(int id)
 	{
 		string msg = $"{(char)MessageType.FetchLobby}{id}";
 		if (users.Count > 0)
@@ -54,7 +53,7 @@ public partial class Server : Node
 		users.Add(id, new UserData(id, "", -1, null));
 		GD.Print($"Client {id} connected");
 	}
-	public void OnDisconnect(int id)
+	private void OnDisconnect(int id)
 	{
 		users.Remove(id);
 		peers[id] = null;
@@ -62,16 +61,16 @@ public partial class Server : Node
 
 		SendMessage(MessageType.Unregister, new string[] { id.ToString() });
 	}
-	public void ReceiveData(int id, string data)
+	private void ReceiveData(int id, string data)
 	{
 		GD.Print($"Server is broadcasting packet with from {id}: {data}");
 
 		Broadcast(data, id);
 
-		string[] args = data.Substring(1).Split(" ");
+		string[] args = data[1..].Split(" ");
 		AfterBroadcastMessage(id, (MessageType)data[0], args);
 	}
-	public void AfterBroadcastMessage(int from, MessageType type, string[] args)
+	private void AfterBroadcastMessage(int from, MessageType type, string[] args)
 	{
 		switch (type)
 		{
@@ -122,15 +121,14 @@ public partial class Server : Node
 				continue;
 
 			StreamPeerTcp.Status status = client.GetStatus();
-			if (status == StreamPeerTcp.Status.None || status == StreamPeerTcp.Status.Error)
+			switch (status)
 			{
-				OnDisconnect(i);
-				continue;
-			}
-			else if (status == StreamPeerTcp.Status.Connecting)
-			{
-				GD.Print($"Client {i} is still connecting, skipping data check");
-				continue;
+				case StreamPeerTcp.Status.None or StreamPeerTcp.Status.Error:
+					OnDisconnect(i);
+					continue;
+				case StreamPeerTcp.Status.Connecting:
+					GD.Print($"Client {i} is still connecting, skipping data check");
+					continue;
 			}
 
 			int byteCount = client.GetAvailableBytes();

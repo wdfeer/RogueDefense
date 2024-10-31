@@ -13,7 +13,7 @@ public partial class Client : Node
 {
     public static string host;
     public static ushort port;
-    public static Client instance = new Client();
+    public static Client instance = new();
     public static StreamPeerTcp client;
     public static int myId = -1;
     public void Start()
@@ -34,22 +34,22 @@ public partial class Client : Node
             client.DisconnectFromHost();
         client = null;
     }
-    public List<UserData> others = new List<UserData>();
+    public List<UserData> others = new();
     public UserData GetUserData(int id) => others.Find(x => x.id == id);
-    public void RemoveUserData(int id) => others.Remove(GetUserData(id));
-    public void ChangeSceneToLobby()
+    private void RemoveUserData(int id) => others.Remove(GetUserData(id));
+    private void ChangeSceneToLobby()
     {
         GD.Print("This client connected! Loading lobby...");
         if (NetworkManager.mode == NetMode.Client)
             UI.JoinScene.JoinScene.TryChangeToLobbyScene();
     }
-    public void ReceiveMessage(string message)
+    private void ReceiveMessage(string message)
     {
         MessageType type = (MessageType)message[0];
         GD.Print($"Client received msg of type {type} with contents: {message}");
         ProcessMessage(type, message[1..].Split(' '));
     }
-    public void ProcessMessage(MessageType type, string[] args)
+    private void ProcessMessage(MessageType type, string[] args)
     {
         switch (type)
         {
@@ -186,20 +186,4 @@ public partial class Client : Node
             ReceiveMessage(data);
         }
     }
-}
-public enum MessageType
-{
-    FetchLobby = '0',
-    Register = '1',
-    Unregister = '2',
-    SetAbility = 'a',
-    UpdateSettings = 'c',
-    StartGame = 's',
-    EnemyKill = 'k',
-    Upgrade = 'u',
-    Death = 'd',
-    Retry = 'r',
-    AbilityActivated = 'A',
-    PositionUpdated = 'p',
-    TargetSelected = 't'
 }

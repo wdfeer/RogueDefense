@@ -26,7 +26,7 @@ public partial class Lobby : Control
 		else
 			NetworkManager.NetStart(); // clients' NetworkManager is already started by JoinButton
 	}
-	Dictionary<int, UI.Lobby.PlayerData> userDisplayNodes = new Dictionary<int, UI.Lobby.PlayerData>();
+	readonly Dictionary<int, UI.Lobby.PlayerData> userDisplayNodes = new();
 	public void AddUser(UserData data)
 	{
 		var node = userDataScene.Instantiate<UI.Lobby.PlayerData>();
