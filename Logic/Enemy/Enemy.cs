@@ -12,7 +12,7 @@ namespace RogueDefense.Logic.Enemy;
 
 public abstract partial class Enemy : Area2D
 {
-	public static List<Enemy> enemies = new List<Enemy>();
+	public static List<Enemy> enemies = new();
 	public abstract float GetBaseSpeed();
 	EnemySound sound;
 	public override void _Ready()
@@ -39,7 +39,7 @@ public abstract partial class Enemy : Area2D
 	{
 		sound = new EnemySound(this);
 	}
-	public static RandomNumberGenerator statsRng = new RandomNumberGenerator();
+	public static RandomNumberGenerator statsRng = new();
 	public static void ResetRngSeed()
 	{
 		if (NetworkManager.Singleplayer)
@@ -211,7 +211,7 @@ public abstract partial class Enemy : Area2D
 			CombatTextDisplay.instance.AddCombatText(new CombatText()
 			{
 				position = GlobalPosition + new Vector2(-80 + GD.Randf() * 80, -100),
-				direction = textVelocity == null ? Vector2.Up : (Vector2)textVelocity,
+				direction = textVelocity ?? Vector2.Up,
 				modulate = textColor,
 				text = MathHelper.ToShortenedString(damage)
 			});
@@ -279,7 +279,7 @@ public abstract partial class Enemy : Area2D
 
 
 	public float damageCap = -1f;
-	float GetDamageCap(int gen)
+	static float GetDamageCap(int gen)
 		=> gen > 20 ? (gen > 60 ? 0.03f : 0.08f) : 0.151f;
 	public void SetDamageCap(float maxHpDamageCap)
 	{
@@ -291,22 +291,22 @@ public abstract partial class Enemy : Area2D
 
 
 	public float minDamage = -1f;
-	float GetMinDamage(int gen)
+	static float GetMinDamage(int gen)
 		=> gen > 10 ? (gen > 25 ? 0.03f : 0.06f) : 0.099f;
-	public void SetMinDamage(float minDamage)
+	public void SetMinDamage(float value)
 	{
 		Label label = (Label)GetNode("BottomInfo");
 		label.Visible = true;
-		label.Text = $"Minimum Damage per Hit: {MathHelper.ToPercentAndRound(minDamage)}%";
-		this.minDamage = maxHp * minDamage;
+		label.Text = $"Minimum Damage per Hit: {MathHelper.ToPercentAndRound(value)}%";
+		minDamage = maxHp * value;
 	}
 
 
 
-	public Bleed bleed = new Bleed();
-	public Viral viral = new Viral();
-	public Cold cold = new Cold();
-	public Corrosive corrosive = new Corrosive();
+	public Bleed bleed = new();
+	public Viral viral = new();
+	public Cold cold = new();
+	public Corrosive corrosive = new();
 	public Status[] statuses;
 	public void AddBleed(float totalDmg, float duration) => bleed.Add(totalDmg / 5f, duration);
 	public void AddViral(float duration) => viral.Add(duration);

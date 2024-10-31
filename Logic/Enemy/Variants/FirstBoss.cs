@@ -6,12 +6,12 @@ namespace RogueDefense.Logic.Enemy.Variants;
 public partial class FirstBoss : Enemy
 {
 	public override float GetBaseSpeed()
-		=> (Hp / maxHp) < 0.5f ? 2f : 1f;
+		=> (Hp / maxHp) < 0.4f ? 2f : 1f;
 
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
 		maxHp *= 1.5f;
-		maxHp += 60f;
+		maxHp += 50f;
 	}
 	protected override void ModifyImmunities(ref Status[] statuses)
 	{
