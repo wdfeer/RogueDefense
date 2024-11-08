@@ -37,7 +37,7 @@ public partial class Client : Node
     public List<UserData> others = new();
     public UserData GetUserData(int id) => others.Find(x => x.id == id);
     private void RemoveUserData(int id) => others.Remove(GetUserData(id));
-    private void ChangeSceneToLobby()
+    private static void ChangeSceneToLobby()
     {
         GD.Print("This client connected! Loading lobby...");
         if (NetworkManager.mode == NetMode.Client)
@@ -155,7 +155,7 @@ public partial class Client : Node
             Lobby.Instance.RemoveUser(id);
         }
     }
-    void Broadcast(string data)
+    static void Broadcast(string data)
     {
         if (client == null)
             throw new NullReferenceException("variable StreamPeerTcp client is null! Please make sure it has initialized");
