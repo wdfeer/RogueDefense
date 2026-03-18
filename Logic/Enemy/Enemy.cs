@@ -147,7 +147,9 @@ public abstract partial class Enemy : Area2D
 	}
 	void ScaleDamage(int gen)
 	{
-		damage = 12.5f * Mathf.Sqrt(1f + gen) * oneTimeDamageMult;
+		damage = 11.5f * Mathf.Sqrt(1f + gen) * oneTimeDamageMult;
+		if (NetworkManager.Singleplayer)
+			damage *= 0.8f;
 
 		ModifyDamage(ref damage);
 
