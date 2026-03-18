@@ -1,5 +1,6 @@
 using System.Linq;
 using RogueDefense.Logic.Enemy.Statuses;
+using RogueDefense.Logic.Network;
 
 namespace RogueDefense.Logic.Enemy.Variants;
 
@@ -11,7 +12,7 @@ public partial class FirstBoss : Enemy
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
 		maxHp *= 1.5f;
-		maxHp += 50f;
+		maxHp += NetworkManager.Singleplayer ? 25 : 50;
 	}
 	protected override void ModifyImmunities(ref Status[] statuses)
 	{

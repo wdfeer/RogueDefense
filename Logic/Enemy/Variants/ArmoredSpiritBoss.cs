@@ -1,10 +1,11 @@
 using System;
 using System.Linq;
 using RogueDefense.Logic.Enemy.Statuses;
+using RogueDefense.Logic.Network;
 
 namespace RogueDefense.Logic.Enemy.Variants;
 
-public partial class ArmoredSpirit : Enemy
+public partial class ArmoredSpiritBoss : Enemy
 {
 	public override float GetBaseSpeed()
 		=> 0.6f;
@@ -17,7 +18,7 @@ public partial class ArmoredSpirit : Enemy
 	protected override void ModifyArmor(ref float armor)
 	{
 		armor *= 3f;
-		armor += 500f;
+		armor += NetworkManager.Singleplayer ? 360f : 500f;
 	}
 	protected override void ModifyImmunities(ref Status[] statuses)
 	{
