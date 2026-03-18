@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://kt63cqpw2db5"]
 
 [ext_resource type="PackedScene" uid="uid://djlwd1jt4bb3k" path="res://Scenes/MainMenu/background.tscn" id="1_u76gu"]
-[ext_resource type="PackedScene" uid="uid://lq2blybll7l5" path="res://Scenes/MainMenu/UpgradeContainer.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://d7hydk75hi01" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
@@ -14,12 +13,11 @@
 [ext_resource type="Script" uid="uid://btttoiby27ax3" path="res://Logic/UI/MainMenu/UsernameInput.cs" id="13"]
 [ext_resource type="Script" uid="uid://c2480q7h8smc0" path="res://Logic/UI/MainMenu/MPButton.cs" id="14"]
 [ext_resource type="Texture2D" uid="uid://b65dsdcjq560t" path="res://Assets/Images/Icons/game-icons.net/anvil-impact.svg" id="14_l3r0m"]
-[ext_resource type="Script" uid="uid://dcc43gtcm0fri" path="res://Logic/UI/MainMenu/AugmentScreen/AugmentPointLabel.cs" id="15_4r3tt"]
 [ext_resource type="Texture2D" uid="uid://coybaj0ak2fgt" path="res://Assets/Images/Icons/github-mark-white.svg" id="15_avmqa"]
 [ext_resource type="PackedScene" uid="uid://c02lgsibl1utw" path="res://Scenes/MainMenu/TopPlay.tscn" id="17"]
-[ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/Images/Icons/game-icons.net/check-mark.svg" id="17_j8td6"]
 [ext_resource type="Script" uid="uid://biv5edd3hq6rk" path="res://Logic/UI/MainMenu/TopPlays.cs" id="18"]
 [ext_resource type="Script" uid="uid://dqwt4ylpx0wdn" path="res://Logic/UI/MainMenu/Version.gd" id="18_867ui"]
+[ext_resource type="PackedScene" uid="uid://cn3qcemajmx43" path="res://Scenes/MainMenu/AugmentPanel.tscn" id="18_cmo68"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_7rens"]
 device = -1
@@ -43,9 +41,6 @@ colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_fp4qk"]
 gradient = SubResource("Gradient_1gf4l")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enlh7"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 
 [node name="Control" type="Control" unique_id=505208634]
 process_mode = 3
@@ -269,77 +264,6 @@ scale = Vector2(0.2, 0.2)
 icon = ExtResource("14_l3r0m")
 script = ExtResource("12")
 
-[node name="AugmentPanel" type="Panel" parent="." unique_id=909804460]
+[node name="AugmentPanel" parent="." unique_id=2000408678 instance=ExtResource("18_cmo68")]
 visible = false
-self_modulate = Color(0.5, 0.5, 0.5, 1)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5")
-theme_override_styles/panel = SubResource("StyleBoxFlat_enlh7")
-
-[node name="PointLabel" type="Label" parent="AugmentPanel" unique_id=29295857]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -305.0
-offset_top = 16.0
-offset_right = -14.0
-offset_bottom = 64.0
-grow_horizontal = 0
-theme = ExtResource("5")
-theme_override_font_sizes/font_size = 32
-text = "10 Augment Points"
-script = ExtResource("15_4r3tt")
-
-[node name="AugmentsButton" type="Button" parent="AugmentPanel" unique_id=28644507]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -129.0
-offset_top = -121.0
-offset_right = 391.0
-offset_bottom = 399.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.2, 0.2)
-icon = ExtResource("17_j8td6")
-script = ExtResource("12")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="AugmentPanel" unique_id=564158873]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = -258.0
-offset_right = 652.0
-offset_bottom = 258.0
-grow_vertical = 2
-
-[node name="0" parent="AugmentPanel/VBoxContainer" unique_id=631544907 instance=ExtResource("2")]
-layout_mode = 2
-augmentText = "Base Damage: "
-
-[node name="1" parent="AugmentPanel/VBoxContainer" unique_id=1173377613 instance=ExtResource("2")]
-layout_mode = 2
-augmentText = "Base Fire Rate: "
-
-[node name="2" parent="AugmentPanel/VBoxContainer" unique_id=1563384095 instance=ExtResource("2")]
-layout_mode = 2
-augmentText = "Base Multishot: "
-
-[node name="3" parent="AugmentPanel/VBoxContainer" unique_id=730664063 instance=ExtResource("2")]
-layout_mode = 2
-augmentText = "Status Chance Mult: "
-
-[node name="4" parent="AugmentPanel/VBoxContainer" unique_id=1728947951 instance=ExtResource("2")]
-layout_mode = 2
-augmentText = "Crit Damage Mult: "
