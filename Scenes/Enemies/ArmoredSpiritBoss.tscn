@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cg55ebhgoye21"]
+
+[ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_3asie"]
+[ext_resource type="Script" uid="uid://cp6yvshvafc5h" path="res://Logic/Enemy/Variants/ArmoredSpiritBoss.cs" id="2_gm1ld"]
+[ext_resource type="Texture2D" uid="uid://bta4xw4p5neii" path="res://Assets/Images/Enemies/armored_spirit_boss.svg" id="3_hvshi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6jkxt"]
+size = Vector2(125, 125)
+
+[node name="ArmoredSpiritBoss" unique_id=1388054798 instance=ExtResource("1_3asie")]
+script = ExtResource("2_gm1ld")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("RectangleShape2D_6jkxt")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_hvshi")
