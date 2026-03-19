@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ddojec0o1i2sb"]
+
+[sub_resource type="ConcavePolygonShape2D" id="ConcavePolygonShape2D_dctr5"]
+segments = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="Boundaries" type="StaticBody2D" unique_id=1299672735]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1769296811]
+shape = SubResource("ConcavePolygonShape2D_dctr5")

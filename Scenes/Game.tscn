@@ -47,16 +47,13 @@
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(62, 62)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bunfs"]
-normal = Vector2(1, 0)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ap78q"]
-normal = Vector2(0, 1)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wugso"]
-normal = Vector2(-1, 0)
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hvse4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkjwx"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25098, 1, 0.25098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3v27"]
 bg_color = Color(0.25098, 0.25098, 0.25098, 1)
@@ -65,14 +62,6 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 0.25098, 0.25098, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkjwx"]
-bg_color = Color(0.101961, 0.101961, 0.101961, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.25098, 1, 0.25098, 1)
 
 [sub_resource type="InputEventAction" id="InputEventAction_kb0q4"]
 action = &"ability"
@@ -110,7 +99,7 @@ bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fync3"]
 bg_color = Color(0, 0, 0, 0.627451)
 
-[node name="Game" type="Control" node_paths=PackedStringArray("background")]
+[node name="Game" type="Control" unique_id=893701233 node_paths=PackedStringArray("background")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,7 +109,7 @@ grow_vertical = 2
 script = ExtResource("1")
 background = NodePath("Background")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=434424563]
 modulate = Color(0.5, 0.5, 0.5, 1)
 z_index = -3
 position = Vector2(612, 315)
@@ -129,14 +118,14 @@ texture = ExtResource("3_hvrda")
 script = ExtResource("4_bil5u")
 backgrounds = Array[CompressedTexture2D]([ExtResource("3_hvrda"), ExtResource("5_cqq2p"), ExtResource("6_osbn0"), ExtResource("7_vp4ep"), ExtResource("8_58s5q"), ExtResource("9_dpyxg")])
 
-[node name="UISounds" parent="." instance=ExtResource("3_te3pu")]
+[node name="UISounds" parent="." unique_id=197711205 instance=ExtResource("3_te3pu")]
 root_path = NodePath("..")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=313140455]
 process_mode = 3
 anchor_mode = 0
 
-[node name="EnemySpawner" type="Node2D" parent="."]
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=2076492631]
 position = Vector2(950, 300)
 script = ExtResource("16_bbfcr")
 regularEnemyScene = ExtResource("4")
@@ -148,25 +137,25 @@ multigunnerScene = ExtResource("16_brqtq")
 multigunnerBossScene = ExtResource("17_8qcy2")
 arcaneBossScene = ExtResource("18_jqv4r")
 
-[node name="CombatTextDisplay" type="Node2D" parent="."]
+[node name="CombatTextDisplay" type="Node2D" parent="." unique_id=2089000835]
 script = ExtResource("16_8utqd")
 
-[node name="DefenseObjective" type="StaticBody2D" parent="."]
+[node name="DefenseObjective" type="StaticBody2D" parent="." unique_id=853563700]
 position = Vector2(100, 300)
 collision_mask = 3
 script = ExtResource("10")
 projectileManagerScene = ExtResource("17_v5lu7")
 turretScene = ExtResource("17")
 
-[node name="Sprite2D" type="Sprite2D" parent="DefenseObjective"]
+[node name="Sprite2D" type="Sprite2D" parent="DefenseObjective" unique_id=1442291163]
 texture = ExtResource("6")
 vframes = 5
 region_rect = Rect2(0, 0, 60, 60)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseObjective"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DefenseObjective" unique_id=358563401]
 shape = SubResource("1")
 
-[node name="HpBar" type="ProgressBar" parent="DefenseObjective"]
+[node name="HpBar" type="ProgressBar" parent="DefenseObjective" unique_id=1684365397]
 offset_left = -31.0
 offset_top = -59.0
 offset_right = 31.0
@@ -177,36 +166,15 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
-[node name="Boundaries" type="Node2D" parent="."]
-visible = false
-
-[node name="LeftWall" type="StaticBody2D" parent="Boundaries"]
+[node name="Boundaries" type="StaticBody2D" parent="." unique_id=402473706]
 collision_layer = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/LeftWall"]
-shape = SubResource("WorldBoundaryShape2D_bunfs")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Boundaries" unique_id=1432843749]
+position = Vector2(718.62445, 592.3456)
+build_mode = 1
+polygon = PackedVector2Array(305.37555, -592.3456, 305.37555, 7.654419, -718.62445, 7.654419, -718.62445, -592.3456)
 
-[node name="TopWall" type="StaticBody2D" parent="Boundaries"]
-collision_layer = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/TopWall"]
-shape = SubResource("WorldBoundaryShape2D_ap78q")
-
-[node name="RightWall" type="StaticBody2D" parent="Boundaries"]
-collision_layer = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightWall"]
-position = Vector2(1056, 0)
-shape = SubResource("WorldBoundaryShape2D_wugso")
-
-[node name="BottomWall" type="StaticBody2D" parent="Boundaries"]
-collision_layer = 16
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BottomWall"]
-position = Vector2(0, 600)
-shape = SubResource("WorldBoundaryShape2D_hvse4")
-
-[node name="DpsLabel" type="Label" parent="."]
+[node name="DpsLabel" type="Label" parent="." unique_id=1962658078]
 process_mode = 3
 modulate = Color(1, 1, 1, 0.627451)
 layout_mode = 1
@@ -222,7 +190,7 @@ theme = ExtResource("7")
 text = "Avg DPS: 0.0"
 script = ExtResource("14")
 
-[node name="LevelText" type="Label" parent="."]
+[node name="LevelText" type="Label" parent="." unique_id=1374924814]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -236,7 +204,7 @@ theme = ExtResource("7")
 text = "Stage 1 - 1"
 horizontal_alignment = 1
 
-[node name="PPLabel" type="Label" parent="."]
+[node name="PPLabel" type="Label" parent="." unique_id=2140885303]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -250,7 +218,7 @@ theme = ExtResource("7")
 text = "0.000 pp"
 horizontal_alignment = 1
 
-[node name="BuffText" type="Label" parent="."]
+[node name="BuffText" type="Label" parent="." unique_id=1571865970]
 modulate = Color(0.662745, 0.784314, 1, 1)
 layout_mode = 1
 anchors_preset = 7
@@ -273,7 +241,7 @@ horizontal_alignment = 1
 vertical_alignment = 2
 script = ExtResource("20")
 
-[node name="AbilityButton" type="Button" parent="."]
+[node name="AbilityButton" type="Button" parent="." unique_id=1027983593]
 custom_minimum_size = Vector2(88, 88)
 layout_mode = 1
 anchors_preset = 3
@@ -288,13 +256,13 @@ offset_bottom = -64.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = ExtResource("7")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkjwx")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_r3v27")
 shortcut = SubResource("Shortcut_5tqol")
 icon = ExtResource("14_sx78e")
 expand_icon = true
 
-[node name="CooldownLabel" type="Label" parent="AbilityButton"]
+[node name="CooldownLabel" type="Label" parent="AbilityButton" unique_id=45187186]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 88.0
@@ -305,7 +273,7 @@ theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="AbilityButton"]
+[node name="Label" type="Label" parent="AbilityButton" unique_id=959232082]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -324,9 +292,9 @@ Duration: 5 s
 Cooldown: 30 s"
 horizontal_alignment = 2
 
-[node name="NetPoller" parent="." instance=ExtResource("11")]
+[node name="NetPoller" parent="." unique_id=438012516 instance=ExtResource("11")]
 
-[node name="Virtual Joystick" parent="." instance=ExtResource("27_1jjpa")]
+[node name="Virtual Joystick" parent="." unique_id=1070776330 instance=ExtResource("27_1jjpa")]
 modulate = Color(1, 1, 1, 0.25098)
 layout_mode = 1
 offset_left = 180.0
@@ -340,7 +308,7 @@ action_right = "move_right"
 action_up = "move_up"
 action_down = "move_down"
 
-[node name="UpgradeScreen" type="Panel" parent="."]
+[node name="UpgradeScreen" type="Panel" parent="." unique_id=1604106748]
 process_mode = 3
 visible = false
 custom_minimum_size = Vector2(0, 400)
@@ -355,7 +323,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8")
 
-[node name="UpgradeText" type="Label" parent="UpgradeScreen"]
+[node name="UpgradeText" type="Label" parent="UpgradeScreen" unique_id=577184407]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 4.0
@@ -366,7 +334,7 @@ text = "This text
 should be
 updated on start"
 
-[node name="UpgradeButton1" parent="UpgradeScreen" instance=ExtResource("3")]
+[node name="UpgradeButton1" parent="UpgradeScreen" unique_id=1569957531 instance=ExtResource("3")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -381,7 +349,7 @@ grow_horizontal = 2
 grow_vertical = 2
 shortcut = SubResource("Shortcut_ejynp")
 
-[node name="UpgradeButton2" parent="UpgradeScreen" instance=ExtResource("3")]
+[node name="UpgradeButton2" parent="UpgradeScreen" unique_id=744822612 instance=ExtResource("3")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -397,7 +365,7 @@ grow_vertical = 2
 shortcut = SubResource("Shortcut_hj2em")
 text = "											"
 
-[node name="UpgradeButton3" parent="UpgradeScreen" instance=ExtResource("3")]
+[node name="UpgradeButton3" parent="UpgradeScreen" unique_id=1159273691 instance=ExtResource("3")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -413,7 +381,7 @@ grow_vertical = 2
 shortcut = SubResource("Shortcut_rdled")
 text = "													"
 
-[node name="NotificationLabel" type="Label" parent="UpgradeScreen"]
+[node name="NotificationLabel" type="Label" parent="UpgradeScreen" unique_id=1504414998]
 visible = false
 layout_mode = 1
 anchors_preset = 5
@@ -431,21 +399,21 @@ text = "Stage 1 Clear:
 +1 Augment Point"
 horizontal_alignment = 1
 
-[node name="NotificationPopup" type="PopupPanel" parent="."]
+[node name="NotificationPopup" type="PopupPanel" parent="." unique_id=1760464903]
 process_mode = 3
 initial_position = 1
 size = Vector2i(493, 60)
 exclusive = true
 script = ExtResource("19")
 
-[node name="Label" type="Label" parent="NotificationPopup"]
+[node name="Label" type="Label" parent="NotificationPopup" unique_id=546255580]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 489.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
@@ -454,7 +422,7 @@ text = "[Username] used [AbilityName]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MenuButton" type="Button" parent="."]
+[node name="MenuButton" type="Button" parent="." unique_id=1151575923]
 process_mode = 3
 layout_mode = 0
 offset_left = 8.0
@@ -467,7 +435,7 @@ icon = ExtResource("18_pat0i")
 expand_icon = true
 script = ExtResource("19_culfp")
 
-[node name="DeathScreen" type="Panel" parent="."]
+[node name="DeathScreen" type="Panel" parent="." unique_id=752233628]
 process_mode = 3
 visible = false
 layout_mode = 1
@@ -479,12 +447,12 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
 script = ExtResource("15")
 
-[node name="Blur" parent="DeathScreen" instance=ExtResource("19_kdd8b")]
+[node name="Blur" parent="DeathScreen" unique_id=754890917 instance=ExtResource("19_kdd8b")]
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="Label" type="Label" parent="DeathScreen"]
+[node name="Label" type="Label" parent="DeathScreen" unique_id=1677632549]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -498,7 +466,7 @@ text = "YOU ARE DEAD!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="DeathScreen"]
+[node name="ScoreLabel" type="Label" parent="DeathScreen" unique_id=28480333]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -515,7 +483,7 @@ text = "Level 9999 reached"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ReturnButton" type="Button" parent="DeathScreen"]
+[node name="ReturnButton" type="Button" parent="DeathScreen" unique_id=1754399291]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -533,7 +501,7 @@ theme_override_font_sizes/font_size = 64
 text = "MAIN MENU"
 script = ExtResource("13")
 
-[node name="Menu" type="Panel" parent="."]
+[node name="Menu" type="Panel" parent="." unique_id=2133701484]
 process_mode = 3
 visible = false
 layout_mode = 1
@@ -544,12 +512,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fync3")
 
-[node name="Blur" parent="Menu" instance=ExtResource("19_kdd8b")]
+[node name="Blur" parent="Menu" unique_id=1506740036 instance=ExtResource("19_kdd8b")]
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=179205073]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -564,7 +532,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="BackButton" type="Button" parent="Menu/VBoxContainer"]
+[node name="BackButton" type="Button" parent="Menu/VBoxContainer" unique_id=753584212]
 layout_mode = 2
 theme = ExtResource("7")
 theme_override_font_sizes/font_size = 20
@@ -573,7 +541,7 @@ icon = ExtResource("20_ldo46")
 expand_icon = true
 script = ExtResource("21_11t6h")
 
-[node name="ExitButton" type="Button" parent="Menu/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="Menu/VBoxContainer" unique_id=1237027622]
 process_mode = 3
 layout_mode = 2
 theme = ExtResource("7")
@@ -583,14 +551,14 @@ icon = ExtResource("18_xbath")
 expand_icon = true
 script = ExtResource("18")
 
-[node name="ConfirmPopup" type="ConfirmationDialog" parent="Menu/VBoxContainer/ExitButton"]
+[node name="ConfirmPopup" type="ConfirmationDialog" parent="Menu/VBoxContainer/ExitButton" unique_id=1077264092]
 initial_position = 2
 size = Vector2i(310, 100)
 popup_window = true
 theme = ExtResource("7")
 dialog_text = "Give up (progress will NOT be saved!)"
 
-[node name="ClientSettings" parent="Menu" instance=ExtResource("24_iflvr")]
+[node name="ClientSettings" parent="Menu" unique_id=234736812 instance=ExtResource("24_iflvr")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -604,7 +572,7 @@ offset_bottom = 49.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FpsLabel" type="Label" parent="."]
+[node name="FpsLabel" type="Label" parent="." unique_id=665191178]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
