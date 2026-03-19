@@ -121,10 +121,6 @@ backgrounds = Array[CompressedTexture2D]([ExtResource("3_hvrda"), ExtResource("5
 [node name="UISounds" parent="." unique_id=197711205 instance=ExtResource("3_te3pu")]
 root_path = NodePath("..")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=313140455]
-process_mode = 3
-anchor_mode = 0
-
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2076492631]
 position = Vector2(950, 300)
 script = ExtResource("16_bbfcr")
