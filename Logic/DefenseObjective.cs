@@ -1,3 +1,4 @@
+using System;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Core;
@@ -51,14 +52,21 @@ public partial class DefenseObjective : Node2D
         return result >= 0 ? result : 0;
     }
 
-    public float damageMult = 1f;
     public float evasionChance = 0f;
+    public float damageMult = 1f;
+    public float flatDamageReduction = 0f;
     public void Damage(float dmg)
     {
         if (GD.Randf() < evasionChance)
             return;
 
         dmg *= damageMult;
+
+        // hits still deal 1 damage even if flatDamageReduction infinite
+        if (dmg > 1f)
+        {
+            dmg = MathF.Max(1f, dmg - flatDamageReduction);
+        }
 
         CombatTextDisplay.instance.AddCombatText(new CombatText()
         {

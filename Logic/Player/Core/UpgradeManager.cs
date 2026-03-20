@@ -63,12 +63,14 @@ public class UpgradeManager
         float hpMult = 1f + SumEveryonesUpgradeValues(UpgradeType.MaxHp) + MaxHpPerKillPlayer.GetTotalIncrease();
         DefenseObjective.instance.maxHp = DefenseObjective.BASE_MAX_HP * hpMult;
     }
-    public void UpdateDamageReduction()
+    public void UpdateDamageReductions()
     {
         float damageTakenMult = PlayerManager.players
             .Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.DamageReduction))
             .Aggregate(1f, (a, b) => a * b);
         DefenseObjective.instance.damageMult = damageTakenMult;
+        
+        DefenseObjective.instance.flatDamageReduction = SumEveryonesUpgradeValues(UpgradeType.FlatDamageReduction);
     }
     public void UpdateEvasion()
     {
@@ -82,7 +84,7 @@ public class UpgradeManager
     {
         if (player.IsLocal)
         {
-            UpdateDamageReduction();
+            UpdateDamageReductions();
             UpdateEvasion();
         }
 

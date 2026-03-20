@@ -224,6 +224,15 @@ public partial class UpgradeType
         chanceMult = 0.5f
     };
 
+    public static readonly UpgradeType FlatDamageReduction =
+        new(x => $"-{MathF.Round(x)} flat damage taken")
+        {
+            getBaseRandomValue = () => 5f,
+            canBeRolled = () =>
+                DefenseObjective.instance.damageMult <= 0.8f &&
+                PlayerManager.my.upgradeManager.SumEveryonesUpgradeValues(FlatDamageReduction) < 50f
+        };
+
     public static UpgradeType[] AllTypes =
     {
         MaxHp,
@@ -256,7 +265,8 @@ public partial class UpgradeType
         RecoverySpeed,
         CritChanceOnStunned,
         RecoilDamage,
-        BleedChanceMinusDamage
+        BleedChanceMinusDamage,
+        FlatDamageReduction
     };
 
     public static void Initialize()
