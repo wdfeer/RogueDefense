@@ -11,10 +11,10 @@ public class DamageReductionAbility : ActiveAbility
     {
         buffLeft = Duration * 7.5f;
     }
-    public float buffLeft = 0;
+    public float buffLeft;
     public override void PostUpgradeUpdate(float delta)
     {
-        if (buffLeft > 0 && player.IsLocal)
+        if (buffLeft > 0)
         {
             buffLeft -= delta;
             DefenseObjective.instance.damageMult *= DamageTakenMult;
@@ -23,7 +23,9 @@ public class DamageReductionAbility : ActiveAbility
     public float DamageTakenMult => 0.5f / Strength;
     public float DamageReduction => 1f - DamageTakenMult;
     protected override string GetAbilityText()
-        => $@"+{(DamageReduction * 100f).ToString("0.00")}% Damage Reduction
-Duration: {(7.5f * Duration).ToString("0.00")} s
-Cooldown: {Cooldown.ToString("0.00")} s";
+        => $"""
+            +{(DamageReduction * 100f).ToString("0.00")}% Damage Reduction
+            Duration: {(7.5f * Duration).ToString("0.00")} s
+            Cooldown: {Cooldown.ToString("0.00")} s
+            """;
 }

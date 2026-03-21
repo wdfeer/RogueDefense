@@ -73,7 +73,6 @@ public class UpgradeManager
             .Aggregate(1f, (a, b) => a * b);
         DefenseObjective.instance.damageMult = damageTakenMult;
 
-        // FIXME: flat damage reduction not synced for some reason
         DefenseObjective.instance.flatDamageReduction = SumEveryonesUpgradeValues(UpgradeType.FlatDamageReduction);
     }
 
