@@ -46,7 +46,8 @@ public abstract class ActiveAbility : PlayerHooks
     }
     public void NetSendActivation()
     {
-        Client.instance.SendMessage(MessageType.AbilityActivated, new string[] { Client.myId.ToString(), GetAbilityIndex().ToString() });
+        Client.instance.SendMessage(MessageType.AbilityActivated, [Client.myId.ToString(), GetAbilityIndex().ToString()
+        ]);
     }
 
     public virtual float BaseCooldown => 25f;

@@ -12,8 +12,8 @@ public static class UserData
     public static int highscoreMultiplayer = 0;
     public static int gameCount = 0;
     public static int killCount = 0;
-    public static float[] topPP = { 0f, 0f, 0f };
-    public static int[] augmentAllotment = { 0, 0, 0, 0, 0 };
+    public static float[] topPP = [0f, 0f, 0f];
+    public static int[] augmentAllotment = [0, 0, 0, 0, 0];
     private static int spareAugmentPoints = 10;
 
     public static int SpareAugmentPoints

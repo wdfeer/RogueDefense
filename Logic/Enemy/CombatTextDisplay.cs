@@ -16,7 +16,7 @@ public partial class CombatTextDisplay : Node2D
 	{
 		texts.Add(combatText);
 	}
-	private List<CombatText> texts = new();
+	private List<CombatText> texts = [];
 	public override void _Draw()
 	{
 		for (int i = 0; i < texts.Count; i++)

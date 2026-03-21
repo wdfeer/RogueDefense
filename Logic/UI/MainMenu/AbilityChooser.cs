@@ -22,7 +22,7 @@ public partial class AbilityChooser : MenuButton
 	public void IdPressed(int id)
 	{
 		chosen = id;
-		Client.instance.SendMessage(MessageType.SetAbility, new string[] { Client.myId.ToString(), id.ToString() });
+		Client.instance.SendMessage(MessageType.SetAbility, [Client.myId.ToString(), id.ToString()]);
 		ResetButtonText();
 	}
 

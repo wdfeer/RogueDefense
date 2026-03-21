@@ -12,7 +12,7 @@ namespace RogueDefense.Logic.Enemy;
 
 public abstract partial class Enemy : Area2D
 {
-	public static List<Enemy> enemies = new();
+	public static List<Enemy> enemies = [];
 	public abstract float GetBaseSpeed();
 	EnemySound sound;
 	public override void _Ready()
@@ -25,7 +25,7 @@ public abstract partial class Enemy : Area2D
 
 		BodyEntered += OnBodyEntered;
 
-		statuses = new Status[] { bleed, corrosive, viral, cold };
+		statuses = [bleed, corrosive, viral, cold];
 		foreach (Status status in statuses)
 		{
 			status.enemy = this;

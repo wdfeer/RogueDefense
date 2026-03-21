@@ -4,7 +4,7 @@ public partial class ShieldOrbGenerator : Node2D
 {
     [Export]
     public PackedScene shieldOrb;
-    public ShieldOrb[] orbs = new ShieldOrb[0];
+    public ShieldOrb[] orbs = [];
     public int count = 0;
     public void CreateOrbs(int count, bool tappable = true, bool exploding = false)
     {

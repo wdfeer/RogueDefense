@@ -50,7 +50,8 @@ public class AbilityManager
         if (index == -1) return "Random";
         return abilityTypes[index].ToString().Split(".").Last();
     }
-    public static readonly Type[] abilityTypes = {
+    public static readonly Type[] abilityTypes =
+    [
         typeof(DamageAbility),
         typeof(FireRateAbility),
         typeof(ShurikenAbility),
@@ -61,7 +62,7 @@ public class AbilityManager
         typeof(CritChanceAbility),
         typeof(DamageDealtTakenAbility),
         typeof(DamageReductionAbility)
-    };
+    ];
     public static ActiveAbility CreateAbilityInstance(int index, Player player, Button button = null)
     {
         if (index < 0) index = new Random().Next(0, abilityTypes.Length);

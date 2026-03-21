@@ -16,6 +16,6 @@ public partial class StartButton : Button
             Network.Lobby.Instance.GetTree().ChangeSceneToFile("res://Scenes/Game.tscn");
         }
         else
-            Server.instance.SendMessage(MessageType.StartGame, new string[0]);
+            Server.instance.SendMessage(MessageType.StartGame, []);
     }
 }

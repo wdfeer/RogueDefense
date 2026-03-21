@@ -27,7 +27,7 @@ public class UpgradeManager
         UpdateUpgrades();
     }
 
-    public List<Upgrade> upgrades = new();
+    public List<Upgrade> upgrades = [];
 
     public static void AddUpgrade(Upgrade upgrade, int from)
     {

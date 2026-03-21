@@ -19,7 +19,7 @@ public struct Upgrade
     }
     public static Upgrade[] RandomUniqueUpgrades(int count)
     {
-        List<UpgradeType> alreadyRolled = new List<UpgradeType>();
+        List<UpgradeType> alreadyRolled = [];
         Upgrade[] upgrades = new Upgrade[count];
         for (int i = 0; i < count; i++)
         {

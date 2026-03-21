@@ -7,7 +7,7 @@ public partial class BGM : AudioStreamPlayer
 {
 	private const string MUSIC_PATH = "res://Assets/Music";
 
-	private readonly List<AudioStream> streams = new();
+	private readonly List<AudioStream> streams = [];
 	public override void _Ready()
 	{
 		using var dir = DirAccess.Open(MUSIC_PATH);

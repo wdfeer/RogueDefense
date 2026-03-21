@@ -20,7 +20,7 @@ public partial class Game : Node
 
 		PP.currentPP = 0f;
 
-		Enemy.Enemy.enemies = new System.Collections.Generic.List<Enemy.Enemy>();
+		Enemy.Enemy.enemies = [];
 		Enemy.Enemy.ResetRngSeed();
 
 		PlayerManager.my = new Player.Core.Player(Client.myId, UserData.augmentAllotment);
@@ -50,7 +50,8 @@ public partial class Game : Node
 		enemy.QueueFree();
 		if (!NetworkManager.Singleplayer && netUpdate)
 		{
-			Client.instance.SendMessage(MessageType.EnemyKill, new string[1] { Enemy.Enemy.enemies.FindIndex(x => x == enemy).ToString() });
+			Client.instance.SendMessage(MessageType.EnemyKill, [Enemy.Enemy.enemies.FindIndex(x => x == enemy).ToString()
+			]);
 		}
 		if (Enemy.Enemy.enemies.All(x => x.Dead))
 			EndWave();
@@ -66,7 +67,7 @@ public partial class Game : Node
 		PP.currentPP += PP.GetWavePP(wave, DefenseObjective.instance.HpRatio, Enemy.Enemy.enemies.Count);
 		((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
 
-		Enemy.Enemy.enemies = new System.Collections.Generic.List<Enemy.Enemy>();
+		Enemy.Enemy.enemies = [];
 		wave++;
 
 		GetNode<UI.InGame.UpgradeScreen>("./UpgradeScreen").ResetNotificationLabel();

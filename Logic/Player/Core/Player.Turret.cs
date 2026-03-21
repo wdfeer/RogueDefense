@@ -32,10 +32,10 @@ public partial class Player
     private static void SendPositionUpdateMessage(int client, int turretIndex, float x, float y)
     {
         Client.instance.SendMessage(MessageType.PositionUpdated,
-            new[] { client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString() });
+            [client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString()]);
     }
 
-    public List<Turret.Turret> turrets = new List<Turret.Turret>();
+    public List<Turret.Turret> turrets = [];
     public IEnumerable<Turret.Turret> ActiveTurrets => turrets.Where(x => !x.Stunned);
     public Turret.Turret controlledTurret;
     public Enemy.Enemy target;
@@ -75,7 +75,7 @@ public partial class Player
         if (netUpdate && Client.client != null)
         {
             Client.instance.SendMessage(MessageType.TargetSelected,
-                new[] { Client.myId.ToString(), enemyIndex.ToString() });
+                [Client.myId.ToString(), enemyIndex.ToString()]);
         }
     }
 

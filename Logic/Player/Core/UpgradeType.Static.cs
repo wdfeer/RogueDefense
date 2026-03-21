@@ -234,7 +234,7 @@ public partial class UpgradeType
         };
 
     public static UpgradeType[] AllTypes =
-    {
+    [
         MaxHp,
         DamageReduction,
         Evasion,
@@ -267,7 +267,7 @@ public partial class UpgradeType
         RecoilDamage,
         BleedChanceMinusDamage,
         FlatDamageReduction
-    };
+    ];
 
     public static void Initialize()
     {

@@ -34,7 +34,7 @@ public partial class Client : Node
             client.DisconnectFromHost();
         client = null;
     }
-    public List<UserData> others = new();
+    public List<UserData> others = [];
     public UserData GetUserData(int id) => others.Find(x => x.id == id);
     private void RemoveUserData(int id) => others.Remove(GetUserData(id));
     private static void ChangeSceneToLobby()
@@ -56,7 +56,8 @@ public partial class Client : Node
             case MessageType.FetchLobby:
                 ChangeSceneToLobby();
                 GD.Print($"Sending Register Message with augments {string.Join(",", Save.UserData.augmentAllotment)}");
-                SendMessage(MessageType.Register, new string[] { args[0], Save.UserData.name, UI.MainMenu.AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(Save.UserData.augmentAllotment) });
+                SendMessage(MessageType.Register, [args[0], Save.UserData.name, UI.MainMenu.AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(Save.UserData.augmentAllotment)
+                ]);
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {

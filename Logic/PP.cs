@@ -39,7 +39,7 @@ public class PP
         if (currentPP < UserData.topPP.Last())
             return false;
 
-        List<float> newTopPP = UserData.topPP.Concat(new float[] { currentPP }).ToList();
+        List<float> newTopPP = UserData.topPP.Concat([currentPP]).ToList();
         newTopPP.Sort((x, y) => y.CompareTo(x));
 
         UserData.topPP = newTopPP.Take(3).ToArray();

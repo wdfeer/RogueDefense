@@ -9,7 +9,7 @@ public abstract class Projectile
     public Projectile()
     {
         shape = new CircleShape2D() { Radius = Radius };
-        hitEnemies = new List<Rid>();
+        hitEnemies = [];
     }
 
     public Core.Player owner;

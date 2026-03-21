@@ -11,7 +11,7 @@ public class ClientSettings
 
     public byte ToByte()
     {
-        bool[] array = { ShowCombatText, ShowHpBar, ShowAvgDps, ShowFps, MusicOn, SoundOn, false, false };
+        bool[] array = [ShowCombatText, ShowHpBar, ShowAvgDps, ShowFps, MusicOn, SoundOn, false, false];
         return MathHelper.BoolArrayToByte(array);
     }
 

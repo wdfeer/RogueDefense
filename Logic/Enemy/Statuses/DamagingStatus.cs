@@ -5,7 +5,7 @@ namespace RogueDefense.Logic.Enemy.Statuses;
 
 public abstract class DamagingStatus : Status
 {
-    public List<DamagingStatusInstance> instances = new List<DamagingStatusInstance>();
+    public List<DamagingStatusInstance> instances = [];
     public override int Count => instances.Count;
     public void Add(float dpt, float duration)
     {

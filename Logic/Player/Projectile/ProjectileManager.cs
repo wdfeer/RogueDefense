@@ -10,8 +10,8 @@ public partial class ProjectileManager : Node2D
     [Export]
     public Array<Texture2D> textures;
 
-    public List<Projectile> proj = new List<Projectile>();
-    public List<Projectile> projDeffered = new List<Projectile>();
+    public List<Projectile> proj = [];
+    public List<Projectile> projDeffered = [];
     public Bullet SpawnBullet(Vector2 gposition)
     {
         Bullet b = new Bullet(textures);
@@ -43,7 +43,7 @@ public partial class ProjectileManager : Node2D
     {
         proj.RemoveAll(p => p.queuedForDeletion);
         proj.AddRange(projDeffered);
-        projDeffered = new List<Projectile>();
+        projDeffered = [];
     }
     public void ClearProjectiles(Func<Projectile, bool> except)
     {
@@ -51,6 +51,6 @@ public partial class ProjectileManager : Node2D
     }
     public void ClearProjectiles()
     {
-        proj = new List<Projectile>();
+        proj = [];
     }
 }

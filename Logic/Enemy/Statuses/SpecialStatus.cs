@@ -5,7 +5,7 @@ namespace RogueDefense.Logic.Enemy.Statuses;
 
 public abstract class SpecialStatus : Status
 {
-    public List<float> instances = new List<float>();
+    public List<float> instances = [];
     public override int Count => instances.Count;
     public void Add(float duration)
     {

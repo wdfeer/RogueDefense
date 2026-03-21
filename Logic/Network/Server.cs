@@ -59,7 +59,7 @@ public partial class Server : Node
 		peers[id] = null;
 		GD.Print($"Client {id} disconnected");
 
-		SendMessage(MessageType.Unregister, new string[] { id.ToString() });
+		SendMessage(MessageType.Unregister, [id.ToString()]);
 	}
 	private void ReceiveData(int id, string data)
 	{

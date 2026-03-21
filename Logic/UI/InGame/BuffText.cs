@@ -14,5 +14,5 @@ public partial class BuffText : Label
             Text += getText();
         }
     }
-    public List<Func<string>> textGetters = new List<Func<string>>();
+    public List<Func<string>> textGetters = [];
 }

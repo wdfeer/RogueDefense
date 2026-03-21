@@ -25,11 +25,11 @@ public partial class EnemySpawner : Node2D
 	{
 		Enemy InstantiateRandomNormal()
 		{
-			List<PackedScene> possibilities = new List<PackedScene>
-			{
+			List<PackedScene> possibilities =
+			[
 				regularEnemyScene,
 				multigunnerScene
-			};
+			];
 			if (gen > 15)
 				possibilities.Add(miniArmoredSpiritScene);
 			if (gen > 19 && index != 0)
@@ -50,13 +50,13 @@ public partial class EnemySpawner : Node2D
 				case 39:
 					return arcaneBossScene.Instantiate<Enemy>();
 				default:
-					List<PackedScene> possibilities = new()
-					{
+					List<PackedScene> possibilities =
+					[
 						firstBossScene,
 						multigunnerBossScene,
 						armoredSpiritBossScene,
 						arcaneBossScene
-					};
+					];
 
 					return possibilities[Enemy.statsRng.RandiRange(0, possibilities.Count - 1)].Instantiate<Enemy>();
 			}

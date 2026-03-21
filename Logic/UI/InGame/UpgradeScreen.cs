@@ -15,11 +15,12 @@ public partial class UpgradeScreen : Panel
     public override void _Ready()
     {
         instance = this;
-        buttons = new Button[] {
+        buttons =
+        [
             GetNode<Button>("UpgradeButton1"),
             GetNode<Button>("UpgradeButton2"),
-            GetNode<Button>("UpgradeButton3"),
-        };
+            GetNode<Button>("UpgradeButton3")
+        ];
         for (int i = 0; i < buttons.Length; i++)
         {
             Button butt = buttons[i];
@@ -77,7 +78,8 @@ public partial class UpgradeScreen : Panel
         else
         {
             upgradesMade++;
-            Client.instance.SendMessage(MessageType.Upgrade, new string[] { Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S" });
+            Client.instance.SendMessage(MessageType.Upgrade, [Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S"
+            ]);
             if (EveryoneUpgraded())
                 HideAndUnpause();
             else SetButtonsVisibility(false);
