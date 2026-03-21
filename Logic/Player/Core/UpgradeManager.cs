@@ -154,6 +154,9 @@ public class UpgradeManager
 
         var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
         upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
+        if (DefenseObjective.instance.flatDamageReduction > 0.01f)
+            upgradeText.Text +=
+                $"Defense: {MathF.Round(DefenseObjective.instance.flatDamageReduction)}\n";
         if (Math.Abs(DefenseObjective.instance.damageMult - 1f) > 0.01f)
             upgradeText.Text +=
                 $"Damage Reduction: {MathHelper.ToPercentAndRound(1 - DefenseObjective.instance.damageMult)}%\n";
