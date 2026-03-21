@@ -87,6 +87,112 @@ action = &"upgrade3"
 [sub_resource type="Shortcut" id="Shortcut_rdled"]
 events = [SubResource("InputEventAction_sbve0")]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dctr5"]
+bg_color = Color(0, 0, 0, 1)
+skew = Vector2(0.5, 0)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.25098, 1, 0.25098, 1)
+
+[sub_resource type="Animation" id="Animation_mi7vx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_styles/panel:border_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.25098, 1, 0.25098, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t2joc"]
+resource_name = "show"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/panel:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1.4),
+"transitions": PackedFloat32Array(1, 2, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_styles/panel:border_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1.4),
+"transitions": PackedFloat32Array(1, 2, 1),
+"update": 0,
+"values": [Color(0.25098, 1, 0.25098, 1), Color(0.25098, 1, 0.25098, 1), Color(0.2509804, 1, 0.2509804, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8333333, 1.4),
+"transitions": PackedFloat32Array(1, 2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hide"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_audqb"]
+_data = {
+&"RESET": SubResource("Animation_mi7vx"),
+&"show": SubResource("Animation_t2joc")
+}
+
 [sub_resource type="InputEventAction" id="InputEventAction_cdmt3"]
 action = &"menu"
 
@@ -401,19 +507,19 @@ horizontal_alignment = 1
 
 [node name="NotificationPopup" type="PopupPanel" parent="." unique_id=1760464903]
 process_mode = 3
+oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(493, 60)
 exclusive = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_dctr5")
 script = ExtResource("19")
 
 [node name="Label" type="Label" parent="NotificationPopup" unique_id=546255580]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 489.0
-offset_bottom = 56.0
+offset_top = 1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7")
@@ -421,6 +527,9 @@ theme_override_font_sizes/font_size = 32
 text = "[Username] used [AbilityName]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NotificationPopup" unique_id=13325890]
+libraries/ = SubResource("AnimationLibrary_audqb")
 
 [node name="MenuButton" type="Button" parent="." unique_id=1151575923]
 process_mode = 3
