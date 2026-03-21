@@ -16,6 +16,7 @@ public partial class Client : Node
     public static Client instance = new();
     public static StreamPeerTcp client;
     public static int myId = -1;
+
     public void Start()
     {
         client = new();
@@ -28,27 +29,32 @@ public partial class Client : Node
             SetProcess(false);
         }
     }
+
     public void Stop()
     {
         if (client != null)
             client.DisconnectFromHost();
         client = null;
     }
+
     public List<UserData> others = [];
     public UserData GetUserData(int id) => others.Find(x => x.id == id);
     private void RemoveUserData(int id) => others.Remove(GetUserData(id));
+
     private static void ChangeSceneToLobby()
     {
         GD.Print("This client connected! Loading lobby...");
         if (NetworkManager.mode == NetMode.Client)
             UI.JoinScene.JoinScene.TryChangeToLobbyScene();
     }
+
     private void ReceiveMessage(string message)
     {
         MessageType type = (MessageType)message[0];
         GD.Print($"Client received msg of type {type} with contents: {message}");
         ProcessMessage(type, message[1..].Split(' '));
     }
+
     private void ProcessMessage(MessageType type, string[] args)
     {
         switch (type)
@@ -56,14 +62,18 @@ public partial class Client : Node
             case MessageType.FetchLobby:
                 ChangeSceneToLobby();
                 GD.Print($"Sending Register Message with augments {string.Join(",", Save.UserData.augmentAllotment)}");
-                SendMessage(MessageType.Register, [args[0], Save.UserData.name, UI.MainMenu.AbilityChooser.chosen.ToString(), UserData.AugmentPointsAsString(Save.UserData.augmentAllotment)
+                SendMessage(MessageType.Register, [
+                    args[0], Save.UserData.name, UI.MainMenu.AbilityChooser.chosen.ToString(),
+                    UserData.AugmentPointsAsString(Save.UserData.augmentAllotment)
                 ]);
                 myId = args[0].ToInt();
                 for (int i = 1; i < args.Length; i++)
                 {
                     var strs = args[i].Split(";");
-                    RegisterUser(strs[0].ToInt(), strs[1], strs[2].ToInt(), strs[3].Split("/").Select(x => int.Parse(x)).ToArray());
+                    RegisterUser(strs[0].ToInt(), strs[1], strs[2].ToInt(),
+                        strs[3].Split("/").Select(x => int.Parse(x)).ToArray());
                 }
+
                 break;
             case MessageType.Register:
                 RegisterUser(args[0].ToInt(), args[1], args[2].ToInt(), UserData.AugmentPointsFromString(args[3]));
@@ -96,6 +106,7 @@ public partial class Client : Node
                 }
                 else
                     GD.PrintErr("Received an EnemyKill message when the Game is not active");
+
                 break;
             case MessageType.Upgrade:
                 Upgrade up = new(UpgradeType.AllTypes[args[1].ToInt()], args[2].Replace(",", ".").ToFloat())
@@ -108,6 +119,7 @@ public partial class Client : Node
                 {
                     UI.InGame.UpgradeScreen.instance.HideAndUnpause();
                 }
+
                 break;
             case MessageType.Death:
                 DefenseObjective.instance.Death(false);
@@ -120,7 +132,8 @@ public partial class Client : Node
                 id = args[0].ToInt();
                 string username = GetUserData(id).name;
                 int abilityTypeIndex = args[1].ToInt();
-                ActiveAbility ability = (ActiveAbility)PlayerManager.players[id].hooks.Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
+                ActiveAbility ability = (ActiveAbility)PlayerManager.players[id].hooks
+                    .Find(x => x.GetType() == AbilityManager.abilityTypes[abilityTypeIndex]);
                 ability.ActivateTryShare();
                 UI.InGame.NotificationPopup.Notify($"{username} used {ability.GetName()}", 1.5f);
                 break;
@@ -128,7 +141,7 @@ public partial class Client : Node
                 Player.Core.Player player = PlayerManager.players[args[0].ToInt()];
                 Player.Turret.Turret turret = player.turrets[args[1].ToInt()];
                 float x = args[2].Replace(",", ".").ToFloat(), y = args[3].Replace(",", ".").ToFloat();
-                turret.GlobalPosition = new Vector2(x, y);
+                turret.UpdatePositionFromNetwork(new Vector2(x, y));
                 break;
             case MessageType.TargetSelected:
                 player = PlayerManager.players[args[0].ToInt()];
@@ -139,6 +152,7 @@ public partial class Client : Node
                 break;
         }
     }
+
     void RegisterUser(int id, string name, int ability, int[] upgradePoints)
     {
         UserData d = new UserData(id, name, ability, upgradePoints);
@@ -148,6 +162,7 @@ public partial class Client : Node
             Lobby.Instance.AddUser(d);
         }
     }
+
     void UnregisterUser(int id)
     {
         RemoveUserData(id);
@@ -156,10 +171,12 @@ public partial class Client : Node
             Lobby.Instance.RemoveUser(id);
         }
     }
+
     static void Broadcast(string data)
     {
         if (client == null)
-            throw new NullReferenceException("variable StreamPeerTcp client is null! Please make sure it has initialized");
+            throw new NullReferenceException(
+                "variable StreamPeerTcp client is null! Please make sure it has initialized");
         client.PutUtf8String(data);
     }
 

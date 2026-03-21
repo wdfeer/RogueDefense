@@ -6,6 +6,10 @@ namespace RogueDefense.Logic.Player.Core;
 
 public partial class Player
 {
+    public const double POSITION_UPDATE_INTERVAL = 0.1;
+    private double positionUpdateTimer;
+    private Vector2? lastSentPosition;
+
     private void UpdateMovement(double delta)
     {
         Vector2 inputDirection = Vector2.Zero;
@@ -23,10 +27,19 @@ public partial class Player
             turret.MoveAndSlide();
         }
 
-        if (NetworkManager.Singleplayer || inputDirection == Vector2.Zero)
-            return;
+        // Send position update over the network
         Vector2 pos = controlledTurret.GlobalPosition;
-        SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
+        if ((!NetworkManager.Singleplayer && inputDirection != Vector2.Zero) || pos != lastSentPosition)
+        {
+            positionUpdateTimer += delta;
+            if (positionUpdateTimer > POSITION_UPDATE_INTERVAL)
+            {
+                SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
+
+                lastSentPosition = pos;
+                positionUpdateTimer = 0.0;
+            }
+        }
     }
 
     private static void SendPositionUpdateMessage(int client, int turretIndex, float x, float y)
