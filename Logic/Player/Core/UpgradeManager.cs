@@ -11,6 +11,7 @@ namespace RogueDefense.Logic.Player.Core;
 public class UpgradeManager
 {
     readonly Player player;
+
     public UpgradeManager(Player player)
     {
         this.player = player;
@@ -27,6 +28,7 @@ public class UpgradeManager
     }
 
     public List<Upgrade> upgrades = new();
+
     public static void AddUpgrade(Upgrade upgrade, int from)
     {
         if (upgrade.risky)
@@ -39,16 +41,15 @@ public class UpgradeManager
         if (upgrade.type == UpgradeType.Turret)
         {
             PlayerManager.players[from].SpawnTurret();
+            return;
         }
-        else
+
+        var upgradeManager = PlayerManager.players[from].upgradeManager;
+        upgradeManager.upgrades.Add(upgrade);
+        foreach (var item in PlayerManager.players)
         {
-            var upgradeManager = PlayerManager.players[from].upgradeManager;
-            upgradeManager.upgrades.Add(upgrade);
-            foreach (var item in PlayerManager.players)
-            {
-                item.Value.upgradeManager.UpdateUpgrades();
-                PlayerManager.my.upgradeManager.UpdateUpgradeText();
-            }
+            item.Value.upgradeManager.UpdateUpgrades();
+            PlayerManager.my.upgradeManager.UpdateUpgradeText();
         }
     }
 
@@ -58,20 +59,24 @@ public class UpgradeManager
     public float bleedChance;
     public float viralChance;
     public float coldChance;
+
     public void UpdateMaxHp()
     {
         float hpMult = 1f + SumEveryonesUpgradeValues(UpgradeType.MaxHp) + MaxHpPerKillPlayer.GetTotalIncrease();
         DefenseObjective.instance.maxHp = DefenseObjective.BASE_MAX_HP * hpMult;
     }
+
     public void UpdateDamageReductions()
     {
         float damageTakenMult = PlayerManager.players
             .Select(x => x.Value.upgradeManager.GetReversedMultiplier(UpgradeType.DamageReduction))
             .Aggregate(1f, (a, b) => a * b);
         DefenseObjective.instance.damageMult = damageTakenMult;
-        
+
+        // FIXME: flat damage reduction not synced for some reason
         DefenseObjective.instance.flatDamageReduction = SumEveryonesUpgradeValues(UpgradeType.FlatDamageReduction);
     }
+
     public void UpdateEvasion()
     {
         float chanceToTakeDamage = PlayerManager.players
@@ -80,6 +85,7 @@ public class UpgradeManager
         float evasionChance = 1 - chanceToTakeDamage;
         DefenseObjective.instance.evasionChance = evasionChance;
     }
+
     public void UpdateUpgrades()
     {
         if (player.IsLocal)
@@ -125,15 +131,20 @@ public class UpgradeManager
     }
 
     public float dynamicUpgradeModifier = 1f;
+
     private IEnumerable<float> GetAllUpgradeValues(UpgradeType type)
         => upgrades.Where(x => x.type.Equals(type)).Select(x => x.Value);
+
     public float SumAllUpgradeValues(UpgradeType type)
         => GetAllUpgradeValues(type).Aggregate(0f, (a, b) => a + b) * dynamicUpgradeModifier;
+
     public float GetTotalUpgradeMultiplier(UpgradeType type)
         => 1f + SumAllUpgradeValues(type);
+
     public float SumEveryonesUpgradeValues(UpgradeType type)
         => PlayerManager.players.Select(x => x.Value.upgradeManager.SumAllUpgradeValues(type))
             .Aggregate(0f, (a, b) => a + b);
+
     public float GetReversedMultiplier(UpgradeType type) // Returns the product of all (1 - upgradeValue) on the player
         => GetAllUpgradeValues(type).Select(x => 1 - x).Aggregate(1f, (a, b) => a * b) / dynamicUpgradeModifier;
 
@@ -144,7 +155,8 @@ public class UpgradeManager
         var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
         upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
         if (Math.Abs(DefenseObjective.instance.damageMult - 1f) > 0.01f)
-            upgradeText.Text += $"Damage Reduction: {MathHelper.ToPercentAndRound(1 - DefenseObjective.instance.damageMult)}%\n";
+            upgradeText.Text +=
+                $"Damage Reduction: {MathHelper.ToPercentAndRound(1 - DefenseObjective.instance.damageMult)}%\n";
         if (DefenseObjective.instance.evasionChance > 0f)
             upgradeText.Text += $"Evasion: {MathHelper.ToPercentAndRound(DefenseObjective.instance.evasionChance)}%\n";
         upgradeText.Text += $@"
@@ -157,7 +169,9 @@ Critical Multiplier: {critDamageMult.ToString("0.00")}x
 ";
         if (bleedChance > 0f) upgradeText.Text += $"\nBleeding Chance: {(bleedChance * 100f).ToString("0.0")}%";
         float corrosiveChance = PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance;
-        if (corrosiveChance > 0f) upgradeText.Text += $"\nCorrosive Chance: {(corrosiveChance * 100f).ToString("0.0")}%"; if (viralChance > 0f) upgradeText.Text += $"\nViral Chance: {(viralChance * 100f).ToString("0.0")}%";
+        if (corrosiveChance > 0f)
+            upgradeText.Text += $"\nCorrosive Chance: {(corrosiveChance * 100f).ToString("0.0")}%";
+        if (viralChance > 0f) upgradeText.Text += $"\nViral Chance: {(viralChance * 100f).ToString("0.0")}%";
         if (coldChance > 0f) upgradeText.Text += $"\nCold Chance: {(coldChance * 100f).ToString("0.0")}% ";
     }
 }
