@@ -13,10 +13,8 @@ public partial class DefenseObjective : Node2D
 {
     public static DefenseObjective instance;
 
-    [Export]
-    public PackedScene projectileManagerScene;
-    [Export]
-    public PackedScene turretScene;
+    [Export] public PackedScene projectileManagerScene;
+    [Export] public PackedScene turretScene;
 
     public override void _Ready()
     {
@@ -35,17 +33,20 @@ public partial class DefenseObjective : Node2D
 
 
     private float hp;
+
     public float Hp
     {
         get => hp;
         set => hp = value;
     }
+
     public float HpRatio => Hp / maxHp;
     public const float BASE_MAX_HP = 100;
     public float maxHp = BASE_MAX_HP;
     private ProgressBar hpBar;
 
     private Sprite2D sprite;
+
     private int GetSpriteFrame()
     {
         int result = 4 - (int)(HpRatio / 0.2f);
@@ -55,6 +56,7 @@ public partial class DefenseObjective : Node2D
     public float evasionChance = 0f;
     public float damageMult = 1f;
     public float flatDamageReduction = 0f;
+
     public void Damage(float dmg)
     {
         if (GD.Randf() < evasionChance)
@@ -81,7 +83,23 @@ public partial class DefenseObjective : Node2D
         {
             Death();
         }
+        else
+        {
+            var corrosiveOnDamageTaken =
+                PlayerManager.my.upgradeManager.SumEveryonesUpgradeValues(UpgradeType.CorrosiveOnDamageTaken);
+            if (corrosiveOnDamageTaken > 0f)
+            {
+                Enemy.Enemy.enemies.ForEach(it =>
+                {
+                    for (int i = 0; i < corrosiveOnDamageTaken; i++)
+                    {
+                        it.corrosive.Add(5);
+                    }
+                });
+            }
+        }
     }
+
     public override void _Process(double delta)
     {
         hpBar.Visible = UserData.clientSettings.ShowHpBar;
@@ -99,6 +117,7 @@ public partial class DefenseObjective : Node2D
             pair.Value._Process(delta);
         }
     }
+
     public override void _PhysicsProcess(double delta)
     {
         foreach (var pair in PlayerManager.players)
@@ -115,6 +134,7 @@ public partial class DefenseObjective : Node2D
             SetHealthDrainTimer();
         });
     }
+
     void DrainHealth()
     {
         float dps = 6;
@@ -125,6 +145,7 @@ public partial class DefenseObjective : Node2D
     }
 
     public bool dead = false;
+
     public void Death(bool local = true)
     {
         if (local && !NetworkManager.Singleplayer)
@@ -138,6 +159,7 @@ public partial class DefenseObjective : Node2D
 
         Game.instance.GetTree().Paused = true;
         UI.InGame.DeathScreen.instance.Show();
-        (UI.InGame.DeathScreen.instance.GetNode("ScoreLabel") as Label).Text = $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
+        (UI.InGame.DeathScreen.instance.GetNode("ScoreLabel") as Label).Text =
+            $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
     }
 }

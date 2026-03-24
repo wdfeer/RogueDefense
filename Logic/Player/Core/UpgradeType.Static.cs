@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Hooks;
+using RogueDefense.Logic.Player.Hooks.ActiveAbilities;
 using RogueDefense.Logic.Player.Hooks.Upgrades;
 using RogueDefense.Logic.UI.MainMenu.AugmentScreen;
 using UserData = RogueDefense.Logic.Save.UserData;
@@ -233,6 +234,15 @@ public partial class UpgradeType
                 PlayerManager.my.upgradeManager.SumEveryonesUpgradeValues(FlatDamageReduction) < 50f
         };
 
+    public static readonly UpgradeType CorrosiveOnDamageTaken =
+        new(x => $"On Damaged: add {MathF.Round(x)} Corrosive stacks to enemies")
+        {
+            chanceMult = 0.5f,
+            getBaseRandomValue = () => 3f,
+            canBeRolled = () =>
+                Game.Wave > 12 && PlayerManager.my.abilityManager.ability1 is not ArmorStripAbility
+        };
+    
     public static UpgradeType[] AllTypes =
     [
         MaxHp,
@@ -266,7 +276,8 @@ public partial class UpgradeType
         CritChanceOnStunned,
         RecoilDamage,
         BleedChanceMinusDamage,
-        FlatDamageReduction
+        FlatDamageReduction,
+        CorrosiveOnDamageTaken
     ];
 
     public static void Initialize()
