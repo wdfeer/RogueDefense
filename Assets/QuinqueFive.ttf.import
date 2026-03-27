@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://idbujal30pa6"
-path="res://.godot/imported/segoeui.ttf-ff5c456725c3e2ddb1f25ab386d4ab12.fontdata"
+uid="uid://mlgdrpmwosq1"
+path="res://.godot/imported/QuinqueFive.ttf-ea3d18fbb02ceeb4d7c0a5d39c9c5fa2.fontdata"
 
 [deps]
 
-source_file="res://Assets/segoeui.ttf"
-dest_files=["res://.godot/imported/segoeui.ttf-ff5c456725c3e2ddb1f25ab386d4ab12.fontdata"]
+source_file="res://Assets/QuinqueFive.ttf"
+dest_files=["res://.godot/imported/QuinqueFive.ttf-ea3d18fbb02ceeb4d7c0a5d39c9c5fa2.fontdata"]
 
 [params]
 
@@ -23,7 +23,7 @@ allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
 hinting=1
-subpixel_positioning=1
+subpixel_positioning=4
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null

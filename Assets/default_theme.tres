@@ -1,6 +1,10 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cgin3ow5quv68"]
+[gd_resource type="Theme" format=3 uid="uid://cgin3ow5quv68"]
+
+[ext_resource type="FontFile" uid="uid://mlgdrpmwosq1" path="res://Assets/QuinqueFive.ttf" id="1_j6874"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oenbf"]
 
 [resource]
+default_font = ExtResource("1_j6874")
+default_font_size = 4
 Button/styles/focus = SubResource("StyleBoxEmpty_oenbf")
