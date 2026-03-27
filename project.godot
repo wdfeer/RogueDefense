@@ -45,6 +45,7 @@ project/assembly_name="RogueDefense"
 
 [gui]
 
+theme/custom="uid://cgin3ow5quv68"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]

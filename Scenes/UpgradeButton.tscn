@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://ck8gmgjr1lmqk"]
+[gd_scene format=3 uid="uid://ck8gmgjr1lmqk"]
 
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="2_2twcg"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="2_2twcg"]
 
-[node name="UpgradeButton" type="Button"]
+[node name="UpgradeButton" type="Button" unique_id=980866474]
 offset_left = 437.0
 offset_top = 260.0
 offset_right = 637.0
 offset_bottom = 380.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1431618024]
 layout_mode = 0
 offset_right = 600.0
 offset_bottom = 360.0

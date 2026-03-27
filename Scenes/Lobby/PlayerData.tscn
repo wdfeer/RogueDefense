@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdpste7hjr5v5"]
+[gd_scene format=3 uid="uid://bdpste7hjr5v5"]
 
 [ext_resource type="Texture2D" uid="uid://t3p5mfkxc68l" path="res://Assets/Images/godot.png" id="2_4of0t"]
-[ext_resource type="Script" path="res://Logic/UI/Lobby/PlayerData.cs" id="3"]
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="3_qvrnw"]
+[ext_resource type="Script" uid="uid://bu3u136n2wxmf" path="res://Logic/UI/Lobby/PlayerData.cs" id="3"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="3_qvrnw"]
 
 [node name="PlayerData" type="Panel"]
 custom_minimum_size = Vector2(0, 80)

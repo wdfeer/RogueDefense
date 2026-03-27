@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cn3qcemajmx43"]
 
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="1_1xcyf"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="1_1xcyf"]
 [ext_resource type="Script" uid="uid://dcc43gtcm0fri" path="res://Logic/UI/MainMenu/AugmentScreen/AugmentPointLabel.cs" id="2_clsfh"]
 [ext_resource type="Texture2D" uid="uid://cmmg1navf2b37" path="res://Assets/Images/Icons/game-icons.net/check-mark.svg" id="3_8u1bf"]
 [ext_resource type="Script" uid="uid://phlc4nd1jiq7" path="res://Logic/UI/MainMenu/AugmentsButton.cs" id="4_w6vcp"]

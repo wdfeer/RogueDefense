@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cjl26paddv1b1" path="res://Assets/Images/Backgrounds/Stage2.png" id="5_cqq2p"]
 [ext_resource type="Texture2D" uid="uid://cg6bpe3ran01u" path="res://Assets/Images/defense_objective.svg" id="6"]
 [ext_resource type="Texture2D" uid="uid://cragqgc6dufek" path="res://Assets/Images/Backgrounds/Stage3.png" id="6_osbn0"]
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="7"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="7"]
 [ext_resource type="Texture2D" uid="uid://cctlucpinf1je" path="res://Assets/Images/Backgrounds/Stage4.png" id="7_vp4ep"]
 [ext_resource type="Script" uid="uid://16fjllvmnrwc" path="res://Logic/UI/InGame/UpgradeScreen.cs" id="8"]
 [ext_resource type="Texture2D" uid="uid://5tdagghqrgur" path="res://Assets/Images/Backgrounds/Stage5.png" id="8_58s5q"]

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c2xtli60svwua" path="res://Scenes/UISounds.tscn" id="2_fmcyo"]
 [ext_resource type="PackedScene" uid="uid://dtm1dpgedp8k2" path="res://Scenes/Lobby/Lobby.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://d7hydk75hi01" path="res://Scenes/MainMenu/JoinScene.tscn" id="4"]
-[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/Images/default_theme.tres" id="5"]
+[ext_resource type="Theme" uid="uid://cgin3ow5quv68" path="res://Assets/default_theme.tres" id="5"]
 [ext_resource type="Texture2D" uid="uid://d4n1tobo1ylie" path="res://Assets/Images/Icons/edit_icon_small.png" id="7_5ef50"]
 [ext_resource type="Script" uid="uid://b6uvhvw6hpyph" path="res://Logic/UI/MainMenu/Statview.cs" id="9"]
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="9_8to8e"]
