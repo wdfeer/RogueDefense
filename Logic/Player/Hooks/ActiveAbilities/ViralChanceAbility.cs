@@ -1,18 +1,13 @@
 namespace RogueDefense.Logic.Player.Hooks.ActiveAbilities;
 
-public class ViralChanceAbility : ActiveAbility
+public class ViralChanceAbility(Core.Player player, Button button) : ActiveAbility(player, button)
 {
-    public ViralChanceAbility(Core.Player player, Button button) : base(player, button)
-    {
-    }
-
-
     public override void Activate()
     {
         buffLeft = Duration * BASE_DURATION;
     }
-    public float buffLeft = 0;
-    float unaffectedViralChance = 0;
+    public float buffLeft;
+    float unaffectedViralChance;
     public override void PostUpgradeUpdate(float delta)
     {
         unaffectedViralChance = player.upgradeManager.viralChance;
@@ -30,7 +25,7 @@ public class ViralChanceAbility : ActiveAbility
     public const float BASE_DURATION = 4f;
 
 
-    public float FlatBonus => 0.2f * Strength;
+    public float FlatBonus => 0.3f * Strength;
     public float MultBonus => 1f * Mathf.Pow(Strength, 1.5f);
     float TotalBonus => (unaffectedViralChance + FlatBonus) * MultBonus;
     public override float BaseCooldown => 16f;
