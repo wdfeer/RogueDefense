@@ -3,11 +3,8 @@ using RogueDefense.Logic.Network;
 
 namespace RogueDefense.Logic.Player.Hooks.ActiveAbilities;
 
-public class ArmorStripAbility : ActiveAbility
+public class ArmorStripAbility(Core.Player player, Button button) : ActiveAbility(player, button)
 {
-    public ArmorStripAbility(Core.Player player, Button button) : base(player, button)
-    {
-    }
     public override void Activate()
     {
         foreach (Enemy.Enemy enemy in Enemy.Enemy.enemies)
@@ -28,7 +25,7 @@ public class ArmorStripAbility : ActiveAbility
 
     public override float BaseCooldown => (NetworkManager.Singleplayer ? 25f : 33f) / Mathf.Sqrt(Duration);
     public float Strip => BASE_STRIP * Mathf.Sqrt(Strength);
-    float Damage => 1f + (Strength - 1) / Mathf.Min(Mathf.Sqrt(Strength), 2);
+    float Damage => 1f + (Strength - 1) / Mathf.Min(Strength, 2);
     protected override string GetAbilityText()
         => @$"Remove {Math.Min(100, MathHelper.ToPercentAndRound(Strip))}% Enemy Armor
 Deal {MathHelper.ToPercentAndRound(Damage)}% of it as damage 
