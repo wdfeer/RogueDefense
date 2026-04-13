@@ -8,7 +8,7 @@ namespace RogueDefense.Logic.Enemy.Variants;
 public partial class ArmoredSpiritBoss : Enemy
 {
 	public override float GetBaseSpeed()
-		=> 0.5f;
+		=> 0.8f;
 
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
@@ -20,6 +20,13 @@ public partial class ArmoredSpiritBoss : Enemy
 		armor *= 2.5f;
 		armor += NetworkManager.Singleplayer ? 360f : 500f;
 	}
+
+	// This enemy is more about tanking its hits
+	protected override void ModifyDamage(ref float damage)
+	{
+		damage *= NetworkManager.Singleplayer ? 0.35f : 0.6f;
+	}
+
 	protected override void ModifyImmunities(ref Status[] statuses)
 	{
 		Bleed bleed = (Bleed)statuses.FirstOrDefault(x => x is Bleed, null);
