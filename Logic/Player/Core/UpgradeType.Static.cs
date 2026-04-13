@@ -112,7 +112,7 @@ public partial class UpgradeType
 
     public static readonly UpgradeType Turret = new(x => "Summon a Turret")
     {
-        chanceMult = 0.25f,
+        chanceMult = 1.25f,
         canBeRolled = () => Game.Wave > (NetworkManager.Singleplayer ? 22 : 36) &&
                             (float)PlayerManager.my.turrets.Count / NetworkManager.PlayerCount < 1.9f
     };
