@@ -544,7 +544,7 @@ icon = ExtResource("18_pat0i")
 expand_icon = true
 script = ExtResource("19_culfp")
 
-[node name="DeathScreen" type="Panel" parent="." unique_id=752233628 node_paths=PackedStringArray("scoreLabel")]
+[node name="DeathScreen" type="Panel" parent="." unique_id=752233628 node_paths=PackedStringArray("scoreLabel", "augmentLabel")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -555,6 +555,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
 script = ExtResource("15")
 scoreLabel = NodePath("VBoxContainer/ScoreLabel")
+augmentLabel = NodePath("VBoxContainer/AugmentsGained")
 
 [node name="Blur" parent="DeathScreen" unique_id=754890917 instance=ExtResource("19_kdd8b")]
 layout_mode = 1

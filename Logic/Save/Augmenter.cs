@@ -29,7 +29,7 @@ public static class Augmenter
         var fromStages = stages * (stages + 1) / 2;
 
         int fromPP = 0;
-        int i = 0;
+        int i = GetNextPPThreshold(0);
         var ppAchieved = topPP.Max();
         while (i < ppAchieved)
         {
