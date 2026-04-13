@@ -18,7 +18,10 @@ public partial class UpgradeType
     };
 
     public static readonly UpgradeType DamageReduction =
-        new(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction") { valueMult = 0.455f };
+        new(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage Reduction")
+        {
+            getBaseRandomValue = () => GD.Randf() * 0.03f + (NetworkManager.Singleplayer ? 0.12f : 0.07f)
+        };
 
     public static readonly UpgradeType Evasion = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Evasion")
     {
@@ -213,17 +216,17 @@ public partial class UpgradeType
             getBaseRandomValue = () => 0.2f,
             canBeRolled = () => PlayerManager.my.shootManager.Recoil == 0
         };
-    
+
     public static readonly UpgradeType BleedChanceMinusDamage =
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance, -{MathHelper.ToPercentAndRound(x / 2f)}% Damage")
-    {
-        status = true,
-        getBaseRandomValue = () => 0.24f,
-        canBeRolled = () =>
-            PlayerManager.my.upgradeManager.bleedChance < 0.33f * AugmentContainer.GetStatMult(3) &&
-            PlayerManager.my.shootManager.damage > 1f,
-        chanceMult = 0.5f
-    };
+        {
+            status = true,
+            getBaseRandomValue = () => 0.24f,
+            canBeRolled = () =>
+                PlayerManager.my.upgradeManager.bleedChance < 0.33f * AugmentContainer.GetStatMult(3) &&
+                PlayerManager.my.shootManager.damage > 1f,
+            chanceMult = 0.5f
+        };
 
     public static readonly UpgradeType FlatDamageReduction =
         new(x => $"-{MathF.Round(x)} flat damage taken")
@@ -242,7 +245,7 @@ public partial class UpgradeType
             canBeRolled = () =>
                 Game.Wave > 12 && PlayerManager.my.abilityManager.ability1 is not ArmorStripAbility
         };
-    
+
     public static UpgradeType[] AllTypes =
     [
         MaxHp,
