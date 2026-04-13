@@ -120,9 +120,9 @@ public partial class UpgradeType
     public static readonly UpgradeType DamagePerUniqueStatus =
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
         {
-            chanceMult = 0.2f,
+            chanceMult = 0.33f,
             canBeRolled = () =>
-                Game.Wave > 45 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().IncreasePerStatus < 0.35f,
+                Game.Wave > 41 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().IncreasePerStatus < 0.35f,
             valueMult = 0.3f
         };
 
