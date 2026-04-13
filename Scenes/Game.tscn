@@ -546,7 +546,6 @@ script = ExtResource("19_culfp")
 
 [node name="DeathScreen" type="Panel" parent="." unique_id=752233628 node_paths=PackedStringArray("scoreLabel")]
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -555,7 +554,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
 script = ExtResource("15")
-scoreLabel = NodePath("VBoxContainer/MarginContainer/ScoreLabel")
+scoreLabel = NodePath("VBoxContainer/ScoreLabel")
 
 [node name="Blur" parent="DeathScreen" unique_id=754890917 instance=ExtResource("19_kdd8b")]
 layout_mode = 1
@@ -575,6 +574,7 @@ offset_right = 251.0
 offset_bottom = 180.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 32
 
 [node name="Title" type="Label" parent="DeathScreen/VBoxContainer" unique_id=1677632549]
 layout_mode = 2
@@ -585,12 +585,7 @@ text = "YOU ARE DEAD!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="DeathScreen/VBoxContainer" unique_id=509738277]
-layout_mode = 2
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="ScoreLabel" type="Label" parent="DeathScreen/VBoxContainer/MarginContainer" unique_id=28480333]
+[node name="ScoreLabel" type="Label" parent="DeathScreen/VBoxContainer" unique_id=28480333]
 layout_mode = 2
 theme = ExtResource("7")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -606,6 +601,13 @@ theme = ExtResource("7")
 theme_override_font_sizes/font_size = 64
 text = "MAIN MENU"
 script = ExtResource("13")
+
+[node name="AugmentsGained" type="Label" parent="DeathScreen/VBoxContainer" unique_id=687110000]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.264, 0.88, 0.264, 1)
+theme_override_font_sizes/font_size = 32
+text = "10pp broken: +1 Augment Point"
 
 [node name="Menu" type="Panel" parent="." unique_id=2133701484]
 process_mode = 3

@@ -38,17 +38,18 @@ public static class SaveManager
     
     static void LoadAugments(FileAccess file)
     {
-        int stages = Math.Max(highscoreSingleplayer, highscoreMultiplayer) / 10;
-        SpareAugmentPoints = stages * (stages + 1) / 2;
+        SpareAugmentPoints = Augmenter.GetTotalAugmentCount();
         for (int i = 0; i < augmentAllotment.Length; i++)
         {
             augmentAllotment[i] = (int)file.Get64();
             SpareAugmentPoints -= augmentAllotment[i];
         }
+        
+        // Reset if invalid augment allotment
         if (SpareAugmentPoints < 0)
         {
             augmentAllotment = new int[augmentAllotment.Length];
-            SpareAugmentPoints = stages * (stages + 1) / 2;
+            SpareAugmentPoints = Augmenter.GetTotalAugmentCount();
         }
     }
     

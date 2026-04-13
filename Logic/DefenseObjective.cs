@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Player.Core;
@@ -152,14 +153,11 @@ public partial class DefenseObjective : Node2D
         {
             Client.instance.SendMessage(MessageType.Death);
         }
+        
+        DeathScreen.instance.Activate();
 
         PP.TryRecordPP();
         UserData.gameCount++;
         SaveManager.Save();
-
-        Game.instance.GetTree().Paused = true;
-        DeathScreen.instance.Show();
-        DeathScreen.instance.scoreLabel.Text =
-            $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
     }
 }
