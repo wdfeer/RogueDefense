@@ -8,16 +8,16 @@ namespace RogueDefense.Logic.Enemy.Variants;
 public partial class ArmoredSpiritBoss : Enemy
 {
 	public override float GetBaseSpeed()
-		=> 0.6f;
+		=> 0.5f;
 
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
-		maxHp /= GetBaseSpeed();
-		maxHp += 100f;
+		maxHp *= 2;
+		maxHp += NetworkManager.Singleplayer ? 75f : 100f;
 	}
 	protected override void ModifyArmor(ref float armor)
 	{
-		armor *= 3f;
+		armor *= 2.5f;
 		armor += NetworkManager.Singleplayer ? 360f : 500f;
 	}
 	protected override void ModifyImmunities(ref Status[] statuses)

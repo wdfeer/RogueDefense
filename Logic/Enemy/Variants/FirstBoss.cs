@@ -12,7 +12,7 @@ public partial class FirstBoss : Enemy
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
 		maxHp *= 1.5f;
-		maxHp += NetworkManager.Singleplayer ? 25 : 50;
+		maxHp += NetworkManager.Singleplayer ? 30 : 50;
 	}
 	protected override void ModifyImmunities(ref Status[] statuses)
 	{
