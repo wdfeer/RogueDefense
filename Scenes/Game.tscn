@@ -546,6 +546,7 @@ script = ExtResource("19_culfp")
 
 [node name="DeathScreen" type="Panel" parent="." unique_id=752233628 node_paths=PackedStringArray("scoreLabel", "augmentLabel")]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

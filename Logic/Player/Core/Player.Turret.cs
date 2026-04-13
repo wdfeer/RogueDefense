@@ -29,7 +29,7 @@ public partial class Player
 
         // Send position update over the network
         Vector2 pos = controlledTurret.GlobalPosition;
-        if ((!NetworkManager.Singleplayer && inputDirection != Vector2.Zero) || pos != lastSentPosition)
+        if (!NetworkManager.Singleplayer && (inputDirection != Vector2.Zero || pos != lastSentPosition))
         {
             positionUpdateTimer += delta;
             if (positionUpdateTimer > POSITION_UPDATE_INTERVAL)
