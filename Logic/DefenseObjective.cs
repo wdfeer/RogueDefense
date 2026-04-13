@@ -158,8 +158,8 @@ public partial class DefenseObjective : Node2D
         SaveManager.Save();
 
         Game.instance.GetTree().Paused = true;
-        UI.InGame.DeathScreen.instance.Show();
-        (UI.InGame.DeathScreen.instance.GetNode("ScoreLabel") as Label).Text =
+        DeathScreen.instance.Show();
+        DeathScreen.instance.scoreLabel.Text =
             $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
     }
 }

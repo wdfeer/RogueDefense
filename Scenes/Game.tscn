@@ -544,7 +544,7 @@ icon = ExtResource("18_pat0i")
 expand_icon = true
 script = ExtResource("19_culfp")
 
-[node name="DeathScreen" type="Panel" parent="." unique_id=752233628]
+[node name="DeathScreen" type="Panel" parent="." unique_id=752233628 node_paths=PackedStringArray("scoreLabel")]
 process_mode = 3
 visible = false
 layout_mode = 1
@@ -555,19 +555,29 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7yfom")
 script = ExtResource("15")
+scoreLabel = NodePath("VBoxContainer/MarginContainer/ScoreLabel")
 
 [node name="Blur" parent="DeathScreen" unique_id=754890917 instance=ExtResource("19_kdd8b")]
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="Label" type="Label" parent="DeathScreen" unique_id=1677632549]
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen" unique_id=492145601]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 88.0
-offset_bottom = 176.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -251.0
+offset_top = -180.5
+offset_right = 251.0
+offset_bottom = 180.5
 grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="DeathScreen/VBoxContainer" unique_id=1677632549]
+layout_mode = 2
 theme = ExtResource("7")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 64
@@ -575,36 +585,23 @@ text = "YOU ARE DEAD!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="DeathScreen" unique_id=28480333]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -41.5
-offset_bottom = 41.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="DeathScreen/VBoxContainer" unique_id=509738277]
+layout_mode = 2
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="ScoreLabel" type="Label" parent="DeathScreen/VBoxContainer/MarginContainer" unique_id=28480333]
+layout_mode = 2
 theme = ExtResource("7")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 60
-text = "Level 9999 reached"
+text = "99 Stages cleared
+123.456 pp"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ReturnButton" type="Button" parent="DeathScreen" unique_id=1754399291]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -156.0
-offset_right = 256.0
-offset_bottom = -56.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="ReturnButton" type="Button" parent="DeathScreen/VBoxContainer" unique_id=1754399291]
+layout_mode = 2
 theme = ExtResource("7")
 theme_override_font_sizes/font_size = 64
 text = "MAIN MENU"
