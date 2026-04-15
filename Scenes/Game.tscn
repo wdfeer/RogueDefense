@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://cs6usky6tq505" path="res://Scenes/Enemies/Multigunner.tscn" id="16_brqtq"]
 [ext_resource type="PackedScene" uid="uid://cbgccxqtdj6tt" path="res://Scenes/Turret.tscn" id="17"]
 [ext_resource type="PackedScene" uid="uid://cf5k47mxihymy" path="res://Scenes/Enemies/MultigunnerBoss.tscn" id="17_8qcy2"]
+[ext_resource type="PackedScene" uid="uid://ors870jinhm0" path="res://Scenes/Enemies/Duogunner.tscn" id="17_mi7vx"]
 [ext_resource type="PackedScene" uid="uid://43imkg4sl66e" path="res://Scenes/ProjectileManager.tscn" id="17_v5lu7"]
 [ext_resource type="Script" uid="uid://dh0wnpui6vf8h" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="PackedScene" uid="uid://diecg660ktie5" path="res://Scenes/Enemies/ArcaneBoss/ArcaneBoss.tscn" id="18_jqv4r"]
@@ -240,6 +241,7 @@ armoredSpiritBossScene = ExtResource("12_icdcw")
 miniArmoredSpiritScene = ExtResource("13_383pk")
 explodingEyeScene = ExtResource("14_gxxuh")
 multigunnerScene = ExtResource("16_brqtq")
+duogunnerScene = ExtResource("17_mi7vx")
 multigunnerBossScene = ExtResource("17_8qcy2")
 arcaneBossScene = ExtResource("18_jqv4r")
 

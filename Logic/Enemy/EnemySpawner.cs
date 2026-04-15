@@ -18,6 +18,8 @@ public partial class EnemySpawner : Node2D
 	[Export]
 	public PackedScene multigunnerScene;
 	[Export]
+	public PackedScene duogunnerScene;
+	[Export]
 	public PackedScene multigunnerBossScene;
 	[Export]
 	public PackedScene arcaneBossScene;
@@ -28,7 +30,8 @@ public partial class EnemySpawner : Node2D
 			List<PackedScene> possibilities =
 			[
 				regularEnemyScene,
-				multigunnerScene
+				multigunnerScene,
+				duogunnerScene
 			];
 			if (gen > 15)
 				possibilities.Add(miniArmoredSpiritScene);
