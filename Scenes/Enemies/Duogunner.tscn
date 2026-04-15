@@ -9,11 +9,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_omhc4"]
 radius = 56.0
 
-[node name="Duogunner" unique_id=1926031801 node_paths=PackedStringArray("spawnPoints") instance=ExtResource("1_tvw5x")]
+[node name="Duogunner" unique_id=1926031801 node_paths=PackedStringArray("spawnPoints", "spriteToRotate") instance=ExtResource("1_tvw5x")]
 monitorable = false
 script = ExtResource("2_neuhy")
 bulletScene = ExtResource("4_15d0d")
 spawnPoints = [NodePath("Sprite2D/Gun/SpawnPoint"), NodePath("Sprite2D/Gun2/SpawnPoint")]
+spriteToRotate = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_omhc4")

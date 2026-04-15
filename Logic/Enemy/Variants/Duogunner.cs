@@ -7,16 +7,7 @@ namespace RogueDefense.Logic.Enemy.Variants;
 public partial class Duogunner : Enemy
 {
     [Export] PackedScene bulletScene;
-
-    public override void _Ready()
-    {
-        base._Ready();
-
-        GetNode<Sprite2D>("Sprite2D").Rotate(GD.Randf() * Mathf.Pi);
-    }
-
-    [Export]
-    Node2D[] spawnPoints;
+    [Export] Node2D[] spawnPoints;
 
     protected override bool ShieldOrbsAllowed => false;
 
@@ -25,7 +16,7 @@ public partial class Duogunner : Enemy
 
     protected override void ModifyDamage(ref float damage)
     {
-        damage *= 0.25f;
+        damage *= 0.3f;
     }
 
     protected override void ModifyMaxHp(ref float maxHp)
@@ -35,7 +26,7 @@ public partial class Duogunner : Enemy
 
     protected override void ModifyArmor(ref float armor)
     {
-        armor *= 1.25f;
+        armor *= 1.5f;
 
         if (armor < 300)
             armor = 300f;
@@ -45,13 +36,16 @@ public partial class Duogunner : Enemy
     protected virtual float HpCriticalModifier => (Hp / maxHp < 0.5f) ? 1.5f : 1;
 
     float shootTimer = GD.Randf();
-    float ShootInterval => 1f / HpCriticalModifier;
+    float ShootInterval => (Game.Wave > 20 ? 1.2f : 1.5f) / HpCriticalModifier;
 
     public override void _Process(double delta)
     {
         base._Process(delta);
 
-        GetNode<Sprite2D>("Sprite2D").SetRotation(GlobalPosition.AngleTo(DefenseObjective.instance.GlobalPosition));
+        var target = PlayerManager.my.controlledTurret.GlobalPosition;
+        var diff = target - GlobalPosition;
+        GetNode<Sprite2D>("Sprite2D").GlobalRotation =
+            MathF.Atan2(diff.Y, diff.X);
 
         shootTimer += (float)delta;
         if (shootTimer > ShootInterval)
