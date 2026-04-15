@@ -3,16 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://dcw1pfahgswms" path="res://Scenes/Enemies/RegularEnemy.tscn" id="1_tvw5x"]
 [ext_resource type="Script" uid="uid://b772bjlpodect" path="res://Logic/Enemy/Variants/Duogunner.cs" id="2_neuhy"]
 [ext_resource type="PackedScene" uid="uid://dl7qsuudqjod4" path="res://Scenes/Enemies/MultigunnerGun.tscn" id="3_ic12c"]
+[ext_resource type="PackedScene" uid="uid://bihd7f4474w3i" path="res://Scenes/Enemies/EnemyBullet.tscn" id="4_15d0d"]
 [ext_resource type="Texture2D" uid="uid://c6pu0n1nidmv8" path="res://Assets/Images/Enemies/Multigunner/multigunner0.svg" id="5_sn2ay"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_omhc4"]
 radius = 56.0
 
 [node name="Duogunner" unique_id=1926031801 node_paths=PackedStringArray("spawnPoints") instance=ExtResource("1_tvw5x")]
+monitorable = false
 script = ExtResource("2_neuhy")
-gunScene = null
-bulletScene = null
-spawnPoints = []
+bulletScene = ExtResource("4_15d0d")
+spawnPoints = [NodePath("Sprite2D/Gun/SpawnPoint"), NodePath("Sprite2D/Gun2/SpawnPoint")]
 
 [node name="CollisionShape2D" parent="." index="0"]
 shape = SubResource("CircleShape2D_omhc4")
@@ -24,3 +25,6 @@ texture = ExtResource("5_sn2ay")
 
 [node name="Gun2" parent="Sprite2D" index="1" unique_id=865534017 instance=ExtResource("3_ic12c")]
 rotation = 3.1415927
+
+[editable path="Sprite2D/Gun"]
+[editable path="Sprite2D/Gun2"]

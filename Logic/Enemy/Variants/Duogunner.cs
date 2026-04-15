@@ -6,7 +6,6 @@ namespace RogueDefense.Logic.Enemy.Variants;
 
 public partial class Duogunner : Enemy
 {
-    [Export] PackedScene gunScene;
     [Export] PackedScene bulletScene;
 
     public override void _Ready()
@@ -16,21 +15,8 @@ public partial class Duogunner : Enemy
         GetNode<Sprite2D>("Sprite2D").Rotate(GD.Randf() * Mathf.Pi);
     }
 
-    [Export] Node2D[] spawnPoints;
-
-    void SpawnGuns(int count)
-    {
-        spawnPoints = new Node2D[count];
-        for (int i = 0; i < count; i++)
-        {
-            Node2D gun = gunScene.Instantiate<Node2D>();
-            GetNode<Sprite2D>("Sprite2D").AddChild(gun);
-            gun.GlobalPosition = GlobalPosition;
-            gun.Rotation = Mathf.Pi * 2 * i / count;
-            spawnPoints[i] = gun.GetNode<Node2D>("SpawnPoint");
-        }
-    }
-
+    [Export]
+    Node2D[] spawnPoints;
 
     protected override bool ShieldOrbsAllowed => false;
 
