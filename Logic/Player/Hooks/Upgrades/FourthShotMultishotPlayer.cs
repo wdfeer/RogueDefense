@@ -2,11 +2,11 @@ using RogueDefense.Logic.Player.Core;
 
 namespace RogueDefense.Logic.Player.Hooks.Upgrades;
 
-public class NthShotMultishotPlayer : PlayerHooks
+public class FourthShotMultishotPlayer : PlayerHooks
 {
     int shots = 0;
 
-    public NthShotMultishotPlayer(Core.Player player) : base(player)
+    public FourthShotMultishotPlayer(Core.Player player) : base(player)
     {
     }
 
@@ -14,7 +14,7 @@ public class NthShotMultishotPlayer : PlayerHooks
     {
         if (shots >= 4)
         {
-            float mult = player.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.NthShotMultishot);
+            float mult = player.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.FourthShotMultishot);
             shooter.multishot *= mult;
 
             shots = 0;

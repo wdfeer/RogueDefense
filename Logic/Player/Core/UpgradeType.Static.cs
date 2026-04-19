@@ -14,7 +14,7 @@ public partial class UpgradeType
 {
     public static readonly UpgradeType MaxHp = new(x => $"+{MathHelper.ToPercentAndRound(x)} Max Hp")
     {
-        getBaseRandomValue = () => GD.Randf() * 0.05f + 0.01f * (10 + Game.Wave / 2)
+        getBaseRandomValue = () => 0.1f + GD.Randf() * 0.04f + 0.01f * Game.Wave
     };
 
     public static readonly UpgradeType DamageReduction =
@@ -38,7 +38,7 @@ public partial class UpgradeType
 
     public static readonly UpgradeType CritChance = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Chance")
     {
-        canBeRolled = () => PlayerManager.my.upgradeManager.critChance < 1.25f
+        canBeRolled = () => PlayerManager.my.upgradeManager.critChance < 1.5f
     };
 
     public static readonly UpgradeType CritDamage = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Crit Damage")
@@ -49,8 +49,8 @@ public partial class UpgradeType
     public static readonly UpgradeType BleedChance = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance")
     {
         status = true,
-        getBaseRandomValue = () => 0.16f,
-        canBeRolled = () => PlayerManager.my.upgradeManager.bleedChance < 0.25f * AugmentContainer.GetStatMult(3)
+        getBaseRandomValue = () => 0.2f,
+        canBeRolled = () => PlayerManager.my.upgradeManager.bleedChance < 0.4f * AugmentContainer.GetStatMult(3)
     };
 
     public static readonly UpgradeType CorrosiveChance =
@@ -65,13 +65,14 @@ public partial class UpgradeType
     public static readonly UpgradeType ViralChance = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Viral Chance")
     {
         status = true,
-        chanceMult = 0.5f,
+        chanceMult = 0.7f,
         valueMult = 0.7f
     };
 
     public static readonly UpgradeType ColdChance = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Slow Chance")
     {
         status = true,
+        chanceMult = 0.4f,
         valueMult = 0.13f,
         canBeRolled = () => Game.Wave > 24 && PlayerManager.my.upgradeManager.coldChance < 0.13f
     };
@@ -86,36 +87,36 @@ public partial class UpgradeType
     public static readonly UpgradeType AbilityDuration =
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Ability Duration")
         {
-            valueMult = 1.15f, chanceMult = 0.5f,
+            valueMult = 1.15f, chanceMult = 0.6f,
             canBeRolled = () => !PlayerManager.my.abilityManager.ability1.ConstantValues
         };
 
-    public static readonly UpgradeType NthShotMultishot =
+    public static readonly UpgradeType FourthShotMultishot =
         new(x => $"Every 4th shot has +{MathHelper.ToPercentAndRound(x)}% Total Multishot")
         {
             chanceMult = 0.2f,
             getBaseRandomValue = () => 1f,
-            canBeRolled = () => PlayerManager.my.upgradeManager.SumAllUpgradeValues(NthShotMultishot) < 1.5f
+            canBeRolled = () => PlayerManager.my.upgradeManager.SumAllUpgradeValues(FourthShotMultishot) < 1.5f
         };
 
     public static readonly UpgradeType PlusDamageMinusFireRate =
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Damage, -{MathHelper.ToPercentAndRound(x / 2)}% Fire Rate")
         {
             chanceMult = 0.2f,
-            canBeRolled = () => PlayerManager.my.shootManager.shootInterval < 1.4f,
+            canBeRolled = () => PlayerManager.my.shootManager.shootInterval < 1f,
             getBaseRandomValue = () => 0.9f
         };
 
     public static readonly UpgradeType MaxHpPerKill = new(x => $"On Kill: +{MathHelper.ToPercentAndRound(x)} Max Hp")
     {
-        chanceMult = 0.33f,
-        canBeRolled = () => Game.Wave < 12 || GD.Randf() < 0.3f,
+        chanceMult = 0.35f,
+        canBeRolled = () => Game.Wave < 13 || GD.Randf() < 0.25f,
         getBaseRandomValue = () => 0.01f
     };
 
     public static readonly UpgradeType Turret = new(x => "Summon a Turret")
     {
-        chanceMult = 1.25f,
+        chanceMult = 1.75f,
         canBeRolled = () => Game.Wave > (NetworkManager.Singleplayer ? 22 : 36) &&
                             (float)PlayerManager.my.turrets.Count / NetworkManager.PlayerCount < 1.9f
     };
@@ -123,7 +124,7 @@ public partial class UpgradeType
     public static readonly UpgradeType DamagePerUniqueStatus =
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage per Unique Status Effect")
         {
-            chanceMult = 0.33f,
+            chanceMult = 0.45f,
             canBeRolled = () =>
                 Game.Wave > 41 && PlayerHooks.GetLocalHooks<DamagePerUniqueStatusPlayer>().IncreasePerStatus < 0.35f,
             valueMult = 0.3f
@@ -133,7 +134,7 @@ public partial class UpgradeType
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Fire Rate, -{MathHelper.ToPercentAndRound(x / 2)}% Multishot")
         {
             chanceMult = 0.2f,
-            canBeRolled = () => Game.Wave > 10 && PlayerManager.my.shootManager.multishot > 1f,
+            canBeRolled = () => PlayerManager.my.shootManager.multishot > 1f,
             valueMult = 2.2f
         };
 
@@ -157,7 +158,7 @@ public partial class UpgradeType
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage on First Shot")
         {
             chanceMult = 0.2f,
-            getBaseRandomValue = () => 2f
+            getBaseRandomValue = () => 2.5f
         };
 
     public static readonly UpgradeType FirstHitCritDamage = new(x => $"+{(int)x}x Total Crit Dmg on First Hit")
@@ -170,9 +171,9 @@ public partial class UpgradeType
     public static readonly UpgradeType TotalDamageVsArmor =
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Total Damage vs Armored Enemy")
         {
-            chanceMult = 0.33f,
-            getBaseRandomValue = () => (20 + UserData.augmentAllotment[0]) / 100f,
-            canBeRolled = () => Game.Wave > 15 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().Mult < 1.1f
+            chanceMult = 0.4f,
+            getBaseRandomValue = () => 0.15f,
+            canBeRolled = () => Game.Wave > 13 && PlayerHooks.GetLocalHooks<DamageVsArmorPlayer>().Mult < 1.5f
         };
 
     public static readonly UpgradeType ExplosionChance =
@@ -180,7 +181,7 @@ public partial class UpgradeType
         {
             chanceMult = 0.25f,
             getBaseRandomValue = () => 0.33f,
-            canBeRolled = () => Game.Wave > 30 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().Chance < 0.5f
+            canBeRolled = () => Game.Wave > 30 && PlayerHooks.GetLocalHooks<ExplosionPlayer>().Chance < 1f
         };
 
     public static readonly UpgradeType ExplosionRadius =
@@ -221,11 +222,11 @@ public partial class UpgradeType
         new(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance, -{MathHelper.ToPercentAndRound(x / 2f)}% Damage")
         {
             status = true,
-            getBaseRandomValue = () => 0.24f,
+            getBaseRandomValue = () => 0.3f,
             canBeRolled = () =>
-                PlayerManager.my.upgradeManager.bleedChance < 0.33f * AugmentContainer.GetStatMult(3) &&
+                PlayerManager.my.upgradeManager.bleedChance < 1f * AugmentContainer.GetStatMult(3) &&
                 PlayerManager.my.shootManager.damage > 1f,
-            chanceMult = 0.5f
+            chanceMult = 0.3f
         };
 
     public static readonly UpgradeType FlatDamageReduction =
@@ -240,7 +241,7 @@ public partial class UpgradeType
     public static readonly UpgradeType CorrosiveOnDamageTaken =
         new(x => $"On Damaged: add {MathF.Round(x)} Corrosive stacks to enemies")
         {
-            chanceMult = 0.5f,
+            chanceMult = 0.3f,
             getBaseRandomValue = () => 3f,
             canBeRolled = () =>
                 Game.Wave > 12 && PlayerManager.my.abilityManager.ability1 is not ArmorStripAbility
@@ -262,7 +263,7 @@ public partial class UpgradeType
         AbilityStrength,
         AbilityDuration,
         FirstHitCritDamage,
-        NthShotMultishot,
+        FourthShotMultishot,
         PlusDamageMinusFireRate,
         MaxHpPerKill,
         Turret,
