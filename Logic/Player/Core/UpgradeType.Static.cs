@@ -26,7 +26,7 @@ public partial class UpgradeType
     public static readonly UpgradeType Evasion = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Evasion")
     {
         chanceMult = 0.5f,
-        valueMult = 0.52f,
+        getBaseRandomValue = () => GD.Randf() * 0.04f + (NetworkManager.Singleplayer ? 0.125f : 0.075f),
         canBeRolled = () => Game.Wave > 15
     };
 
