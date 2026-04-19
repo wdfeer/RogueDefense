@@ -237,10 +237,10 @@ public partial class UpgradeType
     public static readonly UpgradeType FlatDamageReduction =
         new(x => $"-{MathF.Round(x)} flat damage taken")
         {
-            getBaseRandomValue = () => 5f,
+            getBaseRandomValue = () => NetworkManager.Singleplayer ? 4f : 3f,
             canBeRolled = () =>
                 DefenseObjective.instance.damageMult <= 0.8f &&
-                PlayerManager.my.upgradeManager.SumEveryonesUpgradeValues(FlatDamageReduction) < 50f
+                PlayerManager.my.upgradeManager.SumEveryonesUpgradeValues(FlatDamageReduction) < 25f
         };
 
     public static readonly UpgradeType CorrosiveOnDamageTaken =
