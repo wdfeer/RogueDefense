@@ -172,6 +172,8 @@ Multishot: {player.shootManager.multishot.ToString("0.00")}
 Critical Chance: {(critChance * 100f).ToString("0.0")}%
 Critical Multiplier: {critDamageMult.ToString("0.00")}x
 ";
+        float burnChance = PlayerHooks.GetLocalHooks<StatusPlayer>().burnChance;
+        if (burnChance > 0f) upgradeText.Text += $"\nBurn Chance: {(burnChance * 100f).ToString("0.0")}%";
         if (bleedChance > 0f) upgradeText.Text += $"\nBleeding Chance: {(bleedChance * 100f).ToString("0.0")}%";
         float corrosiveChance = PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance;
         if (corrosiveChance > 0f)
