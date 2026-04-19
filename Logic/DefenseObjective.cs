@@ -61,7 +61,16 @@ public partial class DefenseObjective : Node2D
     public void Damage(float dmg)
     {
         if (GD.Randf() < evasionChance)
+        {
+            CombatTextDisplay.instance.AddCombatText(new CombatText()
+            {
+                direction = Vector2.Up * 1.5f,
+                modulate = Colors.GreenYellow,
+                position = GlobalPosition + Vector2.Up * 60 + 10 * Vector2.Right * (GD.Randf() - 0.5f),
+                text = "MISS"
+            });
             return;
+        }
 
         dmg *= damageMult;
 
@@ -153,7 +162,7 @@ public partial class DefenseObjective : Node2D
         {
             Client.instance.SendMessage(MessageType.Death);
         }
-        
+
         DeathScreen.instance.Activate();
 
         PP.TryRecordPP();
