@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.Player.Hooks.Upgrades;
+using RogueDefense.Logic.UI.InGame;
 
 namespace RogueDefense.Logic.Player.Turret;
 
@@ -96,10 +98,29 @@ public partial class Turret : CharacterBody2D
     public bool Stunned => StunTimer > 0;
 
 
-    public void Stun(float duration)
+    public void TryStun(float duration)
     {
-        StunTimer += duration / owner.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.RecoverySpeed);
-
-        PlayerHooks.GetHooks<CritChanceOnStunnedPlayer>(owner).Activate();
+        if (GD.Randf() < DefenseObjective.instance.evasionChance)
+        {
+            CombatTextDisplay.instance.AddCombatText(new CombatText()
+            {
+                direction = Vector2.Up * 1.5f,
+                modulate = Colors.GreenYellow,
+                position = GlobalPosition + Vector2.Up * 50,
+                text = "MISS"
+            });
+        }
+        else
+        {
+            CombatTextDisplay.instance.AddCombatText(new CombatText()
+            {
+                direction = Vector2.Up * 1.5f,
+                modulate = Colors.Red,
+                position = GlobalPosition + Vector2.Up * 50,
+                text = "STUN"
+            });
+            StunTimer += duration / owner.upgradeManager.GetTotalUpgradeMultiplier(UpgradeType.RecoverySpeed);
+            PlayerHooks.GetHooks<CritChanceOnStunnedPlayer>(owner).Activate();
+        }
     }
 }

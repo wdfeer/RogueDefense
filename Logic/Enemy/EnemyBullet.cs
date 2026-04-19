@@ -31,7 +31,7 @@ public partial class EnemyBullet : Area2D
 		}
 		else if (body is Player.Turret.Turret turret && !turret.Stunned)
 		{
-			turret.Stun(STUN_DURATION);
+			turret.TryStun(STUN_DURATION);
 			QueueFree();
 		}
 	}
