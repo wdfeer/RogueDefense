@@ -56,6 +56,8 @@ public class UpgradeManager
     public float critChance;
     public float baseCritMult = 2f;
     public float critDamageMult = 2f;
+    
+    // TODO: refactor into a generic status chance dict in StatusPlayer
     public float bleedChance;
     public float viralChance;
     public float coldChance;
@@ -122,6 +124,7 @@ public class UpgradeManager
                       SumAllUpgradeValues(UpgradeType.BleedChanceMinusDamage);
         viralChance = SumAllUpgradeValues(UpgradeType.ViralChance);
         coldChance = SumAllUpgradeValues(UpgradeType.ColdChance);
+        PlayerHooks.GetHooks<StatusPlayer>(player).burnChance = SumAllUpgradeValues(UpgradeType.BurnChance);
         PlayerHooks.GetHooks<StatusPlayer>(player).corrosiveChance = SumAllUpgradeValues(UpgradeType.CorrosiveChance);
 
         player.shootManager.shootSpeed = ShootManager.BASE_SHOOT_SPEED;

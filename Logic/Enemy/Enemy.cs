@@ -25,7 +25,7 @@ public abstract partial class Enemy : Area2D
 
 		BodyEntered += OnBodyEntered;
 
-		statuses = [bleed, corrosive, viral, cold];
+		statuses = [burn, bleed, corrosive, viral, cold];
 		foreach (Status status in statuses)
 		{
 			status.enemy = this;
@@ -136,10 +136,10 @@ public abstract partial class Enemy : Area2D
 		dynamicDamageMult = 1f;
 		dynamicArmorMult = 1f;
 
-		bleed.TryProcess((float)delta);
-		viral.TryProcess((float)delta);
-		cold.TryProcess((float)delta);
-		corrosive.TryProcess((float)delta);
+		foreach (var s in statuses)
+		{
+			s.TryProcess((float)delta);
+		}
 
 		ResetArmorDisplay();
 	}
@@ -183,11 +183,14 @@ public abstract partial class Enemy : Area2D
 	}
 	
 	
+        // TODO: refactor and standardize this
 	public Bleed bleed = new();
+	public Burn burn = new();
 	public Viral viral = new();
 	public Cold cold = new();
 	public Corrosive corrosive = new();
 	public Status[] statuses;
+	public void AddBurn(float totalDmg, float duration) => burn.Add(totalDmg / 5f, duration);
 	public void AddBleed(float totalDmg, float duration) => bleed.Add(totalDmg / 5f, duration);
 	public void AddViral(float duration) => viral.Add(duration);
 	public void AddCold(float duration) => cold.Add(duration);

@@ -29,10 +29,10 @@ public partial class ArmoredSpiritBoss : Enemy
 
 	protected override void ModifyImmunities(ref Status[] statuses)
 	{
-		Bleed bleed = (Bleed)statuses.FirstOrDefault(x => x is Bleed, null);
-		if (bleed != null)
+		Bleed bl = (Bleed)statuses.FirstOrDefault(x => x is Bleed, null);
+		if (bl != null)
 		{
-			bleed.immune = true;
+			bl.immune = true;
 		}
 	}
 	protected override bool ShieldOrbsAllowed => false;

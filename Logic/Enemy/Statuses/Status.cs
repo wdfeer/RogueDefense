@@ -5,7 +5,7 @@ public abstract class Status
 
     public abstract int Count { get; }
     public bool Active => Count > 0;
-    public virtual bool ShouldProcess() => Active && enemy != null && !enemy.Dead;
+    public bool ShouldProcess() => Active && enemy != null && !enemy.Dead;
     public bool immune = false;
     public void TryProcess(float delta)
     {

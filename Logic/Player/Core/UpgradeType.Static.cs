@@ -45,6 +45,11 @@ public partial class UpgradeType
     {
         canBeRolled = () => PlayerManager.my.upgradeManager.critChance > 0
     };
+    
+    public static readonly UpgradeType BurnChance = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Burn Chance")
+    {
+        status = true,
+    };
 
     public static readonly UpgradeType BleedChance = new(x => $"+{MathHelper.ToPercentAndRound(x)}% Bleed Chance")
     {
@@ -281,7 +286,8 @@ public partial class UpgradeType
         RecoilDamage,
         BleedChanceMinusDamage,
         FlatDamageReduction,
-        CorrosiveOnDamageTaken
+        CorrosiveOnDamageTaken,
+        BurnChance
     ];
 
     public static void Initialize()
