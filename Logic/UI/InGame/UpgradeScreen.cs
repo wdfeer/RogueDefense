@@ -59,7 +59,7 @@ public partial class UpgradeScreen : Panel
 		{
 			label.Visible = true;
 			int stage = Game.Wave / 10;
-			label.Text = $"Stage {stage} Clear:\n+{stage} Augment Point{(stage == 1 ? "" : "s")}";
+			label.Text = $"Stage {stage} Clear:\n+1 Augment Point";
 		}
 		else label.Visible = false;
 	}

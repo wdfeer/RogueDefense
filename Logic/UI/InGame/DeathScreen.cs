@@ -21,8 +21,8 @@ public partial class DeathScreen : Panel
 		
 		scoreLabel.Text = $"{Game.GetStage() - 1} Stages cleared\n{PP.currentPP.ToString("0.000")} pp";
 
-		var oldThreshold = Augmenter.GetNextPPThreshold(UserData.MaxPP);
-		if (Augmenter.GetNextPPThreshold(PP.currentPP) > oldThreshold)
+		var oldThreshold = AugmentBalance.GetNextPPThreshold(UserData.MaxPP);
+		if (AugmentBalance.GetNextPPThreshold(PP.currentPP) > oldThreshold)
 		{
 			augmentLabel.Visible = true;
 			augmentLabel.Text =

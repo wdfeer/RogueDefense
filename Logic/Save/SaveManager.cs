@@ -38,7 +38,7 @@ public static class SaveManager
     
     static void LoadAugments(FileAccess file)
     {
-        SpareAugmentPoints = Augmenter.GetTotalAugmentCount();
+        SpareAugmentPoints = AugmentBalance.GetTotalAugmentCount();
         for (int i = 0; i < augmentAllotment.Length; i++)
         {
             augmentAllotment[i] = (int)file.Get64();
@@ -49,7 +49,7 @@ public static class SaveManager
         if (SpareAugmentPoints < 0)
         {
             augmentAllotment = new int[augmentAllotment.Length];
-            SpareAugmentPoints = Augmenter.GetTotalAugmentCount();
+            SpareAugmentPoints = AugmentBalance.GetTotalAugmentCount();
         }
     }
     
