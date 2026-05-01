@@ -74,7 +74,7 @@ public partial class Game : Node
     public void EndWave()
     {
         PP.currentPP += PP.GetWavePP(wave,
-            Enemy.Enemy.enemies.Count(it => it.damageCap > 0f || it.minDamage > 0f),
+            Enemy.Enemy.enemies.Count(it => it.modifiers != new EnemyModifiers()),
             Enemy.Enemy.enemies.Select(it => it.statuses.Count(status => status.immune)).Sum(),
             Enemy.Enemy.enemies.Count);
         ((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";

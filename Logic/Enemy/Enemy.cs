@@ -77,12 +77,12 @@ public abstract partial class Enemy : Area2D
 		if (Dead) return;
 
 		damage *= dynamicDamageMult;
-		if (damage < minDamage)
+		if (damage < modifiers.minDamage * maxHp)
 			damage = 0;
 		if (!ignoreArmor)
 			damage *= GetArmorDamageMultiplier(armor);
-		if (damageCap > 0 && damage > damageCap)
-			damage = damageCap;
+		if (modifiers.damageCap > 0 && damage > modifiers.damageCap * maxHp)
+			damage = modifiers.damageCap * maxHp;
 		Hp -= damage;
 
 		PlayerManager.my.hooks.ForEach(x => x.OnAnyHit(damage));
@@ -158,32 +158,7 @@ public abstract partial class Enemy : Area2D
 			attacking = true;
 	}
 
-
-	public float damageCap = -1f;
-	static float GetDamageCap(int gen)
-		=> gen > 20 ? (gen > 60 ? 0.03f : 0.08f) : 0.151f;
-	public void SetDamageCap(float maxHpDamageCap)
-	{
-		Label label = (Label)GetNode("BottomInfo");
-		label.Visible = true;
-		label.Text = $"Damage Cap per Hit: {MathHelper.ToPercentAndRound(maxHpDamageCap)}%";
-		damageCap = maxHp * maxHpDamageCap;
-	}
-
-
-	public float minDamage = -1f;
-	static float GetMinDamage(int gen)
-		=> gen > 10 ? (gen > 25 ? 0.03f : 0.06f) : 0.099f;
-	public void SetMinDamage(float value)
-	{
-		Label label = (Label)GetNode("BottomInfo");
-		label.Visible = true;
-		label.Text = $"Minimum Damage per Hit: {MathHelper.ToPercentAndRound(value)}%";
-		minDamage = maxHp * value;
-	}
-	
-	
-        // TODO: refactor and standardize this
+	// TODO: refactor and standardize this
 	public Bleed bleed = new();
 	public Burn burn = new();
 	public Viral viral = new();

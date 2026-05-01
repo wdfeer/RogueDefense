@@ -26,7 +26,7 @@ public partial class Enemy
         ResetImmunities(gen, index);
 
         ResetShieldOrbs(gen);
-        ResetEffects(gen);
+        ResetModifiers(gen);
     }
 
     void ResetImmunities(int gen, int index)
@@ -52,19 +52,7 @@ public partial class Enemy
         ModifyImmunities(ref statuses);
     }
 
-    ShieldOrbGenerator shieldOrbGenerator;
-
-    void ResetEffects(int gen)
-    {
-        if (!bleed.immune && !corrosive.immune)
-        {
-            float rand = statsRng.Randf();
-            if (rand < 0.1f)
-                SetDamageCap(GetDamageCap(gen));
-            else if (shieldOrbGenerator.count > 0 && gen > 15 && rand < 0.2f)
-                SetMinDamage(GetMinDamage(gen));
-        }
-    }
+    private ShieldOrbGenerator shieldOrbGenerator;
 
     void ResetShieldOrbs(int gen)
     {
@@ -81,6 +69,21 @@ public partial class Enemy
         if (gen % 2 == 0 && GD.Randf() < 0.5f)
             shieldOrbGenerator.CreateOrbs(1 + Mathf.RoundToInt(GD.Randf() * 4), exploding: exploding);
         else shieldOrbGenerator.count = 0;
+    }
+
+    public EnemyModifiers modifiers = new();
+
+    void ResetModifiers(int gen)
+    {
+        if (!bleed.immune && !corrosive.immune)
+        {
+            float rand = statsRng.Randf();
+            if (rand < 0.1f)
+                modifiers = new EnemyModifiers(damageCap: EnemyModifiers.GetDamageCap(gen));
+            else if (shieldOrbGenerator.count > 0 && gen > 15 && rand < 0.2f)
+                modifiers = new EnemyModifiers(minDamage: EnemyModifiers.GetMinDamage(gen));
+            modifiers.SetLabels(this);
+        }
     }
 
     void ScaleMaxHp(int gen)
