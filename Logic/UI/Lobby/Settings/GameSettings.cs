@@ -6,7 +6,7 @@ public static class GameSettings
 {
     public static float totalDmgMult = 1f;
     public static float totalFireRateMult = 1f;
-    public static bool healthDrain = false;
+    public static bool healthDrain;
     public static void SendSettings()
     {
         if (NetworkManager.mode != NetMode.Server) return;
