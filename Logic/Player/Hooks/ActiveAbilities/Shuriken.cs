@@ -11,7 +11,7 @@ public class Shuriken : Projectile.Projectile
 
 	protected override int Radius => 16;
 	readonly Texture2D texture;
-	const float ROTATION_SPEED = Mathf.Pi * 3;
+	const float RotationSpeed = Mathf.Pi * 3;
 	float rotation = 0;
 	public override void Draw(CanvasItem drawer)
 	{
@@ -24,7 +24,7 @@ public class Shuriken : Projectile.Projectile
 	{
 		base.PhysicsProcess(delta);
 
-		rotation += delta * ROTATION_SPEED;
+		rotation += delta * RotationSpeed;
 	}
 
 	public override bool KillShieldOrbs => true;

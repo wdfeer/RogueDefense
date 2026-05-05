@@ -3,20 +3,23 @@ namespace RogueDefense.Logic.Player.Hooks.ActiveAbilities;
 public class ShurikenAbility : ActiveAbility
 {
     public int ShurikenCount => Mathf.FloorToInt(Strength / 0.8f);
+
     public override void Activate()
     {
         for (int i = 0; i < ShurikenCount; i++)
         {
+            var pos = player.controlledTurret.GlobalPosition;
             Shuriken proj = new Shuriken(player.shootManager.projectileManager.textures)
             {
                 owner = player,
-                velocity = new Vector2(20f, 0f).Rotated(0.1f * GD.Randf()),
+                velocity = 20 * pos.DirectionTo(player.target.GlobalPosition).Rotated(0.1f * (2 * GD.Randf() - 1)),
                 damage = Damage,
-                position = DefenseObjective.instance.GlobalPosition
+                position = pos
             };
             player.shootManager.projectileManager.proj.Add(proj);
         }
     }
+
     public const float BASE_DAMAGE = 5;
 
     public ShurikenAbility(Core.Player player, Button button) : base(player, button)
@@ -30,6 +33,7 @@ public class ShurikenAbility : ActiveAbility
     public override bool Shared => false;
     public float Damage => BASE_DAMAGE * Strength * player.shootManager.damage;
     public override float BaseCooldown => 10f / Mathf.Pow(Duration, 0.65f);
+
     protected override string GetAbilityText()
         => $@"Throw {ShurikenCount} Shuriken{(ShurikenCount > 1 ? "s" : "")} with {(int)Damage} Damage
 Cooldown: {Cooldown:0.00} s";
