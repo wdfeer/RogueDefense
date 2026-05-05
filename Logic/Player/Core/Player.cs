@@ -1,4 +1,5 @@
 using RogueDefense.Logic.Network;
+using RogueDefense.Logic.Player.Hooks.ActiveAbilities;
 using RogueDefense.Logic.Player.Projectile;
 using UserData = RogueDefense.Logic.Save.UserData;
 
@@ -49,7 +50,7 @@ public partial class Player
 
     public void OnWaveEnd()
     {
-        shootManager.ClearBullets(x => x is FusedBullet);
+        shootManager.ClearBullets(x => x is FusedBullet or Shuriken);
         hooks.ForEach(x => x.OnWaveEnd());
         upgradeManager.UpdateUpgrades();
         upgradeManager.UpdateUpgradeText();
