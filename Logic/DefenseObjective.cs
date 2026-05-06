@@ -136,24 +136,6 @@ public partial class DefenseObjective : Node2D
         }
     }
 
-    void SetHealthDrainTimer()
-    {
-        ToSignal(GetTree().CreateTimer(1, false), "timeout").OnCompleted(() =>
-        {
-            DrainHealth();
-            SetHealthDrainTimer();
-        });
-    }
-
-    void DrainHealth()
-    {
-        float dps = 6;
-        if (!NetworkManager.Singleplayer) dps *= 1.5f;
-        if (Game.Wave > 40) dps *= 2f;
-        if (Game.Wave > 25) dps *= 2f;
-        Damage(dps);
-    }
-
     public bool dead = false;
 
     public void Death(bool local = true)

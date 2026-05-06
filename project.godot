@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="RogueDefense"
 config/description="Multiplayer tower defense roguelike game licensed under GPL-3.0"
-config/version="2.15.10"
+config/version="2.15.11"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.6", "C#")
 boot_splash/bg_color=Color(0, 0, 0, 1)
