@@ -14,8 +14,8 @@ public partial class DpsLabel : Label
     }
 
     public List<(float damage, float timeAgo)> hits = [];
-    float secondTimer = 0f;
-    const float HIT_SAVE_DURATION = 1f;
+    float secondTimer;
+    const float HIT_SAVE_DURATION = 5f;
     public override void _Process(double delta)
     {
         Visible = UserData.clientSettings.ShowAvgDps;
