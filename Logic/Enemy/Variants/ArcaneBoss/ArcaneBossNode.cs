@@ -19,7 +19,8 @@ public partial class ArcaneBossNode : Enemy
 	protected override void ModifyGen(ref int gen, int index) { }
 	protected override void ModifyMaxHp(ref float maxHp)
 	{
-		maxHp += 10 ^ Game.GetStage() * NetworkManager.PlayerCount / 4;
+		maxHp *= 0.5f;
+		maxHp += 500f * Game.GetStage() * NetworkManager.PlayerCount;
 	}
 	protected override void ModifyArmor(ref float armor)
 	{
