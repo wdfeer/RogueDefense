@@ -31,7 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://cf5k47mxihymy" path="res://Scenes/Enemies/MultigunnerBoss.tscn" id="17_8qcy2"]
 [ext_resource type="PackedScene" uid="uid://ors870jinhm0" path="res://Scenes/Enemies/Duogunner.tscn" id="17_mi7vx"]
 [ext_resource type="PackedScene" uid="uid://43imkg4sl66e" path="res://Scenes/ProjectileManager.tscn" id="17_v5lu7"]
-[ext_resource type="Script" uid="uid://dh0wnpui6vf8h" path="res://Logic/UI/InGame/ExitButton.cs" id="18"]
 [ext_resource type="PackedScene" uid="uid://diecg660ktie5" path="res://Scenes/Enemies/ArcaneBoss/ArcaneBoss.tscn" id="18_jqv4r"]
 [ext_resource type="Texture2D" uid="uid://c8mjml32c8q2y" path="res://Assets/Images/Icons/game-icons.net/hamburger-menu.svg" id="18_pat0i"]
 [ext_resource type="Texture2D" uid="uid://fqdgbhgv6ugk" path="res://Assets/Images/Icons/game-icons.net/cancel.svg" id="18_xbath"]
@@ -40,9 +39,9 @@
 [ext_resource type="PackedScene" uid="uid://q50meh6i02ee" path="res://Assets/Shaders/blur.tscn" id="19_kdd8b"]
 [ext_resource type="Script" uid="uid://dq1851v1rkn2h" path="res://Logic/UI/InGame/BuffText.cs" id="20"]
 [ext_resource type="Texture2D" uid="uid://c6pt4yqyytldg" path="res://Assets/Images/Icons/game-icons.net/play-button.svg" id="20_ldo46"]
-[ext_resource type="Script" uid="uid://dn8va1ubt1klu" path="res://Logic/UI/InGame/BackButton.gd" id="21_11t6h"]
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="24_iflvr"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="27_1jjpa"]
+[ext_resource type="Script" uid="uid://b56v8ytnqyakc" path="res://Logic/UI/InGame/PauseMenu.cs" id="39_dctr5"]
 [ext_resource type="Script" uid="uid://b3trhfqoc3qkq" path="res://Logic/UI/InGame/FpsLabel.cs" id="39_uohka"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -194,14 +193,14 @@ _data = {
 &"show": SubResource("Animation_t2joc")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
+bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
+
 [sub_resource type="InputEventAction" id="InputEventAction_cdmt3"]
 action = &"menu"
 
 [sub_resource type="Shortcut" id="Shortcut_3a13u"]
 events = [SubResource("InputEventAction_cdmt3")]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7yfom"]
-bg_color = Color(0.160784, 0.160784, 0.160784, 0.941176)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fync3"]
 bg_color = Color(0, 0, 0, 0.627451)
@@ -531,19 +530,6 @@ vertical_alignment = 1
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NotificationPopup" unique_id=13325890]
 libraries/ = SubResource("AnimationLibrary_audqb")
 
-[node name="MenuButton" type="Button" parent="." unique_id=1151575923]
-process_mode = 3
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 64.0
-offset_bottom = 64.0
-theme = ExtResource("7")
-shortcut = SubResource("Shortcut_3a13u")
-icon = ExtResource("18_pat0i")
-expand_icon = true
-script = ExtResource("19_culfp")
-
 [node name="DeathScreen" type="Panel" parent="." unique_id=752233628 node_paths=PackedStringArray("scoreLabel", "augmentLabel")]
 process_mode = 3
 visible = false
@@ -611,7 +597,21 @@ theme_override_colors/font_color = Color(0.264, 0.88, 0.264, 1)
 theme_override_font_sizes/font_size = 32
 text = "10pp broken: +1 Augment Point"
 
-[node name="Menu" type="Panel" parent="." unique_id=2133701484]
+[node name="PauseButton" type="Button" parent="." unique_id=1151575923 node_paths=PackedStringArray("menu")]
+process_mode = 3
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 64.0
+offset_bottom = 64.0
+theme = ExtResource("7")
+shortcut = SubResource("Shortcut_3a13u")
+icon = ExtResource("18_pat0i")
+expand_icon = true
+script = ExtResource("19_culfp")
+menu = NodePath("../PauseMenu")
+
+[node name="PauseMenu" type="Panel" parent="." unique_id=2133701484 node_paths=PackedStringArray("resumeButton", "exitButton")]
 process_mode = 3
 visible = false
 layout_mode = 1
@@ -621,13 +621,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fync3")
+script = ExtResource("39_dctr5")
+resumeButton = NodePath("VBoxContainer/BackButton")
+exitButton = NodePath("VBoxContainer/ExitButton")
 
-[node name="Blur" parent="Menu" unique_id=1506740036 instance=ExtResource("19_kdd8b")]
+[node name="Blur" parent="PauseMenu" unique_id=1506740036 instance=ExtResource("19_kdd8b")]
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=179205073]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu" unique_id=179205073]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -642,16 +645,15 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="BackButton" type="Button" parent="Menu/VBoxContainer" unique_id=753584212]
+[node name="BackButton" type="Button" parent="PauseMenu/VBoxContainer" unique_id=753584212]
 layout_mode = 2
 theme = ExtResource("7")
 theme_override_font_sizes/font_size = 20
 text = "PLAY"
 icon = ExtResource("20_ldo46")
 expand_icon = true
-script = ExtResource("21_11t6h")
 
-[node name="ExitButton" type="Button" parent="Menu/VBoxContainer" unique_id=1237027622]
+[node name="ExitButton" type="Button" parent="PauseMenu/VBoxContainer" unique_id=1237027622]
 process_mode = 3
 layout_mode = 2
 theme = ExtResource("7")
@@ -659,16 +661,15 @@ theme_override_font_sizes/font_size = 20
 text = "EXIT"
 icon = ExtResource("18_xbath")
 expand_icon = true
-script = ExtResource("18")
 
-[node name="ConfirmPopup" type="ConfirmationDialog" parent="Menu/VBoxContainer/ExitButton" unique_id=1077264092]
+[node name="ConfirmPopup" type="ConfirmationDialog" parent="PauseMenu/VBoxContainer/ExitButton" unique_id=1077264092]
 initial_position = 2
 size = Vector2i(310, 100)
 popup_window = true
 theme = ExtResource("7")
 dialog_text = "Give up (progress will NOT be saved!)"
 
-[node name="ClientSettings" parent="Menu" unique_id=234736812 instance=ExtResource("24_iflvr")]
+[node name="ClientSettings" parent="PauseMenu" unique_id=234736812 instance=ExtResource("24_iflvr")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -701,5 +702,5 @@ horizontal_alignment = 2
 vertical_alignment = 2
 script = ExtResource("39_uohka")
 
-[connection signal="pressed" from="MenuButton" to="MenuButton" method="_on_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/BackButton" to="Menu/VBoxContainer/BackButton" method="_on_pressed"]
+[connection signal="pressed" from="PauseButton" to="PauseButton" method="_on_pressed"]
+[connection signal="pressed" from="PauseMenu/VBoxContainer/BackButton" to="PauseMenu/VBoxContainer/BackButton" method="_on_pressed"]
