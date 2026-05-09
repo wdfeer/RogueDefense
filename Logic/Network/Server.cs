@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using RogueDefense.Logic.Network.Messages;
 
 namespace RogueDefense.Logic.Network;
 
@@ -34,29 +36,34 @@ public partial class Server : Node
 
     private readonly Dictionary<int, UserData> users = new();
 
-    private void SendPacket(int id, string data)
+    private void SendPacket(int id, MessageType type, Resource data)
     {
-        peers[id].PutUtf8String(data);
+        peers[id].Put8((sbyte)type);
+        peers[id].PutVar(data);
     }
 
-    private void Broadcast(string data, int ignore = -1) => users.ToList().ForEach(x =>
+    public void Broadcast(MessageType type, Resource message, int ignore = -1) => users.ToList().ForEach(x =>
     {
         if (x.Key != ignore)
-            SendPacket(x.Key, data);
+            SendPacket(x.Key, type, message);
     });
 
     private void OnConnect(int id)
     {
-        string msg = $"{(char)MessageType.FetchLobby}{id}";
-        if (users.Count > 0)
+        FetchLobbyMessage msg = new FetchLobbyMessage()
         {
-            msg += " " + string.Join(" ",
-                users.Select(x =>
-                    $"{x.Key};{x.Value.name};{x.Value.ability};{UserData.AugmentPointsAsString(x.Value.augmentPoints)}"));
-        }
+            id = id
+        };
+        msg.others = users.Select(it => new RegisterMessage()
+        {
+            id = it.Key,
+            name = it.Value.name,
+            ability = it.Value.ability,
+            augmentPoints = it.Value.augmentPoints
+        }).ToArray();
 
         GD.Print($"Sending FetchLobby message: {msg}");
-        SendPacket(id, msg);
+        SendPacket(id, MessageType.FetchLobby, msg);
         users.Add(id, new UserData(id, "", -1, null));
         GD.Print($"Client {id} connected");
     }
@@ -67,40 +74,31 @@ public partial class Server : Node
         peers[id] = null;
         GD.Print($"Client {id} disconnected");
 
-        SendMessage(MessageType.Unregister, [id.ToString()]);
+        Broadcast(MessageType.Unregister, new UnregisterMessage() { id = id });
     }
 
-    private void ReceiveData(int id, string data)
+    private void ReceiveData(int id, MessageType type, Resource message)
     {
-        GD.Print($"Server is broadcasting packet with from {id}: {data}");
+        GD.Print($"Server is broadcasting packet with from {id} of type {type}.");
 
-        Broadcast(data, id);
+        Broadcast(type, message, id);
 
-        string[] args = data[1..].Split(" ");
-        AfterBroadcastMessage(id, (MessageType)data[0], args);
+        AfterBroadcastMessage(id, type, message);
     }
 
-    private void AfterBroadcastMessage(int from, MessageType type, string[] args)
+    private void AfterBroadcastMessage(int from, MessageType type, Resource message)
     {
         switch (type)
         {
             case MessageType.Register:
-                users[from] = new UserData(from, args[1], args[2].ToInt(), UserData.AugmentPointsFromString(args[3]));
-                GD.Print($"Registered user {args[1]} with ability {args[2]} as {from}");
+                RegisterMessage msg = (RegisterMessage)message;
+                users[from] = new UserData(msg.id, msg.name, msg.ability, msg.augmentPoints);
+                GD.Print($"Registered user \"{msg.name}\" {{{msg.id}}}.");
                 return;
             default:
                 return;
         }
     }
-
-    public void SendMessage(MessageType type, string[] args = null)
-    {
-        string msg = $"{(char)type}";
-        if (args != null)
-            msg += string.Join(" ", args);
-        Broadcast(msg);
-    }
-
 
     public void Poll() // important to always keep polling
     {
@@ -142,7 +140,9 @@ public partial class Server : Node
             if (byteCount > 0)
             {
                 GD.Print($"Server: {byteCount} bytes are available from {i}");
-                ReceiveData(i, client.GetUtf8String());
+                MessageType type = (MessageType)client.Get8();
+                Resource message = (Resource)client.GetVar();
+                ReceiveData(i, type, message);
             }
         }
     }
