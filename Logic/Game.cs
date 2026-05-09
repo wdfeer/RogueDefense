@@ -2,6 +2,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
+using RogueDefense.Logic.Network.Messages;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.Save;
@@ -26,6 +27,8 @@ public partial class Game : Node
         Enemy.Enemy.ResetRngSeed();
 
         PlayerManager.my = new Player.Core.Player(Client.myId, UserData.augmentAllotment);
+        
+        // TODO: inspect why this line is here
         Client.instance.others.ForEach(x => new Player.Core.Player(x.id, x.augmentPoints));
 
         SpawnEnemiesAfterDelay();
@@ -54,9 +57,10 @@ public partial class Game : Node
         enemy.QueueFree();
         if (!NetworkManager.Singleplayer && netUpdate)
         {
-            Client.instance.SendMessage(MessageType.EnemyKill, [
-                Enemy.Enemy.enemies.FindIndex(x => x == enemy).ToString()
-            ]);
+            Client.instance.SendMessage(MessageType.EnemyKill, new EnemyKillMessage()
+            {
+                index = Enemy.Enemy.enemies.FindIndex(x => x == enemy)
+            });
         }
 
         if (Enemy.Enemy.enemies.All(x => x.Dead))
@@ -77,7 +81,7 @@ public partial class Game : Node
             Enemy.Enemy.enemies.Count(it => it.modifiers != new EnemyModifiers()),
             Enemy.Enemy.enemies.Select(it => it.statuses.Count(status => status.immune)).Sum(),
             Enemy.Enemy.enemies.Count);
-        ((Label)GetNode("PPLabel")).Text = PP.currentPP.ToString("0.000") + " pp";
+        GetNode<Label>("PPLabel").Text = PP.currentPP.ToString("0.000") + " pp";
 
         Enemy.Enemy.enemies = [];
         wave++;
@@ -97,7 +101,7 @@ public partial class Game : Node
         }
 
         SpawnEnemiesAfterDelay();
-        (GetNode("./LevelText") as Label).Text = $"Stage {GetStage()} - {wave % 10 + 1}";
+        GetNode<Label>("./LevelText").Text = $"Stage {GetStage()} - {wave % 10 + 1}";
     }
 
     public void GoToMainMenu()

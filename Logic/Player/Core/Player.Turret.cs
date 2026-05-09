@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using RogueDefense.Logic.Network;
+using RogueDefense.Logic.Network.Messages;
 
 namespace RogueDefense.Logic.Player.Core;
 
@@ -34,7 +35,7 @@ public partial class Player
             positionUpdateTimer += delta;
             if (positionUpdateTimer > POSITION_UPDATE_INTERVAL)
             {
-                SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos.X, pos.Y);
+                SendPositionUpdateMessage(Client.myId, turrets.FindIndex(x => x == controlledTurret), pos);
 
                 lastSentPosition = pos;
                 positionUpdateTimer = 0.0;
@@ -42,10 +43,15 @@ public partial class Player
         }
     }
 
-    private static void SendPositionUpdateMessage(int client, int turretIndex, float x, float y)
+    private static void SendPositionUpdateMessage(int client, int turretIndex, Vector2 pos)
     {
         Client.instance.SendMessage(MessageType.PositionUpdated,
-            [client.ToString(), turretIndex.ToString(), x.ToString(), y.ToString()]);
+            new PositionUpdatedMessage()
+            {
+                from = client,
+                turretIndex = turretIndex,
+                newPos = pos,
+            });
     }
 
     public List<Turret.Turret> turrets = [];
@@ -88,7 +94,11 @@ public partial class Player
         if (netUpdate && Client.client != null)
         {
             Client.instance.SendMessage(MessageType.TargetSelected,
-                [Client.myId.ToString(), enemyIndex.ToString()]);
+                new TargetSelectedMessage()
+                {
+                    from = Client.myId,
+                    enemyIndex = enemyIndex
+                });
         }
     }
 

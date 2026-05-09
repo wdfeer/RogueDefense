@@ -6,6 +6,7 @@ public static class NetworkManager
     public static bool Singleplayer => mode == NetMode.Singleplayer;
     public static NetMode mode = NetMode.Singleplayer;
     public static bool active = false;
+
     public static void NetStart()
     {
         if (mode == NetMode.Server)
@@ -19,8 +20,10 @@ public static class NetworkManager
         {
             Client.instance.Start();
         }
+
         active = true;
     }
+
     public static void NetStop()
     {
         active = false;
@@ -29,9 +32,11 @@ public static class NetworkManager
             Server.instance.Stop();
             Server.instance = new Server();
         }
+
         Client.instance.Stop();
         Client.instance = new Client();
     }
+
     public static void Poll()
     {
         if (mode == NetMode.Server) Server.instance.Poll();

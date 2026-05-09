@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using RogueDefense.Logic.Network;
+using RogueDefense.Logic.Network.Messages;
 using RogueDefense.Logic.Player.Core;
 using UserData = RogueDefense.Logic.Save.UserData;
 
@@ -47,7 +48,7 @@ public partial class UpgradeScreen : Panel
 
 		for (int i = 0; i < buttons.Length; i++)
 		{
-			(buttons[i].GetNode("Label") as Label).Text = upgrades[i].ToString();
+			buttons[i].GetNode<Label>("Label").Text = upgrades[i].ToString();
 		}
 	}
 	public void ResetNotificationLabel()
@@ -77,8 +78,12 @@ public partial class UpgradeScreen : Panel
 		else
 		{
 			upgradesMade++;
-			Client.instance.SendMessage(MessageType.Upgrade, [Client.myId.ToString(), up.type.uniqueId.ToString(), up.Value.ToString(), up.risky ? "R" : "S"
-			]);
+			Client.instance.SendMessage(MessageType.Upgrade, new UpgradeMessage()
+			{
+				from = Client.myId,
+				typeIndex = up.type.uniqueId,
+				risky = up.risky
+			});
 			if (EveryoneUpgraded())
 				HideAndUnpause();
 			else SetButtonsVisibility(false);

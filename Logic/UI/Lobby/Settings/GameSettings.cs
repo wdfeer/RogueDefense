@@ -1,4 +1,5 @@
 using RogueDefense.Logic.Network;
+using RogueDefense.Logic.Network.Messages;
 
 namespace RogueDefense.Logic.UI.Lobby.Settings;
 
@@ -11,18 +12,12 @@ public static class GameSettings
     {
         if (NetworkManager.mode != NetMode.Server) return;
 
-        Client.instance.SendMessage(MessageType.UpdateSettings, [
-            totalDmgMult.ToString("0.0"),
-            totalFireRateMult.ToString("0.0"),
-            healthDrain ? "1" : "0"
-        ]);
-    }
-    public static void ReceiveSettings(string[] args)
-    {
-        totalDmgMult = args[0].ToFloat();
-        totalFireRateMult = args[1].ToFloat();
-        healthDrain = args[2] == "1";
-        UpdateSliders();
+        Client.instance.SendMessage(MessageType.UpdateSettings, new UpdateSettingsMessage()
+        {
+            damage = totalDmgMult,
+            fireRate = totalFireRateMult,
+            healthDrain = healthDrain,
+        });
     }
 
     public static void UpdateFromSliders()

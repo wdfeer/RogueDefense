@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
+using RogueDefense.Logic.Network.Messages;
 using RogueDefense.Logic.Player.Core;
 using RogueDefense.Logic.Save;
 using RogueDefense.Logic.UI.InGame;
@@ -91,7 +92,7 @@ public partial class DefenseObjective : Node2D
         Hp -= dmg;
         if (Hp <= 0)
         {
-            Death();
+            Death(true);
         }
         else
         {
@@ -138,11 +139,11 @@ public partial class DefenseObjective : Node2D
 
     public bool dead = false;
 
-    public void Death(bool local = true)
+    public void Death(bool sync)
     {
-        if (local && !NetworkManager.Singleplayer)
+        if (sync && !NetworkManager.Singleplayer)
         {
-            Client.instance.SendMessage(MessageType.Death);
+            Client.instance.SendMessage(MessageType.Death, new DeathMessage());
         }
 
         DeathScreen.instance.Activate();
