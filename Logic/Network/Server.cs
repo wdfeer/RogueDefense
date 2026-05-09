@@ -36,10 +36,9 @@ public partial class Server : Node
 
     private readonly Dictionary<int, UserData> users = new();
 
-    private void SendPacket(int id, MessageType type, Resource data)
+    private void SendPacket(int id, MessageType type, Resource message)
     {
-        peers[id].Put8((sbyte)type);
-        peers[id].PutVar(data);
+        StreamHelper.WriteIntoStream(peers[id], type, message);
     }
 
     public void Broadcast(MessageType type, Resource message, int ignore = -1) => users.ToList().ForEach(x =>
@@ -140,9 +139,8 @@ public partial class Server : Node
             if (byteCount > 0)
             {
                 GD.Print($"Server: {byteCount} bytes are available from {i}");
-                MessageType type = (MessageType)client.Get8();
-                Resource message = (Resource)client.GetVar();
-                ReceiveData(i, type, message);
+                var tuple = StreamHelper.ReadFromStream(client);
+                ReceiveData(i, tuple.Item1, tuple.Item2);
             }
         }
     }

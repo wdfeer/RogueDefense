@@ -70,9 +70,9 @@ public partial class Client : Node
 
 	public static void RegisterSelf()
 	{
-		Client.instance.SendMessage(MessageType.Register, new RegisterMessage()
+		instance.SendMessage(MessageType.Register, new RegisterMessage()
 		{
-			id = Client.myId,
+			id = myId,
 			name = Save.UserData.name,
 			ability = AbilityChooser.chosen,
 			augmentPoints = Save.UserData.augmentAllotment,
@@ -91,8 +91,7 @@ public partial class Client : Node
 	static void Broadcast(MessageType type, Resource message)
 	{
 		Debug.Assert(client != null);
-		client.Put8((sbyte)type);
-		client.PutVar(message);
+		StreamHelper.WriteIntoStream(client, type, message);
 	}
 
 	public void SendMessage(MessageType type, Resource message)
@@ -112,9 +111,8 @@ public partial class Client : Node
 		if (byteCount > 0)
 		{
 			GD.Print($"Client: {byteCount} bytes are available.");
-			MessageType type = (MessageType)client.Get8();
-			Resource message = (Resource)client.GetVar();
-			ReceiveMessage(type, message);
+			var tuple = StreamHelper.ReadFromStream(client);
+			ReceiveMessage(tuple.Item1, tuple.Item2);
 		}
 	}
 }
