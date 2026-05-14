@@ -1,5 +1,3 @@
-using RogueDefense.Logic.UI.MainMenu;
-
 namespace RogueDefense.Logic.Network.Messages;
 
 public partial class FetchLobbyMessage : Resource, IMessage
@@ -13,9 +11,9 @@ public partial class FetchLobbyMessage : Resource, IMessage
         GD.Print($"Sending Register Message with augments {string.Join(",", Save.UserData.augmentAllotment)}");
         Client.RegisterSelf();
         Client.myId = id;
-        for (int i = 1; i < others.Length; i++)
+        foreach (var user in others)
         {
-            client.RegisterUser(others[i]);
+            client.RegisterUser(user);
         }
     }
 }
