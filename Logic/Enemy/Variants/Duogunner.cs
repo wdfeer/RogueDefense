@@ -1,6 +1,5 @@
 using System;
 using RogueDefense.Logic.Player.Core;
-using RogueDefense.Logic.Player.Turret;
 
 namespace RogueDefense.Logic.Enemy.Variants;
 

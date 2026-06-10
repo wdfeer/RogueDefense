@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using RogueDefense.Logic.Enemy;
 using RogueDefense.Logic.Network;
 using RogueDefense.Logic.Network.Messages;

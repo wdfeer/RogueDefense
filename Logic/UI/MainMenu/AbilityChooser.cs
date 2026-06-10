@@ -1,5 +1,4 @@
 using RogueDefense.Logic.Network;
-using RogueDefense.Logic.Network.Messages;
 using RogueDefense.Logic.Player.Core;
 
 namespace RogueDefense.Logic.UI.MainMenu;

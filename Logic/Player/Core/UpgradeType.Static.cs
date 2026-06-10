@@ -6,7 +6,6 @@ using RogueDefense.Logic.Player.Hooks;
 using RogueDefense.Logic.Player.Hooks.ActiveAbilities;
 using RogueDefense.Logic.Player.Hooks.Upgrades;
 using RogueDefense.Logic.UI.MainMenu.AugmentScreen;
-using UserData = RogueDefense.Logic.Save.UserData;
 
 namespace RogueDefense.Logic.Player.Core;
 
