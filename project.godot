@@ -18,7 +18,7 @@ config/name="RogueDefense"
 config/description="Multiplayer tower defense roguelike game licensed under GPL-3.0"
 config/version="2.15.13"
 run/main_scene="res://Scenes/MainMenu/MainMenu.tscn"
-config/features=PackedStringArray("4.6", "C#")
+config/features=PackedStringArray("4.7", "C#")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 config/icon="res://Assets/Images/icon.png"
 
