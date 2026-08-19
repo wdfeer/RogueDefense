@@ -56,7 +56,7 @@ public class UpgradeManager
     public float critChance;
     public float baseCritMult = 2f;
     public float critDamageMult = 2f;
-    
+
     // TODO: refactor into a generic status chance dict in StatusPlayer
     public float bleedChance;
     public float viralChance;
@@ -154,8 +154,8 @@ public class UpgradeManager
     {
         if (player != PlayerManager.my) return;
 
-        var upgradeText = Game.instance.GetNode("UpgradeScreen/UpgradeText") as Label;
-        upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp.ToString("0.0")}\n";
+        var upgradeText = Game.instance.GetNode<Label>("UpgradeScreen/UpgradeText");
+        upgradeText.Text = $"Max HP: {DefenseObjective.instance.maxHp:0.0}\n";
         if (DefenseObjective.instance.flatDamageReduction > 0.01f)
             upgradeText.Text +=
                 $"Defense: {MathF.Round(DefenseObjective.instance.flatDamageReduction)}\n";
@@ -165,20 +165,20 @@ public class UpgradeManager
         if (DefenseObjective.instance.evasionChance > 0f)
             upgradeText.Text += $"Evasion: {MathHelper.ToPercentAndRound(DefenseObjective.instance.evasionChance)}%\n";
         upgradeText.Text += $@"
-Damage: {player.shootManager.damage.ToString("0.00")}
-Fire Rate: {(1f / player.shootManager.shootInterval).ToString("0.00")}
-Multishot: {player.shootManager.multishot.ToString("0.00")}
+UpdateUpgradeTextDamage: {player.shootManager.damage:0.00}
+Fire Rate: {(1f / player.shootManager.shootInterval):0.00}
+Multishot: {player.shootManager.multishot:0.00}
 
-Critical Chance: {(critChance * 100f).ToString("0.0")}%
-Critical Multiplier: {critDamageMult.ToString("0.00")}x
+Critical Chance: {(critChance * 100f):0.0}%
+Critical Multiplier: {critDamageMult:0.00}x
 ";
         float burnChance = PlayerHooks.GetLocalHooks<StatusPlayer>().burnChance;
-        if (burnChance > 0f) upgradeText.Text += $"\nBurn Chance: {(burnChance * 100f).ToString("0.0")}%";
-        if (bleedChance > 0f) upgradeText.Text += $"\nBleeding Chance: {(bleedChance * 100f).ToString("0.0")}%";
+        if (burnChance > 0f) upgradeText.Text += $"\nBurn Chance: {(burnChance * 100f):0.0}%";
+        if (bleedChance > 0f) upgradeText.Text += $"\nBleeding Chance: {(bleedChance * 100f):0.0}%";
         float corrosiveChance = PlayerHooks.GetLocalHooks<StatusPlayer>().corrosiveChance;
         if (corrosiveChance > 0f)
-            upgradeText.Text += $"\nCorrosive Chance: {(corrosiveChance * 100f).ToString("0.0")}%";
-        if (viralChance > 0f) upgradeText.Text += $"\nViral Chance: {(viralChance * 100f).ToString("0.0")}%";
-        if (coldChance > 0f) upgradeText.Text += $"\nCold Chance: {(coldChance * 100f).ToString("0.0")}% ";
+            upgradeText.Text += $"\nCorrosive Chance: {(corrosiveChance * 100f):0.0}%";
+        if (viralChance > 0f) upgradeText.Text += $"\nViral Chance: {(viralChance * 100f):0.0}%";
+        if (coldChance > 0f) upgradeText.Text += $"\nCold Chance: {(coldChance * 100f):0.0}% ";
     }
 }
