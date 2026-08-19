@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Evolution" format=3 uid="uid://dpdkiwsw7glld"]
+
+[ext_resource type="Script" uid="uid://bkyft0mghs34k" path="res://Logic/Player/Core/Evolution.cs" id="1_cnjh6"]
+
+[resource]
+script = ExtResource("1_cnjh6")
+name = "Sniper"
+damage = 2.0
+fireRate = 0.8
+spread = 0.2
+metadata/_custom_type_script = "uid://bkyft0mghs34k"

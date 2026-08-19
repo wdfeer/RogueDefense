@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://c6pt4yqyytldg" path="res://Assets/Images/Icons/game-icons.net/play-button.svg" id="20_ldo46"]
 [ext_resource type="PackedScene" uid="uid://c86d8jw0um27y" path="res://Scenes/MainMenu/ClientSettings.tscn" id="24_iflvr"]
 [ext_resource type="PackedScene" uid="uid://dmr0fcamx7t56" path="res://addons/virtual_joystick/virtual_joystick_scene.tscn" id="27_1jjpa"]
+[ext_resource type="Script" uid="uid://bt6501qdtcbgf" path="res://Logic/UI/InGame/EvolutionScreen.cs" id="33_mi7vx"]
 [ext_resource type="Script" uid="uid://b56v8ytnqyakc" path="res://Logic/UI/InGame/PauseMenu.cs" id="39_dctr5"]
 [ext_resource type="Script" uid="uid://b3trhfqoc3qkq" path="res://Logic/UI/InGame/FpsLabel.cs" id="39_uohka"]
 
@@ -409,11 +410,6 @@ offset_top = -180.0
 offset_right = 244.0
 offset_bottom = -116.0
 joystick_mode = 1
-visibility_mode = 1
-action_left = "move_left"
-action_right = "move_right"
-action_up = "move_up"
-action_down = "move_down"
 
 [node name="UpgradeScreen" type="Panel" parent="." unique_id=1604106748]
 process_mode = 3
@@ -503,6 +499,93 @@ theme_override_font_sizes/font_size = 32
 text = "Stage 1 Clear:
 +1 Augment Point"
 horizontal_alignment = 1
+
+[node name="EvolutionScreen" type="Panel" parent="." unique_id=407551972]
+process_mode = 3
+visible = false
+custom_minimum_size = Vector2(0, 440)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_mi7vx")
+
+[node name="NotificationLabel" type="Label" parent="EvolutionScreen" unique_id=2092845181]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -137.5
+offset_top = 27.0
+offset_right = 137.5
+offset_bottom = 120.0
+grow_horizontal = 2
+theme = ExtResource("7")
+theme_override_colors/font_color = Color(0.264, 0.88, 0.264, 1)
+theme_override_font_sizes/font_size = 32
+text = "Evolutions available:"
+horizontal_alignment = 1
+
+[node name="UpgradeText" type="Label" parent="EvolutionScreen" unique_id=2111444956]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 263.0
+offset_bottom = 396.0
+theme = ExtResource("7")
+text = "This text
+should be
+updated on start"
+
+[node name="Button1" parent="EvolutionScreen" unique_id=1112875313 instance=ExtResource("3")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = 0.0
+offset_right = -150.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+shortcut = SubResource("Shortcut_ejynp")
+
+[node name="Button2" parent="EvolutionScreen" unique_id=193425780 instance=ExtResource("3")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+shortcut = SubResource("Shortcut_hj2em")
+text = "											"
+
+[node name="Button3" parent="EvolutionScreen" unique_id=1666375152 instance=ExtResource("3")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = 0.0
+offset_right = 350.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+shortcut = SubResource("Shortcut_rdled")
+text = "													"
 
 [node name="NotificationPopup" type="PopupPanel" parent="." unique_id=1760464903]
 process_mode = 3

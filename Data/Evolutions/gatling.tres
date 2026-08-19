@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Evolution" format=3 uid="uid://cwdh8ogplfdf6"]
+
+[ext_resource type="Script" uid="uid://bkyft0mghs34k" path="res://Logic/Player/Core/Evolution.cs" id="1_mgpgu"]
+
+[resource]
+script = ExtResource("1_mgpgu")
+name = "Gatling"
+damage = 0.5
+fireRate = 2.5
+spread = 1.5
+metadata/_custom_type_script = "uid://bkyft0mghs34k"

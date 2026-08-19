@@ -36,7 +36,7 @@ public partial class Turret : CharacterBody2D
 
         if (target != null && IsInstanceValid(target))
         {
-            (GetNode("TurretSprite") as Sprite2D).LookAt(target.GlobalPosition);
+            GetNode<Sprite2D>("TurretSprite").LookAt(target.GlobalPosition);
         }
 
         if (netPositions.Count < 2)

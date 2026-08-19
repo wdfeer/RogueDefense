@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Evolution" format=3 uid="uid://b4ngn7cslp6as"]
+
+[ext_resource type="Script" uid="uid://bkyft0mghs34k" path="res://Logic/Player/Core/Evolution.cs" id="1_70brk"]
+
+[resource]
+script = ExtResource("1_70brk")
+name = "Shotgun"
+damage = 0.4
+fireRate = 0.8
+multishot = 3.0
+spread = 2.0
+metadata/_custom_type_script = "uid://bkyft0mghs34k"
